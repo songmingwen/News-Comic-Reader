@@ -151,7 +151,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //            mCoderDao.deleteByKey(19940l);
 
         } else if (id == R.id.nav_send) {
-
 //            if (mUserDao.load(1993l) == null)
 //                mUserDao.insert(new User(1993l, "taozi"));
 //            mUserDao.update(new User(1993l, "Song"));
@@ -159,7 +158,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //            if (mCoderDao.load(1994l) == null)
 //                mCoderDao.insert(new Coder(1994l, "taozi"));
 //            mCoderDao.update(new Coder(1994l, "Song"));
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
