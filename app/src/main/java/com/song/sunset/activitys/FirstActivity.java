@@ -31,9 +31,11 @@ public class FirstActivity extends Activity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
+
                 FirstActivity.this.startActivity(new Intent(FirstActivity.this, MainActivity.class));
                 overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_fade_out);
                 FirstActivity.this.finish();
+
             }
 
             @Override
