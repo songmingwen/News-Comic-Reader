@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/id_comic_detail_header_layout"
+    android:paddingTop="?attr/actionBarSize"
+    android:layout_width="match_parent"
+    android:layout_height="280dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="-30dp"
+        android:layout_marginRight="-30dp"
+        android:background="@drawable/shape_circle_white" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp">
+
+        <com.song.sunset.views.ShadowView
+            android:layout_width="123dp"
+            android:layout_height="153dp"
+            android:layout_centerHorizontal="true"/>
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/id_comic_detail_header_image"
+            android:layout_marginTop="5dp"
+            android:layout_width="113dp"
+            android:layout_height="143dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/blackhole" />
+
+
+        <TextView
+            android:id="@+id/id_comic_detail_header_comic_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/id_comic_detail_header_image"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/id_comic_detail_header_author_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/id_comic_detail_header_comic_name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="7dp"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.song.sunset">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <application
+        android:name=".activitys.SunsetApplication"
+        android:allowBackup="true"
+        android:configChanges="keyboardHidden|orientation|screenSize"
+        android:icon="@mipmap/logo"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".activitys.FirstActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activitys.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activitys.BaseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activitys.ComicDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activitys.ComicReadActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activitys.TVActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity
+            android:name=".activitys.ScalePicActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activitys.ComicListActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name="com.subscaleview.sample.SubScaleViewActivity" />
+        <activity android:name="com.subscaleview.sample.animation.AnimationActivity" />
+        <activity android:name="com.subscaleview.sample.basicfeatures.BasicFeaturesActivity" />
+        <activity android:name="com.subscaleview.sample.configuration.ConfigurationActivity" />
+        <activity android:name="com.subscaleview.sample.eventhandling.EventHandlingActivity" />
+        <activity android:name="com.subscaleview.sample.eventhandlingadvanced.AdvancedEventHandlingActivity" />
+        <activity android:name="com.subscaleview.sample.extension.ExtensionActivity" />
+        <activity android:name="com.subscaleview.sample.viewpager.ViewPagerActivity" />
+        <activity android:name="com.subscaleview.sample.imagedisplay.ImageDisplayActivity" />
+    </application>
+
+</manifest>

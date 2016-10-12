@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="pickerview">
+        <attr name="pickerview_gravity">
+            <enum name="center" value="17"/>
+            <enum name="left" value="3"/>
+            <enum name="right" value="5"/>
+        </attr>
+        <attr name="pickerview_textSize" format="dimension"/>
+        <attr name="pickerview_textColorOut" format="color"/>
+        <attr name="pickerview_textColorCenter" format="color"/>
+        <attr name="pickerview_dividerColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="ProgressLayout">
+        <attr name="loadingProgressBarWidth" format="dimension"/>
+        <attr name="loadingProgressBarHeight" format="dimension"/>
+        <attr name="loadingBackgroundColor" format="color"/>
+
+        <attr name="emptyImageWidth" format="dimension"/>
+        <attr name="emptyImageHeight" format="dimension"/>
+        <attr name="emptyTitleTextSize" format="dimension"/>
+        <attr name="emptyContentTextSize" format="dimension"/>
+        <attr name="emptyTitleTextColor" format="color"/>
+        <attr name="emptyContentTextColor" format="color"/>
+        <attr name="emptyBackgroundColor" format="color"/>
+
+        <attr name="errorImageWidth" format="dimension"/>
+        <attr name="errorImageHeight" format="dimension"/>
+        <attr name="errorTitleTextSize" format="dimension"/>
+        <attr name="errorContentTextSize" format="dimension"/>
+        <attr name="errorTitleTextColor" format="color"/>
+        <attr name="errorContentTextColor" format="color"/>
+        <attr name="errorButtonTextColor" format="color"/>
+        <attr name="errorBackgroundColor" format="color"/>
+    </declare-styleable>
+</resources>
