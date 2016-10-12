@@ -14,10 +14,10 @@ A comic reading app software
 
 1, the network framework is the use of Retrofit2
    Flexible set up a network cache time: support individual settings interface to cache expiration time, cache expiration time is not set to go defaults expiration time.
-  
+   
 2, the picture is used to load the framework of fresco
    On fresco for simple packaging; support for customizable picture progress loading, custom local cache location, size.
-
+   
 3, custom ScaleRecyclerView, support RecyclerView zoom (double-click, gesture), drag.
    Gesture scaling to be optimized.
   
