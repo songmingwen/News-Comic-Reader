@@ -1,5 +1,5 @@
 # Comic
-一款漫画阅读的app软件
+##一款漫画阅读的app软件
 
 1、网络框架使用的是Retrofit2
   灵活设置网络缓存时间：支持单独设置接口缓存过期时间，未设置缓存过期时间的走默认值过期时间。
@@ -9,7 +9,7 @@
 
 3、自定义ScaleRecyclerView，支持RecyclerView的缩放（双击、手势），拖动。
 
-##手势缩放有待优化，希望大神可以指点。
+###手势缩放有待优化，希望大神可以指点。
   
 A comic reading app software
 
@@ -21,5 +21,5 @@ A comic reading app software
    
 3, custom ScaleRecyclerView, support RecyclerView zoom (double-click, gesture), drag.
 
-##Gesture scaling need to be optimized.Look forward to your guidance
+###Gesture scaling need to be optimized.Look forward to your guidance
   
