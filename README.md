@@ -8,7 +8,8 @@
   对fresco进行简单封装；支持可自定义图片进度加载，自定义本地缓存位置、大小。
 
 3、自定义ScaleRecyclerView，支持RecyclerView的缩放（双击、手势），拖动。
-  手势缩放有待优化。
+
+##手势缩放有待优化，希望大神可以指点。
   
 A comic reading app software
 
@@ -19,5 +20,6 @@ A comic reading app software
    On fresco for simple packaging; support for customizable picture progress loading, custom local cache location, size.
    
 3, custom ScaleRecyclerView, support RecyclerView zoom (double-click, gesture), drag.
-   Gesture scaling to be optimized.
+
+##Gesture scaling need to be optimized.Look forward to your guidance
   
