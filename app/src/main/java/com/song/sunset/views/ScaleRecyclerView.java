@@ -220,8 +220,11 @@ public class ScaleRecyclerView extends RecyclerView implements View.OnTouchListe
 
     @Override
     public boolean onScale(ScaleGestureDetector detector) {
-//        Log.i(TAG, "onScale: " + detector.getScaleFactor() + "*******" + detector.getFocusX() + "*******" + detector.getFocusY());
+//        Log.i(TAG, "onScale: " + detector.getScaleFactor() + "  ***  " + detector.getFocusX() + "  ***  " + detector.getFocusY());
         float scaleFactor = detector.getScaleFactor();
+        if (Math.abs(scaleFactor - 1) < 0.001) {
+            return true;
+        }
         float nextScale = currentScale * scaleFactor;
         if (nextScale > MAX_SCALE_RATE) {
             nextScale = MAX_SCALE_RATE;
