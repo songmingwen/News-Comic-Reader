@@ -1,6 +1,5 @@
 package com.song.sunset.utils.retrofit;
 
-import com.song.sunset.utils.service.AppServices;
 import com.song.sunset.utils.service.Retrofit2Service;
 /**
  * Created by Song on 2016/8/29 0029.

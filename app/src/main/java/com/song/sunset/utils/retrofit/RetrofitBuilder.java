@@ -22,7 +22,7 @@ public enum RetrofitBuilder {
 //                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
 
                 //String转换器
-//                .addConverterFactory(StringConverterFactory.create())
+                .addConverterFactory(StringConverterFactory.create())
 
                 //gson转化器
                 .addConverterFactory(GsonConverterFactory.create())
