@@ -46,7 +46,7 @@ public class TVActivity extends AppCompatActivity {
 //        jc.setUp(tvUrl, JCVideoPlayerStandard.SCREEN_LAYOUT_LIST, tvName);
 
         player = new PlayerView(this, rootView)
-                .setTitle("什么")
+                .setTitle(tvName)
                 .setScaleType(PlayStateParams.fitparent)
                 .hideMenu(true)
                 .forbidTouch(false)
@@ -54,7 +54,7 @@ public class TVActivity extends AppCompatActivity {
                     @Override
                     public void onShowThumbnail(ImageView ivThumbnail) {
                         Glide.with(TVActivity.this)
-                                .load("http://pic2.nipic.com/20090413/406638_125424003_2.jpg")
+                                .load("http://4493bz.1985t.com/uploads/allimg/141204/4-141204095J8.jpg")
                                 .into(ivThumbnail);
                     }
                 })

@@ -31,12 +31,12 @@ public class TVListFragment extends Fragment {
         tvArrayList = new ArrayList<>();
         TV tv_1 = new TV("CCTV3-综艺HD", "http://ivi.bupt.edu.cn/hls/cctv3hd.m3u8");
         TV tv_2 = new TV("CCTV6-电影HD", "http://ivi.bupt.edu.cn/hls/cctv6hd.m3u8");
-        TV tv_3 = new TV("CCTV8-电视剧HD", " http://ivi.bupt.edu.cn/hls/cctv8hd.m3u8");
         TV tv_4 = new TV("架子鼓", "http://2449.vod.myqcloud.com/2449_22ca37a6ea9011e5acaaf51d105342e3.f20.mp4");
+        TV tv_5 = new TV("新闻", "rtmp://live.hkstv.hk.lxdns.com/live/hks");
         tvArrayList.add(tv_1);
         tvArrayList.add(tv_2);
-        tvArrayList.add(tv_3);
         tvArrayList.add(tv_4);
+        tvArrayList.add(tv_5);
     }
 
     @Nullable
