@@ -146,11 +146,24 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //            Log.i("-------------:", users0.toString());
 
         } else if (id == R.id.nav_share) {
-
+            getmHandler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    LocationMarkerActivity.start(MainActivity.this);
+                }
+            }, 300);
 //            mUserDao.deleteByKey(1993l);
 //            mCoderDao.deleteByKey(19940l);
 
         } else if (id == R.id.nav_send) {
+//            getmHandler().postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    BasicMapActivity.start(MainActivity.this);
+//                }
+//            }, 300);
+
+
 //            if (mUserDao.load(1993l) == null)
 //                mUserDao.insert(new User(1993l, "taozi"));
 //            mUserDao.update(new User(1993l, "Song"));

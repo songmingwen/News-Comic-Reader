@@ -8,6 +8,15 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+
     <application
         android:name=".activitys.SunsetApplication"
         android:allowBackup="true"
@@ -39,8 +48,9 @@
         <activity
             android:name=".activitys.ComicReadActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activitys.TVActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity
+            android:name=".activitys.TVActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
             android:name=".activitys.ScalePicActivity"
             android:screenOrientation="portrait" />
@@ -56,6 +66,15 @@
         <activity android:name="com.subscaleview.sample.extension.ExtensionActivity" />
         <activity android:name="com.subscaleview.sample.viewpager.ViewPagerActivity" />
         <activity android:name="com.subscaleview.sample.imagedisplay.ImageDisplayActivity" />
+
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="1b85142155dba7f4c7f243bfd78cb7c4" />
+
+        <activity android:name=".activitys.LocationMarkerActivity" />
+        <activity android:name=".activitys.BasicMapActivity"/>
+        <!-- 定位需要的服务 使用2.0的定位需要加上这个 -->
+        <service android:name="com.amap.api.location.APSService" />
     </application>
 
 </manifest>
