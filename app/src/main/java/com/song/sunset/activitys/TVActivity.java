@@ -2,11 +2,13 @@ package com.song.sunset.activitys;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -14,6 +16,7 @@ import com.dou361.ijkplayer.listener.OnShowThumbnailListener;
 import com.dou361.ijkplayer.widget.PlayStateParams;
 import com.dou361.ijkplayer.widget.PlayerView;
 import com.song.sunset.R;
+import com.song.sunset.utils.ScreenUtils;
 
 /**
  * Created by Song on 2016/9/1 0001.
@@ -70,6 +73,16 @@ public class TVActivity extends AppCompatActivity {
 
         if (player != null) {
             player.onResume();
+        }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {//横屏
+            ScreenUtils.fullscreen(this, true);
+        } else if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {//竖屏
+            ScreenUtils.fullscreen(this, false);
         }
     }
 

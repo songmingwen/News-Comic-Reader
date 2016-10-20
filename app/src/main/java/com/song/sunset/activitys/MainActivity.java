@@ -163,6 +163,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //                }
 //            }, 300);
 
+            MeadiaPlayerActivity.start(MainActivity.this);
 
 //            if (mUserDao.load(1993l) == null)
 //                mUserDao.insert(new User(1993l, "taozi"));

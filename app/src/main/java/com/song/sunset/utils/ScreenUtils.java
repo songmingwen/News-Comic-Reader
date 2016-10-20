@@ -1,6 +1,9 @@
 package com.song.sunset.utils;
 
+import android.app.Activity;
 import android.content.Context;
+import android.view.Window;
+import android.view.WindowManager;
 
 /**
  * ScreenUtils
@@ -38,5 +41,18 @@ public class ScreenUtils {
 
     public static int px2DpCeilInt(Context context, float px) {
         return (int) (px2Dp(context, px) + 0.5f);
+    }
+
+
+    public static void fullscreen(Activity activity, boolean enable) {
+        Window window = activity.getWindow();
+        WindowManager.LayoutParams lp = window.getAttributes();
+        if (enable) { //显示状态栏
+            lp.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
+        } else { //隐藏状态栏
+            lp.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }
+        window.setAttributes(lp);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
     }
 }
