@@ -17,6 +17,9 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        jackOptions {
+            enabled true
+        }
     }
     buildTypes {
         release {
@@ -27,6 +30,10 @@ android {
 //    sourceSets {
 //        main.java.srcDirs += 'src/main/kotlin'
 //    }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
 }
 //--------------------------greenDao配置--------------------------
 apply plugin: 'org.greenrobot.greendao'

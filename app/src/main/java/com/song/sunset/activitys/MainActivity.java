@@ -74,14 +74,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private void setUpListener() {
         navigationView.setNavigationItemSelectedListener(this);
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        fab.setOnClickListener(view -> {
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                pvTime.show();
+            pvTime.show();
 //                pvOptions.show();
 //                MainActivity.this.startActivity(new Intent(MainActivity.this, SubScaleViewActivity.class));
-            }
         });
     }
 
@@ -146,23 +143,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //            Log.i("-------------:", users0.toString());
 
         } else if (id == R.id.nav_share) {
-            getmHandler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    LocationMarkerActivity.start(MainActivity.this);
-                }
-            }, 300);
+            getmHandler().postDelayed(() -> LocationMarkerActivity.start(MainActivity.this), 300);
 //            mUserDao.deleteByKey(1993l);
 //            mCoderDao.deleteByKey(19940l);
 
         } else if (id == R.id.nav_send) {
-            getmHandler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
+            getmHandler().postDelayed(() -> {
 //                    BasicMapActivity.start(MainActivity.this);
 //                    MeadiaPlayerActivity.start(MainActivity.this);
-                    VideoViewActivity.start(MainActivity.this);
-                }
+                VideoViewActivity.start(MainActivity.this);
             }, 300);
 
 
@@ -205,14 +194,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         pvTime.setTime(new Date());
         pvTime.setTitle("请选择日期");
         //时间选择后回调
-        pvTime.setOnTimeSelectListener(new TimePickerView.OnTimeSelectListener() {
-            @Override
-            public void onTimeSelect(Date date) {
-                Calendar c = Calendar.getInstance();
-                c.setTime(date);
+        pvTime.setOnTimeSelectListener(date -> {
+            Calendar c = Calendar.getInstance();
+            c.setTime(date);
 //                Toast.makeText(MainActivity.this, c.get(Calendar.YEAR) + "年" + (1 + c.get(Calendar.MONTH)) + "月" + c.get(Calendar.DAY_OF_MONTH) + "日", Toast.LENGTH_SHORT).show();
 //                Toast.makeText(MainActivity.this, DateTimeUtils.getConstellation(1 + c.get(Calendar.MONTH), Calendar.DAY_OF_MONTH), Toast.LENGTH_SHORT).show();
-                Toast.makeText(MainActivity.this, DateTimeUtils.getAge(date) + "岁", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, DateTimeUtils.getAge(date) + "岁", Toast.LENGTH_SHORT).show();
 
 //                User user = new User();
 //                user.setId((long) c.get(Calendar.YEAR));
@@ -223,7 +210,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //                coder.setId((long) c.get(Calendar.YEAR));
 //                coder.setName(DateTimeUtils.getAge(date) + "岁");
 //                mCoderDao.insert(coder);
-            }
         });
     }
 
@@ -236,21 +222,14 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         pvOptions.setCyclic(true);
         pvOptions.setLabels("");
         pvOptions.setSelectOptions(1);
-        pvOptions.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
-            @Override
-            public void onOptionsSelect(int options1, int option2, int options3) {
-                Toast.makeText(MainActivity.this, options1 + "", Toast.LENGTH_SHORT).show();
-            }
-        });
+        pvOptions.setOnoptionsSelectListener((options1, option2, options3) ->
+                Toast.makeText(MainActivity.this, options1 + "", Toast.LENGTH_SHORT).show());
     }
 
     private void switchFragmentDelay(final String className, final String title) {
-        getmHandler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                switchFragment(className, R.id.activity_framelayout_main);
-                toolbar.setTitle(title);
-            }
+        getmHandler().postDelayed(() -> {
+            switchFragment(className, R.id.activity_framelayout_main);
+            toolbar.setTitle(title);
         }, 300);
     }
 }

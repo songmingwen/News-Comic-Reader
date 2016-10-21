@@ -30,12 +30,10 @@ public class VideoViewActivity extends BaseActivity {
         videoView.setVideoURI(uri);
         videoView.start();
         videoView.requestFocus();
-        videoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
-            @Override
-            public boolean onError(MediaPlayer mp, int what, int extra) {
-                Log.d("onError: ", what + " --- " + extra);
-                return false;
-            }
+
+        videoView.setOnErrorListener((mp, what, extra) -> {
+            Log.d("onError: ", what + " --- " + extra);
+            return false;
         });
     }
 
