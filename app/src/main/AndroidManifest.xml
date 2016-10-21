@@ -67,6 +67,7 @@
         <activity android:name="com.subscaleview.sample.viewpager.ViewPagerActivity" />
         <activity android:name="com.subscaleview.sample.imagedisplay.ImageDisplayActivity" />
         <activity android:name=".activitys.MeadiaPlayerActivity"/>
+        <activity android:name=".activitys.VideoViewActivity"/>
 
         <meta-data
             android:name="com.amap.api.v2.apikey"

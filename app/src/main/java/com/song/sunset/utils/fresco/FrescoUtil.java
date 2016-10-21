@@ -120,12 +120,12 @@ public class FrescoUtil {
         Uri uri = Uri.parse(url);
         ImageRequest request = ImageRequestBuilder
                 .newBuilderWithSource(uri)
-                .setResizeOptions(getResizeOption(width, height))
+                .setAutoRotateEnabled(true)
+                .setProgressiveRenderingEnabled(false) //渐变加载
+                .setLocalThumbnailPreviewsEnabled(true)
+//                .setResizeOptions(getResizeOption(width, height))
 //                .setPostprocessor(getPostProcessor())
-//                .setAutoRotateEnabled(true)
-//                .setProgressiveRenderingEnabled(false) //渐变加载
 //                .setLowestPermittedRequestLevel(ImageRequest.RequestLevel.FULL_FETCH)
-//                .setLocalThumbnailPreviewsEnabled(true)
 //                .setImageDecodeOptions()
                 .build();
         return request;
