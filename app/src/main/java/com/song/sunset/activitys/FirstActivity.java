@@ -7,7 +7,9 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.RelativeLayout;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.song.sunset.R;
+import com.song.sunset.utils.fresco.FrescoUtil;
 
 /**
  * Created by Song on 2016/9/14 0014.
@@ -46,5 +48,6 @@ public class FirstActivity extends Activity {
         animation.setDuration(1000);
         animation.start();
         first.setAnimation(animation);
+        Fresco.initialize(this, FrescoUtil.getDefaultImagePipelineConfig(this));
     }
 }

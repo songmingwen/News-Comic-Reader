@@ -43,7 +43,6 @@ public class SunsetApplication extends Application {
         });
 //        setCoderDatabase();
         AppConfig.setApp(this);
-        Fresco.initialize(this, FrescoUtil.getDefaultImagePipelineConfig(this));
         initLoadingAndRetryLayout();
     }
 
