@@ -30,11 +30,6 @@ public class VideoViewActivity extends BaseActivity {
         videoView.setVideoURI(uri);
         videoView.start();
         videoView.requestFocus();
-
-        videoView.setOnErrorListener((mp, what, extra) -> {
-            Log.d("onError: ", what + " --- " + extra);
-            return false;
-        });
     }
 
     @Override

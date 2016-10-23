@@ -2,7 +2,9 @@ package com.song.sunset.activitys;
 
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Handler;
 
+import com.facebook.common.soloader.SoLoaderShim;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.song.sunset.utils.loadingmanager.LoadingAndRetryManager;
 import com.song.sunset.R;
@@ -33,7 +35,12 @@ public class SunsetApplication extends Application {
     public void onCreate() {
         super.onCreate();
         sunsetApplication = this;
-        setUserDatabase();
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                setUserDatabase();
+            }
+        });
 //        setCoderDatabase();
         AppConfig.setApp(this);
         Fresco.initialize(this, FrescoUtil.getDefaultImagePipelineConfig(this));
