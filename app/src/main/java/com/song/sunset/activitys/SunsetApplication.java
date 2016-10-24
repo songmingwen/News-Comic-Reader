@@ -4,12 +4,9 @@ import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 
-import com.facebook.common.soloader.SoLoaderShim;
-import com.facebook.drawee.backends.pipeline.Fresco;
 import com.song.sunset.utils.loadingmanager.LoadingAndRetryManager;
 import com.song.sunset.R;
 import com.song.sunset.utils.AppConfig;
-import com.song.sunset.utils.fresco.FrescoUtil;
 import com.sunset.greendao.gen.DaoMaster;
 import com.sunset.greendao.gen.DaoSession;
 

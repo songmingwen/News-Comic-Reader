@@ -156,14 +156,14 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //            mCoderDao.deleteByKey(19940l);
 
         } else if (id == R.id.nav_send) {
-            getmHandler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    BasicMapActivity.start(MainActivity.this);
+//            getmHandler().postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    BasicMapActivity.start(MainActivity.this);
 //                    MeadiaPlayerActivity.start(MainActivity.this);
-                    VideoViewActivity.start(MainActivity.this);
-                }
-            }, 300);
+//                    VideoViewActivity.start(MainActivity.this);
+//                }
+//            }, 300);
 
 //            if (mUserDao.load(1993l) == null)
 //                mUserDao.insert(new User(1993l, "taozi"));
