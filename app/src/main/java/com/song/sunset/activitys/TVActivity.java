@@ -7,6 +7,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -63,11 +64,20 @@ public class TVActivity extends AppCompatActivity {
                 })
                 .setPlaySource(tvUrl)
                 .startPlay();
+
+        Log.d("TV", "onCreate");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d("TV", "onStart");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        Log.d("TV", "onResume");
 //        Sensor accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 //        sensorManager.registerListener(sensorEventListener, accelerometerSensor, SensorManager.SENSOR_DELAY_NORMAL);
 
@@ -92,15 +102,22 @@ public class TVActivity extends AppCompatActivity {
         super.onPause();
 //        sensorManager.unregisterListener(sensorEventListener);
 //        JCVideoPlayer.releaseAllVideos();
-
+        Log.d("TV", "onPause");
         if (player != null) {
             player.onPause();
         }
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("TV", "onStop");
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
+        Log.d("TV", "onDestroy");
         if (player != null) {
             player.onDestroy();
         }
