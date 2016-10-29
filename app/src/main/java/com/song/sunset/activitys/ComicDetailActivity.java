@@ -5,16 +5,20 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
+import com.song.sunset.beans.ComicLocalCollection;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.loadingmanager.LoadingAndRetryManager;
 import com.song.sunset.beans.basebeans.BaseBean;
@@ -27,6 +31,7 @@ import com.song.sunset.utils.retrofit.RetrofitCall;
 import com.song.sunset.utils.BitmapUtil;
 import com.song.sunset.utils.retrofit.RetrofitUtil;
 import com.song.sunset.utils.volley.SampleVolleyFactory;
+import com.sunset.greendao.gen.ComicLocalCollectionDao;
 
 import retrofit2.Call;
 
@@ -44,11 +49,15 @@ public class ComicDetailActivity extends BaseActivity {
     private int color;
     private Toolbar toolbar;
     private boolean hasCache = false;
+    private FloatingActionButton floatingActionButton;
+    private ComicLocalCollectionDao comicLocalCollectionDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comic_detail);
+
+        comicLocalCollectionDao = SunsetApplication.getSunsetApplication().getDaoSession().getComicLocalCollectionDao();
 
         mLoadingAndRetryManager = LoadingAndRetryManager.generate(this, new OnLoadingAndRetryListener() {
             @Override
@@ -69,6 +78,8 @@ public class ComicDetailActivity extends BaseActivity {
         if (getIntent() != null) {
             comicId = getIntent().getIntExtra(COMIC_ID, -1);
         }
+
+        floatingActionButton = (FloatingActionButton) findViewById(R.id.id_comic_detail_fab);
 
         recyclerView = (RecyclerView) findViewById(R.id.id_comic_detail_recycler);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -94,6 +105,7 @@ public class ComicDetailActivity extends BaseActivity {
             @Override
             public void onSuccess(ComicDetailBean comicDetailBean) {
                 mLoadingAndRetryManager.showContent();
+                setFloatButtonOnClick(comicDetailBean.getComic());
                 toolbar.setTitle(comicDetailBean.getComic().getName());
                 toolbar.setLogo(R.mipmap.logo);
                 adapter.setData(comicDetailBean);
@@ -103,6 +115,32 @@ public class ComicDetailActivity extends BaseActivity {
             @Override
             public void onFailure(int errorCode, String errorMsg) {
                 mLoadingAndRetryManager.showRetry();
+            }
+        });
+    }
+
+    private void setFloatButtonOnClick(final ComicDetailBean.ComicBean comic) {
+        final long comicId = Long.parseLong(comic.getComic_id());
+        if (comicLocalCollectionDao.load(comicId) == null) {
+            floatingActionButton.setImageDrawable(getResources().getDrawable(android.R.drawable.star_big_off));
+        } else {
+            floatingActionButton.setImageDrawable(getResources().getDrawable(android.R.drawable.star_big_on));
+        }
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (comicLocalCollectionDao == null) {
+                    return;
+                }
+                if (comicLocalCollectionDao.load(comicId) == null) {
+                    comicLocalCollectionDao.insert(new ComicLocalCollection(comic.getCover(), comic.getName(), comicId, comic.getDescription(), comic.getAuthor().getName()));
+                    floatingActionButton.setImageDrawable(getResources().getDrawable(android.R.drawable.star_big_on));
+                    Toast.makeText(getApplication(), "收藏成功", Toast.LENGTH_SHORT).show();
+                } else {
+                    comicLocalCollectionDao.deleteByKey(comicId);
+                    floatingActionButton.setImageDrawable(getResources().getDrawable(android.R.drawable.star_big_off));
+                    Toast.makeText(getApplication(), "取消收藏", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

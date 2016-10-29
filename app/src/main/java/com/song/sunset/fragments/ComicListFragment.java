@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.song.sunset.beans.basebeans.BaseBean;
 import com.song.sunset.beans.ComicListBean;
@@ -37,7 +36,7 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
 
     private boolean isVisiable = false;
     private boolean isLoading = false;
-    private boolean isRefresh = false;
+    private boolean isRefreshing = false;
     private boolean hasCache = false;
     private ProgressLayout progressLayout;
     private LoadMoreRecyclerView recyclerView;
@@ -122,12 +121,12 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
 
     @Override
     public void onRefresh() {
-        if (isRefresh) {
+        if (isRefreshing) {
             return;
         }
 //        getDataFromNet(1);
         getDataFromRetrofit2(1);
-        isRefresh = true;
+        isRefreshing = true;
     }
 
     @Override
@@ -147,7 +146,7 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
         super.onStop();
         currentPage = 1;
         isLoading = false;
-        isRefresh = false;
+        isRefreshing = false;
     }
 
     @Override
@@ -163,9 +162,9 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
             public void onSuccess(ComicListBean comicListBean) {
                 progressLayout.showContent();
                 List<ComicListBean.ComicsBean> comicsBeanList = comicListBean.getComics();
-                if (isRefresh) {
+                if (isRefreshing) {
                     currentPage = 1;
-                    isRefresh = false;
+                    isRefreshing = false;
                     adapter.setData(comicsBeanList);
                     refreshLayout.setRefreshing(false);
                 } else {
@@ -179,8 +178,8 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
 
             @Override
             public void onFailure(int errorCode, String errorMsg) {
-                if (isRefresh) {
-                    isRefresh = false;
+                if (isRefreshing) {
+                    isRefreshing = false;
                     refreshLayout.setRefreshing(false);
                 } else {
                     currentPage--;
@@ -215,9 +214,9 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
 //                            return;
 //                        }
 //                        List<ComicListRD.DataBean.ReturnDataBean.ComicsBean> comicsBeanList = response.getData().getReturnData().getComics();
-//                        if (isRefresh) {
+//                        if (isRefreshing) {
 //                            currentPage = 1;
-//                            isRefresh = false;
+//                            isRefreshing = false;
 //                            adapter.setData(comicsBeanList);
 //                            refreshLayout.setRefreshing(false);
 //                        } else {
@@ -232,8 +231,8 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
 //                new Response.ErrorListener() {
 //                    @Override
 //                    public void onErrorResponse(VolleyError error) {
-//                        if (isRefresh) {
-//                            isRefresh = false;
+//                        if (isRefreshing) {
+//                            isRefreshing = false;
 //                            refreshLayout.setRefreshing(false);
 //                        } else {
 //                            currentPage--;

@@ -15,9 +15,11 @@ import android.widget.Toast;
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.TimePickerView;
 import com.song.sunset.R;
+import com.song.sunset.fragments.CollectionFragment;
 import com.song.sunset.fragments.ComicClassifyFragment;
 import com.song.sunset.fragments.ComicListFragment;
 import com.song.sunset.fragments.ComicRankFragment;
+import com.song.sunset.fragments.MVPComicListFragment;
 import com.song.sunset.fragments.TVListFragment;
 import com.song.sunset.utils.DateTimeUtils;
 
@@ -51,7 +53,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         initTimePicker();
         initOptionsPicker();
 
-        switchFragment(ComicListFragment.class.getName(), R.id.activity_framelayout_main);
+        switchFragment(MVPComicListFragment.class.getName(), R.id.activity_framelayout_main);
         toolbar.setTitle("更新漫画");
 
         setUpListener();
@@ -124,10 +126,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         int id = item.getItemId();
 
         if (id == R.id.nav_gallery) {
-            switchFragmentDelay(ComicListFragment.class.getName(), "更新漫画");
+            switchFragmentDelay(MVPComicListFragment.class.getName(), "更新漫画");
         } else if (id == R.id.classify_comic) {
             switchFragmentDelay(ComicClassifyFragment.class.getName(), "分类漫画");
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_video) {
             switchFragmentDelay(TVListFragment.class.getName(), "电视频道");
         } else if (id == R.id.nav_manage) {
 //            ComicRankFragment.start(MainActivity.this);
@@ -145,7 +147,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //                Log.i("-------------:", load0.toString());
 //            Log.i("-------------:", users0.toString());
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_map) {
             getmHandler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -155,7 +157,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //            mUserDao.deleteByKey(1993l);
 //            mCoderDao.deleteByKey(19940l);
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_collection) {
+            switchFragmentDelay(CollectionFragment.class.getName(), "收藏漫画");
+
 //            getmHandler().postDelayed(new Runnable() {
 //                @Override
 //                public void run() {
