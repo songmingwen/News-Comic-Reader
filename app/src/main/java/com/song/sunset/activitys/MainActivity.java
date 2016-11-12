@@ -36,17 +36,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private ArrayList<String> options1Items = new ArrayList<>();
     private FloatingActionButton fab;
     private NavigationView navigationView;
-//    private UserDao mUserDao;
-//    private CoderDao mCoderDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setSwipeBackEnable(false);
-
-//        mUserDao = SunsetApplication.getSunsetApplication().getUserDaoSession().getUserDao();
-//        mCoderDao = SunsetApplication.getSunsetApplication().getUserDaoSession().getCoderDao();
 
         initView();
         initDrawer();
@@ -135,18 +130,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //            ComicRankFragment.start(MainActivity.this);
             switchFragmentDelay(ComicRankFragment.class.getName(), "排行漫画");
 
-//            List<User> users = mUserDao.loadAll();
-//            User load = mUserDao.load(1993l);
-//            if (load != null)
-//                Log.d("-------------:", load.toString());
-//            Log.d("-------------:", users.toString());
-//
-//            List<Coder> users0 = mCoderDao.loadAll();
-//            Coder load0 = mCoderDao.load(1994l);
-//            if (load0 != null)
-//                Log.i("-------------:", load0.toString());
-//            Log.i("-------------:", users0.toString());
-
         } else if (id == R.id.nav_map) {
             getmHandler().postDelayed(new Runnable() {
                 @Override
@@ -154,9 +137,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     LocationMarkerActivity.start(MainActivity.this);
                 }
             }, 300);
-//            mUserDao.deleteByKey(1993l);
-//            mCoderDao.deleteByKey(19940l);
-
         } else if (id == R.id.nav_collection) {
             switchFragmentDelay(CollectionFragment.class.getName(), "收藏漫画");
 
@@ -168,14 +148,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //                    VideoViewActivity.start(MainActivity.this);
 //                }
 //            }, 300);
-
-//            if (mUserDao.load(1993l) == null)
-//                mUserDao.insert(new User(1993l, "taozi"));
-//            mUserDao.update(new User(1993l, "Song"));
-//
-//            if (mCoderDao.load(1994l) == null)
-//                mCoderDao.insert(new Coder(1994l, "taozi"));
-//            mCoderDao.update(new Coder(1994l, "Song"));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -216,16 +188,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //                Toast.makeText(MainActivity.this, c.get(Calendar.YEAR) + "年" + (1 + c.get(Calendar.MONTH)) + "月" + c.get(Calendar.DAY_OF_MONTH) + "日", Toast.LENGTH_SHORT).show();
 //                Toast.makeText(MainActivity.this, DateTimeUtils.getConstellation(1 + c.get(Calendar.MONTH), Calendar.DAY_OF_MONTH), Toast.LENGTH_SHORT).show();
                 Toast.makeText(MainActivity.this, DateTimeUtils.getAge(date) + "岁", Toast.LENGTH_SHORT).show();
-
-//                User user = new User();
-//                user.setId((long) c.get(Calendar.YEAR));
-//                user.setName(DateTimeUtils.getAge(date) + "岁");
-//                mUserDao.insert(user);
-
-//                Coder coder = new Coder();
-//                coder.setId((long) c.get(Calendar.YEAR));
-//                coder.setName(DateTimeUtils.getAge(date) + "岁");
-//                mCoderDao.insert(coder);
             }
         });
     }
