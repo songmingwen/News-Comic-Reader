@@ -2,6 +2,9 @@ package com.song.sunset.activitys;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -10,6 +13,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bigkoo.pickerview.OptionsPickerView;
@@ -22,10 +26,28 @@ import com.song.sunset.fragments.ComicRankFragment;
 import com.song.sunset.fragments.MVPComicListFragment;
 import com.song.sunset.fragments.TVListFragment;
 import com.song.sunset.utils.DateTimeUtils;
+import com.zzhoujay.richtext.RichText;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.DataNode;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -36,6 +58,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private ArrayList<String> options1Items = new ArrayList<>();
     private FloatingActionButton fab;
     private NavigationView navigationView;
+    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +105,30 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         });
     }
 
+//    /**
+//     * 将文本中的表情符号转换为表情图片
+//     *
+//     * @param text
+//     * @return
+//     */
+//    public CharSequence replace(Context context, CharSequence text, int upResId, int downResId) {
+//        // SpannableString连续的字符串，长度不可变，同时可以附加一些object;可变的话使用SpannableStringBuilder，参考sdk文档
+//        SpannableString ss = new SpannableString("[up_quote]" + text + "[down_quote]");
+//        // 得到要显示图片的资源
+//        Drawable upDrawable = context.getResources().getDrawable(upResId);
+//        Drawable downDrawable = context.getResources().getDrawable(downResId);
+//        // 设置高度
+//        upDrawable.setBounds(0, 0, upDrawable.getIntrinsicWidth(), upDrawable.getIntrinsicHeight());
+//        downDrawable.setBounds(0, 0, downDrawable.getIntrinsicWidth(), downDrawable.getIntrinsicHeight());
+//        // 跨度底部应与周围文本的基线对齐
+//        ImageSpan upSpan = new ImageSpan(upDrawable, ImageSpan.ALIGN_BASELINE);
+//        ImageSpan downSpan = new ImageSpan(downDrawable, ImageSpan.ALIGN_BASELINE);
+//        // 附加图片
+//        ss.setSpan(upSpan, 0, "[up_quote]".length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+//        ss.setSpan(downSpan, "[up_quote]".length() + text.length(), "[up_quote]".length() + text.length() + "[down_quote]".length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+//        return ss;
+//    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -101,9 +148,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
