@@ -2,9 +2,6 @@ package com.song.sunset.activitys;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.text.Html;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,33 +18,13 @@ import com.bigkoo.pickerview.TimePickerView;
 import com.song.sunset.R;
 import com.song.sunset.fragments.CollectionFragment;
 import com.song.sunset.fragments.ComicClassifyFragment;
-import com.song.sunset.fragments.ComicListFragment;
 import com.song.sunset.fragments.ComicRankFragment;
 import com.song.sunset.fragments.MVPComicListFragment;
 import com.song.sunset.fragments.TVListFragment;
 import com.song.sunset.utils.DateTimeUtils;
-import com.zzhoujay.richtext.RichText;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.DataNode;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserFactory;
-
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.StringReader;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -58,7 +35,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private ArrayList<String> options1Items = new ArrayList<>();
     private FloatingActionButton fab;
     private NavigationView navigationView;
-    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
