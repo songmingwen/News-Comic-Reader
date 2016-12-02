@@ -41,17 +41,17 @@ public class ComicClassifyAdapter extends RecyclerView.Adapter {
                 final ComicClassifyBean.TopListBean topListBean = data.getTopList().get(position);
                 bindTopData(classifyViewHolder, topListBean);
             } else if (getItemViewType(position) == BOTTOM_TYPE) {
-                final ComicClassifyBean.RankingListBean rankingListBean = data.getRankingList().get(position - 4);
+                final ComicClassifyBean.RankingListBean rankingListBean = data.getRankingList().get(position - data.getTopList().size());
                 bindBottomData(classifyViewHolder, rankingListBean);
             }
         }
     }
 
     private void bindTopData(ComicClassifyViewHolder classifyViewHolder, final ComicClassifyBean.TopListBean topListBean) {
-        int realWidth = (ViewUtil.getScreenWidth() - ViewUtil.dip2px(42)) >> 1;
+        int realWidth = (ViewUtil.getScreenWidth() - ViewUtil.dip2px(56)) / 3;
         int realHeight = realWidth * 28 / 57;
         classifyViewHolder.textView.setText(topListBean.getSortName());
-        FrescoUtil.setFrescoCoverImage(classifyViewHolder.simpleDraweeView, topListBean.getCover(), realWidth, realHeight,false);
+        FrescoUtil.setFrescoCoverImage(classifyViewHolder.simpleDraweeView, topListBean.getCover(), realWidth, realHeight, false);
         final ComicClassifyBean.TopListBean.ExtraBean.TabListBean tabListBean = topListBean.getExtra().getTabList().get(0);
 
         classifyViewHolder.simpleDraweeView.setOnClickListener(new View.OnClickListener() {

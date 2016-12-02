@@ -68,7 +68,7 @@ public class ComicClassifyFragment extends Fragment {
             public int getSpanSize(int position) {
                 int itemViewType = adapter.getItemViewType(position);
                 if (itemViewType == ComicClassifyAdapter.TOP_TYPE) {
-                    return 3;
+                    return 2;
                 } else if (itemViewType == ComicClassifyAdapter.BOTTOM_TYPE) {
                     return 2;
                 } else {
