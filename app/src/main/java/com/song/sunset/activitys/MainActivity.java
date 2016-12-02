@@ -80,6 +80,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //                pvOptions.show();
 //                MainActivity.this.startActivity(new Intent(MainActivity.this, SubScaleViewActivity.class));
 //                MainActivity.this.startActivity(new Intent(MainActivity.this, TouchEventTestActivity.class));
+                MainActivity.this.startActivity(new Intent(MainActivity.this, TempTestActivity.class));
             }
         });
     }
