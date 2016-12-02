@@ -1,5 +1,6 @@
 package com.song.sunset.activitys;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
@@ -22,6 +23,7 @@ import com.song.sunset.fragments.ComicRankFragment;
 import com.song.sunset.fragments.MVPComicListFragment;
 import com.song.sunset.fragments.TVListFragment;
 import com.song.sunset.utils.DateTimeUtils;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -74,9 +76,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             @Override
             public void onClick(View v) {
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                pvTime.show();
+//                pvTime.show();
 //                pvOptions.show();
 //                MainActivity.this.startActivity(new Intent(MainActivity.this, SubScaleViewActivity.class));
+//                MainActivity.this.startActivity(new Intent(MainActivity.this, TouchEventTestActivity.class));
             }
         });
     }
