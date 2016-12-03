@@ -16,8 +16,29 @@
                 android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:onClick="buttonOnClick" />
-        </com.song.sunset.views.TouchEventInnerViewGroup>
+                android:onClick="buttonOnClick"
+                android:visibility="gone" />
 
+            <!--<com.song.sunset.views.MatrixImageView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:scaleType="matrix"-->
+            <!--android:visibility="gone" />-->
+
+            <!--<com.song.sunset.views.MultiCircleView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:visibility="gone" />-->
+
+            <!--<com.song.sunset.views.BitmapMeshView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:visibility="gone" />-->
+
+            <com.song.sunset.views.WaveView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_centerInParent="true" />
+        </com.song.sunset.views.TouchEventInnerViewGroup>
     </com.song.sunset.views.TouchEventOuterViewGroup>
 </LinearLayout>
