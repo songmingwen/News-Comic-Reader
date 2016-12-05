@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.song.sunset.R;
+import com.song.sunset.utils.BitmapUtil;
 import com.song.sunset.utils.ViewUtil;
 
 /**
@@ -43,7 +44,7 @@ public class BitmapMeshView extends View {
 
         // 获取位图资源
         int screenW = ViewUtil.getScreenWidth();
-        mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ness);
+        mBitmap = BitmapUtil.getSmallBitmap(getResources(), R.drawable.ness, screenW);
         mBitmap = Bitmap.createScaledBitmap(mBitmap, screenW, screenW * mBitmap.getHeight() / mBitmap.getWidth(), true);
 
         // 初始化坐标数组

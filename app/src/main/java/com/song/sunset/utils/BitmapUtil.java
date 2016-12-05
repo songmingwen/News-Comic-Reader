@@ -1,6 +1,7 @@
 package com.song.sunset.utils;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -217,6 +218,15 @@ public class BitmapUtil {
         options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
         options.inJustDecodeBounds = false;
         return BitmapFactory.decodeFile(filePath, options);
+    }
+
+    public static Bitmap getSmallBitmap(Resources res, int id, int reqWidth) {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeResource(res, id, options);
+        options.inSampleSize = (int) (options.outWidth / (float) reqWidth);
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeResource(res, id, options);
     }
 
     public byte[] compressBitmapToBytes(String filePath, int reqWidth, int reqHeight, int quality) {

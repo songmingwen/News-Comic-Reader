@@ -73,10 +73,9 @@ public class WaveView extends View {
     protected void onDraw(Canvas canvas) {
         /**
          * 设置Path起点
-         * 注意我将Path的起点设置在了控件的外部看不到的区域
-         * 如果我们将起点设置在控件左端x=0的位置会使得贝塞尔曲线变得生硬
-         * 至于为什么刚才我已经说了
-         * 所以我们稍微让起点往“外”走点
+         * 注意将Path的起点设置在了控件的外部看不到的区域
+         * 如果将起点设置在控件左端x=0的位置会使得贝塞尔曲线变得生硬
+         * 所以稍微让起点往“外”走点
          */
         wave_1_mPath.moveTo(-1 / 4F * vWidth, vHeight / 2);
         wave_2_mPath.moveTo(-1 / 4F * vWidth, vHeight / 2);

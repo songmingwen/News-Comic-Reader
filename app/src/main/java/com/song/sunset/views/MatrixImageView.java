@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.widget.ImageView;
 
 import com.song.sunset.R;
+import com.song.sunset.utils.BitmapUtil;
 import com.song.sunset.utils.ViewUtil;
 
 /**
@@ -60,7 +61,7 @@ public class MatrixImageView extends ImageView {
          * 设置图片资源
          */
         int screenW = ViewUtil.getScreenWidth();
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ness);
+        Bitmap bitmap = BitmapUtil.getSmallBitmap(getResources(), R.drawable.ness, screenW);
         bitmap = Bitmap.createScaledBitmap(bitmap, screenW, screenW * bitmap.getHeight() / bitmap.getWidth(), true);
         setImageBitmap(bitmap);
     }

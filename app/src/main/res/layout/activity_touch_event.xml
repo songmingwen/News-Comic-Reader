@@ -35,9 +35,15 @@
             <!--android:layout_height="wrap_content"-->
             <!--android:visibility="gone" />-->
 
+            <com.song.sunset.views.CustomView
+                android:id="@+id/custom_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
             <com.song.sunset.views.WaveView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:layout_below="@id/custom_view"
                 android:layout_centerInParent="true" />
         </com.song.sunset.views.TouchEventInnerViewGroup>
     </com.song.sunset.views.TouchEventOuterViewGroup>
