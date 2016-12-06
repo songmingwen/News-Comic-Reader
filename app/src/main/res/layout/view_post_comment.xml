@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="10dp"
+    android:paddingLeft="1px"
+    android:paddingTop="10dp">
+
+    <TextView
+        android:id="@+id/view_post_comment_num_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:background="@color/color_transparent_10"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="1"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/view_post_comment_username_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/view_post_comment_num_tv"
+        android:text="用户名"
+        android:textColor="@color/color_0096B6"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/view_post_comment_username_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/view_post_comment_username_tv"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/view_post_comment_num_tv"
+        android:text="地址"
+        android:textColor="@color/Grey_500"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/view_post_comment_username_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/view_post_comment_username_tv"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/view_post_comment_username_address"
+        android:text="手机"
+        android:textColor="@color/Grey_500"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/view_post_comment_content_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/view_post_comment_username_address"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/view_post_comment_num_tv"
+        android:paddingRight="10dp"
+        android:text="内容内容内容内容内容内容内容内容内容内容内容内容内容"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/view_post_comment_hide_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:padding="15dp"
+        android:text="展开隐藏楼层"
+        android:textSize="12sp" />
+
+</RelativeLayout>

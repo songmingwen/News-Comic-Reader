@@ -18,7 +18,8 @@ import com.song.sunset.R;
 import com.song.sunset.adapters.ComicClassifyAdapter;
 import com.song.sunset.utils.retrofit.RetrofitCall;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
-import com.song.sunset.utils.retrofit.RetrofitUtil;
+import com.song.sunset.utils.retrofit.RetrofitApiBuilder;
+import com.song.sunset.utils.service.RetrofitApi;
 
 import retrofit2.Call;
 
@@ -57,7 +58,7 @@ public class ComicClassifyFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.id_comic_classify_recycler);
         adapter = new ComicClassifyAdapter(getActivity());
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 6){
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 6) {
             @Override
             protected int getExtraLayoutSpace(RecyclerView.State state) {
                 return ViewUtil.getScreenHeigth();
@@ -112,7 +113,7 @@ public class ComicClassifyFragment extends Fragment {
 
     public void getDataFromRetrofit2() {
         mLoadingAndRetryManager.showLoading();
-        Call<BaseBean<ComicClassifyBean>> call = RetrofitUtil.getRetrofit2Service().queryComicClassifyBeanByGetCall(2);
+        Call<BaseBean<ComicClassifyBean>> call = RetrofitApiBuilder.getRetrofitApi(RetrofitApi.class).queryComicClassifyBeanByGetCall(2);
         RetrofitCall.call(call, new RetrofitCallback<ComicClassifyBean>() {
             @Override
             public void onSuccess(ComicClassifyBean comicReadBean) {

@@ -12,18 +12,22 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
+import rx.Observable;
 
 /**
  * Created by Song on 2016/9/18 0018.
  * Email:z53520@qq.com
  */
-public interface Retrofit2Service {
-    String COMIC_BASE_URL = "http://app.u17.com/v3/appV3/android/phone/";
+public interface RetrofitApi {
 
     //此处若不添加max-age信息，会统一在OfflineCacheControlInterceptor类中添加默认的max-age
     //    @Headers("Cache-Control: public, max-age=3600")
     @GET("comic/detail_static_new")
     Call<BaseBean<ComicDetailBean>> queryComicDetailRDByGetCall(
+            @Query("comicid") int comicid);
+
+    @GET("comic/detail_static_new")
+    Observable<BaseBean<ComicDetailBean>> queryComicDetailRDByGetObservable(
             @Query("comicid") int comicid);
 
     //    @Headers("Cache-Control: public, max-age=3600")

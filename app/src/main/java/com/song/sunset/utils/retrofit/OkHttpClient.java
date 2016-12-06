@@ -42,8 +42,7 @@ public enum OkHttpClient {
                 .readTimeout(TIMEOUT_READ, TimeUnit.SECONDS)
                 .connectTimeout(TIMEOUT_CONNECTION, TimeUnit.SECONDS)
 
-                .build()
-        ;
+                .build();
     }
 
     public okhttp3.OkHttpClient getOkHttpClient() {

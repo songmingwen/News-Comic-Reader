@@ -15,6 +15,7 @@
     <color name="color_sky_blue">#00ffff</color>
     <color name="color_purple">#ff00ff</color>
     <color name="color_yellow">#ffff00</color>
+    <color name="color_light_yellow">#ffffd7</color>
 
     <color name="white">#FFFFFF</color>
     <color name="color_transparent_white_88">#88FFFFFF</color>

@@ -9,7 +9,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
@@ -26,14 +25,15 @@ import com.song.sunset.beans.ComicDetailBean;
 import com.song.sunset.utils.loadingmanager.OnLoadingAndRetryListener;
 import com.song.sunset.R;
 import com.song.sunset.adapters.ComicDetailAdapter;
+import com.song.sunset.utils.retrofit.ObservableTool;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
-import com.song.sunset.utils.retrofit.RetrofitCall;
 import com.song.sunset.utils.BitmapUtil;
-import com.song.sunset.utils.retrofit.RetrofitUtil;
+import com.song.sunset.utils.retrofit.RetrofitApiBuilder;
+import com.song.sunset.utils.service.RetrofitApi;
 import com.song.sunset.utils.volley.SampleVolleyFactory;
 import com.sunset.greendao.gen.ComicLocalCollectionDao;
 
-import retrofit2.Call;
+import rx.Observable;
 
 /**
  * Created by Song on 2016/8/29 0029.
@@ -48,7 +48,6 @@ public class ComicDetailActivity extends BaseActivity {
     private ComicDetailAdapter adapter;
     private int color;
     private Toolbar toolbar;
-    private boolean hasCache = false;
     private FloatingActionButton floatingActionButton;
     private ComicLocalCollectionDao comicLocalCollectionDao;
 
@@ -66,8 +65,7 @@ public class ComicDetailActivity extends BaseActivity {
                     @Override
                     public void onClick(View v) {
                         mLoadingAndRetryManager.showLoading();
-//                        getDataFromNet();
-                        getDataFromRetrofit2();
+                        getDataFromRetrofit2ByObservable();
                     }
                 });
             }
@@ -95,13 +93,32 @@ public class ComicDetailActivity extends BaseActivity {
                 toolbar.setAlpha(rate);
             }
         });
-//        getDataFromNet();
-        getDataFromRetrofit2();
+        getDataFromRetrofit2ByObservable();
     }
 
-    public void getDataFromRetrofit2() {
-        Call<BaseBean<ComicDetailBean>> call = RetrofitUtil.getRetrofit2Service().queryComicDetailRDByGetCall(comicId);
-        RetrofitCall.call(call, new RetrofitCallback<ComicDetailBean>() {
+//    public void getDataFromRetrofit2() {
+//        Call<BaseBean<ComicDetailBean>> call = RetrofitApiBuilder.getRetrofitApi(RetrofitApi.class).queryComicDetailRDByGetCall(comicId);
+//        RetrofitCall.call(call, new RetrofitCallback<ComicDetailBean>() {
+//            @Override
+//            public void onSuccess(ComicDetailBean comicDetailBean) {
+//                mLoadingAndRetryManager.showContent();
+//                setFloatButtonOnClick(comicDetailBean.getComic());
+//                toolbar.setTitle(comicDetailBean.getComic().getName());
+//                toolbar.setLogo(R.mipmap.logo);
+//                adapter.setData(comicDetailBean);
+//                setExtractionColorFromBitmap(comicDetailBean);
+//            }
+//
+//            @Override
+//            public void onFailure(int errorCode, String errorMsg) {
+//                mLoadingAndRetryManager.showRetry();
+//            }
+//        });
+//    }
+
+    public void getDataFromRetrofit2ByObservable() {
+        Observable<BaseBean<ComicDetailBean>> observable = RetrofitApiBuilder.getRetrofitApi(RetrofitApi.class).queryComicDetailRDByGetObservable(comicId);
+        ObservableTool.subscribe(observable, new RetrofitCallback<ComicDetailBean>() {
             @Override
             public void onSuccess(ComicDetailBean comicDetailBean) {
                 mLoadingAndRetryManager.showContent();
@@ -168,34 +185,5 @@ public class ComicDetailActivity extends BaseActivity {
         });
         imageRequest.setRetryPolicy(new DefaultRetryPolicy());
         queue.add(imageRequest);
-    }
-
-    public void getDataFromNet() {
-//        hasCache = false;
-//        RequestQueue queue = SampleVolleyFactory.getRequestQueue(this);
-//        GsonRequest gsonRequest = new GsonRequest<>(AppServices.getComicDetailUrl(comicId), ComicDetailRD.class,
-//                new Response.Listener<ComicDetailRD>() {
-//                    @Override
-//                    public void onResponse(ComicDetailRD response) {
-//                        hasCache = true;
-//                        mLoadingAndRetryManager.showContent();
-//                        ComicDetailRD.DataBean.ReturnDataBean comicDetailRD = response.getData().getReturnData();
-//                        toolbar.setTitle(comicDetailRD.getComic().getName());
-//                        toolbar.setLogo(R.mipmap.logo);
-//                        adapter.setData(comicDetailRD);
-//                        setExtractionColorFromBitmap(comicDetailRD);
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        if (hasCache)
-//                            mLoadingAndRetryManager.showContent();
-//                        else
-//                            mLoadingAndRetryManager.showRetry();
-//                    }
-//                });
-//        gsonRequest.setRetryPolicy(new DefaultRetryPolicy(10000, 3, 1));
-//        queue.add(gsonRequest);
     }
 }

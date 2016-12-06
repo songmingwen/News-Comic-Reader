@@ -16,8 +16,9 @@ import com.song.sunset.R;
 import com.song.sunset.adapters.ComicReadAdapter;
 import com.song.sunset.utils.retrofit.RetrofitCall;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
-import com.song.sunset.utils.retrofit.RetrofitUtil;
+import com.song.sunset.utils.retrofit.RetrofitApiBuilder;
 import com.song.sunset.utils.ViewUtil;
+import com.song.sunset.utils.service.RetrofitApi;
 import com.song.sunset.views.ScaleRecyclerView;
 
 import java.util.ArrayList;
@@ -125,7 +126,7 @@ public class ComicReadActivity extends BaseActivity {
 
     public void getDataFromRetrofit2() {
         mLoadingAndRetryManager.showLoading();
-        Call<BaseBean<List<ComicReadBean>>> call = RetrofitUtil.getRetrofit2Service().queryComicReadRDByGetCall(comicId);
+        Call<BaseBean<List<ComicReadBean>>> call = RetrofitApiBuilder.getRetrofitApi(RetrofitApi.class).queryComicReadRDByGetCall(comicId);
         RetrofitCall.call(call, new RetrofitCallback<List<ComicReadBean>>() {
             @Override
             public void onSuccess(List<ComicReadBean> comicReadBean) {

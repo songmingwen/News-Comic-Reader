@@ -20,7 +20,8 @@ import com.song.sunset.utils.loadingmanager.LoadingAndRetryManager;
 import com.song.sunset.utils.loadingmanager.OnLoadingAndRetryListener;
 import com.song.sunset.utils.retrofit.RetrofitCall;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
-import com.song.sunset.utils.retrofit.RetrofitUtil;
+import com.song.sunset.utils.retrofit.RetrofitApiBuilder;
+import com.song.sunset.utils.service.RetrofitApi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -131,7 +132,7 @@ public class ComicRankFragment extends BaseFragment {
     }
 
     private void loadNetData() {
-        Call<BaseBean<ComicRankListBean>> call = RetrofitUtil.getRetrofit2Service().queryComicRankListBeanByGetCall();
+        Call<BaseBean<ComicRankListBean>> call = RetrofitApiBuilder.getRetrofitApi(RetrofitApi.class).queryComicRankListBeanByGetCall();
         RetrofitCall.call(call, new RetrofitCallback<ComicRankListBean>() {
             @Override
             public void onSuccess(ComicRankListBean comicRankListBean) {
