@@ -37,9 +37,19 @@ public interface RetrofitApi {
             @Query("argName") String argName,
             @Query("argValue") int argValue);
 
+    @GET("list/commonComicList")
+    Observable<BaseBean<ComicListBean>> queryComicListRDByGetObservable(
+            @Query("page") int page,
+            @Query("argName") String argName,
+            @Query("argValue") int argValue);
+
     //    @Headers("Cache-Control: public, max-age=3600")
     @GET("comic/chapterlist")
     Call<BaseBean<List<ComicReadBean>>> queryComicReadRDByGetCall(
+            @Query("comicid") String comicid);
+
+    @GET("comic/chapterlist")
+    Observable<BaseBean<List<ComicReadBean>>> queryComicReadRDByGetObservable(
             @Query("comicid") String comicid);
 
     //    @Headers("Cache-Control: public, max-age=3600")
@@ -47,7 +57,14 @@ public interface RetrofitApi {
     Call<BaseBean<ComicClassifyBean>> queryComicClassifyBeanByGetCall(
             @Query("version") int version);
 
+    @GET("sort/mobileCateList")
+    Observable<BaseBean<ComicClassifyBean>> queryComicClassifyBeanByGetObservable(
+            @Query("version") int version);
+
     //    @Headers("Cache-Control: public, max-age=3600")
     @GET("rank/list")
     Call<BaseBean<ComicRankListBean>> queryComicRankListBeanByGetCall();
+
+    @GET("rank/list")
+    Observable<BaseBean<ComicRankListBean>> queryComicRankListBeanByGetObservable();
 }

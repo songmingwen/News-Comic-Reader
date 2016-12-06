@@ -19,6 +19,7 @@ import com.song.sunset.activitys.ComicListActivity;
 import com.song.sunset.adapters.ComicListAdapter;
 import com.song.sunset.impls.LoadingMoreListener;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
+import com.song.sunset.utils.retrofit.ObservableTool;
 import com.song.sunset.utils.retrofit.RetrofitCall;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.retrofit.RetrofitApiBuilder;
@@ -28,6 +29,7 @@ import com.song.sunset.views.LoadMoreRecyclerView;
 import java.util.List;
 
 import retrofit2.Call;
+import rx.Observable;
 
 /**
  * Created by Song on 2016/8/27 0027.
@@ -157,8 +159,8 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
     }
 
     public void getDataFromRetrofit2(int page) {
-        Call<BaseBean<ComicListBean>> call = RetrofitApiBuilder.getRetrofitApi(RetrofitApi.class).queryComicListRDByGetCall(page, argName, argValue);
-        RetrofitCall.call(call, new RetrofitCallback<ComicListBean>() {
+        Observable<BaseBean<ComicListBean>> observable = RetrofitApiBuilder.getRetrofitApi(RetrofitApi.class).queryComicListRDByGetObservable(page, argName, argValue);
+        ObservableTool.subscribe(observable, new RetrofitCallback<ComicListBean>() {
             @Override
             public void onSuccess(ComicListBean comicListBean) {
                 progressLayout.showContent();

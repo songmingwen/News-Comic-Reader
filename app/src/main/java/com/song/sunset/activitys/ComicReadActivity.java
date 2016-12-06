@@ -14,6 +14,7 @@ import com.song.sunset.beans.ComicReadBean;
 import com.song.sunset.utils.loadingmanager.OnLoadingAndRetryListener;
 import com.song.sunset.R;
 import com.song.sunset.adapters.ComicReadAdapter;
+import com.song.sunset.utils.retrofit.ObservableTool;
 import com.song.sunset.utils.retrofit.RetrofitCall;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.retrofit.RetrofitApiBuilder;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
+import rx.Observable;
 
 /**
  * Created by Song on 2016/8/30 0030.
@@ -126,8 +128,8 @@ public class ComicReadActivity extends BaseActivity {
 
     public void getDataFromRetrofit2() {
         mLoadingAndRetryManager.showLoading();
-        Call<BaseBean<List<ComicReadBean>>> call = RetrofitApiBuilder.getRetrofitApi(RetrofitApi.class).queryComicReadRDByGetCall(comicId);
-        RetrofitCall.call(call, new RetrofitCallback<List<ComicReadBean>>() {
+        Observable<BaseBean<List<ComicReadBean>>> Observable = RetrofitApiBuilder.getRetrofitApi(RetrofitApi.class).queryComicReadRDByGetObservable(comicId);
+        ObservableTool.subscribe(Observable, new RetrofitCallback<List<ComicReadBean>>() {
             @Override
             public void onSuccess(List<ComicReadBean> comicReadBean) {
                 mLoadingAndRetryManager.showContent();
