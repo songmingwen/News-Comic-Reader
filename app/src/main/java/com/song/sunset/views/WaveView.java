@@ -38,9 +38,22 @@ public class WaveView extends View {
     private boolean wave_2_goTop_2 = true;// 判断控制点是该上移还是下移
     private boolean wave_2_goLeft = true;// 判断控制点是该上移还是下移
 
+    public WaveView(Context context) {
+        super(context);
+        init();
+    }
+
     public WaveView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init();
+    }
 
+    public WaveView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        init();
+    }
+
+    private void init() {
         // 实例化画笔并设置参数
         wave_1_mPaint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG);
         wave_2_mPaint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG);

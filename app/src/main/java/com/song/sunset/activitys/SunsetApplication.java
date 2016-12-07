@@ -4,6 +4,7 @@ import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 
+import com.song.sunset.utils.CrashHandler;
 import com.song.sunset.utils.loadingmanager.LoadingAndRetryManager;
 import com.song.sunset.R;
 import com.song.sunset.utils.AppConfig;
@@ -20,27 +21,21 @@ public class SunsetApplication extends Application {
     private SQLiteDatabase db;
     private DaoMaster mDaoMaster;
     private DaoSession mDaoSession;
-
-//    private DaoMaster.DevOpenHelper mCoderHelper;
-//    private SQLiteDatabase dbCoder;
-//    private DaoMaster mCoderDaoMaster;
-//    private DaoSession mCoderDaoSession;
-
     private static SunsetApplication sunsetApplication;
 
     @Override
     public void onCreate() {
         super.onCreate();
         sunsetApplication = this;
-        new Handler().post(new Runnable() {
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 setUserDatabase();
             }
-        });
-//        setCoderDatabase();
+        }, 100);
         AppConfig.setApp(this);
         initLoadingAndRetryLayout();
+        CrashHandler.getInstance().init(this);
     }
 
     private void initLoadingAndRetryLayout() {

@@ -28,6 +28,10 @@ import com.song.sunset.views.LoadMoreRecyclerView;
 
 import java.util.List;
 
+import in.srain.cube.views.ptr.PtrDefaultHandler;
+import in.srain.cube.views.ptr.PtrFrameLayout;
+import in.srain.cube.views.ptr.PtrHandler;
+import in.srain.cube.views.ptr.header.StoreHouseHeader;
 import retrofit2.Call;
 import rx.Observable;
 
@@ -35,7 +39,7 @@ import rx.Observable;
  * Created by Song on 2016/8/27 0027.
  * Email:z53520@qq.com
  */
-public class ComicListFragment extends BaseFragment implements LoadingMoreListener, SwipeRefreshLayout.OnRefreshListener, OnRVItemClickListener {
+public class ComicListFragment extends BaseFragment implements LoadingMoreListener, SwipeRefreshLayout.OnRefreshListener, OnRVItemClickListener, PtrHandler {
 
     private boolean isVisiable = false;
     private boolean isLoading = false;
@@ -43,7 +47,8 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
     private boolean hasCache = false;
     private ProgressLayout progressLayout;
     private LoadMoreRecyclerView recyclerView;
-    private SwipeRefreshLayout refreshLayout;
+//    private SwipeRefreshLayout refreshLayout;
+    private PtrFrameLayout refreshLayout;
     private RelativeLayout progressBar;
     private ComicListAdapter adapter;
     private int currentPage = 1;
@@ -92,9 +97,26 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
         progressBar = (RelativeLayout) view.findViewById(R.id.id_loading_more_progress);
         showProgress(false);
 
-        refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.id_comic_list_swipe_refresh);
-        refreshLayout.setOnRefreshListener(this);
-        refreshLayout.setColorSchemeResources(R.color.color_2bbad8, R.color.color_ffa200);
+        refreshLayout = (PtrFrameLayout) view.findViewById(R.id.id_comic_list_swipe_refresh);
+//        refreshLayout.setOnRefreshListener(this);
+//        refreshLayout.setColorSchemeResources(R.color.color_2bbad8, R.color.color_ffa200);
+        StoreHouseHeader header = new StoreHouseHeader(getContext());
+        header.setPadding(0, ViewUtil.dip2px(2), 0, ViewUtil.dip2px(2));
+        header.initWithString("Song");
+        header.setTextColor(getResources().getColor(R.color.colorPrimary));
+        header.setBackgroundColor(getResources().getColor(R.color.white));
+
+        refreshLayout.setDurationToCloseHeader(1500);
+        refreshLayout.setHeaderView(header);
+        refreshLayout.addPtrUIHandler(header);
+        refreshLayout.setPtrHandler(this);
+        refreshLayout.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                refreshLayout.autoRefresh();
+
+            }
+        }, 100);
 
         recyclerView = (LoadMoreRecyclerView) view.findViewById(R.id.id_recyclerview_comiclist);
         adapter = new ComicListAdapter(getActivity());
@@ -169,7 +191,8 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
                     currentPage = 1;
                     isRefreshing = false;
                     adapter.setData(comicsBeanList);
-                    refreshLayout.setRefreshing(false);
+//                    refreshLayout.setRefreshing(false);
+                    refreshLayout.refreshComplete();
                 } else {
                     if (isLoading) {
                         isLoading = false;
@@ -183,7 +206,8 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
             public void onFailure(int errorCode, String errorMsg) {
                 if (isRefreshing) {
                     isRefreshing = false;
-                    refreshLayout.setRefreshing(false);
+//                    refreshLayout.setRefreshing(false);
+                    refreshLayout.refreshComplete();
                 } else {
                     currentPage--;
                     if (isLoading) {
@@ -201,6 +225,21 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
 
     public void showProgress(boolean flag) {
         progressBar.setVisibility(flag ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+        return PtrDefaultHandler.checkContentCanBePulledDown(frame, content, header);
+    }
+
+    @Override
+    public void onRefreshBegin(PtrFrameLayout frame) {
+        if (isRefreshing) {
+            return;
+        }
+//        getDataFromNet(1);
+        getDataFromRetrofit2(1);
+        isRefreshing = true;
     }
 
 //    public void getDataFromNet(int page) {

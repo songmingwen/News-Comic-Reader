@@ -3,6 +3,7 @@ package com.song.sunset.activitys;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -40,6 +41,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.i("main_activity_onCreate","----------------");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setSwipeBackEnable(false);
@@ -79,8 +81,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //                pvTime.show();
 //                pvOptions.show();
 //                MainActivity.this.startActivity(new Intent(MainActivity.this, SubScaleViewActivity.class));
-                MainActivity.this.startActivity(new Intent(MainActivity.this, TouchEventTestActivity.class));
-//                MainActivity.this.startActivity(new Intent(MainActivity.this, TempTestActivity.class));
+//                MainActivity.this.startActivity(new Intent(MainActivity.this, TouchEventTestActivity.class));
+                MainActivity.this.startActivity(new Intent(MainActivity.this, TempTestActivity.class));
             }
         });
     }

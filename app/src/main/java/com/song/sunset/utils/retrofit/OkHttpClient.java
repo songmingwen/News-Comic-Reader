@@ -31,6 +31,9 @@ public enum OkHttpClient {
                 //设置Cache目录
                 .cache(CacheUtil.getCache())
 
+                //添加cookie
+//                .cookieJar()
+
                 //设置缓存
                 .addInterceptor(cacheInterceptor)
                 .addNetworkInterceptor(cacheInterceptor)
@@ -42,7 +45,7 @@ public enum OkHttpClient {
                 .readTimeout(TIMEOUT_READ, TimeUnit.SECONDS)
                 .connectTimeout(TIMEOUT_CONNECTION, TimeUnit.SECONDS)
 
-                .build();
+              .build();
     }
 
     public okhttp3.OkHttpClient getOkHttpClient() {
