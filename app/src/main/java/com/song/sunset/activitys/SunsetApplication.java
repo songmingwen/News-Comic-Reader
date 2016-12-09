@@ -35,7 +35,7 @@ public class SunsetApplication extends Application {
         }, 100);
         AppConfig.setApp(this);
         initLoadingAndRetryLayout();
-        CrashHandler.getInstance().init(this);
+//        CrashHandler.getInstance().init(this);
     }
 
     private void initLoadingAndRetryLayout() {

@@ -41,10 +41,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i("main_activity_onCreate","----------------");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setSwipeBackEnable(false);
 
         initView();
         initDrawer();
@@ -55,6 +53,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         toolbar.setTitle("更新漫画");
 
         setUpListener();
+    }
+
+    @Override
+    public boolean swipeBackPriority() {
+        return false;
     }
 
     private void initView() {
@@ -182,7 +185,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressedSupport() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);

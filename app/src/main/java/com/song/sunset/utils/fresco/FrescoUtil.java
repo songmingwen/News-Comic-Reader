@@ -51,18 +51,18 @@ public class FrescoUtil {
     }
 
     public static void setFrescoCoverImage(SimpleDraweeView simpleDraweeView, String url, int width, int height, boolean hasBorder) {
-        setFrescoImage(simpleDraweeView, url, NO_PARAMS, width, height, hasBorder);
+        setFrescoImage(simpleDraweeView, url, NO_PARAMS, width, height, hasBorder, false);
     }
 
     public static void setFrescoComicImage(SimpleDraweeView simpleDraweeView, String url, int position, int width, int height) {
-        setFrescoImage(simpleDraweeView, url, position, width, height, false);
+        setFrescoImage(simpleDraweeView, url, position, width, height, false, false);
     }
 
-    public static void setFrescoImage(SimpleDraweeView simpleDraweeView, String url, int position, int width, int height, boolean hasBorder) {
+    public static void setFrescoImage(SimpleDraweeView simpleDraweeView, String url, int position, int width, int height, boolean hasBorder, boolean userBlur) {
         simpleDraweeView.getLayoutParams().width = width;
         simpleDraweeView.getLayoutParams().height = height;
         simpleDraweeView.setHierarchy(getHierarchy(position, hasBorder));
-        simpleDraweeView.setController(getController(simpleDraweeView, url, width, height));
+        simpleDraweeView.setController(getController(simpleDraweeView, url, width, height, userBlur));
     }
 
     /**
@@ -70,7 +70,7 @@ public class FrescoUtil {
      */
     public static GenericDraweeHierarchy getHierarchy(int position, boolean hasBorder) {
         GenericDraweeHierarchyBuilder builder = new GenericDraweeHierarchyBuilder(AppConfig.getApp().getResources());
-        GenericDraweeHierarchy hierarchy = builder
+        return builder
                 .setPlaceholderImage(android.R.color.white)
                 .setProgressBarImage(getProgressBarImage(position))
                 .setRetryImage(R.drawable.blackhole)
@@ -79,7 +79,6 @@ public class FrescoUtil {
                 .setRoundingParams(getRoundingParams(hasBorder))
                 .setFadeDuration(50)
                 .build();
-        return hierarchy;
     }
 
     public static Drawable getProgressBarImage(int position) {
@@ -105,30 +104,27 @@ public class FrescoUtil {
      * 可以创建一个这个类的实例，来实现对所要显示的图片做更多的控制。
      */
 
-    public static DraweeController getController(SimpleDraweeView simpleDraweeView, String url, int width, int height) {
-        DraweeController controller = Fresco.newDraweeControllerBuilder()
-                .setImageRequest(getImageRequest(url, width, height))
+    public static DraweeController getController(SimpleDraweeView simpleDraweeView, String url, int width, int height, boolean userBlur) {
+        return Fresco.newDraweeControllerBuilder()
+                .setImageRequest(getImageRequest(url, width, height, userBlur))
                 .setOldController(simpleDraweeView.getController())
                 .setControllerListener(getControllerListener())
                 .setTapToRetryEnabled(true)
                 .setAutoPlayAnimations(true)
                 .build();
-        return controller;
     }
 
-    public static ImageRequest getImageRequest(String url, int width, int height) {
+    public static ImageRequest getImageRequest(String url, int width, int height, boolean userBlur) {
         Uri uri = Uri.parse(url);
-        ImageRequest request = ImageRequestBuilder
+        return ImageRequestBuilder
                 .newBuilderWithSource(uri)
-                .setAutoRotateEnabled(true)
                 .setProgressiveRenderingEnabled(false) //渐变加载
                 .setLocalThumbnailPreviewsEnabled(true)
+                .setPostprocessor(getPostProcessor(userBlur))
 //                .setResizeOptions(getResizeOption(width, height))
-//                .setPostprocessor(getPostProcessor())
 //                .setLowestPermittedRequestLevel(ImageRequest.RequestLevel.FULL_FETCH)
 //                .setImageDecodeOptions()
                 .build();
-        return request;
     }
 
     public static ResizeOptions getResizeOption(int width, int height) {
@@ -170,18 +166,22 @@ public class FrescoUtil {
         return listener;
     }
 
-    public static Postprocessor getPostProcessor() {
-        Postprocessor redMeshPostprocessor = new BasePostprocessor() {
-            @Override
-            public String getName() {
-                return "redMeshPostprocessor";
-            }
+    public static Postprocessor getPostProcessor(boolean userBlur) {
+        if (userBlur) {
+            return new BasePostprocessor() {
+                @Override
+                public String getName() {
+                    return "blurPostprocessor";
+                }
 
-            @Override
-            public void process(Bitmap bitmap) {
-            }
-        };
-        return redMeshPostprocessor;
+                @Override
+                public void process(Bitmap bitmap) {
+                    BitmapBlurHelper.blur(bitmap, 35);
+                }
+            };
+        } else {
+            return null;
+        }
     }
 
     /**

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.song.sunset.R;
 import com.song.sunset.activitys.ComicDetailActivity;
+import com.song.sunset.activitys.ComicDetailMVPActivity;
 import com.song.sunset.beans.ComicLocalCollection;
 import com.song.sunset.holders.ComicListViewHolder;
 import com.song.sunset.utils.ViewUtil;
@@ -45,7 +46,7 @@ public class CollectionComicAdapter extends RecyclerView.Adapter<ComicListViewHo
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ComicDetailActivity.start(context, (int) data.get(position).getComicId());
+                    ComicDetailMVPActivity.start(context, (int) data.get(position).getComicId());
                 }
             });
         }
@@ -61,8 +62,11 @@ public class CollectionComicAdapter extends RecyclerView.Adapter<ComicListViewHo
     }
 
     public void setData(List<ComicLocalCollection> data) {
+        if (this.data == null) {
+            this.data = new ArrayList<>();
+        }
         if (data != null && data.size() > 0) {
-            if (this.data != null && this.data.size() > 0) {
+            if (this.data.size() > 0) {
                 this.data.clear();
             }
             this.data.addAll(data);

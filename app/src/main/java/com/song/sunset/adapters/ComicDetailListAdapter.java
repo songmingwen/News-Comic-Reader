@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.song.sunset.R;
 import com.song.sunset.activitys.ComicReadActivity;
+import com.song.sunset.adapters.base.BaseRecyclerViewAdapter;
 import com.song.sunset.beans.ComicDetailBean;
 import com.song.sunset.holders.ComicDetailListItemViewHolder;
 

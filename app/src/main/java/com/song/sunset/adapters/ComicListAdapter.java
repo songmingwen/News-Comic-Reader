@@ -7,7 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.song.sunset.R;
-import com.song.sunset.activitys.ComicDetailActivity;
+import com.song.sunset.activitys.ComicDetailMVPActivity;
+import com.song.sunset.adapters.base.BaseRecyclerViewAdapter;
 import com.song.sunset.beans.ComicListBean;
 import com.song.sunset.holders.ComicListViewHolder;
 import com.song.sunset.utils.fresco.FrescoUtil;
@@ -43,6 +44,6 @@ public class ComicListAdapter extends BaseRecyclerViewAdapter<ComicListBean.Comi
 
     @Override
     protected void onItemClick(View view, int position) {
-        ComicDetailActivity.start(context, getData().get(position).getComicId());
+        ComicDetailMVPActivity.start(context, getData().get(position).getComicId());
     }
 }

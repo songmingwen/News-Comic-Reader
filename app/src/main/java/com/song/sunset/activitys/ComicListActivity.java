@@ -51,9 +51,4 @@ public class ComicListActivity extends BaseActivity {
         intent.putExtra(SORT_NAME, sortName);
         context.startActivity(intent);
     }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
 }

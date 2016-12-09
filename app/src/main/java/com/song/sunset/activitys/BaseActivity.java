@@ -10,7 +10,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.view.WindowManager;
 
-import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
+import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
+
 
 /**
  * Created by Song on 2016/8/27 0027.

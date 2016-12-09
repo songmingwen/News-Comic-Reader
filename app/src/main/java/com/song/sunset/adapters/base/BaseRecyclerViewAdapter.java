@@ -1,4 +1,4 @@
-package com.song.sunset.adapters;
+package com.song.sunset.adapters.base;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
