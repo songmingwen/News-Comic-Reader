@@ -18,6 +18,7 @@ public class RetrofitService {
 
     public static <T> T createApi(Class<T> clazz, String url) {
         Retrofit retrofit = new Retrofit.Builder()
+                //设置baseUrl
                 .baseUrl(url)
                 //设置OKHttpClient
                 .client(OkHttpClient.INSTANCE.getOkHttpClient())
