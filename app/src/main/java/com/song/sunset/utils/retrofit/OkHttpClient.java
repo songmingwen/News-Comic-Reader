@@ -27,25 +27,19 @@ public enum OkHttpClient {
         okHttpClient = new okhttp3.OkHttpClient.Builder()
                 //打印日志
                 .addInterceptor(interceptor)
-
                 //设置Cache目录
                 .cache(CacheUtil.getCache())
-
                 //添加cookie
 //                .cookieJar()
-
                 //设置缓存
                 .addInterceptor(cacheInterceptor)
                 .addNetworkInterceptor(cacheInterceptor)
-
                 //失败重连
                 .retryOnConnectionFailure(true)
-
                 //time out
                 .readTimeout(TIMEOUT_READ, TimeUnit.SECONDS)
                 .connectTimeout(TIMEOUT_CONNECTION, TimeUnit.SECONDS)
-
-              .build();
+                .build();
     }
 
     public okhttp3.OkHttpClient getOkHttpClient() {
