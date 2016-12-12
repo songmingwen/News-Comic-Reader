@@ -1,35 +1,33 @@
 package com.song.sunset.utils.retrofit;
 
+import com.song.sunset.utils.service.WholeApi;
+
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Created by Song on 2016/9/18 0018.
- * Email:z53520@qq.com
+ * Created by songmw3 on 2016/12/12.
  */
-public enum RetrofitBuilder {
 
-    INSTANCE;
+public class RetrofitService {
 
-    private final Retrofit.Builder retrofitBuilder;
-
-    RetrofitBuilder() {
-        retrofitBuilder = new Retrofit.Builder()
-                //设置OKHttpClient
-                .client(OkHttpClient.INSTANCE.getOkHttpClient())
-
-                //Rx
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-
-                //String转换器
-                .addConverterFactory(StringConverterFactory.create())
-
-                //gson转化器
-                .addConverterFactory(GsonConverterFactory.create());
+    public static <T> T createApi(Class<T> clazz) {
+        return createApi(clazz, WholeApi.COMIC_BASE_URL);
     }
 
-    public Retrofit.Builder getRetrofitBuilder() {
-        return retrofitBuilder;
+    public static <T> T createApi(Class<T> clazz, String url) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                //设置OKHttpClient
+                .client(OkHttpClient.INSTANCE.getOkHttpClient())
+                //Rx
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                //String转换器
+                .addConverterFactory(StringConverterFactory.create())
+                //gson转化器
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        return retrofit.create(clazz);
     }
 }

@@ -19,15 +19,13 @@ import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.loadingmanager.LoadingAndRetryManager;
 import com.song.sunset.utils.loadingmanager.OnLoadingAndRetryListener;
 import com.song.sunset.utils.retrofit.ObservableTool;
-import com.song.sunset.utils.retrofit.RetrofitCall;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
-import com.song.sunset.utils.retrofit.RetrofitApiBuilder;
-import com.song.sunset.utils.service.RetrofitApi;
+import com.song.sunset.utils.retrofit.RetrofitService;
+import com.song.sunset.utils.service.ComicApi;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
 import rx.Observable;
 
 import static com.song.sunset.activitys.ComicListActivity.ARG_NAME;
@@ -134,7 +132,7 @@ public class ComicRankFragment extends BaseFragment {
     }
 
     private void loadNetData() {
-        Observable<BaseBean<ComicRankListBean>> observable = RetrofitApiBuilder.getRetrofitApi(RetrofitApi.class).queryComicRankListBeanByGetObservable();
+        Observable<BaseBean<ComicRankListBean>> observable = RetrofitService.createApi(ComicApi.class).queryComicRankListBeanByGetObservable();
         ObservableTool.subscribe(observable, new RetrofitCallback<ComicRankListBean>() {
             @Override
             public void onSuccess(ComicRankListBean comicRankListBean) {

@@ -28,8 +28,8 @@ import com.song.sunset.adapters.ComicDetailAdapter;
 import com.song.sunset.utils.retrofit.ObservableTool;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.BitmapUtil;
-import com.song.sunset.utils.retrofit.RetrofitApiBuilder;
-import com.song.sunset.utils.service.RetrofitApi;
+import com.song.sunset.utils.retrofit.RetrofitService;
+import com.song.sunset.utils.service.ComicApi;
 import com.song.sunset.utils.volley.SampleVolleyFactory;
 import com.sunset.greendao.gen.ComicLocalCollectionDao;
 
@@ -117,7 +117,7 @@ public class ComicDetailActivity extends BaseActivity {
 //    }
 
     public void getDataFromRetrofit2ByObservable() {
-        Observable<BaseBean<ComicDetailBean>> observable = RetrofitApiBuilder.getRetrofitApi(RetrofitApi.class).queryComicDetailRDByGetObservable(comicId);
+        Observable<BaseBean<ComicDetailBean>> observable = RetrofitService.createApi(ComicApi.class).queryComicDetailRDByGetObservable(comicId);
         ObservableTool.subscribe(observable, new RetrofitCallback<ComicDetailBean>() {
             @Override
             public void onSuccess(ComicDetailBean comicDetailBean) {

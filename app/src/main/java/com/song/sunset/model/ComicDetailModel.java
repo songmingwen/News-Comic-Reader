@@ -5,8 +5,8 @@ import com.song.sunset.activitys.SunsetApplication;
 import com.song.sunset.beans.ComicDetailBean;
 import com.song.sunset.beans.ComicLocalCollection;
 import com.song.sunset.beans.basebeans.BaseBean;
-import com.song.sunset.utils.retrofit.RetrofitApiBuilder;
-import com.song.sunset.utils.service.RetrofitApi;
+import com.song.sunset.utils.retrofit.RetrofitService;
+import com.song.sunset.utils.service.ComicApi;
 import com.sunset.greendao.gen.ComicLocalCollectionDao;
 
 import rx.Observable;
@@ -19,7 +19,7 @@ public class ComicDetailModel implements CoreBaseModel {
     private ComicLocalCollectionDao comicLocalCollectionDao;
 
     public Observable<BaseBean<ComicDetailBean>> getData(int comicId) {
-        return RetrofitApiBuilder.getRetrofitApi(RetrofitApi.class).queryComicDetailRDByGetObservable(comicId);
+        return RetrofitService.createApi(ComicApi.class).queryComicDetailRDByGetObservable(comicId);
     }
 
     public boolean getCollectedState(int comicId) {

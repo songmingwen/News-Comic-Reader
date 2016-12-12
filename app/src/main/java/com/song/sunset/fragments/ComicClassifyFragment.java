@@ -17,12 +17,10 @@ import com.song.sunset.utils.loadingmanager.OnLoadingAndRetryListener;
 import com.song.sunset.R;
 import com.song.sunset.adapters.ComicClassifyAdapter;
 import com.song.sunset.utils.retrofit.ObservableTool;
-import com.song.sunset.utils.retrofit.RetrofitCall;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
-import com.song.sunset.utils.retrofit.RetrofitApiBuilder;
-import com.song.sunset.utils.service.RetrofitApi;
+import com.song.sunset.utils.retrofit.RetrofitService;
+import com.song.sunset.utils.service.ComicApi;
 
-import retrofit2.Call;
 import rx.Observable;
 
 /**
@@ -115,7 +113,7 @@ public class ComicClassifyFragment extends Fragment {
 
     public void getDataFromRetrofit2() {
         mLoadingAndRetryManager.showLoading();
-        Observable<BaseBean<ComicClassifyBean>> observable = RetrofitApiBuilder.getRetrofitApi(RetrofitApi.class).queryComicClassifyBeanByGetObservable(2);
+        Observable<BaseBean<ComicClassifyBean>> observable = RetrofitService.createApi(ComicApi.class).queryComicClassifyBeanByGetObservable(2);
         ObservableTool.subscribe(observable, new RetrofitCallback<ComicClassifyBean>() {
             @Override
             public void onSuccess(ComicClassifyBean comicReadBean) {

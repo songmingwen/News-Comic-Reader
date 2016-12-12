@@ -18,7 +18,7 @@ import rx.Observable;
  * Created by Song on 2016/9/18 0018.
  * Email:z53520@qq.com
  */
-public interface RetrofitApi {
+public interface ComicApi {
 
     //此处若不添加max-age信息，会统一在OfflineCacheControlInterceptor类中添加默认的max-age
     //    @Headers("Cache-Control: public, max-age=3600")
