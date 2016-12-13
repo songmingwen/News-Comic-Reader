@@ -8,7 +8,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.0'
+        classpath 'com.android.tools.build:gradle:2.2.2'
 
         /**greenDao配置*/
         classpath 'org.greenrobot:greendao-gradle-plugin:3.1.1'
@@ -17,6 +17,10 @@ buildscript {
         /** kotlin配置*/
 //        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         /** kotlin配置*/
+
+        /**dagger配置*/
+//        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        /**dagger配置*/
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
