@@ -1,4 +1,4 @@
-package com.song.sunset;
+package com.song.sunset.utils;
 
 /**
  * Created by songmw3 on 2016/12/12.

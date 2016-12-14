@@ -20,7 +20,7 @@ import rx.Observable;
  */
 public interface ComicApi {
 
-    //此处若不添加max-age信息，会统一在OfflineCacheControlInterceptor类中添加默认的max-age
+    /**此处若不添加max-age信息，会统一在OfflineCacheControlInterceptor类中添加默认的max-age*/
     //    @Headers("Cache-Control: public, max-age=3600")
     @GET("comic/detail_static_new")
     Call<BaseBean<ComicDetailBean>> queryComicDetailRDByGetCall(

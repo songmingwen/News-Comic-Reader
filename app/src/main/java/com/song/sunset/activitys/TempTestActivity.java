@@ -6,7 +6,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.song.sunset.R;
-import com.song.sunset.Reflect;
+import com.song.sunset.utils.Reflect;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.views.CustomScrollView;
 
