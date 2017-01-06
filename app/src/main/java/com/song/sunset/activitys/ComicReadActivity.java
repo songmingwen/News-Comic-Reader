@@ -127,7 +127,7 @@ public class ComicReadActivity extends BaseActivity {
     public void getDataFromRetrofit2() {
         mLoadingAndRetryManager.showLoading();
         Observable<BaseBean<List<ComicReadBean>>> Observable = RetrofitService.createApi(ComicApi.class).queryComicReadRDByGetObservable(comicId);
-        ObservableTool.subscribe(Observable, new RetrofitCallback<List<ComicReadBean>>() {
+        ObservableTool.comicSubscribe(Observable, new RetrofitCallback<List<ComicReadBean>>() {
             @Override
             public void onSuccess(List<ComicReadBean> comicReadBean) {
                 mLoadingAndRetryManager.showContent();

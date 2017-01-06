@@ -1,5 +1,6 @@
 package com.song.sunset.adapters;
 
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
@@ -13,9 +14,9 @@ import java.util.List;
  * Email:z53520@qq.com
  */
 
-public class RankingPagerAdapter extends FragmentPagerAdapter {
+public class RankingPagerAdapter<T extends Fragment> extends FragmentPagerAdapter {
 
-    private List<ComicListFragment> fragments = new ArrayList<>();
+    private List<T> fragments = new ArrayList<>();
 
     private List<String> titleList = new ArrayList<>();
 
@@ -23,7 +24,7 @@ public class RankingPagerAdapter extends FragmentPagerAdapter {
         super(fm);
     }
 
-    public void setFragmentList(List<ComicListFragment> fragmentList, List<String> titleList) {
+    public void setFragmentList(List<T> fragmentList, List<String> titleList) {
         this.fragments.clear();
         this.titleList.clear();
         if (fragmentList != null && fragmentList.size() > 0)
@@ -34,7 +35,7 @@ public class RankingPagerAdapter extends FragmentPagerAdapter {
         notifyDataSetChanged();
     }
 
-    public List<ComicListFragment> getFragments() {
+    public List<T> getFragments() {
         return fragments;
     }
 
@@ -53,8 +54,8 @@ public class RankingPagerAdapter extends FragmentPagerAdapter {
     }
 
     @Override
-    public ComicListFragment getItem(int position) {
-        ComicListFragment fragment = null;
+    public T getItem(int position) {
+        T fragment = null;
         if (fragments != null) {
             fragment = fragments.get(position);
         }

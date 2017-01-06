@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.song.sunset.R;
-import com.song.sunset.activitys.TVActivity;
+import com.song.sunset.activitys.VideoListActivity;
 import com.song.sunset.adapters.base.BaseRecyclerViewAdapter;
 import com.song.sunset.beans.TV;
 import com.song.sunset.holders.TVListViewHolder;
@@ -37,6 +37,6 @@ public class TVListAdapter extends BaseRecyclerViewAdapter<TV, TVListViewHolder>
 
     @Override
     protected void onItemClick(View view, int position) {
-        TVActivity.start(context, getData().get(position).getTvUrl(), getData().get(position).getTvName());
+        VideoListActivity.start(context, getData().get(position).getTvUrl(), getData().get(position).getTvName());
     }
 }

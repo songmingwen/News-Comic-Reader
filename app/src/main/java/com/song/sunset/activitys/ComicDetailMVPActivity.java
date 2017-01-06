@@ -149,7 +149,7 @@ public class ComicDetailMVPActivity extends CoreBaseActivity<ComicDetailPresente
                         adapter.setColor(color);
                         toolbar.setBackgroundColor(color);
                     }
-                }, 128, 128, Bitmap.Config.ALPHA_8, new Response.ErrorListener() {
+                }, 64, 64, Bitmap.Config.ALPHA_8, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
             }

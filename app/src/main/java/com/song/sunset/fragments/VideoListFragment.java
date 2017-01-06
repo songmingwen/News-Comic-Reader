@@ -10,19 +10,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
-import com.song.sunset.beans.basebeans.BaseBean;
-import com.song.sunset.beans.ComicListBean;
-import com.song.sunset.impls.OnRVItemClickListener;
-import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.R;
 import com.song.sunset.activitys.ComicListActivity;
 import com.song.sunset.adapters.ComicListAdapter;
+import com.song.sunset.adapters.VideoListAdapter;
+import com.song.sunset.beans.ComicListBean;
+import com.song.sunset.beans.VideoBean;
+import com.song.sunset.beans.basebeans.BaseBean;
 import com.song.sunset.impls.LoadingMoreListener;
+import com.song.sunset.impls.OnRVItemClickListener;
+import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
+import com.song.sunset.utils.retrofit.BasicParamsInterceptor;
 import com.song.sunset.utils.retrofit.ObservableTool;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.retrofit.RetrofitService;
 import com.song.sunset.utils.service.ComicApi;
+import com.song.sunset.utils.service.VideoApi;
 import com.song.sunset.views.LoadMoreRecyclerView;
 
 import java.util.List;
@@ -34,24 +38,23 @@ import in.srain.cube.views.ptr.header.StoreHouseHeader;
 import rx.Observable;
 
 /**
- * Created by Song on 2016/8/27 0027.
- * Email:z53520@qq.com
+ * Created by songmw3 on 2016/12/21.
  */
-public class ComicListFragment extends BaseFragment implements LoadingMoreListener, SwipeRefreshLayout.OnRefreshListener, OnRVItemClickListener, PtrHandler {
-
+public class VideoListFragment extends BaseFragment implements LoadingMoreListener, SwipeRefreshLayout.OnRefreshListener, OnRVItemClickListener, PtrHandler {
     private boolean isVisiable = false;
     private boolean isLoading = false;
     private boolean isRefreshing = false;
     private boolean hasCache = false;
     private ProgressLayout progressLayout;
     private LoadMoreRecyclerView recyclerView;
-//    private SwipeRefreshLayout refreshLayout;
+    //    private SwipeRefreshLayout refreshLayout;
     private PtrFrameLayout refreshLayout;
     private RelativeLayout progressBar;
-    private ComicListAdapter adapter;
+    private VideoListAdapter adapter;
     private int currentPage = 1;
-    private String argName = "";
-    private int argValue;
+    private String name = "";
+    private String typeid = "";
+    private String chType = "";
 
     private View.OnClickListener errorClickListener = new View.OnClickListener() {
         @Override
@@ -65,7 +68,6 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
     protected void loadData() {
         super.loadData();
         isVisiable = true;
-//        getDataFromRetrofit2(currentPage);
     }
 
     @Override
@@ -73,18 +75,16 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             Bundle bundle = getArguments();
-            argName = bundle.getString(ComicListActivity.ARG_NAME);
-            argValue = bundle.getInt(ComicListActivity.ARG_VALUE);
-        } else {//每日更新的标识
-            argName = "sort";
-            argValue = 0;
+            chType = bundle.getString("chType");
+            typeid = bundle.getString("typeid");
+            name = bundle.getString("name");
         }
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_comiclist, container, false);
+        return inflater.inflate(R.layout.fragment_videolist, container, false);
     }
 
     @Override
@@ -117,9 +117,9 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
         }, 100);
 
         recyclerView = (LoadMoreRecyclerView) view.findViewById(R.id.id_recyclerview_comiclist);
-        adapter = new ComicListAdapter(getActivity());
+        adapter = new VideoListAdapter(getActivity());
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3) {
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1) {
             @Override
             protected int getExtraLayoutSpace(RecyclerView.State state) {
                 return ViewUtil.getScreenHeigth();
@@ -128,7 +128,6 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
         recyclerView.setLoadingMoreListener(this);
         adapter.setOnRVItemClickListener(this);
 
-        //        getDataFromNet(currentPage);
         getDataFromRetrofit2(currentPage);
     }
 
@@ -147,7 +146,6 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
         if (isRefreshing) {
             return;
         }
-//        getDataFromNet(1);
         getDataFromRetrofit2(1);
         isRefreshing = true;
     }
@@ -159,7 +157,6 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
         }
         showProgress(true);
         currentPage++;
-//        getDataFromNet(currentPage);
         getDataFromRetrofit2(currentPage);
         isLoading = true;
     }
@@ -175,27 +172,25 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-//        Fresco.getImagePipeline().clearCaches();
     }
 
     public void getDataFromRetrofit2(int page) {
-        Observable<BaseBean<ComicListBean>> observable = RetrofitService.createApi(ComicApi.class).queryComicListRDByGetObservable(page, argName, argValue);
-        ObservableTool.comicSubscribe(observable, new RetrofitCallback<ComicListBean>() {
+        Observable<List<VideoBean>> observable = RetrofitService.createApi(VideoApi.class, VideoApi.baseUrl).queryVideoRDByGetObservable(page, "list", typeid);
+        ObservableTool.videoSubscribe(observable, new RetrofitCallback<VideoBean>() {
             @Override
-            public void onSuccess(ComicListBean comicListBean) {
+            public void onSuccess(VideoBean videoBean) {
                 progressLayout.showContent();
-                List<ComicListBean.ComicsBean> comicsBeanList = comicListBean.getComics();
+                List<VideoBean.ItemBean> videoBeanList = videoBean.getItem();
                 if (isRefreshing) {
                     currentPage = 1;
                     isRefreshing = false;
-                    adapter.setData(comicsBeanList);
-//                    refreshLayout.setRefreshing(false);
+                    adapter.setData(videoBeanList);
                     refreshLayout.refreshComplete();
                 } else {
                     if (isLoading) {
                         isLoading = false;
                     }
-                    adapter.addDatas(comicsBeanList);
+                    adapter.addDatas(videoBeanList);
                     showProgress(false);
                 }
             }
@@ -204,7 +199,6 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
             public void onFailure(int errorCode, String errorMsg) {
                 if (isRefreshing) {
                     isRefreshing = false;
-//                    refreshLayout.setRefreshing(false);
                     refreshLayout.refreshComplete();
                 } else {
                     currentPage--;
@@ -235,60 +229,7 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
         if (isRefreshing) {
             return;
         }
-//        getDataFromNet(1);
         getDataFromRetrofit2(1);
         isRefreshing = true;
     }
-
-//    public void getDataFromNet(int page) {
-//        hasCache = false;
-//        RequestQueue queue = SampleVolleyFactory.getRequestQueue(getActivity());
-//        GsonRequest gsonRequest = new GsonRequest<>(AppServices.getComicListUrl(page, argValue, argName), ComicListRD.class,
-//                new Response.Listener<ComicListRD>() {
-//                    @Override
-//                    public void onResponse(ComicListRD response) {
-//                        hasCache = true;
-//                        mLoadingAndRetryManager.showContent();
-//                        if (response == null || response.getData() == null || response.getData().getStateCode() == 0) {
-//                            showProgress(false);
-//                            return;
-//                        }
-//                        List<ComicListRD.DataBean.ReturnDataBean.ComicsBean> comicsBeanList = response.getData().getReturnData().getComics();
-//                        if (isRefreshing) {
-//                            currentPage = 1;
-//                            isRefreshing = false;
-//                            adapter.setData(comicsBeanList);
-//                            refreshLayout.setRefreshing(false);
-//                        } else {
-//                            if (isLoading) {
-//                                isLoading = false;
-//                            }
-//                            adapter.addDatas(comicsBeanList);
-//                            showProgress(false);
-//                        }
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        if (isRefreshing) {
-//                            isRefreshing = false;
-//                            refreshLayout.setRefreshing(false);
-//                        } else {
-//                            currentPage--;
-//                            if (isLoading) {
-//                                isLoading = false;
-//                                showProgress(false);
-//                            } else {
-//                                if (hasCache)
-//                                    mLoadingAndRetryManager.showContent();
-//                                else
-//                                    mLoadingAndRetryManager.showRetry();
-//                            }
-//                        }
-//                    }
-//                });
-//        gsonRequest.setRetryPolicy(new DefaultRetryPolicy());
-//        queue.add(gsonRequest);
-//    }
 }

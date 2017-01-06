@@ -48,6 +48,5 @@ public class FirstActivity extends Activity {
         animation.setDuration(1000);
         animation.start();
         first.setAnimation(animation);
-        Fresco.initialize(this, FrescoUtil.getDefaultImagePipelineConfig(this));
     }
 }

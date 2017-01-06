@@ -72,7 +72,7 @@ public class FloorView extends LinearLayout {
      */
     private void initViewWithAll(List<Comment> comments) {
         for (int i = 0; i < comments.size(); i++) {
-            View commentView = getView(comments.get(i), i, comments.size(), false);
+            View commentView = getView(comments.get(i), i, i + 1, comments.size(), false);
             addView(commentView);
         }
     }
@@ -86,15 +86,15 @@ public class FloorView extends LinearLayout {
         View commentView = null;
 
         //初始化一楼
-        commentView = getView(comments.get(0), 0, 4, false);
+        commentView = getView(comments.get(0), 0, 1, 4, false);
         addView(commentView);
 
         //初始化二楼
-        commentView = getView(comments.get(1), 1, 4, false);
+        commentView = getView(comments.get(1), 1, 2, 4, false);
         addView(commentView);
 
         //初始化隐藏楼层标识
-        commentView = getView(null, 2, 4, true);
+        commentView = getView(null, 2, 3, 4, true);
         commentView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,21 +104,22 @@ public class FloorView extends LinearLayout {
         });
         addView(commentView);
 
-        //初始化倒数第二楼
-        commentView = getView(comments.get(comments.size() - 2), 3, 4, false);
+        //初始化最后一楼
+        commentView = getView(comments.get(comments.size() - 1), 3, comments.size(), 4, false);
         addView(commentView);
     }
 
     /**
      * 获取单个评论子视图
      *
-     * @param comment 评论对象
-     * @param index   第几个评论
-     * @param count   总共有几个评论
-     * @param isHide  是否是隐藏显示
+     * @param comment    评论对象
+     * @param index      第几个评论
+     * @param showNumber 评论显示的楼层数
+     * @param count      总共有几个评论
+     * @param isHide     是否是隐藏显示
      * @return 一个评论子视图
      */
-    private View getView(Comment comment, int index, int count, boolean isHide) {
+    private View getView(Comment comment, int index, int showNumber, int count, boolean isHide) {
         //获取根布局
         View commentView = LayoutInflater.from(context).inflate(R.layout.view_post_comment, null);
 
@@ -162,7 +163,7 @@ public class FloorView extends LinearLayout {
             tvContent.setText(comment.getContent());
             tvAddress.setText(user.getAddress());
             tvPhone.setText(user.getPhone());
-            tvNum.setText(String.valueOf(index + 1));
+            tvNum.setText(String.valueOf(showNumber));
         }
 
         //设置布局参数

@@ -3,7 +3,6 @@ package com.song.sunset.activitys;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,7 +11,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bigkoo.pickerview.OptionsPickerView;
@@ -22,8 +20,8 @@ import com.song.sunset.fragments.CollectionFragment;
 import com.song.sunset.fragments.ComicClassifyFragment;
 import com.song.sunset.fragments.ComicRankFragment;
 import com.song.sunset.fragments.MVPComicListFragment;
-import com.song.sunset.fragments.TVListFragment;
 import com.song.sunset.utils.DateTimeUtils;
+import com.stfalcon.frescoimageviewer.ImageViewer;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -84,8 +82,16 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //                pvTime.show();
 //                pvOptions.show();
 //                MainActivity.this.startActivity(new Intent(MainActivity.this, SubScaleViewActivity.class));
-//                MainActivity.this.startActivity(new Intent(MainActivity.this, TouchEventTestActivity.class));
-                MainActivity.this.startActivity(new Intent(MainActivity.this, TempTestActivity.class));
+                MainActivity.this.startActivity(new Intent(MainActivity.this, TouchEventTestActivity.class));
+//                MainActivity.this.startActivity(new Intent(MainActivity.this, TempTestActivity.class));
+//                new ImageViewer.Builder(MainActivity.this, new String[]{"http://img2.niutuku.com/1312/0831/0831-niutuku.com-28071.jpg",
+//                        "http://img2.niutuku.com/desk/130220/52/52-niutuku.com-984.jpg",
+//                        "http://img01.sogoucdn.com/app/a/100540002/490110.jpg",
+//                        "http://att.x2.hiapk.com/forum/201409/10/173524pydcdt4ccz928j8d.jpg",
+//                        "http://cdn.duitang.com/uploads/item/201409/07/20140907233240_VYNvH.jpeg"})
+//                        .setStartPosition(0)
+//                        .hideStatusBar(false)
+//                        .show();
             }
         });
     }
@@ -154,7 +160,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         } else if (id == R.id.classify_comic) {
             switchFragmentDelay(ComicClassifyFragment.class.getName(), "分类漫画");
         } else if (id == R.id.nav_video) {
-            switchFragmentDelay(TVListFragment.class.getName(), "电视频道");
+//            switchFragmentDelay(TVListFragment.class.getName(), "电视频道");
+            VideoListActivity.start(this);
         } else if (id == R.id.nav_manage) {
 //            ComicRankFragment.start(MainActivity.this);
             switchFragmentDelay(ComicRankFragment.class.getName(), "排行漫画");

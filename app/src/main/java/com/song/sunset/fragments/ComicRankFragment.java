@@ -133,7 +133,7 @@ public class ComicRankFragment extends BaseFragment {
 
     private void loadNetData() {
         Observable<BaseBean<ComicRankListBean>> observable = RetrofitService.createApi(ComicApi.class).queryComicRankListBeanByGetObservable();
-        ObservableTool.subscribe(observable, new RetrofitCallback<ComicRankListBean>() {
+        ObservableTool.comicSubscribe(observable, new RetrofitCallback<ComicRankListBean>() {
             @Override
             public void onSuccess(ComicRankListBean comicRankListBean) {
                 mLoadingAndRetryManager.showContent();

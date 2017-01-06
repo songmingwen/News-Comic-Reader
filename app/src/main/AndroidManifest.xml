@@ -50,7 +50,7 @@
             android:name=".activitys.ComicReadActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activitys.TVActivity"
+            android:name=".activitys.VideoListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
             android:name=".activitys.ScalePicActivity"
@@ -72,6 +72,7 @@
         <activity android:name=".activitys.TouchEventTestActivity"/>
         <activity android:name=".activitys.TempTestActivity"/>
         <activity android:name=".activitys.ComicDetailMVPActivity"/>
+        <activity android:name=".activitys.VideoActivity"/>
 
         <meta-data
             android:name="com.amap.api.v2.apikey"

@@ -18,8 +18,8 @@ import okhttp3.Response;
  */
 public class OfflineCacheControlInterceptor implements Interceptor {
 
-    public static final int MAX_STALE = 60 * 60 * 24 * 28;//4个星期
-    public static final int MAX_AGE = 60 * 60;//1个小时
+    private static final int MAX_STALE = 60 * 60 * 24 * 28;//4个星期
+    private static final int MAX_AGE = 60 * 60;//1个小时
 
     @Override
     public Response intercept(Chain chain) throws IOException {

@@ -2,6 +2,8 @@ package com.song.sunset.utils.retrofit;
 
 import com.song.sunset.beans.basebeans.BaseBean;
 
+import java.util.List;
+
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -14,7 +16,7 @@ import rx.schedulers.Schedulers;
 
 public class ObservableTool {
 
-    public static <T> void subscribe(Observable<BaseBean<T>> observable, final RetrofitCallback<T> retrofitCallback) {
+    public static <T> void comicSubscribe(Observable<BaseBean<T>> observable, final RetrofitCallback<T> retrofitCallback) {
         observable
                 .map(new Func1<BaseBean<T>, T>() {
                     @Override
@@ -54,6 +56,32 @@ public class ObservableTool {
                             return;
                         }
                         retrofitCallback.onSuccess(t);
+                    }
+                });
+    }
+
+    public static <T> void videoSubscribe(Observable<List<T>> observable, final RetrofitCallback<T> retrofitCallback) {
+        observable
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .unsubscribeOn(Schedulers.io())
+                .subscribe(new Subscriber<List<T>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        retrofitCallback.onFailure(-1, "服务器错误");
+                    }
+
+                    @Override
+                    public void onNext(List<T> t) {
+                        if (t == null) {
+                            return;
+                        }
+                        retrofitCallback.onSuccess(t.get(0));
                     }
                 });
     }

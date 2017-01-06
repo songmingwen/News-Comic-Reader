@@ -114,7 +114,7 @@ public class ComicClassifyFragment extends Fragment {
     public void getDataFromRetrofit2() {
         mLoadingAndRetryManager.showLoading();
         Observable<BaseBean<ComicClassifyBean>> observable = RetrofitService.createApi(ComicApi.class).queryComicClassifyBeanByGetObservable(2);
-        ObservableTool.subscribe(observable, new RetrofitCallback<ComicClassifyBean>() {
+        ObservableTool.comicSubscribe(observable, new RetrofitCallback<ComicClassifyBean>() {
             @Override
             public void onSuccess(ComicClassifyBean comicReadBean) {
                 mLoadingAndRetryManager.showContent();

@@ -18,7 +18,7 @@ public class ComicDetailPresenter extends CoreBasePresenter<ComicDetailModel, Co
     }
 
     public void showData(int comicId) {
-        ObservableTool.subscribe(mModel.getData(comicId), new RetrofitCallback<ComicDetailBean>() {
+        ObservableTool.comicSubscribe(mModel.getData(comicId), new RetrofitCallback<ComicDetailBean>() {
             @Override
             public void onSuccess(ComicDetailBean comicDetailBean) {
                 mView.setData(comicDetailBean);

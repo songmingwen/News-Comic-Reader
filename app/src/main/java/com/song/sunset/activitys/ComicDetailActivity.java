@@ -118,7 +118,7 @@ public class ComicDetailActivity extends BaseActivity {
 
     public void getDataFromRetrofit2ByObservable() {
         Observable<BaseBean<ComicDetailBean>> observable = RetrofitService.createApi(ComicApi.class).queryComicDetailRDByGetObservable(comicId);
-        ObservableTool.subscribe(observable, new RetrofitCallback<ComicDetailBean>() {
+        ObservableTool.comicSubscribe(observable, new RetrofitCallback<ComicDetailBean>() {
             @Override
             public void onSuccess(ComicDetailBean comicDetailBean) {
                 mLoadingAndRetryManager.showContent();
