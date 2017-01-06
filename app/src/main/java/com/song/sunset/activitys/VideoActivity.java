@@ -62,29 +62,18 @@ public class VideoActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        if (player != null) {
-            player.onResume();
-        }
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        //屏幕旋转隐藏或显示状态栏
-        if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {//横屏
-            ScreenUtils.fullscreen(this, true);
-        } else if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {//竖屏
-            ScreenUtils.fullscreen(this, false);
-        }
-    }
-
-    @Override
     protected void onPause() {
         super.onPause();
         if (player != null) {
             player.onPause();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (player != null) {
+            player.onResume();
         }
     }
 
@@ -94,6 +83,20 @@ public class VideoActivity extends AppCompatActivity {
         if (player != null) {
             player.onDestroy();
         }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (player != null) {
+            player.onConfigurationChanged(newConfig);
+        }
+//        //屏幕旋转隐藏或显示状态栏
+//        if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {//横屏
+//            ScreenUtils.fullscreen(this, true);
+//        } else if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {//竖屏
+//            ScreenUtils.fullscreen(this, false);
+//        }
     }
 
     @Override

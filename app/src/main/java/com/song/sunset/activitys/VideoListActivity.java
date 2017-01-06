@@ -72,20 +72,6 @@ public class VideoListActivity extends AppCompatActivity {
                 page.setAlpha(normalizedposition);
             }
         });
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
         slidingTabLayout.setViewPager(viewPager);
 
         loadNetData();
@@ -128,47 +114,6 @@ public class VideoListActivity extends AppCompatActivity {
                 mLoadingAndRetryManager.showRetry();
             }
         });
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        //屏幕旋转隐藏或显示状态栏
-        if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {//横屏
-            ScreenUtils.fullscreen(this, true);
-        } else if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {//竖屏
-            ScreenUtils.fullscreen(this, false);
-        }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
     }
 
     public static void start(Context context, String tvUrl, String tvName) {

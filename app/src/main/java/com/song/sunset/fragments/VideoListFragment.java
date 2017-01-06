@@ -40,7 +40,7 @@ import rx.Observable;
 /**
  * Created by songmw3 on 2016/12/21.
  */
-public class VideoListFragment extends BaseFragment implements LoadingMoreListener, SwipeRefreshLayout.OnRefreshListener, OnRVItemClickListener, PtrHandler {
+public class VideoListFragment extends BaseFragment implements LoadingMoreListener, SwipeRefreshLayout.OnRefreshListener, PtrHandler {
     private boolean isVisiable = false;
     private boolean isLoading = false;
     private boolean isRefreshing = false;
@@ -126,14 +126,8 @@ public class VideoListFragment extends BaseFragment implements LoadingMoreListen
             }
         });
         recyclerView.setLoadingMoreListener(this);
-        adapter.setOnRVItemClickListener(this);
 
         getDataFromRetrofit2(currentPage);
-    }
-
-    @Override
-    public void onClick(View v, int position) {
-//        Toast.makeText(getActivity(), "" + position, Toast.LENGTH_SHORT).show();
     }
 
     @Override

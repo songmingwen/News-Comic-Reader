@@ -1,8 +1,10 @@
 package com.song.sunset.activitys;
 
 import android.app.Application;
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
+import android.support.multidex.MultiDex;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.song.sunset.utils.CrashHandler;
@@ -29,16 +31,17 @@ public class SunsetApplication extends Application {
     public void onCreate() {
         super.onCreate();
         sunsetApplication = this;
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                setUserDatabase();
-            }
-        }, 100);
+        setUserDatabase();
         AppConfig.setApp(this);
         initLoadingAndRetryLayout();
         Fresco.initialize(this, FrescoUtil.getDefaultImagePipelineConfig(this));
 //        CrashHandler.getInstance().init(this);
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
     private void initLoadingAndRetryLayout() {

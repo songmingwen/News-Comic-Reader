@@ -13,7 +13,7 @@ public enum OkHttpClient {
 
     INSTANCE;
 
-    private final okhttp3.OkHttpClient.Builder okHttpClientBuilder;
+    private final okhttp3.OkHttpClient okHttpClientBuilder;
 
     private static final int TIMEOUT_READ = 15;
     private static final int TIMEOUT_CONNECTION = 15;
@@ -27,6 +27,8 @@ public enum OkHttpClient {
         okHttpClientBuilder = new okhttp3.OkHttpClient.Builder()
                 //打印日志
                 .addInterceptor(logInterceptor)
+                //添加固定公共请求参数
+                .addInterceptor(getPublicParams())
 
                 //设置缓存
                 .addInterceptor(cacheInterceptor)
@@ -43,20 +45,12 @@ public enum OkHttpClient {
 
                 //time out
                 .readTimeout(TIMEOUT_READ, TimeUnit.SECONDS)
-                .connectTimeout(TIMEOUT_CONNECTION, TimeUnit.SECONDS);
+                .connectTimeout(TIMEOUT_CONNECTION, TimeUnit.SECONDS)
+                .build();
     }
 
-    public okhttp3.OkHttpClient getOkHttpClient(boolean addPublicParams) {
-        if (addPublicParams) {
-            //添加默认公共请求参数
-            return okHttpClientBuilder.addInterceptor(getPublicParams()).build();
-        } else {
-            return okHttpClientBuilder.build();
-        }
-    }
-
-    public okhttp3.OkHttpClient getOkHttpClient(Interceptor publicParams) {
-        return okHttpClientBuilder.addInterceptor(publicParams).build();
+    public okhttp3.OkHttpClient getOkHttpClient() {
+        return okHttpClientBuilder;
     }
 
     public Interceptor getPublicParams() {

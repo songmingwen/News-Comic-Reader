@@ -147,7 +147,6 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
         if (isRefreshing) {
             return;
         }
-//        getDataFromNet(1);
         getDataFromRetrofit2(1);
         isRefreshing = true;
     }
@@ -159,7 +158,6 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
         }
         showProgress(true);
         currentPage++;
-//        getDataFromNet(currentPage);
         getDataFromRetrofit2(currentPage);
         isLoading = true;
     }
@@ -189,7 +187,6 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
                     currentPage = 1;
                     isRefreshing = false;
                     adapter.setData(comicsBeanList);
-//                    refreshLayout.setRefreshing(false);
                     refreshLayout.refreshComplete();
                 } else {
                     if (isLoading) {
@@ -204,7 +201,6 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
             public void onFailure(int errorCode, String errorMsg) {
                 if (isRefreshing) {
                     isRefreshing = false;
-//                    refreshLayout.setRefreshing(false);
                     refreshLayout.refreshComplete();
                 } else {
                     currentPage--;
@@ -235,60 +231,7 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
         if (isRefreshing) {
             return;
         }
-//        getDataFromNet(1);
         getDataFromRetrofit2(1);
         isRefreshing = true;
     }
-
-//    public void getDataFromNet(int page) {
-//        hasCache = false;
-//        RequestQueue queue = SampleVolleyFactory.getRequestQueue(getActivity());
-//        GsonRequest gsonRequest = new GsonRequest<>(AppServices.getComicListUrl(page, argValue, argName), ComicListRD.class,
-//                new Response.Listener<ComicListRD>() {
-//                    @Override
-//                    public void onResponse(ComicListRD response) {
-//                        hasCache = true;
-//                        mLoadingAndRetryManager.showContent();
-//                        if (response == null || response.getData() == null || response.getData().getStateCode() == 0) {
-//                            showProgress(false);
-//                            return;
-//                        }
-//                        List<ComicListRD.DataBean.ReturnDataBean.ComicsBean> comicsBeanList = response.getData().getReturnData().getComics();
-//                        if (isRefreshing) {
-//                            currentPage = 1;
-//                            isRefreshing = false;
-//                            adapter.setData(comicsBeanList);
-//                            refreshLayout.setRefreshing(false);
-//                        } else {
-//                            if (isLoading) {
-//                                isLoading = false;
-//                            }
-//                            adapter.addDatas(comicsBeanList);
-//                            showProgress(false);
-//                        }
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        if (isRefreshing) {
-//                            isRefreshing = false;
-//                            refreshLayout.setRefreshing(false);
-//                        } else {
-//                            currentPage--;
-//                            if (isLoading) {
-//                                isLoading = false;
-//                                showProgress(false);
-//                            } else {
-//                                if (hasCache)
-//                                    mLoadingAndRetryManager.showContent();
-//                                else
-//                                    mLoadingAndRetryManager.showRetry();
-//                            }
-//                        }
-//                    }
-//                });
-//        gsonRequest.setRetryPolicy(new DefaultRetryPolicy());
-//        queue.add(gsonRequest);
-//    }
 }

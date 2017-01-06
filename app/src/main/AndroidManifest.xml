@@ -16,7 +16,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
 
     <application
         android:name=".activitys.SunsetApplication"
@@ -67,19 +67,21 @@
         <activity android:name="com.subscaleview.sample.extension.ExtensionActivity" />
         <activity android:name="com.subscaleview.sample.viewpager.ViewPagerActivity" />
         <activity android:name="com.subscaleview.sample.imagedisplay.ImageDisplayActivity" />
-        <activity android:name=".activitys.MeadiaPlayerActivity"/>
-        <activity android:name=".activitys.VideoViewActivity"/>
-        <activity android:name=".activitys.TouchEventTestActivity"/>
-        <activity android:name=".activitys.TempTestActivity"/>
-        <activity android:name=".activitys.ComicDetailMVPActivity"/>
-        <activity android:name=".activitys.VideoActivity"/>
+        <activity android:name=".activitys.MeadiaPlayerActivity" />
+        <activity android:name=".activitys.VideoViewActivity" />
+        <activity android:name=".activitys.TouchEventTestActivity" />
+        <activity android:name=".activitys.TempTestActivity" />
+        <activity android:name=".activitys.ComicDetailMVPActivity" />
+        <activity
+            android:name=".activitys.VideoActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
 
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="1b85142155dba7f4c7f243bfd78cb7c4" />
 
         <activity android:name=".activitys.LocationMarkerActivity" />
-        <activity android:name=".activitys.BasicMapActivity"/>
+        <activity android:name=".activitys.BasicMapActivity" />
         <!-- 定位需要的服务 使用2.0的定位需要加上这个 -->
         <service android:name="com.amap.api.location.APSService" />
     </application>
