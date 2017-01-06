@@ -35,8 +35,7 @@
             android:layout_marginTop="5dp"
             android:layout_width="113dp"
             android:layout_height="143dp"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/blackhole" />
+            android:layout_centerHorizontal="true"/>
 
 
         <TextView

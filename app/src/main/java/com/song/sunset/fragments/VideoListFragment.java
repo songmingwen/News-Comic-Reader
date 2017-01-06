@@ -11,21 +11,14 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.song.sunset.R;
-import com.song.sunset.activitys.ComicListActivity;
-import com.song.sunset.adapters.ComicListAdapter;
 import com.song.sunset.adapters.VideoListAdapter;
-import com.song.sunset.beans.ComicListBean;
 import com.song.sunset.beans.VideoBean;
-import com.song.sunset.beans.basebeans.BaseBean;
 import com.song.sunset.impls.LoadingMoreListener;
-import com.song.sunset.impls.OnRVItemClickListener;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
-import com.song.sunset.utils.retrofit.BasicParamsInterceptor;
 import com.song.sunset.utils.retrofit.ObservableTool;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.retrofit.RetrofitService;
-import com.song.sunset.utils.service.ComicApi;
 import com.song.sunset.utils.service.VideoApi;
 import com.song.sunset.views.LoadMoreRecyclerView;
 
@@ -122,7 +115,7 @@ public class VideoListFragment extends BaseFragment implements LoadingMoreListen
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1) {
             @Override
             protected int getExtraLayoutSpace(RecyclerView.State state) {
-                return ViewUtil.getScreenHeigth();
+                return ViewUtil.getScreenHeigth() / 3;
             }
         });
         recyclerView.setLoadingMoreListener(this);

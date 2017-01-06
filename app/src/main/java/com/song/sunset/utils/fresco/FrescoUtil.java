@@ -7,6 +7,7 @@ import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Environment;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.facebook.cache.disk.DiskCacheConfig;
@@ -50,19 +51,23 @@ public class FrescoUtil {
         setFrescoCoverImage(simpleDraweeView, url, width, height, true);
     }
 
+    public static void setFrescoImageWith2Url(SimpleDraweeView simpleDraweeView, String lowResUrl, String originalUrl, int width, int height) {
+        setFrescoImage(simpleDraweeView, lowResUrl, originalUrl, NO_PARAMS, width, height, false, false);
+    }
+
     public static void setFrescoCoverImage(SimpleDraweeView simpleDraweeView, String url, int width, int height, boolean hasBorder) {
-        setFrescoImage(simpleDraweeView, url, NO_PARAMS, width, height, hasBorder, false);
+        setFrescoImage(simpleDraweeView, null, url, NO_PARAMS, width, height, hasBorder, false);
     }
 
     public static void setFrescoComicImage(SimpleDraweeView simpleDraweeView, String url, int position, int width, int height) {
-        setFrescoImage(simpleDraweeView, url, position, width, height, false, false);
+        setFrescoImage(simpleDraweeView, null, url, position, width, height, false, false);
     }
 
-    public static void setFrescoImage(SimpleDraweeView simpleDraweeView, String url, int position, int width, int height, boolean hasBorder, boolean userBlur) {
+    public static void setFrescoImage(SimpleDraweeView simpleDraweeView, String lowResUrl, String originalUrl, int position, int width, int height, boolean hasBorder, boolean userBlur) {
         simpleDraweeView.getLayoutParams().width = width;
         simpleDraweeView.getLayoutParams().height = height;
         simpleDraweeView.setHierarchy(getHierarchy(position, hasBorder));
-        simpleDraweeView.setController(getController(simpleDraweeView, url, width, height, userBlur));
+        simpleDraweeView.setController(getController(simpleDraweeView, lowResUrl, originalUrl, width, height, userBlur));
     }
 
     /**
@@ -104,9 +109,10 @@ public class FrescoUtil {
      * 可以创建一个这个类的实例，来实现对所要显示的图片做更多的控制。
      */
 
-    public static DraweeController getController(SimpleDraweeView simpleDraweeView, String url, int width, int height, boolean userBlur) {
+    public static DraweeController getController(SimpleDraweeView simpleDraweeView, String lowResUrl, String originalUrl, int width, int height, boolean userBlur) {
         return Fresco.newDraweeControllerBuilder()
-                .setImageRequest(getImageRequest(url, width, height, userBlur))
+                .setLowResImageRequest(getImageRequest(lowResUrl, width, height, userBlur))
+                .setImageRequest(getImageRequest(originalUrl, width, height, userBlur))
                 .setOldController(simpleDraweeView.getController())
                 .setControllerListener(getControllerListener())
                 .setTapToRetryEnabled(true)
@@ -115,6 +121,9 @@ public class FrescoUtil {
     }
 
     public static ImageRequest getImageRequest(String url, int width, int height, boolean userBlur) {
+        if (TextUtils.isEmpty(url)) {
+            return null;
+        }
         Uri uri = Uri.parse(url);
         return ImageRequestBuilder
                 .newBuilderWithSource(uri)

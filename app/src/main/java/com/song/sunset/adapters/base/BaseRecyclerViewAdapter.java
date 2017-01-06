@@ -16,8 +16,9 @@ import java.util.List;
  */
 public abstract class BaseRecyclerViewAdapter<RD, VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    protected List<RD> mList;
-    protected OnRVItemClickListener onRVItemClickListener;
+    private List<RD> mList;
+
+    private OnRVItemClickListener onRVItemClickListener;
 
     protected BaseRecyclerViewAdapter() {
         if (mList == null) {

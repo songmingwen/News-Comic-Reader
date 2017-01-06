@@ -13,6 +13,7 @@ import com.song.sunset.adapters.base.BaseRecyclerViewAdapter;
 import com.song.sunset.beans.VideoBean;
 import com.song.sunset.holders.VideoListViewHolder;
 import com.song.sunset.utils.ViewUtil;
+import com.song.sunset.utils.fresco.FrescoUtil;
 
 /**
  * Created by songmw3 on 2016/12/21.
@@ -37,20 +38,16 @@ public class VideoListAdapter extends BaseRecyclerViewAdapter<VideoBean.ItemBean
         }
 
         final VideoBean.ItemBean bean = getData().get(position);
+        int realWidth = ViewUtil.getScreenWidth();
+        int realHeight = realWidth * 9 / 16;
 
         VideoListViewHolder videoListViewHolder = (VideoListViewHolder) holder;
-        Glide.with(context)
-                .load(bean.getImage())
-                .into(videoListViewHolder.cover);
+        FrescoUtil.setFrescoImageWith2Url(videoListViewHolder.cover, bean.getThumbnail(), bean.getImage(), realWidth, realHeight);
         videoListViewHolder.videoName.setText(bean.getTitle());
-        View.OnClickListener listener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                VideoActivity.start(context, bean.getVideo_url(), bean.getTitle(), bean.getImage());
-            }
-        };
-        videoListViewHolder.cover.setOnClickListener(listener);
-        videoListViewHolder.videoName.setOnClickListener(listener);
     }
 
+    protected void onItemClick(View view, int position) {
+        VideoBean.ItemBean bean = getData().get(position);
+        VideoActivity.start(context, bean.getVideo_url(), bean.getTitle(), bean.getImage());
+    }
 }
