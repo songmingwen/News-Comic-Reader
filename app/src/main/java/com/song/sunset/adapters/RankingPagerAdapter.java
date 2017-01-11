@@ -3,6 +3,7 @@ package com.song.sunset.adapters;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.song.sunset.fragments.ComicListFragment;
 
@@ -14,7 +15,7 @@ import java.util.List;
  * Email:z53520@qq.com
  */
 
-public class RankingPagerAdapter<T extends Fragment> extends FragmentPagerAdapter {
+public class RankingPagerAdapter<T extends Fragment> extends FragmentStatePagerAdapter {
 
     private List<T> fragments = new ArrayList<>();
 

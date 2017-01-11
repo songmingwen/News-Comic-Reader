@@ -25,7 +25,7 @@ import com.song.sunset.beans.ComicDetailBean;
 import com.song.sunset.utils.loadingmanager.OnLoadingAndRetryListener;
 import com.song.sunset.R;
 import com.song.sunset.adapters.ComicDetailAdapter;
-import com.song.sunset.utils.retrofit.ObservableTool;
+import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.BitmapUtil;
 import com.song.sunset.utils.retrofit.RetrofitService;
@@ -118,7 +118,7 @@ public class ComicDetailActivity extends BaseActivity {
 
     public void getDataFromRetrofit2ByObservable() {
         Observable<BaseBean<ComicDetailBean>> observable = RetrofitService.createApi(ComicApi.class).queryComicDetailRDByGetObservable(comicId);
-        ObservableTool.comicSubscribe(observable, new RetrofitCallback<ComicDetailBean>() {
+        RxUtil.comicSubscribe(observable, new RetrofitCallback<ComicDetailBean>() {
             @Override
             public void onSuccess(ComicDetailBean comicDetailBean) {
                 mLoadingAndRetryManager.showContent();

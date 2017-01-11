@@ -1,6 +1,8 @@
-package com.song.sunset.utils.retrofit;
+package com.song.sunset.utils.rxjava;
 
 import com.song.sunset.beans.basebeans.BaseBean;
+import com.song.sunset.utils.retrofit.RetrofitCallback;
+import com.tbruyelle.rxpermissions.RxPermissions;
 
 import java.util.List;
 
@@ -14,7 +16,7 @@ import rx.schedulers.Schedulers;
  * Created by songmw3 on 2016/12/6.
  */
 
-public class ObservableTool {
+public class RxUtil {
 
     public static <T> void comicSubscribe(Observable<BaseBean<T>> observable, final RetrofitCallback<T> retrofitCallback) {
         observable
@@ -36,9 +38,7 @@ public class ObservableTool {
                         return tBaseBean.data.returnData;
                     }
                 })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .unsubscribeOn(Schedulers.io())
+                .compose(RxUtil.<T>rxSchedulerHelper())
                 .subscribe(new Subscriber<T>() {
                     @Override
                     public void onCompleted() {
@@ -62,9 +62,7 @@ public class ObservableTool {
 
     public static <T> void videoSubscribe(Observable<List<T>> observable, final RetrofitCallback<T> retrofitCallback) {
         observable
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .unsubscribeOn(Schedulers.io())
+                .compose(RxUtil.<List<T>>rxSchedulerHelper())
                 .subscribe(new Subscriber<List<T>>() {
                     @Override
                     public void onCompleted() {
@@ -84,5 +82,19 @@ public class ObservableTool {
                         retrofitCallback.onSuccess(t.get(0));
                     }
                 });
+    }
+
+    /**
+     *  compose简化线程
+     */
+    public static <T> Observable.Transformer<T, T> rxSchedulerHelper() {
+        return new Observable.Transformer<T, T>() {
+            @Override
+            public Observable<T> call(Observable<T> observable) {
+                return observable.subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .unsubscribeOn(Schedulers.io());
+            }
+        };
     }
 }

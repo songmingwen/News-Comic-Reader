@@ -3,7 +3,7 @@ package com.song.sunset.presenter;
 import com.song.core.base.CoreBasePresenter;
 import com.song.sunset.beans.ComicDetailBean;
 import com.song.sunset.model.ComicDetailModel;
-import com.song.sunset.utils.retrofit.ObservableTool;
+import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.view.ComicDetailView;
 
@@ -18,7 +18,7 @@ public class ComicDetailPresenter extends CoreBasePresenter<ComicDetailModel, Co
     }
 
     public void showData(int comicId) {
-        ObservableTool.comicSubscribe(mModel.getData(comicId), new RetrofitCallback<ComicDetailBean>() {
+        RxUtil.comicSubscribe(mModel.getData(comicId), new RetrofitCallback<ComicDetailBean>() {
             @Override
             public void onSuccess(ComicDetailBean comicDetailBean) {
                 mView.setData(comicDetailBean);

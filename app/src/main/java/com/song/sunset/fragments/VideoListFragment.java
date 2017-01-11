@@ -16,10 +16,11 @@ import com.song.sunset.beans.VideoBean;
 import com.song.sunset.impls.LoadingMoreListener;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
-import com.song.sunset.utils.retrofit.ObservableTool;
+import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.retrofit.RetrofitService;
 import com.song.sunset.utils.service.VideoApi;
+import com.song.sunset.utils.service.WholeApi;
 import com.song.sunset.views.LoadMoreRecyclerView;
 
 import java.util.List;
@@ -162,8 +163,8 @@ public class VideoListFragment extends BaseFragment implements LoadingMoreListen
     }
 
     public void getDataFromRetrofit2(int page) {
-        Observable<List<VideoBean>> observable = RetrofitService.createApi(VideoApi.class, VideoApi.baseUrl).queryVideoRDByGetObservable(page, "list", typeid);
-        ObservableTool.videoSubscribe(observable, new RetrofitCallback<VideoBean>() {
+        Observable<List<VideoBean>> observable = RetrofitService.createApi(VideoApi.class, WholeApi.VIDEO_BASE_URL).queryVideoRDByGetObservable(page, "list", typeid);
+        RxUtil.videoSubscribe(observable, new RetrofitCallback<VideoBean>() {
             @Override
             public void onSuccess(VideoBean videoBean) {
                 progressLayout.showContent();

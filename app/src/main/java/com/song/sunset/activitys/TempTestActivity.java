@@ -3,18 +3,18 @@ package com.song.sunset.activitys;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import com.davemorrissey.labs.subscaleview.ImageSource;
-import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.song.sunset.R;
-import com.song.sunset.utils.Reflect;
-import com.song.sunset.utils.ViewUtil;
-import com.song.sunset.views.CustomScrollView;
 import com.song.sunset.views.TextSwitchView;
-import com.stfalcon.frescoimageviewer.ImageViewer;
+
+import java.util.ArrayList;
+
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by songmw3 on 2016/12/2.
@@ -35,5 +35,47 @@ public class TempTestActivity extends BaseActivity {
 
     public void onTempTestFlowButtonClick(View view) {
         textSwitchView.setTextStillTime(3000);
+        test();
+    }
+
+    public void test() {
+        Integer[] int01 = {1, 22};
+        Integer[] int02 = {333, 4444};
+        Integer[] int03 = {55555, 666666};
+        ArrayList<Integer[]> list = new ArrayList<>();
+        list.add(int01);
+        list.add(int02);
+        list.add(int03);
+        Observable.from(list)
+                .flatMap(new Func1<Integer[], Observable<Integer>>() {
+                    @Override
+                    public Observable<Integer> call(Integer[] strings) {
+                        return Observable.from(strings);
+                    }
+                })
+                .map(new Func1<Integer, String>() {
+                    @Override
+                    public String call(Integer i) {
+                        return i.toString();
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<String>() {
+                    @Override
+                    public void onCompleted() {
+                        Toast.makeText(TempTestActivity.this, "完成", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        Toast.makeText(TempTestActivity.this, s, Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }

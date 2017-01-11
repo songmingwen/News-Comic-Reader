@@ -18,7 +18,7 @@ import com.song.sunset.beans.basebeans.BaseBean;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.loadingmanager.LoadingAndRetryManager;
 import com.song.sunset.utils.loadingmanager.OnLoadingAndRetryListener;
-import com.song.sunset.utils.retrofit.ObservableTool;
+import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.retrofit.RetrofitService;
 import com.song.sunset.utils.service.ComicApi;
@@ -133,7 +133,7 @@ public class ComicRankFragment extends BaseFragment {
 
     private void loadNetData() {
         Observable<BaseBean<ComicRankListBean>> observable = RetrofitService.createApi(ComicApi.class).queryComicRankListBeanByGetObservable();
-        ObservableTool.comicSubscribe(observable, new RetrofitCallback<ComicRankListBean>() {
+        RxUtil.comicSubscribe(observable, new RetrofitCallback<ComicRankListBean>() {
             @Override
             public void onSuccess(ComicRankListBean comicRankListBean) {
                 mLoadingAndRetryManager.showContent();

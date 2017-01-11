@@ -2,27 +2,25 @@ package com.song.sunset.activitys;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import com.dou361.ijkplayer.widget.PlayerView;
+
 import com.flyco.tablayout.SlidingTabLayout;
 import com.song.sunset.R;
 import com.song.sunset.adapters.RankingPagerAdapter;
 import com.song.sunset.beans.VideoBean;
 import com.song.sunset.fragments.VideoListFragment;
-import com.song.sunset.utils.ScreenUtils;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.loadingmanager.LoadingAndRetryManager;
 import com.song.sunset.utils.loadingmanager.OnLoadingAndRetryListener;
-import com.song.sunset.utils.retrofit.ObservableTool;
+import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.retrofit.RetrofitService;
 import com.song.sunset.utils.service.VideoApi;
+import com.song.sunset.utils.service.WholeApi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,8 +76,8 @@ public class VideoListActivity extends AppCompatActivity {
     }
 
     private void loadNetData() {
-        Observable<List<VideoBean>> observable = RetrofitService.createApi(VideoApi.class, VideoApi.baseUrl).queryFirstVideoRDByGetObservable(1);
-        ObservableTool.videoSubscribe(observable, new RetrofitCallback<VideoBean>() {
+        Observable<List<VideoBean>> observable = RetrofitService.createApi(VideoApi.class, WholeApi.VIDEO_BASE_URL).queryFirstVideoRDByGetObservable(1);
+        RxUtil.videoSubscribe(observable, new RetrofitCallback<VideoBean>() {
             @Override
             public void onSuccess(VideoBean videoBean) {
                 List<VideoBean.TypesBean> list = videoBean.getTypes();
