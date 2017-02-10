@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.song.sunset.utils.ScreenUtils;
 import com.song.sunset.utils.loadingmanager.LoadingAndRetryManager;
 import com.song.sunset.beans.basebeans.BaseBean;
 import com.song.sunset.beans.ComicReadBean;
@@ -30,7 +31,7 @@ import rx.Observable;
  * Created by Song on 2016/8/30 0030.
  * Email:z53520@qq.com
  */
-public class ComicReadActivity extends BaseActivity {
+public class ComicReadActivity extends BaseActivity implements RetrofitCallback<List<ComicReadBean>> {
 
     public static final String OPEN_POSITION = "open_position";
     private LoadingAndRetryManager mLoadingAndRetryManager;
@@ -51,7 +52,7 @@ public class ComicReadActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comic_read);
-
+        ScreenUtils.fullscreen(this, true);
         mLoadingAndRetryManager = LoadingAndRetryManager.generate(this, new OnLoadingAndRetryListener() {
             @Override
             public void setRetryEvent(View retryView) {
@@ -127,21 +128,21 @@ public class ComicReadActivity extends BaseActivity {
     public void getDataFromRetrofit2() {
         mLoadingAndRetryManager.showLoading();
         Observable<BaseBean<List<ComicReadBean>>> Observable = RetrofitService.createApi(ComicApi.class).queryComicReadRDByGetObservable(comicId);
-        RxUtil.comicSubscribe(Observable, new RetrofitCallback<List<ComicReadBean>>() {
-            @Override
-            public void onSuccess(List<ComicReadBean> comicReadBean) {
-                mLoadingAndRetryManager.showContent();
-                ArrayList<ComicReadBean.ImageListBean.ImagesBean> dataList = getDataList(comicReadBean);
-                adapter.setData(dataList);
-                int realPosition = getRealPosition(comicReadBean);
-                recyclerView.scrollToPosition(realPosition);
-            }
+        RxUtil.comicSubscribe(Observable, this);
+    }
 
-            @Override
-            public void onFailure(int errorCode, String errorMsg) {
-                mLoadingAndRetryManager.showRetry();
-            }
-        });
+    @Override
+    public void onSuccess(List<ComicReadBean> comicReadBean) {
+        mLoadingAndRetryManager.showContent();
+        ArrayList<ComicReadBean.ImageListBean.ImagesBean> dataList = getDataList(comicReadBean);
+        adapter.setData(dataList);
+        int realPosition = getRealPosition(comicReadBean);
+        recyclerView.scrollToPosition(realPosition);
+    }
+
+    @Override
+    public void onFailure(int errorCode, String errorMsg) {
+        mLoadingAndRetryManager.showRetry();
     }
 
 //    public void getDataFromNet() {

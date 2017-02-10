@@ -7,9 +7,9 @@ import java.lang.reflect.ParameterizedType;
  */
 
 public class TUtil {
-    public static <T> T getT(Object o, int i) {
+    public static <T> T getT(Object object, int i) {
         try {
-            return ((Class<T>) ((ParameterizedType) (o.getClass().getGenericSuperclass())).getActualTypeArguments()[i])
+            return ((Class<T>) ((ParameterizedType) (object.getClass().getGenericSuperclass())).getActualTypeArguments()[i])
                     .newInstance();
         } catch (InstantiationException e) {
             e.printStackTrace();
