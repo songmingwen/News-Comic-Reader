@@ -146,6 +146,7 @@ public class ComicDetailMVPActivity extends CoreBaseActivity<ComicDetailPresente
                 new Response.Listener<Bitmap>() {
                     @Override
                     public void onResponse(Bitmap response) {
+                        if (ComicDetailMVPActivity.this.isFinishing()) return;
                         color = BitmapUtil.getColorFromBitmap(response);
                         adapter.setColor(color);
                         toolbar.setBackgroundColor(color);
