@@ -37,6 +37,7 @@ import butterknife.OnClick;
 
 /**
  * Created by songmw3 on 2016/12/8.
+ * E-mail:z53520@qq.com
  */
 
 public class ComicDetailMVPActivity extends CoreBaseActivity<ComicDetailPresenter, ComicDetailModel> implements ComicDetailView {
