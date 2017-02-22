@@ -6,7 +6,7 @@
     <TextView
         android:id="@+id/id_comic_detail_list_item_text"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="25dp"
         android:layout_margin="5dp"
         android:background="@drawable/circle_rect_40dp"
         android:gravity="center"
@@ -15,5 +15,5 @@
         android:singleLine="true"
         android:text="第一张喽"
         android:textColor="@color/color_transparent_88"
-        android:textSize="11sp" />
+        android:textSize="9sp" />
 </RelativeLayout>

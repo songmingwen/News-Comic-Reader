@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.song.sunset.R;
-import com.song.sunset.activitys.ComicDetailActivity;
 import com.song.sunset.activitys.ComicDetailMVPActivity;
 import com.song.sunset.beans.ComicLocalCollection;
 import com.song.sunset.holders.ComicListViewHolder;
@@ -19,6 +18,7 @@ import java.util.List;
 
 /**
  * Created by z5352_000 on 2016/10/29 0029.
+ * E-mail:z53520@qq.com
  */
 public class CollectionComicAdapter extends RecyclerView.Adapter<ComicListViewHolder> {
     private Context context;
@@ -33,7 +33,7 @@ public class CollectionComicAdapter extends RecyclerView.Adapter<ComicListViewHo
 
     @Override
     public ComicListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ComicListViewHolder(LayoutInflater.from(context).inflate(R.layout.comiclist_item, parent, false));
+        return new ComicListViewHolder(LayoutInflater.from(context).inflate(R.layout.comic_list_sample_item, parent, false));
     }
 
     @Override

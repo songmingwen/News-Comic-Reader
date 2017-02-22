@@ -1,6 +1,7 @@
 package com.song.sunset.adapters;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +28,7 @@ public class ComicListAdapter extends BaseRecyclerViewAdapter<ComicListBean.Comi
 
     @Override
     protected ComicListViewHolder onCreatePersonalViewHolder(ViewGroup parent, int viewType) {
-        return new ComicListViewHolder(LayoutInflater.from(context).inflate(R.layout.comiclist_item, parent, false));
+        return new ComicListViewHolder(LayoutInflater.from(context).inflate(R.layout.comic_list_full_item, parent, false));
     }
 
     @Override
@@ -39,7 +40,20 @@ public class ComicListAdapter extends BaseRecyclerViewAdapter<ComicListBean.Comi
         int realHeight = realWidth * 143 / 113;
 
         comicListViewHolder.comicName.setText(comicsBean.getName());
+        comicListViewHolder.comicDesc.setText(comicsBean.getDescription());
+        comicListViewHolder.comicAuthor.setText(comicsBean.getAuthor());
+        comicListViewHolder.comicTags.setText(getTags(comicsBean));
         FrescoUtil.setFrescoCoverImage(comicListViewHolder.simpleDraweeView, comicsBean.getCover(), realWidth, realHeight);
+    }
+
+    @NonNull
+    private StringBuffer getTags(ComicListBean.ComicsBean comicsBean) {
+        StringBuffer stringBuffer = new StringBuffer();
+        for (String tag : comicsBean.getTags()) {
+            stringBuffer.append(tag).append(" | ");
+        }
+        stringBuffer.delete(stringBuffer.length() - 3, stringBuffer.length() - 1);
+        return stringBuffer;
     }
 
     @Override

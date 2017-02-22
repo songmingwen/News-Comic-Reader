@@ -112,14 +112,13 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
             @Override
             public void run() {
                 refreshLayout.autoRefresh();
-
             }
         }, 100);
 
         recyclerView = (LoadMoreRecyclerView) view.findViewById(R.id.id_recyclerview_comiclist);
         adapter = new ComicListAdapter(getActivity());
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3) {
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1) {
             @Override
             protected int getExtraLayoutSpace(RecyclerView.State state) {
                 return ViewUtil.getScreenHeigth();

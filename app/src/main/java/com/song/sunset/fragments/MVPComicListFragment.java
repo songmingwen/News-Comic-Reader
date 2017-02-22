@@ -31,6 +31,7 @@ import in.srain.cube.views.ptr.header.StoreHouseHeader;
 
 /**
  * Created by z5352_000 on 2016/10/29 0029.
+ * E-mail:z53520@qq.com
  */
 
 public class MVPComicListFragment extends BaseFragment implements ComicListView, SwipeRefreshLayout.OnRefreshListener, LoadingMoreListener, PtrHandler {
@@ -100,7 +101,7 @@ public class MVPComicListFragment extends BaseFragment implements ComicListView,
         recyclerView = (LoadMoreRecyclerView) view.findViewById(R.id.id_recyclerview_comiclist);
         adapter = new ComicListAdapter(getActivity());
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3) {
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1) {
             @Override
             protected int getExtraLayoutSpace(RecyclerView.State state) {
                 return ViewUtil.getScreenHeigth();

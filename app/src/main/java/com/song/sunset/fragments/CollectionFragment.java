@@ -2,7 +2,6 @@ package com.song.sunset.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,6 +21,7 @@ import java.util.List;
 
 /**
  * Created by z5352_000 on 2016/10/29 0029.
+ * E-mail:z53520@qq.com
  */
 public class CollectionFragment extends BaseFragment {
 
