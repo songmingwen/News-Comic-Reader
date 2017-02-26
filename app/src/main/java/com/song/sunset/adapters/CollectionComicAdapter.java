@@ -39,10 +39,8 @@ public class CollectionComicAdapter extends RecyclerView.Adapter<ComicListViewHo
     @Override
     public void onBindViewHolder(ComicListViewHolder holder, final int position) {
         if (data != null) {
-            int realWidth = (ViewUtil.getScreenWidth() - ViewUtil.dip2px(56)) / 3;
-            int realHeight = realWidth * 143 / 113;
             holder.comicName.setText(data.get(position).getName());
-            FrescoUtil.setFrescoCoverImage(holder.simpleDraweeView, data.get(position).getCover(), realWidth, realHeight);
+            FrescoUtil.setFrescoImage(holder.simpleDraweeView, data.get(position).getCover());
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

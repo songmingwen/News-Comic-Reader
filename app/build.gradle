@@ -2,8 +2,8 @@ apply plugin: 'com.android.application'
 //apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.2"
+    compileSdkVersion rootProject.ext.android.ANDROID_COMPILE_SDK_VERSION
+    buildToolsVersion rootProject.ext.android.ANDROID_BUILD_TOOLS_VERSION
 
     sourceSets {
         main {
@@ -13,10 +13,10 @@ android {
 
     defaultConfig {
         applicationId "com.song.sunset"
-        minSdkVersion 16
-        targetSdkVersion 24
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.android.ANDROID_BUILD_MIN_SDK_VERSION
+        targetSdkVersion rootProject.ext.android.ANDROID_TARGET_SDK_VERSION
+        versionCode rootProject.ext.android.ANDROID_VERSION_CODE
+        versionName rootProject.ext.android.ANDROID_VERSION_NAME
 //        jackOptions {
 //            enabled true
 //        }
@@ -48,63 +48,41 @@ greendao {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:24.2.1'
-    compile 'com.android.support:design:24.2.1'
-    compile 'com.android.support:palette-v7:24.2.1'
+    compile "com.android.support:appcompat-v7:${rootProject.ext.android.ANDROID_APPCOMPAT_VERSION}"
+    compile "com.android.support:design:${rootProject.ext.android.ANDROID_APPCOMPAT_VERSION}"
+    compile "com.android.support:cardview-v7:${rootProject.ext.android.ANDROID_APPCOMPAT_VERSION}"
+    compile "com.android.support:palette-v7:${rootProject.ext.android.ANDROID_APPCOMPAT_VERSION}"
 
-    compile'com.android.support:multidex:1.0.1'
-
-    //    compile 'com.google.code.gson:gson:2.7'
-
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-
-    compile 'com.facebook.fresco:fresco:1.1.0'
-    compile 'jp.wasabeef:fresco-processors:2.0.0'
-    compile 'com.github.stfalcon:frescoimageviewer:0.4.0'
-    // If you want to use the GPU Filters
-    compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.3.0'
-
-    compile 'com.android.volley:volley:1.0.0'
-    compile 'me.imid.swipebacklayout.lib:library:1.0.0'
-    compile 'com.davemorrissey.labs:subsampling-scale-image-view:3.6.0'
-    compile 'com.dou361.ijkplayer:jjdxm-ijkplayer:1.0.6'
-//    compile 'fm.jiecao:jiecaovideoplayer:4.6.5'
-
-    compile 'com.squareup.okhttp3:okhttp:3.4.1'
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.4.0'
-
-    compile 'io.reactivex:rxandroid:1.2.0'
-    compile 'io.reactivex:rxjava:1.1.5'
-    compile 'com.tbruyelle.rxpermissions:rxpermissions:0.8.2@aar'
-
-//    compile 'com.liulishuo.filedownloader:library:1.3.0'//文件下载库
-//    compile 'zlc.season:rxdownload2:1.0.2'
-
-    compile 'me.yokeyword:fragmentation:0.8.4'
-//    如果想使用SwipeBack 滑动边缘退出Fragment / Activity功能 ， 请再添加下面的库
-    compile 'me.yokeyword:fragmentation-swipeback:0.7.9'
-//    compile 'com.hpw.mvpframe.core.1.0.0'
-
-//    compile 'com.jakewharton:butterknife:8.2.1'
-    compile 'com.jakewharton:butterknife:7.0.1'
-
-    compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.0.0@aar'
-
-    compile 'org.greenrobot:greendao-generator:3.1.0'
-    compile 'org.greenrobot:greendao:3.1.1'
-
-    compile 'rapid.decoder:library:0.3.0'
-    compile 'rapid.decoder:jpeg-decoder:0.3.0'
-    compile 'rapid.decoder:png-decoder:0.3.0'
-//    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    //    compile 'com.brucetoo.pickview:library:1.2.2'
-    //    compile 'com.bigkoo:pickerview:2.1.1'
-
-//    compile 'org.jsoup:jsoup:1.10.1'
-    compile 'in.srain.cube:ultra-ptr:1.0.11'
+    compile rootProject.ext.dependencies["multidex"]
+    compile rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
+    compile rootProject.ext.dependencies["glide"]
+    compile rootProject.ext.dependencies["fresco"]
+    compile rootProject.ext.dependencies["fresco_processors"]
+    compile rootProject.ext.dependencies["frescoimageviewer"]
+    compile rootProject.ext.dependencies["gpuimage_library"]
+    compile rootProject.ext.dependencies["volley"]
+    compile rootProject.ext.dependencies["swipebacklayout"]
+    compile rootProject.ext.dependencies["subsampling_scale_image_view"]
+    compile rootProject.ext.dependencies["ijkplayer"]
+    compile rootProject.ext.dependencies["okhttp3"]
+    compile rootProject.ext.dependencies["retrofit2"]
+    compile rootProject.ext.dependencies["retrofit2_converter_gson"]
+    compile rootProject.ext.dependencies["retrofit2_adapter_rxjava"]
+    compile rootProject.ext.dependencies["okhttp3_logging_interceptor"]
+    compile rootProject.ext.dependencies["rxandroid"]
+    compile rootProject.ext.dependencies["rxjava"]
+    compile rootProject.ext.dependencies["rxpermissions"]
+    compile rootProject.ext.dependencies["fragmentation"]
+    compile rootProject.ext.dependencies["fragmentation_swipeback"]
+    compile rootProject.ext.dependencies["butterknife"]
+    compile rootProject.ext.dependencies["FlycoTabLayout_Lib"]
+    compile rootProject.ext.dependencies["greendao_generator"]
+    compile rootProject.ext.dependencies["greendao"]
+    compile rootProject.ext.dependencies["rapid_decoder_library"]
+    compile rootProject.ext.dependencies["rapid_jpeg_decoder"]
+    compile rootProject.ext.dependencies["rapid_png_decoder"]
+    compile rootProject.ext.dependencies["ultra_ptr"]
+    compile rootProject.ext.dependencies["switchbutton"]
 }
 
 repositories {

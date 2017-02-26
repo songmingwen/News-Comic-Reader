@@ -47,6 +47,11 @@ public class FrescoUtil {
 
     public static final int NO_PARAMS = -1;
 
+    public static void setFrescoImage(SimpleDraweeView simpleDraweeView, String url) {
+        simpleDraweeView.setHierarchy(getHierarchy(NO_PARAMS, false));
+        simpleDraweeView.setImageURI(url);
+    }
+
     public static void setFrescoCoverImage(SimpleDraweeView simpleDraweeView, String url, int width, int height) {
         setFrescoCoverImage(simpleDraweeView, url, width, height, true);
     }

@@ -1,64 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/id_comic_list_item"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="7dp">
-
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/id_comic_list_simple_drawee_view"
-        android:layout_width="113dp"
-        android:layout_height="143dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+    android:layout_gravity="center"
+    android:foreground="?android:attr/selectableItemBackground"
+    card_view:cardBackgroundColor="@color/white"
+    card_view:cardCornerRadius="3dp"
+    card_view:cardUseCompatPadding="true">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="3dp"
-        android:layout_toRightOf="@id/id_comic_list_simple_drawee_view">
+        android:id="@+id/id_comic_list_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/id_comic_list_simple_comic_name"
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/id_comic_list_simple_drawee_view"
+            android:layout_width="113dp"
+            android:layout_height="143dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true" />
+
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:text="漫画名称"
-            android:textSize="18sp" />
+            android:layout_toRightOf="@id/id_comic_list_simple_drawee_view"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp">
 
-        <TextView
-            android:id="@+id/id_comic_list_simple_comic_author"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/id_comic_list_simple_comic_name"
-            android:layout_marginTop="5dp"
-            android:singleLine="true"
-            android:text="漫画作者"
-            android:textSize="14sp" />
+            <TextView
+                android:id="@+id/id_comic_list_simple_comic_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="漫画名称"
+                android:textColor="@color/Grey_900"
+                android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/id_comic_list_simple_comic_tags"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/id_comic_list_simple_comic_author"
-            android:layout_marginTop="5dp"
-            android:singleLine="true"
-            android:text="漫画类型"
-            android:textSize="14sp" />
+            <TextView
+                android:id="@+id/id_comic_list_simple_comic_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/id_comic_list_simple_comic_name"
+                android:layout_marginTop="5dp"
+                android:singleLine="true"
+                android:text="漫画作者"
+                android:textColor="@color/Grey_800"
+                android:textSize="13sp" />
 
-        <TextView
-            android:id="@+id/id_comic_list_simple_comic_desc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/id_comic_list_simple_comic_tags"
-            android:layout_marginTop="10dp"
-            android:maxLines="3"
-            android:minLines="3"
-            android:text="漫画详情\n哈哈\n哈哈"
-            android:textSize="12sp" />
+            <TextView
+                android:id="@+id/id_comic_list_simple_comic_tags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/id_comic_list_simple_comic_author"
+                android:layout_marginTop="5dp"
+                android:singleLine="true"
+                android:text="漫画类型"
+                android:textColor="@color/Grey_800"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/id_comic_list_simple_comic_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/id_comic_list_simple_comic_tags"
+                android:layout_marginTop="10dp"
+                android:maxLines="2"
+                android:minLines="2"
+                android:text="漫画详情\n哈哈\n哈哈"
+                android:textColor="@color/Grey_700"
+                android:textSize="12sp" />
+        </RelativeLayout>
     </RelativeLayout>
+</android.support.v7.widget.CardView>
 
-</RelativeLayout>
