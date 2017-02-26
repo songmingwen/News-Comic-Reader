@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:foreground="?android:attr/selectableItemBackground"
-    card_view:cardBackgroundColor="@color/white"
-    card_view:cardCornerRadius="7dp"
-    card_view:cardUseCompatPadding="true">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/id_comic_detail_list_item_text"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="25dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/circle_rect_40dp"
         android:gravity="center"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         android:singleLine="true"
         android:text="第一张喽"
         android:textColor="@color/color_transparent_88"
-        android:textSize="12sp" />
-</android.support.v7.widget.CardView>
+        android:textSize="9sp" />
+</RelativeLayout>
