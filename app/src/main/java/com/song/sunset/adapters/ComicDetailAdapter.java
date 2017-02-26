@@ -64,7 +64,7 @@ public class ComicDetailAdapter extends RecyclerView.Adapter {
                 ComicDetailListViewHolder comicDetailListViewHolder = (ComicDetailListViewHolder) holder;
                 ComicDetailListAdapter adapter = new ComicDetailListAdapter(context, data.getComic().getComic_id());
                 comicDetailListViewHolder.recyclerView.setAdapter(adapter);
-                comicDetailListViewHolder.recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
+                comicDetailListViewHolder.recyclerView.setLayoutManager(new GridLayoutManager(context, 3));
                 adapter.setData(data.getChapter_list());
             }
         }
