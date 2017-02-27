@@ -34,4 +34,10 @@
         <item name="android:paddingRight">15.0dip</item>
 
     </style>
+
+    <style name="AppCardView" parent="@style/CardView.Light">
+        <item name="cardPreventCornerOverlap">false</item>
+        <item name="cardUseCompatPadding">true</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+    </style>
 </resources>
