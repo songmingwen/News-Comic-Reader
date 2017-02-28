@@ -47,6 +47,7 @@ public class ComicDetailModel implements CoreBaseModel {
     }
 
     public void updateCollectedComicData(ComicDetailBean comicDetailBean) {
+        if (!getCollectedState(Integer.parseInt(comicDetailBean.getComic().getComic_id()))) return;
         ComicLocalCollection localCollection = new ComicLocalCollection();
         localCollection.setAuthor(comicDetailBean.getComic().getAuthor().getName());
         localCollection.setComicId(Long.parseLong(comicDetailBean.getComic().getComic_id()));
