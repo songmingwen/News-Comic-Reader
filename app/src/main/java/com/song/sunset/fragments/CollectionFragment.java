@@ -9,9 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.song.sunset.R;
-import com.song.sunset.activitys.SunsetApplication;
 import com.song.sunset.adapters.CollectionComicAdapter;
 import com.song.sunset.beans.ComicLocalCollection;
+import com.song.sunset.utils.GreenDaoUtil;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.loadingmanager.LoadingAndRetryManager;
 import com.song.sunset.utils.loadingmanager.OnLoadingAndRetryListener;
@@ -32,7 +32,7 @@ public class CollectionFragment extends BaseFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        comicLocalCollectionDao = SunsetApplication.getSunsetApplication().getDaoSession().getComicLocalCollectionDao();
+        comicLocalCollectionDao = GreenDaoUtil.getDaoSession().getComicLocalCollectionDao();
     }
 
     @Nullable

@@ -1,10 +1,10 @@
 package com.song.sunset.model;
 
 import com.song.core.base.CoreBaseModel;
-import com.song.sunset.activitys.SunsetApplication;
 import com.song.sunset.beans.ComicDetailBean;
 import com.song.sunset.beans.ComicLocalCollection;
 import com.song.sunset.beans.basebeans.BaseBean;
+import com.song.sunset.utils.GreenDaoUtil;
 import com.song.sunset.utils.retrofit.RetrofitService;
 import com.song.sunset.utils.service.ComicApi;
 import com.sunset.greendao.gen.ComicLocalCollectionDao;
@@ -24,7 +24,7 @@ public class ComicDetailModel implements CoreBaseModel {
 
     public boolean getCollectedState(int comicId) {
         if (comicLocalCollectionDao == null) {
-            comicLocalCollectionDao = SunsetApplication.getSunsetApplication().getDaoSession().getComicLocalCollectionDao();
+            comicLocalCollectionDao = GreenDaoUtil.getDaoSession().getComicLocalCollectionDao();
         }
         return comicLocalCollectionDao.load((long) comicId) != null;
     }

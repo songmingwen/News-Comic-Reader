@@ -18,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.song.sunset.beans.ComicLocalCollection;
+import com.song.sunset.utils.GreenDaoUtil;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.loadingmanager.LoadingAndRetryManager;
 import com.song.sunset.beans.basebeans.BaseBean;
@@ -56,7 +57,7 @@ public class ComicDetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comic_detail);
 
-        comicLocalCollectionDao = SunsetApplication.getSunsetApplication().getDaoSession().getComicLocalCollectionDao();
+        comicLocalCollectionDao = GreenDaoUtil.getDaoSession().getComicLocalCollectionDao();
 
         mLoadingAndRetryManager = LoadingAndRetryManager.generate(this, new OnLoadingAndRetryListener() {
             @Override
