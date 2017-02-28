@@ -152,7 +152,7 @@ public class ComicDetailActivity extends BaseActivity {
                 }
                 if (comicLocalCollectionDao.load(comicId) == null) {
                     comicLocalCollectionDao.insert(new ComicLocalCollection(comic.getComic().getCover(), comic.getComic().getName(),
-                            comicId, comic.getComic().getDescription(), comic.getComic().getAuthor().getName(), comic.getChapter_list().size()));
+                            comicId, comic.getComic().getDescription(), comic.getComic().getAuthor().getName(), String.valueOf(comic.getChapter_list().size())));
                     floatingActionButton.setImageDrawable(getResources().getDrawable(android.R.drawable.star_big_on));
                     Toast.makeText(getApplication(), "收藏成功", Toast.LENGTH_SHORT).show();
                 } else {

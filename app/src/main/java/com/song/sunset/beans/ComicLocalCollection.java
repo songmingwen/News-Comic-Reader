@@ -16,10 +16,10 @@ public class ComicLocalCollection {
     private long comicId;
     private String description;
     private String author;
-    private int chapterNum;
-    @Generated(hash = 562612706)
+    private String chapterNum;
+    @Generated(hash = 1145280907)
     public ComicLocalCollection(String cover, String name, long comicId,
-            String description, String author, int chapterNum) {
+            String description, String author, String chapterNum) {
         this.cover = cover;
         this.name = name;
         this.comicId = comicId;
@@ -60,10 +60,10 @@ public class ComicLocalCollection {
     public void setAuthor(String author) {
         this.author = author;
     }
-    public int getChapterNum() {
+    public String getChapterNum() {
         return this.chapterNum;
     }
-    public void setChapterNum(int chapterNum) {
+    public void setChapterNum(String chapterNum) {
         this.chapterNum = chapterNum;
     }
 }

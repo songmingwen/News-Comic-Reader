@@ -40,7 +40,7 @@ public class ComicDetailModel implements CoreBaseModel {
             localCollection.setCover(comicDetailBean.getComic().getCover());
             localCollection.setDescription(comicDetailBean.getComic().getDescription());
             localCollection.setName(comicDetailBean.getComic().getName());
-            localCollection.setChapterNum(comicDetailBean.getChapter_list().size());
+            localCollection.setChapterNum(String.valueOf(comicDetailBean.getChapter_list().size()));
             comicLocalCollectionDao.insert(localCollection);
         }
         return !isCollected;
@@ -53,7 +53,7 @@ public class ComicDetailModel implements CoreBaseModel {
         localCollection.setCover(comicDetailBean.getComic().getCover());
         localCollection.setDescription(comicDetailBean.getComic().getDescription());
         localCollection.setName(comicDetailBean.getComic().getName());
-        localCollection.setChapterNum(comicDetailBean.getChapter_list().size());
+        localCollection.setChapterNum(String.valueOf(comicDetailBean.getChapter_list().size()));
         comicLocalCollectionDao.insertOrReplace(localCollection);
     }
 }

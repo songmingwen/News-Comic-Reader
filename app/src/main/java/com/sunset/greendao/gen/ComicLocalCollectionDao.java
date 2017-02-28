@@ -29,7 +29,7 @@ public class ComicLocalCollectionDao extends AbstractDao<ComicLocalCollection, L
         public final static Property ComicId = new Property(2, long.class, "comicId", true, "_id");
         public final static Property Description = new Property(3, String.class, "description", false, "DESCRIPTION");
         public final static Property Author = new Property(4, String.class, "author", false, "AUTHOR");
-        public final static Property ChapterNum = new Property(5, int.class, "chapterNum", false, "CHAPTER_NUM");
+        public final static Property ChapterNum = new Property(5, String.class, "chapterNum", false, "CHAPTER_NUM");
     }
 
 
@@ -50,7 +50,7 @@ public class ComicLocalCollectionDao extends AbstractDao<ComicLocalCollection, L
                 "\"_id\" INTEGER PRIMARY KEY NOT NULL ," + // 2: comicId
                 "\"DESCRIPTION\" TEXT," + // 3: description
                 "\"AUTHOR\" TEXT," + // 4: author
-                "\"CHAPTER_NUM\" INTEGER NOT NULL );"); // 5: chapterNum
+                "\"CHAPTER_NUM\" TEXT);"); // 5: chapterNum
     }
 
     /** Drops the underlying database table. */
@@ -83,7 +83,11 @@ public class ComicLocalCollectionDao extends AbstractDao<ComicLocalCollection, L
         if (author != null) {
             stmt.bindString(5, author);
         }
-        stmt.bindLong(6, entity.getChapterNum());
+ 
+        String chapterNum = entity.getChapterNum();
+        if (chapterNum != null) {
+            stmt.bindString(6, chapterNum);
+        }
     }
 
     @Override
@@ -110,7 +114,11 @@ public class ComicLocalCollectionDao extends AbstractDao<ComicLocalCollection, L
         if (author != null) {
             stmt.bindString(5, author);
         }
-        stmt.bindLong(6, entity.getChapterNum());
+ 
+        String chapterNum = entity.getChapterNum();
+        if (chapterNum != null) {
+            stmt.bindString(6, chapterNum);
+        }
     }
 
     @Override
@@ -126,7 +134,7 @@ public class ComicLocalCollectionDao extends AbstractDao<ComicLocalCollection, L
             cursor.getLong(offset + 2), // comicId
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // description
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // author
-            cursor.getInt(offset + 5) // chapterNum
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // chapterNum
         );
         return entity;
     }
@@ -138,7 +146,7 @@ public class ComicLocalCollectionDao extends AbstractDao<ComicLocalCollection, L
         entity.setComicId(cursor.getLong(offset + 2));
         entity.setDescription(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setAuthor(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setChapterNum(cursor.getInt(offset + 5));
+        entity.setChapterNum(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
      }
     
     @Override

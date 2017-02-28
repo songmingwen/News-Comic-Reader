@@ -2,6 +2,7 @@ package com.song.sunset.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +44,7 @@ public class CollectionComicAdapter extends RecyclerView.Adapter<ComicListViewHo
     @Override
     public void onBindViewHolder(final ComicListViewHolder holder, final int position) {
         if (data != null) {
-            final int chapterNum = data.get(position).getChapterNum();
+            final String chapterNum = data.get(position).getChapterNum();
             final int comicId = (int) data.get(position).getComicId();
 
             holder.comicName.setText(data.get(position).getName());
@@ -52,7 +53,7 @@ public class CollectionComicAdapter extends RecyclerView.Adapter<ComicListViewHo
                     new RetrofitCallback<ComicDetailBean>() {
                         @Override
                         public void onSuccess(ComicDetailBean comicDetailBean) {
-                            if (comicDetailBean.getChapter_list().size() > chapterNum) {
+                            if (!TextUtils.equals(String.valueOf(comicDetailBean.getChapter_list().size()), chapterNum)) {
                                 holder.haveUpdate.setVisibility(View.VISIBLE);
                             }
                         }
