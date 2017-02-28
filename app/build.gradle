@@ -39,7 +39,7 @@ android {
 //--------------------------greenDao配置--------------------------
 apply plugin: 'org.greenrobot.greendao'
 greendao {
-    schemaVersion 1
+    schemaVersion 2
     daoPackage 'com.sunset.greendao.gen'
     targetGenDir 'src/main/java'
 }
