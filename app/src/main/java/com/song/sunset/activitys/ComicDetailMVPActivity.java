@@ -111,7 +111,7 @@ public class ComicDetailMVPActivity extends CoreBaseActivity<ComicDetailPresente
 
     @OnClick(R.id.id_comic_detail_fab)
     public void onClick() {
-        mPresenter.changeCollectedState(comicId, comicDetailBean);
+        mPresenter.changeCollectedState(comicDetailBean);
     }
 
     @Override
@@ -122,6 +122,7 @@ public class ComicDetailMVPActivity extends CoreBaseActivity<ComicDetailPresente
         toolbar.setLogo(R.mipmap.logo);
         adapter.setData(comicDetailBean);
         setExtractionColorFromBitmap(comicDetailBean);
+        mPresenter.updateCollectedComicData(comicDetailBean);
     }
 
     @Override

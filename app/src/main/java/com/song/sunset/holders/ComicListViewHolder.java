@@ -16,7 +16,7 @@ import com.song.sunset.R;
 public class ComicListViewHolder extends RecyclerView.ViewHolder {
 
     public SimpleDraweeView simpleDraweeView;
-    public TextView comicName, comicDesc, comicAuthor, comicTags;
+    public TextView comicName, comicDesc, comicAuthor, comicTags, haveUpdate;
     public RelativeLayout comicListLayout;
 
     public ComicListViewHolder(View itemview) {
@@ -27,5 +27,6 @@ public class ComicListViewHolder extends RecyclerView.ViewHolder {
         comicDesc = (TextView) itemview.findViewById(R.id.id_comic_list_simple_comic_desc);
         comicAuthor = (TextView) itemview.findViewById(R.id.id_comic_list_simple_comic_author);
         comicTags = (TextView) itemview.findViewById(R.id.id_comic_list_simple_comic_tags);
+        haveUpdate = (TextView) itemview.findViewById(R.id.id_comic_collection_have_update);
     }
 }

@@ -122,7 +122,7 @@ public class ComicDetailActivity extends BaseActivity {
             @Override
             public void onSuccess(ComicDetailBean comicDetailBean) {
                 mLoadingAndRetryManager.showContent();
-                setFloatButtonOnClick(comicDetailBean.getComic());
+                setFloatButtonOnClick(comicDetailBean);
                 toolbar.setTitle(comicDetailBean.getComic().getName());
                 toolbar.setLogo(R.mipmap.logo);
                 adapter.setData(comicDetailBean);
@@ -136,8 +136,8 @@ public class ComicDetailActivity extends BaseActivity {
         });
     }
 
-    private void setFloatButtonOnClick(final ComicDetailBean.ComicBean comic) {
-        final long comicId = Long.parseLong(comic.getComic_id());
+    private void setFloatButtonOnClick(final ComicDetailBean comic) {
+        final long comicId = Long.parseLong(comic.getComic().getComic_id());
         if (comicLocalCollectionDao.load(comicId) == null) {
             floatingActionButton.setImageDrawable(getResources().getDrawable(android.R.drawable.star_big_off));
         } else {
@@ -150,7 +150,8 @@ public class ComicDetailActivity extends BaseActivity {
                     return;
                 }
                 if (comicLocalCollectionDao.load(comicId) == null) {
-                    comicLocalCollectionDao.insert(new ComicLocalCollection(comic.getCover(), comic.getName(), comicId, comic.getDescription(), comic.getAuthor().getName()));
+                    comicLocalCollectionDao.insert(new ComicLocalCollection(comic.getComic().getCover(), comic.getComic().getName(),
+                            comicId, comic.getComic().getDescription(), comic.getComic().getAuthor().getName(), comic.getChapter_list().size()));
                     floatingActionButton.setImageDrawable(getResources().getDrawable(android.R.drawable.star_big_on));
                     Toast.makeText(getApplication(), "收藏成功", Toast.LENGTH_SHORT).show();
                 } else {

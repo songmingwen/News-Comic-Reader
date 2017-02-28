@@ -13,6 +13,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <TextView
+            android:id="@+id/id_comic_collection_have_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@color/colorPrimary"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:text="@string/have_update"
+            android:textColor="@color/white"
+            android:visibility="gone" />
+
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/id_comic_list_simple_drawee_view"
             android:layout_width="match_parent"

@@ -29,10 +29,10 @@ public class ComicDetailModel implements CoreBaseModel {
         return comicLocalCollectionDao.load((long) comicId) != null;
     }
 
-    public boolean changeCollectedState(int comicId, ComicDetailBean comicDetailBean) {
-        boolean isCollected = getCollectedState(comicId);
+    public boolean changeCollectedState(ComicDetailBean comicDetailBean) {
+        boolean isCollected = getCollectedState(Integer.parseInt(comicDetailBean.getComic().getComic_id()));
         if (isCollected) {
-            comicLocalCollectionDao.deleteByKey((long) comicId);
+            comicLocalCollectionDao.deleteByKey((long) Integer.parseInt(comicDetailBean.getComic().getComic_id()));
         } else {
             ComicLocalCollection localCollection = new ComicLocalCollection();
             localCollection.setAuthor(comicDetailBean.getComic().getAuthor().getName());
@@ -40,8 +40,20 @@ public class ComicDetailModel implements CoreBaseModel {
             localCollection.setCover(comicDetailBean.getComic().getCover());
             localCollection.setDescription(comicDetailBean.getComic().getDescription());
             localCollection.setName(comicDetailBean.getComic().getName());
+            localCollection.setChapterNum(comicDetailBean.getChapter_list().size());
             comicLocalCollectionDao.insert(localCollection);
         }
         return !isCollected;
+    }
+
+    public void updateCollectedComicData(ComicDetailBean comicDetailBean) {
+        ComicLocalCollection localCollection = new ComicLocalCollection();
+        localCollection.setAuthor(comicDetailBean.getComic().getAuthor().getName());
+        localCollection.setComicId(Long.parseLong(comicDetailBean.getComic().getComic_id()));
+        localCollection.setCover(comicDetailBean.getComic().getCover());
+        localCollection.setDescription(comicDetailBean.getComic().getDescription());
+        localCollection.setName(comicDetailBean.getComic().getName());
+        localCollection.setChapterNum(comicDetailBean.getChapter_list().size());
+        comicLocalCollectionDao.insertOrReplace(localCollection);
     }
 }

@@ -39,8 +39,13 @@ public class ComicDetailPresenter extends CoreBasePresenter<ComicDetailModel, Co
         mView.showCollected(mModel.getCollectedState(comicId), false);
     }
 
-    public void changeCollectedState(int comicId, ComicDetailBean comicDetailBean) {
+    public void changeCollectedState(ComicDetailBean comicDetailBean) {
         if (mView == null || mModel == null) return;
-        mView.showCollected(mModel.changeCollectedState(comicId, comicDetailBean), true);
+        mView.showCollected(mModel.changeCollectedState(comicDetailBean), true);
+    }
+
+    public void updateCollectedComicData(ComicDetailBean comicDetailBean) {
+        if (mModel == null) return;
+        mModel.updateCollectedComicData(comicDetailBean);
     }
 }

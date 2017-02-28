@@ -26,9 +26,7 @@ import java.util.List;
 public class CollectionFragment extends BaseFragment {
 
     private LoadingAndRetryManager mLoadingAndRetryManager;
-    private RecyclerView recyclerView;
     private CollectionComicAdapter adapter;
-    private List<ComicLocalCollection> list;
     private ComicLocalCollectionDao comicLocalCollectionDao;
 
     @Override
@@ -58,7 +56,7 @@ public class CollectionFragment extends BaseFragment {
         });
         mLoadingAndRetryManager.showLoading();
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.id_comic_collection);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.id_comic_collection);
         adapter = new CollectionComicAdapter(getActivity());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3) {
@@ -76,7 +74,7 @@ public class CollectionFragment extends BaseFragment {
     }
 
     public void getDataFromSQLite() {
-        list = comicLocalCollectionDao.loadAll();
+        List<ComicLocalCollection> list = comicLocalCollectionDao.loadAll();
         mLoadingAndRetryManager.showContent();
         adapter.setData(list);
     }
