@@ -21,6 +21,7 @@ import android.view.SurfaceView;
 import android.widget.LinearLayout;
 
 import com.song.sunset.R;
+import com.song.sunset.activitys.base.BaseActivity;
 
 /**
  * Created by z5352_000 on 2016/10/20 0020.

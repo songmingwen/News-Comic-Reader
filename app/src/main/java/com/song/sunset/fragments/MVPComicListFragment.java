@@ -14,13 +14,13 @@ import com.song.sunset.R;
 import com.song.sunset.activitys.ComicListActivity;
 import com.song.sunset.adapters.ComicListAdapter;
 import com.song.sunset.beans.ComicListBean;
+import com.song.sunset.fragments.base.BaseFragment;
 import com.song.sunset.impls.ComicListView;
 import com.song.sunset.impls.LoadingMoreListener;
 import com.song.sunset.presenter.ComicListPresenter;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.views.LoadMoreRecyclerView;
-import com.song.sunset.views.WaveView;
 
 import java.util.List;
 

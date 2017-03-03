@@ -17,6 +17,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
+import com.song.sunset.activitys.base.BaseActivity;
 import com.song.sunset.beans.ComicLocalCollection;
 import com.song.sunset.utils.GreenDaoUtil;
 import com.song.sunset.utils.ViewUtil;

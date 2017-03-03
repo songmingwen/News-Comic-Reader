@@ -1,4 +1,4 @@
-package com.song.sunset.fragments;
+package com.song.sunset.fragments.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

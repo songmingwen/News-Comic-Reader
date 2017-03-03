@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.song.sunset.R;
 import com.song.sunset.adapters.CollectionComicAdapter;
 import com.song.sunset.beans.ComicLocalCollection;
+import com.song.sunset.fragments.base.BaseFragment;
 import com.song.sunset.utils.GreenDaoUtil;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.loadingmanager.LoadingAndRetryManager;

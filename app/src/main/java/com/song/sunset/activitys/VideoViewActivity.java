@@ -2,14 +2,13 @@ package com.song.sunset.activitys;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.MediaController;
 import android.widget.VideoView;
 
 import com.song.sunset.R;
+import com.song.sunset.activitys.base.BaseActivity;
 
 /**
  * Created by z5352_000 on 2016/10/21 0021.

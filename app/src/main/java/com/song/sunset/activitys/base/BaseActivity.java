@@ -1,4 +1,4 @@
-package com.song.sunset.activitys;
+package com.song.sunset.activitys.base;
 
 import android.content.Context;
 import android.os.Build;

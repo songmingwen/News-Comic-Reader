@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.song.sunset.activitys.base.BaseActivity;
 import com.song.sunset.utils.ScreenUtils;
 import com.song.sunset.utils.loadingmanager.LoadingAndRetryManager;
 import com.song.sunset.beans.basebeans.BaseBean;

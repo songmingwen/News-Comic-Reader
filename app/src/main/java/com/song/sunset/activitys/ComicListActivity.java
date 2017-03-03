@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import com.song.sunset.R;
-import com.song.sunset.fragments.ComicListFragment;
+import com.song.sunset.activitys.base.BaseActivity;
 import com.song.sunset.fragments.MVPComicListFragment;
 
 /**

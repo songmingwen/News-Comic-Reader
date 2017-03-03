@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.song.sunset.R;
+import com.song.sunset.activitys.base.BaseActivity;
 import com.song.sunset.views.TextSwitchView;
 
 import java.util.ArrayList;

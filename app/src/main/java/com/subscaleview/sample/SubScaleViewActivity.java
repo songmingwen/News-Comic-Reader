@@ -16,14 +16,13 @@ limitations under the License.
 
 package com.subscaleview.sample;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import com.song.sunset.R;
-import com.song.sunset.activitys.BaseActivity;
+import com.song.sunset.activitys.base.BaseActivity;
 import com.subscaleview.sample.animation.AnimationActivity;
 import com.subscaleview.sample.basicfeatures.BasicFeaturesActivity;
 import com.subscaleview.sample.configuration.ConfigurationActivity;

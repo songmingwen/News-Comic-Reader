@@ -15,6 +15,7 @@ import com.song.sunset.R;
 import com.song.sunset.adapters.RankingPagerAdapter;
 import com.song.sunset.beans.ComicRankListBean;
 import com.song.sunset.beans.basebeans.BaseBean;
+import com.song.sunset.fragments.base.BaseFragment;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.loadingmanager.LoadingAndRetryManager;
 import com.song.sunset.utils.loadingmanager.OnLoadingAndRetryListener;
@@ -139,14 +140,14 @@ public class ComicRankFragment extends BaseFragment {
                 mLoadingAndRetryManager.showContent();
                 List<ComicRankListBean.RankinglistBean> rankingTypeItemList = comicRankListBean.getRankinglist();
 
-                List<ComicListFragment> fragmentList = new ArrayList<>();
+                List<ComicRankListFragment> fragmentList = new ArrayList<>();
                 List<String> titleList = new ArrayList<>();
 
                 for (ComicRankListBean.RankinglistBean rankingTypeItem : rankingTypeItemList) {
                     Bundle bundle = new Bundle();
                     bundle.putString(ARG_NAME, rankingTypeItem.getArgName());
                     bundle.putInt(ARG_VALUE, Integer.parseInt(rankingTypeItem.getArgValue()));
-                    ComicListFragment fragment = (ComicListFragment) Fragment.instantiate(getActivity(), ComicListFragment.class.getName(), bundle);
+                    ComicRankListFragment fragment = (ComicRankListFragment) Fragment.instantiate(getActivity(), ComicRankListFragment.class.getName(), bundle);
 
                     fragmentList.add(fragment);
                     titleList.add(rankingTypeItem.getTitle());

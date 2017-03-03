@@ -1,6 +1,5 @@
 package com.song.sunset.activitys;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +15,7 @@ import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.LatLng;
 import com.song.sunset.R;
+import com.song.sunset.activitys.base.BaseActivity;
 
 
 /**

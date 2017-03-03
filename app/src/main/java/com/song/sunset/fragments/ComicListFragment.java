@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 
 import com.song.sunset.beans.basebeans.BaseBean;
 import com.song.sunset.beans.ComicListBean;
+import com.song.sunset.fragments.base.BaseFragment;
 import com.song.sunset.impls.OnRVItemClickListener;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.R;

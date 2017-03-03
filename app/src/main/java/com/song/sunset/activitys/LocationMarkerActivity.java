@@ -9,7 +9,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -30,6 +29,7 @@ import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.song.sunset.R;
+import com.song.sunset.activitys.base.BaseActivity;
 import com.song.sunset.utils.SensorEventHelper;
 
 /**

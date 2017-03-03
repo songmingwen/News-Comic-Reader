@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import com.song.sunset.R;
 import com.song.sunset.adapters.VideoListAdapter;
 import com.song.sunset.beans.VideoBean;
+import com.song.sunset.fragments.base.BaseFragment;
 import com.song.sunset.impls.LoadingMoreListener;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;

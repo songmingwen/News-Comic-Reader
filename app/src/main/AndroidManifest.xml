@@ -41,7 +41,7 @@
             android:name=".activitys.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activitys.BaseActivity"
+            android:name=".activitys.base.BaseActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activitys.ComicDetailActivity"
