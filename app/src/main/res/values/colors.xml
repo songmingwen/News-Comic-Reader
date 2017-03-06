@@ -27,11 +27,11 @@
     <color name="color_transparent_20">#20000000</color>
     <color name="color_transparent_10">#10000000</color>
 
+    <color name="Grey_50">#FAFAFA</color>
     <color name="Grey_100">#F5F5F5</color>
     <color name="Grey_200">#EEEEEE</color>
     <color name="Grey_300">#E0E0E0</color>
     <color name="Grey_400">#BDBDBD</color>
-    <color name="Grey_50">#FAFAFA</color>
     <color name="Grey_500">#9E9E9E</color>
     <color name="Grey_600">#757575</color>
     <color name="Grey_700">#616161</color>
