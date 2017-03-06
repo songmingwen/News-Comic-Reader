@@ -18,8 +18,6 @@ import com.dou361.ijkplayer.listener.OnShowThumbnailListener;
 import com.dou361.ijkplayer.widget.PlayStateParams;
 import com.dou361.ijkplayer.widget.PlayerView;
 import com.song.sunset.R;
-import com.song.sunset.utils.ScreenUtils;
-import com.song.sunset.utils.ViewUtil;
 
 /**
  * Created by Song on 2016/9/1 0001.

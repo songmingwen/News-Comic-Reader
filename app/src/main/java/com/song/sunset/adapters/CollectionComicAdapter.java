@@ -44,7 +44,7 @@ public class CollectionComicAdapter extends RecyclerView.Adapter<ComicListViewHo
     @Override
     public void onBindViewHolder(final ComicListViewHolder holder, final int position) {
         if (data != null) {
-            final String chapterNum = data.get(position).getChapterNum();
+            final int chapterNum = Integer.parseInt(data.get(position).getChapterNum());
             final int comicId = (int) data.get(position).getComicId();
 
             holder.comicName.setText(data.get(position).getName());
@@ -53,9 +53,11 @@ public class CollectionComicAdapter extends RecyclerView.Adapter<ComicListViewHo
                     new RetrofitCallback<ComicDetailBean>() {
                         @Override
                         public void onSuccess(ComicDetailBean comicDetailBean) {
-                            if (!TextUtils.equals(String.valueOf(comicDetailBean.getChapter_list().size()), chapterNum)) {
+                            int diff = comicDetailBean.getChapter_list().size() - chapterNum;
+                            if (diff != 0) {
                                 holder.haveUpdate.setVisibility(View.VISIBLE);
-                            }
+                                holder.haveUpdate.setText(String.format(context.getString(R.string.have_update), diff));
+                            } else holder.haveUpdate.setVisibility(View.GONE);
                         }
 
                         @Override

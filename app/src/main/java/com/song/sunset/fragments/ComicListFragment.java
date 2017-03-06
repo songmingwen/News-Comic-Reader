@@ -147,8 +147,8 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
         if (isRefreshing) {
             return;
         }
-        getDataFromRetrofit2(1);
         isRefreshing = true;
+        getDataFromRetrofit2(1);
     }
 
     @Override
@@ -158,8 +158,8 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
         }
         showProgress(true);
         currentPage++;
-        getDataFromRetrofit2(currentPage);
         isLoading = true;
+        getDataFromRetrofit2(currentPage);
     }
 
     @Override

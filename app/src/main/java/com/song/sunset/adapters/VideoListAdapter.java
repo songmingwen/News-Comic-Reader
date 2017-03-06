@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
 import com.song.sunset.R;
 import com.song.sunset.activitys.VideoActivity;
 import com.song.sunset.adapters.base.BaseRecyclerViewAdapter;

@@ -103,8 +103,8 @@ public abstract class LoadableListFragment<Adapter extends BaseRecyclerViewAdapt
         if (isRefreshing) {
             return;
         }
-        getDataFromNet(1);
         isRefreshing = true;
+        getDataFromNet(1);
     }
 
     public void showProgress(boolean flag) {
@@ -116,10 +116,10 @@ public abstract class LoadableListFragment<Adapter extends BaseRecyclerViewAdapt
         if (isLoading) {
             return;
         }
+        isLoading = true;
         showProgress(true);
         currentPage++;
         getDataFromNet(currentPage);
-        isLoading = true;
     }
 
     @Override

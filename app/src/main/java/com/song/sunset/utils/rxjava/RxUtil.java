@@ -24,19 +24,14 @@ public class RxUtil {
                 .map(new Func1<BaseBean<T>, T>() {
                     @Override
                     public T call(BaseBean<T> tBaseBean) {
-                        if (tBaseBean == null) {
-                            retrofitCallback.onFailure(-1, "无数据");
+                        if (tBaseBean == null ||
+                                tBaseBean.data == null ||
+                                tBaseBean.data.returnData == null ||
+                                tBaseBean.data.stateCode == 0) {
                             return null;
+                        } else {
+                            return tBaseBean.data.returnData;
                         }
-                        if (tBaseBean.data.returnData == null) {
-                            retrofitCallback.onFailure(-1, "无数据");
-                            return null;
-                        }
-                        if (tBaseBean.data.stateCode == 0) {
-                            retrofitCallback.onFailure(-1, "没有更多信息");
-                            return null;
-                        }
-                        return tBaseBean.data.returnData;
                     }
                 })
                 .compose(RxUtil.<T>rxSchedulerHelper())
@@ -53,10 +48,8 @@ public class RxUtil {
 
                     @Override
                     public void onNext(T t) {
-                        if (t == null) {
-                            return;
-                        }
-                        retrofitCallback.onSuccess(t);
+                        if (t == null) retrofitCallback.onFailure(-1, "无数据");
+                        else retrofitCallback.onSuccess(t);
                     }
                 });
     }
@@ -86,7 +79,7 @@ public class RxUtil {
     }
 
     /**
-     *  compose简化线程
+     * compose简化线程
      */
     public static <T> Observable.Transformer<T, T> rxSchedulerHelper() {
         return new Observable.Transformer<T, T>() {
