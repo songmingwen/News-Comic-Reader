@@ -23,5 +23,5 @@
     <string name="progressActivityErrorContentPlaceholder">We could not establish a connection with our servers. Please try again when you are connected to the internet.</string>
 
     <string name="small_problem_new">稍后重试</string>
-    <string name="have_update">NEW(%d)</string>
+    <string name="have_update">更新%d章</string>
 </resources>
