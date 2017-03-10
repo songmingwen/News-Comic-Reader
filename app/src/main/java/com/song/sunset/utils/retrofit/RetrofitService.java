@@ -9,6 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by songmw3 on 2016/12/12.
+ * Email:z53520@qq.com
  */
 
 public class RetrofitService {
@@ -23,12 +24,12 @@ public class RetrofitService {
                 .baseUrl(baseUrl)
                 //设置OKHttpClient
                 .client(OkHttpClient.INSTANCE.getOkHttpClient())
-                //Rx
+                //Rx转换器
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                //String转换器
-                .addConverterFactory(StringConverterFactory.create())
                 //gson转化器
                 .addConverterFactory(GsonConverterFactory.create())
+                //String转换器
+                .addConverterFactory(StringConverterFactory.create())
                 .build();
         return retrofit.create(clazz);
     }
