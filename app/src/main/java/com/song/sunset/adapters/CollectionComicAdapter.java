@@ -2,7 +2,6 @@ package com.song.sunset.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,7 @@ import com.song.sunset.utils.fresco.FrescoUtil;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.retrofit.RetrofitService;
 import com.song.sunset.utils.rxjava.RxUtil;
-import com.song.sunset.utils.service.ComicApi;
+import com.song.sunset.utils.service.U17ComicApi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +48,7 @@ public class CollectionComicAdapter extends RecyclerView.Adapter<ComicListViewHo
 
             holder.comicName.setText(data.get(position).getName());
             FrescoUtil.setFrescoImage(holder.simpleDraweeView, data.get(position).getCover());
-            RxUtil.comicSubscribe(RetrofitService.createApi(ComicApi.class).queryComicDetailRDByGetObservable(comicId),
+            RxUtil.comicSubscribe(RetrofitService.createApi(U17ComicApi.class).queryComicDetailRDByGetObservable(comicId),
                     new RetrofitCallback<ComicDetailBean>() {
                         @Override
                         public void onSuccess(ComicDetailBean comicDetailBean) {

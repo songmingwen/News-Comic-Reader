@@ -22,7 +22,7 @@ import com.song.sunset.utils.loadingmanager.OnLoadingAndRetryListener;
 import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.retrofit.RetrofitService;
-import com.song.sunset.utils.service.ComicApi;
+import com.song.sunset.utils.service.U17ComicApi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +41,7 @@ public class ComicRankFragment extends BaseFragment {
     private static final String BUNDLE_KEY_PAGE_INDEX = "page_index";
     private ViewPager rankingViewPager;
     private SlidingTabLayout rankingSlidingTabLayout;
-    private RankingPagerAdapter rankingPagerAdapter;
+    private RankingPagerAdapter<ComicRankListFragment> rankingPagerAdapter;
     private LoadingAndRetryManager mLoadingAndRetryManager;
     private int mCurrPos = 0;
 
@@ -103,7 +103,7 @@ public class ComicRankFragment extends BaseFragment {
         rankingViewPager = (ViewPager) view.findViewById(R.id.ranking_view_pager);
         rankingSlidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.ranking_sliding_layout);
 
-        rankingPagerAdapter = new RankingPagerAdapter(getChildFragmentManager());
+        rankingPagerAdapter = new RankingPagerAdapter<>(getChildFragmentManager());
         rankingViewPager.setAdapter(rankingPagerAdapter);
         rankingViewPager.setOffscreenPageLimit(2);
         rankingViewPager.setCurrentItem(mCurrPos);
@@ -133,7 +133,7 @@ public class ComicRankFragment extends BaseFragment {
     }
 
     private void loadNetData() {
-        Observable<BaseBean<ComicRankListBean>> observable = RetrofitService.createApi(ComicApi.class).queryComicRankListBeanByGetObservable();
+        Observable<BaseBean<ComicRankListBean>> observable = RetrofitService.createApi(U17ComicApi.class).queryComicRankListBeanByGetObservable();
         RxUtil.comicSubscribe(observable, new RetrofitCallback<ComicRankListBean>() {
             @Override
             public void onSuccess(ComicRankListBean comicRankListBean) {

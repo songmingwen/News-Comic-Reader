@@ -9,6 +9,7 @@ import android.view.View;
 
 /**
  * Created by songmw3 on 2016/12/3.
+ * E-mail:z53520@qq.com
  */
 
 public class WaveView extends View {

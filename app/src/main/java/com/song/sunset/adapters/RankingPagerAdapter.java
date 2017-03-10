@@ -5,8 +5,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.song.sunset.fragments.ComicListFragment;
-
 import java.util.ArrayList;
 import java.util.List;
 

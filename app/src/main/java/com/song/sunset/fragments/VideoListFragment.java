@@ -20,7 +20,7 @@ import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.retrofit.RetrofitService;
-import com.song.sunset.utils.service.VideoApi;
+import com.song.sunset.utils.service.IfengVideoApi;
 import com.song.sunset.utils.service.WholeApi;
 import com.song.sunset.views.LoadMoreRecyclerView;
 
@@ -103,13 +103,6 @@ public class VideoListFragment extends BaseFragment implements LoadingMoreListen
         refreshLayout.setHeaderView(header);
         refreshLayout.addPtrUIHandler(header);
         refreshLayout.setPtrHandler(this);
-        refreshLayout.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                refreshLayout.autoRefresh();
-
-            }
-        }, 100);
 
         recyclerView = (LoadMoreRecyclerView) view.findViewById(R.id.id_recyclerview_comiclist);
         adapter = new VideoListAdapter(getActivity());
@@ -164,7 +157,7 @@ public class VideoListFragment extends BaseFragment implements LoadingMoreListen
     }
 
     public void getDataFromRetrofit2(int page) {
-        Observable<List<VideoBean>> observable = RetrofitService.createApi(VideoApi.class, WholeApi.VIDEO_BASE_URL).queryVideoRDByGetObservable(page, "list", typeid);
+        Observable<List<VideoBean>> observable = RetrofitService.createApi(IfengVideoApi.class, WholeApi.VIDEO_BASE_URL).queryVideoRDByGetObservable(page, "list", typeid);
         RxUtil.videoSubscribe(observable, new RetrofitCallback<VideoBean>() {
             @Override
             public void onSuccess(VideoBean videoBean) {
@@ -195,7 +188,7 @@ public class VideoListFragment extends BaseFragment implements LoadingMoreListen
                         isLoading = false;
                         showProgress(false);
                     } else {
-                        progressLayout.showError(getResources().getDrawable(R.drawable.blackhole_broken), "连接失败",
+                        progressLayout.showError(getResources().getDrawable(R.drawable.icon_new_style_failure), "连接失败",
                                 "无法建立连接",
                                 "点击重试", errorClickListener, null);
                     }

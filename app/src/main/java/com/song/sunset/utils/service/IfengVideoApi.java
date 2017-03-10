@@ -12,7 +12,7 @@ import rx.Observable;
  * Created by songmw3 on 2016/12/21.
  */
 
-public interface VideoApi {
+public interface IfengVideoApi {
 
     @GET("ifengvideoList")
     Observable<List<VideoBean>> queryFirstVideoRDByGetObservable(

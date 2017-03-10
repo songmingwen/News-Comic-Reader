@@ -20,7 +20,7 @@ import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.retrofit.RetrofitService;
-import com.song.sunset.utils.service.ComicApi;
+import com.song.sunset.utils.service.U17ComicApi;
 import com.song.sunset.views.ScaleRecyclerView;
 
 import java.util.ArrayList;
@@ -128,7 +128,7 @@ public class ComicReadActivity extends BaseActivity implements RetrofitCallback<
 
     public void getDataFromRetrofit2() {
         mLoadingAndRetryManager.showLoading();
-        Observable<BaseBean<List<ComicReadBean>>> Observable = RetrofitService.createApi(ComicApi.class).queryComicReadRDByGetObservable(comicId);
+        Observable<BaseBean<List<ComicReadBean>>> Observable = RetrofitService.createApi(U17ComicApi.class).queryComicReadRDByGetObservable(comicId);
         RxUtil.comicSubscribe(Observable, this);
     }
 

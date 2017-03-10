@@ -12,7 +12,7 @@ import com.song.sunset.beans.basebeans.BaseBean;
 import com.song.sunset.fragments.base.LoadableListFragment;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.retrofit.RetrofitService;
-import com.song.sunset.utils.service.ComicApi;
+import com.song.sunset.utils.service.U17ComicApi;
 
 import java.util.List;
 
@@ -42,7 +42,7 @@ public class ComicRankListFragment extends LoadableListFragment<ComicListAdapter
 
     @Override
     protected Observable<BaseBean<ComicListBean>> getRetrofitApi(int page) {
-        return RetrofitService.createApi(ComicApi.class).queryComicListRDByGetObservable(page, argName, argValue);
+        return RetrofitService.createApi(U17ComicApi.class).queryComicListRDByGetObservable(page, argName, argValue);
     }
 
     @Override

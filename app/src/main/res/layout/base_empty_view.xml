@@ -7,10 +7,10 @@
 
     <ImageView
         android:id="@+id/base_retry_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_centerInParent="true"
-        android:src="@drawable/thanatos" />
+        android:src="@drawable/icon_new_style_failure" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -19,6 +19,6 @@
         android:layout_centerInParent="true"
         android:layout_marginTop="7dp"
         android:text="没有内容"
-        android:textColor="@color/color_red" />
+        android:textColor="@color/colorPrimary" />
 
 </RelativeLayout>

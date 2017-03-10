@@ -23,7 +23,7 @@ import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.retrofit.RetrofitService;
-import com.song.sunset.utils.service.ComicApi;
+import com.song.sunset.utils.service.U17ComicApi;
 import com.song.sunset.views.LoadMoreRecyclerView;
 
 import java.util.List;
@@ -177,7 +177,7 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
     }
 
     public void getDataFromRetrofit2(int page) {
-        Observable<BaseBean<ComicListBean>> observable = RetrofitService.createApi(ComicApi.class).queryComicListRDByGetObservable(page, argName, argValue);
+        Observable<BaseBean<ComicListBean>> observable = RetrofitService.createApi(U17ComicApi.class).queryComicListRDByGetObservable(page, argName, argValue);
         RxUtil.comicSubscribe(observable, new RetrofitCallback<ComicListBean>() {
             @Override
             public void onSuccess(ComicListBean comicListBean) {
@@ -208,7 +208,7 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
                         isLoading = false;
                         showProgress(false);
                     } else {
-                        progressLayout.showError(getResources().getDrawable(R.drawable.blackhole_broken), "连接失败",
+                        progressLayout.showError(getResources().getDrawable(R.drawable.icon_new_style_failure), "连接失败",
                                 "无法建立连接",
                                 "点击重试", errorClickListener, null);
                     }

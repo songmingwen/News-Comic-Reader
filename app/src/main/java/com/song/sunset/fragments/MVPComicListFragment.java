@@ -160,7 +160,7 @@ public class MVPComicListFragment extends BaseFragment implements ComicListView,
 
     @Override
     public void showError() {
-        progressLayout.showError(getResources().getDrawable(R.drawable.blackhole_broken), "连接失败",
+        progressLayout.showError(getResources().getDrawable(R.drawable.icon_new_style_failure), "连接失败",
                 "无法建立连接",
                 "点击重试", errorClickListener, null);
     }

@@ -161,7 +161,7 @@ public abstract class LoadableListFragment<Adapter extends BaseRecyclerViewAdapt
                         isLoading = false;
                         showProgress(false);
                     } else {
-                        progressLayout.showError(getResources().getDrawable(R.drawable.blackhole_broken), "连接失败",
+                        progressLayout.showError(getResources().getDrawable(R.drawable.icon_new_style_failure), "连接失败",
                                 "无法建立连接",
                                 "点击重试", errorClickListener, null);
                     }

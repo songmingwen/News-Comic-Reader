@@ -83,9 +83,9 @@ public class FrescoUtil {
         return builder
                 .setPlaceholderImage(android.R.color.white)
                 .setProgressBarImage(getProgressBarImage(position))
-                .setRetryImage(R.drawable.blackhole)
+                .setRetryImage(R.drawable.icon_new_style_retry)
                 .setRetryImageScaleType(ScalingUtils.ScaleType.CENTER_INSIDE)
-                .setFailureImage(R.drawable.thanatos)
+                .setFailureImage(R.drawable.icon_new_style_failure)
                 .setRoundingParams(getRoundingParams(hasBorder))
                 .setFadeDuration(50)
                 .build();
