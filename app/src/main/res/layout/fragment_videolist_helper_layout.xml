@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.song.sunset.utils.loadingmanager.ProgressLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:progressActivity="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/progress"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    progressActivity:emptyBackgroundColor="#FFFFFF"
+    progressActivity:emptyContentTextColor="#000000"
+    progressActivity:emptyTitleTextColor="#000000"
+    progressActivity:errorBackgroundColor="#FFFFFF"
+    progressActivity:errorButtonTextColor="#000000"
+    progressActivity:errorContentTextColor="#000000"
+    progressActivity:errorTitleTextColor="#000000"
+    progressActivity:loadingBackgroundColor="#FFFFFF">
+
+    <in.srain.cube.views.ptr.PtrFrameLayout xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/id_comic_list_swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        cube_ptr:ptr_duration_to_close="200"
+        cube_ptr:ptr_duration_to_close_header="1000"
+        cube_ptr:ptr_keep_header_when_refresh="true"
+        cube_ptr:ptr_pull_to_fresh="false"
+        cube_ptr:ptr_ratio_of_header_height_to_refresh="1.2"
+        cube_ptr:ptr_resistance="1.7">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_video_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </in.srain.cube.views.ptr.PtrFrameLayout>
+</com.song.sunset.utils.loadingmanager.ProgressLayout>

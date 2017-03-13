@@ -16,6 +16,7 @@ import com.song.sunset.utils.fresco.FrescoUtil;
 
 /**
  * Created by songmw3 on 2016/12/21.
+ * E-mail:z53520@qq.com
  */
 public class VideoListAdapter extends BaseRecyclerViewAdapter<VideoBean.ItemBean, VideoListViewHolder> {
 

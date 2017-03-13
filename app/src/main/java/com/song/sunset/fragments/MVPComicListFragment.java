@@ -34,7 +34,7 @@ import in.srain.cube.views.ptr.header.StoreHouseHeader;
  * E-mail:z53520@qq.com
  */
 
-public class MVPComicListFragment extends BaseFragment implements ComicListView, SwipeRefreshLayout.OnRefreshListener, LoadingMoreListener, PtrHandler {
+public class MVPComicListFragment extends BaseFragment implements ComicListView, LoadingMoreListener, PtrHandler {
 
     private ComicListPresenter comicListPresenter;
     private ProgressLayout progressLayout;
@@ -115,11 +115,6 @@ public class MVPComicListFragment extends BaseFragment implements ComicListView,
     public void onDestroyView() {
         super.onDestroyView();
         comicListPresenter = null;
-    }
-
-    @Override
-    public void onRefresh() {
-        comicListPresenter.refreshingData(argName, argValue);
     }
 
     @Override

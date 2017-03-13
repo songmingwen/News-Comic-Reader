@@ -5,6 +5,7 @@ import com.song.sunset.model.ComicListModel;
 
 /**
  * Created by z5352_000 on 2016/10/29 0029.
+ * E-mail:z53520@qq.com
  */
 public class ComicListPresenter {
     private ComicListView comicListView;

@@ -12,7 +12,7 @@ import com.flyco.tablayout.SlidingTabLayout;
 import com.song.sunset.R;
 import com.song.sunset.adapters.RankingPagerAdapter;
 import com.song.sunset.beans.VideoBean;
-import com.song.sunset.fragments.VideoListFragment;
+import com.song.sunset.fragments.VideoListHelperFragment;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.loadingmanager.LoadingAndRetryManager;
 import com.song.sunset.utils.loadingmanager.OnLoadingAndRetryListener;
@@ -82,7 +82,7 @@ public class VideoListActivity extends AppCompatActivity {
             public void onSuccess(VideoBean videoBean) {
                 List<VideoBean.TypesBean> list = videoBean.getTypes();
 
-                List<VideoListFragment> fragmentList = new ArrayList<>();
+                List<VideoListHelperFragment> fragmentList = new ArrayList<>();
 
                 List<String> titleList = new ArrayList<>();
 
@@ -91,7 +91,7 @@ public class VideoListActivity extends AppCompatActivity {
                     bundle.putString("chType", item.getChType());
                     bundle.putString("typeid", item.getId());
                     bundle.putString("name", item.getName());
-                    VideoListFragment fragment = (VideoListFragment) Fragment.instantiate(VideoListActivity.this, VideoListFragment.class.getName(), bundle);
+                    VideoListHelperFragment fragment = (VideoListHelperFragment) Fragment.instantiate(VideoListActivity.this, VideoListHelperFragment.class.getName(), bundle);
                     fragmentList.add(fragment);
                     titleList.add(item.getName());
                 }
