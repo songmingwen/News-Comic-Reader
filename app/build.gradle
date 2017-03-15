@@ -45,6 +45,10 @@ greendao {
 }
 //--------------------------greenDao配置--------------------------
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
@@ -83,8 +87,4 @@ dependencies {
     compile rootProject.ext.dependencies["rapid_png_decoder"]
     compile rootProject.ext.dependencies["ultra_ptr"]
     compile rootProject.ext.dependencies["switchbutton"]
-}
-
-repositories {
-    mavenCentral()
 }

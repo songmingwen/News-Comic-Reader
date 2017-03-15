@@ -2,12 +2,9 @@ package com.song.sunset.activitys;
 
 import android.app.Application;
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.Handler;
 import android.support.multidex.MultiDex;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.song.sunset.utils.CrashHandler;
 import com.song.sunset.utils.GreenDaoUtil;
 import com.song.sunset.utils.fresco.FrescoUtil;
 import com.song.sunset.utils.loadingmanager.LoadingAndRetryManager;
