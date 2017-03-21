@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/id_first_image"
         android:layout_width="match_parent"
-        android:layout_height="320dp"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:src="@drawable/animals_eagle" />
 

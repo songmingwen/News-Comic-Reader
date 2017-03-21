@@ -76,7 +76,7 @@ public class CollectionFragment extends BaseFragment {
 
     public void getDataFromSQLite() {
         List<ComicLocalCollection> list = comicLocalCollectionDao.loadAll();
-        mLoadingAndRetryManager.showContent();
         adapter.setData(list);
+        mLoadingAndRetryManager.showContent();
     }
 }
