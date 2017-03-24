@@ -36,7 +36,7 @@ public class ComicDetailPresenter extends CoreBasePresenter<ComicDetailModel, Co
 
     public void showCollecteState(int comicId) {
         if (mView == null || mModel == null) return;
-        mView.showCollected(mModel.getCollectedState(comicId), false);
+        mView.showCollected(mModel.isCollected(comicId), false);
     }
 
     public void changeCollectedState(ComicDetailBean comicDetailBean) {

@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 //apply plugin: 'kotlin-android'
+apply from: 'tinker-support.gradle'//微信热修复
 
 android {
     compileSdkVersion rootProject.ext.android.ANDROID_COMPILE_SDK_VERSION
@@ -87,4 +88,5 @@ dependencies {
     compile rootProject.ext.dependencies["rapid_png_decoder"]
     compile rootProject.ext.dependencies["ultra_ptr"]
     compile rootProject.ext.dependencies["switchbutton"]
+    compile rootProject.ext.dependencies["crashreport_upgrade"]
 }

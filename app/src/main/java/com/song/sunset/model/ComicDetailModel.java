@@ -23,39 +23,45 @@ public class ComicDetailModel implements CoreBaseModel {
         return RetrofitService.createApi(U17ComicApi.class).queryComicDetailRDByGetObservable(comicId);
     }
 
-    public boolean getCollectedState(int comicId) {
+    public boolean isCollected(int comicId) {
         if (comicLocalCollectionDao == null) {
             comicLocalCollectionDao = GreenDaoUtil.getDaoSession().getComicLocalCollectionDao();
         }
         return comicLocalCollectionDao.load((long) comicId) != null;
     }
 
-    public boolean changeCollectedState(ComicDetailBean comicDetailBean) {
-        boolean isCollected = getCollectedState(Integer.parseInt(comicDetailBean.getComic().getComic_id()));
+    public boolean changeCollectedState(ComicDetailBean bean) {
+        if (comicLocalCollectionDao == null) {
+            comicLocalCollectionDao = GreenDaoUtil.getDaoSession().getComicLocalCollectionDao();
+        }
+        boolean isCollected = isCollected(Integer.parseInt(bean.getComic().getComic_id()));
         if (isCollected) {
-            comicLocalCollectionDao.deleteByKey((long) Integer.parseInt(comicDetailBean.getComic().getComic_id()));
+            comicLocalCollectionDao.deleteByKey((long) Integer.parseInt(bean.getComic().getComic_id()));
         } else {
             ComicLocalCollection localCollection = new ComicLocalCollection();
-            localCollection.setAuthor(comicDetailBean.getComic().getAuthor().getName());
-            localCollection.setComicId(Long.parseLong(comicDetailBean.getComic().getComic_id()));
-            localCollection.setCover(comicDetailBean.getComic().getCover());
-            localCollection.setDescription(comicDetailBean.getComic().getDescription());
-            localCollection.setName(comicDetailBean.getComic().getName());
-            localCollection.setChapterNum(String.valueOf(comicDetailBean.getChapter_list().size()));
+            localCollection.setAuthor(bean.getComic().getAuthor().getName());
+            localCollection.setComicId(Long.parseLong(bean.getComic().getComic_id()));
+            localCollection.setCover(bean.getComic().getCover());
+            localCollection.setDescription(bean.getComic().getDescription());
+            localCollection.setName(bean.getComic().getName());
+            localCollection.setChapterNum(String.valueOf(bean.getChapter_list().size()));
             comicLocalCollectionDao.insert(localCollection);
         }
         return !isCollected;
     }
 
-    public void updateCollectedComicData(ComicDetailBean comicDetailBean) {
-        if (!getCollectedState(Integer.parseInt(comicDetailBean.getComic().getComic_id()))) return;
+    public void updateCollectedComicData(ComicDetailBean bean) {
+        if (comicLocalCollectionDao == null) {
+            comicLocalCollectionDao = GreenDaoUtil.getDaoSession().getComicLocalCollectionDao();
+        }
+        if (!isCollected(Integer.parseInt(bean.getComic().getComic_id()))) return;
         ComicLocalCollection localCollection = new ComicLocalCollection();
-        localCollection.setAuthor(comicDetailBean.getComic().getAuthor().getName());
-        localCollection.setComicId(Long.parseLong(comicDetailBean.getComic().getComic_id()));
-        localCollection.setCover(comicDetailBean.getComic().getCover());
-        localCollection.setDescription(comicDetailBean.getComic().getDescription());
-        localCollection.setName(comicDetailBean.getComic().getName());
-        localCollection.setChapterNum(String.valueOf(comicDetailBean.getChapter_list().size()));
+        localCollection.setAuthor(bean.getComic().getAuthor().getName());
+        localCollection.setComicId(Long.parseLong(bean.getComic().getComic_id()));
+        localCollection.setCover(bean.getComic().getCover());
+        localCollection.setDescription(bean.getComic().getDescription());
+        localCollection.setName(bean.getComic().getName());
+        localCollection.setChapterNum(String.valueOf(bean.getChapter_list().size()));
         comicLocalCollectionDao.insertOrReplace(localCollection);
     }
 }

@@ -74,8 +74,11 @@ public class CollectionFragment extends BaseFragment {
         getDataFromSQLite();
     }
 
-    public void getDataFromSQLite() {
+    private void getDataFromSQLite() {
         List<ComicLocalCollection> list = comicLocalCollectionDao.loadAll();
+        if (list == null || list.size() <= 0) {
+            mLoadingAndRetryManager.showEmpty();
+        }
         adapter.setData(list);
         mLoadingAndRetryManager.showContent();
     }

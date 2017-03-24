@@ -53,6 +53,7 @@ ext {
             //    "pickerview": "com.bigkoo:pickerview:2.1.1",
             //    "jsoup": "org.jsoup:jsoup:1.10.1",
             "ultra_ptr"                    : "in.srain.cube:ultra-ptr:1.0.11",
-            "switchbutton"                 : "com.kyleduo.switchbutton:library:1.4.5"
+            "switchbutton"                 : "com.kyleduo.switchbutton:library:1.4.5",
+            "crashreport_upgrade"          : "com.tencent.bugly:crashreport_upgrade:latest.release"//微信热修复
     ]
 }

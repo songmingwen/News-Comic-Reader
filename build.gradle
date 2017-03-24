@@ -21,6 +21,8 @@ buildscript {
         /**dagger配置*/
 //        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
         /**dagger配置*/
+
+        classpath "com.tencent.bugly:tinker-support:latest.release"//微信热修复
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
