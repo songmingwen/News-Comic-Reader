@@ -231,7 +231,7 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
         if (isRefreshing) {
             return;
         }
-        getDataFromRetrofit2(1);
         isRefreshing = true;
+        getDataFromRetrofit2(1);
     }
 }

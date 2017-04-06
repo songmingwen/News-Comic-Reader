@@ -47,9 +47,9 @@ public class ScreenUtils {
     public static void fullscreen(Activity activity, boolean enable) {
         Window window = activity.getWindow();
         WindowManager.LayoutParams lp = window.getAttributes();
-        if (enable) { //显示状态栏
+        if (enable) { //隐藏状态栏
             lp.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
-        } else { //隐藏状态栏
+        } else { //显示状态栏
             lp.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
         window.setAttributes(lp);

@@ -1,5 +1,8 @@
 package com.song.sunset.utils.retrofit;
 
+import com.song.sunset.utils.AppConfig;
+import com.song.sunset.utils.DeviceUtils;
+
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
@@ -53,11 +56,39 @@ public enum OkHttpClient {
         return okHttpClientBuilder;
     }
 
+    //http://api.iclient.ifeng.com/ClientNews?
+    // id=SYLB10,SYDT10&
+    // action=down&
+    // pullNum=3&
+    // lastDoc=,,,&
+    // province=北京市&
+    // city=北京市&
+    // district=朝阳区&
+    // gv=5.5.4&
+    // av=5.5.4&
+    // uid=865982024584370&
+    // deviceid=865982024584370&
+    // proid=ifengnews&
+    // os=android_23&
+    // df=androidphone&
+    // vt=5&
+    // screen=1080x1920&
+    // publishid=9023&
+    // nw=wifi&
+    // loginid=76078652
+
     public Interceptor getPublicParams() {
         return new BasicParamsInterceptor.Builder()
-                .addHeaderParam("device_id", "S_phone")
-                .addParam("uid", "S_uid")
-                .addQueryParam("api_version", "1.0001")
+//                .addHeaderParam("device_id", "S_phone")
+//                .addParam("uid", DeviceUtils.getAuthenticationID(AppConfig.getApp()))
+                .addQueryParam("device_id", "S_phone")
+                .addQueryParam("uid", DeviceUtils.getAuthenticationID(AppConfig.getApp()))
+                .addQueryParam("id", "SYLB10,SYDT10")
+                .addQueryParam("gv", "5.5.4")
+                .addQueryParam("av", "5.5.4")
+                .addQueryParam("nw", "wifi")
+                .addQueryParam("df", "androidphone")
+                .addQueryParam("publishid", "9023")
                 .build();
     }
 }

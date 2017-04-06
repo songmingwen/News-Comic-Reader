@@ -19,7 +19,7 @@ import com.song.sunset.utils.loadingmanager.OnLoadingAndRetryListener;
 import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.retrofit.RetrofitService;
-import com.song.sunset.utils.service.IfengVideoApi;
+import com.song.sunset.utils.service.IfengNewsApi;
 import com.song.sunset.utils.service.WholeApi;
 
 import java.util.ArrayList;
@@ -76,8 +76,8 @@ public class VideoListActivity extends AppCompatActivity {
     }
 
     private void loadNetData() {
-        Observable<List<VideoBean>> observable = RetrofitService.createApi(IfengVideoApi.class, WholeApi.VIDEO_BASE_URL).queryFirstVideoRDByGetObservable(1);
-        RxUtil.videoSubscribe(observable, new RetrofitCallback<VideoBean>() {
+        Observable<List<VideoBean>> observable = RetrofitService.createApi(IfengNewsApi.class, WholeApi.IFENG_NEWS_BASE_URL).queryFirstVideoObservable(1);
+        RxUtil.ifengNewsSubscribe(observable, new RetrofitCallback<VideoBean>() {
             @Override
             public void onSuccess(VideoBean videoBean) {
                 List<VideoBean.TypesBean> list = videoBean.getTypes();

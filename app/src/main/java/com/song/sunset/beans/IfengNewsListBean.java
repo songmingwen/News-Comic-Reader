@@ -1,0 +1,120 @@
+package com.song.sunset.beans;
+
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.List;
+
+/**
+ * Created by Song on 2017/3/30 0030.
+ * E-mail: z53520@qq.com
+ */
+
+public class IfengNewsListBean implements Parcelable {
+
+    private String listId;
+    private String type;
+    private int expiredTime;
+    private int currentPage;
+    private int totalPage;
+    private int topsize;
+    private List<IfengChannelBean> item;
+
+    public String getListId() {
+        return listId;
+    }
+
+    public void setListId(String listId) {
+        this.listId = listId;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public int getExpiredTime() {
+        return expiredTime;
+    }
+
+    public void setExpiredTime(int expiredTime) {
+        this.expiredTime = expiredTime;
+    }
+
+    public int getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(int currentPage) {
+        this.currentPage = currentPage;
+    }
+
+    public int getTotalPage() {
+        return totalPage;
+    }
+
+    public void setTotalPage(int totalPage) {
+        this.totalPage = totalPage;
+    }
+
+    public int getTopsize() {
+        return topsize;
+    }
+
+    public void setTopsize(int topsize) {
+        this.topsize = topsize;
+    }
+
+    public List<IfengChannelBean> getItem() {
+        return item;
+    }
+
+    public void setItem(List<IfengChannelBean> item) {
+        this.item = item;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.listId);
+        dest.writeString(this.type);
+        dest.writeInt(this.expiredTime);
+        dest.writeInt(this.currentPage);
+        dest.writeInt(this.totalPage);
+        dest.writeInt(this.topsize);
+        dest.writeTypedList(this.item);
+    }
+
+    public IfengNewsListBean() {
+    }
+
+    protected IfengNewsListBean(Parcel in) {
+        this.listId = in.readString();
+        this.type = in.readString();
+        this.expiredTime = in.readInt();
+        this.currentPage = in.readInt();
+        this.totalPage = in.readInt();
+        this.topsize = in.readInt();
+        this.item = in.createTypedArrayList(IfengChannelBean.CREATOR);
+    }
+
+    public static final Parcelable.Creator<IfengNewsListBean> CREATOR = new Parcelable.Creator<IfengNewsListBean>() {
+        @Override
+        public IfengNewsListBean createFromParcel(Parcel source) {
+            return new IfengNewsListBean(source);
+        }
+
+        @Override
+        public IfengNewsListBean[] newArray(int size) {
+            return new IfengNewsListBean[size];
+        }
+    };
+}

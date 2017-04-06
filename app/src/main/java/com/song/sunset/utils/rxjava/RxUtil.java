@@ -54,7 +54,7 @@ public class RxUtil {
                 });
     }
 
-    public static <T> void videoSubscribe(Observable<List<T>> observable, final RetrofitCallback<T> retrofitCallback) {
+    public static <T> void ifengNewsSubscribe(Observable<List<T>> observable, final RetrofitCallback<T> retrofitCallback) {
         observable
                 .compose(RxUtil.<List<T>>rxSchedulerHelper())
                 .subscribe(new Subscriber<List<T>>() {

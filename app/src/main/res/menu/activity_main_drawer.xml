@@ -24,8 +24,8 @@
         <menu>
             <item
                 android:id="@+id/nav_map"
-                android:icon="@drawable/navi_map_gps_locked"
-                android:title="Map" />
+                android:icon="@drawable/news"
+                android:title="凤凰新闻" />
             <item
                 android:id="@+id/nav_video"
                 android:icon="@drawable/icon_video"

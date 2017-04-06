@@ -18,7 +18,7 @@ import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.retrofit.RetrofitService;
 import com.song.sunset.utils.rxjava.RxUtil;
-import com.song.sunset.utils.service.IfengVideoApi;
+import com.song.sunset.utils.service.IfengNewsApi;
 import com.song.sunset.utils.service.WholeApi;
 import com.song.sunset.views.BaseLoadMoreView;
 
@@ -100,8 +100,8 @@ public class VideoListHelperFragment extends BaseFragment implements BaseQuickAd
     }
 
     public void getDataFromRetrofit2(int page) {
-        Observable<List<VideoBean>> observable = RetrofitService.createApi(IfengVideoApi.class, WholeApi.VIDEO_BASE_URL).queryVideoRDByGetObservable(page, "list", typeid);
-        RxUtil.videoSubscribe(observable, new RetrofitCallback<VideoBean>() {
+        Observable<List<VideoBean>> observable = RetrofitService.createApi(IfengNewsApi.class, WholeApi.IFENG_NEWS_BASE_URL).queryVideoObservable(page, "list", typeid);
+        RxUtil.ifengNewsSubscribe(observable, new RetrofitCallback<VideoBean>() {
             @Override
             public void onSuccess(VideoBean videoBean) {
                 progressLayout.showContent();

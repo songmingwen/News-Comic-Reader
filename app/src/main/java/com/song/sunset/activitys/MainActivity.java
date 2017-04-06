@@ -20,6 +20,7 @@ import com.song.sunset.activitys.base.BaseActivity;
 import com.song.sunset.fragments.CollectionFragment;
 import com.song.sunset.fragments.ComicClassifyFragment;
 import com.song.sunset.fragments.ComicRankFragment;
+import com.song.sunset.fragments.IfengListFragment;
 import com.song.sunset.fragments.MVPComicListFragment;
 import com.song.sunset.utils.DateTimeUtils;
 
@@ -171,12 +172,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             switchFragmentDelay(ComicRankFragment.class.getName(), "排行漫画");
 
         } else if (id == R.id.nav_map) {
-            getmHandler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    LocationMarkerActivity.start(MainActivity.this);
-                }
-            }, 300);
+            switchFragmentDelay(IfengListFragment.class.getName(), "凤凰新闻");
+//            getmHandler().postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    LocationMarkerActivity.start(MainActivity.this);
+//                }
+//            }, 300);
         } else if (id == R.id.nav_collection) {
             switchFragmentDelay(CollectionFragment.class.getName(), "收藏漫画");
 
