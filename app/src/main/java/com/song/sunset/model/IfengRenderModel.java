@@ -1,4 +1,4 @@
-package com.song.sunset.utils;
+package com.song.sunset.model;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -24,91 +24,91 @@ import java.util.ArrayList;
  * E-mail: z53520@qq.com
  */
 
-public class IfengRenderUtils {
+public class IfengRenderModel {
 
-    public static void renderSingleTitle(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
+    public void renderSingleTitle(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
         SingleTitleViewHolder viewHolder = (SingleTitleViewHolder) holder;
         setTitleAndBottomData(ifengChannelBean, viewHolder);
     }
 
-    public static void renderTitleImage(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
+    public void renderTitleImage(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
         TitleImageViewHolder viewHolder = (TitleImageViewHolder) holder;
         FrescoUtil.setFrescoImage(viewHolder.image, ifengChannelBean.getThumbnail());
         setTitleAndBottomData(ifengChannelBean, viewHolder);
     }
 
-    public static void renderSlideImage(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
+    public void renderSlideImage(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
         SlideImageViewHolder viewHolder = (SlideImageViewHolder) holder;
         setSlideImage(ifengChannelBean, getSimpleDraweeViews(viewHolder.image1, viewHolder.image2, viewHolder.image3));
         setTitleAndBottomData(ifengChannelBean, viewHolder);
     }
 
-    public static void renderSlideImage2(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
+    public void renderSlideImage2(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
         SlideImage2ViewHolder viewHolder = (SlideImage2ViewHolder) holder;
         setSlideImage(ifengChannelBean, getSimpleDraweeViews(viewHolder.image1, viewHolder.image2, viewHolder.image3));
         setTitleAndBottomData(ifengChannelBean, viewHolder);
     }
 
-    public static void renderBigImage(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
+    public void renderBigImage(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
         BigImageViewHolder viewHolder = (BigImageViewHolder) holder;
         FrescoUtil.setFrescoImage(viewHolder.image, ifengChannelBean.getThumbnail());
         setTitleAndBottomData(ifengChannelBean, viewHolder);
     }
 
-    public static void renderBigImage2(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
+    public void renderBigImage2(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
 
     }
 
-    public static void renderVideoView(RecyclerView.ViewHolder holder, final IfengChannelBean ifengChannelBean) {
+    public void renderVideoView(RecyclerView.ViewHolder holder, final IfengChannelBean ifengChannelBean) {
         VideoViewViewHolder viewHolder = (VideoViewViewHolder) holder;
         FrescoUtil.setFrescoImage(viewHolder.image, ifengChannelBean.getThumbnail());
         setTitleAndBottomData(ifengChannelBean, viewHolder);
     }
 
-    public static void renderMatchScore(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
+    public void renderMatchScore(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
 
     }
 
-    public static void renderScompreView(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
+    public void renderScompreView(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
 
     }
 
-    public static void renderMatchImage(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
+    public void renderMatchImage(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
 
     }
 
-    public static void renderLongImage(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
+    public void renderLongImage(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
         LongImageViewHolder viewHolder = (LongImageViewHolder) holder;
         viewHolder.title.setText(ifengChannelBean.getTitle());
         FrescoUtil.setFrescoImage(viewHolder.image, ifengChannelBean.getThumbnail());
     }
 
-    public static void renderLiveImage(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
+    public void renderLiveImage(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
 
     }
 
-    public static void renderBigTop(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
+    public void renderBigTop(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
 
     }
 
-    public static void renderListFocusSlide(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
+    public void renderListFocusSlide(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
 
     }
 
-    public static void renderTopicTitle(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
+    public void renderTopicTitle(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
 
     }
 
-    public static void renderTopicBannerAd(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
+    public void renderTopicBannerAd(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
 
     }
 
-    public static void renderVideoBigImage(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
+    public void renderVideoBigImage(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
 
     }
 
     @NonNull
-    private static ArrayList<SimpleDraweeView> getSimpleDraweeViews(SimpleDraweeView image1, SimpleDraweeView image2, SimpleDraweeView image3) {
+    private ArrayList<SimpleDraweeView> getSimpleDraweeViews(SimpleDraweeView image1, SimpleDraweeView image2, SimpleDraweeView image3) {
         ArrayList<SimpleDraweeView> imageList = new ArrayList<>();
         imageList.add(image1);
         imageList.add(image2);
@@ -116,7 +116,7 @@ public class IfengRenderUtils {
         return imageList;
     }
 
-    private static void setSlideImage(IfengChannelBean ifengChannelBean, ArrayList<SimpleDraweeView> imageList) {
+    private void setSlideImage(IfengChannelBean ifengChannelBean, ArrayList<SimpleDraweeView> imageList) {
         for (int i = 0; i < 3; i++) {
             if (ifengChannelBean.getStyle().getImages() != null) {
                 int count = ifengChannelBean.getStyle().getImages().size();
@@ -129,7 +129,7 @@ public class IfengRenderUtils {
         }
     }
 
-    private static void setTitleAndBottomData(IfengChannelBean ifengChannelBean, IfengBaseBottomViewHolder viewHolder) {
+    private void setTitleAndBottomData(IfengChannelBean ifengChannelBean, IfengBaseBottomViewHolder viewHolder) {
         viewHolder.title.setText(ifengChannelBean.getTitle());
         if (ifengChannelBean.getSubscribe() != null) {
             viewHolder.txSource.setText(ifengChannelBean.getSubscribe().getCatename());

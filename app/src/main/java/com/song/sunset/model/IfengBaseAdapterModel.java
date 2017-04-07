@@ -1,6 +1,5 @@
-package com.song.sunset.utils;
+package com.song.sunset.model;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -33,7 +32,7 @@ import com.song.sunset.holders.VideoViewViewHolder;
  * Created by Song on 2017/3/30 0030.
  * E-mail: z53520@qq.com
  */
-public class IfengListUtils {
+public class IfengBaseAdapterModel implements RecyclerViewAdapterModel<IfengChannelBean>{
 
     public static final String SINGLE_TITLE = "singletitle";               //单标题
     public static final String TITLE_IMAGE = "titleimg";                  //左图右文
@@ -71,7 +70,7 @@ public class IfengListUtils {
     public static final int TOPIC_BANNER_ADV_VIEW_TYPE = 15;
     public static final int VIDEO_BIG_IMG_VIEW_TYPE = 16;          //视频大图当页播放样式
 
-    public static int getViewType(IfengChannelBean ifengChannelBean) {
+    public int getViewType(IfengChannelBean ifengChannelBean) {
         if (ifengChannelBean == null
                 || ifengChannelBean.getStyle() == null
                 || TextUtils.isEmpty(ifengChannelBean.getStyle().getView())) {
@@ -117,7 +116,7 @@ public class IfengListUtils {
         }
     }
 
-    public static RecyclerView.ViewHolder getViewHolder(Context context, ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder getViewHolder(Context context, ViewGroup parent, int viewType) {
         switch (viewType) {
             case SINGLE_TITLE_VIEW_TYPE:
                 return new SingleTitleViewHolder(LayoutInflater.from(context).inflate(R.layout.item_ifeng_single_title, parent, false));
@@ -158,8 +157,8 @@ public class IfengListUtils {
         }
     }
 
-    public static void render(final Activity context, int itemViewType, RecyclerView.ViewHolder holder, final IfengChannelBean ifengChannelBean) {
-
+    public void render(final Context context, int itemViewType, RecyclerView.ViewHolder holder, final IfengChannelBean ifengChannelBean) {
+        IfengRenderModel model = new IfengRenderModel();
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -169,58 +168,58 @@ public class IfengListUtils {
 
         switch (itemViewType) {
             case SINGLE_TITLE_VIEW_TYPE:
-                IfengRenderUtils.renderSingleTitle(holder, ifengChannelBean);
+                model.renderSingleTitle(holder, ifengChannelBean);
                 break;
             case TITLE_IMAGE_VIEW_TYPE:
-                IfengRenderUtils.renderTitleImage(holder, ifengChannelBean);
+                model.renderTitleImage(holder, ifengChannelBean);
                 break;
             case SLIDE_IMAGE_VIEW_TYPE:
-                IfengRenderUtils.renderSlideImage(holder, ifengChannelBean);
+                model.renderSlideImage(holder, ifengChannelBean);
                 break;
             case SLIDE_IMAGE2_VIEW_TYPE:
-                IfengRenderUtils.renderSlideImage2(holder, ifengChannelBean);
+                model.renderSlideImage2(holder, ifengChannelBean);
                 break;
             case BIG_IMG_VIEW_TYPE:
-                IfengRenderUtils.renderBigImage(holder, ifengChannelBean);
+                model.renderBigImage(holder, ifengChannelBean);
                 break;
             case BIG_IMG2_VIEW_TYPE:
-                IfengRenderUtils.renderBigImage2(holder, ifengChannelBean);
+                model.renderBigImage2(holder, ifengChannelBean);
                 break;
             case VIDEO_VIEW_TYPE:
-                IfengRenderUtils.renderVideoView(holder, ifengChannelBean);
+                model.renderVideoView(holder, ifengChannelBean);
                 break;
             case MATCH_SCORE_VIEW_TYPE:
-                IfengRenderUtils.renderMatchScore(holder, ifengChannelBean);
+                model.renderMatchScore(holder, ifengChannelBean);
                 break;
             case MATCH_SCOMPRE_VIEW_TYPE:
-                IfengRenderUtils.renderScompreView(holder, ifengChannelBean);
+                model.renderScompreView(holder, ifengChannelBean);
                 break;
             case MATCH_IMG_VIEW_TYPE:
-                IfengRenderUtils.renderMatchImage(holder, ifengChannelBean);
+                model.renderMatchImage(holder, ifengChannelBean);
                 break;
             case LONG_IMG_VIEW_TYPE:
-                IfengRenderUtils.renderLongImage(holder, ifengChannelBean);
+                model.renderLongImage(holder, ifengChannelBean);
                 break;
             case LIVE_IMG_VIEW_TYPE:
-                IfengRenderUtils.renderLiveImage(holder, ifengChannelBean);
+                model.renderLiveImage(holder, ifengChannelBean);
                 break;
             case BIG_TOPIC_VIEW_TYPE:
-                IfengRenderUtils.renderBigTop(holder, ifengChannelBean);
+                model.renderBigTop(holder, ifengChannelBean);
                 break;
             case LIST_FOCUS_SLIDER_VIEW_TYPE:
-                IfengRenderUtils.renderListFocusSlide(holder, ifengChannelBean);
+                model.renderListFocusSlide(holder, ifengChannelBean);
                 break;
             case TOPIC_TITLE_VIEW_TYPE:
-                IfengRenderUtils.renderTopicTitle(holder, ifengChannelBean);
+                model.renderTopicTitle(holder, ifengChannelBean);
                 break;
             case TOPIC_BANNER_ADV_VIEW_TYPE:
-                IfengRenderUtils.renderTopicBannerAd(holder, ifengChannelBean);
+                model.renderTopicBannerAd(holder, ifengChannelBean);
                 break;
             case VIDEO_BIG_IMG_VIEW_TYPE:
-                IfengRenderUtils.renderVideoBigImage(holder, ifengChannelBean);
+                model.renderVideoBigImage(holder, ifengChannelBean);
                 break;
             default:
-                IfengRenderUtils.renderSingleTitle(holder, ifengChannelBean);
+                model.renderSingleTitle(holder, ifengChannelBean);
                 break;
         }
     }

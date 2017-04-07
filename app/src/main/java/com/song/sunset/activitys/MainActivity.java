@@ -23,6 +23,7 @@ import com.song.sunset.fragments.ComicRankFragment;
 import com.song.sunset.fragments.IfengListFragment;
 import com.song.sunset.fragments.MVPComicListFragment;
 import com.song.sunset.utils.DateTimeUtils;
+import com.subscaleview.sample.SubScaleViewActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -87,8 +88,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //                pvTime.show();
 //                pvOptions.show();
 //                MainActivity.this.startActivity(new Intent(MainActivity.this, SubScaleViewActivity.class));
-//                MainActivity.this.startActivity(new Intent(MainActivity.this, TouchEventTestActivity.class));
-                MainActivity.this.startActivity(new Intent(MainActivity.this, TempTestActivity.class));
+                MainActivity.this.startActivity(new Intent(MainActivity.this, TouchEventTestActivity.class));
+//                MainActivity.this.startActivity(new Intent(MainActivity.this, TempTestActivity.class));
 //                new ImageViewer.Builder(MainActivity.this, new String[]{"http://img2.niutuku.com/1312/0831/0831-niutuku.com-28071.jpg",
 //                        "http://img2.niutuku.com/desk/130220/52/52-niutuku.com-984.jpg",
 //                        "http://img01.sogoucdn.com/app/a/100540002/490110.jpg",

@@ -1,15 +1,12 @@
 package com.song.sunset.adapters;
 
 import android.app.Activity;
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
-import com.song.sunset.adapters.base.BaseRecyclerViewAdapter;
 import com.song.sunset.beans.IfengChannelBean;
-import com.song.sunset.utils.IfengListUtils;
+import com.song.sunset.model.RecyclerViewAdapterModel;
+import com.song.sunset.model.BigNewsAdapterModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,17 +19,19 @@ public class IfengListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private List<IfengChannelBean> mList;
     private Activity context;
+    private final RecyclerViewAdapterModel<IfengChannelBean> model;
 
     public IfengListAdapter(Activity context) {
         this.context = context;
         if (mList == null) {
             mList = new ArrayList<>();
         }
+        model = new BigNewsAdapterModel();
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return IfengListUtils.getViewHolder(context, parent, viewType);
+        return model.getViewHolder(context, parent, viewType);
     }
 
     @Override
@@ -40,7 +39,7 @@ public class IfengListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         if (getData() == null || getData().size() <= 0) {
             return;
         }
-        IfengListUtils.render(context, getItemViewType(position), holder, getData().get(position));
+        model.render(context, getItemViewType(position), holder, getData().get(position));
     }
 
     @Override
@@ -48,7 +47,7 @@ public class IfengListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         if (mList == null || mList.size() <= 0) {
             return 0;
         }
-        return IfengListUtils.getViewType(mList.get(position));
+        return model.getViewType(mList.get(position));
     }
 
     @Override
