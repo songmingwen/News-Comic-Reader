@@ -10,6 +10,7 @@
     <color name="color_ffa200">#ffa200</color>
 
     <color name="color_red">#ff0000</color>
+    <color name="color_smooth_red">#ff4545</color>
     <color name="color_green">#00ff00</color>
     <color name="color_blue">#0000ff</color>
     <color name="color_sky_blue">#00ffff</color>

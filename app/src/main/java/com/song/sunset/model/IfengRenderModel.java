@@ -7,14 +7,21 @@ import android.view.View;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.song.sunset.beans.IfengChannelBean;
+import com.song.sunset.beans.IfengLiveExt;
+import com.song.sunset.beans.IfengSportLiveExt;
 import com.song.sunset.holders.BigImageViewHolder;
 import com.song.sunset.holders.IfengBaseBottomViewHolder;
+import com.song.sunset.holders.LiveImageViewHolder;
 import com.song.sunset.holders.LongImageViewHolder;
+import com.song.sunset.holders.MatchImageViewHolder;
+import com.song.sunset.holders.MatchScoreViewHolder;
+import com.song.sunset.holders.ScompreViewViewHolder;
 import com.song.sunset.holders.SingleTitleViewHolder;
 import com.song.sunset.holders.SlideImage2ViewHolder;
 import com.song.sunset.holders.SlideImageViewHolder;
 import com.song.sunset.holders.TitleImageViewHolder;
 import com.song.sunset.holders.VideoViewViewHolder;
+import com.song.sunset.utils.DateTimeUtils;
 import com.song.sunset.utils.fresco.FrescoUtil;
 
 import java.util.ArrayList;
@@ -66,15 +73,21 @@ public class IfengRenderModel {
     }
 
     public void renderMatchScore(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
-
+        MatchScoreViewHolder viewHolder = (MatchScoreViewHolder) holder;
+        setBaseLiveWithScore(ifengChannelBean, viewHolder);
     }
 
     public void renderScompreView(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
-
+        ScompreViewViewHolder viewHolder = (ScompreViewViewHolder) holder;
+        FrescoUtil.setFrescoImage(viewHolder.image, ifengChannelBean.getThumbnail());
+        viewHolder.state.setText(getLiveState(ifengChannelBean));
+        viewHolder.title.setText(ifengChannelBean.getTitle());
     }
 
     public void renderMatchImage(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
-
+        MatchImageViewHolder viewHolder = (MatchImageViewHolder) holder;
+        FrescoUtil.setFrescoImage(viewHolder.bg, ifengChannelBean.getThumbnail());
+        setBaseLiveWithScore(ifengChannelBean, viewHolder);
     }
 
     public void renderLongImage(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
@@ -84,7 +97,14 @@ public class IfengRenderModel {
     }
 
     public void renderLiveImage(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
-
+        LiveImageViewHolder viewHolder = (LiveImageViewHolder) holder;
+        FrescoUtil.setFrescoImage(viewHolder.image, ifengChannelBean.getThumbnail());
+        viewHolder.title.setText(ifengChannelBean.getTitle());
+        viewHolder.tag.setText(getLiveState(ifengChannelBean));
+        if (ifengChannelBean.getLiveExt() == null) {
+            return;
+        }
+        viewHolder.time.setText(DateTimeUtils.getLiveTime(ifengChannelBean.getLiveExt().getStartTimeMillis()));
     }
 
     public void renderBigTop(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
@@ -151,5 +171,38 @@ public class IfengRenderModel {
         if (ifengChannelBean.getUpdateTime() != null) {
             viewHolder.updateTime.setText(ifengChannelBean.getUpdateTime().substring(11));
         }
+    }
+
+    private void setBaseLiveWithScore(IfengChannelBean ifengChannelBean, MatchScoreViewHolder viewHolder) {
+        IfengSportLiveExt bean = ifengChannelBean.getSportsLiveExt();
+        if (bean == null) {
+            return;
+        }
+        viewHolder.leftLogo.setImageURI(bean.getLeftLogo());
+        viewHolder.rightLogo.setImageURI(bean.getRightLogo());
+        viewHolder.leftTeam.setText(bean.getLeftName());
+        viewHolder.rightTeam.setText(bean.getRightName());
+        viewHolder.score.setText(bean.getLeftScore() + " - " + bean.getRightScore());
+        viewHolder.beginTime.setText(ifengChannelBean.getStartTimeStr());
+    }
+
+    @NonNull
+    private String getLiveState(IfengChannelBean ifengChannelBean) {
+        IfengLiveExt bean = ifengChannelBean.getLiveExt();
+        String realState;
+        if (bean == null) {
+            realState = "正在直播";
+        } else {
+            if (TextUtils.equals(bean.getStatus(), "1")) {
+                realState = "即将开始";
+            } else if (TextUtils.equals(bean.getStatus(), "2")) {
+                realState = "正在直播";
+            } else if (TextUtils.equals(bean.getStatus(), "3")) {
+                realState = "直播结束";
+            } else {
+                realState = "正在直播";
+            }
+        }
+        return realState;
     }
 }

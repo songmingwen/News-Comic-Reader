@@ -30,6 +30,9 @@ public class IfengChannelBean implements Parcelable {
     private String simId;
     private boolean hasSlide;
     private String recomToken;
+    private String startTimeStr;
+    private IfengLiveExt liveExt;
+    private IfengSportLiveExt sportsLiveExt;
 
     public String getThumbnail() {
         return thumbnail;
@@ -199,6 +202,30 @@ public class IfengChannelBean implements Parcelable {
         this.recomToken = recomToken;
     }
 
+    public String getStartTimeStr() {
+        return startTimeStr;
+    }
+
+    public void setStartTimeStr(String startTimeStr) {
+        this.startTimeStr = startTimeStr;
+    }
+
+    public IfengLiveExt getLiveExt() {
+        return liveExt;
+    }
+
+    public void setLiveExt(IfengLiveExt liveExt) {
+        this.liveExt = liveExt;
+    }
+
+    public IfengSportLiveExt getSportsLiveExt() {
+        return sportsLiveExt;
+    }
+
+    public void setSportsLiveExt(IfengSportLiveExt sportsLiveExt) {
+        this.sportsLiveExt = sportsLiveExt;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -227,6 +254,9 @@ public class IfengChannelBean implements Parcelable {
         dest.writeString(this.simId);
         dest.writeByte(this.hasSlide ? (byte) 1 : (byte) 0);
         dest.writeString(this.recomToken);
+        dest.writeString(this.startTimeStr);
+        dest.writeParcelable(this.liveExt, flags);
+        dest.writeParcelable(this.sportsLiveExt, flags);
     }
 
     public IfengChannelBean() {
@@ -254,9 +284,12 @@ public class IfengChannelBean implements Parcelable {
         this.simId = in.readString();
         this.hasSlide = in.readByte() != 0;
         this.recomToken = in.readString();
+        this.startTimeStr = in.readString();
+        this.liveExt = in.readParcelable(IfengLiveExt.class.getClassLoader());
+        this.sportsLiveExt = in.readParcelable(IfengSportLiveExt.class.getClassLoader());
     }
 
-    public static final Parcelable.Creator<IfengChannelBean> CREATOR = new Parcelable.Creator<IfengChannelBean>() {
+    public static final Creator<IfengChannelBean> CREATOR = new Creator<IfengChannelBean>() {
         @Override
         public IfengChannelBean createFromParcel(Parcel source) {
             return new IfengChannelBean(source);
