@@ -78,6 +78,7 @@ public class CollectionFragment extends BaseFragment {
         List<ComicLocalCollection> list = comicLocalCollectionDao.loadAll();
         if (list == null || list.size() <= 0) {
             mLoadingAndRetryManager.showEmpty();
+            return;
         }
         adapter.setData(list);
         mLoadingAndRetryManager.showContent();

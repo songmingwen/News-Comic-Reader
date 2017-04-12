@@ -6,7 +6,8 @@ import android.os.Parcelable;
 import java.util.List;
 
 /**
- * Created by z5352 on 2017/4/12 0012.
+ * Created by Song on 2017/4/12 0012.
+ * Email:z53520@qq.com
  */
 
 public class ComicsBean implements Parcelable {

@@ -11,7 +11,8 @@ import com.song.sunset.utils.service.U17ComicApi;
 import retrofit2.Call;
 
 /**
- * Created by z5352_000 on 2016/10/29 0029.
+ * Created by Song on 2016/10/29 0029.
+ * Email:z53520@qq.com
  */
 public class ComicListModel {
 

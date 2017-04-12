@@ -16,7 +16,7 @@ import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.fresco.FrescoUtil;
 
 /**
- * Created by songmw3 on 2017/3/3.
+ * Created by Song on 2017/3/3.
  * E-mail:z53520@qq.com
  */
 public class DefaultLoadableAdapter extends  BaseRecyclerViewAdapter<ComicsBean, ComicListViewHolder> {
