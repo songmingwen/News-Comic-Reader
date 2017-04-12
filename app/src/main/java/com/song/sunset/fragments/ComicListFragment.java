@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.song.sunset.beans.ComicsBean;
 import com.song.sunset.beans.basebeans.BaseBean;
 import com.song.sunset.beans.ComicListBean;
 import com.song.sunset.fragments.base.BaseFragment;
@@ -182,7 +183,7 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
             @Override
             public void onSuccess(ComicListBean comicListBean) {
                 progressLayout.showContent();
-                List<ComicListBean.ComicsBean> comicsBeanList = comicListBean.getComics();
+                List<ComicsBean> comicsBeanList = comicListBean.getComics();
                 if (isRefreshing) {
                     currentPage = 1;
                     isRefreshing = false;

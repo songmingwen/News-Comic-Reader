@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.song.sunset.R;
 import com.song.sunset.activitys.ComicDetailMVPActivity;
 import com.song.sunset.beans.ComicListBean;
+import com.song.sunset.beans.ComicsBean;
 import com.song.sunset.holders.ComicListViewHolder;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.fresco.FrescoUtil;
@@ -18,7 +19,7 @@ import com.song.sunset.utils.fresco.FrescoUtil;
  * Created by songmw3 on 2017/3/3.
  * E-mail:z53520@qq.com
  */
-public class DefaultLoadableAdapter extends  BaseRecyclerViewAdapter<ComicListBean.ComicsBean, ComicListViewHolder> {
+public class DefaultLoadableAdapter extends  BaseRecyclerViewAdapter<ComicsBean, ComicListViewHolder> {
 
     private Context context;
 
@@ -33,7 +34,7 @@ public class DefaultLoadableAdapter extends  BaseRecyclerViewAdapter<ComicListBe
 
     @Override
     protected void onBindPersonalViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ComicListBean.ComicsBean comicsBean = getData().get(position);
+        ComicsBean comicsBean = getData().get(position);
         ComicListViewHolder comicListViewHolder = (ComicListViewHolder) holder;
 
         int realWidth = (ViewUtil.getScreenWidth() - ViewUtil.dip2px(56)) / 3;
@@ -47,7 +48,7 @@ public class DefaultLoadableAdapter extends  BaseRecyclerViewAdapter<ComicListBe
     }
 
     @NonNull
-    private StringBuffer getTags(ComicListBean.ComicsBean comicsBean) {
+    private StringBuffer getTags(ComicsBean comicsBean) {
         StringBuffer stringBuffer = new StringBuffer();
         for (String tag : comicsBean.getTags()) {
             stringBuffer.append(tag).append(" | ");

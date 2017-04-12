@@ -1,6 +1,6 @@
 package com.song.sunset.impls;
 
-import com.song.sunset.beans.ComicListBean;
+import com.song.sunset.beans.ComicsBean;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ public interface ComicListView {
 
     void hideLoadingMoreProgress();
 
-    void showContent(List<ComicListBean.ComicsBean> list, boolean isRefresh);
+    void showContent(List<ComicsBean> list, boolean isRefresh);
 
     void showLoading();
 

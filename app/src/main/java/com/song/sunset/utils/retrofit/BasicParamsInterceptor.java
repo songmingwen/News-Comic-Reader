@@ -103,6 +103,7 @@ public class BasicParamsInterceptor implements Interceptor {
                 Map.Entry entry = (Map.Entry) o;
                 httpUrlBuilder.addQueryParameter((String) entry.getKey(), (String) entry.getValue());
             }
+            httpUrlBuilder.addQueryParameter("time_tag", String.valueOf(System.currentTimeMillis()));
             requestBuilder.url(httpUrlBuilder.build());
             return requestBuilder.build();
         }

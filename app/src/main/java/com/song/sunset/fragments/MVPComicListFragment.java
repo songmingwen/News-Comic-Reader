@@ -14,6 +14,7 @@ import com.song.sunset.R;
 import com.song.sunset.activitys.ComicListActivity;
 import com.song.sunset.adapters.ComicListAdapter;
 import com.song.sunset.beans.ComicListBean;
+import com.song.sunset.beans.ComicsBean;
 import com.song.sunset.fragments.base.BaseFragment;
 import com.song.sunset.impls.ComicListView;
 import com.song.sunset.impls.LoadingMoreListener;
@@ -90,13 +91,6 @@ public class MVPComicListFragment extends BaseFragment implements ComicListView,
         refreshLayout.setHeaderView(header);
         refreshLayout.addPtrUIHandler(header);
         refreshLayout.setPtrHandler(this);
-        refreshLayout.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                refreshLayout.autoRefresh();
-
-            }
-        }, 100);
 
         recyclerView = (LoadMoreRecyclerView) view.findViewById(R.id.id_recyclerview_comiclist);
         adapter = new ComicListAdapter(getActivity());
@@ -139,7 +133,7 @@ public class MVPComicListFragment extends BaseFragment implements ComicListView,
     }
 
     @Override
-    public void showContent(List<ComicListBean.ComicsBean> list, boolean isRefresh) {
+    public void showContent(List<ComicsBean> list, boolean isRefresh) {
         if (isRefresh) {
             adapter.setData(list);
         } else {
