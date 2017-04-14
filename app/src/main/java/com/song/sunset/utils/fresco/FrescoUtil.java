@@ -26,6 +26,7 @@ import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.generic.RoundingParams;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.backends.okhttp3.OkHttpImagePipelineConfigFactory;
 import com.facebook.imagepipeline.cache.MemoryCacheParams;
 import com.facebook.imagepipeline.common.ResizeOptions;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
@@ -37,6 +38,7 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.facebook.imagepipeline.request.Postprocessor;
 import com.song.sunset.R;
 import com.song.sunset.utils.AppConfig;
+import com.song.sunset.utils.retrofit.OkHttpClient;
 import com.song.sunset.views.LoadingDisplayProgress;
 
 /**
@@ -274,7 +276,6 @@ public class FrescoUtil {
                 .setMainDiskCacheConfig(diskCacheConfig)
                 .setMemoryTrimmableRegistry(NoOpMemoryTrimmableRegistry.getInstance())
                 .setResizeAndRotateEnabledForNetwork(true);
-
 
         // 就是这段代码，用于清理缓存
         NoOpMemoryTrimmableRegistry.getInstance().registerMemoryTrimmable(new MemoryTrimmable() {

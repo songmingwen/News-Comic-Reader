@@ -28,6 +28,10 @@ public class SunsetApplication extends Application {
 
         initLoadingAndRetryLayout();
 
+//        ImagePipelineConfig config = OkHttpImagePipelineConfigFactory
+//                .newBuilder(this, OkHttpClient.INSTANCE.getOkHttpClient())
+//                .build();
+
         Fresco.initialize(this, FrescoUtil.getDefaultImagePipelineConfig(this));
 //        CrashHandler.getInstance().init(this);
     }

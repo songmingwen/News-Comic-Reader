@@ -11,7 +11,7 @@ import com.song.sunset.beans.IfengChannelBean;
  * E-mail: z53520@qq.com
  */
 
-public class BigNewsAdapterModel extends IfengBaseAdapterModel {
+public class IfengDefaultAdapterModel extends IfengBaseAdapterModel {
 
     @Override
     public int getViewType(IfengChannelBean ifengChannelBean){

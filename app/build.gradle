@@ -36,6 +36,7 @@ android {
 //        sourceCompatibility 1.8
 //        targetCompatibility 1.8
 //    }
+    buildToolsVersion '25.0.2'
 }
 //--------------------------greenDao配置--------------------------
 apply plugin: 'org.greenrobot.greendao'
@@ -63,7 +64,8 @@ dependencies {
     compile rootProject.ext.dependencies["glide"]
     compile rootProject.ext.dependencies["fresco"]
     compile rootProject.ext.dependencies["fresco_processors"]
-    compile rootProject.ext.dependencies["frescoimageviewer"]
+//    compile rootProject.ext.dependencies["frescoimageviewer"]
+//    compile rootProject.ext.dependencies["imagepipeline-okhttp3"]
     compile rootProject.ext.dependencies["gpuimage_library"]
     compile rootProject.ext.dependencies["volley"]
     compile rootProject.ext.dependencies["swipebacklayout"]

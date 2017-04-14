@@ -32,103 +32,103 @@ import java.util.ArrayList;
  */
 
 public class IfengRenderModel {
-
-    public void renderSingleTitle(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
-        SingleTitleViewHolder viewHolder = (SingleTitleViewHolder) holder;
-        setTitleAndBottomData(ifengChannelBean, viewHolder);
-    }
-
-    public void renderTitleImage(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
-        TitleImageViewHolder viewHolder = (TitleImageViewHolder) holder;
-        FrescoUtil.setFrescoImage(viewHolder.image, ifengChannelBean.getThumbnail());
-        setTitleAndBottomData(ifengChannelBean, viewHolder);
-    }
-
-    public void renderSlideImage(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
-        SlideImageViewHolder viewHolder = (SlideImageViewHolder) holder;
-        setSlideImage(ifengChannelBean, getSimpleDraweeViews(viewHolder.image1, viewHolder.image2, viewHolder.image3));
-        setTitleAndBottomData(ifengChannelBean, viewHolder);
-    }
-
-    public void renderSlideImage2(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
-        SlideImage2ViewHolder viewHolder = (SlideImage2ViewHolder) holder;
-        setSlideImage(ifengChannelBean, getSimpleDraweeViews(viewHolder.image1, viewHolder.image2, viewHolder.image3));
-        setTitleAndBottomData(ifengChannelBean, viewHolder);
-    }
-
-    public void renderBigImage(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
-        BigImageViewHolder viewHolder = (BigImageViewHolder) holder;
-        FrescoUtil.setFrescoImage(viewHolder.image, ifengChannelBean.getThumbnail());
-        setTitleAndBottomData(ifengChannelBean, viewHolder);
-    }
-
-    public void renderBigImage2(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
-
-    }
-
-    public void renderVideoView(RecyclerView.ViewHolder holder, final IfengChannelBean ifengChannelBean) {
-        VideoViewViewHolder viewHolder = (VideoViewViewHolder) holder;
-        FrescoUtil.setFrescoImage(viewHolder.image, ifengChannelBean.getThumbnail());
-        setTitleAndBottomData(ifengChannelBean, viewHolder);
-    }
-
-    public void renderMatchScore(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
-        MatchScoreViewHolder viewHolder = (MatchScoreViewHolder) holder;
-        setBaseLiveWithScore(ifengChannelBean, viewHolder);
-    }
-
-    public void renderScompreView(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
-        ScompreViewViewHolder viewHolder = (ScompreViewViewHolder) holder;
-        FrescoUtil.setFrescoImage(viewHolder.image, ifengChannelBean.getThumbnail());
-        viewHolder.state.setText(getLiveState(ifengChannelBean));
-        viewHolder.title.setText(ifengChannelBean.getTitle());
-    }
-
-    public void renderMatchImage(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
-        MatchImageViewHolder viewHolder = (MatchImageViewHolder) holder;
-        FrescoUtil.setFrescoImage(viewHolder.bg, ifengChannelBean.getThumbnail());
-        setBaseLiveWithScore(ifengChannelBean, viewHolder);
-    }
-
-    public void renderLongImage(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
-        LongImageViewHolder viewHolder = (LongImageViewHolder) holder;
-        viewHolder.title.setText(ifengChannelBean.getTitle());
-        FrescoUtil.setFrescoImage(viewHolder.image, ifengChannelBean.getThumbnail());
-    }
-
-    public void renderLiveImage(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
-        LiveImageViewHolder viewHolder = (LiveImageViewHolder) holder;
-        FrescoUtil.setFrescoImage(viewHolder.image, ifengChannelBean.getThumbnail());
-        viewHolder.title.setText(ifengChannelBean.getTitle());
-        viewHolder.tag.setText(getLiveState(ifengChannelBean));
-        if (ifengChannelBean.getLiveExt() == null) {
-            return;
-        }
-        viewHolder.time.setText(DateTimeUtils.getLiveTime(ifengChannelBean.getLiveExt().getStartTimeMillis()));
-    }
-
-    public void renderBigTop(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
-
-    }
-
-    public void renderListFocusSlide(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
-
-    }
-
-    public void renderTopicTitle(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
-
-    }
-
-    public void renderTopicBannerAd(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
-
-    }
-
-    public void renderVideoBigImage(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
-
-    }
+//
+//    public void renderSingleTitle(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
+//        SingleTitleViewHolder viewHolder = (SingleTitleViewHolder) holder;
+//        setTitleAndBottomData(ifengChannelBean, viewHolder);
+//    }
+//
+//    public void renderTitleImage(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
+//        TitleImageViewHolder viewHolder = (TitleImageViewHolder) holder;
+//        FrescoUtil.setFrescoImage(viewHolder.image, ifengChannelBean.getThumbnail());
+//        setTitleAndBottomData(ifengChannelBean, viewHolder);
+//    }
+//
+//    public void renderSlideImage(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
+//        SlideImageViewHolder viewHolder = (SlideImageViewHolder) holder;
+//        setSlideImage(ifengChannelBean, getSimpleDraweeViews(viewHolder.image1, viewHolder.image2, viewHolder.image3));
+//        setTitleAndBottomData(ifengChannelBean, viewHolder);
+//    }
+//
+//    public void renderSlideImage2(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
+//        SlideImage2ViewHolder viewHolder = (SlideImage2ViewHolder) holder;
+//        setSlideImage(ifengChannelBean, getSimpleDraweeViews(viewHolder.image1, viewHolder.image2, viewHolder.image3));
+//        setTitleAndBottomData(ifengChannelBean, viewHolder);
+//    }
+//
+//    public void renderBigImage(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
+//        BigImageViewHolder viewHolder = (BigImageViewHolder) holder;
+//        FrescoUtil.setFrescoImage(viewHolder.image, ifengChannelBean.getThumbnail());
+//        setTitleAndBottomData(ifengChannelBean, viewHolder);
+//    }
+//
+//    public void renderBigImage2(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
+//
+//    }
+//
+//    public void renderVideoView(RecyclerView.ViewHolder holder, final IfengChannelBean ifengChannelBean) {
+//        VideoViewViewHolder viewHolder = (VideoViewViewHolder) holder;
+//        FrescoUtil.setFrescoImage(viewHolder.image, ifengChannelBean.getThumbnail());
+//        setTitleAndBottomData(ifengChannelBean, viewHolder);
+//    }
+//
+//    public void renderMatchScore(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
+//        MatchScoreViewHolder viewHolder = (MatchScoreViewHolder) holder;
+//        setBaseLiveWithScore(ifengChannelBean, viewHolder);
+//    }
+//
+//    public void renderScompreView(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
+//        ScompreViewViewHolder viewHolder = (ScompreViewViewHolder) holder;
+//        FrescoUtil.setFrescoImage(viewHolder.image, ifengChannelBean.getThumbnail());
+//        viewHolder.state.setText(getLiveState(ifengChannelBean));
+//        viewHolder.title.setText(ifengChannelBean.getTitle());
+//    }
+//
+//    public void renderMatchImage(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
+//        MatchImageViewHolder viewHolder = (MatchImageViewHolder) holder;
+//        FrescoUtil.setFrescoImage(viewHolder.bg, ifengChannelBean.getThumbnail());
+//        setBaseLiveWithScore(ifengChannelBean, viewHolder);
+//    }
+//
+//    public void renderLongImage(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
+//        LongImageViewHolder viewHolder = (LongImageViewHolder) holder;
+//        viewHolder.title.setText(ifengChannelBean.getTitle());
+//        FrescoUtil.setFrescoImage(viewHolder.image, ifengChannelBean.getThumbnail());
+//    }
+//
+//    public void renderLiveImage(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
+//        LiveImageViewHolder viewHolder = (LiveImageViewHolder) holder;
+//        FrescoUtil.setFrescoImage(viewHolder.image, ifengChannelBean.getThumbnail());
+//        viewHolder.title.setText(ifengChannelBean.getTitle());
+//        viewHolder.tag.setText(getLiveState(ifengChannelBean));
+//        if (ifengChannelBean.getLiveExt() == null) {
+//            return;
+//        }
+//        viewHolder.time.setText(DateTimeUtils.getLiveTime(ifengChannelBean.getLiveExt().getStartTimeMillis()));
+//    }
+//
+//    public void renderBigTop(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
+//
+//    }
+//
+//    public void renderListFocusSlide(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
+//
+//    }
+//
+//    public void renderTopicTitle(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
+//
+//    }
+//
+//    public void renderTopicBannerAd(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
+//
+//    }
+//
+//    public void renderVideoBigImage(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
+//
+//    }
 
     @NonNull
-    private ArrayList<SimpleDraweeView> getSimpleDraweeViews(SimpleDraweeView image1, SimpleDraweeView image2, SimpleDraweeView image3) {
+    static ArrayList<SimpleDraweeView> getSimpleDraweeViews(SimpleDraweeView image1, SimpleDraweeView image2, SimpleDraweeView image3) {
         ArrayList<SimpleDraweeView> imageList = new ArrayList<>();
         imageList.add(image1);
         imageList.add(image2);
@@ -136,7 +136,7 @@ public class IfengRenderModel {
         return imageList;
     }
 
-    private void setSlideImage(IfengChannelBean ifengChannelBean, ArrayList<SimpleDraweeView> imageList) {
+    static void setSlideImage(IfengChannelBean ifengChannelBean, ArrayList<SimpleDraweeView> imageList) {
         for (int i = 0; i < 3; i++) {
             if (ifengChannelBean.getStyle().getImages() != null) {
                 int count = ifengChannelBean.getStyle().getImages().size();
@@ -149,7 +149,7 @@ public class IfengRenderModel {
         }
     }
 
-    private void setTitleAndBottomData(IfengChannelBean ifengChannelBean, IfengBaseBottomViewHolder viewHolder) {
+    static void setTitleAndBottomData(IfengChannelBean ifengChannelBean, IfengBaseBottomViewHolder viewHolder) {
         viewHolder.title.setText(ifengChannelBean.getTitle());
         if (ifengChannelBean.getSubscribe() != null) {
             viewHolder.txSource.setText(ifengChannelBean.getSubscribe().getCatename());
@@ -173,7 +173,7 @@ public class IfengRenderModel {
         }
     }
 
-    private void setBaseLiveWithScore(IfengChannelBean ifengChannelBean, MatchScoreViewHolder viewHolder) {
+    static void setBaseLiveWithScore(IfengChannelBean ifengChannelBean, MatchScoreViewHolder viewHolder) {
         IfengSportLiveExt bean = ifengChannelBean.getSportsLiveExt();
         if (bean == null) {
             return;
@@ -187,7 +187,7 @@ public class IfengRenderModel {
     }
 
     @NonNull
-    private String getLiveState(IfengChannelBean ifengChannelBean) {
+    static String getLiveState(IfengChannelBean ifengChannelBean) {
         IfengLiveExt bean = ifengChannelBean.getLiveExt();
         String realState;
         if (bean == null) {

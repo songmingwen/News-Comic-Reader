@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 
 import com.song.sunset.beans.IfengChannelBean;
 import com.song.sunset.model.RecyclerViewAdapterModel;
-import com.song.sunset.model.BigNewsAdapterModel;
+import com.song.sunset.model.IfengDefaultAdapterModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ public class IfengListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         if (mList == null) {
             mList = new ArrayList<>();
         }
-        model = new BigNewsAdapterModel();
+        model = new IfengDefaultAdapterModel();
     }
 
     @Override

@@ -1,8 +1,6 @@
 package com.song.sunset.model;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -160,7 +158,6 @@ public class IfengBaseAdapterModel implements RecyclerViewAdapterModel<IfengChan
     }
 
     public void render(final Context context, int itemViewType, RecyclerView.ViewHolder holder, final IfengChannelBean ifengChannelBean) {
-        IfengRenderModel model = new IfengRenderModel();
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -168,61 +165,64 @@ public class IfengBaseAdapterModel implements RecyclerViewAdapterModel<IfengChan
             }
         });
 
+        IfengBaseRenderModel model;
+
         switch (itemViewType) {
             case SINGLE_TITLE_VIEW_TYPE:
-                model.renderSingleTitle(holder, ifengChannelBean);
+                model = new SingleTitleRenderModel();
                 break;
             case TITLE_IMAGE_VIEW_TYPE:
-                model.renderTitleImage(holder, ifengChannelBean);
+                model = new TitleImageRenderModel();
                 break;
             case SLIDE_IMAGE_VIEW_TYPE:
-                model.renderSlideImage(holder, ifengChannelBean);
+                model = new SlideImageRenderModel();
                 break;
             case SLIDE_IMAGE2_VIEW_TYPE:
-                model.renderSlideImage2(holder, ifengChannelBean);
+                model = new SlideImage2RenderModel();
                 break;
             case BIG_IMG_VIEW_TYPE:
-                model.renderBigImage(holder, ifengChannelBean);
+                model = new BigImageRenderModel();
                 break;
             case BIG_IMG2_VIEW_TYPE:
-                model.renderBigImage2(holder, ifengChannelBean);
+                model = new BigImage2RenderModel();
                 break;
             case VIDEO_VIEW_TYPE:
-                model.renderVideoView(holder, ifengChannelBean);
+                model = new VideoViewRenderModel();
                 break;
             case MATCH_SCORE_VIEW_TYPE:
-                model.renderMatchScore(holder, ifengChannelBean);
+                model = new MatchScoreRenderModel();
                 break;
             case MATCH_SCOMPRE_VIEW_TYPE:
-                model.renderScompreView(holder, ifengChannelBean);
+                model = new ScompreRenderModel();
                 break;
             case MATCH_IMG_VIEW_TYPE:
-                model.renderMatchImage(holder, ifengChannelBean);
+                model = new MatchImageRenderModel();
                 break;
             case LONG_IMG_VIEW_TYPE:
-                model.renderLongImage(holder, ifengChannelBean);
+                model = new LongImageRenderModel();
                 break;
             case LIVE_IMG_VIEW_TYPE:
-                model.renderLiveImage(holder, ifengChannelBean);
+                model = new LiveImageRenderModel();
                 break;
             case BIG_TOPIC_VIEW_TYPE:
-                model.renderBigTop(holder, ifengChannelBean);
+                model = new BigTopRenderModel();
                 break;
             case LIST_FOCUS_SLIDER_VIEW_TYPE:
-                model.renderListFocusSlide(holder, ifengChannelBean);
+                model = new ListFocusSlideRenderModel();
                 break;
             case TOPIC_TITLE_VIEW_TYPE:
-                model.renderTopicTitle(holder, ifengChannelBean);
+                model = new TopicTitleRenderModel();
                 break;
             case TOPIC_BANNER_ADV_VIEW_TYPE:
-                model.renderTopicBannerAd(holder, ifengChannelBean);
+                model = new TopicBannerAdRenderModel();
                 break;
             case VIDEO_BIG_IMG_VIEW_TYPE:
-                model.renderVideoBigImage(holder, ifengChannelBean);
+                model = new VideoBigImageRenderModel();
                 break;
             default:
-                model.renderSingleTitle(holder, ifengChannelBean);
+                model = new SingleTitleRenderModel();
                 break;
         }
+        model.render(holder, ifengChannelBean);
     }
 }
