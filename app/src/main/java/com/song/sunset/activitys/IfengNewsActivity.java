@@ -33,6 +33,7 @@ public class IfengNewsActivity extends BaseActivity {
     private String url;
     private ProgressBar progressBar;
     private LoadingAndRetryManager mLoadingAndRetryManager;
+    private WebView mWebView;
 
     public static void start(Context context, String url) {
         Intent intent = new Intent(context, IfengNewsActivity.class);
@@ -43,7 +44,7 @@ public class IfengNewsActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ScreenUtils.fullscreen(this,true);
+        ScreenUtils.fullscreen(this, true);
         StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimary));
         setContentView(R.layout.activity_ifeng_news_layout);
 
@@ -54,7 +55,7 @@ public class IfengNewsActivity extends BaseActivity {
         }
 
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
-        WebView mWebView = (WebView) findViewById(R.id.web_view);
+        mWebView = (WebView) findViewById(R.id.web_view);
         initWebView(mWebView);
         if (TextUtils.isEmpty(url)) {
             Toast.makeText(this, "网页暂时无法打开", Toast.LENGTH_SHORT).show();
@@ -62,6 +63,15 @@ public class IfengNewsActivity extends BaseActivity {
             return;
         }
         mWebView.loadUrl(url);
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (null != mWebView) {
+            mWebView.removeAllViews();
+            mWebView.destroy();
+        }
+        super.onDestroy();
     }
 
     protected void initWebView(WebView webView) {

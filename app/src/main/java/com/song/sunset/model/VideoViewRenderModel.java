@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.song.sunset.beans.IfengChannelBean;
 import com.song.sunset.holders.VideoViewViewHolder;
+import com.song.sunset.model.base.IfengBaseRenderModel;
 import com.song.sunset.utils.fresco.FrescoUtil;
 
 /**
@@ -11,7 +12,7 @@ import com.song.sunset.utils.fresco.FrescoUtil;
  * E-mail: z53520@qq.com
  */
 
-class VideoViewRenderModel implements IfengBaseRenderModel {
+public class VideoViewRenderModel extends IfengBaseRenderModel {
 
     @Override
     public void render(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {

@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.song.sunset.beans.IfengChannelBean;
 import com.song.sunset.holders.MatchScoreViewHolder;
+import com.song.sunset.model.base.IfengBaseRenderModel;
 
 
 /**
@@ -11,7 +12,7 @@ import com.song.sunset.holders.MatchScoreViewHolder;
  * E-mail: z53520@qq.com
  */
 
-class MatchScoreRenderModel implements IfengBaseRenderModel {
+public class MatchScoreRenderModel extends IfengBaseRenderModel {
 
     @Override
     public void render(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {

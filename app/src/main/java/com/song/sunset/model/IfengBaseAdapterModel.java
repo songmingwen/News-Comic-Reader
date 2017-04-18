@@ -27,12 +27,31 @@ import com.song.sunset.holders.TopicBannerAdViewHolder;
 import com.song.sunset.holders.TopicTitleViewHolder;
 import com.song.sunset.holders.VideoBigImageViewHolder;
 import com.song.sunset.holders.VideoViewViewHolder;
+import com.song.sunset.model.BigImage2RenderModel;
+import com.song.sunset.model.BigImageRenderModel;
+import com.song.sunset.model.BigTopRenderModel;
+import com.song.sunset.model.ListFocusSlideRenderModel;
+import com.song.sunset.model.LiveImageRenderModel;
+import com.song.sunset.model.LongImageRenderModel;
+import com.song.sunset.model.MatchImageRenderModel;
+import com.song.sunset.model.MatchScoreRenderModel;
+import com.song.sunset.model.ScompreRenderModel;
+import com.song.sunset.model.SingleTitleRenderModel;
+import com.song.sunset.model.SlideImage2RenderModel;
+import com.song.sunset.model.SlideImageRenderModel;
+import com.song.sunset.model.TitleImageRenderModel;
+import com.song.sunset.model.TopicBannerAdRenderModel;
+import com.song.sunset.model.TopicTitleRenderModel;
+import com.song.sunset.model.VideoBigImageRenderModel;
+import com.song.sunset.model.VideoViewRenderModel;
+import com.song.sunset.model.base.IfengBaseRenderModel;
+import com.song.sunset.model.base.RecyclerViewAdapterModel;
 
 /**
  * Created by Song on 2017/3/30 0030.
  * E-mail: z53520@qq.com
  */
-public class IfengBaseAdapterModel implements RecyclerViewAdapterModel<IfengChannelBean>{
+public class IfengBaseAdapterModel implements RecyclerViewAdapterModel<IfengChannelBean> {
 
     public static final String SINGLE_TITLE = "singletitle";               //单标题
     public static final String TITLE_IMAGE = "titleimg";                  //左图右文

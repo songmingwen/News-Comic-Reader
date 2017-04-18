@@ -1,4 +1,4 @@
-package com.song.sunset.model;
+package com.song.sunset.model.base;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

@@ -3,7 +3,6 @@ package com.song.sunset.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +15,6 @@ import com.song.sunset.beans.IfengChannelBean;
 import com.song.sunset.beans.IfengNewsListBean;
 import com.song.sunset.fragments.base.BaseFragment;
 import com.song.sunset.impls.LoadingMoreListener;
-import com.song.sunset.utils.RecyclerViewDivider;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
@@ -108,13 +106,13 @@ public class IfengListFragment extends BaseFragment implements RetrofitCallback<
         List<IfengChannelBean> ifengChannelBeanList = ifengNewsListBean.getItem();
         if (isRefreshing) {
             isRefreshing = false;
-            mAdapter.addTopData(ifengChannelBeanList);
+            mAdapter.addDataAtTop(ifengChannelBeanList);
             refreshLayout.refreshComplete();
         } else {
             if (isLoading) {
                 isLoading = false;
             }
-            mAdapter.addBottomData(ifengChannelBeanList);
+            mAdapter.addDataAtBottom(ifengChannelBeanList);
             showProgress(false);
         }
     }

@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.song.sunset.beans.IfengChannelBean;
 import com.song.sunset.holders.TitleImageViewHolder;
+import com.song.sunset.model.base.IfengBaseRenderModel;
 import com.song.sunset.utils.fresco.FrescoUtil;
 
 
@@ -12,7 +13,7 @@ import com.song.sunset.utils.fresco.FrescoUtil;
  * E-mail: z53520@qq.com
  */
 
-public class TitleImageRenderModel implements IfengBaseRenderModel {
+public class TitleImageRenderModel extends IfengBaseRenderModel {
 
     @Override
     public void render(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {

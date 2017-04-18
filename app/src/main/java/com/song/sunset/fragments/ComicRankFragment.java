@@ -111,7 +111,10 @@ public class ComicRankFragment extends BaseFragment {
             @Override
             public void transformPage(View page, float position) {
                 final float normalizedposition = Math.abs(Math.abs(position) - 1);
-                page.setAlpha(normalizedposition);
+                float realRotate = normalizedposition / 10 + 0.9f;
+                page.setAlpha(realRotate);
+                page.setScaleX(realRotate);
+                page.setScaleY(realRotate);
             }
         });
         rankingViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
