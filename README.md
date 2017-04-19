@@ -15,9 +15,9 @@
 4、新增新闻模块，可以浏览新闻资讯、观看新闻娱乐短视频。
 
 ### 手势缩放有待优化，希望大神可以指点。
-  
-  
-  
+
+
+
 ## A comic reading app software
 
 1, The network framework is the use of Retrofit2
@@ -30,9 +30,9 @@
 
 4, Add news module, you can browse news and watch entertain video.
 ### Gesture scaling need to be optimized.Look forward to your guidance
-  
-  
-  
+
+
+
   
     Copyright 2016 Li Zhaotailang
 
