@@ -90,5 +90,9 @@ dependencies {
     compile rootProject.ext.dependencies["rapid_png_decoder"]
     compile rootProject.ext.dependencies["ultra_ptr"]
     compile rootProject.ext.dependencies["switchbutton"]
+    compile rootProject.ext.dependencies["DanmakuFlameMaster"]
+    compile rootProject.ext.dependencies["ndkbitmap-armv7a"]
+    compile rootProject.ext.dependencies["ndkbitmap-armv5"]
+    compile rootProject.ext.dependencies["ndkbitmap-x86"]
 //    compile rootProject.ext.dependencies["crashreport_upgrade"]
 }

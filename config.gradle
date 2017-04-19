@@ -55,6 +55,11 @@ ext {
             //    "jsoup": "org.jsoup:jsoup:1.10.1",
             "ultra_ptr"                    : "in.srain.cube:ultra-ptr:1.0.11",
             "switchbutton"                 : "com.kyleduo.switchbutton:library:1.4.5",
-            "crashreport_upgrade"          : "com.tencent.bugly:crashreport_upgrade:latest.release"//微信热修复
+            "crashreport_upgrade"          : "com.tencent.bugly:crashreport_upgrade:latest.release",//微信热修复
+
+            "DanmakuFlameMaster"           : "com.github.ctiao:DanmakuFlameMaster:0.7.4",
+            "ndkbitmap-armv7a"             : "com.github.ctiao:ndkbitmap-armv7a:0.7.4",
+            "ndkbitmap-armv5"              : "com.github.ctiao:ndkbitmap-armv5:0.7.4",
+            "ndkbitmap-x86"                : "com.github.ctiao:ndkbitmap-x86:0.7.4"
     ]
 }

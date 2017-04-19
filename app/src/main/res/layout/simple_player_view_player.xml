@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/app_video_box"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/black"
@@ -11,7 +10,12 @@
     <com.dou361.ijkplayer.widget.IjkVideoView
         android:id="@+id/video_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
+
+    <master.flame.danmaku.ui.widget.DanmakuTextureView
+        android:id="@+id/danmaku_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <LinearLayout
         android:id="@+id/ll_bg"
@@ -26,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
-            android:visibility="visible"/>
+            android:visibility="visible" />
     </LinearLayout>
 
     <!--重新播放-->
@@ -45,7 +49,7 @@
             android:layout_height="wrap_content"
             android:text="@string/small_problem_new"
             android:textColor="@android:color/white"
-            android:textSize="14dp"/>
+            android:textSize="14dp" />
 
         <ImageView
             android:id="@+id/app_video_replay_icon"
@@ -53,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="8dp"
-            android:src="@drawable/simple_player_circle_outline_white_36dp"/>
+            android:src="@drawable/simple_player_circle_outline_white_36dp" />
     </LinearLayout>
     <!-- 网络提示-->
     <LinearLayout
@@ -73,7 +77,7 @@
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
             android:text="您正在使用移动网络播放视频\n可能产生较高流量费用"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white" />
 
         <TextView
             android:id="@+id/app_video_netTie_icon"
@@ -84,7 +88,7 @@
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
             android:text="继续"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white" />
     </LinearLayout>
 
     <!--加载中-->
@@ -100,16 +104,17 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:indeterminateBehavior="repeat"
-            android:indeterminateOnly="true"/>
+            android:indeterminateOnly="true" />
+
         <TextView
             android:id="@+id/app_video_speed"
             android:layout_width="wrap_content"
-            android:layout_marginTop="4dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:gravity="center"
-            android:visibility="gone"
             android:text="188Kb/s"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white"
+            android:visibility="gone" />
     </LinearLayout>
 
     <!-- 中间触摸提示-->
@@ -117,16 +122,16 @@
         layout="@layout/simple_player_touch_gestures"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true" />
 
     <!-- 顶部栏-->
-    <include layout="@layout/simple_player_topbar"/>
+    <include layout="@layout/simple_player_topbar" />
     <!-- 底部栏-->
     <include
         layout="@layout/simple_player_controlbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true" />
 
     <!--声音亮度控制-->
     <LinearLayout
@@ -149,18 +154,18 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/qcloud_player_icon_audio_vol_mute"/>
+                android:src="@drawable/qcloud_player_icon_audio_vol_mute" />
 
             <SeekBar
                 android:id="@+id/simple_player_volume_controller"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="150dp"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/qcloud_player_icon_audio_vol"/>
+                android:src="@drawable/qcloud_player_icon_audio_vol" />
         </LinearLayout>
 
         <LinearLayout
@@ -175,18 +180,18 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:padding="5dp"
-                android:src="@drawable/qcloud_player_icon_brightness"/>
+                android:src="@drawable/qcloud_player_icon_brightness" />
 
             <SeekBar
                 android:id="@+id/simple_player_brightness_controller"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="150dp"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/qcloud_player_icon_brightness"/>
+                android:src="@drawable/qcloud_player_icon_brightness" />
         </LinearLayout>
 
     </LinearLayout>
@@ -205,7 +210,7 @@
         <ListView
             android:id="@+id/simple_player_select_streams_list"
             android:layout_width="150dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 
@@ -215,6 +220,6 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginTop="8dp"
-        android:src="@drawable/simple_player_center_play"/>
+        android:src="@drawable/simple_player_center_play" />
 
 </RelativeLayout>

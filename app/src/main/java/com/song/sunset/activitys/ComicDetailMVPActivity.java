@@ -6,14 +6,11 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.OnScrollListener;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
-import android.widget.RelativeLayout;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.RequestQueue;
@@ -22,7 +19,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.song.core.base.CoreBaseActivity;
 import com.song.sunset.R;
-import com.song.sunset.adapters.ComicClassifyAdapter;
 import com.song.sunset.adapters.ComicDetailAdapter;
 import com.song.sunset.beans.ComicDetailBean;
 import com.song.sunset.model.ComicDetailModel;
@@ -35,7 +31,6 @@ import com.song.sunset.utils.volley.SampleVolleyFactory;
 import com.song.sunset.view.ComicDetailView;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**

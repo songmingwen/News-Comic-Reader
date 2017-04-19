@@ -109,14 +109,18 @@ public class VideoListHelperFragment extends BaseFragment implements BaseQuickAd
                 if (isRefreshing) {
                     currentPage = 1;
                     isRefreshing = false;
-                    mAdapter.setNewData(videoBeanList);
+                    if (mAdapter != null) {
+                        mAdapter.setNewData(videoBeanList);
+                    }
                     refreshLayout.refreshComplete();
                 } else {
                     if (isLoading) {
                         isLoading = false;
                     }
-                    mAdapter.addData(videoBeanList);
-                    mAdapter.loadMoreComplete();
+                    if (mAdapter != null) {
+                        mAdapter.addData(videoBeanList);
+                        mAdapter.loadMoreComplete();
+                    }
                 }
             }
 
