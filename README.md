@@ -16,7 +16,9 @@
 
 ### 手势缩放有待优化，希望大神可以指点。
   
-A comic reading app software
+  
+  
+## A comic reading app software
 
 1, The network framework is the use of Retrofit2
    Flexible set up a network cache time: support individual settings interface to cache expiration time, cache expiration time is not set to go defaults expiration time.
