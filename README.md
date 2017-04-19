@@ -26,6 +26,6 @@ A comic reading app software
    
 3, Custom ScaleRecyclerView, support RecyclerView zoom (double-click, gesture), drag.
 
-3, Add news module, you can browse news and watch entertain video.
+4, Add news module, you can browse news and watch entertain video.
 ### Gesture scaling need to be optimized.Look forward to your guidance
   
