@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.song.sunset.R;
-import com.song.sunset.adapters.IfengListAdapter;
-import com.song.sunset.beans.IfengChannelBean;
-import com.song.sunset.beans.IfengNewsListBean;
+import com.song.sunset.adapters.PhoenixListAdapter;
+import com.song.sunset.beans.PhoenixChannelBean;
+import com.song.sunset.beans.PhoenixNewsListBean;
 import com.song.sunset.fragments.base.BaseFragment;
 import com.song.sunset.impls.LoadingMoreListener;
 import com.song.sunset.utils.ViewUtil;
@@ -20,7 +20,7 @@ import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.retrofit.RetrofitService;
 import com.song.sunset.utils.rxjava.RxUtil;
-import com.song.sunset.utils.service.IfengNewsApi;
+import com.song.sunset.utils.service.PhoenixNewsApi;
 import com.song.sunset.utils.service.WholeApi;
 import com.song.sunset.views.LoadMoreRecyclerView;
 
@@ -37,11 +37,11 @@ import rx.Observable;
  * E-mail: z53520@qq.com
  */
 
-public class IfengListFragment extends BaseFragment implements RetrofitCallback<IfengNewsListBean>, PtrHandler, LoadingMoreListener {
+public class PhoenixListFragment extends BaseFragment implements RetrofitCallback<PhoenixNewsListBean>, PtrHandler, LoadingMoreListener {
 
     private RelativeLayout progressBar;
     private LoadMoreRecyclerView recyclerView;
-    private IfengListAdapter mAdapter;
+    private PhoenixListAdapter mAdapter;
     private PtrFrameLayout refreshLayout;
     private ProgressLayout progressLayout;
     private boolean isLoading, isRefreshing = false;
@@ -54,7 +54,7 @@ public class IfengListFragment extends BaseFragment implements RetrofitCallback<
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_ifeng_list, container, false);
+        return inflater.inflate(R.layout.fragment_phoenix_list, container, false);
     }
 
     @Override
@@ -66,7 +66,7 @@ public class IfengListFragment extends BaseFragment implements RetrofitCallback<
         progressBar = (RelativeLayout) view.findViewById(R.id.id_loading_more_progress);
         showProgress(false);
 
-        refreshLayout = (PtrFrameLayout) view.findViewById(R.id.id_ifeng_list_swipe_refresh);
+        refreshLayout = (PtrFrameLayout) view.findViewById(R.id.id_phoenix_list_swipe_refresh);
         StoreHouseHeader header = new StoreHouseHeader(getContext());
         header.setPadding(0, ViewUtil.dip2px(2), 0, ViewUtil.dip2px(2));
         header.initWithString("Song");
@@ -78,8 +78,8 @@ public class IfengListFragment extends BaseFragment implements RetrofitCallback<
         refreshLayout.addPtrUIHandler(header);
         refreshLayout.setPtrHandler(this);
 
-        recyclerView = (LoadMoreRecyclerView) view.findViewById(R.id.id_recyclerview_ifeng_list);
-        mAdapter = new IfengListAdapter(getActivity());
+        recyclerView = (LoadMoreRecyclerView) view.findViewById(R.id.id_recyclerview_phoenix_list);
+        mAdapter = new PhoenixListAdapter(getActivity());
         recyclerView.setAdapter(mAdapter);
         recyclerView.setLoadingMoreListener(this);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1) {
@@ -90,29 +90,29 @@ public class IfengListFragment extends BaseFragment implements RetrofitCallback<
         });
         //添加分割线
 //        recyclerView.addItemDecoration(new RecyclerViewDivider(getActivity(), LinearLayoutManager.HORIZONTAL));
-        getDataFromRetrofit2(IfengNewsApi.DOWN);
+        getDataFromRetrofit2(PhoenixNewsApi.DOWN);
     }
 
     private void getDataFromRetrofit2(String action) {
-        Observable<List<IfengNewsListBean>> observable = RetrofitService
-                .createApi(IfengNewsApi.class, WholeApi.IFENG_NEWS_BASE_URL)
-                .queryIfengListObservable(action);
-        RxUtil.ifengNewsSubscribe(observable, this);
+        Observable<List<PhoenixNewsListBean>> observable = RetrofitService
+                .createApi(PhoenixNewsApi.class, WholeApi.PHOENIX_NEWS_BASE_URL)
+                .queryPhoenixListObservable(action);
+        RxUtil.phoenixNewsSubscribe(observable, this);
     }
 
     @Override
-    public void onSuccess(IfengNewsListBean ifengNewsListBean) {
+    public void onSuccess(PhoenixNewsListBean phoenixNewsListBean) {
         progressLayout.showContent();
-        List<IfengChannelBean> ifengChannelBeanList = ifengNewsListBean.getItem();
+        List<PhoenixChannelBean> phoenixChannelBeanList = phoenixNewsListBean.getItem();
         if (isRefreshing) {
             isRefreshing = false;
-            mAdapter.addDataAtTop(ifengChannelBeanList);
+            mAdapter.addDataAtTop(phoenixChannelBeanList);
             refreshLayout.refreshComplete();
         } else {
             if (isLoading) {
                 isLoading = false;
             }
-            mAdapter.addDataAtBottom(ifengChannelBeanList);
+            mAdapter.addDataAtBottom(phoenixChannelBeanList);
             showProgress(false);
         }
     }
@@ -138,7 +138,7 @@ public class IfengListFragment extends BaseFragment implements RetrofitCallback<
         @Override
         public void onClick(View v) {
             progressLayout.showLoading();
-            getDataFromRetrofit2(IfengNewsApi.DOWN);
+            getDataFromRetrofit2(PhoenixNewsApi.DOWN);
         }
     };
 
@@ -153,7 +153,7 @@ public class IfengListFragment extends BaseFragment implements RetrofitCallback<
             return;
         }
         isRefreshing = true;
-        getDataFromRetrofit2(IfengNewsApi.DOWN);
+        getDataFromRetrofit2(PhoenixNewsApi.DOWN);
     }
 
     @Override
@@ -163,7 +163,7 @@ public class IfengListFragment extends BaseFragment implements RetrofitCallback<
         }
         showProgress(true);
         isLoading = true;
-        getDataFromRetrofit2(IfengNewsApi.UP);
+        getDataFromRetrofit2(PhoenixNewsApi.UP);
     }
 
     public void showProgress(boolean flag) {

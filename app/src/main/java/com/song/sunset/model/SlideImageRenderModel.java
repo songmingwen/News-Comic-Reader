@@ -2,9 +2,9 @@ package com.song.sunset.model;
 
 import android.support.v7.widget.RecyclerView;
 
-import com.song.sunset.beans.IfengChannelBean;
+import com.song.sunset.beans.PhoenixChannelBean;
 import com.song.sunset.holders.SlideImageViewHolder;
-import com.song.sunset.model.base.IfengBaseRenderModel;
+import com.song.sunset.model.base.PhoenixBaseRenderModel;
 
 
 /**
@@ -12,12 +12,12 @@ import com.song.sunset.model.base.IfengBaseRenderModel;
  * E-mail: z53520@qq.com
  */
 
-public class SlideImageRenderModel extends IfengBaseRenderModel {
+public class SlideImageRenderModel extends PhoenixBaseRenderModel {
 
     @Override
-    public void render(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
+    public void render(RecyclerView.ViewHolder holder, PhoenixChannelBean phoenixChannelBean) {
         SlideImageViewHolder viewHolder = (SlideImageViewHolder) holder;
-        IfengRenderModel.setSlideImage(ifengChannelBean, IfengRenderModel.getSimpleDraweeViews(viewHolder.image1, viewHolder.image2, viewHolder.image3));
-        IfengRenderModel.setTitleAndBottomData(ifengChannelBean, viewHolder);
+        PhoenixRenderModel.setSlideImage(phoenixChannelBean, PhoenixRenderModel.getSimpleDraweeViews(viewHolder.image1, viewHolder.image2, viewHolder.image3));
+        PhoenixRenderModel.setTitleAndBottomData(phoenixChannelBean, viewHolder);
     }
 }

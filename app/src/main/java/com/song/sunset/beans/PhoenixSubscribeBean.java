@@ -8,7 +8,7 @@ import android.os.Parcelable;
  * E-mail: z53520@qq.com
  */
 
-public class IfengSubscribeBean implements Parcelable {
+public class PhoenixSubscribeBean implements Parcelable {
 
     private String cateid;
     private String type;
@@ -70,10 +70,10 @@ public class IfengSubscribeBean implements Parcelable {
         dest.writeString(this.description);
     }
 
-    public IfengSubscribeBean() {
+    public PhoenixSubscribeBean() {
     }
 
-    protected IfengSubscribeBean(Parcel in) {
+    protected PhoenixSubscribeBean(Parcel in) {
         this.cateid = in.readString();
         this.type = in.readString();
         this.catename = in.readString();
@@ -81,15 +81,15 @@ public class IfengSubscribeBean implements Parcelable {
         this.description = in.readString();
     }
 
-    public static final Parcelable.Creator<IfengSubscribeBean> CREATOR = new Parcelable.Creator<IfengSubscribeBean>() {
+    public static final Parcelable.Creator<PhoenixSubscribeBean> CREATOR = new Parcelable.Creator<PhoenixSubscribeBean>() {
         @Override
-        public IfengSubscribeBean createFromParcel(Parcel source) {
-            return new IfengSubscribeBean(source);
+        public PhoenixSubscribeBean createFromParcel(Parcel source) {
+            return new PhoenixSubscribeBean(source);
         }
 
         @Override
-        public IfengSubscribeBean[] newArray(int size) {
-            return new IfengSubscribeBean[size];
+        public PhoenixSubscribeBean[] newArray(int size) {
+            return new PhoenixSubscribeBean[size];
         }
     };
 }

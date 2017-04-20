@@ -18,7 +18,7 @@ public class ScompreViewViewHolder extends RecyclerView.ViewHolder {
 
     public ScompreViewViewHolder(View inflate) {
         super(inflate);
-        image = (SimpleDraweeView) inflate.findViewById(R.id.ifeng_image);
+        image = (SimpleDraweeView) inflate.findViewById(R.id.phoenix_image);
         title = (TextView) inflate.findViewById(R.id.title);
         state = (TextView) inflate.findViewById(R.id.tx_live_state);
     }

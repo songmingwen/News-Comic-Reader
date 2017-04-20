@@ -19,7 +19,7 @@
     <!-- 选项文字大小 需要配合 bools.xml 的 pickerview_customTextSize 为 true 才有效果-->
     <dimen name="pickerview_textsize">18sp</dimen>
 
-    <dimen name="ifeng_title_big">17sp</dimen>
-    <dimen name="ifeng_title">15sp</dimen>
-    <dimen name="ifeng_des">12sp</dimen>
+    <dimen name="phoenix_title_big">17sp</dimen>
+    <dimen name="phoenix_title">15sp</dimen>
+    <dimen name="phoenix_des">12sp</dimen>
 </resources>

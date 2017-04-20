@@ -324,7 +324,7 @@ public class DateTimeUtils {
         String strTime = channelTimeFormat.format(new Date(time));
         String now = monthDayFormat.format(new Date());
         if (now.split(" ")[0].equals(strTime.split(" ")[0])){
-            res += AppConfig.getApp().getString(R.string.ifeng_today);
+            res += AppConfig.getApp().getString(R.string.phoenix_today);
             res += " " + strTime.split(" ")[1];
             return res;
         } else {
@@ -336,7 +336,7 @@ public class DateTimeUtils {
                 return "";
             }
             if ((lTimeDay+ONE_DAY)< time && (lTimeDay+ONE_DAY+ONE_DAY)>time ) {
-                res += AppConfig.getApp().getString(R.string.ifeng_tomorrow);
+                res += AppConfig.getApp().getString(R.string.phoenix_tomorrow);
                 res += " " + strTime.split(" ")[1];
                 return res;
             }

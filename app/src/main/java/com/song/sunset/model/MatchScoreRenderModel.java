@@ -2,9 +2,9 @@ package com.song.sunset.model;
 
 import android.support.v7.widget.RecyclerView;
 
-import com.song.sunset.beans.IfengChannelBean;
+import com.song.sunset.beans.PhoenixChannelBean;
 import com.song.sunset.holders.MatchScoreViewHolder;
-import com.song.sunset.model.base.IfengBaseRenderModel;
+import com.song.sunset.model.base.PhoenixBaseRenderModel;
 
 
 /**
@@ -12,11 +12,11 @@ import com.song.sunset.model.base.IfengBaseRenderModel;
  * E-mail: z53520@qq.com
  */
 
-public class MatchScoreRenderModel extends IfengBaseRenderModel {
+public class MatchScoreRenderModel extends PhoenixBaseRenderModel {
 
     @Override
-    public void render(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
+    public void render(RecyclerView.ViewHolder holder, PhoenixChannelBean phoenixChannelBean) {
         MatchScoreViewHolder viewHolder = (MatchScoreViewHolder) holder;
-        IfengRenderModel.setBaseLiveWithScore(ifengChannelBean, viewHolder);
+        PhoenixRenderModel.setBaseLiveWithScore(phoenixChannelBean, viewHolder);
     }
 }

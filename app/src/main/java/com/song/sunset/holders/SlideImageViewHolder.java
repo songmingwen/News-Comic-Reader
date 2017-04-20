@@ -9,14 +9,14 @@ import com.song.sunset.R;
  * Created by Song on 2017/3/31 0031.
  * E-mail: z53520@qq.com
  */
-public class SlideImageViewHolder extends IfengBaseBottomViewHolder {
+public class SlideImageViewHolder extends PhoenixBaseBottomViewHolder {
 
     public SimpleDraweeView image1, image2, image3;
 
     public SlideImageViewHolder(View inflate) {
         super(inflate);
-        image1 = (SimpleDraweeView) inflate.findViewById(R.id.ifeng_image_1);
-        image2 = (SimpleDraweeView) inflate.findViewById(R.id.ifeng_image_2);
-        image3 = (SimpleDraweeView) inflate.findViewById(R.id.ifeng_image_3);
+        image1 = (SimpleDraweeView) inflate.findViewById(R.id.phoenix_image_1);
+        image2 = (SimpleDraweeView) inflate.findViewById(R.id.phoenix_image_2);
+        image3 = (SimpleDraweeView) inflate.findViewById(R.id.phoenix_image_3);
     }
 }

@@ -7,32 +7,32 @@ import android.os.Parcelable;
  * Created by Song on 2017/3/30 0030.
  * E-mail: z53520@qq.com
  */
-public class IfengChannelBean implements Parcelable {
+public class PhoenixChannelBean implements Parcelable {
 
     private String thumbnail;
     private String online;
     private String title;
     private String showType;
     private String source;
-    private IfengSubscribeBean subscribe;
+    private PhoenixSubscribeBean subscribe;
     private String updateTime;
     private String id;
     private String documentId;
     private String staticId;
     private String type;
-    private IfengStyleBean style;
+    private PhoenixStyleBean style;
     private boolean hasVideo;
     private String commentsUrl;
     private String comments;
     private String commentsall;
-    private IfengLinkBean link;
+    private PhoenixLinkBean link;
     private String reftype;
     private String simId;
     private boolean hasSlide;
     private String recomToken;
     private String startTimeStr;
-    private IfengLiveExt liveExt;
-    private IfengSportLiveExt sportsLiveExt;
+    private PhoenixLiveExt liveExt;
+    private PhoenixSportLiveExt sportsLiveExt;
 
     public String getThumbnail() {
         return thumbnail;
@@ -74,11 +74,11 @@ public class IfengChannelBean implements Parcelable {
         this.source = source;
     }
 
-    public IfengSubscribeBean getSubscribe() {
+    public PhoenixSubscribeBean getSubscribe() {
         return subscribe;
     }
 
-    public void setSubscribe(IfengSubscribeBean subscribe) {
+    public void setSubscribe(PhoenixSubscribeBean subscribe) {
         this.subscribe = subscribe;
     }
 
@@ -122,11 +122,11 @@ public class IfengChannelBean implements Parcelable {
         this.type = type;
     }
 
-    public IfengStyleBean getStyle() {
+    public PhoenixStyleBean getStyle() {
         return style;
     }
 
-    public void setStyle(IfengStyleBean style) {
+    public void setStyle(PhoenixStyleBean style) {
         this.style = style;
     }
 
@@ -162,11 +162,11 @@ public class IfengChannelBean implements Parcelable {
         this.commentsall = commentsall;
     }
 
-    public IfengLinkBean getLink() {
+    public PhoenixLinkBean getLink() {
         return link;
     }
 
-    public void setLink(IfengLinkBean link) {
+    public void setLink(PhoenixLinkBean link) {
         this.link = link;
     }
 
@@ -210,19 +210,19 @@ public class IfengChannelBean implements Parcelable {
         this.startTimeStr = startTimeStr;
     }
 
-    public IfengLiveExt getLiveExt() {
+    public PhoenixLiveExt getLiveExt() {
         return liveExt;
     }
 
-    public void setLiveExt(IfengLiveExt liveExt) {
+    public void setLiveExt(PhoenixLiveExt liveExt) {
         this.liveExt = liveExt;
     }
 
-    public IfengSportLiveExt getSportsLiveExt() {
+    public PhoenixSportLiveExt getSportsLiveExt() {
         return sportsLiveExt;
     }
 
-    public void setSportsLiveExt(IfengSportLiveExt sportsLiveExt) {
+    public void setSportsLiveExt(PhoenixSportLiveExt sportsLiveExt) {
         this.sportsLiveExt = sportsLiveExt;
     }
 
@@ -259,45 +259,45 @@ public class IfengChannelBean implements Parcelable {
         dest.writeParcelable(this.sportsLiveExt, flags);
     }
 
-    public IfengChannelBean() {
+    public PhoenixChannelBean() {
     }
 
-    protected IfengChannelBean(Parcel in) {
+    protected PhoenixChannelBean(Parcel in) {
         this.thumbnail = in.readString();
         this.online = in.readString();
         this.title = in.readString();
         this.showType = in.readString();
         this.source = in.readString();
-        this.subscribe = in.readParcelable(IfengSubscribeBean.class.getClassLoader());
+        this.subscribe = in.readParcelable(PhoenixSubscribeBean.class.getClassLoader());
         this.updateTime = in.readString();
         this.id = in.readString();
         this.documentId = in.readString();
         this.staticId = in.readString();
         this.type = in.readString();
-        this.style = in.readParcelable(IfengStyleBean.class.getClassLoader());
+        this.style = in.readParcelable(PhoenixStyleBean.class.getClassLoader());
         this.hasVideo = in.readByte() != 0;
         this.commentsUrl = in.readString();
         this.comments = in.readString();
         this.commentsall = in.readString();
-        this.link = in.readParcelable(IfengLinkBean.class.getClassLoader());
+        this.link = in.readParcelable(PhoenixLinkBean.class.getClassLoader());
         this.reftype = in.readString();
         this.simId = in.readString();
         this.hasSlide = in.readByte() != 0;
         this.recomToken = in.readString();
         this.startTimeStr = in.readString();
-        this.liveExt = in.readParcelable(IfengLiveExt.class.getClassLoader());
-        this.sportsLiveExt = in.readParcelable(IfengSportLiveExt.class.getClassLoader());
+        this.liveExt = in.readParcelable(PhoenixLiveExt.class.getClassLoader());
+        this.sportsLiveExt = in.readParcelable(PhoenixSportLiveExt.class.getClassLoader());
     }
 
-    public static final Creator<IfengChannelBean> CREATOR = new Creator<IfengChannelBean>() {
+    public static final Creator<PhoenixChannelBean> CREATOR = new Creator<PhoenixChannelBean>() {
         @Override
-        public IfengChannelBean createFromParcel(Parcel source) {
-            return new IfengChannelBean(source);
+        public PhoenixChannelBean createFromParcel(Parcel source) {
+            return new PhoenixChannelBean(source);
         }
 
         @Override
-        public IfengChannelBean[] newArray(int size) {
-            return new IfengChannelBean[size];
+        public PhoenixChannelBean[] newArray(int size) {
+            return new PhoenixChannelBean[size];
         }
     };
 }

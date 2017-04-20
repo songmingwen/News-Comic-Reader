@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.song.sunset.R;
-import com.song.sunset.activitys.IfengNewsActivity;
-import com.song.sunset.beans.IfengChannelBean;
+import com.song.sunset.activitys.PhoenixNewsActivity;
+import com.song.sunset.beans.PhoenixChannelBean;
 import com.song.sunset.holders.BigImage2ViewHolder;
 import com.song.sunset.holders.BigImageViewHolder;
 import com.song.sunset.holders.BigTopViewHolder;
@@ -27,31 +27,14 @@ import com.song.sunset.holders.TopicBannerAdViewHolder;
 import com.song.sunset.holders.TopicTitleViewHolder;
 import com.song.sunset.holders.VideoBigImageViewHolder;
 import com.song.sunset.holders.VideoViewViewHolder;
-import com.song.sunset.model.BigImage2RenderModel;
-import com.song.sunset.model.BigImageRenderModel;
-import com.song.sunset.model.BigTopRenderModel;
-import com.song.sunset.model.ListFocusSlideRenderModel;
-import com.song.sunset.model.LiveImageRenderModel;
-import com.song.sunset.model.LongImageRenderModel;
-import com.song.sunset.model.MatchImageRenderModel;
-import com.song.sunset.model.MatchScoreRenderModel;
-import com.song.sunset.model.ScompreRenderModel;
-import com.song.sunset.model.SingleTitleRenderModel;
-import com.song.sunset.model.SlideImage2RenderModel;
-import com.song.sunset.model.SlideImageRenderModel;
-import com.song.sunset.model.TitleImageRenderModel;
-import com.song.sunset.model.TopicBannerAdRenderModel;
-import com.song.sunset.model.TopicTitleRenderModel;
-import com.song.sunset.model.VideoBigImageRenderModel;
-import com.song.sunset.model.VideoViewRenderModel;
-import com.song.sunset.model.base.IfengBaseRenderModel;
+import com.song.sunset.model.base.PhoenixBaseRenderModel;
 import com.song.sunset.model.base.RecyclerViewAdapterModel;
 
 /**
  * Created by Song on 2017/3/30 0030.
  * E-mail: z53520@qq.com
  */
-public class IfengBaseAdapterModel implements RecyclerViewAdapterModel<IfengChannelBean> {
+public class PhoenixBaseAdapterModel implements RecyclerViewAdapterModel<PhoenixChannelBean> {
 
     public static final String SINGLE_TITLE = "singletitle";               //单标题
     public static final String TITLE_IMAGE = "titleimg";                  //左图右文
@@ -89,13 +72,13 @@ public class IfengBaseAdapterModel implements RecyclerViewAdapterModel<IfengChan
     public static final int TOPIC_BANNER_ADV_VIEW_TYPE = 15;
     public static final int VIDEO_BIG_IMG_VIEW_TYPE = 16;          //视频大图当页播放样式
 
-    public int getViewType(IfengChannelBean ifengChannelBean) {
-        if (ifengChannelBean == null
-                || ifengChannelBean.getStyle() == null
-                || TextUtils.isEmpty(ifengChannelBean.getStyle().getView())) {
+    public int getViewType(PhoenixChannelBean phoenixChannelBean) {
+        if (phoenixChannelBean == null
+                || phoenixChannelBean.getStyle() == null
+                || TextUtils.isEmpty(phoenixChannelBean.getStyle().getView())) {
             return SINGLE_TITLE_VIEW_TYPE;
         }
-        String viewType = ifengChannelBean.getStyle().getView();
+        String viewType = phoenixChannelBean.getStyle().getView();
         if (TextUtils.equals(viewType, SINGLE_TITLE)) {
             return SINGLE_TITLE_VIEW_TYPE;
         } else if (TextUtils.equals(viewType, TITLE_IMAGE)) {
@@ -138,53 +121,53 @@ public class IfengBaseAdapterModel implements RecyclerViewAdapterModel<IfengChan
     public RecyclerView.ViewHolder getViewHolder(Context context, ViewGroup parent, int viewType) {
         switch (viewType) {
             case SINGLE_TITLE_VIEW_TYPE:
-                return new SingleTitleViewHolder(LayoutInflater.from(context).inflate(R.layout.item_ifeng_single_title, parent, false));
+                return new SingleTitleViewHolder(LayoutInflater.from(context).inflate(R.layout.item_phoenix_single_title, parent, false));
             case TITLE_IMAGE_VIEW_TYPE:
-                return new TitleImageViewHolder(LayoutInflater.from(context).inflate(R.layout.item_ifeng_title_image, parent, false));
+                return new TitleImageViewHolder(LayoutInflater.from(context).inflate(R.layout.item_phoenix_title_image, parent, false));
             case SLIDE_IMAGE_VIEW_TYPE:
-                return new SlideImageViewHolder(LayoutInflater.from(context).inflate(R.layout.item_ifeng_slide_image, parent, false));
+                return new SlideImageViewHolder(LayoutInflater.from(context).inflate(R.layout.item_phoenix_slide_image, parent, false));
             case SLIDE_IMAGE2_VIEW_TYPE:
-                return new SlideImage2ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_ifeng_slide_image2, parent, false));
+                return new SlideImage2ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_phoenix_slide_image2, parent, false));
             case BIG_IMG_VIEW_TYPE:
-                return new BigImageViewHolder(LayoutInflater.from(context).inflate(R.layout.item_ifeng_big_image, parent, false));
+                return new BigImageViewHolder(LayoutInflater.from(context).inflate(R.layout.item_phoenix_big_image, parent, false));
             case BIG_IMG2_VIEW_TYPE:
-                return new BigImage2ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_ifeng_big_image2, parent, false));
+                return new BigImage2ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_phoenix_big_image2, parent, false));
             case VIDEO_VIEW_TYPE:
-                return new VideoViewViewHolder(LayoutInflater.from(context).inflate(R.layout.item_ifeng_video_view, parent, false));
+                return new VideoViewViewHolder(LayoutInflater.from(context).inflate(R.layout.item_phoenix_video_view, parent, false));
             case MATCH_SCORE_VIEW_TYPE:
-                return new MatchScoreViewHolder(LayoutInflater.from(context).inflate(R.layout.item_ifeng_match_score, parent, false));
+                return new MatchScoreViewHolder(LayoutInflater.from(context).inflate(R.layout.item_phoenix_match_score, parent, false));
             case MATCH_SCOMPRE_VIEW_TYPE:
-                return new ScompreViewViewHolder(LayoutInflater.from(context).inflate(R.layout.item_ifeng_scompre_view, parent, false));
+                return new ScompreViewViewHolder(LayoutInflater.from(context).inflate(R.layout.item_phoenix_scompre_view, parent, false));
             case MATCH_IMG_VIEW_TYPE:
-                return new MatchImageViewHolder(LayoutInflater.from(context).inflate(R.layout.item_ifeng_match_image, parent, false));
+                return new MatchImageViewHolder(LayoutInflater.from(context).inflate(R.layout.item_phoenix_match_image, parent, false));
             case LONG_IMG_VIEW_TYPE:
-                return new LongImageViewHolder(LayoutInflater.from(context).inflate(R.layout.item_ifeng_long_view, parent, false));
+                return new LongImageViewHolder(LayoutInflater.from(context).inflate(R.layout.item_phoenix_long_view, parent, false));
             case LIVE_IMG_VIEW_TYPE:
-                return new LiveImageViewHolder(LayoutInflater.from(context).inflate(R.layout.item_ifeng_live_image, parent, false));
+                return new LiveImageViewHolder(LayoutInflater.from(context).inflate(R.layout.item_phoenix_live_image, parent, false));
             case BIG_TOPIC_VIEW_TYPE:
-                return new BigTopViewHolder(LayoutInflater.from(context).inflate(R.layout.item_ifeng_big_topic, parent, false));
+                return new BigTopViewHolder(LayoutInflater.from(context).inflate(R.layout.item_phoenix_big_topic, parent, false));
             case LIST_FOCUS_SLIDER_VIEW_TYPE:
-                return new ListFocusSlideViewHolder(LayoutInflater.from(context).inflate(R.layout.item_ifeng_list_focus_slide, parent, false));
+                return new ListFocusSlideViewHolder(LayoutInflater.from(context).inflate(R.layout.item_phoenix_list_focus_slide, parent, false));
             case TOPIC_TITLE_VIEW_TYPE:
-                return new TopicTitleViewHolder(LayoutInflater.from(context).inflate(R.layout.item_ifeng_topic_title, parent, false));
+                return new TopicTitleViewHolder(LayoutInflater.from(context).inflate(R.layout.item_phoenix_topic_title, parent, false));
             case TOPIC_BANNER_ADV_VIEW_TYPE:
-                return new TopicBannerAdViewHolder(LayoutInflater.from(context).inflate(R.layout.item_ifeng_banner_adv, parent, false));
+                return new TopicBannerAdViewHolder(LayoutInflater.from(context).inflate(R.layout.item_phoenix_banner_adv, parent, false));
             case VIDEO_BIG_IMG_VIEW_TYPE:
-                return new VideoBigImageViewHolder(LayoutInflater.from(context).inflate(R.layout.item_ifeng_video_big_image, parent, false));
+                return new VideoBigImageViewHolder(LayoutInflater.from(context).inflate(R.layout.item_phoenix_video_big_image, parent, false));
             default:
-                return new SingleTitleViewHolder(LayoutInflater.from(context).inflate(R.layout.item_ifeng_single_title, parent, false));
+                return new SingleTitleViewHolder(LayoutInflater.from(context).inflate(R.layout.item_phoenix_single_title, parent, false));
         }
     }
 
-    public void render(final Context context, int itemViewType, RecyclerView.ViewHolder holder, final IfengChannelBean ifengChannelBean) {
+    public void render(final Context context, int itemViewType, RecyclerView.ViewHolder holder, final PhoenixChannelBean phoenixChannelBean) {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IfengNewsActivity.start(context, ifengChannelBean.getLink().getWeburl());
+                PhoenixNewsActivity.start(context, phoenixChannelBean.getLink().getWeburl());
             }
         });
 
-        IfengBaseRenderModel model;
+        PhoenixBaseRenderModel model;
 
         switch (itemViewType) {
             case SINGLE_TITLE_VIEW_TYPE:
@@ -242,6 +225,6 @@ public class IfengBaseAdapterModel implements RecyclerViewAdapterModel<IfengChan
                 model = new SingleTitleRenderModel();
                 break;
         }
-        model.render(holder, ifengChannelBean);
+        model.render(holder, phoenixChannelBean);
     }
 }

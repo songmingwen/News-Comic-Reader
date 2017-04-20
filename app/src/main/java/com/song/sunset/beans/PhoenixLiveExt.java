@@ -7,7 +7,7 @@ import android.os.Parcelable;
  * Created by Song on 2017/4/11 0011.
  * E-mail: z53520@qq.com
  */
-public class IfengLiveExt implements Parcelable {
+public class PhoenixLiveExt implements Parcelable {
 
     private String hasVideo;
     private String hasVr;
@@ -89,10 +89,10 @@ public class IfengLiveExt implements Parcelable {
         dest.writeString(this.endStamp);
     }
 
-    public IfengLiveExt() {
+    public PhoenixLiveExt() {
     }
 
-    protected IfengLiveExt(Parcel in) {
+    protected PhoenixLiveExt(Parcel in) {
         this.hasVideo = in.readString();
         this.hasVr = in.readString();
         this.startTime = in.readLong();
@@ -101,15 +101,15 @@ public class IfengLiveExt implements Parcelable {
         this.endStamp = in.readString();
     }
 
-    public static final Parcelable.Creator<IfengLiveExt> CREATOR = new Parcelable.Creator<IfengLiveExt>() {
+    public static final Parcelable.Creator<PhoenixLiveExt> CREATOR = new Parcelable.Creator<PhoenixLiveExt>() {
         @Override
-        public IfengLiveExt createFromParcel(Parcel source) {
-            return new IfengLiveExt(source);
+        public PhoenixLiveExt createFromParcel(Parcel source) {
+            return new PhoenixLiveExt(source);
         }
 
         @Override
-        public IfengLiveExt[] newArray(int size) {
-            return new IfengLiveExt[size];
+        public PhoenixLiveExt[] newArray(int size) {
+            return new PhoenixLiveExt[size];
         }
     };
 }

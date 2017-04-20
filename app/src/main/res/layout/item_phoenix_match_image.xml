@@ -16,7 +16,7 @@
         android:padding="5dp">
 
         <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/ifeng_image_bg"
+            android:id="@+id/phoenix_image_bg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             fresco:viewAspectRatio="4.2" />

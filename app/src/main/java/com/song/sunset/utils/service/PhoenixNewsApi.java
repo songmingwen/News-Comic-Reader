@@ -1,6 +1,6 @@
 package com.song.sunset.utils.service;
 
-import com.song.sunset.beans.IfengNewsListBean;
+import com.song.sunset.beans.PhoenixNewsListBean;
 import com.song.sunset.beans.VideoBean;
 
 import java.util.List;
@@ -14,7 +14,7 @@ import rx.Observable;
  * E-mail: z53520@qq.com
  */
 
-public interface IfengNewsApi {
+public interface PhoenixNewsApi {
 
     /**此处若不添加max-age信息，会统一在OfflineCacheControlInterceptor类中添加默认的max-age*/
     //    @Headers("Cache-Control: public, max-age=3600")
@@ -37,6 +37,6 @@ public interface IfengNewsApi {
      * @return
      */
     @GET("ClientNews")
-    Observable<List<IfengNewsListBean>> queryIfengListObservable(
+    Observable<List<PhoenixNewsListBean>> queryPhoenixListObservable(
             @Query("action") String action);
 }

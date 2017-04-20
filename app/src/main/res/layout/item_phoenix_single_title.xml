@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     style="@style/AppCardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -9,27 +8,31 @@
     android:layout_marginBottom="4dp"
     card_view:cardCornerRadius="3dp">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/ifeng_image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            fresco:viewAspectRatio="2.8" />
 
         <TextView
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_rect_gradient_video_title"
-            android:paddingBottom="15dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="10dp"
-            android:textColor="@color/white"
-            android:textSize="@dimen/ifeng_title" />
-    </RelativeLayout>
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:minLines="2"
+            android:padding="5dp"
+            android:textColor="@color/Grey_900"
+            android:textSize="@dimen/phoenix_title" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="15dp">
+
+            <include layout="@layout/phoenix_bottom" />
+        </RelativeLayout>
+    </LinearLayout>
 </android.support.v7.widget.CardView>

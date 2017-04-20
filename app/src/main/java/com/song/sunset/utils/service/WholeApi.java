@@ -8,5 +8,5 @@ public class WholeApi {
 
     public static final String COMIC_BASE_URL = "http://app.u17.com/v3/appV3/android/phone/";
 
-    public static final String IFENG_NEWS_BASE_URL = "http://api.iclient.ifeng.com/";
+    public static final String PHOENIX_NEWS_BASE_URL = "http://api.iclient.ifeng.com/";
 }

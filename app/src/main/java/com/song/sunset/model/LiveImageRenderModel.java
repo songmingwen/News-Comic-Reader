@@ -2,9 +2,9 @@ package com.song.sunset.model;
 
 import android.support.v7.widget.RecyclerView;
 
-import com.song.sunset.beans.IfengChannelBean;
+import com.song.sunset.beans.PhoenixChannelBean;
 import com.song.sunset.holders.LiveImageViewHolder;
-import com.song.sunset.model.base.IfengBaseRenderModel;
+import com.song.sunset.model.base.PhoenixBaseRenderModel;
 import com.song.sunset.utils.DateTimeUtils;
 import com.song.sunset.utils.fresco.FrescoUtil;
 
@@ -14,17 +14,17 @@ import com.song.sunset.utils.fresco.FrescoUtil;
  * E-mail: z53520@qq.com
  */
 
-public class LiveImageRenderModel extends IfengBaseRenderModel {
+public class LiveImageRenderModel extends PhoenixBaseRenderModel {
 
     @Override
-    public void render(RecyclerView.ViewHolder holder, IfengChannelBean ifengChannelBean) {
+    public void render(RecyclerView.ViewHolder holder, PhoenixChannelBean phoenixChannelBean) {
         LiveImageViewHolder viewHolder = (LiveImageViewHolder) holder;
-        FrescoUtil.setFrescoImage(viewHolder.image, ifengChannelBean.getThumbnail());
-        viewHolder.title.setText(ifengChannelBean.getTitle());
-        viewHolder.tag.setText(IfengRenderModel.getLiveState(ifengChannelBean));
-        if (ifengChannelBean.getLiveExt() == null) {
+        FrescoUtil.setFrescoImage(viewHolder.image, phoenixChannelBean.getThumbnail());
+        viewHolder.title.setText(phoenixChannelBean.getTitle());
+        viewHolder.tag.setText(PhoenixRenderModel.getLiveState(phoenixChannelBean));
+        if (phoenixChannelBean.getLiveExt() == null) {
             return;
         }
-        viewHolder.time.setText(DateTimeUtils.getLiveTime(ifengChannelBean.getLiveExt().getStartTimeMillis()));
+        viewHolder.time.setText(DateTimeUtils.getLiveTime(phoenixChannelBean.getLiveExt().getStartTimeMillis()));
     }
 }

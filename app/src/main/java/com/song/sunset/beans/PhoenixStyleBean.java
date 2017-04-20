@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * E-mail: z53520@qq.com
  */
 
-public class IfengStyleBean implements Parcelable {
+public class PhoenixStyleBean implements Parcelable {
 
     //展示类型	recommend/bigimg/slides/normal
     private String type;
@@ -132,10 +132,10 @@ public class IfengStyleBean implements Parcelable {
         dest.writeString(this.sponsorLogo);
     }
 
-    public IfengStyleBean() {
+    public PhoenixStyleBean() {
     }
 
-    protected IfengStyleBean(Parcel in) {
+    protected PhoenixStyleBean(Parcel in) {
         this.type = in.readString();
         this.tag = in.readString();
         this.images = in.createStringArrayList();
@@ -148,15 +148,15 @@ public class IfengStyleBean implements Parcelable {
         this.sponsorLogo = in.readString();
     }
 
-    public static final Parcelable.Creator<IfengStyleBean> CREATOR = new Parcelable.Creator<IfengStyleBean>() {
+    public static final Parcelable.Creator<PhoenixStyleBean> CREATOR = new Parcelable.Creator<PhoenixStyleBean>() {
         @Override
-        public IfengStyleBean createFromParcel(Parcel source) {
-            return new IfengStyleBean(source);
+        public PhoenixStyleBean createFromParcel(Parcel source) {
+            return new PhoenixStyleBean(source);
         }
 
         @Override
-        public IfengStyleBean[] newArray(int size) {
-            return new IfengStyleBean[size];
+        public PhoenixStyleBean[] newArray(int size) {
+            return new PhoenixStyleBean[size];
         }
     };
 }

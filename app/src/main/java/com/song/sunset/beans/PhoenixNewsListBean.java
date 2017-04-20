@@ -11,7 +11,7 @@ import java.util.List;
  * E-mail: z53520@qq.com
  */
 
-public class IfengNewsListBean implements Parcelable {
+public class PhoenixNewsListBean implements Parcelable {
 
     private String listId;
     private String type;
@@ -19,7 +19,7 @@ public class IfengNewsListBean implements Parcelable {
     private int currentPage;
     private int totalPage;
     private int topsize;
-    private List<IfengChannelBean> item;
+    private List<PhoenixChannelBean> item;
 
     public String getListId() {
         return listId;
@@ -69,11 +69,11 @@ public class IfengNewsListBean implements Parcelable {
         this.topsize = topsize;
     }
 
-    public List<IfengChannelBean> getItem() {
+    public List<PhoenixChannelBean> getItem() {
         return item;
     }
 
-    public void setItem(List<IfengChannelBean> item) {
+    public void setItem(List<PhoenixChannelBean> item) {
         this.item = item;
     }
 
@@ -93,28 +93,28 @@ public class IfengNewsListBean implements Parcelable {
         dest.writeTypedList(this.item);
     }
 
-    public IfengNewsListBean() {
+    public PhoenixNewsListBean() {
     }
 
-    protected IfengNewsListBean(Parcel in) {
+    protected PhoenixNewsListBean(Parcel in) {
         this.listId = in.readString();
         this.type = in.readString();
         this.expiredTime = in.readInt();
         this.currentPage = in.readInt();
         this.totalPage = in.readInt();
         this.topsize = in.readInt();
-        this.item = in.createTypedArrayList(IfengChannelBean.CREATOR);
+        this.item = in.createTypedArrayList(PhoenixChannelBean.CREATOR);
     }
 
-    public static final Parcelable.Creator<IfengNewsListBean> CREATOR = new Parcelable.Creator<IfengNewsListBean>() {
+    public static final Parcelable.Creator<PhoenixNewsListBean> CREATOR = new Parcelable.Creator<PhoenixNewsListBean>() {
         @Override
-        public IfengNewsListBean createFromParcel(Parcel source) {
-            return new IfengNewsListBean(source);
+        public PhoenixNewsListBean createFromParcel(Parcel source) {
+            return new PhoenixNewsListBean(source);
         }
 
         @Override
-        public IfengNewsListBean[] newArray(int size) {
-            return new IfengNewsListBean[size];
+        public PhoenixNewsListBean[] newArray(int size) {
+            return new PhoenixNewsListBean[size];
         }
     };
 }

@@ -7,7 +7,7 @@ import android.os.Parcelable;
  * Created by Song on 2017/4/11 0011.
  * E-mail: z53520@qq.com
  */
-public class IfengSportLiveExt implements Parcelable {
+public class PhoenixSportLiveExt implements Parcelable {
 
     /**
      * matchid : 5342
@@ -264,10 +264,10 @@ public class IfengSportLiveExt implements Parcelable {
         dest.writeByte(this.sync ? (byte) 1 : (byte) 0);
     }
 
-    public IfengSportLiveExt() {
+    public PhoenixSportLiveExt() {
     }
 
-    protected IfengSportLiveExt(Parcel in) {
+    protected PhoenixSportLiveExt(Parcel in) {
         this.matchid = in.readString();
         this.title = in.readString();
         this.isOneTitle = in.readString();
@@ -292,15 +292,15 @@ public class IfengSportLiveExt implements Parcelable {
         this.sync = in.readByte() != 0;
     }
 
-    public static final Parcelable.Creator<IfengSportLiveExt> CREATOR = new Parcelable.Creator<IfengSportLiveExt>() {
+    public static final Parcelable.Creator<PhoenixSportLiveExt> CREATOR = new Parcelable.Creator<PhoenixSportLiveExt>() {
         @Override
-        public IfengSportLiveExt createFromParcel(Parcel source) {
-            return new IfengSportLiveExt(source);
+        public PhoenixSportLiveExt createFromParcel(Parcel source) {
+            return new PhoenixSportLiveExt(source);
         }
 
         @Override
-        public IfengSportLiveExt[] newArray(int size) {
-            return new IfengSportLiveExt[size];
+        public PhoenixSportLiveExt[] newArray(int size) {
+            return new PhoenixSportLiveExt[size];
         }
     };
 }

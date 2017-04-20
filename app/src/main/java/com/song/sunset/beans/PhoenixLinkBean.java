@@ -7,7 +7,7 @@ import android.os.Parcelable;
  * Created by Song on 2017/3/30 0030.
  * E-mail: z53520@qq.com
  */
-public class IfengLinkBean implements Parcelable {
+public class PhoenixLinkBean implements Parcelable {
 
     private String type;
     private String url;
@@ -49,24 +49,24 @@ public class IfengLinkBean implements Parcelable {
         dest.writeString(this.weburl);
     }
 
-    public IfengLinkBean() {
+    public PhoenixLinkBean() {
     }
 
-    protected IfengLinkBean(Parcel in) {
+    protected PhoenixLinkBean(Parcel in) {
         this.type = in.readString();
         this.url = in.readString();
         this.weburl = in.readString();
     }
 
-    public static final Parcelable.Creator<IfengLinkBean> CREATOR = new Parcelable.Creator<IfengLinkBean>() {
+    public static final Parcelable.Creator<PhoenixLinkBean> CREATOR = new Parcelable.Creator<PhoenixLinkBean>() {
         @Override
-        public IfengLinkBean createFromParcel(Parcel source) {
-            return new IfengLinkBean(source);
+        public PhoenixLinkBean createFromParcel(Parcel source) {
+            return new PhoenixLinkBean(source);
         }
 
         @Override
-        public IfengLinkBean[] newArray(int size) {
-            return new IfengLinkBean[size];
+        public PhoenixLinkBean[] newArray(int size) {
+            return new PhoenixLinkBean[size];
         }
     };
 }

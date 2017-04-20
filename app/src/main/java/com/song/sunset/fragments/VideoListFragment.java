@@ -19,7 +19,7 @@ import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.retrofit.RetrofitService;
-import com.song.sunset.utils.service.IfengNewsApi;
+import com.song.sunset.utils.service.PhoenixNewsApi;
 import com.song.sunset.utils.service.WholeApi;
 import com.song.sunset.views.LoadMoreRecyclerView;
 
@@ -147,8 +147,8 @@ public class VideoListFragment extends BaseFragment implements LoadingMoreListen
     }
 
     public void getDataFromRetrofit2(int page) {
-        Observable<List<VideoBean>> observable = RetrofitService.createApi(IfengNewsApi.class, WholeApi.IFENG_NEWS_BASE_URL).queryVideoObservable(page, "list", typeid);
-        RxUtil.ifengNewsSubscribe(observable, new RetrofitCallback<VideoBean>() {
+        Observable<List<VideoBean>> observable = RetrofitService.createApi(PhoenixNewsApi.class, WholeApi.PHOENIX_NEWS_BASE_URL).queryVideoObservable(page, "list", typeid);
+        RxUtil.phoenixNewsSubscribe(observable, new RetrofitCallback<VideoBean>() {
             @Override
             public void onSuccess(VideoBean videoBean) {
                 progressLayout.showContent();

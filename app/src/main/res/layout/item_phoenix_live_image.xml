@@ -15,7 +15,7 @@
         android:background="@drawable/shape_rect_gradient_video_title_reverse">
 
         <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/ifeng_image"
+            android:id="@+id/phoenix_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             fresco:viewAspectRatio="2.8" />
@@ -23,7 +23,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/ifeng_image"
+            android:layout_alignBottom="@id/phoenix_image"
             android:padding="5dp">
 
             <TextView
@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:textColor="@color/white"
-                android:textSize="@dimen/ifeng_title" />
+                android:textSize="@dimen/phoenix_title" />
 
             <TextView
                 android:id="@+id/tx_live_tag"
@@ -42,11 +42,11 @@
                 android:background="@drawable/shape_rect_circle_red"
                 android:paddingBottom="2dp"
                 android:paddingRight="7dp"
-                android:drawableLeft="@drawable/ifeng_play_white"
+                android:drawableLeft="@drawable/phoenix_play_white"
                 android:paddingTop="2dp"
                 android:drawablePadding="3dp"
                 android:textColor="@color/white"
-                android:textSize="@dimen/ifeng_des" />
+                android:textSize="@dimen/phoenix_des" />
 
             <TextView
                 android:id="@+id/tx_live_time"
@@ -57,7 +57,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_toRightOf="@id/tx_live_tag"
                 android:textColor="@color/white"
-                android:textSize="@dimen/ifeng_des" />
+                android:textSize="@dimen/phoenix_des" />
         </RelativeLayout>
     </RelativeLayout>
 </android.support.v7.widget.CardView>

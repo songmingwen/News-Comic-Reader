@@ -43,7 +43,7 @@ import master.flame.danmaku.ui.widget.DanmakuTextureView;
  * Created by Song on 2016/9/1 0001.
  * Email:z53520@qq.com
  */
-public class VideoActivity extends AppCompatActivity {
+public class PhoenixVideoActivity extends AppCompatActivity {
     public static final String TV_URL = "tv_url";
     public static final String TV_NAME = "tv_name";
     public static final String TV_COVER = "tv_cover";
@@ -164,7 +164,7 @@ public class VideoActivity extends AppCompatActivity {
                 .showThumbnail(new OnShowThumbnailListener() {
                     @Override
                     public void onShowThumbnail(ImageView ivThumbnail) {
-                        Glide.with(VideoActivity.this)
+                        Glide.with(PhoenixVideoActivity.this)
                                 .load(tvCover)
                                 .into(ivThumbnail);
                     }
@@ -243,7 +243,7 @@ public class VideoActivity extends AppCompatActivity {
     }
 
     public static void start(Context context, String tvUrl, String tvName, String cover) {
-        Intent intent = new Intent(context, VideoActivity.class);
+        Intent intent = new Intent(context, PhoenixVideoActivity.class);
         intent.putExtra(TV_NAME, tvName);
         intent.putExtra(TV_URL, tvUrl);
         intent.putExtra(TV_COVER, cover);

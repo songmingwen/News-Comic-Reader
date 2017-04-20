@@ -73,9 +73,9 @@
         <activity android:name=".activitys.TouchEventTestActivity" />
         <activity android:name=".activitys.TempTestActivity" />
         <activity android:name=".activitys.ComicDetailMVPActivity" />
-        <activity android:name=".activitys.IfengNewsActivity" />
+        <activity android:name=".activitys.PhoenixNewsActivity" />
         <activity
-            android:name=".activitys.VideoActivity"
+            android:name=".activitys.PhoenixVideoActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
 
         <meta-data

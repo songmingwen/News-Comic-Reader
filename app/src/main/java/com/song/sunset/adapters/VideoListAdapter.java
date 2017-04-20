@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.song.sunset.R;
-import com.song.sunset.activitys.VideoActivity;
+import com.song.sunset.activitys.PhoenixVideoActivity;
 import com.song.sunset.adapters.base.BaseRecyclerViewAdapter;
 import com.song.sunset.beans.VideoBean;
 import com.song.sunset.holders.VideoListViewHolder;
@@ -48,6 +48,6 @@ public class VideoListAdapter extends BaseRecyclerViewAdapter<VideoBean.ItemBean
 
     protected void onItemClick(View view, int position) {
         VideoBean.ItemBean bean = getData().get(position);
-        VideoActivity.start(context, bean.getVideo_url(), bean.getTitle(), bean.getImage());
+        PhoenixVideoActivity.start(context, bean.getVideo_url(), bean.getTitle(), bean.getImage());
     }
 }

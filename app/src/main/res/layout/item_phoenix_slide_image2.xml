@@ -22,7 +22,7 @@
             android:visibility="visible">
 
             <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/ifeng_image_1"
+                android:id="@+id/phoenix_image_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
@@ -36,14 +36,14 @@
                 android:orientation="vertical">
 
                 <com.facebook.drawee.view.SimpleDraweeView
-                    android:id="@+id/ifeng_image_2"
+                    android:id="@+id/phoenix_image_2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:scaleType="fitXY"
                     fresco:viewAspectRatio="1.35" />
 
                 <com.facebook.drawee.view.SimpleDraweeView
-                    android:id="@+id/ifeng_image_3"
+                    android:id="@+id/phoenix_image_3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
@@ -62,7 +62,7 @@
             android:paddingRight="10dp"
             android:paddingTop="10dp"
             android:textColor="@color/white"
-            android:textSize="@dimen/ifeng_title" />
+            android:textSize="@dimen/phoenix_title" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -70,7 +70,7 @@
             android:layout_below="@id/topic_thumbnail_big_left"
             android:layout_margin="5dp">
 
-            <include layout="@layout/ifeng_bottom" />
+            <include layout="@layout/phoenix_bottom" />
         </RelativeLayout>
     </RelativeLayout>
 </android.support.v7.widget.CardView>

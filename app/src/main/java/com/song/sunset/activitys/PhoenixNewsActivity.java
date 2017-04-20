@@ -27,17 +27,17 @@ import com.song.sunset.utils.loadingmanager.LoadingAndRetryManager;
  * E-mail: z53520@qq.com
  */
 
-public class IfengNewsActivity extends BaseActivity {
+public class PhoenixNewsActivity extends BaseActivity {
 
-    public static final String IFENG_NEWS_URL = "ifeng_news_url";
+    public static final String PHOENIX_NEWS_URL = "phoenix_news_url";
     private String url;
     private ProgressBar progressBar;
     private LoadingAndRetryManager mLoadingAndRetryManager;
     private WebView mWebView;
 
     public static void start(Context context, String url) {
-        Intent intent = new Intent(context, IfengNewsActivity.class);
-        intent.putExtra(IFENG_NEWS_URL, url);
+        Intent intent = new Intent(context, PhoenixNewsActivity.class);
+        intent.putExtra(PHOENIX_NEWS_URL, url);
         context.startActivity(intent);
     }
 
@@ -46,12 +46,12 @@ public class IfengNewsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         ScreenUtils.fullscreen(this, true);
         StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimary));
-        setContentView(R.layout.activity_ifeng_news_layout);
+        setContentView(R.layout.activity_phoenix_news_layout);
 
         mLoadingAndRetryManager = LoadingAndRetryManager.generate(this, null);
         mLoadingAndRetryManager.showLoading();
         if (getIntent() != null) {
-            url = getIntent().getStringExtra(IFENG_NEWS_URL);
+            url = getIntent().getStringExtra(PHOENIX_NEWS_URL);
         }
 
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
@@ -63,6 +63,14 @@ public class IfengNewsActivity extends BaseActivity {
             return;
         }
         mWebView.loadUrl(url);
+    }
+
+    @Override
+    public void onBackPressedSupport() {
+        if (mWebView != null && mWebView.canGoBack())
+            mWebView.goBack();
+        else
+            super.onBackPressedSupport();
     }
 
     @Override

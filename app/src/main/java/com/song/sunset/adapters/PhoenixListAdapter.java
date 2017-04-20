@@ -5,26 +5,22 @@ import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
 import com.song.sunset.adapters.base.BaseRVAdapterWithoutVH;
-import com.song.sunset.beans.IfengChannelBean;
-import com.song.sunset.model.base.BaseRenderModel;
+import com.song.sunset.beans.PhoenixChannelBean;
 import com.song.sunset.model.base.RecyclerViewAdapterModel;
-import com.song.sunset.model.IfengDefaultAdapterModel;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.song.sunset.model.PhoenixDefaultAdapterModel;
 
 /**
  * Created by Song on 2017/3/30 0030.
  * E-mail: z53520@qq.com
  */
-public class IfengListAdapter extends BaseRVAdapterWithoutVH<IfengChannelBean> {
+public class PhoenixListAdapter extends BaseRVAdapterWithoutVH<PhoenixChannelBean> {
 
     private Activity context;
-    private final RecyclerViewAdapterModel<IfengChannelBean> model;
+    private final RecyclerViewAdapterModel<PhoenixChannelBean> model;
 
-    public IfengListAdapter(Activity context) {
+    public PhoenixListAdapter(Activity context) {
         this.context = context;
-        model = new IfengDefaultAdapterModel();
+        model = new PhoenixDefaultAdapterModel();
     }
 
     @Override

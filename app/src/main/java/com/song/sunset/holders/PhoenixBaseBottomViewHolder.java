@@ -12,12 +12,12 @@ import com.song.sunset.R;
  * E-mail: z53520@qq.com
  */
 
-public class IfengBaseBottomViewHolder extends RecyclerView.ViewHolder {
+public class PhoenixBaseBottomViewHolder extends RecyclerView.ViewHolder {
 
     public TextView title, txSource, commentCount, picCount, updateTime;
     public SimpleDraweeView imgSource;
 
-    public IfengBaseBottomViewHolder(View itemView) {
+    public PhoenixBaseBottomViewHolder(View itemView) {
         super(itemView);
         title = (TextView) itemView.findViewById(R.id.title);
         txSource = (TextView) itemView.findViewById(R.id.tx_source);
