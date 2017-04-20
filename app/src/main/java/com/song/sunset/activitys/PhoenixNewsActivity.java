@@ -2,17 +2,20 @@ package com.song.sunset.activitys;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.webkit.GeolocationPermissions;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -34,6 +37,10 @@ public class PhoenixNewsActivity extends BaseActivity {
     private ProgressBar progressBar;
     private LoadingAndRetryManager mLoadingAndRetryManager;
     private WebView mWebView;
+    private FrameLayout video_fullView;// 全屏时视频加载view
+    private View xCustomView;
+    private WebChromeClient.CustomViewCallback xCustomViewCallback;
+    private WebChromeClientCompat xwebchromeclient;
 
     public static void start(Context context, String url) {
         Intent intent = new Intent(context, PhoenixNewsActivity.class);
@@ -47,6 +54,7 @@ public class PhoenixNewsActivity extends BaseActivity {
         ScreenUtils.fullscreen(this, true);
         StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimary));
         setContentView(R.layout.activity_phoenix_news_layout);
+        video_fullView = (FrameLayout) findViewById(R.id.video_fullView);
 
         mLoadingAndRetryManager = LoadingAndRetryManager.generate(this, null);
         mLoadingAndRetryManager.showLoading();
@@ -67,6 +75,10 @@ public class PhoenixNewsActivity extends BaseActivity {
 
     @Override
     public void onBackPressedSupport() {
+        if (inCustomView()) {
+            hideCustomView();
+            return ;
+        }
         if (mWebView != null && mWebView.canGoBack())
             mWebView.goBack();
         else
@@ -95,7 +107,9 @@ public class PhoenixNewsActivity extends BaseActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             webView.getSettings().setTextZoom(100);
         }
-        webView.setWebChromeClient(new WebChromeClientCompat());
+
+        xwebchromeclient = new WebChromeClientCompat();
+        webView.setWebChromeClient(xwebchromeclient);
         webView.setWebViewClient(new WebDetailClient());
     }
 
@@ -134,6 +148,41 @@ public class PhoenixNewsActivity extends BaseActivity {
             }
             super.onGeolocationPermissionsShowPrompt(origin, callback);
         }
+
+        @Override
+        public void onShowCustomView(View view, int requestedOrientation, CustomViewCallback callback) {
+            super.onShowCustomView(view, requestedOrientation, callback);
+        }
+
+        @Override
+        public void onShowCustomView(View view, CustomViewCallback callback) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            mWebView.setVisibility(View.INVISIBLE);
+            // 如果一个视图已经存在，那么立刻终止并新建一个
+            if (xCustomView != null) {
+                callback.onCustomViewHidden();
+                return;
+            }
+            video_fullView.addView(view);
+            xCustomView = view;
+            xCustomViewCallback = callback;
+            video_fullView.setVisibility(View.VISIBLE);
+        }
+
+        // 视频播放退出全屏会被调用的
+        @Override
+        public void onHideCustomView() {
+            if (xCustomView == null)// 不是全屏播放状态
+                return;
+
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            xCustomView.setVisibility(View.GONE);
+            video_fullView.removeView(xCustomView);
+            xCustomView = null;
+            video_fullView.setVisibility(View.GONE);
+            xCustomViewCallback.onCustomViewHidden();
+            mWebView.setVisibility(View.VISIBLE);
+        }
     }
 
     private class WebDetailClient extends WebViewClient {
@@ -164,5 +213,22 @@ public class PhoenixNewsActivity extends BaseActivity {
         public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
             handler.proceed();//解决https网址webView无法展示的问题
         }
+    }
+
+    /**
+     * 判断是否是全屏
+     *
+     * @return
+     */
+    public boolean inCustomView() {
+        return (xCustomView != null);
+    }
+
+    /**
+     * 全屏时按返加键执行退出全屏方法
+     */
+    public void hideCustomView() {
+        xwebchromeclient.onHideCustomView();
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 }
