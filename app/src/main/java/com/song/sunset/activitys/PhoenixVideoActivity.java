@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Random;
 
 import master.flame.danmaku.controller.IDanmakuView;
 import master.flame.danmaku.danmaku.model.BaseDanmaku;
@@ -142,13 +143,13 @@ public class PhoenixVideoActivity extends AppCompatActivity {
         ArrayList<DanmakuBean> list = new ArrayList<>();
         for (int x = 0; x < 1000; x++) {
             DanmakuBean bean = new DanmakuBean();
-            bean.setTime(x * 1000 / 2);
+            bean.setTime((int) (Math.random() * 500) * 1000 / 2);
             bean.setColor(Color.WHITE);
             bean.setType(BaseDanmaku.TYPE_SCROLL_RL);
             bean.setTextShadowColor(Color.BLACK);
             bean.setId(String.valueOf(x));
             bean.setTextSize(20f * (this.getResources().getDisplayMetrics().density - 0.6f));
-            bean.setContent("第" + x + "条弹幕666");
+            bean.setContent("弹幕来一发666");
             bean.setLive(true);
             list.add(bean);
         }
