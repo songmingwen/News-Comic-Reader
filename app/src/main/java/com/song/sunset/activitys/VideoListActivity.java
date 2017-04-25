@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.flyco.tablayout.SlidingTabLayout;
@@ -82,7 +83,7 @@ public class VideoListActivity extends AppCompatActivity {
             public void onSuccess(VideoBean videoBean) {
                 List<VideoBean.TypesBean> list = videoBean.getTypes();
 
-                List<VideoListHelperFragment> fragmentList = new ArrayList<>();
+                List<Fragment> fragmentList = new ArrayList<>();
 
                 List<String> titleList = new ArrayList<>();
 
@@ -91,6 +92,9 @@ public class VideoListActivity extends AppCompatActivity {
                     bundle.putString("chType", item.getChType());
                     bundle.putString("typeid", item.getId());
                     bundle.putString("name", item.getName());
+                    if (TextUtils.equals(item.getName(), "凤凰卫视") || TextUtils.equals(item.getName(), "音频") || TextUtils.equals(item.getName(), "直播")) {
+                        continue;
+                    }
                     VideoListHelperFragment fragment = (VideoListHelperFragment) Fragment.instantiate(VideoListActivity.this, VideoListHelperFragment.class.getName(), bundle);
                     fragmentList.add(fragment);
                     titleList.add(item.getName());

@@ -25,32 +25,35 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.song.sunset.R;
+import com.song.sunset.utils.ViewUtil;
 
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 import tv.danmaku.ijk.media.player.IjkMediaPlayer;
 
 /**
- * Created by tcking on 15/10/27.
+ * Created by Song on 2017/4/24
+ * Email:z53520@qq.com
  */
-public class GiraffePlayer {
+public class SimplePlayer {
 
-     //等比缩放,画面填满view。
+    //等比缩放,画面填满view。
     public static final String SCALE_TYPE_FIT_PARENT = "fitParent";
 
-     //等比缩放,直到画面宽高都等于或小于view的宽高。
+    //等比缩放,直到画面宽高都等于或小于view的宽高。
     public static final String SCALE_TYPE_FILL_PARENT = "fillParent";
 
-     //将视频的内容完整居中显示，如果视频大于view,则按比例缩视频直到完全显示在view中。
+    //将视频的内容完整居中显示，如果视频大于view,则按比例缩视频直到完全显示在view中。
     public static final String SCALE_TYPE_WRAP_CONTENT = "wrapContent";
 
-     //不剪裁,非等比例拉伸画面填满整个View
+    //不剪裁,非等比例拉伸画面填满整个View
     public static final String SCALE_TYPE_FIT_XY = "fitXY";
 
-     //不剪裁,非等比例拉伸画面到16:9,并完全显示在View中。
+    //不剪裁,非等比例拉伸画面到16:9,并完全显示在View中。
     public static final String SCALE_TYPE_16_9 = "16:9";
 
-     //不剪裁,非等比例拉伸画面到4:3,并完全显示在View中。
+    //不剪裁,非等比例拉伸画面到4:3,并完全显示在View中。
     public static final String SCALE_TYPE_4_3 = "4:3";
 
     private static final int MESSAGE_SHOW_PROGRESS = 1;
@@ -76,10 +79,9 @@ public class GiraffePlayer {
     private int status = STATUS_IDLE;
     private boolean isLive = false;//是否为直播
     private OrientationEventListener orientationEventListener;
-    final private int initHeight;
+    private int initHeight, initWidth;
     private int defaultTimeout = 3000;
     private int screenWidthPixels;
-
 
     private final View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
@@ -88,10 +90,7 @@ public class GiraffePlayer {
                 toggleFullScreen();
             } else if (v.getId() == R.id.app_video_play) {
                 doPauseResume();
-                show(defaultTimeout);
             } else if (v.getId() == R.id.app_video_replay_icon) {
-                videoView.seekTo(0);
-                videoView.start();
                 doPauseResume();
             } else if (v.getId() == R.id.app_video_finish) {
                 if (!fullScreenOnly && !portrait) {
@@ -148,29 +147,42 @@ public class GiraffePlayer {
         $.id(R.id.app_video_title).text(title);
     }
 
+    public void setCover(String cover) {
+        $.id(R.id.image_simple_video).visible();
+        $.id(R.id.image_simple_video).image(cover);
+    }
 
     private void doPauseResume() {
+        if (status == STATUS_ERROR) {
+            play(SimplePlayer.this.url);
+            return;
+        }
         if (status == STATUS_COMPLETED) {
             $.id(R.id.app_video_replay).gone();
             videoView.seekTo(0);
-            videoView.start();
+            start();
         } else if (videoView.isPlaying()) {
-            statusChange(STATUS_PAUSE);
-            videoView.pause();
+            pause();
         } else {
-            videoView.start();
+            start();
         }
         updatePausePlay();
+        show(defaultTimeout);
     }
 
     private void updatePausePlay() {
         if (videoView.isPlaying()) {
             $.id(R.id.app_video_play).image(R.drawable.ic_stop_white_24dp);
+            $.id(R.id.app_video_replay_icon).image(R.drawable.ic_pause_big);
         } else {
             $.id(R.id.app_video_play).image(R.drawable.ic_play_arrow_white_24dp);
+            if (status == STATUS_COMPLETED) {
+                $.id(R.id.app_video_replay_icon).image(R.drawable.simple_replay);
+            } else {
+                $.id(R.id.app_video_replay_icon).image(R.drawable.ic_play_circle_outline_white_36dp);
+            }
         }
     }
-
 
     /**
      * @param timeout
@@ -196,12 +208,24 @@ public class GiraffePlayer {
     }
 
     private void showBottomControl(boolean show) {
-        $.id(R.id.app_video_play).visibility(show ? View.VISIBLE : View.GONE);
-        $.id(R.id.app_video_currentTime).visibility(show ? View.VISIBLE : View.GONE);
-        $.id(R.id.app_video_endTime).visibility(show ? View.VISIBLE : View.GONE);
-        $.id(R.id.app_video_seekBar).visibility(show ? View.VISIBLE : View.GONE);
+        $.id(R.id.app_video_bottom_box).visibility(show ? View.VISIBLE : View.GONE);
+        if (status == STATUS_PLAYING) {
+            if (show) {
+                $.id(R.id.app_video_replay).visible();
+                $.id(R.id.app_video_replay_icon).image(R.drawable.ic_pause_big);
+            } else {
+                $.id(R.id.app_video_replay).gone();
+            }
+        } else if (status == STATUS_COMPLETED) {
+            $.id(R.id.app_video_replay).visible();
+            $.id(R.id.app_video_replay_icon).image(R.drawable.simple_replay);
+        } else if (status == STATUS_LOADING) {
+            $.id(R.id.app_video_replay).gone();
+        } else {
+            $.id(R.id.app_video_replay).visible();
+            $.id(R.id.app_video_replay_icon).image(R.drawable.ic_play_circle_outline_white_36dp);
+        }
     }
-
 
     private long duration;
     private boolean instantSeeking;
@@ -223,6 +247,7 @@ public class GiraffePlayer {
         @Override
         public void onStartTrackingTouch(SeekBar seekBar) {
             isDragging = true;
+            $.id(R.id.image_simple_video).gone();
             show(3600000);
             handler.removeMessages(MESSAGE_SHOW_PROGRESS);
             if (instantSeeking) {
@@ -234,6 +259,7 @@ public class GiraffePlayer {
         public void onStopTrackingTouch(SeekBar seekBar) {
             if (!instantSeeking) {
                 videoView.seekTo((int) ((duration * seekBar.getProgress() * 1.0) / 1000));
+                start();
             }
             show(defaultTimeout);
             handler.removeMessages(MESSAGE_SHOW_PROGRESS);
@@ -277,7 +303,7 @@ public class GiraffePlayer {
         }
     };
 
-    public GiraffePlayer(final Activity activity) {
+    public SimplePlayer(final Activity activity) {
         try {
             IjkMediaPlayer.loadLibrariesOnce(null);
             IjkMediaPlayer.native_profileBegin("libijkplayer.so");
@@ -289,10 +315,13 @@ public class GiraffePlayer {
         screenWidthPixels = activity.getResources().getDisplayMetrics().widthPixels;
         $ = new Query(activity);
         videoView = (IjkVideoView) activity.findViewById(R.id.video_view);
+        videoView.setVisibility(View.INVISIBLE);
         videoView.setOnCompletionListener(new IMediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(IMediaPlayer mp) {
                 statusChange(STATUS_COMPLETED);
+                $.id(R.id.image_simple_video).visible();
+                $.id(R.id.app_video_currentTime).text(generateTime(videoView.getDuration()));
                 oncomplete.run();
             }
         });
@@ -320,6 +349,8 @@ public class GiraffePlayer {
                         break;
                     case IMediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START:
                         statusChange(STATUS_PLAYING);
+                        videoView.setVisibility(View.VISIBLE);
+                        $.id(R.id.image_simple_video).gone();
                         break;
                 }
                 onInfoListener.onInfo(what, extra);
@@ -335,13 +366,12 @@ public class GiraffePlayer {
         $.id(R.id.app_video_finish).clicked(onClickListener);
         $.id(R.id.app_video_replay_icon).clicked(onClickListener);
 
-
         audioManager = (AudioManager) activity.getSystemService(Context.AUDIO_SERVICE);
         mMaxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
         final GestureDetector gestureDetector = new GestureDetector(activity, new PlayerGestureListener());
 
-
         View liveBox = activity.findViewById(R.id.app_video_box);
+        setVideoBoxSize(liveBox);
         liveBox.setClickable(true);
         liveBox.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -360,7 +390,6 @@ public class GiraffePlayer {
             }
         });
 
-
         orientationEventListener = new OrientationEventListener(activity) {
             @Override
             public void onOrientationChanged(int orientation) {
@@ -378,14 +407,31 @@ public class GiraffePlayer {
                 }
             }
         };
+        orientationEventListener.enable();
+
         if (fullScreenOnly) {
             activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         }
         portrait = getScreenOrientation() == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
-        initHeight = activity.findViewById(R.id.app_video_box).getLayoutParams().height;
+        ViewGroup.LayoutParams params = activity.findViewById(R.id.app_video_box).getLayoutParams();
+        if (params != null) {
+            initHeight = params.height;
+            initWidth = params.width;
+        }
         hideAll();
         if (!playerSupport) {
             showStatus(activity.getResources().getString(R.string.not_support));
+        }
+    }
+
+    private void setVideoBoxSize(View liveBox) {
+        if (liveBox == null) {
+            return;
+        }
+        ViewGroup.LayoutParams params = liveBox.getLayoutParams();
+        if (params != null) {
+            params.height = ViewUtil.getScreenWidth() * 9 / 16;
+            liveBox.setLayoutParams(params);
         }
     }
 
@@ -407,6 +453,7 @@ public class GiraffePlayer {
     private void statusChange(int newStatus) {
         status = newStatus;
         if (!isLive && newStatus == STATUS_COMPLETED) {
+            $.id(R.id.app_video_replay_icon).image(R.drawable.simple_replay);
             handler.removeMessages(MESSAGE_SHOW_PROGRESS);
             hideAll();
             $.id(R.id.app_video_replay).visible();
@@ -444,7 +491,7 @@ public class GiraffePlayer {
         pauseTime = System.currentTimeMillis();
         show(0);//把系统状态栏显示出来
         if (status == STATUS_PLAYING) {
-            videoView.pause();
+            pause();
             if (!isLive) {
                 currentPosition = videoView.getCurrentPosition();
             }
@@ -461,7 +508,7 @@ public class GiraffePlayer {
                     videoView.seekTo(currentPosition);
                 }
             }
-            videoView.start();
+            start();
         }
     }
 
@@ -478,10 +525,12 @@ public class GiraffePlayer {
                     tryFullScreen(!portrait);
                     if (portrait) {
                         $.id(R.id.app_video_box).height(initHeight, false);
+                        $.id(R.id.app_video_box).size(true, initWidth, false);
                     } else {
                         int heightPixels = activity.getResources().getDisplayMetrics().heightPixels;
                         int widthPixels = activity.getResources().getDisplayMetrics().widthPixels;
                         $.id(R.id.app_video_box).height(Math.min(heightPixels, widthPixels), false);
+                        $.id(R.id.app_video_box).size(true, ViewGroup.LayoutParams.MATCH_PARENT, false);
                     }
                     updateFullScreenButton();
                 }
@@ -517,7 +566,6 @@ public class GiraffePlayer {
                 activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
             }
         }
-
     }
 
     public void onDestroy() {
@@ -537,7 +585,7 @@ public class GiraffePlayer {
         if (playerSupport) {
             $.id(R.id.app_video_loading).visible();
             videoView.setVideoPath(url);
-            videoView.start();
+            start();
         }
     }
 
@@ -604,7 +652,6 @@ public class GiraffePlayer {
                     break;
             }
         }
-
         return orientation;
     }
 
@@ -649,7 +696,6 @@ public class GiraffePlayer {
         long duration = videoView.getDuration();
         long deltaMax = Math.min(100 * 1000, duration - position);
         long delta = (long) (deltaMax * percent);
-
 
         newPosition = delta + position;
         if (newPosition > duration) {
@@ -713,7 +759,11 @@ public class GiraffePlayer {
         }
 
         this.duration = duration;
-        $.id(R.id.app_video_currentTime).text(generateTime(position));
+        if (status == STATUS_COMPLETED) {
+            $.id(R.id.app_video_currentTime).text(generateTime(this.duration));
+        } else {
+            $.id(R.id.app_video_currentTime).text(generateTime(position));
+        }
         $.id(R.id.app_video_endTime).text(generateTime(this.duration));
         return position;
     }
@@ -730,7 +780,7 @@ public class GiraffePlayer {
     }
 
     private void updateFullScreenButton() {
-        if (getScreenOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+        if (getScreenOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE || getScreenOrientation() == ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE) {
             $.id(R.id.app_video_fullscreen).image(R.drawable.ic_fullscreen_exit_white_36dp);
         } else {
             $.id(R.id.app_video_fullscreen).image(R.drawable.ic_fullscreen_white_24dp);
@@ -778,10 +828,12 @@ public class GiraffePlayer {
     }
 
     public void start() {
+        statusChange(STATUS_PLAYING);
         videoView.start();
     }
 
     public void pause() {
+        statusChange(STATUS_PAUSE);
         videoView.pause();
     }
 
@@ -792,7 +844,6 @@ public class GiraffePlayer {
         }
         return false;
     }
-
 
     class Query {
         private final Activity activity;
@@ -810,6 +861,13 @@ public class GiraffePlayer {
         public Query image(int resId) {
             if (view instanceof ImageView) {
                 ((ImageView) view).setImageResource(resId);
+            }
+            return this;
+        }
+
+        public Query image(String url) {
+            if (view instanceof SimpleDraweeView) {
+                ((SimpleDraweeView) view).setImageURI(url);
             }
             return this;
         }
@@ -857,26 +915,18 @@ public class GiraffePlayer {
         }
 
         private void size(boolean width, int n, boolean dip) {
-
             if (view != null) {
-
                 ViewGroup.LayoutParams lp = view.getLayoutParams();
-
-
                 if (n > 0 && dip) {
                     n = dip2pixel(activity, n);
                 }
-
                 if (width) {
                     lp.width = n;
                 } else {
                     lp.height = n;
                 }
-
                 view.setLayoutParams(lp);
-
             }
-
         }
 
         public void height(int height, boolean dip) {
@@ -893,7 +943,6 @@ public class GiraffePlayer {
             DisplayMetrics metrics = resources.getDisplayMetrics();
             float dp = n / (metrics.densityDpi / 160f);
             return dp;
-
         }
     }
 
@@ -915,7 +964,6 @@ public class GiraffePlayer {
         public boolean onDown(MotionEvent e) {
             firstTouch = true;
             return super.onDown(e);
-
         }
 
         /**
@@ -931,7 +979,6 @@ public class GiraffePlayer {
                 volumeControl = mOldX > screenWidthPixels * 0.5f;
                 firstTouch = false;
             }
-
             if (toSeek) {
                 if (!isLive) {
                     onProgressSlide(-deltaX / videoView.getWidth());
@@ -943,10 +990,7 @@ public class GiraffePlayer {
                 } else {
                     onBrightnessSlide(percent);
                 }
-
-
             }
-
             return super.onScroll(e1, e2, distanceX, distanceY);
         }
 
@@ -976,7 +1020,7 @@ public class GiraffePlayer {
      * @return
      */
     public boolean isPlaying() {
-        return videoView != null ? videoView.isPlaying() : false;
+        return videoView != null && videoView.isPlaying();
     }
 
     public void stop() {
@@ -988,7 +1032,7 @@ public class GiraffePlayer {
      *
      * @param msec millisecond
      */
-    public GiraffePlayer seekTo(int msec, boolean showControlPanle) {
+    public SimplePlayer seekTo(int msec, boolean showControlPanle) {
         videoView.seekTo(msec);
         if (showControlPanle) {
             show(defaultTimeout);
@@ -996,7 +1040,7 @@ public class GiraffePlayer {
         return this;
     }
 
-    public GiraffePlayer forward(float percent) {
+    public SimplePlayer forward(float percent) {
         if (isLive || percent > 1 || percent < -1) {
             return this;
         }
@@ -1020,7 +1064,7 @@ public class GiraffePlayer {
         return videoView.getDuration();
     }
 
-    public GiraffePlayer playInFullScreen(boolean fullScreen) {
+    public SimplePlayer playInFullScreen(boolean fullScreen) {
         if (fullScreen) {
             activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
             updateFullScreenButton();
@@ -1029,7 +1073,7 @@ public class GiraffePlayer {
     }
 
     public void toggleFullScreen() {
-        if (getScreenOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+        if (getScreenOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE || getScreenOrientation() == ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE) {
             activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         } else {
             activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -1049,22 +1093,22 @@ public class GiraffePlayer {
         void onInfo(int what, int extra);
     }
 
-    public GiraffePlayer onError(OnErrorListener onErrorListener) {
+    public SimplePlayer onError(OnErrorListener onErrorListener) {
         this.onErrorListener = onErrorListener;
         return this;
     }
 
-    public GiraffePlayer onComplete(Runnable complete) {
+    public SimplePlayer onComplete(Runnable complete) {
         this.oncomplete = complete;
         return this;
     }
 
-    public GiraffePlayer onInfo(OnInfoListener onInfoListener) {
+    public SimplePlayer onInfo(OnInfoListener onInfoListener) {
         this.onInfoListener = onInfoListener;
         return this;
     }
 
-    public GiraffePlayer onControlPanelVisibilityChang(OnControlPanelVisibilityChangeListener listener) {
+    public SimplePlayer onControlPanelVisibilityChang(OnControlPanelVisibilityChangeListener listener) {
         this.onControlPanelVisibilityChangeListener = listener;
         return this;
     }
@@ -1075,23 +1119,24 @@ public class GiraffePlayer {
      * @param isLive
      * @return
      */
-    public GiraffePlayer live(boolean isLive) {
+    public SimplePlayer live(boolean isLive) {
         this.isLive = isLive;
         return this;
     }
 
     /**
      * 切换视频填充状态
+     *
      * @return
      */
-    public GiraffePlayer toggleAspectRatio() {
+    public SimplePlayer toggleAspectRatio() {
         if (videoView != null) {
             videoView.toggleAspectRatio();
         }
         return this;
     }
 
-    public GiraffePlayer onControlPanelVisibilityChange(OnControlPanelVisibilityChangeListener listener) {
+    public SimplePlayer onControlPanelVisibilityChange(OnControlPanelVisibilityChangeListener listener) {
         this.onControlPanelVisibilityChangeListener = listener;
         return this;
     }

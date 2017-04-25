@@ -1,10 +1,5 @@
 package com.song.sunset.activitys;
 
-/**
- * Created by songmw3 on 2017/1/3.
- * E-mail: z53520@qq.com
- */
-
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -12,24 +7,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-import com.dou361.ijkplayer.listener.OnShowThumbnailListener;
-import com.dou361.ijkplayer.widget.PlayStateParams;
-import com.dou361.ijkplayer.widget.PlayerView;
 import com.song.sunset.R;
 import com.song.sunset.beans.DanmakuBean;
+import com.song.sunset.utils.StringUtils;
 import com.song.sunset.utils.danmaku.SongDanmakuParser;
+import com.song.video.SimplePlayer;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Random;
 
 import master.flame.danmaku.controller.IDanmakuView;
 import master.flame.danmaku.danmaku.model.BaseDanmaku;
@@ -45,16 +36,23 @@ import master.flame.danmaku.ui.widget.DanmakuTextureView;
  * Email:z53520@qq.com
  */
 public class PhoenixVideoActivity extends AppCompatActivity {
+
     public static final String TV_URL = "tv_url";
     public static final String TV_NAME = "tv_name";
     public static final String TV_COVER = "tv_cover";
-    private String tvUrl;
-    private String tvName;
-    private String tvCover;
-    private PlayerView player;
+    private String tvUrl, tvName, tvCover;
     private IDanmakuView mDanmakuView;//弹幕view
     private DanmakuContext mDanmakuContext;
     private BaseDanmakuParser mParser;
+    private SimplePlayer player;
+
+    public static void start(Context context, String tvUrl, String tvName, String cover) {
+        Intent intent = new Intent(context, PhoenixVideoActivity.class);
+        intent.putExtra(TV_NAME, tvName);
+        intent.putExtra(TV_URL, tvUrl);
+        intent.putExtra(TV_COVER, cover);
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +60,9 @@ public class PhoenixVideoActivity extends AppCompatActivity {
 
         getExtra();
 
-        View rootView = LayoutInflater.from(this).inflate(R.layout.video_detail_layout, null);
-        setContentView(rootView);
+        setContentView(R.layout.video_detail_layout);
 
-        startVideo(rootView);
+        startVideo();
 
         initDanmakuContext();
         initDanmakuView();
@@ -138,40 +135,13 @@ public class PhoenixVideoActivity extends AppCompatActivity {
         mDanmakuView.enableDanmakuDrawingCache(true);
     }
 
-    @NonNull
-    private ArrayList<DanmakuBean> getDanmakuList() {
-        ArrayList<DanmakuBean> list = new ArrayList<>();
-        for (int x = 0; x < 1000; x++) {
-            DanmakuBean bean = new DanmakuBean();
-            bean.setTime((int) (Math.random() * 500) * 1000 / 2);
-            bean.setColor(Color.WHITE);
-            bean.setType(BaseDanmaku.TYPE_SCROLL_RL);
-            bean.setTextShadowColor(Color.BLACK);
-            bean.setId(String.valueOf(x));
-            bean.setTextSize(20f * (this.getResources().getDisplayMetrics().density - 0.6f));
-            bean.setContent("弹幕来一发666");
-            bean.setLive(true);
-            list.add(bean);
-        }
-        return list;
-    }
-
-    private void startVideo(View rootView) {
-        player = new PlayerView(this, rootView)
-                .setTitle(tvName)
-                .setScaleType(PlayStateParams.fitparent)
-                .hideMenu(true)
-                .forbidTouch(false)
-                .showThumbnail(new OnShowThumbnailListener() {
-                    @Override
-                    public void onShowThumbnail(ImageView ivThumbnail) {
-                        Glide.with(PhoenixVideoActivity.this)
-                                .load(tvCover)
-                                .into(ivThumbnail);
-                    }
-                })
-                .setPlaySource(tvUrl)
-                .startPlay();
+    private void startVideo() {
+        if (TextUtils.isEmpty(tvUrl)) return;
+        player = new SimplePlayer(this);
+        player.setTitle(tvName);
+        player.setCover(tvCover);
+        String realUrl = tvUrl.replace("http", "https");
+        player.play(realUrl);
     }
 
     private void getExtra() {
@@ -243,14 +213,6 @@ public class PhoenixVideoActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    public static void start(Context context, String tvUrl, String tvName, String cover) {
-        Intent intent = new Intent(context, PhoenixVideoActivity.class);
-        intent.putExtra(TV_NAME, tvName);
-        intent.putExtra(TV_URL, tvUrl);
-        intent.putExtra(TV_COVER, cover);
-        context.startActivity(intent);
-    }
-
     public void addDanmaku(View view) {
         addDanmaku(true);
     }
@@ -278,5 +240,23 @@ public class PhoenixVideoActivity extends AppCompatActivity {
 //        danmaku.underlineColor = Color.GREEN;
 //        danmaku.borderColor = Color.GREEN;
         mDanmakuView.addDanmaku(danmaku);
+    }
+
+    @NonNull
+    private ArrayList<DanmakuBean> getDanmakuList() {
+        ArrayList<DanmakuBean> list = new ArrayList<>();
+        for (int x = 0; x < 1000; x++) {
+            DanmakuBean bean = new DanmakuBean();
+            bean.setTime((int) (Math.random() * 500) * 1000 / 2);
+            bean.setColor(Color.WHITE);
+            bean.setType(BaseDanmaku.TYPE_SCROLL_RL);
+            bean.setTextShadowColor(Color.BLACK);
+            bean.setId(String.valueOf(x));
+            bean.setTextSize(20f * (this.getResources().getDisplayMetrics().density - 0.6f));
+            bean.setContent("弹幕来一发666");
+            bean.setLive(true);
+            list.add(bean);
+        }
+        return list;
     }
 }

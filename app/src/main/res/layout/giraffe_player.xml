@@ -1,17 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    android:id="@+id/app_video_box"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#000"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/app_video_box"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#000">
 
-    <tcking.github.com.giraffeplayer.IjkVideoView
+    <com.song.video.IjkVideoView
         android:id="@+id/video_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
 
+    <master.flame.danmaku.ui.widget.DanmakuTextureView
+        android:id="@+id/danmaku_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/image_simple_video"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        fresco:placeholderImage="@mipmap/logo"
+        fresco:placeholderImageScaleType="center"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,11 +34,12 @@
 
         <LinearLayout
             android:id="@+id/app_video_replay"
-            android:gravity="center"
-            android:visibility="visible"
-            android:background="#B3616161"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/color_transparent_40"
+            android:gravity="center"
+            android:visibility="visible">
+
             <ImageView
                 android:id="@+id/app_video_replay_icon"
                 android:layout_width="wrap_content"
@@ -149,7 +164,7 @@
             android:id="@+id/app_video_status"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/background_dark"
+            android:background="@color/color_transparent_40"
             android:gravity="center"
             android:visibility="visible">
 
@@ -157,6 +172,7 @@
                 android:id="@+id/app_video_status_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
                 android:text="@string/small_problem"
                 android:textColor="@android:color/white"
                 android:textSize="14dp"/>
@@ -177,7 +193,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:padding="8dp"
+            android:background="@drawable/shape_rect_gradient_video_title_reverse"
             android:visibility="visible">
 
             <ImageView
@@ -189,15 +205,15 @@
                 android:src="@drawable/ic_play_arrow_white_24dp"/>
 
             <TextView
-                android:text="06:21"
                 android:id="@+id/app_video_currentTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@+id/app_video_play"
+                android:text="00:00"
                 android:textColor="@android:color/white"
-                android:textSize="12dp"
+                android:textSize="12sp"
                 />
 
             <SeekBar
@@ -219,32 +235,33 @@
                 android:layout_toLeftOf="@+id/app_video_fullscreen"
                 android:text="10:10"
                 android:textColor="@android:color/white"
-                android:textSize="12dp"
+                android:textSize="12sp"
                 />
+
             <ImageView
-                android:layout_centerVertical="true"
                 android:id="@+id/app_video_fullscreen"
-                android:paddingLeft="8dp"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/ic_fullscreen_white_24dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="8dp"
+                android:src="@drawable/ic_fullscreen_white_24dp"/>
         </RelativeLayout>
-
     </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/app_video_top_box"
-        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_rect_gradient_video_title"
         android:gravity="center_vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/app_video_finish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="2dp"
             android:src="@drawable/ic_chevron_left_white_36dp"/>
 
         <TextView
