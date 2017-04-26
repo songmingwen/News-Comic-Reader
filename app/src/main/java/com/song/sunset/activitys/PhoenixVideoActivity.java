@@ -113,6 +113,9 @@ public class PhoenixVideoActivity extends AppCompatActivity {
         if (player != null) {
             player.onConfigurationChanged(newConfig);
         }
+        if (mDanmakuContext == null || mDanmakuView == null) {
+            return;
+        }
         if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
             mDanmakuView.getConfig().setDanmakuMargin(20);
         } else if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
