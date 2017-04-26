@@ -13,7 +13,6 @@ import android.view.View;
 
 import com.song.sunset.R;
 import com.song.sunset.beans.DanmakuBean;
-import com.song.sunset.utils.StringUtils;
 import com.song.sunset.utils.danmaku.SongDanmakuParser;
 import com.song.video.SimplePlayer;
 
@@ -30,6 +29,7 @@ import master.flame.danmaku.danmaku.model.IDisplayer;
 import master.flame.danmaku.danmaku.model.android.DanmakuContext;
 import master.flame.danmaku.danmaku.parser.BaseDanmakuParser;
 import master.flame.danmaku.ui.widget.DanmakuTextureView;
+import master.flame.danmaku.ui.widget.DanmakuView;
 
 /**
  * Created by Song on 2016/9/1 0001.
@@ -41,7 +41,7 @@ public class PhoenixVideoActivity extends AppCompatActivity {
     public static final String TV_NAME = "tv_name";
     public static final String TV_COVER = "tv_cover";
     private String tvUrl, tvName, tvCover;
-    private IDanmakuView mDanmakuView;//弹幕view
+    private DanmakuView mDanmakuView;//弹幕view
     private DanmakuContext mDanmakuContext;
     private BaseDanmakuParser mParser;
     private SimplePlayer player;
@@ -54,6 +54,14 @@ public class PhoenixVideoActivity extends AppCompatActivity {
         context.startActivity(intent);
     }
 
+    private void getExtra() {
+        if (getIntent() != null) {
+            tvName = getIntent().getStringExtra(TV_NAME);
+            tvUrl = getIntent().getStringExtra(TV_URL);
+            tvCover = getIntent().getStringExtra(TV_COVER);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,93 +71,6 @@ public class PhoenixVideoActivity extends AppCompatActivity {
         setContentView(R.layout.video_detail_layout);
 
         startVideo();
-
-        initDanmakuContext();
-        initDanmakuView();
-
-    }
-
-    private void initDanmakuContext() {
-        // 设置最大显示行数
-        HashMap<Integer, Integer> maxLinesPair = new HashMap<Integer, Integer>();
-        maxLinesPair.put(BaseDanmaku.TYPE_SCROLL_RL, 5); // 滚动弹幕最大显示5行
-        // 设置是否禁止重叠
-        HashMap<Integer, Boolean> overlappingEnablePair = new HashMap<Integer, Boolean>();
-        overlappingEnablePair.put(BaseDanmaku.TYPE_SCROLL_RL, true);
-        overlappingEnablePair.put(BaseDanmaku.TYPE_FIX_TOP, true);
-
-        mDanmakuContext = DanmakuContext.create();
-        mDanmakuContext.setDanmakuStyle(IDisplayer.DANMAKU_STYLE_SHADOW, 3)
-                .setDuplicateMergingEnabled(false)
-                .setScrollSpeedFactor(1.2f)
-                .setScaleTextSize(1.2f)
-//                .setCacheStuffer(new SpannedCacheStuffer(), mCacheStufferAdapter) // 图文混排使用SpannedCacheStuffer
-//                .setCacheStuffer(new BackgroundCacheStuffer())  // 绘制背景使用BackgroundCacheStuffer
-                .setMaximumLines(maxLinesPair)
-                .preventOverlapping(overlappingEnablePair).setDanmakuMargin(40);
-    }
-
-    private void initDanmakuView() {
-        mDanmakuView = (DanmakuTextureView) findViewById(R.id.danmaku_view);
-        mParser = new SongDanmakuParser(getDanmakuList(), mDanmakuContext);
-        mDanmakuView.setCallback(new master.flame.danmaku.controller.DrawHandler.Callback() {
-            @Override
-            public void updateTimer(DanmakuTimer timer) {
-            }
-
-            @Override
-            public void drawingFinished() {
-
-            }
-
-            @Override
-            public void danmakuShown(BaseDanmaku danmaku) {
-
-            }
-
-            @Override
-            public void prepared() {
-                mDanmakuView.start();
-            }
-        });
-        mDanmakuView.setOnDanmakuClickListener(new IDanmakuView.OnDanmakuClickListener() {
-
-            @Override
-            public boolean onDanmakuClick(IDanmakus danmakus) {
-                Log.d("DFM", "onDanmakuClick: danmakus size:" + danmakus.size());
-                BaseDanmaku latest = danmakus.last();
-                if (null != latest) {
-                    Log.d("DFM", "onDanmakuClick: text of latest danmaku:" + latest.text);
-                    return true;
-                }
-                return false;
-            }
-
-            @Override
-            public boolean onViewClick(IDanmakuView view) {
-                return false;
-            }
-        });
-        mDanmakuView.prepare(mParser, mDanmakuContext);
-        mDanmakuView.showFPS(true);
-        mDanmakuView.enableDanmakuDrawingCache(true);
-    }
-
-    private void startVideo() {
-        if (TextUtils.isEmpty(tvUrl)) return;
-        player = new SimplePlayer(this);
-        player.setTitle(tvName);
-        player.setCover(tvCover);
-        String realUrl = tvUrl.replace("http", "https");
-        player.play(realUrl);
-    }
-
-    private void getExtra() {
-        if (getIntent() != null) {
-            tvName = getIntent().getStringExtra(TV_NAME);
-            tvUrl = getIntent().getStringExtra(TV_URL);
-            tvCover = getIntent().getStringExtra(TV_COVER);
-        }
     }
 
     @Override
@@ -197,12 +118,6 @@ public class PhoenixVideoActivity extends AppCompatActivity {
         } else if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             mDanmakuView.getConfig().setDanmakuMargin(40);
         }
-//        //屏幕旋转隐藏或显示状态栏
-//        if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {//横屏
-//            ScreenUtils.fullscreen(this, true);
-//        } else if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {//竖屏
-//            ScreenUtils.fullscreen(this, false);
-//        }
     }
 
     @Override
@@ -213,8 +128,99 @@ public class PhoenixVideoActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
+    private void startVideo() {
+        if (TextUtils.isEmpty(tvUrl)) return;
+        player = new SimplePlayer(this);
+        player.setTitle(tvName);
+        player.setCover(tvCover);
+        player.play(tvUrl);
+    }
+
     public void addDanmaku(View view) {
-        addDanmaku(true);
+        if (mDanmakuContext == null || mDanmakuView == null) {
+            initDanmakuContext();
+            initDanmakuView();
+        } else {
+            if (!mDanmakuView.isShown()) {
+                mDanmakuView.show();
+            } else {
+                addDanmaku(true);
+            }
+        }
+    }
+
+    public void closeDanmaku(View view) {
+        if (mDanmakuContext != null || mDanmakuView != null) {
+            if (mDanmakuView.isShown()) {
+                mDanmakuView.hide();
+            }
+        }
+    }
+
+    private void initDanmakuContext() {
+        // 设置最大显示行数
+        HashMap<Integer, Integer> maxLinesPair = new HashMap<Integer, Integer>();
+        maxLinesPair.put(BaseDanmaku.TYPE_SCROLL_RL, 5); // 滚动弹幕最大显示5行
+        // 设置是否禁止重叠
+        HashMap<Integer, Boolean> overlappingEnablePair = new HashMap<Integer, Boolean>();
+        overlappingEnablePair.put(BaseDanmaku.TYPE_SCROLL_RL, true);
+        overlappingEnablePair.put(BaseDanmaku.TYPE_FIX_TOP, true);
+
+        mDanmakuContext = DanmakuContext.create();
+        mDanmakuContext.setDanmakuStyle(IDisplayer.DANMAKU_STYLE_SHADOW, 3)
+                .setDuplicateMergingEnabled(false)
+                .setScrollSpeedFactor(1.2f)
+                .setScaleTextSize(1.2f)
+//                .setCacheStuffer(new SpannedCacheStuffer(), mCacheStufferAdapter) // 图文混排使用SpannedCacheStuffer
+//                .setCacheStuffer(new BackgroundCacheStuffer())  // 绘制背景使用BackgroundCacheStuffer
+                .setMaximumLines(maxLinesPair)
+                .preventOverlapping(overlappingEnablePair).setDanmakuMargin(40);
+    }
+
+    private void initDanmakuView() {
+        mDanmakuView = (DanmakuView) findViewById(R.id.danmaku_view);
+        mParser = new SongDanmakuParser(getDanmakuList(), mDanmakuContext);
+        mDanmakuView.setCallback(new master.flame.danmaku.controller.DrawHandler.Callback() {
+            @Override
+            public void updateTimer(DanmakuTimer timer) {
+            }
+
+            @Override
+            public void drawingFinished() {
+
+            }
+
+            @Override
+            public void danmakuShown(BaseDanmaku danmaku) {
+
+            }
+
+            @Override
+            public void prepared() {
+                mDanmakuView.start();
+            }
+        });
+        mDanmakuView.setOnDanmakuClickListener(new IDanmakuView.OnDanmakuClickListener() {
+
+            @Override
+            public boolean onDanmakuClick(IDanmakus danmakus) {
+                Log.d("DFM", "onDanmakuClick: danmakus size:" + danmakus.size());
+                BaseDanmaku latest = danmakus.last();
+                if (null != latest) {
+                    Log.d("DFM", "onDanmakuClick: text of latest danmaku:" + latest.text);
+                    return true;
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onViewClick(IDanmakuView view) {
+                return false;
+            }
+        });
+        mDanmakuView.prepare(mParser, mDanmakuContext);
+//        mDanmakuView.showFPS(true);
+        mDanmakuView.enableDanmakuDrawingCache(true);
     }
 
     private void addDanmaku(boolean islive) {

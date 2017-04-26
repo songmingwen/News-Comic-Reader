@@ -1,23 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/app_video_box"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_simple_video_control_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000">
-
-    <com.song.video.IjkVideoView
-        android:id="@+id/video_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
-
-    <master.flame.danmaku.ui.widget.DanmakuTextureView
-        android:id="@+id/danmaku_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"/>
+    tools:showIn="@layout/simple_player">
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/image_simple_video"

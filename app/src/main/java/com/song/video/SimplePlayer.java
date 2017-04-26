@@ -372,8 +372,10 @@ public class SimplePlayer {
 
         View liveBox = activity.findViewById(R.id.app_video_box);
         setVideoBoxSize(liveBox);
-        liveBox.setClickable(true);
-        liveBox.setOnTouchListener(new View.OnTouchListener() {
+
+        View controlBox = activity.findViewById(R.id.layout_simple_video_control_content);
+        controlBox.setClickable(true);
+        controlBox.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if (gestureDetector.onTouchEvent(motionEvent))
@@ -385,7 +387,6 @@ public class SimplePlayer {
                         endGesture();
                         break;
                 }
-
                 return false;
             }
         });
@@ -957,6 +958,7 @@ public class SimplePlayer {
         @Override
         public boolean onDoubleTap(MotionEvent e) {
 //            videoView.toggleAspectRatio();
+            toggleFullScreen();
             return super.onDoubleTap(e);
         }
 
