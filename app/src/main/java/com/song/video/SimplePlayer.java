@@ -840,7 +840,9 @@ public class SimplePlayer {
     }
 
     public boolean onBackPressed() {
-        if (!fullScreenOnly && getScreenOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+        if (!fullScreenOnly &&
+                (getScreenOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE ||
+                        getScreenOrientation() == ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE)) {
             activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             return true;
         }
