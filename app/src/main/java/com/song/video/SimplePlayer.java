@@ -153,7 +153,6 @@ public class SimplePlayer {
     }
 
     private void doPauseResume() {
-        $.id(R.id.image_simple_video).gone();
         if (status == STATUS_ERROR) {
             play(SimplePlayer.this.url);
             return;
@@ -164,8 +163,10 @@ public class SimplePlayer {
             start();
         } else if (videoView.isPlaying()) {
             pause();
+            $.id(R.id.image_simple_video).gone();
         } else {
             start();
+            $.id(R.id.image_simple_video).gone();
         }
         updatePausePlay();
         show(defaultTimeout);
@@ -248,7 +249,6 @@ public class SimplePlayer {
         @Override
         public void onStartTrackingTouch(SeekBar seekBar) {
             isDragging = true;
-            $.id(R.id.image_simple_video).gone();
             show(3600000);
             handler.removeMessages(MESSAGE_SHOW_PROGRESS);
             if (instantSeeking) {
@@ -342,6 +342,7 @@ public class SimplePlayer {
                         statusChange(STATUS_LOADING);
                         break;
                     case IMediaPlayer.MEDIA_INFO_BUFFERING_END:
+                        $.id(R.id.image_simple_video).gone();
                         statusChange(STATUS_PLAYING);
                         break;
                     case IMediaPlayer.MEDIA_INFO_NETWORK_BANDWIDTH:
