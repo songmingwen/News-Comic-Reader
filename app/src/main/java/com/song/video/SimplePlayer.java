@@ -153,6 +153,7 @@ public class SimplePlayer {
     }
 
     private void doPauseResume() {
+        $.id(R.id.image_simple_video).gone();
         if (status == STATUS_ERROR) {
             play(SimplePlayer.this.url);
             return;
