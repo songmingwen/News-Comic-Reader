@@ -18,19 +18,14 @@
             android:id="@+id/nav_collection"
             android:icon="@drawable/icon_comic"
             android:title="收藏漫画" />
+        <item
+            android:id="@+id/nav_map"
+            android:icon="@drawable/news"
+            android:title="凤凰新闻" />
+        <item
+            android:id="@+id/nav_video"
+            android:icon="@drawable/icon_video"
+            android:title="视频播放" />
     </group>
-
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_map"
-                android:icon="@drawable/news"
-                android:title="凤凰新闻" />
-            <item
-                android:id="@+id/nav_video"
-                android:icon="@drawable/icon_video"
-                android:title="视频播放" />
-        </menu>
-    </item>
 
 </menu>

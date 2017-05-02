@@ -51,11 +51,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         initDrawer();
         initTimePicker();
         initOptionsPicker();
-
-        switchFragment(MVPComicListFragment.class.getName(), R.id.activity_framelayout_main);
-        toolbar.setTitle("更新漫画");
-
         setUpListener();
+        switchFragmentDelay(PhoenixListFragment.class.getName(), "凤凰新闻");
     }
 
     @Override
@@ -75,6 +72,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+        navigationView.setCheckedItem(R.id.nav_map);
     }
 
     private void setUpListener() {

@@ -123,6 +123,7 @@ public class PhoenixNewsActivity extends BaseActivity {
         settings.setLoadWithOverviewMode(true);
         settings.setUseWideViewPort(true);
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
+        settings.setDomStorageEnabled(true);
     }
 
     private class WebChromeClientCompat extends WebChromeClient {

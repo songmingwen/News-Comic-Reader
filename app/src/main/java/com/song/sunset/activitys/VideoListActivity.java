@@ -14,6 +14,7 @@ import com.song.sunset.R;
 import com.song.sunset.adapters.RankingPagerAdapter;
 import com.song.sunset.beans.VideoBean;
 import com.song.sunset.fragments.VideoListHelperFragment;
+import com.song.sunset.fragments.VideoListPlayFragment;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.loadingmanager.LoadingAndRetryManager;
 import com.song.sunset.utils.loadingmanager.OnLoadingAndRetryListener;
@@ -95,9 +96,15 @@ public class VideoListActivity extends AppCompatActivity {
                     if (TextUtils.equals(item.getName(), "凤凰卫视") || TextUtils.equals(item.getName(), "音频") || TextUtils.equals(item.getName(), "直播")) {
                         continue;
                     }
-                    VideoListHelperFragment fragment = (VideoListHelperFragment) Fragment.instantiate(VideoListActivity.this, VideoListHelperFragment.class.getName(), bundle);
-                    fragmentList.add(fragment);
-                    titleList.add(item.getName());
+                    if (TextUtils.equals(item.getName(), "美食")) {
+                        VideoListPlayFragment fragment = (VideoListPlayFragment) Fragment.instantiate(VideoListActivity.this, VideoListPlayFragment.class.getName(), bundle);
+                        fragmentList.add(0, fragment);
+                        titleList.add(0, item.getName());
+                    } else {
+                        VideoListHelperFragment fragment = (VideoListHelperFragment) Fragment.instantiate(VideoListActivity.this, VideoListHelperFragment.class.getName(), bundle);
+                        fragmentList.add(fragment);
+                        titleList.add(item.getName());
+                    }
                 }
 
                 if (fragmentList.size() <= 6) {
