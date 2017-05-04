@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="@color/black"
-              android:orientation="vertical"
-              android:paddingBottom="10dp">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/black"
+    android:paddingBottom="10dp">
 
-    <com.song.video.SimplePlayerLayout
-        android:id="@+id/simple_player"
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/video_drawee"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-</LinearLayout>
+        android:layout_height="wrap_content"
+        fresco:viewAspectRatio="1.78"/>
+
+    <TextView
+        android:id="@+id/video_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_rect_gradient_video_title"
+        android:paddingBottom="15dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:text="视频"
+        android:textColor="@color/white"
+        android:textSize="16sp"/>
+</RelativeLayout>

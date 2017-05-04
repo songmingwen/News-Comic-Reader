@@ -113,35 +113,30 @@ public class VideoListPlayFragment extends BaseFragment implements PtrHandler, L
                     RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
                     //判断是当前layoutManager是否为LinearLayoutManager
                     // 只有LinearLayoutManager才有查找第一个和最后一个可见view位置的方法
+
+
                     if (layoutManager instanceof LinearLayoutManager) {
+                        int firstPosition = RecyclerView.NO_POSITION;
+                        int lastPosition = RecyclerView.NO_POSITION;
                         LinearLayoutManager linearManager = (LinearLayoutManager) layoutManager;
                         //获取最后一个可见view的位置
-                        int lastItemPosition = linearManager.findLastVisibleItemPosition();
+                        lastPosition = linearManager.findLastVisibleItemPosition();
                         //获取第一个可见view的位置
-                        int firstItemPosition = linearManager.findFirstVisibleItemPosition();
+                        firstPosition = linearManager.findFirstVisibleItemPosition();
 
-//                        View targetView = linearManager.findViewByPosition(firstItemPosition);
-//                        if (Math.abs(targetView.getTop()) <= 1) {
-//                            return;
-//                        }
-//                        recyclerView.smoothScrollBy(0, targetView.getTop());
-
-//                        View targetView = null;
-//                        for (int currentPosition = firstItemPosition; currentPosition < lastItemPosition + 1; currentPosition++) {
-//                            View tempView = linearManager.findViewByPosition(currentPosition);
-//                            if (isCenterItemView(tempView)) {
-//                                currentPlayerPosition = currentPosition;
-//                                targetView = tempView;
-//                                break;
-//                            }
-//                        }
-//                        if (targetView == null) return;
-//                        int dY = (int) getCenterDy(targetView);
-//                        if (Math.abs(dY) <= 1) {
-//                            return;
-//                        }
-//                        recyclerView.smoothScrollBy(0, dY);
+                        if (firstPosition <= lastPosition &&
+                                (firstPosition != RecyclerView.NO_POSITION || lastPosition != RecyclerView.NO_POSITION)) {
+                            for (int currentPosition = firstPosition; currentPosition < lastPosition + 1; currentPosition++) {
+                                View tempView = linearManager.findViewByPosition(currentPosition);
+                                if (isCenterItemView(tempView)) {
+                                    currentPlayerPosition = currentPosition;
+                                    mAdapter.start(currentPlayerPosition);
+                                    break;
+                                }
+                            }
+                        }
                     }
+
                 }
             }
 
@@ -150,6 +145,22 @@ public class VideoListPlayFragment extends BaseFragment implements PtrHandler, L
             }
         });
 
+    }
+
+    @Override
+    public void onResume() {
+        if (mAdapter != null) {
+            mAdapter.onResume();
+        }
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        if (mAdapter != null) {
+            mAdapter.onPause();
+        }
+        super.onPause();
     }
 
     private float getTopPosition(View targetView) {
