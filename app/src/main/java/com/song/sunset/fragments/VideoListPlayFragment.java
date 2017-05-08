@@ -1,10 +1,14 @@
 package com.song.sunset.fragments;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -22,6 +26,7 @@ import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.utils.service.PhoenixNewsApi;
 import com.song.sunset.utils.service.WholeApi;
 import com.song.sunset.views.LoadMoreRecyclerView;
+import com.song.video.SimplePlayerLayout;
 
 import java.util.List;
 
@@ -36,16 +41,15 @@ import rx.Observable;
  * E-mail: z53520@qq.com
  */
 
-public class VideoListPlayFragment extends BaseFragment implements PtrHandler, LoadingMoreListener {
+public class VideoListPlayFragment extends BaseFragment implements PtrHandler, LoadingMoreListener, LoadMoreRecyclerView.VideoListPlayListener {
 
     private String typeid = "";
     private LoadMoreRecyclerView recyclerView;
     private VideoListAdapter mAdapter;
     private int currentPage = 1;
-    private boolean isLoading, isRefreshing = false;
+    private boolean isLoading, isRefreshing = false, first;
     private PtrFrameLayout refreshLayout;
     private ProgressLayout progressLayout;
-    private int currentPlayerPosition = -1;
     private RelativeLayout progressBar;
 
     private View.OnClickListener errorClickListener = new View.OnClickListener() {
@@ -54,11 +58,13 @@ public class VideoListPlayFragment extends BaseFragment implements PtrHandler, L
             getDataFromRetrofit2(1);
         }
     };
-    private int mCenterLine;
+
+    private SimplePlayerLayout mPlayer;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        first = true;
         if (getArguments() != null) {
             Bundle bundle = getArguments();
             typeid = bundle.getString("typeid");
@@ -68,32 +74,35 @@ public class VideoListPlayFragment extends BaseFragment implements PtrHandler, L
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_videolist_helper_layout, container, false);
+        return inflater.inflate(R.layout.fragment_videolist, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        progressLayout = (ProgressLayout) view.findViewById(R.id.progress);
+        progressLayout = (ProgressLayout) view.findViewById(R.id.progress__);
         progressLayout.showLoading();
+
+        mPlayer = (SimplePlayerLayout) view.findViewById(R.id.video_in_list);
+        mPlayer.setOnScrollListener(false);
+        mPlayer.setCanChangeOrientation(false);
 
         progressBar = (RelativeLayout) view.findViewById(R.id.id_loading_more_progress);
         showProgress(false);
 
-        refreshLayout = (PtrFrameLayout) view.findViewById(R.id.id_comic_list_swipe_refresh);
+        refreshLayout = (PtrFrameLayout) view.findViewById(R.id.id_video_list_swipe_refresh);
         StoreHouseHeader header = new StoreHouseHeader(getContext());
         header.setPadding(0, ViewUtil.dip2px(2), 0, ViewUtil.dip2px(2));
         header.initWithString("Song");
         header.setTextColor(getResources().getColor(R.color.colorPrimary));
         header.setBackgroundColor(getResources().getColor(R.color.white));
 
-        refreshLayout.setDurationToCloseHeader(1500);
+        refreshLayout.setDurationToCloseHeader(1000);
         refreshLayout.setHeaderView(header);
         refreshLayout.addPtrUIHandler(header);
         refreshLayout.setPtrHandler(this);
 
         recyclerView = (LoadMoreRecyclerView) view.findViewById(R.id.rv_video_list);
-        setRVCenterLine();
 
         mAdapter = new VideoListAdapter(getActivity());
         recyclerView.setAdapter(mAdapter);
@@ -106,87 +115,28 @@ public class VideoListPlayFragment extends BaseFragment implements PtrHandler, L
         });
         getDataFromRetrofit2(currentPage);
 
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
-                    //判断是当前layoutManager是否为LinearLayoutManager
-                    // 只有LinearLayoutManager才有查找第一个和最后一个可见view位置的方法
+        setOnScrollListener();
 
+    }
 
-                    if (layoutManager instanceof LinearLayoutManager) {
-                        int firstPosition = RecyclerView.NO_POSITION;
-                        int lastPosition = RecyclerView.NO_POSITION;
-                        LinearLayoutManager linearManager = (LinearLayoutManager) layoutManager;
-                        //获取最后一个可见view的位置
-                        lastPosition = linearManager.findLastVisibleItemPosition();
-                        //获取第一个可见view的位置
-                        firstPosition = linearManager.findFirstVisibleItemPosition();
-
-                        if (firstPosition <= lastPosition &&
-                                (firstPosition != RecyclerView.NO_POSITION || lastPosition != RecyclerView.NO_POSITION)) {
-                            for (int currentPosition = firstPosition; currentPosition < lastPosition + 1; currentPosition++) {
-                                View tempView = linearManager.findViewByPosition(currentPosition);
-                                if (isCenterItemView(tempView)) {
-                                    currentPlayerPosition = currentPosition;
-                                    mAdapter.start(currentPlayerPosition);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-
-                }
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-            }
-        });
-
+    private void setOnScrollListener() {
+        recyclerView.setVideoListener(this);
     }
 
     @Override
     public void onResume() {
-        if (mAdapter != null) {
-            mAdapter.onResume();
+        if (mPlayer != null) {
+            mPlayer.onResume();
         }
         super.onResume();
     }
 
     @Override
     public void onPause() {
-        if (mAdapter != null) {
-            mAdapter.onPause();
+        if (mPlayer != null) {
+            mPlayer.onPause();
         }
         super.onPause();
-    }
-
-    private float getTopPosition(View targetView) {
-        final int[] location = new int[2];
-        targetView.getLocationOnScreen(location);
-        return location[1];
-    }
-
-    private float getCenterDy(View targetView) {
-        float top = getTopPosition(targetView);
-        float bottom = top + targetView.getHeight();
-        float targetViewCenterLine = (top + bottom) / 2;
-        return targetViewCenterLine - mCenterLine;
-    }
-
-    private void setRVCenterLine() {
-        mCenterLine = ViewUtil.getScreenHeigth() / 2;
-    }
-
-    private boolean isCenterItemView(View tempView) {
-        if (tempView == null) {
-            return false;
-        }
-        float top = getTopPosition(tempView);
-        float bottom = top + tempView.getHeight();
-        return ((top < mCenterLine && bottom > mCenterLine) || top == mCenterLine || bottom == mCenterLine);
     }
 
     public void getDataFromRetrofit2(int page) {
@@ -211,6 +161,10 @@ public class VideoListPlayFragment extends BaseFragment implements PtrHandler, L
                         mAdapter.addDatas(videoBeanList);
                         showProgress(false);
                     }
+                }
+                if (first) {
+                    first = false;
+                    recyclerView.smoothScrollBy(0, 5);
                 }
             }
 
@@ -257,6 +211,14 @@ public class VideoListPlayFragment extends BaseFragment implements PtrHandler, L
     }
 
     @Override
+    public void onDestroy() {
+        if (mPlayer != null) {
+            mPlayer.onDestroy();
+        }
+        super.onDestroy();
+    }
+
+    @Override
     public void onLoadingMore() {
         if (isLoading) {
             return;
@@ -269,5 +231,26 @@ public class VideoListPlayFragment extends BaseFragment implements PtrHandler, L
 
     public void showProgress(boolean flag) {
         progressBar.setVisibility(flag ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void playVideo(int position) {
+        mPlayer.setVisibility(View.VISIBLE);
+        VideoBean.ItemBean mItemBean = mAdapter.getData().get(position);
+        mPlayer.setCover(mItemBean.getImage());
+        mPlayer.setTitle(mItemBean.getTitle());
+        mPlayer.play(mItemBean.getVideo_url());
+    }
+
+    @Override
+    public void stopVideo() {
+        mPlayer.onDestroy();
+        mPlayer.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void locate(float y) {
+        int dy = ViewUtil.getStatusBarHeight() + ViewUtil.dip2px(44) - ViewUtil.dip2px(50);
+        mPlayer.setY(y - dy);
     }
 }

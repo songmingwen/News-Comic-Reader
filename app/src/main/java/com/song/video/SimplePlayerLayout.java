@@ -88,6 +88,7 @@ public class SimplePlayerLayout extends FrameLayout {
     private int defaultTimeout = 3000;
     private int screenWidthPixels;
     private boolean mCanChangeOrientation = true;
+    private boolean canScroll = true;
 
     private final OnClickListener onClickListener = new OnClickListener() {
         @Override
@@ -553,12 +554,17 @@ public class SimplePlayerLayout extends FrameLayout {
     }
 
     public void onConfigurationChanged(final Configuration newConfig) {
+        if (!mCanChangeOrientation){
+            orientationEventListener.disable();
+            return;
+        }
         portrait = newConfig.orientation == Configuration.ORIENTATION_PORTRAIT;
         doOnConfigurationChanged(portrait);
     }
 
     private void doOnConfigurationChanged(final boolean portrait) {
         if (!mCanChangeOrientation) {
+            orientationEventListener.disable();
             return;
         }
         if (videoView != null && !fullScreenOnly) {
@@ -898,6 +904,10 @@ public class SimplePlayerLayout extends FrameLayout {
         }
     }
 
+    public void setOnScrollListener(boolean canScroll) {
+        this.canScroll = canScroll;
+    }
+
     class Query {
         private final Activity activity;
         private View view;
@@ -1025,6 +1035,7 @@ public class SimplePlayerLayout extends FrameLayout {
          */
         @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+            if (!canScroll) return super.onScroll(e1, e2, distanceX, distanceY);
             float mOldX = e1.getX(), mOldY = e1.getY();
             float deltaY = mOldY - e2.getY();
             float deltaX = mOldX - e2.getX();

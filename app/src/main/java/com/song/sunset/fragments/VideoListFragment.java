@@ -83,7 +83,7 @@ public class VideoListFragment extends BaseFragment implements LoadingMoreListen
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        progressLayout = (ProgressLayout) view.findViewById(R.id.progress);
+        progressLayout = (ProgressLayout) view.findViewById(R.id.progress__);
         progressLayout.showLoading();
 
         progressBar = (RelativeLayout) view.findViewById(R.id.id_loading_more_progress);

@@ -30,4 +30,8 @@ public class ViewUtil {
         final float scale = AppConfig.getApp().getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
     }
+
+    public static int getStatusBarHeight() {
+        return AppConfig.getApp().getResources().getDimensionPixelSize(AppConfig.getApp().getResources().getIdentifier("status_bar_height", "dimen", "android"));
+    }
 }

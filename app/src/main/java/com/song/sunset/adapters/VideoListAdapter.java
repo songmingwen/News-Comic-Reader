@@ -23,9 +23,6 @@ import com.song.sunset.utils.fresco.FrescoUtil;
 public class VideoListAdapter extends BaseRecyclerViewAdapter<VideoBean.ItemBean, VideoListViewHolder> {
 
     private Activity context;
-    private int currentPosition = RecyclerView.NO_POSITION;
-    private int stopPosition = RecyclerView.NO_POSITION;
-    private boolean isPause;
 
     public VideoListAdapter(Activity context) {
         this.context = context;
@@ -47,13 +44,12 @@ public class VideoListAdapter extends BaseRecyclerViewAdapter<VideoBean.ItemBean
         int realHeight = realWidth * 9 / 16;
 
         VideoListViewHolder videoListViewHolder = (VideoListViewHolder) holder;
-        Log.i("posi_holderHash: ", position + "----" + videoListViewHolder.hashCode());
         FrescoUtil.setFrescoImageWith2Url(videoListViewHolder.cover, bean.getThumbnail(), bean.getImage(), realWidth, realHeight);
         videoListViewHolder.videoName.setText(bean.getTitle());
     }
 
     protected void onItemClick(View view, int position) {
-        VideoBean.ItemBean bean = getData().get(position);
-        PhoenixVideoActivity.start(context, bean.getVideo_url(), bean.getTitle(), bean.getImage());
+//        VideoBean.ItemBean bean = getData().get(position);
+//        PhoenixVideoActivity.start(context, bean.getVideo_url(), bean.getTitle(), bean.getImage());
     }
 }

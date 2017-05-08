@@ -1,11 +1,15 @@
 package com.song.sunset.activitys;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.OnScrollListener;
@@ -59,6 +63,17 @@ public class ComicDetailMVPActivity extends CoreBaseActivity<ComicDetailPresente
         Intent intent = new Intent(context, ComicDetailMVPActivity.class);
         intent.putExtra(COMIC_ID, comicId);
         context.startActivity(intent);
+    }
+
+    public static void start(Context context, int comicId, View view) {
+        Intent intent = new Intent(context, ComicDetailMVPActivity.class);
+        intent.putExtra(COMIC_ID, comicId);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Bundle comic_cover = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context, view, "comic_cover").toBundle();
+            ActivityCompat.startActivity(context, intent, comic_cover);
+        } else {
+            start(context, comicId);
+        }
     }
 
     @Override

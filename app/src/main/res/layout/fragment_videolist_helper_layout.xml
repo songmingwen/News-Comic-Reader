@@ -15,37 +15,42 @@
     progressActivity:errorTitleTextColor="#000000"
     progressActivity:loadingBackgroundColor="#FFFFFF">
 
-    <in.srain.cube.views.ptr.PtrFrameLayout
-        xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/id_comic_list_swipe_refresh"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        cube_ptr:ptr_duration_to_close="200"
-        cube_ptr:ptr_duration_to_close_header="1000"
-        cube_ptr:ptr_keep_header_when_refresh="true"
-        cube_ptr:ptr_pull_to_fresh="false"
-        cube_ptr:ptr_ratio_of_header_height_to_refresh="1.2"
-        cube_ptr:ptr_resistance="1.7">
-
-        <com.song.sunset.views.LoadMoreRecyclerView
-            android:id="@+id/rv_video_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </in.srain.cube.views.ptr.PtrFrameLayout>
-
     <RelativeLayout
-        android:id="@+id/id_loading_more_progress"
+        android:id="@+id/content_layout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:visibility="gone"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/shape_rect_gradient">
+        android:layout_height="match_parent">
 
-        <ProgressBar
-            style="?android:attr/progressBarStyle"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_centerInParent="true" />
+        <in.srain.cube.views.ptr.PtrFrameLayout
+            xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/id_comic_list_swipe_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            cube_ptr:ptr_duration_to_close="200"
+            cube_ptr:ptr_duration_to_close_header="1000"
+            cube_ptr:ptr_keep_header_when_refresh="true"
+            cube_ptr:ptr_pull_to_fresh="false"
+            cube_ptr:ptr_ratio_of_header_height_to_refresh="1.2"
+            cube_ptr:ptr_resistance="1.7">
+
+            <com.song.sunset.views.LoadMoreRecyclerView
+                android:id="@+id/rv_video_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </in.srain.cube.views.ptr.PtrFrameLayout>
+
+        <RelativeLayout
+            android:id="@+id/id_loading_more_progress"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/shape_rect_gradient"
+            android:visibility="gone">
+
+            <ProgressBar
+                style="?android:attr/progressBarStyle"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
     </RelativeLayout>
-
 </com.song.sunset.utils.loadingmanager.ProgressLayout>
