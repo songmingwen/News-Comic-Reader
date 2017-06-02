@@ -8,7 +8,7 @@ import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.view.ComicDetailView;
 
 /**
- * Created by songmw3 on 2016/12/8.
+ * Created by Song on 2016/12/8.
  * E-mail:z53520@qq.com
  */
 public class ComicDetailPresenter extends CoreBasePresenter<ComicDetailModel, ComicDetailView> {

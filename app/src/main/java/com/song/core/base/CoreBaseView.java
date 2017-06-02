@@ -3,7 +3,8 @@ package com.song.core.base;
 import android.content.Context;
 
 /**
- * Created by hpw on 16/10/27.
+ * Created by Song on 2016/12/8.
+ * E-mail:z53520@qq.com
  */
 
 public interface CoreBaseView {
