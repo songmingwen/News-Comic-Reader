@@ -3,6 +3,7 @@ package com.song.sunset.activitys;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -27,6 +28,12 @@ import com.song.sunset.utils.DateTimeUtils;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by songmw3 on 2016/12/2.
@@ -95,8 +102,66 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //                        .setStartPosition(0)
 //                        .hideStatusBar(false)
 //                        .show();
+
+                RecursiveTest();
             }
         });
+    }
+
+    private void RecursiveTest() {
+        long start2 = System.currentTimeMillis();
+        long result2 = getPlus(1000L);
+        long end2 = System.currentTimeMillis();
+        Log.i("结果对比", "result2=" + result2 + "; time2 = " + (end2 - start2) + "millis");
+
+        final long start1 = System.currentTimeMillis();
+
+        Observable.just(1000L)
+                .map(new Func1<Long, Long>() {
+                    @Override
+                    public Long call(Long aLong) {
+                        return getOrderPlus(aLong);
+                    }
+                })
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<Long>() {
+                    @Override
+                    public void call(Long aLong) {
+                        long result1 = aLong;
+                        long end1 = System.currentTimeMillis();
+                        Log.i("结果对比", "result1=" + result1 + "; time1 = " + (end1 - start1) + "millis");
+                    }
+                });
+    }
+
+    private long getFactorial(long endNum) {
+        if (endNum <= 1) {
+            return 1;
+        } else {
+            return getFactorial(endNum - 1) * endNum;
+        }
+    }
+
+    /**
+     * Java没有实现编译器尾递归的优化
+     * @param endNum
+     * @return
+     */
+    private long getOrderPlus(long endNum) {
+        return endNum == 1 ? 1 : getOrderPlus(endNum, 1);
+    }
+
+    private long getOrderPlus(long endNum, long sum) {
+        return endNum == 1 ? sum : getOrderPlus(endNum - 1, sum + endNum);
+    }
+
+    private long getPlus(long endNum) {
+        int sum = 0;
+        for (long i = 0; i < endNum + 1; i++) {
+            sum += i;
+        }
+        return sum;
     }
 
 //    /**

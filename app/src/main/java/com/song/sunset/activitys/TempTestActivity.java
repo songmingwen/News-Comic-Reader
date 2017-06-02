@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.song.sunset.R;
 import com.song.sunset.activitys.base.BaseActivity;
+import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.views.TextSwitchView;
 
 import java.util.ArrayList;
@@ -48,6 +49,7 @@ public class TempTestActivity extends BaseActivity {
         list.add(int01);
         list.add(int02);
         list.add(int03);
+
         Observable.from(list)
                 .flatMap(new Func1<Integer[], Observable<Integer>>() {
                     @Override
@@ -61,8 +63,7 @@ public class TempTestActivity extends BaseActivity {
                         return i.toString();
                     }
                 })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxUtil.<String>rxSchedulerHelper())
                 .subscribe(new Subscriber<String>() {
                     @Override
                     public void onCompleted() {
