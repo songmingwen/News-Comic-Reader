@@ -1,6 +1,6 @@
 # Comic
 
-## 一款漫画阅读的app软件
+## 一款可以看新闻、看漫画的app软件
 
 ![App icon](https://raw.githubusercontent.com/songmingwen/News-Comic-Reader/master/app/src/main/res/mipmap-xxhdpi/logo.png)
 
