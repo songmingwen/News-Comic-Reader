@@ -62,6 +62,7 @@ dependencies {
     compile rootProject.ext.dependencies["multidex"]
     compile rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
     compile rootProject.ext.dependencies["glide"]
+    compile rootProject.ext.dependencies["glide-transformations"]
     compile rootProject.ext.dependencies["fresco"]
     compile rootProject.ext.dependencies["fresco_processors"]
     compile rootProject.ext.dependencies["gpuimage_library"]

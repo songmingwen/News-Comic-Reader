@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/id_comic_detail_header_layout"
     android:layout_width="match_parent"
-    android:layout_height="280dp"
-    android:paddingTop="?attr/actionBarSize">
+    android:layout_height="280dp">
+
+    <ImageView
+        android:id="@+id/img_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -12,13 +18,13 @@
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="-30dp"
         android:layout_marginRight="-30dp"
-        android:background="@drawable/shape_circle_white" />
+        android:background="@drawable/shape_circle_white"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/white" />
+        android:background="@color/white"/>
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -37,13 +43,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="?attr/actionBarSize"
             card_view:cardElevation="5dp">
 
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/id_comic_detail_header_image"
                 android:layout_width="113dp"
                 android:layout_height="143dp"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"/>
         </android.support.v7.widget.CardView>
 
         <TextView
@@ -54,7 +61,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="12dp"
             android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textSize="16sp"/>
 
         <TextView
             android:id="@+id/id_comic_detail_header_author_name"
@@ -63,6 +70,6 @@
             android:layout_below="@+id/id_comic_detail_header_comic_name"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="7dp"
-            android:textSize="12sp" />
+            android:textSize="12sp"/>
     </RelativeLayout>
 </RelativeLayout>

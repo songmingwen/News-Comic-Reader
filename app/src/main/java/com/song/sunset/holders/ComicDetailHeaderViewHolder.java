@@ -2,6 +2,7 @@ package com.song.sunset.holders;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ public class ComicDetailHeaderViewHolder extends RecyclerView.ViewHolder {
     public SimpleDraweeView simpleDraweeView;
     public TextView comicName;
     public TextView authorName;
+    public ImageView imageBg;
 
     public ComicDetailHeaderViewHolder(View itemview) {
         super(itemview);
@@ -25,5 +27,6 @@ public class ComicDetailHeaderViewHolder extends RecyclerView.ViewHolder {
         simpleDraweeView = (SimpleDraweeView) itemview.findViewById(R.id.id_comic_detail_header_image);
         comicName = (TextView) itemview.findViewById(R.id.id_comic_detail_header_comic_name);
         authorName = (TextView) itemview.findViewById(R.id.id_comic_detail_header_author_name);
+        imageBg = (ImageView) itemview.findViewById(R.id.img_bg);
     }
 }

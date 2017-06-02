@@ -129,7 +129,7 @@ public class ComicDetailMVPActivity extends CoreBaseActivity<ComicDetailPresente
         this.comicDetailBean = comicDetailBean;
         mLoadingAndRetryManager.showContent();
         toolbar.setTitle(comicDetailBean.getComic().getName());
-        toolbar.setLogo(R.mipmap.logo);
+//        toolbar.setLogo(R.mipmap.logo);
         adapter.setData(comicDetailBean);
         setExtractionColorFromBitmap(comicDetailBean);
         mPresenter.updateCollectedComicData(comicDetailBean);
