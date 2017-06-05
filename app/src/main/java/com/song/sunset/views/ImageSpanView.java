@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 import com.song.sunset.utils.ViewUtil;
 
 /**
- * Created by songmw3 on 2016/12/8.
+ * Created by Song on 2016/12/8.
  */
 
 public class ImageSpanView extends RelativeLayout {

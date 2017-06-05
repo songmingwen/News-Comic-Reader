@@ -11,7 +11,7 @@ import jp.wasabeef.fresco.processors.internal.FastBlur;
 import jp.wasabeef.fresco.processors.internal.RSBlur;
 
 /**
- * Created by songmw3 on 2016/12/9.
+ * Created by Song on 2016/12/9.
  */
 
 public final class BitmapBlurHelper {

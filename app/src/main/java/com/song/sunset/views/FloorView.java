@@ -18,7 +18,7 @@ import com.song.sunset.utils.ViewUtil;
 import java.util.List;
 
 /**
- * Created by songmw3 on 2016/12/5.
+ * Created by Song on 2016/12/5.
  */
 
 public class FloorView extends LinearLayout {

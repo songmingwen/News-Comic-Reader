@@ -3,7 +3,7 @@ package com.song.sunset.beans;
 import java.util.List;
 
 /**
- * Created by songmw3 on 2016/12/21.
+ * Created by Song on 2016/12/21.
  */
 
 public class VideoBean {

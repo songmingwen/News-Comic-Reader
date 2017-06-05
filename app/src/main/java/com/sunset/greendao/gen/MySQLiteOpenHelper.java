@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 /**
- * Created by songmw3 on 2017/2/28.
+ * Created by Song on 2017/2/28.
  * E-mail:z53520@qq.com
  */
 

@@ -1,7 +1,7 @@
 package com.song.sunset.utils;
 
 /**
- * Created by songmw3 on 2016/12/12.
+ * Created by Song on 2016/12/12.
  * <p>
  * Copyright (c) 2011-2013, Lukas Eder, lukas.eder@gmail.com
  * All rights reserved.

@@ -11,7 +11,7 @@ import com.song.sunset.utils.BitmapUtil;
 import com.song.sunset.utils.ViewUtil;
 
 /**
- * Created by songmw3 on 2016/12/5.
+ * Created by Song on 2016/12/5.
  */
 
 public class CustomView extends View {

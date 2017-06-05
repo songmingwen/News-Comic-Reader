@@ -7,7 +7,7 @@ import android.view.MotionEvent;
 import android.widget.RelativeLayout;
 
 /**
- * Created by songmw3 on 2016/12/2.
+ * Created by Song on 2016/12/2.
  */
 
 public class TouchEventOuterViewGroup extends RelativeLayout {

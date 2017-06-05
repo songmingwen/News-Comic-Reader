@@ -1,7 +1,7 @@
 package com.song.sunset.beans;
 
 /**
- * Created by songmw3 on 2016/12/5.
+ * Created by Song on 2016/12/5.
  */
 
 public class Comment {

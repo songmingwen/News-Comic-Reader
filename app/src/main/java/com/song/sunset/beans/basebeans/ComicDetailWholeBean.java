@@ -3,7 +3,7 @@ package com.song.sunset.beans.basebeans;
 import java.util.List;
 
 /**
- * Created by songmw3 on 2016/12/6.
+ * Created by Song on 2016/12/6.
  */
 
 public class ComicDetailWholeBean {

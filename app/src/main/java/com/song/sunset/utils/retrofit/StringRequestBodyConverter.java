@@ -11,7 +11,7 @@ import okio.Buffer;
 import retrofit2.Converter;
 
 /**
- * Created by songmw3 on 2017/3/10.
+ * Created by Song on 2017/3/10.
  * E-mail:z53520@qq.com
  */
 public class StringRequestBodyConverter implements Converter<String, RequestBody> {

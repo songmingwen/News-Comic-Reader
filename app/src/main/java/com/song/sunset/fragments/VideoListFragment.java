@@ -32,7 +32,7 @@ import in.srain.cube.views.ptr.header.StoreHouseHeader;
 import rx.Observable;
 
 /**
- * Created by songmw3 on 2016/12/21.
+ * Created by Song on 2016/12/21.
  */
 public class VideoListFragment extends BaseFragment implements LoadingMoreListener, PtrHandler {
     private boolean isVisiable = false;

@@ -6,7 +6,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by songmw3 on 2016/12/14.
+ * Created by Song on 2016/12/14.
  */
 public class NumberUtilTest {
     @Before

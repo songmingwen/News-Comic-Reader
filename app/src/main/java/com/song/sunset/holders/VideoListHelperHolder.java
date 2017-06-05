@@ -8,7 +8,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.song.sunset.R;
 
 /**
- * Created by songmw3 on 2017/3/13.
+ * Created by Song on 2017/3/13.
  * E-mail:z53520@qq.com
  */
 public class VideoListHelperHolder extends BaseViewHolder {

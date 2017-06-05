@@ -13,7 +13,7 @@ import com.song.sunset.utils.ViewUtil;
 import com.song.video.SimplePlayerLayout;
 
 /**
- * Created by songmw3 on 2016/12/21.
+ * Created by Song on 2016/12/21.
  * E-mail:z53520@qq.com
  */
 public class VideoListViewHolder extends RecyclerView.ViewHolder {

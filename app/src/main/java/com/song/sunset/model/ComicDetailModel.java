@@ -12,7 +12,7 @@ import com.sunset.greendao.gen.ComicLocalCollectionDao;
 import rx.Observable;
 
 /**
- * Created by songmw3 on 2016/12/8.
+ * Created by Song on 2016/12/8.
  * E-mail:z53520@qq.com
  */
 public class ComicDetailModel implements CoreBaseModel {

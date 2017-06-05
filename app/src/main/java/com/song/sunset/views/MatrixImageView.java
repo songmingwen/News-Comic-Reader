@@ -14,7 +14,7 @@ import com.song.sunset.utils.BitmapUtil;
 import com.song.sunset.utils.ViewUtil;
 
 /**
- * Created by songmw3 on 2016/12/3.
+ * Created by Song on 2016/12/3.
  */
 
 public class MatrixImageView extends ImageView {

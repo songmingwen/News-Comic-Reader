@@ -5,7 +5,7 @@ import android.os.Looper;
 import android.widget.Toast;
 
 /**
- * Created by songmw3 on 2016/12/7.
+ * Created by Song on 2016/12/7.
  */
 
 public class CrashHandler implements Thread.UncaughtExceptionHandler {

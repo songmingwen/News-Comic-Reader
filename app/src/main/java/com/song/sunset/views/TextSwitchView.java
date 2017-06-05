@@ -17,7 +17,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Created by songmw3 on 2017/1/6.
+ * Created by Song on 2017/1/6.
  */
 
 public class TextSwitchView extends TextSwitcher implements ViewSwitcher.ViewFactory {

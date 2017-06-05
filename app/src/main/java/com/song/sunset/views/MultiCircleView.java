@@ -8,7 +8,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 /**
- * Created by songmw3 on 2016/12/3.
+ * Created by Song on 2016/12/3.
  */
 
 public class MultiCircleView extends View {

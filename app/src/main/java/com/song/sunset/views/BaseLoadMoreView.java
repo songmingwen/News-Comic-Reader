@@ -3,7 +3,7 @@ package com.song.sunset.views;
 import com.song.sunset.R;
 
 /**
- * Created by songmw3 on 2017/3/13.
+ * Created by Song on 2017/3/13.
  * E-mail:z53520@qq.com
  */
 public class BaseLoadMoreView extends com.chad.library.adapter.base.loadmore.LoadMoreView {

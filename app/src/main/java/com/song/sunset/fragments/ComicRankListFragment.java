@@ -19,7 +19,7 @@ import java.util.List;
 import rx.Observable;
 
 /**
- * Created by songmw3 on 2017/3/3.
+ * Created by Song on 2017/3/3.
  * E-mail:z53520@qq.com
  */
 public class ComicRankListFragment extends LoadableListFragment<ComicListAdapter, ComicListBean> {
