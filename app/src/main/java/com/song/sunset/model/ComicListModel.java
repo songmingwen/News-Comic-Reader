@@ -6,7 +6,7 @@ import com.song.sunset.impls.ComicListView;
 import com.song.sunset.utils.retrofit.RetrofitCall;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.retrofit.RetrofitService;
-import com.song.sunset.utils.service.U17ComicApi;
+import com.song.sunset.utils.api.U17ComicApi;
 
 import retrofit2.Call;
 

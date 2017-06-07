@@ -19,8 +19,8 @@ import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.retrofit.RetrofitService;
-import com.song.sunset.utils.service.PhoenixNewsApi;
-import com.song.sunset.utils.service.WholeApi;
+import com.song.sunset.utils.api.PhoenixNewsApi;
+import com.song.sunset.utils.api.WholeApi;
 import com.song.sunset.views.LoadMoreRecyclerView;
 
 import java.util.List;

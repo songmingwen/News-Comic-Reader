@@ -1,8 +1,7 @@
 package com.song.sunset.utils.retrofit;
 
-import com.song.sunset.utils.service.WholeApi;
+import com.song.sunset.utils.api.WholeApi;
 
-import okhttp3.Interceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;

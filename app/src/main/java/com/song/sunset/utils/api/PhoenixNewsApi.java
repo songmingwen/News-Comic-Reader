@@ -1,4 +1,4 @@
-package com.song.sunset.utils.service;
+package com.song.sunset.utils.api;
 
 import com.song.sunset.beans.PhoenixNewsListBean;
 import com.song.sunset.beans.VideoBean;

@@ -1,5 +1,6 @@
 package com.song.sunset.activitys;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -18,12 +19,16 @@ import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.TimePickerView;
 import com.song.sunset.R;
 import com.song.sunset.activitys.base.BaseActivity;
+import com.song.sunset.beans.MusicInfo;
+import com.song.sunset.beans.User;
 import com.song.sunset.fragments.CollectionFragment;
 import com.song.sunset.fragments.ComicClassifyFragment;
 import com.song.sunset.fragments.ComicRankFragment;
 import com.song.sunset.fragments.PhoenixListFragment;
 import com.song.sunset.fragments.MVPComicListFragment;
 import com.song.sunset.utils.DateTimeUtils;
+import com.song.sunset.utils.MusicLoader;
+import com.song.sunset.utils.PushManager;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -103,7 +108,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //                        .hideStatusBar(false)
 //                        .show();
 
-                RecursiveTest();
+//                RecursiveTest();
+                PushManager.getInstance().connect();
+                PushManager.getInstance().sendMusicInfo(MusicLoader.instance(MainActivity.this.getContentResolver()).getMusicList().get(0));
+                Log.i("music_list: ", MusicLoader.instance(MainActivity.this.getContentResolver()).getMusicList().toString());
             }
         });
     }
@@ -145,6 +153,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     /**
      * Java没有实现编译器尾递归的优化
+     *
      * @param endNum
      * @return
      */

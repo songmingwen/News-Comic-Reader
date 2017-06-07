@@ -22,7 +22,7 @@ import com.song.sunset.utils.loadingmanager.OnLoadingAndRetryListener;
 import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.retrofit.RetrofitService;
-import com.song.sunset.utils.service.U17ComicApi;
+import com.song.sunset.utils.api.U17ComicApi;
 
 import java.util.ArrayList;
 import java.util.List;

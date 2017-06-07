@@ -1,15 +1,24 @@
 package com.song.sunset.beans;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Song on 2016/12/5.
  */
-public class User {
+public class User implements Parcelable {
 
     private String userName;
 
     private String address;
 
     private String phone;
+
+    public User(String userName, String address, String phone) {
+        this.userName = userName;
+        this.address = address;
+        this.phone = phone;
+    }
 
     public String getPhone() {
         return phone;
@@ -34,4 +43,46 @@ public class User {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userName='" + userName + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.userName);
+        dest.writeString(this.address);
+        dest.writeString(this.phone);
+    }
+
+    public User() {
+    }
+
+    protected User(Parcel in) {
+        this.userName = in.readString();
+        this.address = in.readString();
+        this.phone = in.readString();
+    }
+
+    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel source) {
+            return new User(source);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 }

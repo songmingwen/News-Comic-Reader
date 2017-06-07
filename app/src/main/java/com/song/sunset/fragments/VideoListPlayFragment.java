@@ -1,14 +1,10 @@
 package com.song.sunset.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -23,8 +19,8 @@ import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.retrofit.RetrofitService;
 import com.song.sunset.utils.rxjava.RxUtil;
-import com.song.sunset.utils.service.PhoenixNewsApi;
-import com.song.sunset.utils.service.WholeApi;
+import com.song.sunset.utils.api.PhoenixNewsApi;
+import com.song.sunset.utils.api.WholeApi;
 import com.song.sunset.views.LoadMoreRecyclerView;
 import com.song.video.SimplePlayerLayout;
 

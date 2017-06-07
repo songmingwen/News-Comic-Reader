@@ -1,11 +1,13 @@
-package com.song.sunset.activitys;
+package com.song.sunset;
 
 import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.song.sunset.utils.CrashHandler;
 import com.song.sunset.utils.GreenDaoUtil;
+import com.song.sunset.utils.PushManager;
 import com.song.sunset.utils.fresco.FrescoUtil;
 import com.song.sunset.utils.loadingmanager.LoadingAndRetryManager;
 import com.song.sunset.R;
@@ -33,7 +35,8 @@ public class SunsetApplication extends Application {
 //                .build();
 
         Fresco.initialize(this, FrescoUtil.getDefaultImagePipelineConfig(this));
-//        CrashHandler.getInstance().init(this);
+        CrashHandler.getInstance().init(this);
+        PushManager.getInstance().init(this);
     }
 
     @Override

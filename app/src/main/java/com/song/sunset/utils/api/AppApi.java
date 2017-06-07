@@ -1,10 +1,10 @@
-package com.song.sunset.utils.service;
+package com.song.sunset.utils.api;
 
 /**
  * Created by Song on 2016/8/29 0029.
  * Email:z53520@qq.com
  */
-public class AppServices {
+public class AppApi {
 
     public static final String COMIC_BASE_URL = "http://app.u17.com/v3/appV3/android/phone/";
 
