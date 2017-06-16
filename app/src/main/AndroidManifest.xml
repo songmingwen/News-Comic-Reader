@@ -40,6 +40,7 @@
         </activity>
         <activity
             android:name=".activitys.MainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".activitys.base.BaseActivity"

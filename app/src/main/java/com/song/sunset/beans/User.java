@@ -3,10 +3,12 @@ package com.song.sunset.beans;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+
 /**
  * Created by Song on 2016/12/5.
  */
-public class User implements Parcelable {
+public class User implements Parcelable ,Cloneable{
 
     private String userName;
 
@@ -42,6 +44,18 @@ public class User implements Parcelable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public User clone() {
+        try {
+            User user = (User) super.clone();
+            user.userName = this.userName;
+            user.address = this.address;
+            user.phone = this.phone;
+            return user;
+        } catch (CloneNotSupportedException e) {
+            return null;
+        }
     }
 
     @Override
