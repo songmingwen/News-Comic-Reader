@@ -42,6 +42,7 @@ public class CollectionComicAdapter extends RecyclerView.Adapter<ComicListViewHo
 
     @Override
     public void onBindViewHolder(final ComicListViewHolder holder, final int position) {
+         holder.haveUpdate.setVisibility(View.GONE);
         if (data != null) {
             final int chapterNum = Integer.parseInt(data.get(position).getChapterNum());
             final int comicId = (int) data.get(position).getComicId();
@@ -56,7 +57,7 @@ public class CollectionComicAdapter extends RecyclerView.Adapter<ComicListViewHo
                             if (diff != 0) {
                                 holder.haveUpdate.setVisibility(View.VISIBLE);
                                 holder.haveUpdate.setText(String.format(context.getString(R.string.have_update), diff));
-                            } else holder.haveUpdate.setVisibility(View.GONE);
+                            }
                         }
 
                         @Override
