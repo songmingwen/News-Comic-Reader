@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -37,14 +38,13 @@ import rx.Observable;
  * E-mail: z53520@qq.com
  */
 
-public class VideoListPlayFragment extends BaseFragment implements PtrHandler, LoadingMoreListener, LoadMoreRecyclerView.VideoListPlayListener {
+public class VideoListPlayFragment extends BaseFragment implements LoadingMoreListener, LoadMoreRecyclerView.VideoListPlayListener, VideoListAdapter.OnItemClickListener {
 
     private String typeid = "";
     private LoadMoreRecyclerView recyclerView;
     private VideoListAdapter mAdapter;
     private int currentPage = 1;
     private boolean isLoading, isRefreshing = false, first;
-    private PtrFrameLayout refreshLayout;
     private ProgressLayout progressLayout;
     private RelativeLayout progressBar;
 
@@ -70,7 +70,7 @@ public class VideoListPlayFragment extends BaseFragment implements PtrHandler, L
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_videolist, container, false);
+        return inflater.inflate(R.layout.fragment_video_play_list, container, false);
     }
 
     @Override
@@ -86,21 +86,10 @@ public class VideoListPlayFragment extends BaseFragment implements PtrHandler, L
         progressBar = (RelativeLayout) view.findViewById(R.id.id_loading_more_progress);
         showProgress(false);
 
-        refreshLayout = (PtrFrameLayout) view.findViewById(R.id.id_video_list_swipe_refresh);
-        StoreHouseHeader header = new StoreHouseHeader(getContext());
-        header.setPadding(0, ViewUtil.dip2px(2), 0, ViewUtil.dip2px(2));
-        header.initWithString("Song");
-        header.setTextColor(getResources().getColor(R.color.colorPrimary));
-        header.setBackgroundColor(getResources().getColor(R.color.white));
-
-        refreshLayout.setDurationToCloseHeader(1000);
-        refreshLayout.setHeaderView(header);
-        refreshLayout.addPtrUIHandler(header);
-        refreshLayout.setPtrHandler(this);
-
         recyclerView = (LoadMoreRecyclerView) view.findViewById(R.id.rv_video_list);
 
         mAdapter = new VideoListAdapter(getActivity());
+        mAdapter.setOnItemClickListener(this);
         recyclerView.setAdapter(mAdapter);
         recyclerView.setLoadingMoreListener(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()) {
@@ -148,7 +137,6 @@ public class VideoListPlayFragment extends BaseFragment implements PtrHandler, L
                     if (mAdapter != null) {
                         mAdapter.setData(videoBeanList);
                     }
-                    refreshLayout.refreshComplete();
                 } else {
                     if (isLoading) {
                         isLoading = false;
@@ -168,7 +156,6 @@ public class VideoListPlayFragment extends BaseFragment implements PtrHandler, L
             public void onFailure(int errorCode, String errorMsg) {
                 if (isRefreshing) {
                     isRefreshing = false;
-                    refreshLayout.refreshComplete();
                 } else {
                     currentPage--;
                     if (isLoading) {
@@ -182,20 +169,6 @@ public class VideoListPlayFragment extends BaseFragment implements PtrHandler, L
                 }
             }
         });
-    }
-
-    @Override
-    public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
-        return PtrDefaultHandler.checkContentCanBePulledDown(frame, content, header);
-    }
-
-    @Override
-    public void onRefreshBegin(PtrFrameLayout frame) {
-        if (isRefreshing) {
-            return;
-        }
-        isRefreshing = true;
-        getDataFromRetrofit2(1);
     }
 
     @Override
@@ -240,13 +213,21 @@ public class VideoListPlayFragment extends BaseFragment implements PtrHandler, L
 
     @Override
     public void stopVideo() {
-        mPlayer.onDestroy();
-        mPlayer.setVisibility(View.GONE);
+        if (mPlayer != null) {
+            mPlayer.onDestroy();
+            mPlayer.setVisibility(View.GONE);
+        }
     }
 
     @Override
     public void locate(float y) {
         int dy = ViewUtil.getStatusBarHeight() + ViewUtil.dip2px(44) - ViewUtil.dip2px(50);
         mPlayer.setY(y - dy);
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+        if (recyclerView == null) return;
+        recyclerView.setClickViewToCenter(position);
     }
 }

@@ -42,6 +42,11 @@ import tv.danmaku.ijk.media.player.IjkMediaPlayer;
  * Email:z53520@qq.com
  */
 public class SimplePlayerLayout extends FrameLayout {
+    @Override
+    protected void onDetachedFromWindow() {
+        onDestroy();
+        super.onDetachedFromWindow();
+    }
 
     //等比缩放,画面填满view。
     public static final String SCALE_TYPE_FIT_PARENT = "fitParent";

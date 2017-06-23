@@ -7,11 +7,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 
-import com.song.sunset.beans.VideoBean;
-import com.song.sunset.fragments.VideoListPlayFragment;
 import com.song.sunset.impls.LoadingMoreListener;
 import com.song.sunset.utils.ViewUtil;
+import com.song.video.SimplePlayerLayout;
 
 /**
  * Created by Song on 2016/8/31 0031.
@@ -175,6 +175,14 @@ public class LoadMoreRecyclerView extends RecyclerView {
         }
     }
 
+    private int getDy(View targetView) {
+        if (targetView == null) return 0;
+        int top = (int) getTopPosition(targetView);
+        int height = targetView.getHeight();
+        int targetTop = mCenterLine - height / 2;
+        return top - targetTop;
+    }
+
     private boolean isCenterItemView(View tempView) {
         if (tempView == null) {
             return false;
@@ -206,5 +214,19 @@ public class LoadMoreRecyclerView extends RecyclerView {
             }
         }
         return max;
+    }
+
+    /**
+     * 设置点击的itemiew，使其滑动到屏幕中间
+     *
+     * @param position
+     */
+    public void setClickViewToCenter(int position) {
+        RecyclerView.LayoutManager layoutManager = getLayoutManager();
+        if (layoutManager instanceof LinearLayoutManager) {
+            View targetView = layoutManager.findViewByPosition(position);
+            int dy = getDy(targetView);
+            this.smoothScrollBy(0, dy);
+        }
     }
 }

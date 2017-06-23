@@ -49,7 +49,18 @@ public class VideoListAdapter extends BaseRecyclerViewAdapter<VideoBean.ItemBean
     }
 
     protected void onItemClick(View view, int position) {
-//        VideoBean.ItemBean bean = getData().get(position);
-//        PhoenixVideoActivity.start(context, bean.getVideo_url(), bean.getTitle(), bean.getImage());
+        if (mOnItemClickListener != null) {
+            mOnItemClickListener.onItemClick(view, position);
+        }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(View view, int position);
+    }
+
+    private OnItemClickListener mOnItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.mOnItemClickListener = onItemClickListener;
     }
 }
