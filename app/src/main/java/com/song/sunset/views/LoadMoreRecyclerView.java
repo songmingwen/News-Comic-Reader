@@ -202,7 +202,7 @@ public class LoadMoreRecyclerView extends RecyclerView {
     }
 
     private void initPosition() {
-        mCenterLine = ViewUtil.getScreenHeigth() / 2 - ViewUtil.dip2px(70);//中线位置为屏幕中心靠上70dp
+        mCenterLine = ViewUtil.getScreenHeigth() / 2;
         mRootTop = getTopPosition(this);
     }
 

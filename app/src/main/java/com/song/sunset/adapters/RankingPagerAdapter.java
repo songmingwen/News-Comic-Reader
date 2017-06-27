@@ -5,6 +5,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.song.sunset.fragments.ComicRankListFragment;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,5 +61,17 @@ public class RankingPagerAdapter<T extends Fragment> extends FragmentStatePagerA
             fragment = fragments.get(position);
         }
         return fragment;
+    }
+
+    @Override
+    public float getPageWidth(int position) {
+        if (position == 0) {
+            if (fragments != null &&
+                    fragments.get(0) != null &&
+                    fragments.get(0) instanceof ComicRankListFragment) {
+                return 1.5f;
+            }
+        }
+        return super.getPageWidth(position);
     }
 }

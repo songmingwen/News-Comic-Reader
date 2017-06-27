@@ -218,7 +218,7 @@ public class SimplePlayerLayout extends FrameLayout {
                 return false;
             }
         });
-
+        videoView.setRender(IjkVideoView.RENDER_SURFACE_VIEW);
         seekBar = (SeekBar) findViewById(R.id.app_video_seekBar);
         seekBar.setMax(1000);
         seekBar.setOnSeekBarChangeListener(mSeekListener);
