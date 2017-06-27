@@ -72,6 +72,24 @@ public class VideoListActivity extends AppCompatActivity {
                 page.setAlpha(normalizedposition);
             }
         });
+        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+
+            @Override
+            public void onPageSelected(int position) {
+                if (rankingPagerAdapter == null) return;
+
+                Fragment fragment = rankingPagerAdapter.getItem(0);
+
+                if (fragment instanceof VideoListPlayFragment) {
+                    VideoListPlayFragment videoListPlayFragment = (VideoListPlayFragment) fragment;
+                    if (position == 0) {
+                        videoListPlayFragment.restartVideo();
+                    } else {
+                        videoListPlayFragment.pauseVideo();
+                    }
+                }
+            }
+        });
         slidingTabLayout.setViewPager(viewPager);
 
         loadNetData();

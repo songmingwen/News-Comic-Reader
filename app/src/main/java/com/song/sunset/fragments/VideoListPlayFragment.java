@@ -230,4 +230,15 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
         if (recyclerView == null) return;
         recyclerView.setClickViewToCenter(position);
     }
+
+    public void restartVideo() {
+        if (mPlayer == null) return;
+        mPlayer.start();
+    }
+
+    public void pauseVideo() {
+        if (mPlayer == null) return;
+        if (mPlayer.getPlayState() == SimplePlayerLayout.STATUS_PAUSE) return;
+        mPlayer.pause();
+    }
 }

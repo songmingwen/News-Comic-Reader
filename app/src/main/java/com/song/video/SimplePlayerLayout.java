@@ -79,12 +79,12 @@ public class SimplePlayerLayout extends FrameLayout {
     private boolean playerSupport;
     private String url;
     private Query $;
-    private int STATUS_ERROR = -1;
-    private int STATUS_IDLE = 0;
-    private int STATUS_LOADING = 1;
-    private int STATUS_PLAYING = 2;
-    private int STATUS_PAUSE = 3;
-    private int STATUS_COMPLETED = 4;
+    public static final int STATUS_ERROR = -1;
+    public static final int STATUS_IDLE = 0;
+    public static final int STATUS_LOADING = 1;
+    public static final int STATUS_PLAYING = 2;
+    public static final int STATUS_PAUSE = 3;
+    public static final int STATUS_COMPLETED = 4;
     private long pauseTime;
     private int status = STATUS_IDLE;
     private boolean isLive = false;//是否为直播
@@ -218,7 +218,6 @@ public class SimplePlayerLayout extends FrameLayout {
                 return false;
             }
         });
-        videoView.setRender(IjkVideoView.RENDER_SURFACE_VIEW);
         seekBar = (SeekBar) findViewById(R.id.app_video_seekBar);
         seekBar.setMax(1000);
         seekBar.setOnSeekBarChangeListener(mSeekListener);
@@ -559,7 +558,7 @@ public class SimplePlayerLayout extends FrameLayout {
     }
 
     public void onConfigurationChanged(final Configuration newConfig) {
-        if (!mCanChangeOrientation){
+        if (!mCanChangeOrientation) {
             orientationEventListener.disable();
             return;
         }
@@ -1214,4 +1213,7 @@ public class SimplePlayerLayout extends FrameLayout {
         return this;
     }
 
+    public int getPlayState() {
+        return status;
+    }
 }
