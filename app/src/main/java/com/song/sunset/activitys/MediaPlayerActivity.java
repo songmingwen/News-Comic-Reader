@@ -27,7 +27,7 @@ import com.song.sunset.activitys.base.BaseActivity;
  * Created by z5352_000 on 2016/10/20 0020.
  */
 
-public class MeadiaPlayerActivity extends BaseActivity implements OnCompletionListener, OnErrorListener, OnInfoListener,
+public class MediaPlayerActivity extends BaseActivity implements OnCompletionListener, OnErrorListener, OnInfoListener,
         OnPreparedListener, OnSeekCompleteListener, OnVideoSizeChangedListener, SurfaceHolder.Callback {
     private Display currDisplay;
     private SurfaceView surfaceView;
@@ -195,6 +195,6 @@ public class MeadiaPlayerActivity extends BaseActivity implements OnCompletionLi
     }
 
     public static void start(Context context) {
-        context.startActivity(new Intent(context, MeadiaPlayerActivity.class));
+        context.startActivity(new Intent(context, MediaPlayerActivity.class));
     }
 }

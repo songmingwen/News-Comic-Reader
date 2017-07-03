@@ -70,7 +70,7 @@
         <activity android:name="com.subscaleview.sample.extension.ExtensionActivity"/>
         <activity android:name="com.subscaleview.sample.viewpager.ViewPagerActivity"/>
         <activity android:name="com.subscaleview.sample.imagedisplay.ImageDisplayActivity"/>
-        <activity android:name=".activitys.MeadiaPlayerActivity"/>
+        <activity android:name=".activitys.MediaPlayerActivity"/>
         <activity android:name=".activitys.VideoViewActivity"/>
         <activity android:name=".activitys.TouchEventTestActivity"/>
         <activity android:name=".activitys.TempTestActivity"/>
