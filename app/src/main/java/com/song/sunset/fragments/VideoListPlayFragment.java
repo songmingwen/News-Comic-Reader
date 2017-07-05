@@ -23,6 +23,7 @@ import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.utils.api.PhoenixNewsApi;
 import com.song.sunset.utils.api.WholeApi;
 import com.song.sunset.views.LoadMoreRecyclerView;
+import com.song.sunset.views.VideoAutoPlayRecyclerView;
 import com.song.video.SimplePlayerLayout;
 
 import java.util.List;
@@ -38,15 +39,18 @@ import rx.Observable;
  * E-mail: z53520@qq.com
  */
 
-public class VideoListPlayFragment extends BaseFragment implements LoadingMoreListener, LoadMoreRecyclerView.VideoListPlayListener, VideoListAdapter.OnItemClickListener {
+public class VideoListPlayFragment extends BaseFragment implements LoadingMoreListener,
+        VideoListAdapter.OnItemClickListener, VideoAutoPlayRecyclerView.VideoListPlayListener {
 
     private String typeid = "";
-    private LoadMoreRecyclerView recyclerView;
+    private VideoAutoPlayRecyclerView recyclerView;
     private VideoListAdapter mAdapter;
     private int currentPage = 1;
     private boolean isLoading, isRefreshing = false, first;
     private ProgressLayout progressLayout;
     private RelativeLayout progressBar;
+
+    private SimplePlayerLayout mPlayer;
 
     private View.OnClickListener errorClickListener = new View.OnClickListener() {
         @Override
@@ -54,8 +58,6 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
             getDataFromRetrofit2(1);
         }
     };
-
-    private SimplePlayerLayout mPlayer;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,34 +81,20 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
         progressLayout = (ProgressLayout) view.findViewById(R.id.progress__);
         progressLayout.showLoading();
 
-        mPlayer = (SimplePlayerLayout) view.findViewById(R.id.video_in_list);
-        mPlayer.setOnScrollListener(false);
-        mPlayer.setCanChangeOrientation(false);
-
         progressBar = (RelativeLayout) view.findViewById(R.id.id_loading_more_progress);
         showProgress(false);
 
-        recyclerView = (LoadMoreRecyclerView) view.findViewById(R.id.rv_video_list);
+        recyclerView = (VideoAutoPlayRecyclerView) view.findViewById(R.id.rv_video_list);
 
         mAdapter = new VideoListAdapter(getActivity());
         mAdapter.setOnItemClickListener(this);
         recyclerView.setAdapter(mAdapter);
         recyclerView.setLoadingMoreListener(this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()) {
-            @Override
-            protected int getExtraLayoutSpace(RecyclerView.State state) {
-                return ViewUtil.getScreenHeigth() / 3;
-            }
-        });
-        getDataFromRetrofit2(currentPage);
-
-        setOnScrollListener();
-
-    }
-
-    private void setOnScrollListener() {
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setVideoListener(this);
+        getDataFromRetrofit2(currentPage);
     }
+
 
     @Override
     public void onResume() {
@@ -203,8 +191,9 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
     }
 
     @Override
-    public void playVideo(int position) {
-        mPlayer.setVisibility(View.VISIBLE);
+    public void playVideo(SimplePlayerLayout player, int position) {
+        mPlayer = player;
+        if (mPlayer == null) return;
         VideoBean.ItemBean mItemBean = mAdapter.getData().get(position);
         mPlayer.setCover(mItemBean.getImage());
         mPlayer.setTitle(mItemBean.getTitle());
@@ -215,14 +204,7 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
     public void stopVideo() {
         if (mPlayer != null) {
             mPlayer.onDestroy();
-            mPlayer.setVisibility(View.GONE);
         }
-    }
-
-    @Override
-    public void locate(float y) {
-        int dy = ViewUtil.getStatusBarHeight() + ViewUtil.dip2px(44) - ViewUtil.dip2px(50);
-        mPlayer.setY(y - dy);
     }
 
     @Override

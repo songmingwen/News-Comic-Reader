@@ -48,6 +48,15 @@ public class VideoListAdapter extends BaseRecyclerViewAdapter<VideoBean.ItemBean
         videoListViewHolder.videoName.setText(bean.getTitle());
     }
 
+    @Override
+    public void onViewDetachedFromWindow(RecyclerView.ViewHolder holder) {
+        super.onViewDetachedFromWindow(holder);
+        ViewGroup viewGroup = (ViewGroup) holder.itemView;
+        if (viewGroup.getChildCount() > 2) {
+            viewGroup.removeViewAt(2);
+        }
+    }
+
     protected void onItemClick(View view, int position) {
         if (mOnItemClickListener != null) {
             mOnItemClickListener.onItemClick(view, position);

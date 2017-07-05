@@ -15,7 +15,7 @@
     progressActivity:errorTitleTextColor="#000000"
     progressActivity:loadingBackgroundColor="#FFFFFF">
 
-    <com.song.sunset.views.LoadMoreRecyclerView
+    <com.song.sunset.views.VideoAutoPlayRecyclerView
         android:id="@+id/rv_video_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
