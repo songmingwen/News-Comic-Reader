@@ -35,10 +35,4 @@
             android:layout_height="30dp"
             android:layout_centerInParent="true"/>
     </RelativeLayout>
-
-    <com.song.video.SimplePlayerLayout
-        android:id="@+id/video_in_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"/>
 </com.song.sunset.utils.loadingmanager.ProgressLayout>
