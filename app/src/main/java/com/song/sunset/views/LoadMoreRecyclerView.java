@@ -6,12 +6,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.AttributeSet;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.song.sunset.impls.LoadingMoreListener;
-import com.song.sunset.utils.ViewUtil;
-import com.song.video.SimplePlayerLayout;
 
 /**
  * Created by Song on 2016/8/31 0031.

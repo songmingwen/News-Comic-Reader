@@ -3,9 +3,7 @@ package com.song.sunset.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -15,23 +13,17 @@ import com.song.sunset.adapters.VideoListAdapter;
 import com.song.sunset.beans.VideoBean;
 import com.song.sunset.fragments.base.BaseFragment;
 import com.song.sunset.impls.LoadingMoreListener;
-import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.retrofit.RetrofitService;
 import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.utils.api.PhoenixNewsApi;
 import com.song.sunset.utils.api.WholeApi;
-import com.song.sunset.views.LoadMoreRecyclerView;
 import com.song.sunset.views.VideoAutoPlayRecyclerView;
 import com.song.video.SimplePlayerLayout;
 
 import java.util.List;
 
-import in.srain.cube.views.ptr.PtrDefaultHandler;
-import in.srain.cube.views.ptr.PtrFrameLayout;
-import in.srain.cube.views.ptr.PtrHandler;
-import in.srain.cube.views.ptr.header.StoreHouseHeader;
 import rx.Observable;
 
 /**

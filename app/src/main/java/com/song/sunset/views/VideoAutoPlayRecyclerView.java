@@ -16,7 +16,7 @@ import com.song.video.SimplePlayerLayout;
  * E-mail: z53520@qq.com
  */
 
-public class VideoAutoPlayRecyclerView extends LoadMoreRecyclerView {
+public class VideoAutoPlayRecyclerView extends LoadMoreRecyclerView implements Runnable {
 
     private boolean changed = false;
 
@@ -152,11 +152,17 @@ public class VideoAutoPlayRecyclerView extends LoadMoreRecyclerView {
         mPlayer = new SimplePlayerLayout(getContext());
         mPlayer.setOnScrollListener(false);
         mPlayer.setCanChangeOrientation(false);
+        mPlayer.onComplete(this);
     }
 
 
+    @Override
+    public void run() {
+        setClickViewToCenter(currentPlayerPosition + 1);
+    }
+
     /**
-     * 设置点击的itemiew，使其滑动到屏幕中间
+     * 设置点击的itemView，使其滑动到屏幕中间
      *
      * @param position
      */
