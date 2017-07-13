@@ -85,6 +85,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         navigationView.setCheckedItem(R.id.nav_map);
+        navigationView.setItemIconTintList(null);
     }
 
     private void setUpListener() {
@@ -229,39 +230,20 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_gallery) {
-            switchFragmentDelay(MVPComicListFragment.class.getName(), "更新漫画");
+            switchFragmentDelay(MVPComicListFragment.class.getName(), getResources().getString(R.string.newest_comic));
         } else if (id == R.id.classify_comic) {
-            switchFragmentDelay(ComicClassifyFragment.class.getName(), "分类漫画");
+            switchFragmentDelay(ComicClassifyFragment.class.getName(), getResources().getString(R.string.classify_comic));
         } else if (id == R.id.nav_video) {
-//            switchFragmentDelay(TVListFragment.class.getName(), "电视频道");
             VideoListActivity.start(this);
         } else if (id == R.id.nav_manage) {
-//            ComicRankFragment.start(MainActivity.this);
-            switchFragmentDelay(ComicRankFragment.class.getName(), "排行漫画");
-
+            switchFragmentDelay(ComicRankFragment.class.getName(), getResources().getString(R.string.rank_comic));
         } else if (id == R.id.nav_map) {
-            switchFragmentDelay(PhoenixListFragment.class.getName(), "凤凰新闻");
-//            getmHandler().postDelayed(new Runnable() {
-//                @Override
-//                public void run() {
-//                    LocationMarkerActivity.start(MainActivity.this);
-//                }
-//            }, 300);
+            switchFragmentDelay(PhoenixListFragment.class.getName(), getResources().getString(R.string.phoenix_news));
         } else if (id == R.id.nav_collection) {
-            switchFragmentDelay(CollectionFragment.class.getName(), "收藏漫画");
-
-//            getmHandler().postDelayed(new Runnable() {
-//                @Override
-//                public void run() {
-//                    BasicMapActivity.start(MainActivity.this);
-//                    MeadiaPlayerActivity.start(MainActivity.this);
-//                    VideoViewActivity.start(MainActivity.this);
-//                }
-//            }, 300);
+            switchFragmentDelay(CollectionFragment.class.getName(), getResources().getString(R.string.collection_comic));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

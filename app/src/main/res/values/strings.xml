@@ -37,4 +37,11 @@
     <string name="can_not_play">不能播放此视频</string>
     <string name="not_support">播放器不支持此设备</string>
     <string name="announce">app所有资源均用于学习，不用做任何商业用途，若有侵权行为请告知，本人马上撤除。</string>
+
+    <string name="newest_comic">最新漫画</string>
+    <string name="classify_comic">分类漫画</string>
+    <string name="rank_comic">排行漫画</string>
+    <string name="collection_comic">收藏漫画</string>
+    <string name="phoenix_news">凤凰新闻</string>
+    <string name="phoenix_video">凤凰视频</string>
 </resources>

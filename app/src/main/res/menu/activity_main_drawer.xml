@@ -2,30 +2,39 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/icon_comic"
-            android:title="更新漫画" />
-        <item
-            android:id="@+id/classify_comic"
-            android:icon="@drawable/icon_comic"
-            android:title="分类漫画" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/icon_comic"
-            android:title="排行漫画" />
-        <item
-            android:id="@+id/nav_collection"
-            android:icon="@drawable/icon_comic"
-            android:title="收藏漫画" />
-        <item
-            android:id="@+id/nav_map"
-            android:icon="@drawable/news"
-            android:title="凤凰新闻" />
-        <item
-            android:id="@+id/nav_video"
-            android:icon="@drawable/icon_video"
-            android:title="视频播放" />
+        <item android:title="漫画">
+            <menu>
+                <item
+                    android:id="@+id/nav_gallery"
+                    android:icon="@drawable/icon_comic"
+                    android:title="@string/newest_comic"/>
+                <item
+                    android:id="@+id/classify_comic"
+                    android:icon="@drawable/icon_comic"
+                    android:title="@string/classify_comic"/>
+                <item
+                    android:id="@+id/nav_manage"
+                    android:icon="@drawable/icon_comic"
+                    android:title="@string/rank_comic"/>
+                <item
+                    android:id="@+id/nav_collection"
+                    android:icon="@drawable/icon_comic"
+                    android:title="@string/collection_comic"/>
+            </menu>
+        </item>
+
+        <item android:title="新闻">
+            <menu>
+                <item
+                    android:id="@+id/nav_map"
+                    android:icon="@drawable/news"
+                    android:title="@string/phoenix_news"/>
+                <item
+                    android:id="@+id/nav_video"
+                    android:icon="@drawable/icon_video"
+                    android:title="@string/phoenix_video"/>
+            </menu>
+        </item>
     </group>
 
 </menu>
