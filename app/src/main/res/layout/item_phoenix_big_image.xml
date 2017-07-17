@@ -31,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:src="@drawable/ic_play_circle_outline_white_36dp"
+                android:src="@drawable/icon_video_play_image"
                 android:visibility="gone"/>
         </RelativeLayout>
 
