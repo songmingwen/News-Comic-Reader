@@ -1,6 +1,8 @@
 package com.song.sunset.model;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.view.View;
 
 import com.song.sunset.beans.PhoenixChannelBean;
 import com.song.sunset.holders.TitleImageViewHolder;
@@ -18,6 +20,7 @@ public class TitleImageRenderModel extends PhoenixBaseRenderModel {
     @Override
     public void render(RecyclerView.ViewHolder holder, PhoenixChannelBean phoenixChannelBean) {
         TitleImageViewHolder viewHolder = (TitleImageViewHolder) holder;
+        viewHolder.videoImage.setVisibility(TextUtils.equals(phoenixChannelBean.getType(), "phvideo") ? View.VISIBLE : View.GONE);
         FrescoUtil.setFrescoImage(viewHolder.image, phoenixChannelBean.getThumbnail());
         PhoenixRenderModel.setTitleAndBottomData(phoenixChannelBean, viewHolder);
     }

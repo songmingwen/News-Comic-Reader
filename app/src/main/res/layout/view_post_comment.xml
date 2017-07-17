@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/view_post_comment_num_tv"
         android:text="用户名"
-        android:textColor="@color/color_0096B6"
+        android:textColor="@color/color_accent"
         android:textSize="14sp" />
 
     <TextView

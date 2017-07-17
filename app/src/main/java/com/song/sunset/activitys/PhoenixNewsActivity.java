@@ -132,7 +132,7 @@ public class PhoenixNewsActivity extends BaseActivity {
             if (progress < 100 && progressBar.getVisibility() == ProgressBar.GONE) {
                 progressBar.setVisibility(ProgressBar.VISIBLE);
             }
-            if (progress >= 60) {
+            if (progress >= 30) {
                 mLoadingAndRetryManager.showContent();
             }
             progressBar.setProgress(progress);
