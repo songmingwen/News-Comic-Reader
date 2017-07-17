@@ -28,11 +28,11 @@
 
             <ImageView
                 android:id="@+id/img_title_image_video"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_centerInParent="true"
                 android:src="@drawable/icon_video_play_image"
-                android:visibility="visible"/>
+                android:visibility="gone"/>
         </RelativeLayout>
 
         <RelativeLayout
