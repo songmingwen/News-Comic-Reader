@@ -34,4 +34,22 @@
         <attr name="errorButtonTextColor" format="color"/>
         <attr name="errorBackgroundColor" format="color"/>
     </declare-styleable>
+
+    <declare-styleable name="SwitchDayNightMode">
+        <attr name="windowEnterAnimation" format="dimension"/>
+        <attr name="windowExitAnimation" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="SkinnableView">
+        <attr name="android:background" />
+        <attr name="backgroundTint" />
+    </declare-styleable>
+
+    <declare-styleable name="SkinnableTextView">
+        <attr name="android:textColor" />
+    </declare-styleable>
+
+    <declare-styleable name="SkinnableButton">
+        <attr name="android:textColor" />
+    </declare-styleable>
 </resources>

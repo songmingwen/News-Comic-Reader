@@ -7,8 +7,11 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatDelegate;
 import android.text.TextUtils;
 import android.view.WindowManager;
+
+import com.song.sunset.utils.SPUtils;
 
 import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
 
@@ -101,5 +104,17 @@ public class BaseActivity extends SwipeBackActivity {
             supportFragmentManager.executePendingTransactions();
         }
         return mFragment;
+    }
+
+    protected void switchDayNightMode() {
+        boolean nightMode = isNightMode();
+        SPUtils.setBooleanByName(this, SPUtils.APP_NIGHT_MODE, !nightMode);
+        getDelegate().setLocalNightMode(nightMode ?
+                AppCompatDelegate.MODE_NIGHT_NO : AppCompatDelegate.MODE_NIGHT_YES);
+        recreate();//重新启动当前activity
+    }
+
+    public boolean isNightMode() {
+        return SPUtils.getBooleanByName(this, SPUtils.APP_NIGHT_MODE, false);
     }
 }

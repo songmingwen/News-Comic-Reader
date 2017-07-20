@@ -14,6 +14,7 @@ public class SPUtils {
     public static final String APP_USER_KEY = "app_user_key";
     public static final String APP_IMEI_KEY = "app_imei_key";
     public static final String APP_ANDROID_ID_KEY = "app_androidid_key";
+    public static final String APP_NIGHT_MODE = "night_mode";
 
     public static String getStringByName(Context context, String name,
                                          String default_value) {

@@ -1,9 +1,8 @@
 package com.song.sunset.activitys;
 
-import android.content.ContentResolver;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -19,16 +18,12 @@ import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.TimePickerView;
 import com.song.sunset.R;
 import com.song.sunset.activitys.base.BaseActivity;
-import com.song.sunset.beans.MusicInfo;
-import com.song.sunset.beans.User;
 import com.song.sunset.fragments.CollectionFragment;
 import com.song.sunset.fragments.ComicClassifyFragment;
 import com.song.sunset.fragments.ComicRankFragment;
 import com.song.sunset.fragments.PhoenixListFragment;
 import com.song.sunset.fragments.MVPComicListFragment;
 import com.song.sunset.utils.DateTimeUtils;
-import com.song.sunset.utils.MusicLoader;
-import com.song.sunset.utils.PushManager;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -58,6 +53,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        getDelegate().setLocalNightMode(isNightMode() ?
+//                AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
 
         initView();
         initDrawer();
@@ -84,7 +81,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-        navigationView.setCheckedItem(R.id.nav_map);
+        navigationView.setCheckedItem(R.id.nav_news);
         navigationView.setItemIconTintList(null);
     }
 
@@ -98,7 +95,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //                pvTime.show();
 //                pvOptions.show();
 //                MainActivity.this.startActivity(new Intent(MainActivity.this, SubScaleViewActivity.class));
-                MainActivity.this.startActivity(new Intent(MainActivity.this, TouchEventTestActivity.class));
+//                MainActivity.this.startActivity(new Intent(MainActivity.this, TouchEventTestActivity.class));
 //                MainActivity.this.startActivity(new Intent(MainActivity.this, TempTestActivity.class));
 //                new ImageViewer.Builder(MainActivity.this, new String[]{"http://img2.niutuku.com/1312/0831/0831-niutuku.com-28071.jpg",
 //                        "http://img2.niutuku.com/desk/130220/52/52-niutuku.com-984.jpg",
@@ -110,9 +107,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //                        .show();
 
 //                RecursiveTest();
-                PushManager.getInstance().connect();
-                PushManager.getInstance().sendMusicInfo(MusicLoader.instance(MainActivity.this.getContentResolver()).getMusicList().get(0));
-                Log.i("music_list: ", MusicLoader.instance(MainActivity.this.getContentResolver()).getMusicList().toString());
+//                PushManager.getInstance().connect();
+//                PushManager.getInstance().sendMusicInfo(MusicLoader.instance(MainActivity.this.getContentResolver()).getMusicList().get(0));
+//                Log.i("music_list: ", MusicLoader.instance(MainActivity.this.getContentResolver()).getMusicList().toString());
+                switchDayNightMode();
             }
         });
     }
@@ -234,13 +232,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         if (id == R.id.nav_gallery) {
             switchFragmentDelay(MVPComicListFragment.class.getName(), getResources().getString(R.string.newest_comic));
-        } else if (id == R.id.classify_comic) {
+        } else if (id == R.id.nav_classify_comic) {
             switchFragmentDelay(ComicClassifyFragment.class.getName(), getResources().getString(R.string.classify_comic));
         } else if (id == R.id.nav_video) {
             VideoListActivity.start(this);
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_rank_comic) {
             switchFragmentDelay(ComicRankFragment.class.getName(), getResources().getString(R.string.rank_comic));
-        } else if (id == R.id.nav_map) {
+        } else if (id == R.id.nav_news) {
             switchFragmentDelay(PhoenixListFragment.class.getName(), getResources().getString(R.string.phoenix_news));
         } else if (id == R.id.nav_collection) {
             switchFragmentDelay(CollectionFragment.class.getName(), getResources().getString(R.string.collection_comic));
@@ -306,6 +304,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     private void switchFragmentDelay(final String className, final String title) {
+        fab.setVisibility(TextUtils.equals(className, PhoenixListFragment.class.getName()) ? View.VISIBLE : View.GONE);
         getmHandler().postDelayed(new Runnable() {
             @Override
             public void run() {
