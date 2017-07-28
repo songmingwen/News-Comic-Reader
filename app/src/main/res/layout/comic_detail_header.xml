@@ -49,8 +49,14 @@
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/id_comic_detail_header_image"
                 android:layout_width="113dp"
+                android:layout_height="143dp"/>
+
+            <ImageView
+                android:id="@+id/id_comic_detail_header_img"
+                android:layout_width="113dp"
                 android:layout_height="143dp"
-                android:layout_centerHorizontal="true"/>
+                android:visibility="gone"
+                android:scaleType="fitXY"/>
         </android.support.v7.widget.CardView>
 
         <TextView

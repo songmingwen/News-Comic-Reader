@@ -2,6 +2,7 @@ package com.song.sunset.holders;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -18,11 +19,13 @@ public class ComicListViewHolder extends RecyclerView.ViewHolder {
     public SimpleDraweeView simpleDraweeView;
     public TextView comicName, comicDesc, comicAuthor, comicTags, haveUpdate;
     public RelativeLayout comicListLayout;
+    public ImageView cover;
 
     public ComicListViewHolder(View itemview) {
         super(itemview);
         comicListLayout = (RelativeLayout) itemview.findViewById(R.id.id_comic_list_item);
         simpleDraweeView = (SimpleDraweeView) itemview.findViewById(R.id.id_comic_list_simple_drawee_view);
+        cover = (ImageView) itemview.findViewById(R.id.id_comic_list_image_view);
         comicName = (TextView) itemview.findViewById(R.id.id_comic_list_simple_comic_name);
         comicDesc = (TextView) itemview.findViewById(R.id.id_comic_list_simple_comic_desc);
         comicAuthor = (TextView) itemview.findViewById(R.id.id_comic_list_simple_comic_author);

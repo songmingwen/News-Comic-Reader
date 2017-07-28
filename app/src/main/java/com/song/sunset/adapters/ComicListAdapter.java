@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.song.sunset.R;
 import com.song.sunset.activitys.ComicDetailMVPActivity;
 import com.song.sunset.adapters.base.BaseRecyclerViewAdapter;
@@ -36,13 +37,15 @@ public class ComicListAdapter extends BaseRecyclerViewAdapter<ComicsBean, ComicL
         ComicsBean comicsBean = getData().get(position);
         ComicListViewHolder comicListViewHolder = (ComicListViewHolder) holder;
 
-        int realWidth = (ViewUtil.getScreenWidth() - ViewUtil.dip2px(56)) / 3;
-        int realHeight = realWidth * 143 / 113;
+        int realWidth = ViewUtil.dip2px(113);
+        int realHeight = ViewUtil.dip2px(143);
 
         comicListViewHolder.comicName.setText(comicsBean.getName());
         comicListViewHolder.comicDesc.setText(comicsBean.getDescription());
         comicListViewHolder.comicAuthor.setText(comicsBean.getAuthor());
         comicListViewHolder.comicTags.setText(getTags(comicsBean));
+
+//        Glide.with(context).load(comicsBean.getCover()).into(comicListViewHolder.cover);
         FrescoUtil.setFrescoCoverImage(comicListViewHolder.simpleDraweeView, comicsBean.getCover(), realWidth, realHeight);
     }
 

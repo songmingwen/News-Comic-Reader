@@ -53,6 +53,8 @@ public class ComicDetailAdapter extends RecyclerView.Adapter {
             if (getItemViewType(position) == COMIC_DETAIL_TYPE) {
                 ComicDetailHeaderViewHolder headViewHolder = (ComicDetailHeaderViewHolder) holder;
                 FrescoUtil.setFrescoCoverImage(headViewHolder.simpleDraweeView, data.getComic().getCover(), ViewUtil.dip2px(113), ViewUtil.dip2px(143));
+//                Glide.with(context).load(data.getComic().getCover()).into(headViewHolder.cover);
+
                 headViewHolder.comicName.setText(data.getComic().getName());
                 headViewHolder.authorName.setText(data.getComic().getAuthor().getName());
                 headViewHolder.authorName.setTextColor(color);

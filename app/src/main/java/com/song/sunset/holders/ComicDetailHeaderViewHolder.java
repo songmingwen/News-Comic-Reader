@@ -19,12 +19,13 @@ public class ComicDetailHeaderViewHolder extends RecyclerView.ViewHolder {
     public SimpleDraweeView simpleDraweeView;
     public TextView comicName;
     public TextView authorName;
-    public ImageView imageBg;
+    public ImageView cover, imageBg;
 
     public ComicDetailHeaderViewHolder(View itemview) {
         super(itemview);
         comicDetailLayout = (RelativeLayout) itemview.findViewById(R.id.id_comic_detail_header_layout);
         simpleDraweeView = (SimpleDraweeView) itemview.findViewById(R.id.id_comic_detail_header_image);
+        cover = (ImageView) itemview.findViewById(R.id.id_comic_detail_header_img);
         comicName = (TextView) itemview.findViewById(R.id.id_comic_detail_header_comic_name);
         authorName = (TextView) itemview.findViewById(R.id.id_comic_detail_header_author_name);
         imageBg = (ImageView) itemview.findViewById(R.id.img_bg);
