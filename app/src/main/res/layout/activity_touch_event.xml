@@ -4,11 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.song.sunset.views.TouchEventOuterViewGroup
+    <com.song.sunset.widget.TouchEventOuterViewGroup
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.song.sunset.views.TouchEventInnerViewGroup
+        <com.song.sunset.widget.TouchEventInnerViewGroup
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -46,18 +46,18 @@
                 android:clipToPadding="false"
                 android:paddingBottom="25dp">
 
-                <com.song.sunset.views.FloorView
+                <com.song.sunset.widget.FloorView
                     android:id="@+id/floor_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical" />
             </ScrollView>
 
-            <com.song.sunset.views.WaveView
+            <com.song.sunset.widget.WaveView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerInParent="true" />
-        </com.song.sunset.views.TouchEventInnerViewGroup>
-    </com.song.sunset.views.TouchEventOuterViewGroup>
+        </com.song.sunset.widget.TouchEventInnerViewGroup>
+    </com.song.sunset.widget.TouchEventOuterViewGroup>
 </LinearLayout>

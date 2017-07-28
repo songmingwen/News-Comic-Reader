@@ -23,6 +23,7 @@ import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.retrofit.RetrofitService;
 import com.song.sunset.utils.api.U17ComicApi;
+import com.song.sunset.widget.RankViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +40,7 @@ import static com.song.sunset.activitys.ComicListActivity.ARG_VALUE;
 public class ComicRankFragment extends BaseFragment {
 
     private static final String BUNDLE_KEY_PAGE_INDEX = "page_index";
-    private ViewPager rankingViewPager;
+    private RankViewPager rankingViewPager;
     private SlidingTabLayout rankingSlidingTabLayout;
     private RankingPagerAdapter<ComicRankListFragment> rankingPagerAdapter;
     private LoadingAndRetryManager mLoadingAndRetryManager;
@@ -100,7 +101,7 @@ public class ComicRankFragment extends BaseFragment {
 //}
 
     private void initView(View view) {
-        rankingViewPager = (ViewPager) view.findViewById(R.id.ranking_view_pager);
+        rankingViewPager = (RankViewPager) view.findViewById(R.id.ranking_view_pager);
         rankingSlidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.ranking_sliding_layout);
 
         rankingPagerAdapter = new RankingPagerAdapter<>(getChildFragmentManager());

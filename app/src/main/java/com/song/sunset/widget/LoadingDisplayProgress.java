@@ -1,17 +1,15 @@
-package com.song.sunset.views;
+package com.song.sunset.widget;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
+import android.graphics.PixelFormat;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.text.TextPaint;
-import android.util.Log;
 
 import com.song.sunset.utils.ViewUtil;
-
-import static java.security.AccessController.getContext;
 
 /**
  * Created by Song on 2016/8/29 0029.
@@ -111,6 +109,6 @@ public class LoadingDisplayProgress extends Drawable {
 
     @Override
     public int getOpacity() {
-        return 0;
+        return PixelFormat.UNKNOWN;
     }
 }

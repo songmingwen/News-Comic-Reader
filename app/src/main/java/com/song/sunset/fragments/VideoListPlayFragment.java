@@ -19,7 +19,7 @@ import com.song.sunset.utils.retrofit.RetrofitService;
 import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.utils.api.PhoenixNewsApi;
 import com.song.sunset.utils.api.WholeApi;
-import com.song.sunset.views.VideoAutoPlayRecyclerView;
+import com.song.sunset.widget.VideoAutoPlayRecyclerView;
 import com.song.video.SimplePlayerLayout;
 
 import java.util.List;

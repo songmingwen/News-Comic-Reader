@@ -1,4 +1,4 @@
-package com.song.sunset.views;
+package com.song.sunset.widget;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;

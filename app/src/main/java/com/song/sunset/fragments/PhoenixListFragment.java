@@ -22,7 +22,7 @@ import com.song.sunset.utils.retrofit.RetrofitService;
 import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.utils.api.PhoenixNewsApi;
 import com.song.sunset.utils.api.WholeApi;
-import com.song.sunset.views.LoadMoreRecyclerView;
+import com.song.sunset.widget.LoadMoreRecyclerView;
 
 import java.util.List;
 

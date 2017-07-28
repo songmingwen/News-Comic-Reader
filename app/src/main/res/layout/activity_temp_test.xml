@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main_content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/Grey_400">
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/button"
@@ -11,11 +13,31 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_margin="20dp"
-        android:onClick="onTempTestFlowButtonClick" />
+        android:onClick="onTempTestFlowButtonClick"/>
 
-    <com.song.sunset.views.TextSwitchView
+    <com.song.sunset.widget.TextSwitchView
         android:id="@+id/textswitch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true" />
+        android:layout_centerInParent="true"/>
+
+    <ImageView
+        android:id="@+id/image_dot_back"
+        android:layout_width="7dp"
+        android:layout_height="7dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/goods_black_dot"/>
+
+    <ImageView
+        android:id="@+id/image_dot"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/goods_white_dot"/>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="40dp"
+        android:indeterminateDrawable="@drawable/rotate_progress"/>
 </RelativeLayout>

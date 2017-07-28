@@ -21,7 +21,7 @@ import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.retrofit.RetrofitService;
 import com.song.sunset.utils.api.U17ComicApi;
-import com.song.sunset.views.ScaleRecyclerView;
+import com.song.sunset.widget.ScaleRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;

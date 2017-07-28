@@ -22,7 +22,7 @@
         tl:tl_underline_color="@color/color_transparent_88"
         tl:tl_underline_height="0.5dp" />
 
-    <android.support.v4.view.ViewPager
+    <com.song.sunset.widget.RankViewPager
         android:id="@+id/ranking_view_pager"
         android:clipChildren="false"
         android:layout_width="match_parent"

@@ -9,7 +9,7 @@ import com.song.sunset.R;
 import com.song.sunset.activitys.base.BaseActivity;
 import com.song.sunset.beans.Comment;
 import com.song.sunset.beans.User;
-import com.song.sunset.views.FloorView;
+import com.song.sunset.widget.FloorView;
 
 import java.util.ArrayList;
 

@@ -32,7 +32,7 @@
             cube_ptr:ptr_ratio_of_header_height_to_refresh="1.2"
             cube_ptr:ptr_resistance="1.7">
 
-            <com.song.sunset.views.LoadMoreRecyclerView
+            <com.song.sunset.widget.LoadMoreRecyclerView
                 android:id="@+id/rv_video_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>

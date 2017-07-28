@@ -37,8 +37,7 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.facebook.imagepipeline.request.Postprocessor;
 import com.song.sunset.R;
 import com.song.sunset.utils.AppConfig;
-import com.song.sunset.utils.retrofit.OkHttpClient;
-import com.song.sunset.views.LoadingDisplayProgress;
+import com.song.sunset.widget.LoadingDisplayProgress;
 
 /**
  * Created by Song on 2016/8/29 0029.

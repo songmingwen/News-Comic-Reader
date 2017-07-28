@@ -18,7 +18,7 @@ import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.rxjava.RxUtil;
-import com.song.sunset.views.LoadMoreRecyclerView;
+import com.song.sunset.widget.LoadMoreRecyclerView;
 
 import java.util.List;
 

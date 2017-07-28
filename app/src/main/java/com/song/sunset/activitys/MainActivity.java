@@ -1,7 +1,11 @@
 package com.song.sunset.activitys;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.ViewDragHelper;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +16,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.bigkoo.pickerview.OptionsPickerView;
@@ -24,7 +29,10 @@ import com.song.sunset.fragments.ComicRankFragment;
 import com.song.sunset.fragments.PhoenixListFragment;
 import com.song.sunset.fragments.MVPComicListFragment;
 import com.song.sunset.utils.DateTimeUtils;
+import com.song.sunset.utils.ScreenUtils;
+import com.song.sunset.utils.ViewUtil;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -79,10 +87,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setCheckedItem(R.id.nav_news);
         navigationView.setItemIconTintList(null);
+        setDrawerLeftEdgeSize(this, drawer, 0.35f);
     }
 
     private void setUpListener() {
@@ -96,7 +105,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //                pvOptions.show();
 //                MainActivity.this.startActivity(new Intent(MainActivity.this, SubScaleViewActivity.class));
 //                MainActivity.this.startActivity(new Intent(MainActivity.this, TouchEventTestActivity.class));
-//                MainActivity.this.startActivity(new Intent(MainActivity.this, TempTestActivity.class));
+                MainActivity.this.startActivity(new Intent(MainActivity.this, TempTestActivity.class));
 //                new ImageViewer.Builder(MainActivity.this, new String[]{"http://img2.niutuku.com/1312/0831/0831-niutuku.com-28071.jpg",
 //                        "http://img2.niutuku.com/desk/130220/52/52-niutuku.com-984.jpg",
 //                        "http://img01.sogoucdn.com/app/a/100540002/490110.jpg",
@@ -110,7 +119,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //                PushManager.getInstance().connect();
 //                PushManager.getInstance().sendMusicInfo(MusicLoader.instance(MainActivity.this.getContentResolver()).getMusicList().get(0));
 //                Log.i("music_list: ", MusicLoader.instance(MainActivity.this.getContentResolver()).getMusicList().toString());
-                switchDayNightMode();
+
+//                switchDayNightMode();
+
             }
         });
     }

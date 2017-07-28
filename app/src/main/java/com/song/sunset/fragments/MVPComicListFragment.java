@@ -2,9 +2,7 @@ package com.song.sunset.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +12,6 @@ import android.widget.RelativeLayout;
 import com.song.sunset.R;
 import com.song.sunset.activitys.ComicListActivity;
 import com.song.sunset.adapters.ComicListAdapter;
-import com.song.sunset.beans.ComicListBean;
 import com.song.sunset.beans.ComicsBean;
 import com.song.sunset.fragments.base.BaseFragment;
 import com.song.sunset.impls.ComicListView;
@@ -22,7 +19,7 @@ import com.song.sunset.impls.LoadingMoreListener;
 import com.song.sunset.presenter.ComicListPresenter;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
-import com.song.sunset.views.LoadMoreRecyclerView;
+import com.song.sunset.widget.LoadMoreRecyclerView;
 
 import java.util.List;
 
