@@ -8,17 +8,19 @@ import android.view.ViewGroup;
 
 import com.song.sunset.R;
 import com.song.sunset.activitys.ComicReadActivity;
+import com.song.sunset.activitys.ComicReadMVPActivity;
 import com.song.sunset.adapters.base.BaseRecyclerViewAdapter;
-import com.song.sunset.beans.ComicDetailBean;
+import com.song.sunset.beans.ChapterListBean;
 import com.song.sunset.holders.ComicDetailListItemViewHolder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Song on 2016/8/30 0030.
  * Email:z53520@qq.com
  */
-public class ComicDetailListAdapter extends BaseRecyclerViewAdapter<ComicDetailBean.ChapterListBean, ComicDetailListItemViewHolder> {
+public class ComicDetailListAdapter extends BaseRecyclerViewAdapter<ChapterListBean, ComicDetailListItemViewHolder> {
     private Context context;
     private String comicId = "";
 
@@ -35,12 +37,13 @@ public class ComicDetailListAdapter extends BaseRecyclerViewAdapter<ComicDetailB
     @Override
     protected void onBindPersonalViewHolder(RecyclerView.ViewHolder holder, final int position) {
         ComicDetailListItemViewHolder listItemViewHolder = (ComicDetailListItemViewHolder) holder;
-        List<ComicDetailBean.ChapterListBean> data = getData();
+        List<ChapterListBean> data = getData();
         listItemViewHolder.comicListText.setText(data.get(data.size() - 1 - position).getName());
     }
 
     @Override
     protected void onItemClick(View view, int position) {
-        ComicReadActivity.start(context, comicId, getData().size() - 1 - position);
+//        ComicReadActivity.start(context, comicId, getData().size() - 1 - position);
+        ComicReadMVPActivity.start(context, getData().size() - 1 - position, (ArrayList<ChapterListBean>) getData());
     }
 }

@@ -18,12 +18,13 @@ import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
 import com.song.sunset.utils.ViewUtil;
+import com.song.video.SimplePlayer;
 
 /**
  * Created by Song on 2016/8/31 0031.
  * Email:z53520@qq.com
  */
-public class ScaleRecyclerView extends RecyclerView implements View.OnTouchListener, GestureDetector.OnGestureListener, ScaleGestureDetector.OnScaleGestureListener {
+public class ScaleRecyclerView extends RecyclerView implements View.OnTouchListener, ScaleGestureDetector.OnScaleGestureListener {
 
     private Context context;
     public static final String TAG = "ScaleRecyclerView";
@@ -44,8 +45,9 @@ public class ScaleRecyclerView extends RecyclerView implements View.OnTouchListe
     private int firstVisibleItemPosition;
     private int lastVisibleItemPosition;
 
-    private GestureDetector detector;
+    //    private GestureDetector detector;
     private ScaleGestureDetector scaleGestureDetector;
+    private GestureDetector mGestureDetector;
 
     public enum LAYOUT_MANAGER_TYPE {
         LINEAR,
@@ -71,95 +73,95 @@ public class ScaleRecyclerView extends RecyclerView implements View.OnTouchListe
     }
 
     private void init() {
-        detector = new GestureDetector(context, this);
+//        detector = new GestureDetector(context, this);
         scaleGestureDetector = new ScaleGestureDetector(context, this);
+        mGestureDetector = new GestureDetector(context, new ScaleRecyclerViewGestureListener());
         this.setOnTouchListener(this);
     }
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        if (detector != null) {
-            detector.onTouchEvent(event);
+//        if (detector != null) {
+//            detector.onTouchEvent(event);
+//        }
+        if (mGestureDetector != null) {
+            mGestureDetector.onTouchEvent(event);
         }
         if (scaleGestureDetector != null) {
             scaleGestureDetector.onTouchEvent(event);
-//            return scaleGestureDetector.isInProgress();
         }
         return false;
     }
 
-    @Override
-    public boolean onDown(MotionEvent e) {
-//        Log.i(TAG, "onDown: " + e.toString());
-        downX = e.getRawX();
-        downY = e.getRawY();
-        return false;
-    }
-
-    @Override
-    public void onShowPress(MotionEvent e) {
-//        Log.i(TAG, "onShowPress: ");
-    }
-
     private long lastTapTime;
-
     private boolean isZooming = false;
+    private float downX;
+    private float downY;
+    private float moveX;
+    private float moveY;
 
-    @Override
-    public boolean onSingleTapUp(MotionEvent e) {
-//        Log.i(TAG, "onSingleTapUp: " + e.getX());
-        if (System.currentTimeMillis() - lastTapTime < DOUBLE_TAG_TIME_INTERVAL) {
+    public class ScaleRecyclerViewGestureListener extends GestureDetector.SimpleOnGestureListener {
+
+        @Override
+        public boolean onDown(MotionEvent e) {
+            downX = e.getRawX();
+            downY = e.getRawY();
+            return false;
+        }
+
+//        @Override
+//        public boolean onSingleTapUp(MotionEvent e) {
+////        Log.i(TAG, "onSingleTapUp: " + e.getX());
+//            if (System.currentTimeMillis() - lastTapTime < DOUBLE_TAG_TIME_INTERVAL) {
+//                if (isZooming) {
+//                    return false;
+//                } else {
+//                    if (getScaleX() == ORIGINAL_RATE) {
+//                        zoom(ORIGINAL_RATE, MAX_SCALE_RATE, 0, (HALF_SCREEN_WIDTH - e.getX()) * (MAX_SCALE_RATE - 1), 0, (HALF_SCREEN_HEIGHT - e.getY()) * (MAX_SCALE_RATE - 1));
+//                    } else {
+//                        zoom(currentScale, ORIGINAL_RATE, getX(), 0, getY(), 0);
+//                    }
+//                }
+//            }
+//            lastTapTime = System.currentTimeMillis();
+//            return false;
+//        }
+
+        @Override
+        public boolean onDoubleTap(MotionEvent e) {
             if (isZooming) {
-                return false;
+                return super.onDoubleTap(e);
             } else {
                 if (getScaleX() == ORIGINAL_RATE) {
                     zoom(ORIGINAL_RATE, MAX_SCALE_RATE, 0, (HALF_SCREEN_WIDTH - e.getX()) * (MAX_SCALE_RATE - 1), 0, (HALF_SCREEN_HEIGHT - e.getY()) * (MAX_SCALE_RATE - 1));
                 } else {
                     zoom(currentScale, ORIGINAL_RATE, getX(), 0, getY(), 0);
                 }
+                return true;
             }
         }
-        lastTapTime = System.currentTimeMillis();
-        return false;
-    }
 
-    private float downX;
-
-    private float downY;
-    private float moveX;
-    private float moveY;
-
-    @Override
-    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-        if (getScaleX() != ORIGINAL_RATE) {
-            moveX = e2.getRawX();
+        @Override
+        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+            if (getScaleX() != ORIGINAL_RATE) {
+                moveX = e2.getRawX();
 //            Log.i(TAG, "onScroll:moveX= " + moveX);
-            float dx = moveX - downX;
-            float positionX = dx + getX();
+                float dx = moveX - downX;
+                float positionX = dx + getX();
 //            Log.i(TAG, "onScroll:=positionX " + positionX);
-            setX(getPositionX(positionX));
-            downX = moveX;
+                setX(getPositionX(positionX));
+                downX = moveX;
 
-            if (atFirstPosition || atLastPosition) {
-                moveY = e2.getRawY();
-                float dy = moveY - downY;
-                float positionY = dy + getY();
-                setY(getPositionY(positionY));
-                downY = moveY;
+                if (atFirstPosition || atLastPosition) {
+                    moveY = e2.getRawY();
+                    float dy = moveY - downY;
+                    float positionY = dy + getY();
+                    setY(getPositionY(positionY));
+                    downY = moveY;
+                }
             }
+            return true;
         }
-        return true;
-    }
-
-    @Override
-    public void onLongPress(MotionEvent e) {
-//        Log.i(TAG, "onLongPress: ");
-    }
-
-    @Override
-    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-//        Log.i(TAG, "onFling: ");
-        return false;
     }
 
     @Override
@@ -217,6 +219,9 @@ public class ScaleRecyclerView extends RecyclerView implements View.OnTouchListe
         }
     }
 
+    /**
+     * ScaleGestureDetector------------------------------------begin
+     */
     @Override
     public boolean onScale(ScaleGestureDetector detector) {
 //        Log.i(TAG, "onScale: " + detector.getScaleFactor() + "  ***  " + detector.getFocusX() + "  ***  " + detector.getFocusY());
@@ -256,6 +261,10 @@ public class ScaleRecyclerView extends RecyclerView implements View.OnTouchListe
             zoom(currentScale, ORIGINAL_RATE, getX(), 0, getY(), 0);
         }
     }
+
+    /**
+     * ScaleGestureDetector------------------------------------end
+     */
 
     private float getPositionX(float positionX) {
         float maxPositionX = HALF_SCREEN_WIDTH * (currentScale - 1);

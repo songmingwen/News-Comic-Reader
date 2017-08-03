@@ -1,6 +1,7 @@
 package com.song.sunset.utils.api;
 
 import com.song.sunset.beans.ComicRankListBean;
+import com.song.sunset.beans.ComicReadChapterBean;
 import com.song.sunset.beans.basebeans.BaseBean;
 import com.song.sunset.beans.ComicClassifyBean;
 import com.song.sunset.beans.ComicDetailBean;
@@ -20,7 +21,9 @@ import rx.Observable;
  */
 public interface U17ComicApi {
 
-    /**此处若不添加max-age信息，会统一在OfflineCacheControlInterceptor类中添加默认的max-age*/
+    /**
+     * 此处若不添加max-age信息，会统一在OfflineCacheControlInterceptor类中添加默认的max-age
+     */
     //    @Headers("Cache-Control: public, max-age=3600")
     @GET("comic/detail_static_new")
     Call<BaseBean<ComicDetailBean>> queryComicDetailRDByGetCall(
@@ -67,4 +70,9 @@ public interface U17ComicApi {
 
     @GET("rank/list")
     Observable<BaseBean<ComicRankListBean>> queryComicRankListBeanByGetObservable();
+
+    @GET("comic/chapterNew")
+    Observable<BaseBean<ComicReadChapterBean>> queryNewComicReadRDByGetObservable(
+            @Query("chapter_id") String chapterId);
+
 }

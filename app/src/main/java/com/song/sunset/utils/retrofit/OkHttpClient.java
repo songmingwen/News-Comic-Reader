@@ -89,6 +89,7 @@ public enum OkHttpClient {
                 .addQueryParam("nw", "wifi")
                 .addQueryParam("df", "androidphone")
                 .addQueryParam("publishid", "9023")
+                .addQueryParam("v", "3330110")
                 .build();
     }
 }
