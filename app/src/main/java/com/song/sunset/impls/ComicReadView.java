@@ -10,9 +10,7 @@ import java.util.List;
  */
 
 public interface ComicReadView {
-    void loadFirstSuccess(List<ComicReadImageListBean> list);
-
-    void loadFirstFail();
+    void loadFirstEnd(boolean success, List<ComicReadImageListBean> list);
 
     void loadTopEnd(boolean success, List<ComicReadImageListBean> list);
 

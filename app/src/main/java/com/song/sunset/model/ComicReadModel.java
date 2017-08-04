@@ -54,7 +54,7 @@ public class ComicReadModel {
                     if (comicReadChapterBean.getImage_list() == null) {
                         firstLoad(0);
                     } else {
-                        mComicReadView.loadFirstSuccess(comicReadChapterBean.getImage_list());
+                        mComicReadView.loadFirstEnd(true, comicReadChapterBean.getImage_list());
                         loadTop();
                         loadBottom();
                     }
@@ -64,7 +64,7 @@ public class ComicReadModel {
             @Override
             public void onFailure(int errorCode, String errorMsg) {
                 if (mComicReadView != null) {
-                    mComicReadView.loadFirstFail();
+                    mComicReadView.loadFirstEnd(false, null);
                 }
             }
         });
