@@ -50,10 +50,7 @@ import rx.schedulers.Schedulers;
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private Toolbar toolbar;
-    private TimePickerView pvTime;
     private long lastBackPressedTime;
-    private OptionsPickerView pvOptions;
-    private ArrayList<String> options1Items = new ArrayList<>();
     private FloatingActionButton fab;
     private NavigationView navigationView;
 
@@ -66,8 +63,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         initView();
         initDrawer();
-        initTimePicker();
-        initOptionsPicker();
         setUpListener();
         switchFragmentDelay(PhoenixListFragment.class.getName(), "凤凰新闻");
     }
@@ -100,9 +95,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-//                pvTime.show();
-//                pvOptions.show();
 //                MainActivity.this.startActivity(new Intent(MainActivity.this, SubScaleViewActivity.class));
 //                MainActivity.this.startActivity(new Intent(MainActivity.this, TouchEventTestActivity.class));
                 MainActivity.this.startActivity(new Intent(MainActivity.this, TempTestActivity.class));
@@ -183,30 +175,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         return sum;
     }
 
-//    /**
-//     * 将文本中的表情符号转换为表情图片
-//     *
-//     * @param text
-//     * @return
-//     */
-//    public CharSequence replace(Context context, CharSequence text, int upResId, int downResId) {
-//        // SpannableString连续的字符串，长度不可变，同时可以附加一些object;可变的话使用SpannableStringBuilder，参考sdk文档
-//        SpannableString ss = new SpannableString("[up_quote]" + text + "[down_quote]");
-//        // 得到要显示图片的资源
-//        Drawable upDrawable = context.getResources().getDrawable(upResId);
-//        Drawable downDrawable = context.getResources().getDrawable(downResId);
-//        // 设置高度
-//        upDrawable.setBounds(0, 0, upDrawable.getIntrinsicWidth(), upDrawable.getIntrinsicHeight());
-//        downDrawable.setBounds(0, 0, downDrawable.getIntrinsicWidth(), downDrawable.getIntrinsicHeight());
-//        // 跨度底部应与周围文本的基线对齐
-//        ImageSpan upSpan = new ImageSpan(upDrawable, ImageSpan.ALIGN_BASELINE);
-//        ImageSpan downSpan = new ImageSpan(downDrawable, ImageSpan.ALIGN_BASELINE);
-//        // 附加图片
-//        ss.setSpan(upSpan, 0, "[up_quote]".length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-//        ss.setSpan(downSpan, "[up_quote]".length() + text.length(), "[up_quote]".length() + text.length() + "[down_quote]".length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-//        return ss;
-//    }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -272,46 +240,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 lastBackPressedTime = System.currentTimeMillis();
             }
         }
-    }
-
-    private void initTimePicker() {
-        pvTime = new TimePickerView(MainActivity.this, TimePickerView.Type.YEAR_MONTH_DAY);
-        //控制时间范围
-//        Calendar calendar = Calendar.getInstance();
-//        pvTime.setRange(calendar.get(Calendar.YEAR) - 20, calendar.get(Calendar.YEAR));//要在setTime 之前才有效果哦
-        pvTime.setRange(1900, 2016);
-        pvTime.setCyclic(false);
-        pvTime.setCancelable(true);
-        pvTime.setTime(new Date());
-        pvTime.setTitle("请选择日期");
-        //时间选择后回调
-        pvTime.setOnTimeSelectListener(new TimePickerView.OnTimeSelectListener() {
-            @Override
-            public void onTimeSelect(Date date) {
-                Calendar c = Calendar.getInstance();
-                c.setTime(date);
-//                Toast.makeText(MainActivity.this, c.get(Calendar.YEAR) + "年" + (1 + c.get(Calendar.MONTH)) + "月" + c.get(Calendar.DAY_OF_MONTH) + "日", Toast.LENGTH_SHORT).show();
-//                Toast.makeText(MainActivity.this, DateTimeUtils.getConstellation(1 + c.get(Calendar.MONTH), Calendar.DAY_OF_MONTH), Toast.LENGTH_SHORT).show();
-                Toast.makeText(MainActivity.this, DateTimeUtils.getAge(date) + "岁", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void initOptionsPicker() {
-        pvOptions = new OptionsPickerView(this);
-        options1Items.add("男");
-        options1Items.add("女");
-        pvOptions.setPicker(options1Items);
-        pvOptions.setTitle("选择性别");
-        pvOptions.setCyclic(true);
-        pvOptions.setLabels("");
-        pvOptions.setSelectOptions(1);
-        pvOptions.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
-            @Override
-            public void onOptionsSelect(int options1, int option2, int options3) {
-                Toast.makeText(MainActivity.this, options1 + "", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     private void switchFragmentDelay(final String className, final String title) {

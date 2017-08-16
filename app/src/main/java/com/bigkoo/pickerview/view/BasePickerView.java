@@ -37,7 +37,7 @@ public class BasePickerView {
     private boolean isShowing;
     private int gravity = Gravity.BOTTOM;
 
-    public BasePickerView(Context context){
+    public BasePickerView(Context context) {
         this.context = context;
 
         initViews();
@@ -45,9 +45,9 @@ public class BasePickerView {
         initEvents();
     }
 
-    protected void initViews(){
+    protected void initViews() {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        decorView = (ViewGroup) ((Activity)context).getWindow().getDecorView().findViewById(android.R.id.content);
+        decorView = (ViewGroup) ((Activity) context).getWindow().getDecorView().findViewById(android.R.id.content);
         rootView = (ViewGroup) layoutInflater.inflate(R.layout.layout_basepickerview, decorView, false);
         rootView.setLayoutParams(new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
@@ -57,11 +57,13 @@ public class BasePickerView {
     }
 
     protected void init() {
-        inAnim = getInAnimation();
-        outAnim = getOutAnimation();
+        inAnim = getDefaultInAnimation();
+        outAnim = getDefaulOutAnimation();
     }
+
     protected void initEvents() {
     }
+
     /**
      * show的时候调用
      *
@@ -71,6 +73,7 @@ public class BasePickerView {
         decorView.addView(view);
         contentContainer.startAnimation(inAnim);
     }
+
     /**
      * 添加这个View到Activity的根视图
      */
@@ -81,8 +84,10 @@ public class BasePickerView {
         isShowing = true;
         onAttached(rootView);
     }
+
     /**
      * 检测该View是不是已经添加到根视图
+     *
      * @return 如果视图已经存在该View返回true
      */
     public boolean isShowing() {
@@ -121,7 +126,7 @@ public class BasePickerView {
         contentContainer.startAnimation(outAnim);
     }
 
-    public void dismissImmediately() {
+    private void dismissImmediately() {
         //从activity根视图移除
         decorView.removeView(rootView);
         isShowing = false;
@@ -131,14 +136,24 @@ public class BasePickerView {
         }
 
     }
-    public Animation getInAnimation() {
+
+    private Animation getDefaultInAnimation() {
         int res = PickerViewAnimateUtil.getAnimationResource(this.gravity, true);
         return AnimationUtils.loadAnimation(context, res);
     }
 
-    public Animation getOutAnimation() {
+    private Animation getDefaulOutAnimation() {
         int res = PickerViewAnimateUtil.getAnimationResource(this.gravity, false);
         return AnimationUtils.loadAnimation(context, res);
+    }
+
+    public void setAnimation(Animation inAnimation, Animation outAnimation) {
+        if (inAnimation != null) {
+            inAnim = inAnimation;
+        }
+        if (outAnimation != null) {
+            outAnim = outAnimation;
+        }
     }
 
     public BasePickerView setOnDismissListener(OnDismissListener onDismissListener) {
@@ -151,12 +166,12 @@ public class BasePickerView {
 
         if (isCancelable) {
             view.setOnTouchListener(onCancelableTouchListener);
-        }
-        else{
+        } else {
             view.setOnTouchListener(null);
         }
         return this;
     }
+
     /**
      * Called when the user touch on black overlay in order to dismiss the dialog
      */
@@ -170,7 +185,7 @@ public class BasePickerView {
         }
     };
 
-    public View findViewById(int id){
+    public View findViewById(int id) {
         return contentContainer.findViewById(id);
     }
 }

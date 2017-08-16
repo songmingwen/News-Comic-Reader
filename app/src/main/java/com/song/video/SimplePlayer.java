@@ -503,7 +503,7 @@ public class SimplePlayer {
 
     public void onResume() {
         pauseTime = 0;
-        if (status == STATUS_PLAYING) {
+        if (status == STATUS_PAUSE) {
             if (isLive) {
                 videoView.seekTo(0);
             } else {
