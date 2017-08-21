@@ -14,18 +14,18 @@ import com.song.sunset.utils.ViewUtil;
  * Created by Song on 2016/12/5.
  */
 
-public class CustomView extends View {
+public class MeasureAndLayoutView extends View {
     private Bitmap mBitmap;
 
-    public CustomView(Context context) {
+    public MeasureAndLayoutView(Context context) {
         this(context, null);
     }
 
-    public CustomView(Context context, AttributeSet attrs) {
+    public MeasureAndLayoutView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public CustomView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public MeasureAndLayoutView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         int screenW = ViewUtil.getScreenWidth();
 

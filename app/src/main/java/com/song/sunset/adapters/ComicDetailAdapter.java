@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.song.glide_40_transformations.BlurTransformation;
 import com.song.sunset.R;
 import com.song.sunset.activitys.ScalePicActivity;
 import com.song.sunset.beans.ComicDetailBean;
@@ -16,9 +18,6 @@ import com.song.sunset.holders.ComicDetailHeaderViewHolder;
 import com.song.sunset.holders.ComicDetailListViewHolder;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.fresco.FrescoUtil;
-
-import jp.wasabeef.glide.transformations.BlurTransformation;
-import jp.wasabeef.glide.transformations.CropSquareTransformation;
 
 /**
  * Created by Song on 2016/8/29 0029.
@@ -60,7 +59,7 @@ public class ComicDetailAdapter extends RecyclerView.Adapter {
                 headViewHolder.authorName.setTextColor(color);
                 headViewHolder.comicDetailLayout.setBackgroundColor(color);
                 Glide.with(context).load(data.getComic().getCover())
-                        .bitmapTransform(new BlurTransformation(context, 15))
+                        .apply(RequestOptions.bitmapTransform(new BlurTransformation(context, 15)))
                         .into(headViewHolder.imageBg);
 
                 headViewHolder.simpleDraweeView.setOnClickListener(new View.OnClickListener() {

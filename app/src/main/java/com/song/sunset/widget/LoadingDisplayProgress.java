@@ -21,10 +21,10 @@ public class LoadingDisplayProgress extends Drawable {
     public static final float SUB_TEXT_SIZE = ViewUtil.dip2px(13);
     public static final float CIRCLE_STROKE_WIDTH = ViewUtil.dip2px(3);
 
-    Paint mainTextPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
-    Paint subTextPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
-    Paint bgCirclePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    Paint loadingCirclePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private Paint mainTextPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
+    private Paint subTextPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
+    private Paint bgCirclePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private Paint loadingCirclePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
     private String mTextPercent = "0";
     private int mLastLevel = 0;

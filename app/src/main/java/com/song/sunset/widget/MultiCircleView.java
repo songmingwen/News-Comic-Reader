@@ -107,8 +107,8 @@ public class MultiCircleView extends View {
         drawTopLeft(canvas, 30);
         drawTopLeft(canvas, 90);
         drawTopLeft(canvas, 150);
-        drawTopLeft(canvas, 210);
-        drawTopLeft(canvas, 270);
+        drawTopLeft(canvas, -90);
+        drawTopLeft(canvas, -150);
     }
 
     /**

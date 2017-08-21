@@ -8,6 +8,8 @@ import android.content.Context;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.IntDef;
+import android.support.annotation.StringDef;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.text.Spannable;
@@ -15,6 +17,7 @@ import android.text.SpannableString;
 import android.text.style.ImageSpan;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -28,6 +31,9 @@ import com.song.sunset.utils.DateTimeUtils;
 import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.widget.TextSwitchView;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.ref.SoftReference;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -52,6 +58,36 @@ public class TempTestActivity extends BaseActivity {
     private TimePickerView pvTime;
     private OptionsPickerView pvOptions;
     private ArrayList<String> options1Items = new ArrayList<>();
+
+    @IntDef({Days.MON, Days.TUE, Days.WEN, Days.THU, Days.FRI, Days.SAT, Days.SUN})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Days {
+        int MON = 1;
+        int TUE = 2;
+        int WEN = 3;
+        int THU = 4;
+        int FRI = 5;
+        int SAT = 6;
+        int SUN = 7;
+    }
+
+    //先定义 常量
+    public static final String SUNDAY = "星期日";
+    public static final String MONDAY = "星期一";
+    public static final String TUESDAY = "星期二";
+    public static final String WEDNESDAY = "星期三";
+    public static final String THURSDAY = "星期四";
+    public static final String FRIDAY = "星期五";
+    public static final String SATURDAY = "星期六";
+
+    //用 @IntDef "包住" 常量；
+    // @Retention 定义策略
+    // 声明构造器
+    @StringDef({SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface WeekDays {
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,17 +119,19 @@ public class TempTestActivity extends BaseActivity {
 
 //        showMessageFormat();
 
-        pvTime.show();
+//        pvTime.show();
 //        pvOptions.show();
 
-//        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+
+        String string = "我是通过软引用获取的值";
+        SoftReference<String> softReference = new SoftReference<>(string);
+
+        String string_1 = softReference.get();
+        Snackbar.make(view, string_1, Snackbar.LENGTH_LONG).setAction("Action", null).show();
     }
 
     private void showMessageFormat() {
         Toast.makeText(this, MessageFormat.format("{0}的作者是{1}", "本App", "Song"), Toast.LENGTH_SHORT).show();
-        String list = "song";
-        list = null;
-        Toast.makeText(this, (list instanceof String) + "", Toast.LENGTH_SHORT).show();
     }
 
     private void playOrStopAnim() {
