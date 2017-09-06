@@ -39,7 +39,7 @@ import rx.Observable;
  * E-mail: z53520@qq.com
  */
 
-public class ComicReadMVPActivity extends BaseActivity implements ComicReadMVPRecyclerView.ComicLoadListener, ComicReadView {
+public class ComicReadMVPActivity extends BaseActivity implements ComicReadMVPRecyclerView.ComicLoadListener, ComicReadView, ScaleRecyclerView.OnSingleTapListener {
 
     public static final String OPEN_POSITION = "open_position";
     public static final String COMIC_CHAPTER_LIST = "comic_chapter_list";
@@ -49,6 +49,7 @@ public class ComicReadMVPActivity extends BaseActivity implements ComicReadMVPRe
     private ComicReadMVPAdapter adapter;
     private ArrayList<ChapterListBean> mChapterList;
     private ComicReadPresenter mPresenter;
+    private boolean fullScreen;
 
     public static void start(Context context, int openPosition, ArrayList<ChapterListBean> data) {
         Intent intent = new Intent(context, ComicReadMVPActivity.class);
@@ -61,7 +62,7 @@ public class ComicReadMVPActivity extends BaseActivity implements ComicReadMVPRe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comic_read_mvp);
-        ScreenUtils.fullscreen(this, true);
+        switchScreenStatus();
 
         mLoadingAndRetryManager = LoadingAndRetryManager.generate(this, new OnLoadingAndRetryListener() {
             @Override
@@ -89,12 +90,18 @@ public class ComicReadMVPActivity extends BaseActivity implements ComicReadMVPRe
         mLoadingAndRetryManager.showLoading();
     }
 
+    private void switchScreenStatus() {
+        fullScreen = !fullScreen;
+        ScreenUtils.fullscreen(this, fullScreen);
+    }
+
     private void initView() {
         recyclerView = (ComicReadMVPRecyclerView) findViewById(R.id.id_comic_read_recycler);
         adapter = new ComicReadMVPAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(getLinearLayoutManager());
         recyclerView.setComicLoadListener(this);
+        recyclerView.setOnSingleTapListener(this);
     }
 
     @NonNull
@@ -152,5 +159,10 @@ public class ComicReadMVPActivity extends BaseActivity implements ComicReadMVPRe
         if (success) {
             adapter.addDataAtBottom(list);
         }
+    }
+
+    @Override
+    public void onSingleTap() {
+        switchScreenStatus();
     }
 }

@@ -18,12 +18,12 @@ public class ComicListViewHolder extends RecyclerView.ViewHolder {
 
     public SimpleDraweeView simpleDraweeView;
     public TextView comicName, comicDesc, comicAuthor, comicTags, haveUpdate;
-    public RelativeLayout comicListLayout;
+//    public RelativeLayout comicListLayout;
     public ImageView cover;
 
     public ComicListViewHolder(View itemview) {
         super(itemview);
-        comicListLayout = (RelativeLayout) itemview.findViewById(R.id.id_comic_list_item);
+//        comicListLayout = (RelativeLayout) itemview.findViewById(R.id.id_comic_list_item);
         simpleDraweeView = (SimpleDraweeView) itemview.findViewById(R.id.id_comic_list_simple_drawee_view);
         cover = (ImageView) itemview.findViewById(R.id.id_comic_list_image_view);
         comicName = (TextView) itemview.findViewById(R.id.id_comic_list_simple_comic_name);

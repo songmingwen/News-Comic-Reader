@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.TimePickerView;
+import com.song.core.statusbar.StatusBarUtil;
 import com.song.sunset.R;
 import com.song.sunset.activitys.base.BaseActivity;
 import com.song.sunset.fragments.CollectionFragment;
@@ -64,7 +65,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         initView();
         initDrawer();
         setUpListener();
-        switchFragmentDelay(PhoenixListFragment.class.getName(), "凤凰新闻");
+        switchFragmentDelay(PhoenixListFragment.class.getName(), getResources().getString(R.string.phoenix_news), 0);
     }
 
     @Override
@@ -80,6 +81,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     private void initDrawer() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        StatusBarUtil.setColorForDrawerLayout(this, drawer, getResources().getColor(R.color.transparent));
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -97,7 +99,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             public void onClick(View v) {
 //                MainActivity.this.startActivity(new Intent(MainActivity.this, SubScaleViewActivity.class));
 //                MainActivity.this.startActivity(new Intent(MainActivity.this, TouchEventTestActivity.class));
-//                MainActivity.this.startActivity(new Intent(MainActivity.this, TempTestActivity.class));
+                MainActivity.this.startActivity(new Intent(MainActivity.this, TempTestActivity.class));
+//                MainActivity.this.startActivity(new Intent(MainActivity.this, TransTestActivity.class));
 //                new ImageViewer.Builder(MainActivity.this, new String[]{"http://img2.niutuku.com/1312/0831/0831-niutuku.com-28071.jpg",
 //                        "http://img2.niutuku.com/desk/130220/52/52-niutuku.com-984.jpg",
 //                        "http://img01.sogoucdn.com/app/a/100540002/490110.jpg",
@@ -114,7 +117,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
 //                switchDayNightMode();
 
-                MainActivity.this.startActivity(new Intent(MainActivity.this, TransTestActivity.class));
             }
         });
     }
@@ -244,6 +246,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     private void switchFragmentDelay(final String className, final String title) {
+        switchFragmentDelay(className, title, 300L);
+    }
+
+    private void switchFragmentDelay(final String className, final String title, long delayTime) {
         fab.setVisibility(TextUtils.equals(className, PhoenixListFragment.class.getName()) ? View.VISIBLE : View.GONE);
         getmHandler().postDelayed(new Runnable() {
             @Override
@@ -251,6 +257,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 switchFragment(className, R.id.activity_framelayout_main);
                 toolbar.setTitle(title);
             }
-        }, 300);
+        }, delayTime);
     }
 }

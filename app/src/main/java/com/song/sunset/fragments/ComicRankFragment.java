@@ -75,31 +75,6 @@ public class ComicRankFragment extends BaseFragment {
         loadNetData();
     }
 
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.fragment_comic_rank_list);
-//        if (savedInstanceState != null) {
-//            mCurrPos = savedInstanceState.getInt(BUNDLE_KEY_PAGE_INDEX, 0);
-//        }
-//        mLoadingAndRetryManager = LoadingAndRetryManager.generate(this, new OnLoadingAndRetryListener() {
-//            @Override
-//            public void setRetryEvent(View retryView) {
-//                retryView.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        mLoadingAndRetryManager.showLoading();
-//                        loadNetData();
-//                    }
-//                });
-//            }
-//        });
-//        mLoadingAndRetryManager.showLoading();
-//
-//        initView();
-//        loadNetData();
-//}
-
     private void initView(View view) {
         rankingViewPager = (RankViewPager) view.findViewById(R.id.ranking_view_pager);
         rankingSlidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.ranking_sliding_layout);

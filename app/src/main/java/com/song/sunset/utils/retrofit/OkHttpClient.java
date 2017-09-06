@@ -3,6 +3,7 @@ package com.song.sunset.utils.retrofit;
 import com.song.sunset.utils.AppConfig;
 import com.song.sunset.utils.DeviceUtils;
 
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
@@ -12,26 +13,34 @@ import okhttp3.logging.HttpLoggingInterceptor;
  * Created by Song on 2016/9/18 0018.
  * Email:z53520@qq.com
  */
-public enum OkHttpClient {
-
-    INSTANCE;
-
-    private final okhttp3.OkHttpClient okHttpClientBuilder;
+class OkHttpClient {
 
     private static final int TIMEOUT_READ = 15;
+
     private static final int TIMEOUT_CONNECTION = 15;
 
-    OkHttpClient() {
+    private static OkHttpClient sInstance = new OkHttpClient();
+
+    public static synchronized OkHttpClient getInstance() {
+        return sInstance;
+    }
+
+    private okhttp3.OkHttpClient okHttpClientBuilder;
+
+    private OkHttpClient() {
+        initClient();
+    }
+
+    private void initClient() {
         HttpLoggingInterceptor logInterceptor = new HttpLoggingInterceptor();
         logInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         Interceptor cacheInterceptor = new OfflineCacheControlInterceptor();
-
         okHttpClientBuilder = new okhttp3.OkHttpClient.Builder()
                 //打印日志
                 .addInterceptor(logInterceptor)
                 //添加固定公共请求参数
-                .addInterceptor(getPublicParams())
+                .addInterceptor(getBasePublicParams(null))
 
                 //设置缓存
                 .addInterceptor(cacheInterceptor)
@@ -52,8 +61,41 @@ public enum OkHttpClient {
                 .build();
     }
 
-    public okhttp3.OkHttpClient getOkHttpClient() {
-        return okHttpClientBuilder;
+    okhttp3.OkHttpClient createClient(Map<String, String> map) {
+        if (map == null) {
+            if (okHttpClientBuilder == null) {
+                initClient();
+            }
+            return okHttpClientBuilder;
+        }
+        HttpLoggingInterceptor logInterceptor = new HttpLoggingInterceptor();
+        logInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        Interceptor cacheInterceptor = new OfflineCacheControlInterceptor();
+
+        return new okhttp3.OkHttpClient.Builder()
+                //打印日志
+                .addInterceptor(logInterceptor)
+                //添加固定公共请求参数
+                .addInterceptor(getBasePublicParams(map))
+
+                //设置缓存
+                .addInterceptor(cacheInterceptor)
+                .addNetworkInterceptor(cacheInterceptor)
+
+                //设置Cache目录
+                .cache(CacheUtil.getCache())
+
+                //添加cookie
+//                .cookieJar()
+
+                //失败重连
+                .retryOnConnectionFailure(true)
+
+                //time out
+                .readTimeout(TIMEOUT_READ, TimeUnit.SECONDS)
+                .connectTimeout(TIMEOUT_CONNECTION, TimeUnit.SECONDS)
+                .build();
     }
 
     //http://api.iclient.ifeng.com/ClientNews?
@@ -77,10 +119,11 @@ public enum OkHttpClient {
     // nw=wifi&
     // loginid=76078652
 
-    public Interceptor getPublicParams() {
-        return new BasicParamsInterceptor.Builder()
-//                .addHeaderParam("device_id", "S_phone")
-//                .addParam("uid", DeviceUtils.getAuthenticationID(AppConfig.getApp()))
+    private Interceptor getBasePublicParams(Map<String, String> map) {
+
+        BasicParamsInterceptor.Builder builder = new BasicParamsInterceptor.Builder();
+
+        builder
                 .addQueryParam("device_id", "S_phone")
                 .addQueryParam("uid", DeviceUtils.getAuthenticationID(AppConfig.getApp()))
                 .addQueryParam("id", "SYLB10,SYDT10")
@@ -90,7 +133,14 @@ public enum OkHttpClient {
                 .addQueryParam("df", "androidphone")
                 .addQueryParam("publishid", "9023")
                 .addQueryParam("v", "3330110")
-                .addQueryParam("key", "aa32472066c50b390e4b9758f67361e8dd5498fa2460e1f97a6f7c831633e927b0290f330921b01d6885b66f0076483e41441f457c368226fd8273686a00971290137fa115de8d493c00c40b620c8c7962b716b5ef6d3b305338dc12b24ff8e7%253A%253A%253Au17")
-                .build();
+                .addQueryParam("key", "aa32472066c50b390e4b9758f67361e8dd5498fa2460e1f97a6f7c831633e927b0290f330921b01d6885b66f0076483e41441f457c368226fd8273686a00971290137fa115de8d493c00c40b620c8c7962b716b5ef6d3b305338dc12b24ff8e7%253A%253A%253Au17");
+//                .addHeaderParam("device_id", "S_phone")
+//                .addParam("uid", DeviceUtils.getAuthenticationID(AppConfig.getApp()))
+
+        if (map != null) {
+            builder.addQueryParamsMap(map);
+        }
+
+        return builder.build();
     }
 }

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,9 +95,12 @@ public class PhoenixListFragment extends BaseFragment implements RetrofitCallbac
     }
 
     private void getDataFromRetrofit2(String action) {
+        long start = System.currentTimeMillis();
         Observable<List<PhoenixNewsListBean>> observable = RetrofitService
-                .createApi(PhoenixNewsApi.class, WholeApi.PHOENIX_NEWS_BASE_URL)
+                .createApi(PhoenixNewsApi.class, WholeApi.PHOENIX_NEWS_BASE_URL, "time", System.currentTimeMillis() + "")
                 .queryPhoenixListObservable(action);
+        long end = System.currentTimeMillis();
+        Log.i("time = ", (end - start) + "millis");
         RxUtil.phoenixNewsSubscribe(observable, this);
     }
 

@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Scroller;
 
+import com.song.sunset.utils.ScreenUtils;
 import com.song.sunset.utils.ViewUtil;
 import com.song.video.SimplePlayer;
 
@@ -51,7 +52,17 @@ public class ScaleRecyclerView extends RecyclerView implements View.OnTouchListe
     private ScaleGestureDetector scaleGestureDetector;
     private GestureDetector mGestureDetector;
 
-    public enum LAYOUT_MANAGER_TYPE {
+    private OnSingleTapListener mOnSingleTapListener;
+
+    public interface OnSingleTapListener {
+        void onSingleTap();
+    }
+
+    public void setOnSingleTapListener(OnSingleTapListener onSingleTapListener) {
+        mOnSingleTapListener = onSingleTapListener;
+    }
+
+    private enum LAYOUT_MANAGER_TYPE {
         LINEAR,
         GRID,
         STAGGERED_GRID
@@ -98,13 +109,21 @@ public class ScaleRecyclerView extends RecyclerView implements View.OnTouchListe
     private float moveY;
     private FlingRunnable mFlingRunnable;
 
-    public class ScaleRecyclerViewGestureListener extends GestureDetector.SimpleOnGestureListener {
+    private class ScaleRecyclerViewGestureListener extends GestureDetector.SimpleOnGestureListener {
 
         @Override
         public boolean onDown(MotionEvent e) {
             downX = e.getRawX();
             downY = e.getRawY();
             return false;
+        }
+
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent e) {
+            if (mOnSingleTapListener != null) {
+                mOnSingleTapListener.onSingleTap();
+            }
+            return super.onSingleTapConfirmed(e);
         }
 
         @Override

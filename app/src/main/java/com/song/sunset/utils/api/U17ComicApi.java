@@ -12,6 +12,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -29,6 +30,7 @@ public interface U17ComicApi {
     Call<BaseBean<ComicDetailBean>> queryComicDetailRDByGetCall(
             @Query("comicid") int comicid);
 
+    @Headers("Cache-Control: public, max-age=120")
     @GET("comic/detail_static_new")
     Observable<BaseBean<ComicDetailBean>> queryComicDetailRDByGetObservable(
             @Query("comicid") int comicid);
