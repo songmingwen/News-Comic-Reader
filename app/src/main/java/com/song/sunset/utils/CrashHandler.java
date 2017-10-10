@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 /**
  * Created by Song on 2016/12/7.
+ * Email:z53520@qq.com
  */
 
 public class CrashHandler implements Thread.UncaughtExceptionHandler {

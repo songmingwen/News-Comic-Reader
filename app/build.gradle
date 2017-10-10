@@ -23,15 +23,68 @@ android {
 //        }
         multiDexEnabled true
     }
-    buildTypes {
+
+    signingConfigs {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            storeFile file(STORE_FILE)
+            storePassword KEYSTORE_PASSWORD
+            keyAlias KEY_ALIAS
+            keyPassword KEY_PASSWORD
         }
     }
-//    sourceSets {
+
+    buildTypes {
+        debug {
+            zipAlignEnabled true  //是否支持zip
+            minifyEnabled false
+            debuggable true
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            applicationVariants.all { variant ->
+//                variant.outputs.each { output ->
+//                    def outputFile = output.outputFile
+//                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+//                        // apk name  XXXX.apk
+//                        def fileName = "Sunset_debug.apk"
+//                        output.outputFile = new File(outputFile, fileName)
+//                    }
+//                }
+//            }
+        }
+        release {
+            zipAlignEnabled true  //是否支持zip
+            minifyEnabled false  //是否进行混淆
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            applicationVariants.all { variant ->
+//                variant.outputs.each { output ->
+//                    def outputFile = output.outputFile
+//                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+//                        // apk name  XXXX.apk
+//                        def fileName = "Sunset_release.apk"
+//                        output.outputFile = new File(outputFile, fileName)
+//                    }
+//                }
+//            }
+        }
+    }
+
+
+    sourceSets {
 //        main.java.srcDirs += 'src/main/kotlin'
-//    }
+
+        // Move the tests to tests/java, tests/res, etc...
+        instrumentTest.setRoot('tests')
+
+        // Move the build types to build-types/<type>
+        // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
+        // This moves them out of them default location under src/<type>/... which would
+        // conflict with src/ being used by the main source set.
+        // Adding new build types or product flavors should be accompanied
+        // by a similar customization.
+        debug.setRoot('build-types/debug')
+        release.setRoot('build-types/release')
+    }
 //    compileOptions {
 //        sourceCompatibility 1.8
 //        targetCompatibility 1.8
@@ -95,4 +148,6 @@ dependencies {
     compile rootProject.ext.dependencies["ndkbitmap-armv7a"]
     compile rootProject.ext.dependencies["ndkbitmap-armv5"]
     compile rootProject.ext.dependencies["ndkbitmap-x86"]
+    debugCompile rootProject.ext.dependencies["leakcanary_debug"]
+    releaseCompile rootProject.ext.dependencies["leakcanary_release"]
 }

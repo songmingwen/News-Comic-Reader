@@ -22,4 +22,6 @@
     <dimen name="phoenix_title_big">17sp</dimen>
     <dimen name="phoenix_title">15sp</dimen>
     <dimen name="phoenix_des">12sp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 </resources>

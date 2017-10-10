@@ -65,6 +65,9 @@ ext {
             "ndkbitmap-x86"                : "com.github.ctiao:ndkbitmap-x86:0.7.4",
 
             "ijkplayer"                    : "tv.danmaku.ijk.media:ijkplayer-java:0.7.9",
-            "ijkplayer_armv7a"             : "tv.danmaku.ijk.media:ijkplayer-armv7a:0.7.9"
+            "ijkplayer_armv7a"             : "tv.danmaku.ijk.media:ijkplayer-armv7a:0.7.9",
+
+            "leakcanary_debug" :"com.squareup.leakcanary:leakcanary-android:1.5.4",
+            "leakcanary_release" :"com.squareup.leakcanary:leakcanary-android-no-op:1.5.4"
     ]
 }

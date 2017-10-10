@@ -1,8 +1,6 @@
 package com.song.sunset;
 
-import android.app.Application;
-import android.content.Context;
-import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDexApplication;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.song.sunset.utils.CrashHandler;
@@ -10,14 +8,14 @@ import com.song.sunset.utils.GreenDaoUtil;
 import com.song.sunset.utils.PushManager;
 import com.song.sunset.utils.fresco.FrescoUtil;
 import com.song.sunset.utils.loadingmanager.LoadingAndRetryManager;
-import com.song.sunset.R;
 import com.song.sunset.utils.AppConfig;
+import com.squareup.leakcanary.LeakCanary;
 
 /**
  * Created by Song on 2016/8/29 0029.
  * Email:z53520@qq.com
  */
-public class SunsetApplication extends Application {
+public class SunsetApplication extends MultiDexApplication {
 
 
     @Override
@@ -37,12 +35,13 @@ public class SunsetApplication extends Application {
         Fresco.initialize(this, FrescoUtil.getDefaultImagePipelineConfig(this));
         CrashHandler.getInstance().init(this);
         PushManager.getInstance().init(this);
-    }
 
-    @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
-        MultiDex.install(this);
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+        LeakCanary.install(this);
     }
 
     private void initLoadingAndRetryLayout() {

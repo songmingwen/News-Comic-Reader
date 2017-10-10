@@ -1,6 +1,5 @@
 package com.song.sunset.utils;
 
-import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.database.Cursor;
 import android.net.Uri;
@@ -26,7 +25,6 @@ public class MusicLoader {
 
     private static MusicLoader musicLoader;
 
-    private static ContentResolver contentResolver;
     //Uri，指向external的database
     private Uri contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
     //projection：选择的列; where：过滤条件; sortOrder：排序。
@@ -42,9 +40,8 @@ public class MusicLoader {
     private String where = "mime_type in ('audio/mpeg','audio/x-ms-wma') and bucket_display_name <> 'audio' and is_music > 0 ";
     private String sortOrder = Media.DATA;
 
-    public static MusicLoader instance(ContentResolver pContentResolver) {
+    public static MusicLoader instance() {
         if (musicLoader == null) {
-            contentResolver = pContentResolver;
             musicLoader = new MusicLoader();
         }
         return musicLoader;
@@ -52,7 +49,7 @@ public class MusicLoader {
 
     //利用ContentResolver的query函数来查询数据，然后将得到的结果放到MusicInfo对象中，最后放到数组中
     private MusicLoader() {
-        Cursor cursor = contentResolver.query(contentUri, null, null, null, Media.DISPLAY_NAME);
+        Cursor cursor = AppConfig.getApp().getContentResolver().query(contentUri, null, null, null, Media.DISPLAY_NAME);
         if (cursor == null) {
             Log.e(TAG, "MusicLoader: is null");
         } else if (!cursor.moveToFirst()) {
@@ -85,6 +82,7 @@ public class MusicLoader {
                 musicList.add(musicInfo);
 
             } while (cursor.moveToNext());
+            cursor.close();
         }
     }
 
@@ -93,7 +91,6 @@ public class MusicLoader {
     }
 
     public Uri getMusicUriById(long id) {
-        Uri uri = ContentUris.withAppendedId(contentUri, id);
-        return uri;
+        return ContentUris.withAppendedId(contentUri, id);
     }
 }

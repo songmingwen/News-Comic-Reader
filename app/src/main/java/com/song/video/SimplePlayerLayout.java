@@ -168,7 +168,7 @@ public class SimplePlayerLayout extends FrameLayout {
             IjkMediaPlayer.native_profileBegin("libijkplayer.so");
             playerSupport = true;
         } catch (Throwable e) {
-            Log.e("GiraffePlayer", "loadLibraries error", e);
+            Log.e("SimplePlayerLayout", "loadLibraries error", e);
         }
         mRootView = inflate(context, R.layout.simple_player_layout, this);
         this.activity = (Activity) context;

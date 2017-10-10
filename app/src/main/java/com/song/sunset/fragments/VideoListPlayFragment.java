@@ -90,7 +90,7 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
 
     @Override
     public void onResume() {
-        if (mPlayer != null) {
+        if (mPlayer != null && getUserVisibleHint()) {
             mPlayer.onResume();
         }
         super.onResume();

@@ -64,8 +64,8 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
     };
 
     @Override
-    protected void loadData() {
-        super.loadData();
+    protected void visible2User() {
+        super.visible2User();
         isVisiable = true;
 //        getDataFromRetrofit2(currentPage);
     }

@@ -1,11 +1,7 @@
 package com.song.sunset.activitys;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.widget.ViewDragHelper;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -16,11 +12,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.widget.Toast;
-
-import com.bigkoo.pickerview.OptionsPickerView;
-import com.bigkoo.pickerview.TimePickerView;
 import com.song.core.statusbar.StatusBarUtil;
 import com.song.sunset.R;
 import com.song.sunset.activitys.base.BaseActivity;
@@ -29,14 +20,8 @@ import com.song.sunset.fragments.ComicClassifyFragment;
 import com.song.sunset.fragments.ComicRankFragment;
 import com.song.sunset.fragments.PhoenixListFragment;
 import com.song.sunset.fragments.MVPComicListFragment;
-import com.song.sunset.utils.DateTimeUtils;
-import com.song.sunset.utils.ScreenUtils;
-import com.song.sunset.utils.ViewUtil;
-
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
+import com.song.sunset.utils.MusicLoader;
+import com.song.sunset.utils.PushManager;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -57,10 +42,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setDayNightMode(isNightMode());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        getDelegate().setLocalNightMode(isNightMode() ?
-//                AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
 
         initView();
         initDrawer();
@@ -99,8 +83,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             public void onClick(View v) {
 //                MainActivity.this.startActivity(new Intent(MainActivity.this, SubScaleViewActivity.class));
 //                MainActivity.this.startActivity(new Intent(MainActivity.this, TouchEventTestActivity.class));
-                MainActivity.this.startActivity(new Intent(MainActivity.this, TempTestActivity.class));
+//                MainActivity.this.startActivity(new Intent(MainActivity.this, TempTestActivity.class));
 //                MainActivity.this.startActivity(new Intent(MainActivity.this, TransTestActivity.class));
+//                ScrollingActivity.start(MainActivity.this);
 //                new ImageViewer.Builder(MainActivity.this, new String[]{"http://img2.niutuku.com/1312/0831/0831-niutuku.com-28071.jpg",
 //                        "http://img2.niutuku.com/desk/130220/52/52-niutuku.com-984.jpg",
 //                        "http://img01.sogoucdn.com/app/a/100540002/490110.jpg",
@@ -111,11 +96,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //                        .show();
 
 //                RecursiveTest();
-//                PushManager.getInstance().connect();
-//                PushManager.getInstance().sendMusicInfo(MusicLoader.instance(MainActivity.this.getContentResolver()).getMusicList().get(0));
+                PushManager.getInstance().connect();
+                PushManager.getInstance().sendMusicInfo(MusicLoader.instance().getMusicList().get(0));
 //                Log.i("music_list: ", MusicLoader.instance(MainActivity.this.getContentResolver()).getMusicList().toString());
 
-//                switchDayNightMode();
+                switchDayNightMode();
 
             }
         });

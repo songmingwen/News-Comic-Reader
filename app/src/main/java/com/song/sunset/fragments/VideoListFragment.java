@@ -59,8 +59,8 @@ public class VideoListFragment extends BaseFragment implements LoadingMoreListen
     };
 
     @Override
-    protected void loadData() {
-        super.loadData();
+    protected void visible2User() {
+        super.visible2User();
         isVisiable = true;
     }
 

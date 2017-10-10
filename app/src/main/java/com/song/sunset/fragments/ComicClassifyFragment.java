@@ -31,7 +31,6 @@ public class ComicClassifyFragment extends Fragment {
     private LoadingAndRetryManager mLoadingAndRetryManager;
     private RecyclerView recyclerView;
     private ComicClassifyAdapter adapter;
-    private boolean hasCache = false;
 
     @Nullable
     @Override

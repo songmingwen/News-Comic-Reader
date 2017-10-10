@@ -65,13 +65,6 @@ public class VideoListActivity extends AppCompatActivity {
         rankingPagerAdapter = new RankingPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(rankingPagerAdapter);
         viewPager.setOffscreenPageLimit(1);
-        viewPager.setPageTransformer(false, new ViewPager.PageTransformer() {
-            @Override
-            public void transformPage(View page, float position) {
-                final float normalizedposition = Math.abs(Math.abs(position) - 1);
-                page.setAlpha(normalizedposition);
-            }
-        });
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 
             @Override

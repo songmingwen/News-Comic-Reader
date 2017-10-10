@@ -33,13 +33,13 @@ public class BaseFragment extends Fragment {
         super.setUserVisibleHint(isVisibleToUser);
         if (isResumed() && isVisibleToUser) {
             //相当于Fragment的onResume
-            loadData();
+            visible2User();
         } else {
             //相当于Fragment的onPause
         }
     }
 
-    protected void loadData() {
+    protected void visible2User() {
 
     }
 }
