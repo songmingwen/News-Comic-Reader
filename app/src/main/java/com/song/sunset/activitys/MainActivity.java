@@ -96,8 +96,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //                        .show();
 
 //                RecursiveTest();
-                PushManager.getInstance().connect();
-                PushManager.getInstance().sendMusicInfo(MusicLoader.instance().getMusicList().get(0));
+//                PushManager.getInstance().connect();
+//                PushManager.getInstance().sendMusicInfo(MusicLoader.instance().getMusicList().get(0));
 //                Log.i("music_list: ", MusicLoader.instance(MainActivity.this.getContentResolver()).getMusicList().toString());
 
                 switchDayNightMode();
