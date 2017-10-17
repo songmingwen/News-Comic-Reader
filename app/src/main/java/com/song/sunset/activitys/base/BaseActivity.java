@@ -114,17 +114,17 @@ public class BaseActivity extends SwipeBackActivity {
 
     protected void switchDayNightMode() {
         boolean nightMode = isNightMode();
-        setDayNightMode(nightMode);
-        saveDayNightMode(nightMode);
+        setDayNightMode(!nightMode);
+        saveDayNightMode(!nightMode);
         recreate();//重新启动当前activity
     }
 
     private void saveDayNightMode(boolean nightMode) {
-        SPUtils.setBooleanByName(this, SPUtils.APP_NIGHT_MODE, !nightMode);
+        SPUtils.setBooleanByName(this, SPUtils.APP_NIGHT_MODE, nightMode);
     }
 
     protected void setDayNightMode(boolean nightMode) {
-        getDelegate().setLocalNightMode(nightMode ? AppCompatDelegate.MODE_NIGHT_NO : AppCompatDelegate.MODE_NIGHT_YES);
+        getDelegate().setLocalNightMode(nightMode ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
     }
 
     public boolean isNightMode() {

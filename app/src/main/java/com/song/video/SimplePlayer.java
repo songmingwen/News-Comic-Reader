@@ -310,7 +310,7 @@ public class SimplePlayer {
             IjkMediaPlayer.native_profileBegin("libijkplayer.so");
             playerSupport = true;
         } catch (Throwable e) {
-            Log.e("GiraffePlayer", "loadLibraries error", e);
+            Log.e("SimplePlayer", "loadLibraries error", e);
         }
         this.activity = activity;
         screenWidthPixels = activity.getResources().getDisplayMetrics().widthPixels;
@@ -801,7 +801,7 @@ public class SimplePlayer {
     }
 
     /**
-     * using constants in GiraffePlayer,eg: GiraffePlayer.SCALE_TYPE_FIT_PARENT
+     * using constants in SimplePlayer,eg: SimplePlayer.SCALE_TYPE_FIT_PARENT
      *
      * @param scaleType
      */
