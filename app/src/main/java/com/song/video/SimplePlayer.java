@@ -1078,7 +1078,7 @@ public class SimplePlayer {
         return this;
     }
 
-    public void toggleFullScreen() {
+    private void toggleFullScreen() {
         if (getScreenOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE || getScreenOrientation() == ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE) {
             activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         } else {

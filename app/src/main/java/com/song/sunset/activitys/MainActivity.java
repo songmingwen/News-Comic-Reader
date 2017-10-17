@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,6 +13,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import com.song.core.statusbar.StatusBarUtil;
 import com.song.sunset.R;
 import com.song.sunset.activitys.base.BaseActivity;
@@ -20,6 +22,7 @@ import com.song.sunset.fragments.ComicClassifyFragment;
 import com.song.sunset.fragments.ComicRankFragment;
 import com.song.sunset.fragments.PhoenixListFragment;
 import com.song.sunset.fragments.MVPComicListFragment;
+import com.song.sunset.utils.MessengerManager;
 import com.song.sunset.utils.MusicLoader;
 import com.song.sunset.utils.PushManager;
 
@@ -98,9 +101,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //                RecursiveTest();
 //                PushManager.getInstance().connect();
 //                PushManager.getInstance().sendMusicInfo(MusicLoader.instance().getMusicList().get(0));
+                MessengerManager.getInstance().sendMessage();
 //                Log.i("music_list: ", MusicLoader.instance(MainActivity.this.getContentResolver()).getMusicList().toString());
 
-                switchDayNightMode();
+//                switchDayNightMode();
 
             }
         });
@@ -228,6 +232,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 lastBackPressedTime = System.currentTimeMillis();
             }
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        MessengerManager.getInstance().destroy(this);
+        PushManager.getInstance().destory(this);
+        super.onDestroy();
     }
 
     private void switchFragmentDelay(final String className, final String title) {

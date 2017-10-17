@@ -5,6 +5,7 @@ import android.support.multidex.MultiDexApplication;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.song.sunset.utils.CrashHandler;
 import com.song.sunset.utils.GreenDaoUtil;
+import com.song.sunset.utils.MessengerManager;
 import com.song.sunset.utils.PushManager;
 import com.song.sunset.utils.fresco.FrescoUtil;
 import com.song.sunset.utils.loadingmanager.LoadingAndRetryManager;
@@ -35,6 +36,7 @@ public class SunsetApplication extends MultiDexApplication {
         Fresco.initialize(this, FrescoUtil.getDefaultImagePipelineConfig(this));
         CrashHandler.getInstance().init(this);
         PushManager.getInstance().init(this);
+        MessengerManager.getInstance().init(this);
 
         if (LeakCanary.isInAnalyzerProcess(this)) {
             // This process is dedicated to LeakCanary for heap analysis.

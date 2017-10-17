@@ -1,6 +1,5 @@
 package com.song.sunset.utils;
 
-import android.app.Application;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +9,6 @@ import android.os.RemoteException;
 
 import com.song.sunset.IHandler;
 import com.song.sunset.beans.MusicInfo;
-import com.song.sunset.beans.User;
 import com.song.sunset.services.PushService;
 
 /**
@@ -33,7 +31,7 @@ public class PushManager {
         return mInstance;
     }
 
-    private ServiceConnection serviceConnection = new ServiceConnection() {
+    private ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             mIHandler = IHandler.Stub.asInterface(service);
@@ -46,9 +44,13 @@ public class PushManager {
         }
     };
 
-    public void init(Application application) {
+    public void init(Context application) {
         Intent binderIntent = new Intent(application, PushService.class);
-        application.bindService(binderIntent, serviceConnection, Context.BIND_AUTO_CREATE);
+        application.bindService(binderIntent, mServiceConnection, Context.BIND_AUTO_CREATE);
+    }
+
+    public void destory(Context application){
+        application.unbindService(mServiceConnection);
     }
 
     //通过AIDL远程调用
