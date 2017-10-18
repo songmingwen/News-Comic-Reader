@@ -6,8 +6,8 @@ import android.view.ViewGroup;
 
 import com.song.sunset.adapters.base.BaseRVAdapterWithoutVH;
 import com.song.sunset.beans.PhoenixChannelBean;
-import com.song.sunset.model.base.RecyclerViewAdapterModel;
-import com.song.sunset.model.PhoenixDefaultAdapterModel;
+import com.song.sunset.mvp.models.base.RecyclerViewAdapterModel;
+import com.song.sunset.mvp.models.PhoenixDefaultAdapterModel;
 
 /**
  * Created by Song on 2017/3/30 0030.

@@ -1,10 +1,11 @@
 package com.song.sunset.activitys;
 
 import android.os.Bundle;
+import android.os.IBinder;
+import android.os.RemoteException;
 import android.support.design.widget.FloatingActionButton;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.song.core.statusbar.StatusBarUtil;
+import com.song.sunset.IPush;
 import com.song.sunset.R;
 import com.song.sunset.activitys.base.BaseActivity;
 import com.song.sunset.fragments.CollectionFragment;
@@ -22,9 +24,12 @@ import com.song.sunset.fragments.ComicClassifyFragment;
 import com.song.sunset.fragments.ComicRankFragment;
 import com.song.sunset.fragments.PhoenixListFragment;
 import com.song.sunset.fragments.MVPComicListFragment;
-import com.song.sunset.utils.MessengerManager;
+import com.song.sunset.services.impl.BinderPoolImpl;
+import com.song.sunset.services.impl.PushImpl;
+import com.song.sunset.services.managers.BinderPool;
+import com.song.sunset.services.managers.MessengerManager;
+import com.song.sunset.services.managers.PushManager;
 import com.song.sunset.utils.MusicLoader;
-import com.song.sunset.utils.PushManager;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -102,13 +107,24 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //                RecursiveTest();
 //                PushManager.getInstance().connect();
 //                PushManager.getInstance().sendMusicInfo(MusicLoader.instance().getMusicList().get(0));
-                MessengerManager.getInstance().sendMessage();
+//                MessengerManager.getInstance().sendMessage();
+                useBinderPool();
 //                Log.i("music_list: ", MusicLoader.instance(MainActivity.this.getContentResolver()).getMusicList().toString());
 
 //                switchDayNightMode();
 
             }
         });
+    }
+
+    private void useBinderPool() {
+        IBinder iBinder = BinderPool.getInstance(MainActivity.this).queryBinder(BinderPoolImpl.BINDER_PUSH);
+        IPush iPush = PushImpl.asInterface(iBinder);
+        try {
+            iPush.sendMusicInfo(MusicLoader.instance().getMusicList().get(0));
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
     private void RecursiveTest() {

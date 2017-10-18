@@ -14,7 +14,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.OnScrollListener;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -26,14 +25,14 @@ import com.song.core.base.CoreBaseActivity;
 import com.song.sunset.R;
 import com.song.sunset.adapters.ComicDetailAdapter;
 import com.song.sunset.beans.ComicDetailBean;
-import com.song.sunset.model.ComicDetailModel;
-import com.song.sunset.presenter.ComicDetailPresenter;
+import com.song.sunset.mvp.models.ComicDetailModel;
+import com.song.sunset.mvp.presenters.ComicDetailPresenter;
 import com.song.sunset.utils.BitmapUtil;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.loadingmanager.LoadingAndRetryManager;
 import com.song.sunset.utils.loadingmanager.OnLoadingAndRetryListener;
 import com.song.sunset.utils.volley.SampleVolleyFactory;
-import com.song.sunset.view.ComicDetailView;
+import com.song.sunset.mvp.views.ComicDetailView;
 
 import butterknife.Bind;
 import butterknife.OnClick;

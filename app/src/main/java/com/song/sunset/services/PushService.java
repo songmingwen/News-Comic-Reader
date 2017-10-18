@@ -3,15 +3,8 @@ package com.song.sunset.services;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.Looper;
-import android.os.RemoteException;
-import android.util.Log;
-import android.widget.Toast;
-
-import com.song.sunset.IHandler;
-import com.song.sunset.beans.MusicInfo;
+import com.song.sunset.services.impl.PushImpl;
 
 /**
  * Created by Song on 2017/6/7 0007.
@@ -22,19 +15,7 @@ public class PushService extends Service {
 
     public static String TAG = "PushService.class";
 
-    Binder mBinder = new IHandler.Stub() {
-
-        @Override
-        public void connect() throws RemoteException {
-            Log.i(TAG, "connect");
-        }
-
-        @Override
-        public void sendMusicInfo(final MusicInfo musicInfo) throws RemoteException {
-            Log.i(TAG, "sendUserInfo: " + musicInfo.toString());
-        }
-
-    };
+    Binder mBinder = new PushImpl();
 
     @Override
     public IBinder onBind(Intent intent) {

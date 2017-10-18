@@ -16,7 +16,7 @@ import com.song.sunset.adapters.PhoenixListAdapter;
 import com.song.sunset.beans.PhoenixChannelBean;
 import com.song.sunset.beans.PhoenixNewsListBean;
 import com.song.sunset.fragments.base.BaseFragment;
-import com.song.sunset.impls.LoadingMoreListener;
+import com.song.sunset.interfaces.LoadingMoreListener;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.retrofit.RetrofitCallback;

@@ -104,12 +104,25 @@
             android:exported="true"
             android:process=":remote">
         </service>
+        <service
+            android:name=".services.BinderPoolService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":remote">
+        </service>
 
         <activity
             android:name=".activitys.ScrollingActivity"
             android:label="@string/title_activity_scrolling"
             android:theme="@style/AppTheme">
         </activity>
+
+        <provider
+            android:name=".providers.BookProvider"
+            android:authorities="com.song.sunset.providers.bookprovider"
+            android:enabled="true"
+            android:exported="true">
+        </provider>
     </application>
 
 </manifest>

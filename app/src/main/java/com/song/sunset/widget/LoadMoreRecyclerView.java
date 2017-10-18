@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.AttributeSet;
 
-import com.song.sunset.impls.LoadingMoreListener;
+import com.song.sunset.interfaces.LoadingMoreListener;
 
 /**
  * Created by Song on 2016/8/31 0031.
