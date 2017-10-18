@@ -18,7 +18,7 @@ public abstract class BaseRVAdapterWithoutVH<Bean> extends RecyclerView.Adapter<
     private static final int BOTTOM = -1;
     private static final int TOP = 0;
 
-    public BaseRVAdapterWithoutVH() {
+    protected BaseRVAdapterWithoutVH() {
         if (mList == null) {
             mList = new ArrayList<>();
         }

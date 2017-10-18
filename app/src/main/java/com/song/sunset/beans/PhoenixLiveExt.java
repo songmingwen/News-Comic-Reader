@@ -11,7 +11,7 @@ public class PhoenixLiveExt implements Parcelable {
 
     private String hasVideo;
     private String hasVr;
-    private long startTime;
+    private String startTime;
     private String status;//1:即将开始  2:正在直播  3:结束直播
     private String startStamp;
     private String endStamp;
@@ -42,11 +42,11 @@ public class PhoenixLiveExt implements Parcelable {
         this.hasVr = hasVr;
     }
 
-    public long getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(long startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
@@ -83,7 +83,7 @@ public class PhoenixLiveExt implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.hasVideo);
         dest.writeString(this.hasVr);
-        dest.writeLong(this.startTime);
+        dest.writeString(this.startTime);
         dest.writeString(this.status);
         dest.writeString(this.startStamp);
         dest.writeString(this.endStamp);
@@ -95,7 +95,7 @@ public class PhoenixLiveExt implements Parcelable {
     protected PhoenixLiveExt(Parcel in) {
         this.hasVideo = in.readString();
         this.hasVr = in.readString();
-        this.startTime = in.readLong();
+        this.startTime = in.readString();
         this.status = in.readString();
         this.startStamp = in.readString();
         this.endStamp = in.readString();

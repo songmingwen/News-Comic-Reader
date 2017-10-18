@@ -70,10 +70,8 @@ public class RxUtil {
 
                     @Override
                     public void onNext(List<T> t) {
-                        if (t == null) {
-                            return;
-                        }
-                        retrofitCallback.onSuccess(t.get(0));
+                        if (t == null) retrofitCallback.onFailure(-1, "无数据");
+                        else retrofitCallback.onSuccess(t.get(0));
                     }
                 });
     }

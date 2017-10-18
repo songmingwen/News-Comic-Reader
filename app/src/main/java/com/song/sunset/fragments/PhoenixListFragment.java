@@ -1,6 +1,7 @@
 package com.song.sunset.fragments;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,6 +26,8 @@ import com.song.sunset.utils.api.PhoenixNewsApi;
 import com.song.sunset.utils.api.WholeApi;
 import com.song.sunset.widget.LoadMoreRecyclerView;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import in.srain.cube.views.ptr.PtrDefaultHandler;
@@ -106,19 +109,38 @@ public class PhoenixListFragment extends BaseFragment implements RetrofitCallbac
 
     @Override
     public void onSuccess(PhoenixNewsListBean phoenixNewsListBean) {
+        if (mAdapter == null) return;
         progressLayout.showContent();
-        List<PhoenixChannelBean> phoenixChannelBeanList = phoenixNewsListBean.getItem();
+        List<PhoenixChannelBean> removeRepeatedList = getRemoveRepeatList(phoenixNewsListBean.getItem());
         if (isRefreshing) {
             isRefreshing = false;
-            mAdapter.addDataAtTop(phoenixChannelBeanList);
+            mAdapter.addDataAtTop(removeRepeatedList);
             refreshLayout.refreshComplete();
         } else {
             if (isLoading) {
                 isLoading = false;
             }
-            mAdapter.addDataAtBottom(phoenixChannelBeanList);
+            mAdapter.addDataAtBottom(removeRepeatedList);
             showProgress(false);
         }
+    }
+
+    @NonNull
+    private List<PhoenixChannelBean> getRemoveRepeatList(List<PhoenixChannelBean> phoenixChannelBeanList) {
+        List<PhoenixChannelBean> total = mAdapter.getData();
+
+        HashSet<String> set = new HashSet<>();
+        for (PhoenixChannelBean item : total) {
+            set.add(item.getDocumentId());
+        }
+
+        List<PhoenixChannelBean> removeRepeatedList = new ArrayList<>();
+        for (PhoenixChannelBean item : phoenixChannelBeanList) {
+            if (set.add(item.getDocumentId())) {
+                removeRepeatedList.add(item);
+            }
+        }
+        return removeRepeatedList;
     }
 
     @Override
