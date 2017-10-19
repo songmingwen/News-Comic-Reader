@@ -13,7 +13,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
  * Created by Song on 2016/9/18 0018.
  * Email:z53520@qq.com
  */
-class OkHttpClient {
+public class OkHttpClient {
 
     private static final int TIMEOUT_READ = 15;
 
@@ -55,6 +55,9 @@ class OkHttpClient {
                 //失败重连
                 .retryOnConnectionFailure(true)
 
+                //https
+                .sslSocketFactory(HttpsUtil.createDefaultSSLSocketFactory())
+
                 //time out
                 .readTimeout(TIMEOUT_READ, TimeUnit.SECONDS)
                 .connectTimeout(TIMEOUT_CONNECTION, TimeUnit.SECONDS)
@@ -92,6 +95,9 @@ class OkHttpClient {
                 //失败重连
                 .retryOnConnectionFailure(true)
 
+                //https
+                .sslSocketFactory(HttpsUtil.createDefaultSSLSocketFactory())
+
                 //time out
                 .readTimeout(TIMEOUT_READ, TimeUnit.SECONDS)
                 .connectTimeout(TIMEOUT_CONNECTION, TimeUnit.SECONDS)
@@ -127,8 +133,8 @@ class OkHttpClient {
                 .addQueryParam("device_id", "S_phone")
                 .addQueryParam("uid", DeviceUtils.getAuthenticationID(AppConfig.getApp()))
                 .addQueryParam("id", "SYLB10,SYDT10")
-                .addQueryParam("gv", "5.6.4")
-                .addQueryParam("av", "5.6.4")
+                .addQueryParam("gv", "5.6.9")
+                .addQueryParam("av", "5.6.9")
                 .addQueryParam("nw", "wifi")
                 .addQueryParam("df", "androidphone")
                 .addQueryParam("publishid", "9023")

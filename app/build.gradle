@@ -120,6 +120,7 @@ dependencies {
     compile rootProject.ext.dependencies["gpuimage_library"]
     compile rootProject.ext.dependencies["fresco"]
     compile rootProject.ext.dependencies["fresco_processors"]
+    compile rootProject.ext.dependencies["imagepipeline-okhttp3"]
     compile rootProject.ext.dependencies["volley"]
     compile rootProject.ext.dependencies["swipebacklayout"]
     compile rootProject.ext.dependencies["subsampling_scale_image_view"]

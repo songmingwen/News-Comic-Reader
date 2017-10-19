@@ -7,6 +7,8 @@ import android.support.multidex.MultiDexApplication;
 import android.text.TextUtils;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.backends.okhttp3.OkHttpImagePipelineConfigFactory;
+import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.song.sunset.activitys.MainActivity;
 import com.song.sunset.services.managers.BinderPool;
 import com.song.sunset.utils.CrashHandler;
@@ -16,9 +18,12 @@ import com.song.sunset.services.managers.PushManager;
 import com.song.sunset.utils.fresco.FrescoUtil;
 import com.song.sunset.utils.loadingmanager.LoadingAndRetryManager;
 import com.song.sunset.utils.AppConfig;
+import com.song.sunset.utils.retrofit.HttpsUtil;
 import com.squareup.leakcanary.LeakCanary;
 
 import java.util.List;
+
+import okhttp3.OkHttpClient;
 
 /**
  * Created by Song on 2016/8/29 0029.
@@ -44,11 +49,14 @@ public class SunsetApplication extends MultiDexApplication {
 
         initLoadingAndRetryLayout();
 
-//        ImagePipelineConfig config = OkHttpImagePipelineConfigFactory
-//                .newBuilder(this, OkHttpClient.INSTANCE.getOkHttpClient())
-//                .build();
+        OkHttpClient okHttpClient = new okhttp3.OkHttpClient.Builder().sslSocketFactory(HttpsUtil.createDefaultSSLSocketFactory()).build();
 
-        Fresco.initialize(this, FrescoUtil.getDefaultImagePipelineConfig(this));
+        ImagePipelineConfig config = OkHttpImagePipelineConfigFactory
+                .newBuilder(this, okHttpClient)
+                .build();
+
+        //FrescoUtil.getDefaultImagePipelineConfig(this)
+        Fresco.initialize(this, config);
         CrashHandler.getInstance().init(this);
         PushManager.getInstance().init(this);
         BinderPool.getInstance(this);
