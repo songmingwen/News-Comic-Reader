@@ -5,25 +5,22 @@ import android.animation.AnimatorSet;
 import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.graphics.Matrix;
-import android.graphics.RectF;
 import android.os.Build;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
-import android.view.VelocityTracker;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Scroller;
 
-import com.song.sunset.utils.ScreenUtils;
 import com.song.sunset.utils.ViewUtil;
-import com.song.video.SimplePlayer;
 
 /**
  * Created by Song on 2016/8/31 0031.
@@ -53,6 +50,7 @@ public class ScaleRecyclerView extends RecyclerView implements View.OnTouchListe
     private GestureDetector mGestureDetector;
 
     private OnSingleTapListener mOnSingleTapListener;
+    private Scroller mScroller;
 
     public interface OnSingleTapListener {
         void onSingleTap();
@@ -76,7 +74,6 @@ public class ScaleRecyclerView extends RecyclerView implements View.OnTouchListe
 
     public ScaleRecyclerView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
-
     }
 
     public ScaleRecyclerView(Context context, AttributeSet attrs, int defStyle) {
@@ -86,6 +83,8 @@ public class ScaleRecyclerView extends RecyclerView implements View.OnTouchListe
     }
 
     private void init() {
+        mScroller = new Scroller(getContext());
+        int mixSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();//获取系统能识别的最小滑动距离
         scaleGestureDetector = new ScaleGestureDetector(context, this);
         mGestureDetector = new GestureDetector(context, new ScaleRecyclerViewGestureListener());
         this.setOnTouchListener(this);
@@ -107,7 +106,7 @@ public class ScaleRecyclerView extends RecyclerView implements View.OnTouchListe
     private float downY;
     private float moveX;
     private float moveY;
-    private FlingRunnable mFlingRunnable;
+//    private FlingRunnable mFlingRunnable;
 
     private class ScaleRecyclerViewGestureListener extends GestureDetector.SimpleOnGestureListener {
 
@@ -164,100 +163,51 @@ public class ScaleRecyclerView extends RecyclerView implements View.OnTouchListe
 
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            mFlingRunnable = new FlingRunnable(getContext());
-            //调用fling方法，传入控件宽高和当前x和y轴方向的速度
-            //这里得到的vX和vY和scroller需要的velocityX和velocityY的负号正好相反
-            //所以传入一个负值
-            mFlingRunnable.fling(getWidth(), getHeight(), (int) velocityX, (int) velocityY);
-            //执行run方法
-            post(mFlingRunnable);
+            processInertiaSliding((int) (velocityX));
             return true;
         }
     }
 
-
     /**
-     * 惯性滑动
+     * -------------------------执行惯性滑动需要以下方法-------------------------
      */
-    private class FlingRunnable implements Runnable {
-        private Scroller mScroller;
-        private int mCurrentX, mCurrentY;
-
-        public FlingRunnable(Context context) {
-            mScroller = new Scroller(context);
+    private void processInertiaSliding(int velocityX) {
+        final int minX, maxX, minY, maxY;
+        final int startX = (int) getX();
+        //如果图片宽度大于控件宽度
+        if (currentScale > 1) {
+            //这是一个滑动范围[minX,maxX]，详情见下图
+            minX = (int) (-HALF_SCREEN_WIDTH * (currentScale - 1));
+            maxX = (int) (HALF_SCREEN_WIDTH * (currentScale - 1));
+        } else {
+            //如果图片宽度小于控件宽度，则不允许滑动
+            minX = maxX = startX;
         }
 
-        public void cancelFling() {
-            mScroller.forceFinished(true);
-        }
-
-        /**
-         * 这个方法主要是从onTouch中或得到当前滑动的水平和竖直方向的速度
-         * 调用scroller.fling方法，这个方法内部能够自动计算惯性滑动
-         * 的x和y的变化率，根据这个变化率我们就可以对图片进行平移了
-         */
-        public void fling(int viewWidth, int viewHeight, int velocityX, int velocityY) {
-            //startX为当前图片左边界的x坐标
-            final int startX = (int) getX();
-            final int minX, maxX, minY, maxY;
-            //如果图片宽度大于控件宽度
-            if (currentScale > 1) {
-                //这是一个滑动范围[minX,maxX]，详情见下图
-                minX = (int) (-ViewUtil.getScreenWidth() * (currentScale - 1)) / 2;
-                maxX = (int) (ViewUtil.getScreenWidth() * (currentScale - 1)) / 2;
-            } else {
-                //如果图片宽度小于控件宽度，则不允许滑动
-                minX = maxX = startX;
-            }
-
-            //如果图片高度大于控件高度，同理
-            final int startY = (int) getY();
-//            if (currentScale > 1) {
-//                minY = 0;
-//                maxY = (int) (ViewUtil.getScreenHeigth() * (currentScale - 1));
-//            } else {
+        //如果图片高度大于控件高度，同理
+        final int startY = (int) getY();
+        if (currentScale > 1) {
+            minY = (int) (-HALF_SCREEN_HEIGHT * (currentScale - 1));
+            maxY = (int) (HALF_SCREEN_HEIGHT * (currentScale - 1));
+        } else {
             minY = maxY = startY;
-//            }
-            mCurrentX = startX;
-            mCurrentY = startY;
-
-            if (startX != maxX /*|| startY != maxY*/) {
-                //调用fling方法，然后我们可以通过调用getCurX和getCurY来获得当前的x和y坐标
-                //这个坐标的计算是模拟一个惯性滑动来计算出来的，我们根据这个x和y的变化可以模拟
-                //出图片的惯性滑动
-                mScroller.fling(startX, startY, velocityX, velocityY, minX, maxX, minY, maxY);
-            }
-
         }
+        mScroller.fling(startX, startY, velocityX, 0, minX, maxX, minY, maxY);
+        invalidate();
+    }
 
-        /**
-         * 每隔16ms调用这个方法，实现惯性滑动的动画效果
-         */
-        @Override
-        public void run() {
-            if (mScroller.isFinished()) {
-                return;
-            }
-            //如果返回true，说明当前的动画还没有结束，我们可以获得当前的x和y的值
-            if (mScroller.computeScrollOffset()) {
-                //获得当前的x坐标
-                final int newX = mScroller.getCurrX();
-                //获得当前的y坐标
-                final int newY = mScroller.getCurrY();
-                //进行平移操作
-//                postTranslate(mCurrentX - newX, mCurrentY - newY);
-//                checkBorderWhenTranslate();
-//                setImageMatrix(mScaleMatrix);
-
-                setX(getPositionX(newX));
-
-                mCurrentX = newX;
-                mCurrentY = newY;
-                //每16ms调用一次
-                postDelayed(this, 16);
-            }
+    @Override
+    public void computeScroll() {
+        if (mScroller != null && mScroller.computeScrollOffset()) {
+            Log.i(TAG, "computeScroll：" + mScroller.getCurrX() + ";X" + mScroller.getCurrVelocity());
+            setX(getPositionX(mScroller.getCurrX()));
+            postInvalidate();
         }
     }
+
+    /**
+     * -------------------------执行惯性滑动需要以上方法-------------------------
+     */
 
     @Override
     public void onScrolled(int dx, int dy) {
