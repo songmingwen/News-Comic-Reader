@@ -1,5 +1,7 @@
 package com.song.sunset.utils;
 
+import android.text.TextUtils;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.regex.Matcher;
@@ -290,5 +292,16 @@ public class StringUtils {
             }
         }
         return new String(source);
+    }
+
+    public static String replaceHttps2Http(String origin) {
+        return replaceFirst(origin, "https", "http");
+    }
+
+    public static String replaceFirst(String origin, String regex, String replacement) {
+        if (TextUtils.isEmpty(origin)) {
+            return origin;
+        }
+        return origin.replaceFirst(regex, replacement);
     }
 }

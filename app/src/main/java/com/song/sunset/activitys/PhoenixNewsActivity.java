@@ -74,10 +74,22 @@ public class PhoenixNewsActivity extends BaseActivity {
     }
 
     @Override
+    public void onResume() {
+        ResumeWebView();
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        PauseWebView();
+        super.onPause();
+    }
+
+    @Override
     public void onBackPressedSupport() {
         if (inCustomView()) {
             hideCustomView();
-            return ;
+            return;
         }
         if (mWebView != null && mWebView.canGoBack())
             mWebView.goBack();
@@ -231,5 +243,27 @@ public class PhoenixNewsActivity extends BaseActivity {
     public void hideCustomView() {
         xwebchromeclient.onHideCustomView();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
+
+    private void PauseWebView() {
+        if (mWebView == null) {
+            return;
+        }
+        try {
+            mWebView.onPause();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void ResumeWebView() {
+        if (mWebView == null) {
+            return;
+        }
+        try {
+            mWebView.onResume();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -13,6 +13,7 @@ import com.song.sunset.adapters.VideoListAdapter;
 import com.song.sunset.beans.VideoBean;
 import com.song.sunset.fragments.base.BaseFragment;
 import com.song.sunset.interfaces.LoadingMoreListener;
+import com.song.sunset.utils.StringUtils;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.retrofit.RetrofitService;
@@ -189,7 +190,7 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
         VideoBean.ItemBean mItemBean = mAdapter.getData().get(position);
         mPlayer.setCover(mItemBean.getImage());
         mPlayer.setTitle(mItemBean.getTitle());
-        mPlayer.play(mItemBean.getVideo_url());
+        mPlayer.play(StringUtils.replaceHttps2Http(mItemBean.getVideo_url()));
     }
 
     @Override

@@ -13,6 +13,7 @@ import android.view.View;
 
 import com.song.sunset.R;
 import com.song.sunset.beans.DanmakuBean;
+import com.song.sunset.utils.StringUtils;
 import com.song.sunset.utils.danmaku.SongDanmakuParser;
 import com.song.video.SimplePlayer;
 
@@ -60,6 +61,7 @@ public class PhoenixVideoActivity extends AppCompatActivity {
             tvUrl = getIntent().getStringExtra(TV_URL);
             tvCover = getIntent().getStringExtra(TV_COVER);
         }
+        tvUrl = StringUtils.replaceHttps2Http(tvUrl);
     }
 
     @Override

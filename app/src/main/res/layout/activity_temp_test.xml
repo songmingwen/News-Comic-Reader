@@ -44,6 +44,12 @@
         android:layout_height="100dp"
         android:layout_centerInParent="true"/>
 
+    <ImageView
+        android:id="@+id/glide_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"/>
+
     <!--<ImageView-->
     <!--android:id="@+id/ic_svg"-->
     <!--android:layout_width="200dp"-->

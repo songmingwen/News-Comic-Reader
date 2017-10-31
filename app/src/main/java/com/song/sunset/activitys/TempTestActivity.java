@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.TimePickerView;
+import com.bumptech.glide.Glide;
 import com.song.sunset.R;
 import com.song.sunset.activitys.base.BaseActivity;
 import com.song.sunset.utils.DateTimeUtils;
@@ -100,7 +101,6 @@ public class TempTestActivity extends BaseActivity {
         textSwitchView = (TextSwitchView) findViewById(R.id.textswitch);
         initAnimator();
         first = true;
-
         initTimePicker();
         initOptionsPicker();
     }

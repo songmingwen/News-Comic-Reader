@@ -1,8 +1,19 @@
 package com.song.sunset.activitys;
 
+import android.app.ActivityManager;
+import android.app.AppOpsManager;
+import android.app.usage.UsageStats;
+import android.app.usage.UsageStatsManager;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.text.TextUtils;
 import android.util.Log;
@@ -30,6 +41,14 @@ import com.song.sunset.services.managers.BinderPool;
 import com.song.sunset.services.managers.MessengerManager;
 import com.song.sunset.services.managers.PushManager;
 import com.song.sunset.utils.MusicLoader;
+import com.song.sunset.utils.process.AndroidProcesses;
+import com.song.sunset.utils.process.AppNames;
+import com.song.sunset.utils.process.models.AndroidAppProcess;
+import com.song.sunset.utils.process.models.Stat;
+import com.song.sunset.utils.process.models.Statm;
+import com.squareup.haha.perflib.Main;
+
+import java.util.List;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -47,6 +66,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private long lastBackPressedTime;
     private FloatingActionButton fab;
     private NavigationView navigationView;
+    private static final int MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS = 1001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +79,22 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         initDrawer();
         setUpListener();
         switchFragmentDelay(PhoenixListFragment.class.getName(), getResources().getString(R.string.phoenix_news), 0);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            if (!hasPermission()) {
+                startActivityForResult(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS),
+                        MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS);
+            }
+        }
+    }
+
+    //检测用户是否对本app开启了“Apps with usage access”权限
+    private boolean hasPermission() {
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) return false;
+        AppOpsManager appOps = (AppOpsManager) getSystemService(Context.APP_OPS_SERVICE);
+        int mode = appOps.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS,
+                android.os.Process.myUid(), getPackageName());
+        return mode == AppOpsManager.MODE_ALLOWED;
     }
 
     @Override
@@ -92,7 +128,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             public void onClick(View v) {
 //                MainActivity.this.startActivity(new Intent(MainActivity.this, SubScaleViewActivity.class));
 //                MainActivity.this.startActivity(new Intent(MainActivity.this, TouchEventTestActivity.class));
-//                MainActivity.this.startActivity(new Intent(MainActivity.this, TempTestActivity.class));
+                MainActivity.this.startActivity(new Intent(MainActivity.this, TempTestActivity.class));
 //                MainActivity.this.startActivity(new Intent(MainActivity.this, TransTestActivity.class));
 //                ScrollingActivity.start(MainActivity.this);
 //                new ImageViewer.Builder(MainActivity.this, new String[]{"http://img2.niutuku.com/1312/0831/0831-niutuku.com-28071.jpg",
@@ -108,13 +144,67 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //                PushManager.getInstance().connect();
 //                PushManager.getInstance().sendMusicInfo(MusicLoader.instance().getMusicList().get(0));
 //                MessengerManager.getInstance().sendMessage();
-                useBinderPool();
+//                useBinderPool();
 //                Log.i("music_list: ", MusicLoader.instance(MainActivity.this.getContentResolver()).getMusicList().toString());
 
 //                switchDayNightMode();
 
+//                PrintProcess();
+//                getTopApp();
+//                Log.i("recent_song", getTaskList());
             }
         });
+    }
+
+    public String getTaskList() {
+        String apps = "";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            return apps;
+        }
+        ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        PackageManager pm = getPackageManager();
+        try {
+            List<ActivityManager.RecentTaskInfo> list = am.getRecentTasks(64, 0);
+            for (ActivityManager.RecentTaskInfo ti : list) {
+                Intent intent = ti.baseIntent;
+                ResolveInfo resolveInfo = pm.resolveActivity(intent, 0);
+                if (resolveInfo != null) {
+                    apps = apps.equals("") ? resolveInfo.loadLabel(pm) + "" : apps + "," + resolveInfo.loadLabel(pm);
+                }
+            }
+            return apps;
+        } catch (SecurityException se) {
+            se.printStackTrace();
+            return apps;
+        }
+    }
+
+    private void PrintProcess() {
+        List<AndroidAppProcess> processes = AndroidProcesses.getRunningAppProcesses();
+
+        for (AndroidAppProcess process : processes) {
+            Log.d("process_song", process.getPackageName());
+        }
+    }
+
+    private void getTopApp() {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+            UsageStatsManager m = (UsageStatsManager) getSystemService(Context.USAGE_STATS_SERVICE);
+            if (m != null) {
+                long now = System.currentTimeMillis();
+                //获取600秒之内的应用数据
+                List<UsageStats> stats = m.queryUsageStats(UsageStatsManager.INTERVAL_BEST, now - 600 * 1000, now);
+                Log.i("song", "Running app number in last 600 seconds : " + stats.size());
+
+                //取得最近运行的一个app，即当前运行的app
+                if (!stats.isEmpty()) {
+                    for (int i = 0; i < stats.size(); i++) {
+                        Log.i("song", "top running app is : " + stats.get(i).getPackageName());
+                    }
+                }
+
+            }
+        }
     }
 
     private void useBinderPool() {
