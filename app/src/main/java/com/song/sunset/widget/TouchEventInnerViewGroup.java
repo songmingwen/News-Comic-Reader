@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.RelativeLayout;
 
 /**
@@ -30,9 +31,9 @@ public class TouchEventInnerViewGroup extends RelativeLayout {
             case MotionEvent.ACTION_DOWN:
                 Log.i("Inner_dispatch", "-----down");
                 break;
-//            case MotionEvent.ACTION_MOVE:
-//                Log.i("Inner_dispatch", "-----move");
-//                break;
+            case MotionEvent.ACTION_MOVE:
+                Log.i("Inner_dispatch", "-----move");
+                break;
         }
         return super.dispatchTouchEvent(ev);
     }
@@ -43,9 +44,9 @@ public class TouchEventInnerViewGroup extends RelativeLayout {
             case MotionEvent.ACTION_DOWN:
                 Log.i("Inner_Intercept", "-----down");
                 break;
-//            case MotionEvent.ACTION_MOVE:
-//                Log.i("Inner_Intercept", "-----move");
-//                break;
+            case MotionEvent.ACTION_MOVE:
+                Log.i("Inner_Intercept", "-----move");
+                break;
         }
         return super.onInterceptTouchEvent(ev);
     }
@@ -56,10 +57,10 @@ public class TouchEventInnerViewGroup extends RelativeLayout {
             case MotionEvent.ACTION_DOWN:
                 Log.i("Inner_touch", "-----down");
                 break;
-//            case MotionEvent.ACTION_MOVE:
-//                Log.i("Inner_touch", "-----move");
-//                break;
+            case MotionEvent.ACTION_MOVE:
+                Log.i("Inner_touch", "-----move");
+                break;
         }
-        return super.onTouchEvent(event);
+        return true;
     }
 }

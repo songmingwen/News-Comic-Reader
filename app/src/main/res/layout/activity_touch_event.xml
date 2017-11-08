@@ -12,12 +12,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:onClick="buttonOnClick"
-                android:visibility="gone" />
+            <!--<Button-->
+                <!--android:id="@+id/button"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:onClick="buttonOnClick"-->
+                <!--android:visibility="gone" />-->
 
             <!--<com.song.sunset.views.MatrixImageView-->
             <!--android:layout_width="match_parent"-->

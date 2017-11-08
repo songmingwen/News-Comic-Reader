@@ -56,9 +56,9 @@ public class TouchEventTestActivity extends BaseActivity {
                     case MotionEvent.ACTION_DOWN:
                         Log.i("Button_touch", "-----down");
                         break;
-//                    case MotionEvent.ACTION_MOVE:
-//                        Log.i("Button_touch", "-----move");
-//                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        Log.i("Button_touch", "-----move");
+                        break;
                 }
                 return false;
             }
@@ -71,9 +71,9 @@ public class TouchEventTestActivity extends BaseActivity {
             case MotionEvent.ACTION_DOWN:
                 Log.i("Activity_touch", "-----down");
                 break;
-//            case MotionEvent.ACTION_MOVE:
-//                Log.i("Activity_touch", "-----move");
-//                break;
+            case MotionEvent.ACTION_MOVE:
+                Log.i("Activity_touch", "-----move");
+                break;
         }
         return super.onTouchEvent(event);
     }

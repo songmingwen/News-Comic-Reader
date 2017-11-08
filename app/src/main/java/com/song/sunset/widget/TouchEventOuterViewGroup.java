@@ -30,12 +30,11 @@ public class TouchEventOuterViewGroup extends RelativeLayout {
             case MotionEvent.ACTION_DOWN:
                 Log.i("Outer_dispatch", "-----down");
                 break;
-//            case MotionEvent.ACTION_MOVE:
-//                Log.i("Outer_dispatch", "-----move");
-//                break;
+            case MotionEvent.ACTION_MOVE:
+                Log.i("Outer_dispatch", "-----move");
+                break;
         }
-        super.dispatchTouchEvent(ev);
-        return true;
+        return super.dispatchTouchEvent(ev);
     }
 
     @Override
@@ -44,9 +43,9 @@ public class TouchEventOuterViewGroup extends RelativeLayout {
             case MotionEvent.ACTION_DOWN:
                 Log.i("Outer_intercept", "-----down");
                 break;
-//            case MotionEvent.ACTION_MOVE:
-//                Log.i("Outer_intercept", "-----move");
-//                break;
+            case MotionEvent.ACTION_MOVE:
+                Log.i("Outer_intercept", "-----move");
+                break;
         }
         return super.onInterceptTouchEvent(ev);
     }
@@ -57,9 +56,9 @@ public class TouchEventOuterViewGroup extends RelativeLayout {
             case MotionEvent.ACTION_DOWN:
                 Log.i("Outer_touch", "-----down");
                 break;
-//            case MotionEvent.ACTION_MOVE:
-//                Log.i("Outer_touch", "-----move");
-//                break;
+            case MotionEvent.ACTION_MOVE:
+                Log.i("Outer_touch", "-----move");
+                break;
         }
         return super.onTouchEvent(event);
     }
