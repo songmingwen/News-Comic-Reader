@@ -588,7 +588,7 @@ public class SimplePlayer {
         this.url = StringUtils.replaceHttps2Http(url);
         if (playerSupport) {
             $.id(R.id.app_video_loading).visible();
-            videoView.setVideoPath(url);
+            videoView.setVideoPath(this.url);
             start();
         }
     }
