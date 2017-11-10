@@ -1,30 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tl="http://schemas.android.com/apk/res-auto"
+<com.song.sunset.utils.loadingmanager.ProgressLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:progressActivity="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/progress"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:clipChildren="false"
-    android:orientation="vertical">
+    android:background="@color/white">
 
-    <com.flyco.tablayout.SlidingTabLayout
-        android:id="@+id/ranking_sliding_layout"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="44dp"
+        android:layout_height="match_parent"
         android:background="@color/white"
-        tl:tl_indicator_color="@color/colorPrimary"
-        tl:tl_indicator_height="2dp"
-        tl:tl_indicator_width="40dp"
-        tl:tl_tab_width="60dp"
-        tl:tl_textSelectColor="@color/colorPrimary"
-        tl:tl_textUnselectColor="@color/color_transparent_88"
-        tl:tl_textsize="15sp"
-        tl:tl_underline_color="@color/color_transparent_88"
-        tl:tl_underline_height="0.5dp" />
-
-    <com.song.sunset.widget.RankViewPager
-        android:id="@+id/ranking_view_pager"
         android:clipChildren="false"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</LinearLayout>
+        android:orientation="vertical">
+
+        <com.flyco.tablayout.SlidingTabLayout
+            android:id="@+id/ranking_sliding_layout"
+            progressActivity:tl_indicator_color="@color/colorPrimary"
+            progressActivity:tl_indicator_height="2dp"
+            progressActivity:tl_indicator_width="40dp"
+            progressActivity:tl_tab_width="60dp"
+            progressActivity:tl_textSelectColor="@color/colorPrimary"
+            progressActivity:tl_textUnselectColor="@color/color_transparent_88"
+            progressActivity:tl_textsize="15sp"
+            progressActivity:tl_underline_color="@color/color_transparent_88"
+            progressActivity:tl_underline_height="0.5dp"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="@color/white"/>
+
+        <com.song.sunset.widget.RankViewPager
+            android:id="@+id/ranking_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipChildren="false"/>
+    </LinearLayout>
+</com.song.sunset.utils.loadingmanager.ProgressLayout>

@@ -23,7 +23,7 @@ import com.song.core.statusbar.StatusBarUtil;
 import com.song.sunset.R;
 import com.song.sunset.activitys.base.BaseActivity;
 import com.song.sunset.utils.ScreenUtils;
-import com.song.sunset.utils.loadingmanager.LoadingAndRetryManager;
+import com.song.sunset.utils.loadingmanager.ProgressLayout;
 
 /**
  * Created by Song on 2017/4/6 0006.
@@ -35,12 +35,12 @@ public class PhoenixNewsActivity extends BaseActivity {
     public static final String PHOENIX_NEWS_URL = "phoenix_news_url";
     private String url;
     private ProgressBar progressBar;
-    private LoadingAndRetryManager mLoadingAndRetryManager;
     private WebView mWebView;
     private FrameLayout video_fullView;// 全屏时视频加载view
     private View xCustomView;
     private WebChromeClient.CustomViewCallback xCustomViewCallback;
     private WebChromeClientCompat xwebchromeclient;
+    private ProgressLayout progressLayout;
 
     public static void start(Context context, String url) {
         Intent intent = new Intent(context, PhoenixNewsActivity.class);
@@ -56,8 +56,8 @@ public class PhoenixNewsActivity extends BaseActivity {
         setContentView(R.layout.activity_phoenix_news_layout);
         video_fullView = (FrameLayout) findViewById(R.id.video_fullView);
 
-        mLoadingAndRetryManager = LoadingAndRetryManager.generate(this, null);
-        mLoadingAndRetryManager.showLoading();
+        progressLayout = (ProgressLayout)findViewById(R.id.progress);
+        progressLayout.showLoading();
         if (getIntent() != null) {
             url = getIntent().getStringExtra(PHOENIX_NEWS_URL);
         }
@@ -67,7 +67,7 @@ public class PhoenixNewsActivity extends BaseActivity {
         initWebView(mWebView);
         if (TextUtils.isEmpty(url)) {
             Toast.makeText(this, "网页暂时无法打开", Toast.LENGTH_SHORT).show();
-            mLoadingAndRetryManager.showEmpty();
+            progressLayout.showEmpty();
             return;
         }
         mWebView.loadUrl(url);
@@ -145,7 +145,7 @@ public class PhoenixNewsActivity extends BaseActivity {
                 progressBar.setVisibility(ProgressBar.VISIBLE);
             }
             if (progress >= 30) {
-                mLoadingAndRetryManager.showContent();
+                progressLayout.showContent();
             }
             progressBar.setProgress(progress);
             if (progress == 100) {

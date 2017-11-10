@@ -134,4 +134,7 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
+    <string name="without_content">没有内容</string>
+    <string name="loading_failure">加载失败</string>
+    <string name="click_to_loading">点击重试</string>
 </resources>

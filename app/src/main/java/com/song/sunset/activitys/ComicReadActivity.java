@@ -10,12 +10,11 @@ import android.view.View;
 
 import com.song.sunset.activitys.base.BaseActivity;
 import com.song.sunset.utils.ScreenUtils;
-import com.song.sunset.utils.loadingmanager.LoadingAndRetryManager;
 import com.song.sunset.beans.basebeans.BaseBean;
 import com.song.sunset.beans.ComicReadBean;
-import com.song.sunset.utils.loadingmanager.OnLoadingAndRetryListener;
 import com.song.sunset.R;
 import com.song.sunset.adapters.ComicReadAdapter;
+import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.ViewUtil;
@@ -35,12 +34,12 @@ import rx.Observable;
 public class ComicReadActivity extends BaseActivity implements RetrofitCallback<List<ComicReadBean>> {
 
     public static final String OPEN_POSITION = "open_position";
-    private LoadingAndRetryManager mLoadingAndRetryManager;
     private String comicId = "";
     private int openPosition = -1;
     private ScaleRecyclerView recyclerView;
     private ComicReadAdapter adapter;
     private boolean hasCache = false;
+    private ProgressLayout progressLayout;
 
     public static void start(Context context, String comicId, int openPosition) {
         Intent intent = new Intent(context, ComicReadActivity.class);
@@ -54,18 +53,8 @@ public class ComicReadActivity extends BaseActivity implements RetrofitCallback<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comic_read);
         ScreenUtils.fullscreen(this, true);
-        mLoadingAndRetryManager = LoadingAndRetryManager.generate(this, new OnLoadingAndRetryListener() {
-            @Override
-            public void setRetryEvent(View retryView) {
-                retryView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-//                        getDataFromNet();
-                        getDataFromRetrofit2();
-                    }
-                });
-            }
-        });
+        progressLayout = (ProgressLayout)findViewById(R.id.progress);
+        progressLayout.showLoading();
 
         if (getIntent() != null) {
             comicId = getIntent().getStringExtra(ComicDetailActivity.COMIC_ID);
@@ -127,14 +116,14 @@ public class ComicReadActivity extends BaseActivity implements RetrofitCallback<
     }
 
     public void getDataFromRetrofit2() {
-        mLoadingAndRetryManager.showLoading();
+        progressLayout.showLoading();
         Observable<BaseBean<List<ComicReadBean>>> Observable = RetrofitService.createApi(U17ComicApi.class).queryComicReadRDByGetObservable(comicId);
         RxUtil.comicSubscribe(Observable, this);
     }
 
     @Override
     public void onSuccess(List<ComicReadBean> comicReadBean) {
-        mLoadingAndRetryManager.showContent();
+        progressLayout.showContent();
         ArrayList<ComicReadBean.ImageListBean.ImagesBean> dataList = getDataList(comicReadBean);
         adapter.setData(dataList);
         int realPosition = getRealPosition(comicReadBean);
@@ -143,7 +132,12 @@ public class ComicReadActivity extends BaseActivity implements RetrofitCallback<
 
     @Override
     public void onFailure(int errorCode, String errorMsg) {
-        mLoadingAndRetryManager.showRetry();
+        progressLayout.showError(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getDataFromRetrofit2();
+            }
+        });
     }
 
 //    public void getDataFromNet() {

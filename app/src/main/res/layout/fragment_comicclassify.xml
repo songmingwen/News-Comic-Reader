@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.song.sunset.utils.loadingmanager.ProgressLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/progress"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
@@ -12,4 +14,4 @@
         android:clipToPadding="false"
         android:padding="7dp" />
 
-</RelativeLayout>
+</com.song.sunset.utils.loadingmanager.ProgressLayout>

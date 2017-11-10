@@ -7,15 +7,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.song.sunset.R;
 import com.song.sunset.adapters.CollectionComicAdapter;
 import com.song.sunset.beans.ComicLocalCollection;
 import com.song.sunset.fragments.base.BaseFragment;
+import com.song.sunset.utils.AppConfig;
 import com.song.sunset.utils.GreenDaoUtil;
 import com.song.sunset.utils.ViewUtil;
-import com.song.sunset.utils.loadingmanager.LoadingAndRetryManager;
-import com.song.sunset.utils.loadingmanager.OnLoadingAndRetryListener;
+import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.sunset.greendao.gen.ComicLocalCollectionDao;
 
 import java.util.List;
@@ -26,7 +27,7 @@ import java.util.List;
  */
 public class CollectionFragment extends BaseFragment {
 
-    private LoadingAndRetryManager mLoadingAndRetryManager;
+    private ProgressLayout progressLayout;
     private CollectionComicAdapter adapter;
     private ComicLocalCollectionDao comicLocalCollectionDao;
 
@@ -44,18 +45,8 @@ public class CollectionFragment extends BaseFragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        mLoadingAndRetryManager = LoadingAndRetryManager.generate(this, new OnLoadingAndRetryListener() {
-            @Override
-            public void setRetryEvent(View retryView) {
-                retryView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mLoadingAndRetryManager.showLoading();
-                    }
-                });
-            }
-        });
-        mLoadingAndRetryManager.showLoading();
+        progressLayout = (ProgressLayout) view.findViewById(R.id.progress);
+        progressLayout.showLoading();
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.id_comic_collection);
         adapter = new CollectionComicAdapter(getActivity());
@@ -77,10 +68,15 @@ public class CollectionFragment extends BaseFragment {
     private void getDataFromSQLite() {
         List<ComicLocalCollection> list = comicLocalCollectionDao.loadAll();
         if (list == null || list.size() <= 0) {
-            mLoadingAndRetryManager.showEmpty();
+            progressLayout.showError(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(AppConfig.getApp(), "haha", Toast.LENGTH_SHORT).show();
+                }
+            });
             return;
         }
         adapter.setData(list);
-        mLoadingAndRetryManager.showContent();
+        progressLayout.showContent();
     }
 }

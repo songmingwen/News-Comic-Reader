@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.song.sunset.utils.loadingmanager.ProgressLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.song.sunset.utils.loadingmanager.ProgressLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:progressActivity="http://schemas.android.com/apk/res-auto"
     android:id="@+id/progress"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    progressActivity:emptyBackgroundColor="#FFFFFF"
-    progressActivity:emptyContentTextColor="#000000"
-    progressActivity:emptyTitleTextColor="#000000"
-    progressActivity:errorBackgroundColor="#FFFFFF"
-    progressActivity:errorButtonTextColor="#000000"
-    progressActivity:errorContentTextColor="#000000"
-    progressActivity:errorTitleTextColor="#000000"
-    progressActivity:loadingBackgroundColor="#FFFFFF">
+    progressActivity:emptyBackgroundColor="@color/white"
+    progressActivity:emptyContentTextColor="@color/color_accent"
+    progressActivity:emptyTitleTextColor="@color/color_accent"
+    progressActivity:errorBackgroundColor="@color/white"
+    progressActivity:errorButtonTextColor="@color/white"
+    progressActivity:errorContentTextColor="@color/color_accent"
+    progressActivity:errorTitleTextColor="@color/color_accent"
+    progressActivity:loadingBackgroundColor="@color/white">
 
-    <in.srain.cube.views.ptr.PtrFrameLayout xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
+    <in.srain.cube.views.ptr.PtrFrameLayout
         android:id="@+id/id_phoenix_list_swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        cube_ptr:ptr_duration_to_close="200"
-        cube_ptr:ptr_duration_to_close_header="1000"
-        cube_ptr:ptr_keep_header_when_refresh="true"
-        cube_ptr:ptr_pull_to_fresh="false"
-        cube_ptr:ptr_ratio_of_header_height_to_refresh="1.2"
-        cube_ptr:ptr_resistance="1.7">
+        progressActivity:ptr_duration_to_close="200"
+        progressActivity:ptr_duration_to_close_header="1000"
+        progressActivity:ptr_keep_header_when_refresh="true"
+        progressActivity:ptr_pull_to_fresh="false"
+        progressActivity:ptr_ratio_of_header_height_to_refresh="1.2"
+        progressActivity:ptr_resistance="1.7">
 
         <com.song.sunset.widget.LoadMoreRecyclerView
             android:id="@+id/id_recyclerview_phoenix_list"
@@ -31,10 +32,10 @@
             android:layout_height="match_parent"
             android:background="@color/white"
             android:clipChildren="false"
-            android:scrollbars="vertical"
             android:clipToPadding="false"
+            android:padding="7dp"
             android:scrollbarStyle="outsideOverlay"
-            android:padding="7dp" />
+            android:scrollbars="vertical"/>
     </in.srain.cube.views.ptr.PtrFrameLayout>
 
     <RelativeLayout
@@ -49,6 +50,6 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_centerInParent="true"
-            android:visibility="gone" />
+            android:visibility="gone"/>
     </RelativeLayout>
 </com.song.sunset.utils.loadingmanager.ProgressLayout>

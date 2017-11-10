@@ -16,11 +16,10 @@ import com.android.volley.toolbox.ImageRequest;
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.song.sunset.activitys.base.BaseActivity;
-import com.song.sunset.utils.loadingmanager.LoadingAndRetryManager;
-import com.song.sunset.utils.loadingmanager.OnLoadingAndRetryListener;
 import com.song.sunset.R;
 import com.song.sunset.utils.FileUtils;
 import com.song.sunset.utils.SdCardUtil;
+import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.volley.SampleVolleyFactory;
 
 import java.io.File;
@@ -36,28 +35,25 @@ public class ScalePicActivity extends BaseActivity {
     private String picUrl;
     private String picId;
     private SubsamplingScaleImageView imageView;
-    private LoadingAndRetryManager mLoadingAndRetryManager;
+    private ProgressLayout progressLayout;
     private boolean hasCache = false;
     private File file;
+    private View.OnClickListener mOnRetryListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scale_pic);
 
-        mLoadingAndRetryManager = LoadingAndRetryManager.generate(this, new OnLoadingAndRetryListener() {
+        progressLayout = (ProgressLayout)findViewById(R.id.progress);
+        progressLayout.showLoading();
+        mOnRetryListener = new View.OnClickListener() {
             @Override
-            public void setRetryEvent(View retryView) {
-                retryView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mLoadingAndRetryManager.showLoading();
-                        setBitmapFromNet();
-                    }
-                });
+            public void onClick(View v) {
+                progressLayout.showLoading();
+                setBitmapFromNet();
             }
-        });
-        mLoadingAndRetryManager.showLoading();
+        };
 
         if (getIntent() != null) {
             picUrl = getIntent().getStringExtra(PIC_URL);
@@ -82,7 +78,7 @@ public class ScalePicActivity extends BaseActivity {
         file = new File(SdCardUtil.getNormalSDCardPath() + "/Sunset/SavedCover", picId + ".jpg");
         if (file.exists()) {
             imageView.setImage(ImageSource.uri(Uri.fromFile(file)));
-            mLoadingAndRetryManager.showContent();
+            progressLayout.showContent();
             setListener(null);
             return true;
         } else {
@@ -103,21 +99,22 @@ public class ScalePicActivity extends BaseActivity {
                     @Override
                     public void onResponse(Bitmap response) {
                         hasCache = true;
-                        mLoadingAndRetryManager.showContent();
+                        progressLayout.showContent();
                         if (response != null) {
                             imageView.setImage(ImageSource.bitmap(response));
                             setListener(response);
                         } else {
-                            mLoadingAndRetryManager.showRetry();
+                            progressLayout.showError(mOnRetryListener);
                         }
                     }
                 }, 2048, 2048, Bitmap.Config.ARGB_8888, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (hasCache)
-                    mLoadingAndRetryManager.showContent();
-                else
-                    mLoadingAndRetryManager.showRetry();
+                    progressLayout.showContent();
+                else {
+                    progressLayout.showError(mOnRetryListener);
+                }
             }
         });
         imageRequest.setRetryPolicy(new DefaultRetryPolicy());

@@ -10,12 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.song.sunset.utils.ViewUtil;
-import com.song.sunset.utils.loadingmanager.LoadingAndRetryManager;
 import com.song.sunset.beans.basebeans.BaseBean;
 import com.song.sunset.beans.ComicClassifyBean;
-import com.song.sunset.utils.loadingmanager.OnLoadingAndRetryListener;
 import com.song.sunset.R;
 import com.song.sunset.adapters.ComicClassifyAdapter;
+import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.retrofit.RetrofitService;
@@ -28,7 +27,7 @@ import rx.Observable;
  * Email:z53520@qq.com
  */
 public class ComicClassifyFragment extends Fragment {
-    private LoadingAndRetryManager mLoadingAndRetryManager;
+    private ProgressLayout progressLayout;
     private RecyclerView recyclerView;
     private ComicClassifyAdapter adapter;
 
@@ -41,18 +40,7 @@ public class ComicClassifyFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
-        mLoadingAndRetryManager = LoadingAndRetryManager.generate(this, new OnLoadingAndRetryListener() {
-            @Override
-            public void setRetryEvent(View retryView) {
-                retryView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-//                        getDataFromNet();
-                        getDataFromRetrofit2();
-                    }
-                });
-            }
-        });
+        progressLayout = (ProgressLayout) view.findViewById(R.id.progress);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.id_comic_classify_recycler);
         adapter = new ComicClassifyAdapter(getActivity());
@@ -111,18 +99,23 @@ public class ComicClassifyFragment extends Fragment {
 //    }
 
     public void getDataFromRetrofit2() {
-        mLoadingAndRetryManager.showLoading();
+        progressLayout.showLoading();
         Observable<BaseBean<ComicClassifyBean>> observable = RetrofitService.createApi(U17ComicApi.class).queryComicClassifyBeanByGetObservable(2);
         RxUtil.comicSubscribe(observable, new RetrofitCallback<ComicClassifyBean>() {
             @Override
             public void onSuccess(ComicClassifyBean comicReadBean) {
-                mLoadingAndRetryManager.showContent();
+                progressLayout.showContent();
                 adapter.setData(comicReadBean);
             }
 
             @Override
             public void onFailure(int errorCode, String errorMsg) {
-                mLoadingAndRetryManager.showRetry();
+                progressLayout.showRetry(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        getDataFromRetrofit2();
+                    }
+                });
             }
         });
     }

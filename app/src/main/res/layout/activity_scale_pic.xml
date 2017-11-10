@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.song.sunset.utils.loadingmanager.ProgressLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/progress"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black">
+    android:background="@color/white">
 
     <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
         android:id="@+id/id_pic_activity_image"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</RelativeLayout>
+        android:layout_height="match_parent"/>
+</com.song.sunset.utils.loadingmanager.ProgressLayout>

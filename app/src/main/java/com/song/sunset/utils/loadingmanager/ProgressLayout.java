@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -55,7 +56,8 @@ public class ProgressLayout extends RelativeLayout {
     ImageView errorStateImageView;
     TextView errorStateTitleTextView;
     TextView errorStateContentTextView;
-    Button errorStateButton;
+    TextView errorStateButton;
+    CardView mErrorStateButtonContent;
 
     int loadingStateProgressBarWidth;
     int loadingStateProgressBarHeight;
@@ -206,6 +208,14 @@ public class ProgressLayout extends RelativeLayout {
     }
 
     /**
+     * default empty view
+     */
+    public void showEmpty() {
+        Drawable drawable = getContext().getResources().getDrawable(R.drawable.icon_new_style_failure);
+        showEmpty(drawable, getContext().getString(R.string.without_content), "");
+    }
+
+    /**
      * Show empty view when there are not data to show
      *
      * @param emptyImageDrawable Drawable to show
@@ -226,6 +236,20 @@ public class ProgressLayout extends RelativeLayout {
      */
     public void showEmpty(Drawable emptyImageDrawable, String emptyTextTitle, String emptyTextContent, List<Integer> skipIds) {
         switchState(EMPTY, emptyImageDrawable, emptyTextTitle, emptyTextContent, null, null, skipIds);
+    }
+
+    public void showRetry(OnClickListener onClickListener) {
+        showError(onClickListener);
+    }
+
+    /**
+     * default error view
+     *
+     * @param onClickListener
+     */
+    public void showError(OnClickListener onClickListener) {
+        Drawable drawable = getContext().getResources().getDrawable(R.drawable.icon_new_style_failure);
+        showError(drawable, getContext().getString(R.string.loading_failure), "", getContext().getString(R.string.click_to_loading), onClickListener);
     }
 
     /**
@@ -338,7 +362,8 @@ public class ProgressLayout extends RelativeLayout {
                 errorStateTitleTextView.setText(errorText);
                 errorStateContentTextView.setText(errorTextContent);
                 errorStateButton.setText(errorButtonText);
-                errorStateButton.setOnClickListener(onClickListener);
+                mErrorStateButtonContent.setOnClickListener(onClickListener);
+                errorStateRelativeLayout.setOnClickListener(onClickListener);
                 setContentVisibility(false, skipIds);
                 break;
         }
@@ -417,8 +442,8 @@ public class ProgressLayout extends RelativeLayout {
             errorStateImageView = (ImageView) view.findViewById(R.id.errorStateImageView);
             errorStateTitleTextView = (TextView) view.findViewById(R.id.errorStateTitleTextView);
             errorStateContentTextView = (TextView) view.findViewById(R.id.errorStateContentTextView);
-            errorStateButton = (Button) view.findViewById(R.id.errorStateButton);
-
+            errorStateButton = (TextView) view.findViewById(R.id.errorStateButtonText);
+            mErrorStateButtonContent = (CardView) view.findViewById(R.id.button_content);
             //Set error state image width and height
             errorStateImageView.getLayoutParams().width = errorStateImageWidth;
             errorStateImageView.getLayoutParams().height = errorStateImageHeight;

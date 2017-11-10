@@ -16,8 +16,7 @@ import com.song.sunset.beans.VideoBean;
 import com.song.sunset.fragments.VideoListHelperFragment;
 import com.song.sunset.fragments.VideoListPlayFragment;
 import com.song.sunset.utils.ViewUtil;
-import com.song.sunset.utils.loadingmanager.LoadingAndRetryManager;
-import com.song.sunset.utils.loadingmanager.OnLoadingAndRetryListener;
+import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.retrofit.RetrofitService;
@@ -38,7 +37,7 @@ public class VideoListActivity extends AppCompatActivity {
     public static final String TV_NAME = "tv_name";
     private ViewPager viewPager;
     private SlidingTabLayout slidingTabLayout;
-    private LoadingAndRetryManager mLoadingAndRetryManager;
+    private ProgressLayout progressLayout;
     private RankingPagerAdapter rankingPagerAdapter;
 
     @Override
@@ -46,19 +45,8 @@ public class VideoListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
 
-        mLoadingAndRetryManager = LoadingAndRetryManager.generate(this, new OnLoadingAndRetryListener() {
-            @Override
-            public void setRetryEvent(View retryView) {
-                retryView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mLoadingAndRetryManager.showLoading();
-                        loadNetData();
-                    }
-                });
-            }
-        });
-        mLoadingAndRetryManager.showLoading();
+        progressLayout = (ProgressLayout)findViewById(R.id.progress);
+        progressLayout.showLoading();
 
         viewPager = (ViewPager) findViewById(R.id.ranking_view_pager);
         slidingTabLayout = (SlidingTabLayout) findViewById(R.id.ranking_sliding_layout);
@@ -126,12 +114,18 @@ public class VideoListActivity extends AppCompatActivity {
                 rankingPagerAdapter.setFragmentList(fragmentList, titleList);
                 slidingTabLayout.notifyDataSetChanged();
 
-                mLoadingAndRetryManager.showContent();
+                progressLayout.showContent();
             }
 
             @Override
             public void onFailure(int errorCode, String errorMsg) {
-                mLoadingAndRetryManager.showRetry();
+                progressLayout.showRetry(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        progressLayout.showLoading();
+                        loadNetData();
+                    }
+                });
             }
         });
     }

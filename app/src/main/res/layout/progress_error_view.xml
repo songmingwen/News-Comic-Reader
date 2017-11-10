@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/errorStateRelativeLayout"
     android:layout_width="match_parent"
@@ -14,11 +16,10 @@
 
         <ImageView
             android:id="@+id/errorStateImageView"
-            android:layout_width="108dp"
-            android:layout_height="108dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            tools:background="#000000"
-            tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription"/>
 
         <TextView
             android:id="@+id/errorStateTitleTextView"
@@ -28,9 +29,10 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="20dp"
+            android:textColor="@color/color_accent"
             android:textSize="15sp"
             android:textStyle="bold"
-            tools:text="@string/progressActivityErrorTitlePlaceholder" />
+            tools:text="@string/progressActivityErrorTitlePlaceholder"/>
 
         <TextView
             android:id="@+id/errorStateContentTextView"
@@ -43,14 +45,30 @@
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:lineSpacingExtra="5.5dp"
-            tools:text="@string/progressActivityErrorContentPlaceholder" />
+            android:textColor="@color/color_accent"
+            tools:text="@string/progressActivityErrorContentPlaceholder"/>
 
-        <Button
-            android:id="@+id/errorStateButton"
+        <android.support.v7.widget.CardView
+            android:id="@+id/button_content"
+            style="@style/AppCardView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="@string/progressActivityErrorButton"/>
+            android:layout_marginBottom="4dp"
+            card_view:cardCornerRadius="3dp">
+
+            <TextView
+                android:id="@+id/errorStateButtonText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:paddingBottom="5dp"
+                android:paddingLeft="7dp"
+                android:paddingRight="7dp"
+                android:paddingTop="5dp"
+                android:text="@string/progressActivityErrorButton"
+                android:textColor="@color/color_accent"/>
+        </android.support.v7.widget.CardView>
 
     </LinearLayout>
 

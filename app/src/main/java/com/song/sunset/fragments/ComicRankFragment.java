@@ -17,8 +17,7 @@ import com.song.sunset.beans.ComicRankListBean;
 import com.song.sunset.beans.basebeans.BaseBean;
 import com.song.sunset.fragments.base.BaseFragment;
 import com.song.sunset.utils.ViewUtil;
-import com.song.sunset.utils.loadingmanager.LoadingAndRetryManager;
-import com.song.sunset.utils.loadingmanager.OnLoadingAndRetryListener;
+import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.retrofit.RetrofitService;
@@ -43,7 +42,7 @@ public class ComicRankFragment extends BaseFragment {
     private RankViewPager rankingViewPager;
     private SlidingTabLayout rankingSlidingTabLayout;
     private RankingPagerAdapter<ComicRankListFragment> rankingPagerAdapter;
-    private LoadingAndRetryManager mLoadingAndRetryManager;
+    private ProgressLayout progressLayout;
     private int mCurrPos = 0;
 
     @Nullable
@@ -57,19 +56,8 @@ public class ComicRankFragment extends BaseFragment {
         if (savedInstanceState != null) {
             mCurrPos = savedInstanceState.getInt(BUNDLE_KEY_PAGE_INDEX, 0);
         }
-        mLoadingAndRetryManager = LoadingAndRetryManager.generate(this, new OnLoadingAndRetryListener() {
-            @Override
-            public void setRetryEvent(View retryView) {
-                retryView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mLoadingAndRetryManager.showLoading();
-                        loadNetData();
-                    }
-                });
-            }
-        });
-        mLoadingAndRetryManager.showLoading();
+        progressLayout = (ProgressLayout) view.findViewById(R.id.progress);
+        progressLayout.showLoading();
 
         initView(view);
         loadNetData();
@@ -116,7 +104,7 @@ public class ComicRankFragment extends BaseFragment {
         RxUtil.comicSubscribe(observable, new RetrofitCallback<ComicRankListBean>() {
             @Override
             public void onSuccess(ComicRankListBean comicRankListBean) {
-                mLoadingAndRetryManager.showContent();
+                progressLayout.showContent();
                 List<ComicRankListBean.RankinglistBean> rankingTypeItemList = comicRankListBean.getRankinglist();
 
                 List<ComicRankListFragment> fragmentList = new ArrayList<>();
@@ -143,7 +131,13 @@ public class ComicRankFragment extends BaseFragment {
 
             @Override
             public void onFailure(int errorCode, String errorMsg) {
-                mLoadingAndRetryManager.showRetry();
+                progressLayout.showRetry(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        progressLayout.showLoading();
+                        loadNetData();
+                    }
+                });
             }
         });
     }

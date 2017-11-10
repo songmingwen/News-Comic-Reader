@@ -52,12 +52,11 @@ public class BaseActivity extends SwipeBackActivity {
             return;
         }
         FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
-        // detech old fragment
-        Fragment fragment = null;
+        Fragment fragment;
         if (!TextUtils.isEmpty(currTag)) {
             fragment = supportFragmentManager.findFragmentByTag(currTag);
             if (fragment != null && !fragment.isDetached()) {
-                fragmentTransaction.detach(fragment);
+                fragmentTransaction.hide(fragment);
             }
         }
         fragment = supportFragmentManager.findFragmentByTag(className);
@@ -65,7 +64,7 @@ public class BaseActivity extends SwipeBackActivity {
             fragment = Fragment.instantiate(this, className);
             fragmentTransaction.add(layoutId, fragment, className);
         } else {
-            fragmentTransaction.attach(fragment);
+            fragmentTransaction.show(fragment);
         }
         currTag = className;
         fragmentTransaction.commitAllowingStateLoss();

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/emptyStateRelativeLayout"
     android:layout_width="match_parent"
@@ -15,11 +16,10 @@
 
         <ImageView
             android:id="@+id/emptyStateImageView"
-            android:layout_width="108dp"
-            android:layout_height="108dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            tools:background="#000000"
-            tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription"/>
 
         <TextView
             android:id="@+id/emptyStateTitleTextView"
@@ -29,9 +29,10 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="20dp"
+            android:textColor="@color/color_accent"
             android:textSize="15sp"
             android:textStyle="bold"
-            tools:text="@string/progressActivityEmptyTitlePlaceholder" />
+            tools:text="@string/progressActivityEmptyTitlePlaceholder"/>
 
         <TextView
             android:id="@+id/emptyStateContentTextView"
@@ -44,7 +45,8 @@
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:lineSpacingExtra="5.5dp"
-            tools:text="@string/progressActivityEmptyContentPlaceholder" />
+            android:textColor="@color/color_accent"
+            tools:text="@string/progressActivityEmptyContentPlaceholder"/>
 
     </LinearLayout>
 

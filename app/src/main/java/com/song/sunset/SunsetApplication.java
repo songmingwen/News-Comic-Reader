@@ -16,7 +16,6 @@ import com.song.sunset.utils.GreenDaoUtil;
 import com.song.sunset.services.managers.MessengerManager;
 import com.song.sunset.services.managers.PushManager;
 import com.song.sunset.utils.fresco.FrescoUtil;
-import com.song.sunset.utils.loadingmanager.LoadingAndRetryManager;
 import com.song.sunset.utils.AppConfig;
 import com.song.sunset.utils.retrofit.HttpsUtil;
 import com.squareup.leakcanary.LeakCanary;
@@ -46,8 +45,6 @@ public class SunsetApplication extends MultiDexApplication {
         AppConfig.setApp(this);
 
         GreenDaoUtil.initGreenDao();
-
-        initLoadingAndRetryLayout();
 
         OkHttpClient okHttpClient = new okhttp3.OkHttpClient.Builder().sslSocketFactory(HttpsUtil.createDefaultSSLSocketFactory()).build();
 
@@ -87,9 +84,4 @@ public class SunsetApplication extends MultiDexApplication {
         }
     }
 
-    private void initLoadingAndRetryLayout() {
-        LoadingAndRetryManager.BASE_RETRY_LAYOUT_ID = R.layout.base_retry_view;
-        LoadingAndRetryManager.BASE_LOADING_LAYOUT_ID = R.layout.base_loading_view;
-        LoadingAndRetryManager.BASE_EMPTY_LAYOUT_ID = R.layout.base_empty_view;
-    }
 }

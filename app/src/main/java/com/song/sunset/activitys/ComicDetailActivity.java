@@ -21,12 +21,11 @@ import com.song.sunset.activitys.base.BaseActivity;
 import com.song.sunset.beans.ComicLocalCollection;
 import com.song.sunset.utils.GreenDaoUtil;
 import com.song.sunset.utils.ViewUtil;
-import com.song.sunset.utils.loadingmanager.LoadingAndRetryManager;
 import com.song.sunset.beans.basebeans.BaseBean;
 import com.song.sunset.beans.ComicDetailBean;
-import com.song.sunset.utils.loadingmanager.OnLoadingAndRetryListener;
 import com.song.sunset.R;
 import com.song.sunset.adapters.ComicDetailAdapter;
+import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.BitmapUtil;
@@ -43,7 +42,7 @@ import rx.Observable;
  */
 public class ComicDetailActivity extends BaseActivity {
 
-    private LoadingAndRetryManager mLoadingAndRetryManager;
+    private ProgressLayout progressLayout;
     public static final String COMIC_ID = "comic_id";
     private int comicId = -1;
     private RecyclerView recyclerView;
@@ -60,19 +59,8 @@ public class ComicDetailActivity extends BaseActivity {
 
         comicLocalCollectionDao = GreenDaoUtil.getDaoSession().getComicLocalCollectionDao();
 
-        mLoadingAndRetryManager = LoadingAndRetryManager.generate(this, new OnLoadingAndRetryListener() {
-            @Override
-            public void setRetryEvent(View retryView) {
-                retryView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mLoadingAndRetryManager.showLoading();
-                        getDataFromRetrofit2ByObservable();
-                    }
-                });
-            }
-        });
-        mLoadingAndRetryManager.showLoading();
+        progressLayout = (ProgressLayout)findViewById(R.id.progress);
+        progressLayout.showLoading();
 
         color = Color.WHITE;
         if (getIntent() != null) {
@@ -123,7 +111,7 @@ public class ComicDetailActivity extends BaseActivity {
         RxUtil.comicSubscribe(observable, new RetrofitCallback<ComicDetailBean>() {
             @Override
             public void onSuccess(ComicDetailBean comicDetailBean) {
-                mLoadingAndRetryManager.showContent();
+                progressLayout.showContent();
                 setFloatButtonOnClick(comicDetailBean);
                 toolbar.setTitle(comicDetailBean.getComic().getName());
                 toolbar.setLogo(R.mipmap.logo);
@@ -133,7 +121,13 @@ public class ComicDetailActivity extends BaseActivity {
 
             @Override
             public void onFailure(int errorCode, String errorMsg) {
-                mLoadingAndRetryManager.showRetry();
+                progressLayout.showError(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        progressLayout.showLoading();
+                        getDataFromRetrofit2ByObservable();
+                    }
+                });
             }
         });
     }

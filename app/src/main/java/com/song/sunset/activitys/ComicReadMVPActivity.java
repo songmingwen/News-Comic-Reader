@@ -17,8 +17,7 @@ import com.song.sunset.interfaces.ComicReadView;
 import com.song.sunset.mvp.presenters.ComicReadPresenter;
 import com.song.sunset.utils.ScreenUtils;
 import com.song.sunset.utils.ViewUtil;
-import com.song.sunset.utils.loadingmanager.LoadingAndRetryManager;
-import com.song.sunset.utils.loadingmanager.OnLoadingAndRetryListener;
+import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.widget.ComicReadMVPRecyclerView;
 import com.song.sunset.widget.ScaleRecyclerView;
 
@@ -34,13 +33,13 @@ public class ComicReadMVPActivity extends BaseActivity implements ComicReadMVPRe
 
     public static final String OPEN_POSITION = "open_position";
     public static final String COMIC_CHAPTER_LIST = "comic_chapter_list";
-    private LoadingAndRetryManager mLoadingAndRetryManager;
     private int openPosition = -1;
     private ComicReadMVPRecyclerView recyclerView;
     private ComicReadMVPAdapter adapter;
     private ArrayList<ChapterListBean> mChapterList;
     private ComicReadPresenter mPresenter;
     private boolean fullScreen;
+    private ProgressLayout progressLayout;
 
     public static void start(Context context, int openPosition, ArrayList<ChapterListBean> data) {
         Intent intent = new Intent(context, ComicReadMVPActivity.class);
@@ -55,20 +54,8 @@ public class ComicReadMVPActivity extends BaseActivity implements ComicReadMVPRe
         setContentView(R.layout.activity_comic_read_mvp);
         switchScreenStatus();
 
-        mLoadingAndRetryManager = LoadingAndRetryManager.generate(this, new OnLoadingAndRetryListener() {
-            @Override
-            public void setRetryEvent(View retryView) {
-                retryView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (mPresenter != null) {
-                            mLoadingAndRetryManager.showLoading();
-                            mPresenter.firstLoad(openPosition);
-                        }
-                    }
-                });
-            }
-        });
+        progressLayout = (ProgressLayout)findViewById(R.id.progress);
+        progressLayout.showLoading();
 
         if (getIntent() != null) {
             openPosition = getIntent().getIntExtra(OPEN_POSITION, -1);
@@ -78,7 +65,6 @@ public class ComicReadMVPActivity extends BaseActivity implements ComicReadMVPRe
         initView();
         mPresenter = new ComicReadPresenter(this);
         mPresenter.setChapterList(mChapterList, openPosition);
-        mLoadingAndRetryManager.showLoading();
     }
 
     private void switchScreenStatus() {
@@ -130,9 +116,15 @@ public class ComicReadMVPActivity extends BaseActivity implements ComicReadMVPRe
         if (isFinishing()) return;
         if (success) {
             adapter.setData(list);
-            mLoadingAndRetryManager.showContent();
+            progressLayout.showContent();
         } else {
-            mLoadingAndRetryManager.showRetry();
+            progressLayout.showError(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    progressLayout.showLoading();
+                    mPresenter.firstLoad(openPosition);
+                }
+            });
         }
     }
 

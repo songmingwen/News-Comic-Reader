@@ -29,8 +29,7 @@ import com.song.sunset.mvp.models.ComicDetailModel;
 import com.song.sunset.mvp.presenters.ComicDetailPresenter;
 import com.song.sunset.utils.BitmapUtil;
 import com.song.sunset.utils.ViewUtil;
-import com.song.sunset.utils.loadingmanager.LoadingAndRetryManager;
-import com.song.sunset.utils.loadingmanager.OnLoadingAndRetryListener;
+import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.volley.SampleVolleyFactory;
 import com.song.sunset.mvp.views.ComicDetailView;
 
@@ -51,7 +50,7 @@ public class ComicDetailMVPActivity extends CoreBaseActivity<ComicDetailPresente
     @Bind(R.id.id_comic_detail_fab)
     FloatingActionButton floatingActionButton;
 
-    private LoadingAndRetryManager mLoadingAndRetryManager;
+    private ProgressLayout progressLayout;
     public static final String COMIC_ID = "comic_id";
     private ComicDetailAdapter adapter;
     private int comicId = -1;
@@ -83,19 +82,8 @@ public class ComicDetailMVPActivity extends CoreBaseActivity<ComicDetailPresente
 
     @Override
     public void initView(Bundle savedInstanceState) {
-        mLoadingAndRetryManager = LoadingAndRetryManager.generate(this, new OnLoadingAndRetryListener() {
-            @Override
-            public void setRetryEvent(View retryView) {
-                retryView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mLoadingAndRetryManager.showLoading();
-                        mPresenter.showData(comicId);
-                    }
-                });
-            }
-        });
-        mLoadingAndRetryManager.showLoading();
+        progressLayout = (ProgressLayout)findViewById(R.id.progress);
+        progressLayout.showLoading();
 
         color = Color.WHITE;
         if (getIntent() != null) {
@@ -127,7 +115,7 @@ public class ComicDetailMVPActivity extends CoreBaseActivity<ComicDetailPresente
     @Override
     public void setData(ComicDetailBean comicDetailBean) {
         this.comicDetailBean = comicDetailBean;
-        mLoadingAndRetryManager.showContent();
+        progressLayout.showContent();
         toolbar.setTitle(comicDetailBean.getComic().getName());
 //        toolbar.setLogo(R.mipmap.logo);
         adapter.setData(comicDetailBean);
@@ -151,7 +139,13 @@ public class ComicDetailMVPActivity extends CoreBaseActivity<ComicDetailPresente
 
     @Override
     public void showError(String msg) {
-        mLoadingAndRetryManager.showRetry();
+        progressLayout.showError(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressLayout.showLoading();
+                mPresenter.showData(comicId);
+            }
+        });
     }
 
     public void setExtractionColorFromBitmap(ComicDetailBean comicDetailRD) {
