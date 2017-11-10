@@ -33,6 +33,7 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.song.sunset.R;
+import com.song.sunset.utils.StringUtils;
 
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 import tv.danmaku.ijk.media.player.IjkMediaPlayer;
@@ -634,7 +635,7 @@ public class SimplePlayerLayout extends FrameLayout {
     }
 
     public void play(String url) {
-        this.url = url;
+        this.url = StringUtils.replaceHttps2Http(url);
         if (playerSupport) {
             $.id(R.id.app_video_loading).visible();
             videoView.setVideoPath(url);

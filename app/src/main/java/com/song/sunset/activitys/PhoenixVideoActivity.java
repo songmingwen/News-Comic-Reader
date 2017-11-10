@@ -61,7 +61,6 @@ public class PhoenixVideoActivity extends AppCompatActivity {
             tvUrl = getIntent().getStringExtra(TV_URL);
             tvCover = getIntent().getStringExtra(TV_COVER);
         }
-        tvUrl = StringUtils.replaceHttps2Http(tvUrl);
     }
 
     @Override

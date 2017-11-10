@@ -190,7 +190,7 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
         VideoBean.ItemBean mItemBean = mAdapter.getData().get(position);
         mPlayer.setCover(mItemBean.getImage());
         mPlayer.setTitle(mItemBean.getTitle());
-        mPlayer.play(StringUtils.replaceHttps2Http(mItemBean.getVideo_url()));
+        mPlayer.play(mItemBean.getVideo_url());
     }
 
     @Override
