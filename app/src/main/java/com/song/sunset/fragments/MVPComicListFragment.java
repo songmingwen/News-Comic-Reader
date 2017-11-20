@@ -17,9 +17,11 @@ import com.song.sunset.fragments.base.BaseFragment;
 import com.song.sunset.interfaces.ComicListView;
 import com.song.sunset.interfaces.LoadingMoreListener;
 import com.song.sunset.mvp.presenters.ComicListPresenter;
+import com.song.sunset.utils.AppConfig;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.widget.LoadMoreRecyclerView;
+import com.song.sunset.widget.SpacesItemDecoration;
 
 import java.util.List;
 
@@ -85,7 +87,7 @@ public class MVPComicListFragment extends BaseFragment implements ComicListView,
 //        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewUtil.dip2px(40));
 //        waveView.setLayoutParams(params);
 
-        refreshLayout.setDurationToCloseHeader(1500);
+        refreshLayout.setDurationToCloseHeader(AppConfig.REFRESH_CLOSE_TIME);
         refreshLayout.setHeaderView(header);
         refreshLayout.addPtrUIHandler(header);
         refreshLayout.setPtrHandler(this);

@@ -33,41 +33,41 @@ android {
         }
     }
 
-    buildTypes {
-        debug {
-            zipAlignEnabled true  //是否支持zip
-            minifyEnabled false
-            debuggable true
-            signingConfig signingConfigs.release
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-//            applicationVariants.all { variant ->
-//                variant.outputs.each { output ->
-//                    def outputFile = output.outputFile
-//                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
-//                        // apk name  XXXX.apk
-//                        def fileName = "Sunset_debug.apk"
-//                        output.outputFile = new File(outputFile, fileName)
-//                    }
-//                }
-//            }
-        }
-        release {
-            zipAlignEnabled true  //是否支持zip
-            minifyEnabled false  //是否进行混淆
-            signingConfig signingConfigs.release
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-//            applicationVariants.all { variant ->
-//                variant.outputs.each { output ->
-//                    def outputFile = output.outputFile
-//                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
-//                        // apk name  XXXX.apk
-//                        def fileName = "Sunset_release.apk"
-//                        output.outputFile = new File(outputFile, fileName)
-//                    }
-//                }
-//            }
-        }
-    }
+//    buildTypes {
+//        debug {
+//            zipAlignEnabled true  //是否支持zip
+//            minifyEnabled false
+//            debuggable true
+//            signingConfig signingConfigs.release
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+////            applicationVariants.all { variant ->
+////                variant.outputs.each { output ->
+////                    def outputFile = output.outputFile
+////                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+////                        // apk name  XXXX.apk
+////                        def fileName = "Sunset_debug.apk"
+////                        output.outputFile = new File(outputFile, fileName)
+////                    }
+////                }
+////            }
+//        }
+//        release {
+//            zipAlignEnabled true  //是否支持zip
+//            minifyEnabled false  //是否进行混淆
+//            signingConfig signingConfigs.release
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+////            applicationVariants.all { variant ->
+////                variant.outputs.each { output ->
+////                    def outputFile = output.outputFile
+////                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+////                        // apk name  XXXX.apk
+////                        def fileName = "Sunset_release.apk"
+////                        output.outputFile = new File(outputFile, fileName)
+////                    }
+////                }
+////            }
+//        }
+//    }
 
 
     sourceSets {
@@ -106,7 +106,6 @@ repositories {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
     compile "com.android.support:appcompat-v7:${rootProject.ext.android.ANDROID_APPCOMPAT_VERSION}"
     compile "com.android.support:design:${rootProject.ext.android.ANDROID_APPCOMPAT_VERSION}"
     compile "com.android.support:cardview-v7:${rootProject.ext.android.ANDROID_APPCOMPAT_VERSION}"
@@ -153,4 +152,6 @@ dependencies {
     compile rootProject.ext.dependencies["ndkbitmap-x86"]
     debugCompile rootProject.ext.dependencies["leakcanary_debug"]
     releaseCompile rootProject.ext.dependencies["leakcanary_release"]
+    compile 'com.android.support:support-v4:25.3.1'
+    testCompile 'junit:junit:4.12'
 }

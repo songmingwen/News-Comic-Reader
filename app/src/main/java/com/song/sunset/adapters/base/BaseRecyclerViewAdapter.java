@@ -53,6 +53,7 @@ public abstract class BaseRecyclerViewAdapter<RD, VH extends RecyclerView.ViewHo
 
     /**
      * 需要对recyclerView的touch事件进行控制的时候，子类复写该方法，返回false；
+     *
      * @return
      */
     protected boolean getItemClickState() {
@@ -82,8 +83,9 @@ public abstract class BaseRecyclerViewAdapter<RD, VH extends RecyclerView.ViewHo
     public void addDatas(List<RD> itemList) {
         if (mList != null && itemList != null && !itemList.isEmpty()) {
             int size = mList.size();
-            mList.addAll(itemList);
-            notifyItemInserted(size + 1);
+            if (mList.addAll(itemList)) {
+                notifyItemRangeInserted(size, itemList.size());
+            }
         }
     }
 
@@ -92,9 +94,9 @@ public abstract class BaseRecyclerViewAdapter<RD, VH extends RecyclerView.ViewHo
             if (mList != null && !mList.isEmpty()) {
                 mList.clear();
             }
-            if (mList != null)
-                mList.addAll(data);
-            notifyDataSetChanged();
+            if (mList != null && mList.addAll(data)) {
+                notifyDataSetChanged();
+            }
         }
     }
 
@@ -107,8 +109,9 @@ public abstract class BaseRecyclerViewAdapter<RD, VH extends RecyclerView.ViewHo
     public void addData(int position, RD item) {
         if (mList != null && item != null) {
             if (position <= BOTTOM) {
-                mList.add(item);
-                notifyItemInserted(mList.size());
+                if (mList.add(item)) {
+                    notifyItemInserted(mList.size());
+                }
             } else {
                 mList.add(position, item);
                 notifyItemInserted(position);
@@ -125,11 +128,14 @@ public abstract class BaseRecyclerViewAdapter<RD, VH extends RecyclerView.ViewHo
     public void addListData(int position, List<RD> beanList) {
         if (mList != null && beanList != null) {
             if (position <= BOTTOM) {
-                mList.addAll(beanList);
-                notifyItemRangeInserted(mList.size() - beanList.size(), beanList.size());
+                if (mList.addAll(beanList)) {
+                    notifyItemRangeInserted(mList.size(), beanList.size());
+                }
             } else {
-                mList.addAll(position, beanList);
-                notifyItemRangeInserted(position, beanList.size());
+                if (mList.addAll(position, beanList)) {
+                    notifyItemRangeInserted(position, beanList.size());
+//                    notifyDataSetChanged();
+                }
             }
         }
     }

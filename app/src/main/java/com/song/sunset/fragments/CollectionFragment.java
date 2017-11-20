@@ -68,12 +68,7 @@ public class CollectionFragment extends BaseFragment {
     private void getDataFromSQLite() {
         List<ComicLocalCollection> list = comicLocalCollectionDao.loadAll();
         if (list == null || list.size() <= 0) {
-            progressLayout.showError(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(AppConfig.getApp(), "haha", Toast.LENGTH_SHORT).show();
-                }
-            });
+            progressLayout.showEmpty();
             return;
         }
         adapter.setData(list);

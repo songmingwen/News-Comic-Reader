@@ -35,6 +35,7 @@ import com.song.sunset.fragments.ComicClassifyFragment;
 import com.song.sunset.fragments.ComicRankFragment;
 import com.song.sunset.fragments.PhoenixListFragment;
 import com.song.sunset.fragments.MVPComicListFragment;
+import com.song.sunset.fragments.RankList;
 import com.song.sunset.services.impl.BinderPoolImpl;
 import com.song.sunset.services.impl.PushImpl;
 import com.song.sunset.services.managers.BinderPool;
@@ -42,11 +43,7 @@ import com.song.sunset.services.managers.MessengerManager;
 import com.song.sunset.services.managers.PushManager;
 import com.song.sunset.utils.MusicLoader;
 import com.song.sunset.utils.process.AndroidProcesses;
-import com.song.sunset.utils.process.AppNames;
 import com.song.sunset.utils.process.models.AndroidAppProcess;
-import com.song.sunset.utils.process.models.Stat;
-import com.song.sunset.utils.process.models.Statm;
-import com.squareup.haha.perflib.Main;
 
 import java.util.List;
 

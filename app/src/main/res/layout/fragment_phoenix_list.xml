@@ -10,7 +10,7 @@
     progressActivity:emptyContentTextColor="@color/color_accent"
     progressActivity:emptyTitleTextColor="@color/color_accent"
     progressActivity:errorBackgroundColor="@color/white"
-    progressActivity:errorButtonTextColor="@color/white"
+    progressActivity:errorButtonTextColor="@color/color_accent"
     progressActivity:errorContentTextColor="@color/color_accent"
     progressActivity:errorTitleTextColor="@color/color_accent"
     progressActivity:loadingBackgroundColor="@color/white">

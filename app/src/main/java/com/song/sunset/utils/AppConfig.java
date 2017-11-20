@@ -10,6 +10,8 @@ public class AppConfig {
 
     private static Context context;
 
+    public static final int REFRESH_CLOSE_TIME = 500;
+
     public static void setApp(Context outContext) {
         context = outContext;
     }

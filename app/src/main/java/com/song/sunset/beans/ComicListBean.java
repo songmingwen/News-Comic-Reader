@@ -3,13 +3,15 @@ package com.song.sunset.beans;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.song.sunset.beans.basebeans.PageEntity;
+
 import java.util.List;
 
 /**
  * Created by Song on 2016/9/22 0022.
  * Email:z53520@qq.com
  */
-public class ComicListBean implements Parcelable {
+public class ComicListBean implements PageEntity, Parcelable {
 
     private boolean hasMore;
 
@@ -73,4 +75,14 @@ public class ComicListBean implements Parcelable {
             return new ComicListBean[size];
         }
     };
+
+    @Override
+    public int getPageSum() {
+        return 7;
+    }
+
+    @Override
+    public List<?> getData() {
+        return getComics();
+    }
 }

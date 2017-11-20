@@ -14,6 +14,7 @@ import com.song.sunset.adapters.base.BaseRecyclerViewAdapter;
 import com.song.sunset.adapters.base.DefaultLoadableAdapter;
 import com.song.sunset.beans.basebeans.BaseBean;
 import com.song.sunset.interfaces.LoadingMoreListener;
+import com.song.sunset.utils.AppConfig;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
@@ -70,7 +71,7 @@ public abstract class LoadableListFragment<Adapter extends BaseRecyclerViewAdapt
         header.setTextColor(getResources().getColor(R.color.colorPrimary));
         header.setBackgroundColor(getResources().getColor(R.color.white));
 
-        refreshLayout.setDurationToCloseHeader(1500);
+        refreshLayout.setDurationToCloseHeader(AppConfig.REFRESH_CLOSE_TIME);
         refreshLayout.setHeaderView(header);
         refreshLayout.addPtrUIHandler(header);
         refreshLayout.setPtrHandler(this);

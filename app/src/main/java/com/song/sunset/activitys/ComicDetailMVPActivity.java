@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.OnScrollListener;
 import android.support.v7.widget.Toolbar;
@@ -35,6 +35,9 @@ import com.song.sunset.mvp.views.ComicDetailView;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+
+import static com.song.sunset.adapters.ComicDetailAdapter.COMIC_DETAIL_TYPE;
+import static com.song.sunset.adapters.ComicDetailAdapter.COMIC_LIST_TYPE;
 
 /**
  * Created by Song on 2016/12/8.
@@ -82,7 +85,7 @@ public class ComicDetailMVPActivity extends CoreBaseActivity<ComicDetailPresente
 
     @Override
     public void initView(Bundle savedInstanceState) {
-        progressLayout = (ProgressLayout)findViewById(R.id.progress);
+        progressLayout = (ProgressLayout) findViewById(R.id.progress);
         progressLayout.showLoading();
 
         color = Color.WHITE;
@@ -92,7 +95,21 @@ public class ComicDetailMVPActivity extends CoreBaseActivity<ComicDetailPresente
 
         adapter = new ComicDetailAdapter(this);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                int itemViewType = adapter.getItemViewType(position);
+                if (itemViewType == COMIC_DETAIL_TYPE) {
+                    return 3;
+                } else if (itemViewType == COMIC_LIST_TYPE) {
+                    return 1;
+                } else {
+                    return 3;
+                }
+            }
+        });
+        recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.addOnScrollListener(new OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {

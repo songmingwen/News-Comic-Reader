@@ -15,6 +15,7 @@ import com.song.sunset.beans.basebeans.BaseBean;
 import com.song.sunset.beans.ComicListBean;
 import com.song.sunset.fragments.base.BaseFragment;
 import com.song.sunset.interfaces.OnRVItemClickListener;
+import com.song.sunset.utils.AppConfig;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.R;
 import com.song.sunset.activitys.ComicListActivity;
@@ -106,7 +107,7 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
         header.setTextColor(getResources().getColor(R.color.colorPrimary));
         header.setBackgroundColor(getResources().getColor(R.color.white));
 
-        refreshLayout.setDurationToCloseHeader(1500);
+        refreshLayout.setDurationToCloseHeader(AppConfig.REFRESH_CLOSE_TIME);
         refreshLayout.setHeaderView(header);
         refreshLayout.addPtrUIHandler(header);
         refreshLayout.setPtrHandler(this);

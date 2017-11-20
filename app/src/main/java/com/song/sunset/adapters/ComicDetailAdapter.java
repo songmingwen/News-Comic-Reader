@@ -12,12 +12,18 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.song.glide_40_transformations.BlurTransformation;
 import com.song.sunset.R;
+import com.song.sunset.activitys.ComicReadMVPActivity;
 import com.song.sunset.activitys.ScalePicActivity;
+import com.song.sunset.beans.ChapterListBean;
 import com.song.sunset.beans.ComicDetailBean;
 import com.song.sunset.holders.ComicDetailHeaderViewHolder;
+import com.song.sunset.holders.ComicDetailListItemViewHolder;
 import com.song.sunset.holders.ComicDetailListViewHolder;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.fresco.FrescoUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Song on 2016/8/29 0029.
@@ -40,14 +46,14 @@ public class ComicDetailAdapter extends RecyclerView.Adapter {
         if (viewType == COMIC_DETAIL_TYPE) {
             return new ComicDetailHeaderViewHolder(LayoutInflater.from(context).inflate(R.layout.comic_detail_header, parent, false));
         } else if (viewType == COMIC_LIST_TYPE) {
-            return new ComicDetailListViewHolder(LayoutInflater.from(context).inflate(R.layout.comic_detail_list, parent, false));
+            return new ComicDetailListItemViewHolder(LayoutInflater.from(context).inflate(R.layout.comic_detail_list_item, parent, false));
         } else {
             return null;
         }
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (data != null) {
             if (getItemViewType(position) == COMIC_DETAIL_TYPE) {
                 ComicDetailHeaderViewHolder headViewHolder = (ComicDetailHeaderViewHolder) holder;
@@ -69,25 +75,38 @@ public class ComicDetailAdapter extends RecyclerView.Adapter {
                     }
                 });
             } else if (getItemViewType(position) == COMIC_LIST_TYPE) {
-                ComicDetailListViewHolder comicDetailListViewHolder = (ComicDetailListViewHolder) holder;
-                ComicDetailListAdapter adapter = new ComicDetailListAdapter(context, data.getComic().getComic_id());
-                comicDetailListViewHolder.recyclerView.setAdapter(adapter);
-                comicDetailListViewHolder.recyclerView.setLayoutManager(new GridLayoutManager(context, 3));
-                adapter.setData(data.getChapter_list());
+//                ComicDetailListViewHolder comicDetailListViewHolder = (ComicDetailListViewHolder) holder;
+//                ComicDetailListAdapter adapter = new ComicDetailListAdapter(context, data.getComic().getComic_id());
+//                comicDetailListViewHolder.recyclerView.setAdapter(adapter);
+//                comicDetailListViewHolder.recyclerView.setLayoutManager(new GridLayoutManager(context, 3));
+//                adapter.setData(data.getChapter_list());
+                ComicDetailListItemViewHolder listItemViewHolder = (ComicDetailListItemViewHolder) holder;
+                final List<ChapterListBean> dataList = data.getChapter_list();
+                listItemViewHolder.comicListText.setText(dataList.get(dataList.size() - position).getName());
+                listItemViewHolder.comicListText.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ComicReadMVPActivity.start(context, dataList.size() - position, (ArrayList<ChapterListBean>) dataList);
+                    }
+                });
             }
         }
     }
 
     @Override
     public int getItemCount() {
-        return 2;
+        if (data != null && data.getChapter_list() != null && data.getChapter_list().size() >= 1) {
+            return data.getChapter_list().size() + 1;
+        } else {
+            return 1;
+        }
     }
 
     @Override
     public int getItemViewType(int position) {
         if (position == 0) {
             return COMIC_DETAIL_TYPE;
-        } else if (position == 1) {
+        } else if (position >= 1) {
             return COMIC_LIST_TYPE;
         } else {
             return -1;

@@ -31,6 +31,9 @@ public class ComicDetailModel implements CoreBaseModel {
     }
 
     public boolean changeCollectedState(ComicDetailBean bean) {
+        if (bean == null) {
+            return false;
+        }
         if (comicLocalCollectionDao == null) {
             comicLocalCollectionDao = GreenDaoUtil.getDaoSession().getComicLocalCollectionDao();
         }
