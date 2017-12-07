@@ -125,7 +125,7 @@ dependencies {
     compile rootProject.ext.dependencies["subsampling_scale_image_view"]
     compile rootProject.ext.dependencies["ijkplayer_java"]
     compile rootProject.ext.dependencies["ijkplayer_armv7a"]
-//    compile rootProject.ext.dependencies["ijkplayer_arm64"]
+    compile rootProject.ext.dependencies["ijkplayer_arm64"]
 //    compile rootProject.ext.dependencies["ijkplayer_x86_64"]
     compile rootProject.ext.dependencies["okhttp3"]
     compile rootProject.ext.dependencies["retrofit2"]
