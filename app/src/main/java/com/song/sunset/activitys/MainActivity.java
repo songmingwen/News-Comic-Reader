@@ -77,22 +77,22 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         setUpListener();
         switchFragmentDelay(PhoenixListFragment.class.getName(), getResources().getString(R.string.phoenix_news), 0);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            if (!hasPermission()) {
-                startActivityForResult(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS),
-                        MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS);
-            }
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            if (!hasPermission()) {
+//                startActivityForResult(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS),
+//                        MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS);
+//            }
+//        }
     }
 
     //检测用户是否对本app开启了“Apps with usage access”权限
-    private boolean hasPermission() {
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) return false;
-        AppOpsManager appOps = (AppOpsManager) getSystemService(Context.APP_OPS_SERVICE);
-        int mode = appOps.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS,
-                android.os.Process.myUid(), getPackageName());
-        return mode == AppOpsManager.MODE_ALLOWED;
-    }
+//    private boolean hasPermission() {
+//        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) return false;
+//        AppOpsManager appOps = (AppOpsManager) getSystemService(Context.APP_OPS_SERVICE);
+//        int mode = appOps.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS,
+//                android.os.Process.myUid(), getPackageName());
+//        return mode == AppOpsManager.MODE_ALLOWED;
+//    }
 
     @Override
     public boolean swipeBackPriority() {

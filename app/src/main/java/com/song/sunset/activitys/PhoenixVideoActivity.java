@@ -10,11 +10,13 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.song.sunset.R;
 import com.song.sunset.beans.DanmakuBean;
 import com.song.sunset.utils.StringUtils;
 import com.song.sunset.utils.danmaku.SongDanmakuParser;
+import com.song.sunset.widget.GoodsTag;
 import com.song.video.SimplePlayer;
 
 import java.util.ArrayList;
@@ -46,6 +48,7 @@ public class PhoenixVideoActivity extends AppCompatActivity {
     private DanmakuContext mDanmakuContext;
     private BaseDanmakuParser mParser;
     private SimplePlayer player;
+    private LinearLayout mLayout;
 
     public static void start(Context context, String tvUrl, String tvName, String cover) {
         Intent intent = new Intent(context, PhoenixVideoActivity.class);
@@ -71,6 +74,7 @@ public class PhoenixVideoActivity extends AppCompatActivity {
 
         setContentView(R.layout.video_detail_layout);
 
+        mLayout = (LinearLayout) findViewById(R.id.box);
         startVideo();
     }
 
@@ -151,6 +155,9 @@ public class PhoenixVideoActivity extends AppCompatActivity {
                 addDanmaku(true);
             }
         }
+        GoodsTag goodsTag = new GoodsTag(this);
+        goodsTag.setData("19.9", 0);
+        mLayout.addView(goodsTag);
     }
 
     public void closeDanmaku(View view) {
@@ -158,6 +165,10 @@ public class PhoenixVideoActivity extends AppCompatActivity {
             if (mDanmakuView.isShown()) {
                 mDanmakuView.hide();
             }
+        }
+        int removeIndex = mLayout.getChildCount() - 1;
+        if (removeIndex >= 0) {
+            mLayout.removeViewAt(removeIndex);
         }
     }
 
