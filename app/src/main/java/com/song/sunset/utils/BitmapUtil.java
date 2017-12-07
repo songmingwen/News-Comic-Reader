@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
@@ -18,6 +19,7 @@ import android.os.Build;
 import android.provider.MediaStore;
 import android.support.v7.graphics.Palette;
 import android.util.Base64;
+import android.widget.ImageView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -287,5 +289,26 @@ public class BitmapUtil {
             color = Color.WHITE;
         }
         return color;
+    }
+
+    /**
+     * 设置图标的颜色
+     *
+     * @param icon 要改变颜色的icon
+     * @param r    红色偏移值
+     * @param g    绿色偏移值
+     * @param b    蓝色偏移值
+     * @param a    透明度偏移值
+     *             r、g、b、a均介于0-255
+     */
+    public static void setIconColor(ImageView icon, int r, int g, int b, int a) {
+        if (icon == null) return;
+        float[] colorMatrix = new float[]{
+                0, 0, 0, 0, r,
+                0, 0, 0, 0, g,
+                0, 0, 0, 0, b,
+                0, 0, 0, (float) a / 255, 0
+        };
+        icon.setColorFilter(new ColorMatrixColorFilter(colorMatrix));
     }
 }

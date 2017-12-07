@@ -2,7 +2,6 @@ package com.song.sunset.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +15,9 @@ import com.song.sunset.activitys.ComicReadMVPActivity;
 import com.song.sunset.activitys.ScalePicActivity;
 import com.song.sunset.beans.ChapterListBean;
 import com.song.sunset.beans.ComicDetailBean;
+import com.song.sunset.holders.ComicDetailBottomViewHolder;
 import com.song.sunset.holders.ComicDetailHeaderViewHolder;
 import com.song.sunset.holders.ComicDetailListItemViewHolder;
-import com.song.sunset.holders.ComicDetailListViewHolder;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.fresco.FrescoUtil;
 
@@ -34,19 +33,26 @@ public class ComicDetailAdapter extends RecyclerView.Adapter {
     private Context context;
     public static final int COMIC_DETAIL_TYPE = 0;
     public static final int COMIC_LIST_TYPE = 1;
+    public static final int COMIC_BOTTOM_TYPE = 2;
+    public static final int EXTRA_ITEM_COUNT = 2;
+
     private ComicDetailBean data;
     private int color = Color.WHITE;
+    private final LayoutInflater mLayoutInflater;
 
     public ComicDetailAdapter(Context context) {
         this.context = context;
+        mLayoutInflater = LayoutInflater.from(context);
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == COMIC_DETAIL_TYPE) {
-            return new ComicDetailHeaderViewHolder(LayoutInflater.from(context).inflate(R.layout.comic_detail_header, parent, false));
+            return new ComicDetailHeaderViewHolder(mLayoutInflater.inflate(R.layout.comic_detail_header, parent, false));
         } else if (viewType == COMIC_LIST_TYPE) {
-            return new ComicDetailListItemViewHolder(LayoutInflater.from(context).inflate(R.layout.comic_detail_list_item, parent, false));
+            return new ComicDetailListItemViewHolder(mLayoutInflater.inflate(R.layout.comic_detail_list_item, parent, false));
+        } else if (viewType == COMIC_BOTTOM_TYPE) {
+            return new ComicDetailBottomViewHolder(mLayoutInflater.inflate(R.layout.comic_detail_bottom, parent, false));
         } else {
             return null;
         }
@@ -96,7 +102,7 @@ public class ComicDetailAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
         if (data != null && data.getChapter_list() != null && data.getChapter_list().size() >= 1) {
-            return data.getChapter_list().size() + 1;
+            return data.getChapter_list().size() + EXTRA_ITEM_COUNT;
         } else {
             return 1;
         }
@@ -106,8 +112,10 @@ public class ComicDetailAdapter extends RecyclerView.Adapter {
     public int getItemViewType(int position) {
         if (position == 0) {
             return COMIC_DETAIL_TYPE;
-        } else if (position >= 1) {
+        } else if (position >= 1 && position < getItemCount() - 1) {
             return COMIC_LIST_TYPE;
+        } else if (position >= getItemCount() - 1) {
+            return COMIC_BOTTOM_TYPE;
         } else {
             return -1;
         }

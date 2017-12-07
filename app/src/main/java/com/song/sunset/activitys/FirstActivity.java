@@ -31,6 +31,7 @@ public class FirstActivity extends Activity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
+                animation.cancel();
                 startMainActivity();
             }
 

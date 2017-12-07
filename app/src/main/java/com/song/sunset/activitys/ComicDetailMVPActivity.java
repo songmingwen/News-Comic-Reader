@@ -60,6 +60,7 @@ public class ComicDetailMVPActivity extends CoreBaseActivity<ComicDetailPresente
     private int color;
 
     private ComicDetailBean comicDetailBean;
+    private ImageRequest mImageRequest;
 
     public static void start(Context context, int comicId) {
         Intent intent = new Intent(context, ComicDetailMVPActivity.class);
@@ -100,9 +101,7 @@ public class ComicDetailMVPActivity extends CoreBaseActivity<ComicDetailPresente
             @Override
             public int getSpanSize(int position) {
                 int itemViewType = adapter.getItemViewType(position);
-                if (itemViewType == COMIC_DETAIL_TYPE) {
-                    return 3;
-                } else if (itemViewType == COMIC_LIST_TYPE) {
+                if (itemViewType == COMIC_LIST_TYPE) {
                     return 1;
                 } else {
                     return 3;
@@ -110,12 +109,15 @@ public class ComicDetailMVPActivity extends CoreBaseActivity<ComicDetailPresente
             }
         });
         recyclerView.setLayoutManager(gridLayoutManager);
+        final int[] distance = {0};
         recyclerView.addOnScrollListener(new OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                int offset = recyclerView.computeVerticalScrollOffset();
-                float rate = offset * 1.0f / ViewUtil.dip2px(150);
+                distance[0] += dy;
+                int offset = distance[0];
+                float rate = offset * 1.0f / ViewUtil.dip2px(200);
                 rate = rate > 1 ? 1 : rate;
+                rate = rate < 0 ? 0 : rate;
                 toolbar.setAlpha(rate);
             }
         });
@@ -167,7 +169,7 @@ public class ComicDetailMVPActivity extends CoreBaseActivity<ComicDetailPresente
 
     public void setExtractionColorFromBitmap(ComicDetailBean comicDetailRD) {
         RequestQueue queue = SampleVolleyFactory.getRequestQueue(this);
-        ImageRequest imageRequest = new ImageRequest(comicDetailRD.getComic().getCover(),
+        mImageRequest = new ImageRequest(comicDetailRD.getComic().getCover(),
                 new Response.Listener<Bitmap>() {
                     @Override
                     public void onResponse(Bitmap response) {
@@ -181,7 +183,14 @@ public class ComicDetailMVPActivity extends CoreBaseActivity<ComicDetailPresente
             public void onErrorResponse(VolleyError error) {
             }
         });
-        imageRequest.setRetryPolicy(new DefaultRetryPolicy());
-        queue.add(imageRequest);
+        mImageRequest.setRetryPolicy(new DefaultRetryPolicy());
+        queue.add(mImageRequest);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RequestQueue queue = SampleVolleyFactory.getRequestQueue(this);
+        queue.cancelAll(mImageRequest);
     }
 }

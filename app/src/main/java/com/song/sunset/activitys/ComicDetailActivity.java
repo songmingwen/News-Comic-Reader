@@ -74,12 +74,15 @@ public class ComicDetailActivity extends BaseActivity {
         adapter = new ComicDetailAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+        final int[] distance = {0};
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                int offset = recyclerView.computeVerticalScrollOffset();
-                float rate = offset * 1.0f / ViewUtil.dip2px(150);
+                distance[0] += dy;
+                int offset = distance[0];
+                float rate = offset * 1.0f / ViewUtil.dip2px(200);
                 rate = rate > 1 ? 1 : rate;
+                rate = rate < 0 ? 0 : rate;
                 toolbar.setAlpha(rate);
             }
         });
