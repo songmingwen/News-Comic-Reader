@@ -1,11 +1,17 @@
 package com.song.sunset.activitys;
 
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -18,6 +24,7 @@ import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.song.sunset.activitys.base.BaseActivity;
 import com.song.sunset.R;
 import com.song.sunset.utils.FileUtils;
+import com.song.sunset.utils.ScreenUtils;
 import com.song.sunset.utils.SdCardUtil;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.volley.SampleVolleyFactory;
@@ -39,13 +46,15 @@ public class ScalePicActivity extends BaseActivity {
     private boolean hasCache = false;
     private File file;
     private View.OnClickListener mOnRetryListener;
+    private TextView mSavePicTip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scale_pic);
+        ScreenUtils.fullscreen(this, true);
 
-        progressLayout = (ProgressLayout)findViewById(R.id.progress);
+        progressLayout = (ProgressLayout) findViewById(R.id.progress);
         progressLayout.showLoading();
         mOnRetryListener = new View.OnClickListener() {
             @Override
@@ -68,10 +77,29 @@ public class ScalePicActivity extends BaseActivity {
 
     private void initView() {
         imageView = (SubsamplingScaleImageView) findViewById(R.id.id_pic_activity_image);
-        imageView.setDoubleTapZoomDuration(500);
+        imageView.setDoubleTapZoomDuration(200);
         imageView.setDoubleTapZoomScale(2.5f);
         imageView.setPanLimit(SubsamplingScaleImageView.PAN_LIMIT_INSIDE);
         imageView.setMaxScale(5f);
+        mSavePicTip = (TextView) findViewById(R.id.txt_save_pic_tip);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startFadeAnim();
+            }
+        }, 1000);
+    }
+
+    private void startFadeAnim() {
+        Animator animator = AnimatorInflater.loadAnimator(this, R.animator.anim_save_pic_tip_fade);
+        animator.setTarget(mSavePicTip);
+        animator.start();
+        animator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                mSavePicTip.setVisibility(View.GONE);
+            }
+        });
     }
 
     private boolean setBitmapFromLocation() {
