@@ -76,7 +76,7 @@ public class RankList extends RVLoadableFragment<ComicListAdapter, ComicListBean
     }
 
     private void loadData(int page, String argName, int argValue) {
-        Observable<BaseBean<ComicListBean>> observable = RetrofitService.createApi(U17ComicApi.class).queryComicListRDByGetObservable(page, argName, argValue);
+        Observable<BaseBean<ComicListBean>> observable = RetrofitService.createApi(U17ComicApi.class).queryComicListRDByObservable(page, argName, argValue);
         RxUtil.comicSubscribe(observable, RankList.this);
     }
 

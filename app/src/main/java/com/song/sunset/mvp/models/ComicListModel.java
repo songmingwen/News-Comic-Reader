@@ -30,7 +30,7 @@ public class ComicListModel {
             comicListView.showLoading();
         }
         comicListView.showLoadingMoreProgress();
-        Call<BaseBean<ComicListBean>> call = RetrofitService.createApi(U17ComicApi.class).queryComicListRDByGetCall(page, argName, argValue);
+        Call<BaseBean<ComicListBean>> call = RetrofitService.createApi(U17ComicApi.class).queryComicListRDByCall(page, argName, argValue);
         RetrofitCall.call(call, new RetrofitCallback<ComicListBean>() {
             @Override
             public void onSuccess(ComicListBean comicListBean) {
@@ -56,7 +56,7 @@ public class ComicListModel {
             return;
         }
         isRefreshing = true;
-        Call<BaseBean<ComicListBean>> call = RetrofitService.createApi(U17ComicApi.class).queryComicListRDByGetCall(1, argName, argValue);
+        Call<BaseBean<ComicListBean>> call = RetrofitService.createApi(U17ComicApi.class).queryComicListRDByCall(1, argName, argValue);
         RetrofitCall.call(call, new RetrofitCallback<ComicListBean>() {
             @Override
             public void onSuccess(ComicListBean comicListBean) {

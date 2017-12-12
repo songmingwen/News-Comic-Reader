@@ -90,7 +90,7 @@ public class ComicDetailActivity extends BaseActivity {
     }
 
 //    public void getDataFromRetrofit2() {
-//        Call<BaseBean<ComicDetailBean>> call = RetrofitApiBuilder.getRetrofitApi(RetrofitApi.class).queryComicDetailRDByGetCall(comicId);
+//        Call<BaseBean<ComicDetailBean>> call = RetrofitApiBuilder.getRetrofitApi(RetrofitApi.class).queryComicDetailRDByCall(comicId);
 //        RetrofitCall.call(call, new RetrofitCallback<ComicDetailBean>() {
 //            @Override
 //            public void onSuccess(ComicDetailBean comicDetailBean) {
@@ -110,7 +110,7 @@ public class ComicDetailActivity extends BaseActivity {
 //    }
 
     public void getDataFromRetrofit2ByObservable() {
-        Observable<BaseBean<ComicDetailBean>> observable = RetrofitService.createApi(U17ComicApi.class).queryComicDetailRDByGetObservable(comicId);
+        Observable<BaseBean<ComicDetailBean>> observable = RetrofitService.createApi(U17ComicApi.class).queryComicDetailRDByObservable(comicId);
         RxUtil.comicSubscribe(observable, new RetrofitCallback<ComicDetailBean>() {
             @Override
             public void onSuccess(ComicDetailBean comicDetailBean) {

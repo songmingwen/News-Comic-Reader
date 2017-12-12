@@ -42,7 +42,7 @@ public class ComicRankListFragment extends LoadableListFragment<ComicListAdapter
 
     @Override
     protected Observable<BaseBean<ComicListBean>> getRetrofitApi(int page) {
-        return RetrofitService.createApi(U17ComicApi.class).queryComicListRDByGetObservable(page, argName, argValue);
+        return RetrofitService.createApi(U17ComicApi.class).queryComicListRDByObservable(page, argName, argValue);
     }
 
     @Override

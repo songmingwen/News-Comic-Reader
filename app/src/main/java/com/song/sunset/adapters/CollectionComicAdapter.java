@@ -49,7 +49,7 @@ public class CollectionComicAdapter extends RecyclerView.Adapter<ComicListViewHo
 
             holder.comicName.setText(data.get(position).getName());
             FrescoUtil.setFrescoImage(holder.simpleDraweeView, data.get(position).getCover());
-            RxUtil.comicSubscribe(RetrofitService.createApi(U17ComicApi.class).queryComicDetailRDByGetObservable(comicId),
+            RxUtil.comicSubscribe(RetrofitService.createApi(U17ComicApi.class).queryComicDetailRDByObservable(comicId),
                     new RetrofitCallback<ComicDetailBean>() {
                         @Override
                         public void onSuccess(ComicDetailBean comicDetailBean) {

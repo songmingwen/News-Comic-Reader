@@ -4,11 +4,20 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 
+import com.song.sunset.adapters.ComicSearchListAdapter;
+import com.song.sunset.beans.ComicSearchResultBean;
+import com.song.sunset.utils.StringUtils;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.beans.basebeans.BaseBean;
 import com.song.sunset.beans.ComicClassifyBean;
@@ -19,6 +28,10 @@ import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.retrofit.RetrofitService;
 import com.song.sunset.utils.api.U17ComicApi;
+import com.song.sunset.widget.RecyclerViewDivider;
+
+import java.net.URLEncoder;
+import java.util.List;
 
 import rx.Observable;
 
@@ -26,10 +39,13 @@ import rx.Observable;
  * Created by Song on 2016/9/2 0002.
  * Email:z53520@qq.com
  */
-public class ComicClassifyFragment extends Fragment {
+public class ComicClassifyFragment extends Fragment implements TextWatcher {
+
     private ProgressLayout progressLayout;
-    private RecyclerView recyclerView;
     private ComicClassifyAdapter adapter;
+    private EditText mSearchEdit;
+    private View mSearchContent;
+    private ComicSearchListAdapter mSearchListAdapter;
 
     @Nullable
     @Override
@@ -39,10 +55,19 @@ public class ComicClassifyFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        initView(view);
+        getDataFromRetrofit2();
+    }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        resetEdit();
+    }
+
+    private void initView(View view) {
         progressLayout = (ProgressLayout) view.findViewById(R.id.progress);
-
-        recyclerView = (RecyclerView) view.findViewById(R.id.id_comic_classify_recycler);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.id_comic_classify_recycler);
         adapter = new ComicClassifyAdapter(getActivity());
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 6) {
@@ -67,40 +92,33 @@ public class ComicClassifyFragment extends Fragment {
 
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(adapter);
-//        getDataFromNet();
-        getDataFromRetrofit2();
+        mSearchEdit = (EditText) view.findViewById(R.id.et_search);
+        mSearchContent = view.findViewById(R.id.id_comic_classify_search_list);
+        RecyclerView searchRecyclerView = (RecyclerView) view.findViewById(R.id.id_comic_classify_search_recycler);
+        mSearchListAdapter = new ComicSearchListAdapter(getActivity());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        searchRecyclerView.setLayoutManager(linearLayoutManager);
+        searchRecyclerView.setAdapter(mSearchListAdapter);
+        searchRecyclerView.addItemDecoration(new RecyclerViewDivider(getActivity(), LinearLayoutManager.HORIZONTAL, 1, getActivity().getResources().getColor(R.color.Grey_200)));
+        mSearchEdit.addTextChangedListener(this);
+        ImageView clear = (ImageView) view.findViewById(R.id.img_clear);
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetEdit();
+            }
+        });
     }
 
-//    public void getDataFromNet() {
-//        mLoadingAndRetryManager.showLoading();
-//        hasCache = false;
-//        RequestQueue queue = SampleVolleyFactory.getRequestQueue(getActivity());
-//        GsonRequest gsonRequest = new GsonRequest<>(AppServices.COMIC_CLASSIFY_URL, ComicClassifyRD.class,
-//                new Response.Listener<ComicClassifyRD>() {
-//                    @Override
-//                    public void onResponse(ComicClassifyRD response) {
-//                        hasCache = true;
-//                        mLoadingAndRetryManager.showContent();
-//                        ComicClassifyRD.DataBean.ReturnDataBean returnData = response.getData().getReturnData();
-//                        adapter.setData(returnData);
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        if (hasCache)
-//                            mLoadingAndRetryManager.showContent();
-//                        else
-//                            mLoadingAndRetryManager.showRetry();
-//                    }
-//                });
-//        gsonRequest.setRetryPolicy(new DefaultRetryPolicy());
-//        queue.add(gsonRequest);
-//    }
+    private void resetEdit() {
+        if (mSearchEdit != null) {
+            mSearchEdit.setText("");
+        }
+    }
 
     public void getDataFromRetrofit2() {
         progressLayout.showLoading();
-        Observable<BaseBean<ComicClassifyBean>> observable = RetrofitService.createApi(U17ComicApi.class).queryComicClassifyBeanByGetObservable(2);
+        Observable<BaseBean<ComicClassifyBean>> observable = RetrofitService.createApi(U17ComicApi.class).queryComicClassifyBeanByObservable(2);
         RxUtil.comicSubscribe(observable, new RetrofitCallback<ComicClassifyBean>() {
             @Override
             public void onSuccess(ComicClassifyBean comicReadBean) {
@@ -116,6 +134,38 @@ public class ComicClassifyFragment extends Fragment {
                         getDataFromRetrofit2();
                     }
                 });
+            }
+        });
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        String inputString = String.valueOf(s);
+        if (TextUtils.isEmpty(inputString)) {
+            mSearchContent.setVisibility(View.GONE);
+            return;
+        }
+        Observable<BaseBean<List<ComicSearchResultBean>>> observable = RetrofitService.createApi(U17ComicApi.class).queryComicSearchResultRDByObservable(inputString);
+        RxUtil.comicSubscribe(observable, new RetrofitCallback<List<ComicSearchResultBean>>() {
+            @Override
+            public void onSuccess(List<ComicSearchResultBean> comicSearchResultBeen) {
+                mSearchContent.setVisibility(View.VISIBLE);
+                mSearchListAdapter.setData(comicSearchResultBeen);
+            }
+
+            @Override
+            public void onFailure(int errorCode, String errorMsg) {
+
             }
         });
     }

@@ -185,7 +185,7 @@ public abstract class LoadableListFragment<Adapter extends BaseRecyclerViewAdapt
 
     /**
      * 获取网络请求对象
-     * eg:RetrofitService.createApi(ComicApi.class).queryComicListRDByGetObservable(page, argName, argValue);
+     * eg:RetrofitService.createApi(ComicApi.class).queryComicListRDByObservable(page, argName, argValue);
      *
      * @return Observable 对象
      */

@@ -46,7 +46,7 @@ public class ComicReadModel {
         Observable<BaseBean<ComicReadChapterBean>> observable =
                 RetrofitService
                         .createApi(U17ComicApi.class).
-                        queryNewComicReadRDByGetObservable(mChapterList.get(firstPosition).getChapter_id());
+                        queryNewComicReadRDByObservable(mChapterList.get(firstPosition).getChapter_id());
         RxUtil.comicSubscribe(observable, new RetrofitCallback<ComicReadChapterBean>() {
             @Override
             public void onSuccess(ComicReadChapterBean comicReadChapterBean) {
@@ -84,7 +84,7 @@ public class ComicReadModel {
         isLoadingTop = true;
         Observable<BaseBean<ComicReadChapterBean>> observable =
                 RetrofitService.createApi(U17ComicApi.class).
-                        queryNewComicReadRDByGetObservable(mChapterList.get(mCurrentTopPosition).getChapter_id());
+                        queryNewComicReadRDByObservable(mChapterList.get(mCurrentTopPosition).getChapter_id());
         RxUtil.comicSubscribe(observable, new RetrofitCallback<ComicReadChapterBean>() {
             @Override
             public void onSuccess(ComicReadChapterBean comicReadChapterBean) {
@@ -122,7 +122,7 @@ public class ComicReadModel {
         isLoadingBottom = true;
         Observable<BaseBean<ComicReadChapterBean>> observable =
                 RetrofitService.createApi(U17ComicApi.class).
-                        queryNewComicReadRDByGetObservable(mChapterList.get(mCurrentBottomPosition).getChapter_id());
+                        queryNewComicReadRDByObservable(mChapterList.get(mCurrentBottomPosition).getChapter_id());
         RxUtil.comicSubscribe(observable, new RetrofitCallback<ComicReadChapterBean>() {
             @Override
             public void onSuccess(ComicReadChapterBean comicReadChapterBean) {

@@ -117,7 +117,7 @@ public class ComicReadActivity extends BaseActivity implements RetrofitCallback<
 
     public void getDataFromRetrofit2() {
         progressLayout.showLoading();
-        Observable<BaseBean<List<ComicReadBean>>> Observable = RetrofitService.createApi(U17ComicApi.class).queryComicReadRDByGetObservable(comicId);
+        Observable<BaseBean<List<ComicReadBean>>> Observable = RetrofitService.createApi(U17ComicApi.class).queryComicReadRDByObservable(comicId);
         RxUtil.comicSubscribe(Observable, this);
     }
 

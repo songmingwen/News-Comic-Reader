@@ -20,7 +20,7 @@ public class ComicDetailModel implements CoreBaseModel {
     private ComicLocalCollectionDao comicLocalCollectionDao;
 
     public Observable<BaseBean<ComicDetailBean>> getData(int comicId) {
-        return RetrofitService.createApi(U17ComicApi.class).queryComicDetailRDByGetObservable(comicId);
+        return RetrofitService.createApi(U17ComicApi.class).queryComicDetailRDByObservable(comicId);
     }
 
     public boolean isCollected(int comicId) {
