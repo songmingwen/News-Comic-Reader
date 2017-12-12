@@ -64,6 +64,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/cv_comic_search_content"
+        android:layout_marginTop="5dp"
         android:clipChildren="false"
         android:clipToPadding="false"
         android:padding="7dp"/>

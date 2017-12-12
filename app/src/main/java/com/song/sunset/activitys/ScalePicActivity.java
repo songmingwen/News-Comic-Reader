@@ -82,12 +82,6 @@ public class ScalePicActivity extends BaseActivity {
         imageView.setPanLimit(SubsamplingScaleImageView.PAN_LIMIT_INSIDE);
         imageView.setMaxScale(5f);
         mSavePicTip = (TextView) findViewById(R.id.txt_save_pic_tip);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startFadeAnim();
-            }
-        }, 1000);
     }
 
     private void startFadeAnim() {
@@ -128,6 +122,7 @@ public class ScalePicActivity extends BaseActivity {
                     public void onResponse(Bitmap response) {
                         hasCache = true;
                         progressLayout.showContent();
+                        fadeAnimDelay();
                         if (response != null) {
                             imageView.setImage(ImageSource.bitmap(response));
                             setListener(response);
@@ -147,6 +142,15 @@ public class ScalePicActivity extends BaseActivity {
         });
         imageRequest.setRetryPolicy(new DefaultRetryPolicy());
         queue.add(imageRequest);
+    }
+
+    private void fadeAnimDelay() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startFadeAnim();
+            }
+        }, 1000);
     }
 
     private void setListener(final Bitmap response) {
