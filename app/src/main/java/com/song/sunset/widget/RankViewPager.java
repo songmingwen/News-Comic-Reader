@@ -11,6 +11,10 @@ import android.view.MotionEvent;
  */
 
 public class RankViewPager extends ViewPager {
+
+    private float mLastMotionX;
+    private float mLastMotionY;
+
     public RankViewPager(Context context) {
         super(context);
     }
@@ -19,39 +23,11 @@ public class RankViewPager extends ViewPager {
         super(context, attrs);
     }
 
-    float startX = 0;
-    float startY = 0;
-
-    @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                getParent().requestDisallowInterceptTouchEvent(true);
-                startX = ev.getX();
-                startY = ev.getY();
-                break;
             case MotionEvent.ACTION_MOVE:
-                float endX = ev.getX();
-                float endY = ev.getY();
-                float distanceX = endX - startX;
-                float distanceY = endY - startY;
-                if (Math.abs(distanceX) > Math.abs(distanceY)) {
-//当滑动到ViewPager的第0个页面，并且是从左到右滑动
-                    if (getCurrentItem() == 0 && distanceX > 0) {
-                        getParent().requestDisallowInterceptTouchEvent(false);
-                    }
-//当滑动到ViewPager的最后一个页面，并且是从右到左滑动
-                    else if ((getCurrentItem() == (getAdapter().getCount() - 1)) && distanceX < 0) {
-                        getParent().requestDisallowInterceptTouchEvent(true);
-                    }
-//其他,中间部分
-                    else {
-                        getParent().requestDisallowInterceptTouchEvent(true);
-                    }
-                } else {
-//竖直方向滑动
-                    getParent().requestDisallowInterceptTouchEvent(true);
-                }
+                getParent().requestDisallowInterceptTouchEvent(true);
                 break;
             case MotionEvent.ACTION_UP:
                 break;
@@ -59,5 +35,41 @@ public class RankViewPager extends ViewPager {
                 break;
         }
         return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN: {
+                mLastMotionX = ev.getX();
+                mLastMotionY = ev.getY();
+                break;
+            }
+        }
+        return super.onInterceptTouchEvent(ev);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent ev) {
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                mLastMotionX = ev.getX();
+                mLastMotionY = ev.getY();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                if (getParent() != null) {
+                    float xPosition = ev.getX();
+                    float yPosition = ev.getY();
+                    float detX = Math.abs(xPosition - mLastMotionX);
+                    float detY = Math.abs(yPosition - mLastMotionY);
+                    if (getCurrentItem() <= 0 && (xPosition - mLastMotionX) > 0 && detX > detY) {
+                        getParent().requestDisallowInterceptTouchEvent(false);
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+        return super.onTouchEvent(ev);
     }
 }

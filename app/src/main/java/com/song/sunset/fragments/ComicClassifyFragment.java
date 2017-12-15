@@ -67,6 +67,7 @@ public class ComicClassifyFragment extends Fragment implements TextWatcher {
 
     private void initView(View view) {
         progressLayout = (ProgressLayout) view.findViewById(R.id.progress);
+        progressLayout.showLoading();
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.id_comic_classify_recycler);
         adapter = new ComicClassifyAdapter(getActivity());
 
@@ -117,7 +118,6 @@ public class ComicClassifyFragment extends Fragment implements TextWatcher {
     }
 
     public void getDataFromRetrofit2() {
-        progressLayout.showLoading();
         Observable<BaseBean<ComicClassifyBean>> observable = RetrofitService.createApi(U17ComicApi.class).queryComicClassifyBeanByObservable(2);
         RxUtil.comicSubscribe(observable, new RetrofitCallback<ComicClassifyBean>() {
             @Override
@@ -131,6 +131,7 @@ public class ComicClassifyFragment extends Fragment implements TextWatcher {
                 progressLayout.showRetry(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        progressLayout.showLoading();
                         getDataFromRetrofit2();
                     }
                 });

@@ -5,13 +5,11 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion rootProject.ext.android.ANDROID_COMPILE_SDK_VERSION
     buildToolsVersion rootProject.ext.android.ANDROID_BUILD_TOOLS_VERSION
-
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
         }
     }
-
     defaultConfig {
         applicationId "com.song.sunset"
         minSdkVersion rootProject.ext.android.ANDROID_BUILD_MIN_SDK_VERSION
@@ -23,53 +21,32 @@ android {
 //        }
         multiDexEnabled true
     }
-
     signingConfigs {
         release {
-            storeFile file(STORE_FILE)
+            storeFile file('D:/Sunset/comic.jks')
             storePassword KEYSTORE_PASSWORD
             keyAlias KEY_ALIAS
             keyPassword KEY_PASSWORD
         }
     }
-
-//    buildTypes {
-//        debug {
-//            zipAlignEnabled true  //是否支持zip
-//            minifyEnabled false
-//            debuggable true
-//            signingConfig signingConfigs.release
-//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-////            applicationVariants.all { variant ->
-////                variant.outputs.each { output ->
-////                    def outputFile = output.outputFile
-////                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
-////                        // apk name  XXXX.apk
-////                        def fileName = "Sunset_debug.apk"
-////                        output.outputFile = new File(outputFile, fileName)
-////                    }
-////                }
-////            }
-//        }
-//        release {
-//            zipAlignEnabled true  //是否支持zip
-//            minifyEnabled false  //是否进行混淆
-//            signingConfig signingConfigs.release
-//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-////            applicationVariants.all { variant ->
-////                variant.outputs.each { output ->
-////                    def outputFile = output.outputFile
-////                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
-////                        // apk name  XXXX.apk
-////                        def fileName = "Sunset_release.apk"
-////                        output.outputFile = new File(outputFile, fileName)
-////                    }
-////                }
-////            }
-//        }
-//    }
-
-
+    buildTypes {
+        debug {
+            debuggable true
+            jniDebuggable true
+            signingConfig signingConfigs.release
+            renderscriptDebuggable true
+            minifyEnabled false
+        }
+        release {
+            debuggable false
+            jniDebuggable false
+            signingConfig signingConfigs.release
+            renderscriptDebuggable false
+            minifyEnabled true
+            proguardFile 'D:/Sunset/Comic/app/proguard-rules.pro'
+            zipAlignEnabled true
+        }
+    }
     sourceSets {
 //        main.java.srcDirs += 'src/main/kotlin'
 
@@ -105,16 +82,17 @@ repositories {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile "com.android.support:appcompat-v7:${rootProject.ext.android.ANDROID_APPCOMPAT_VERSION}"
     compile "com.android.support:design:${rootProject.ext.android.ANDROID_APPCOMPAT_VERSION}"
     compile "com.android.support:cardview-v7:${rootProject.ext.android.ANDROID_APPCOMPAT_VERSION}"
     compile "com.android.support:palette-v7:${rootProject.ext.android.ANDROID_APPCOMPAT_VERSION}"
-
+    compile "com.android.support:support-v4:${rootProject.ext.android.ANDROID_APPCOMPAT_VERSION}"
+    testCompile 'junit:junit:4.12'
     compile rootProject.ext.dependencies["multidex"]
     compile rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
-//    compile rootProject.ext.dependencies["glide"]
-//    compile rootProject.ext.dependencies["glide-transformations"]
+    //    compile rootProject.ext.dependencies["glide"]
+    //    compile rootProject.ext.dependencies["glide-transformations"]
     compile rootProject.ext.dependencies["glide-4.0-transformations"]
     compile rootProject.ext.dependencies["gpuimage_library"]
     compile rootProject.ext.dependencies["fresco"]
@@ -126,7 +104,7 @@ dependencies {
     compile rootProject.ext.dependencies["ijkplayer_java"]
     compile rootProject.ext.dependencies["ijkplayer_armv7a"]
     compile rootProject.ext.dependencies["ijkplayer_arm64"]
-//    compile rootProject.ext.dependencies["ijkplayer_x86_64"]
+    //    compile rootProject.ext.dependencies["ijkplayer_x86_64"]
     compile rootProject.ext.dependencies["okhttp3"]
     compile rootProject.ext.dependencies["retrofit2"]
     compile rootProject.ext.dependencies["retrofit2_converter_gson"]
@@ -152,6 +130,4 @@ dependencies {
     compile rootProject.ext.dependencies["ndkbitmap-x86"]
     debugCompile rootProject.ext.dependencies["leakcanary_debug"]
     releaseCompile rootProject.ext.dependencies["leakcanary_release"]
-    compile 'com.android.support:support-v4:25.3.1'
-    testCompile 'junit:junit:4.12'
 }
