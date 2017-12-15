@@ -54,7 +54,7 @@ public class ComicReadModel {
                     if (comicReadChapterBean.getImage_list() == null) {
                         firstLoad(0);
                     } else {
-                        mComicReadView.loadFirstEnd(true, comicReadChapterBean.getImage_list());
+                        mComicReadView.loadFirstPage(true, comicReadChapterBean.getImage_list());
                         loadTop();
                         loadBottom();
                     }
@@ -64,7 +64,7 @@ public class ComicReadModel {
             @Override
             public void onFailure(int errorCode, String errorMsg) {
                 if (mComicReadView != null) {
-                    mComicReadView.loadFirstEnd(false, null);
+                    mComicReadView.loadFirstPage(false, null);
                 }
             }
         });
@@ -90,10 +90,10 @@ public class ComicReadModel {
             public void onSuccess(ComicReadChapterBean comicReadChapterBean) {
                 if (mComicReadView != null) {
                     if (comicReadChapterBean.getImage_list() == null) {
-                        mComicReadView.loadTopEnd(false, null);
+                        mComicReadView.loadPreviousPage(false, null);
                     } else {
                         mCurrentTopPosition = mCurrentTopPosition - 1;
-                        mComicReadView.loadTopEnd(true, comicReadChapterBean.getImage_list());
+                        mComicReadView.loadPreviousPage(true, comicReadChapterBean.getImage_list());
                     }
                     isLoadingTop = false;
                 }
@@ -102,7 +102,7 @@ public class ComicReadModel {
             @Override
             public void onFailure(int errorCode, String errorMsg) {
                 if (mComicReadView != null) {
-                    mComicReadView.loadTopEnd(false, null);
+                    mComicReadView.loadPreviousPage(false, null);
                     isLoadingTop = false;
                 }
             }
@@ -128,10 +128,10 @@ public class ComicReadModel {
             public void onSuccess(ComicReadChapterBean comicReadChapterBean) {
                 if (mComicReadView != null) {
                     if (comicReadChapterBean.getImage_list() == null) {
-                        mComicReadView.loadBottomEnd(false, null);
+                        mComicReadView.loadNextPage(false, null);
                     } else {
                         mCurrentBottomPosition = mCurrentBottomPosition + 1;
-                        mComicReadView.loadBottomEnd(true, comicReadChapterBean.getImage_list());
+                        mComicReadView.loadNextPage(true, comicReadChapterBean.getImage_list());
                     }
                     isLoadingBottom = false;
                 }
@@ -140,7 +140,7 @@ public class ComicReadModel {
             @Override
             public void onFailure(int errorCode, String errorMsg) {
                 if (mComicReadView != null) {
-                    mComicReadView.loadBottomEnd(false, null);
+                    mComicReadView.loadNextPage(false, null);
                     isLoadingBottom = false;
                 }
             }

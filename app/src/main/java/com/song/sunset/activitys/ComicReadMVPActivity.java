@@ -112,7 +112,7 @@ public class ComicReadMVPActivity extends BaseActivity implements ComicReadMVPRe
     }
 
     @Override
-    public void loadFirstEnd(boolean success, List<ComicReadImageListBean> list) {
+    public void loadFirstPage(boolean success, List<ComicReadImageListBean> list) {
         if (isFinishing()) return;
         if (success) {
             adapter.setData(list);
@@ -129,7 +129,7 @@ public class ComicReadMVPActivity extends BaseActivity implements ComicReadMVPRe
     }
 
     @Override
-    public void loadTopEnd(boolean success, List<ComicReadImageListBean> list) {
+    public void loadPreviousPage(boolean success, List<ComicReadImageListBean> list) {
         if (isFinishing()) return;
         if (success) {
             adapter.addDataAtTop(list);
@@ -137,7 +137,7 @@ public class ComicReadMVPActivity extends BaseActivity implements ComicReadMVPRe
     }
 
     @Override
-    public void loadBottomEnd(boolean success, List<ComicReadImageListBean> list) {
+    public void loadNextPage(boolean success, List<ComicReadImageListBean> list) {
         if (isFinishing()) return;
         if (success) {
             adapter.addDataAtBottom(list);
