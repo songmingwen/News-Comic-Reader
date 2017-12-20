@@ -1,6 +1,7 @@
 package com.song.sunset.fragments;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,21 +12,32 @@ import android.widget.Toast;
 
 import com.song.sunset.R;
 import com.song.sunset.adapters.CollectionComicAdapter;
+import com.song.sunset.beans.CollectionOnlineListBean;
+import com.song.sunset.beans.ComicCollectionBean;
 import com.song.sunset.beans.ComicLocalCollection;
+import com.song.sunset.beans.basebeans.BaseBean;
 import com.song.sunset.fragments.base.BaseFragment;
 import com.song.sunset.utils.AppConfig;
 import com.song.sunset.utils.GreenDaoUtil;
 import com.song.sunset.utils.ViewUtil;
+import com.song.sunset.utils.api.U17ComicApi;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
+import com.song.sunset.utils.retrofit.RetrofitCallback;
+import com.song.sunset.utils.retrofit.RetrofitService;
+import com.song.sunset.utils.rxjava.RxUtil;
 import com.sunset.greendao.gen.ComicLocalCollectionDao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import rx.Observable;
 
 /**
  * Created by z5352_000 on 2016/10/29 0029.
  * E-mail:z53520@qq.com
  */
-public class CollectionFragment extends BaseFragment {
+public class CollectionFragment extends BaseFragment implements RetrofitCallback<CollectionOnlineListBean> {
 
     private ProgressLayout progressLayout;
     private CollectionComicAdapter adapter;
@@ -73,5 +85,28 @@ public class CollectionFragment extends BaseFragment {
         }
         adapter.setData(list);
         progressLayout.showContent();
+
+        Observable<BaseBean<CollectionOnlineListBean>> observable = RetrofitService.createApi(U17ComicApi.class, getCollectionMap()).queryComicCollectionListRDByObservable("");
+        RxUtil.comicSubscribe(observable, this);
+    }
+
+    @NonNull
+    public static Map<String, String> getCollectionMap() {
+        Map<String, String> map = new HashMap<>();
+        map.put("v", "3360100");
+        map.put("key", "387df5b33fc7fe893a7ca573591a9d82ee5695909ca89b94bc237d734e13762664c4437ea3069d86847388c198390f44b7c0947136188de4aca46c4adfd7eaf9c0844103fd9f7b9f554531ff99da3430222d17ed61d61cfede2d27cb667b3173%3A%3A%3Au17");
+        map.put("t", System.currentTimeMillis() + "");
+        return map;
+    }
+
+    @Override
+    public void onSuccess(CollectionOnlineListBean collectionOnlineListBean) {
+        if (adapter == null) return;
+        adapter.setCollectionList(collectionOnlineListBean.getFavList());
+    }
+
+    @Override
+    public void onFailure(int errorCode, String errorMsg) {
+
     }
 }

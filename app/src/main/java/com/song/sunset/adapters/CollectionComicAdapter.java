@@ -2,12 +2,14 @@ package com.song.sunset.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.song.sunset.R;
 import com.song.sunset.activitys.ComicDetailMVPActivity;
+import com.song.sunset.beans.ComicCollectionBean;
 import com.song.sunset.beans.ComicDetailBean;
 import com.song.sunset.beans.ComicLocalCollection;
 import com.song.sunset.holders.ComicListViewHolder;
@@ -27,6 +29,7 @@ import java.util.List;
 public class CollectionComicAdapter extends RecyclerView.Adapter<ComicListViewHolder> {
     private Context context;
     private List<ComicLocalCollection> data;
+    private List<ComicCollectionBean> mCollectionList;
 
     public CollectionComicAdapter(Context context) {
         this.context = context;
@@ -42,29 +45,25 @@ public class CollectionComicAdapter extends RecyclerView.Adapter<ComicListViewHo
 
     @Override
     public void onBindViewHolder(final ComicListViewHolder holder, final int position) {
-         holder.haveUpdate.setVisibility(View.GONE);
+        holder.haveUpdate.setVisibility(View.GONE);
         if (data != null) {
             final int chapterNum = Integer.parseInt(data.get(position).getChapterNum());
             final int comicId = (int) data.get(position).getComicId();
 
             holder.comicName.setText(data.get(position).getName());
             FrescoUtil.setFrescoImage(holder.simpleDraweeView, data.get(position).getCover());
-            RxUtil.comicSubscribe(RetrofitService.createApi(U17ComicApi.class).queryComicDetailRDByObservable(comicId),
-                    new RetrofitCallback<ComicDetailBean>() {
-                        @Override
-                        public void onSuccess(ComicDetailBean comicDetailBean) {
-                            int diff = comicDetailBean.getChapter_list().size() - chapterNum;
-                            if (diff != 0) {
-                                holder.haveUpdate.setVisibility(View.VISIBLE);
-                                holder.haveUpdate.setText(String.format(context.getString(R.string.have_update), diff));
-                            }
+            //显示更新状态
+            if (mCollectionList != null) {
+                for (ComicCollectionBean bean : mCollectionList) {
+                    if (TextUtils.equals(bean.getComic_id(), comicId + "")) {
+                        int diff = bean.getPass_chapter_num() - chapterNum;
+                        if (diff != 0) {
+                            holder.haveUpdate.setVisibility(View.VISIBLE);
+                            holder.haveUpdate.setText(String.format(context.getString(R.string.have_update), diff));
                         }
-
-                        @Override
-                        public void onFailure(int errorCode, String errorMsg) {
-
-                        }
-                    });
+                    }
+                }
+            }
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -94,5 +93,9 @@ public class CollectionComicAdapter extends RecyclerView.Adapter<ComicListViewHo
             this.data.addAll(data);
             notifyDataSetChanged();
         }
+    }
+
+    public void setCollectionList(List<ComicCollectionBean> collectionList) {
+        mCollectionList = collectionList;
     }
 }

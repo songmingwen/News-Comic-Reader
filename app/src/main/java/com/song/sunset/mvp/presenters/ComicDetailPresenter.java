@@ -34,14 +34,23 @@ public class ComicDetailPresenter extends CoreBasePresenter<ComicDetailModel, Co
         });
     }
 
-    public void showCollecteState(int comicId) {
+    public void showCollectedStated(int comicId) {
         if (mView == null || mModel == null) return;
         mView.showCollected(mModel.isCollected(comicId), false);
     }
 
-    public void changeCollectedState(ComicDetailBean comicDetailBean) {
+    public void changeCollectedState(final ComicDetailBean comicDetailBean) {
         if (mView == null || mModel == null) return;
-        mView.showCollected(mModel.changeCollectedState(comicDetailBean), true);
+        mModel.changeCollectedStateFromNet(comicDetailBean,
+                new ComicDetailModel.ChangeCollectionListener() {
+                    @Override
+                    public void collected(boolean add) {
+                        //网络结果返回，先更新UI
+                        mView.showCollected(add, true);
+                        //将返回结果同步到数据库
+                        mModel.changeCollectedState(comicDetailBean, add);
+                    }
+                });
     }
 
     public void updateCollectedComicData(ComicDetailBean comicDetailBean) {

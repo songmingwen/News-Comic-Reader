@@ -36,7 +36,6 @@ import com.song.sunset.mvp.views.ComicDetailView;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-import static com.song.sunset.adapters.ComicDetailAdapter.COMIC_DETAIL_TYPE;
 import static com.song.sunset.adapters.ComicDetailAdapter.COMIC_LIST_TYPE;
 
 /**
@@ -123,7 +122,7 @@ public class ComicDetailMVPActivity extends CoreBaseActivity<ComicDetailPresente
         });
 
         mPresenter.showData(comicId);
-        mPresenter.showCollecteState(comicId);
+        mPresenter.showCollectedStated(comicId);
     }
 
     @OnClick(R.id.id_comic_detail_fab)

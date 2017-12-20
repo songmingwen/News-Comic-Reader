@@ -1,5 +1,6 @@
 package com.song.sunset.utils.api;
 
+import com.song.sunset.beans.CollectionOnlineListBean;
 import com.song.sunset.beans.ComicRankListBean;
 import com.song.sunset.beans.ComicReadChapterBean;
 import com.song.sunset.beans.ComicSearchResultBean;
@@ -12,8 +13,11 @@ import com.song.sunset.beans.ComicReadBean;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -81,4 +85,9 @@ public interface U17ComicApi {
     @GET("search/relative")
     Observable<BaseBean<List<ComicSearchResultBean>>> queryComicSearchResultRDByObservable(
             @Query("inputText") String inputText);
+
+    @FormUrlEncoded
+    @POST("fav/index")
+    Observable<BaseBean<CollectionOnlineListBean>> queryComicCollectionListRDByObservable(
+            @Field("data") String data);
 }

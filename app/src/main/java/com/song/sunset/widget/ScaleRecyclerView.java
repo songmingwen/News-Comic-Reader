@@ -1,6 +1,7 @@
 package com.song.sunset.widget;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
@@ -102,13 +103,11 @@ public class ScaleRecyclerView extends RecyclerView implements View.OnTouchListe
     }
 
     private boolean isZooming = false;
-    private float downX;
-    private float downY;
-    private float moveX;
-    private float moveY;
-//    private FlingRunnable mFlingRunnable;
 
     private class ScaleRecyclerViewGestureListener extends GestureDetector.SimpleOnGestureListener {
+
+        private float downX;
+        private float downY;
 
         @Override
         public boolean onDown(MotionEvent e) {
@@ -142,7 +141,7 @@ public class ScaleRecyclerView extends RecyclerView implements View.OnTouchListe
         @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
             if (getScaleX() != ORIGINAL_RATE) {
-                moveX = e2.getRawX();
+                float moveX = e2.getRawX();
 //            Log.i(TAG, "onScroll:moveX= " + moveX);
                 float dx = moveX - downX;
                 float positionX = dx + getX();
@@ -151,7 +150,7 @@ public class ScaleRecyclerView extends RecyclerView implements View.OnTouchListe
                 downX = moveX;
 
                 if (atFirstPosition || atLastPosition) {
-                    moveY = e2.getRawY();
+                    float moveY = e2.getRawY();
                     float dy = moveY - downY;
                     float positionY = dy + getY();
                     setY(getPositionY(positionY));
@@ -192,14 +191,14 @@ public class ScaleRecyclerView extends RecyclerView implements View.OnTouchListe
         } else {
             minY = maxY = startY;
         }
-        mScroller.fling(startX, startY, velocityX, 0, minX, maxX, minY, maxY);
+        mScroller.fling(startX, startY, velocityX, 0, Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MIN_VALUE, Integer.MAX_VALUE);
         invalidate();
     }
 
     @Override
     public void computeScroll() {
         if (mScroller != null && mScroller.computeScrollOffset()) {
-            Log.i(TAG, "computeScroll：" + mScroller.getCurrX() + ";X" + mScroller.getCurrVelocity());
+            Log.i(TAG, "computeScroll：X=" + mScroller.getCurrX() + "；velocity=" + mScroller.getCurrVelocity());
             setX(getPositionX(mScroller.getCurrX()));
             postInvalidate();
         }
@@ -363,26 +362,11 @@ public class ScaleRecyclerView extends RecyclerView implements View.OnTouchListe
         animatorSet.setDuration(ANIMATOR_DURATION_TIME);
         animatorSet.setInterpolator(new DecelerateInterpolator());
         animatorSet.start();
-        animatorSet.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-
-            }
-
+        animatorSet.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
                 isZooming = false;
                 currentScale = toRate;
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-
             }
         });
     }
