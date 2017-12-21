@@ -20,12 +20,12 @@ import master.flame.danmaku.danmaku.parser.BaseDanmakuParser;
 public class SongDanmakuParser extends BaseDanmakuParser {
 
     private List<DanmakuBean> mList = null;
-    private DanmakuContext mDanmakuContext;
     private Danmakus danmakus = new Danmakus();
+    private final Object mLock;
 
-    public SongDanmakuParser(List<DanmakuBean> list, DanmakuContext mDanmakuContext) {
+    public SongDanmakuParser(List<DanmakuBean> list) {
         this.mList = list;
-        this.mDanmakuContext = mDanmakuContext;
+        mLock = danmakus.obtainSynchronizer();
     }
 
     @Override
@@ -34,19 +34,18 @@ public class SongDanmakuParser extends BaseDanmakuParser {
             return new Danmakus();
         }
         for (DanmakuBean bean : mList) {
-            BaseDanmaku item = mDanmakuContext.mDanmakuFactory.createDanmaku(bean.getType(), mDanmakuContext);
+            BaseDanmaku item = mContext.mDanmakuFactory.createDanmaku(bean.getType(), mContext);
             if (item != null) {
                 item.setTime(bean.getTime());
                 item.textSize = bean.getTextSize();
                 item.textColor = bean.getColor();
                 item.textShadowColor = bean.getColor() <= Color.BLACK ? Color.WHITE : Color.BLACK;
                 item.setTimer(mTimer);
-                item.flags = mDanmakuContext.mGlobalFlagValues;
+                item.flags = mContext.mGlobalFlagValues;
                 item.text = bean.getContent();
                 item.isLive = bean.isLive();
             }
-            Object lock = danmakus.obtainSynchronizer();
-            synchronized (lock) {
+            synchronized (mLock) {
                 danmakus.addItem(item);
             }
         }

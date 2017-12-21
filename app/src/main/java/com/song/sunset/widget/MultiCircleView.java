@@ -7,17 +7,19 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.song.sunset.utils.ViewUtil;
+
 /**
  * Created by Song on 2016/12/3.
  */
 
 public class MultiCircleView extends View {
     private static final float STROKE_WIDTH = 1F / 256F, // 描边宽度占比
-            LINE_LENGTH = 3F / 64F, // 线段长度占比
-            CRICLE_LARGER_RADIU = 3F / 64F,// 大圆半径
-            CRICLE_SMALL_RADIU = 5F / 64F,// 小圆半径
-            ARC_RADIU = 1F / 8F,// 弧半径
-            ARC_TEXT_RADIU = 5F / 32F;// 弧围绕文字半径
+            LINE_LENGTH = 1F / 16F, // 线段长度占比
+            CIRCLE_LARGER_RADIU = 1F / 16F,// 大圆半径
+            CIRCLE_SMALL_RADIU = 5F / 64F,// 小圆半径
+            ARC_RADIO = 1F / 8F,// 弧半径
+            ARC_TEXT_RADIO = 5F / 32F;// 弧围绕文字半径
 
     private Paint strokePaint;// 描边画笔
 
@@ -25,8 +27,10 @@ public class MultiCircleView extends View {
 
     private float strokeWidth;// 描边宽度
     private float ccX, ccY;// 中心圆圆心坐标
-    private float largeCricleRadiu;// 大圆半径
+    private float circleRadio;// 大圆半径
     private float lineLength;// 线段长度
+    private int mRealWidth;
+    private int mRealHeight;
 
     public MultiCircleView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -53,13 +57,33 @@ public class MultiCircleView extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         // 强制长宽一致
-        super.onMeasure(widthMeasureSpec, widthMeasureSpec);
+        int resultWidth;
+        int resultHeight;
+        int widthSpecMode = MeasureSpec.getMode(widthMeasureSpec);
+        int widthSpecSize = MeasureSpec.getSize(widthMeasureSpec);
+        int heightSpecMode = MeasureSpec.getMode(heightMeasureSpec);
+        int heightSpecSize = MeasureSpec.getSize(heightMeasureSpec);
+        resultWidth = getFinalSize(widthSpecMode, widthSpecSize);
+        resultHeight = getFinalSize(heightSpecMode, heightSpecSize);
+        setMeasuredDimension(resultWidth, resultHeight);
+    }
+
+    private int getFinalSize(int specMode, int specSize) {
+        int resultWidth;
+        if (specMode == MeasureSpec.EXACTLY) {
+            resultWidth = specSize;
+        } else {
+            resultWidth = ViewUtil.dip2px(200);
+        }
+        return resultWidth;
     }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         // 获取控件边长
-        size = w;
+        mRealWidth = w - getPaddingLeft() - getPaddingRight();
+        mRealHeight = h - getPaddingTop() - getPaddingBottom();
+        size = mRealWidth > mRealHeight ? mRealHeight : mRealWidth;
 
         // 参数计算
         calculation();
@@ -73,14 +97,14 @@ public class MultiCircleView extends View {
         strokeWidth = STROKE_WIDTH * size;
 
         // 计算大圆半径
-        largeCricleRadiu = size * CRICLE_LARGER_RADIU;
+        circleRadio = size * CIRCLE_LARGER_RADIU;
 
         // 计算线段长度
         lineLength = size * LINE_LENGTH;
 
         // 计算中心圆圆心坐标
-        ccX = size / 2;
-        ccY = size / 2;
+        ccX = getPaddingLeft() + mRealWidth / 2;
+        ccY = getPaddingTop() + mRealHeight / 2;
 
         // 设置参数
         setPara();
@@ -100,7 +124,7 @@ public class MultiCircleView extends View {
         canvas.drawColor(0xFFF29B76);
 
         // 绘制中心圆
-        canvas.drawCircle(ccX, ccY, largeCricleRadiu, strokePaint);
+        canvas.drawCircle(ccX, ccY, circleRadio, strokePaint);
 
         // 绘制左上方图形
         drawTopLeft(canvas, -30);
@@ -126,10 +150,10 @@ public class MultiCircleView extends View {
         canvas.rotate(-degrees);
 
         // 依次画：线-圈-线-圈
-        canvas.drawLine(0, -largeCricleRadiu, 0, -lineLength * 2, strokePaint);
-        canvas.drawCircle(0, -lineLength * 3, largeCricleRadiu, strokePaint);
-        canvas.drawLine(0, -largeCricleRadiu * 4, 0, -lineLength * 5, strokePaint);
-        canvas.drawCircle(0, -lineLength * 6, largeCricleRadiu, strokePaint);
+        canvas.drawLine(0, -circleRadio, 0, -lineLength * 2, strokePaint);
+        canvas.drawCircle(0, -lineLength * 3, circleRadio, strokePaint);
+        canvas.drawLine(0, -circleRadio * 4, 0, -lineLength * 5, strokePaint);
+        canvas.drawCircle(0, -lineLength * 6, circleRadio, strokePaint);
 
         // 释放画布
         canvas.restore();
