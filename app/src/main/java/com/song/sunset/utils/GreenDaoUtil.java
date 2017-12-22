@@ -16,9 +16,7 @@ public class GreenDaoUtil {
 
     //    private static DaoMaster.DevOpenHelper mDBHelper;
     private static SQLiteDatabase db;
-    private static DaoMaster mDaoMaster;
     private static DaoSession mDaoSession;
-    private static MySQLiteOpenHelper helper;
 
     /**
      * 设置greenDao
@@ -30,17 +28,17 @@ public class GreenDaoUtil {
 //        mDaoMaster = new DaoMaster(db);
 //        mDaoSession = mDaoMaster.newSession();
 
-        helper = new MySQLiteOpenHelper(AppConfig.getApp(), "notes-dbUser", null);
+        MySQLiteOpenHelper helper = new MySQLiteOpenHelper(AppConfig.getApp(), "notes-dbUser", null);
         db = helper.getWritableDatabase();
-        mDaoMaster = new DaoMaster(helper.getWritableDatabase());
-        mDaoSession = mDaoMaster.newSession();
+        DaoMaster daoMaster = new DaoMaster(helper.getWritableDatabase());
+        mDaoSession = daoMaster.newSession();
     }
 
     public static DaoSession getDaoSession() {
         return mDaoSession;
     }
 
-    public static SQLiteDatabase getDbUser() {
+    public static SQLiteDatabase getDb() {
         return db;
     }
 }

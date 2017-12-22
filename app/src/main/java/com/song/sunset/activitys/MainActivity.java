@@ -42,6 +42,7 @@ import com.song.sunset.services.managers.BinderPool;
 import com.song.sunset.services.managers.MessengerManager;
 import com.song.sunset.services.managers.PushManager;
 import com.song.sunset.utils.MusicLoader;
+import com.song.sunset.utils.SPUtils;
 import com.song.sunset.utils.process.AndroidProcesses;
 import com.song.sunset.utils.process.models.AndroidAppProcess;
 
@@ -331,7 +332,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             drawer.closeDrawer(GravityCompat.START);
         } else {
             if (System.currentTimeMillis() - lastBackPressedTime < 2000) {
-                moveTaskToBack(true);
+//                moveTaskToBack(true);
+                SPUtils.setBooleanByName(this, SPUtils.APP_FIRST_INSTALL, false);
+                finish();
             } else {
                 lastBackPressedTime = System.currentTimeMillis();
             }

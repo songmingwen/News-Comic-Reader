@@ -15,6 +15,7 @@ import com.song.sunset.utils.CrashHandler;
 import com.song.sunset.utils.GreenDaoUtil;
 import com.song.sunset.services.managers.MessengerManager;
 import com.song.sunset.services.managers.PushManager;
+import com.song.sunset.utils.SPUtils;
 import com.song.sunset.utils.fresco.FrescoUtil;
 import com.song.sunset.utils.AppConfig;
 import com.song.sunset.utils.retrofit.HttpsUtil;
@@ -43,6 +44,10 @@ public class SunsetApplication extends MultiDexApplication {
 
     private void initInMainProcess() {
         AppConfig.setApp(this);
+
+        if (SPUtils.getBooleanByName(this, SPUtils.APP_FIRST_INSTALL, true)) {
+            SPUtils.setBooleanByName(this, SPUtils.APP_FIRST_INSTALL, true);
+        }
 
         GreenDaoUtil.initGreenDao();
 
