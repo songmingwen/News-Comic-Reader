@@ -97,5 +97,6 @@ public class CollectionComicAdapter extends RecyclerView.Adapter<ComicListViewHo
 
     public void setCollectionList(List<ComicCollectionBean> collectionList) {
         mCollectionList = collectionList;
+        notifyDataSetChanged();
     }
 }
