@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.NotificationCompat;
 import android.text.TextUtils;
 import android.util.Log;
@@ -75,6 +76,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private NavigationView navigationView;
     private static final int MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS = 1001;
     private ComicCollectionPresenter mPresenter;
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSIONS_STORAGE = {
+            "android.permission.READ_EXTERNAL_STORAGE",
+            "android.permission.WRITE_EXTERNAL_STORAGE"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +87,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         setDayNightMode(isNightMode());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        verifyStoragePermissions();
         initView();
         initDrawer();
         setUpListener();
@@ -97,6 +102,21 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //                        MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS);
 //            }
 //        }
+    }
+
+
+    public void verifyStoragePermissions() {
+        try {
+            //检测是否有写的权限
+            int permission = ActivityCompat.checkSelfPermission(this,
+                    "android.permission.WRITE_EXTERNAL_STORAGE");
+            if (permission != PackageManager.PERMISSION_GRANTED) {
+                // 没有写的权限，去申请写的权限，会弹出对话框
+                ActivityCompat.requestPermissions(this, PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     //检测用户是否对本app开启了“Apps with usage access”权限

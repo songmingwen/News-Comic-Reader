@@ -2,8 +2,10 @@ package com.song.sunset;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Process;
 import android.support.multidex.MultiDexApplication;
+import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
