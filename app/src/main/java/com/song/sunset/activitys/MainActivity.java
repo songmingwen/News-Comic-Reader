@@ -1,20 +1,21 @@
 package com.song.sunset.activitys;
 
 import android.app.ActivityManager;
-import android.app.AppOpsManager;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.NotificationCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -30,22 +31,30 @@ import com.song.core.statusbar.StatusBarUtil;
 import com.song.sunset.IPush;
 import com.song.sunset.R;
 import com.song.sunset.activitys.base.BaseActivity;
+import com.song.sunset.beans.CollectionOnlineListBean;
+import com.song.sunset.beans.ComicCollectionBean;
+import com.song.sunset.beans.ComicLocalCollection;
 import com.song.sunset.fragments.CollectionFragment;
 import com.song.sunset.fragments.ComicClassifyFragment;
 import com.song.sunset.fragments.ComicRankFragment;
 import com.song.sunset.fragments.PhoenixListFragment;
 import com.song.sunset.fragments.MVPComicListFragment;
-import com.song.sunset.fragments.RankList;
+import com.song.sunset.mvp.models.ComicCollectionModel;
+import com.song.sunset.mvp.presenters.ComicCollectionPresenter;
+import com.song.sunset.mvp.views.ComicCollectionView;
 import com.song.sunset.services.impl.BinderPoolImpl;
 import com.song.sunset.services.impl.PushImpl;
 import com.song.sunset.services.managers.BinderPool;
 import com.song.sunset.services.managers.MessengerManager;
 import com.song.sunset.services.managers.PushManager;
+import com.song.sunset.utils.GreenDaoUtil;
 import com.song.sunset.utils.MusicLoader;
 import com.song.sunset.utils.SPUtils;
 import com.song.sunset.utils.process.AndroidProcesses;
 import com.song.sunset.utils.process.models.AndroidAppProcess;
+import com.sunset.greendao.gen.ComicLocalCollectionDao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
@@ -58,13 +67,14 @@ import rx.schedulers.Schedulers;
  * Created by Song on 2016/12/2.
  * E-mail:z53520@qq.com
  */
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, ComicCollectionView {
 
     private Toolbar toolbar;
     private long lastBackPressedTime;
     private FloatingActionButton fab;
     private NavigationView navigationView;
     private static final int MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS = 1001;
+    private ComicCollectionPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,8 +86,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         initView();
         initDrawer();
         setUpListener();
-        switchFragmentDelay(PhoenixListFragment.class.getName(), getResources().getString(R.string.phoenix_news), 0);
 
+        switchFragmentDelay(PhoenixListFragment.class.getName(), getResources().getString(R.string.phoenix_news), 0);
+        mPresenter = new ComicCollectionPresenter();
+        mPresenter.attachVM(this, new ComicCollectionModel());
+        mPresenter.getNewestCollectedComic();
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //            if (!hasPermission()) {
 //                startActivityForResult(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS),
@@ -94,6 +107,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //                android.os.Process.myUid(), getPackageName());
 //        return mode == AppOpsManager.MODE_ALLOWED;
 //    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 
     @Override
     public boolean swipeBackPriority() {
@@ -273,11 +291,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
     }
@@ -343,6 +356,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     protected void onDestroy() {
+        if (mPresenter != null) {
+            mPresenter.detachVM();
+        }
         MessengerManager.getInstance().destroy(this);
         PushManager.getInstance().destory(this);
         super.onDestroy();
@@ -361,5 +377,60 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 toolbar.setTitle(title);
             }
         }, delayTime);
+    }
+
+    @Override
+    public void onSuccess(CollectionOnlineListBean collectionOnlineListBean) {
+        ComicLocalCollectionDao comicLocalCollectionDao = GreenDaoUtil.getDaoSession().getComicLocalCollectionDao();
+        List<ComicLocalCollection> list = comicLocalCollectionDao.loadAll();
+        if (list == null || list.isEmpty() || collectionOnlineListBean == null || collectionOnlineListBean.getFavList().isEmpty())
+            return;
+        ArrayList<String> newList = new ArrayList<>();
+        for (ComicLocalCollection bean : list) {
+            for (ComicCollectionBean onlineBean : collectionOnlineListBean.getFavList()) {
+                if (TextUtils.equals(bean.getComicId() + "", onlineBean.getComic_id())
+                        && !TextUtils.equals(bean.getChapterNum(), onlineBean.getPass_chapter_num() + "")) {
+                    newList.add(onlineBean.getName());
+                }
+            }
+        }
+        if (newList.isEmpty()) {
+            return;
+        }
+        String content = "";
+        for (String name : newList) {
+            content += (name + "、");
+        }
+        content = content.substring(0, content.length() - 1);
+        content += "有更新";
+        showNotification(content);
+    }
+
+    private void showNotification(String content) {
+        Intent intent = new Intent(this, ComicCollectionActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
+                | Intent.FLAG_ACTIVITY_NEW_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, (int) (Math.random() * 100000),
+                intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder nBuilder = new NotificationCompat.Builder(this);
+        nBuilder.setSmallIcon(R.mipmap.logo)
+                .setContentIntent(pendingIntent)
+                .setContentTitle("漫画有更新")
+                .setContentText(content)
+                .setPriority(Notification.PRIORITY_MAX)
+                .setAutoCancel(false);
+        Notification notification = nBuilder.build();
+        notification.flags = notification.flags | Notification.FLAG_AUTO_CANCEL
+                | Notification.FLAG_SHOW_LIGHTS
+                | Notification.FLAG_ONGOING_EVENT;
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        manager.notify(1, notification);
+    }
+
+    @Override
+    public void onFailure(int errorCode, String errorMsg) {
+
     }
 }

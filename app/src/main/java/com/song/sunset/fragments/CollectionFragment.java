@@ -17,6 +17,9 @@ import com.song.sunset.beans.ComicCollectionBean;
 import com.song.sunset.beans.ComicLocalCollection;
 import com.song.sunset.beans.basebeans.BaseBean;
 import com.song.sunset.fragments.base.BaseFragment;
+import com.song.sunset.mvp.models.ComicCollectionModel;
+import com.song.sunset.mvp.presenters.ComicCollectionPresenter;
+import com.song.sunset.mvp.views.ComicCollectionView;
 import com.song.sunset.utils.GreenDaoUtil;
 import com.song.sunset.utils.SPUtils;
 import com.song.sunset.utils.ViewUtil;
@@ -37,11 +40,12 @@ import rx.Observable;
  * Created by z5352_000 on 2016/10/29 0029.
  * E-mail:z53520@qq.com
  */
-public class CollectionFragment extends BaseFragment implements RetrofitCallback<CollectionOnlineListBean> {
+public class CollectionFragment extends BaseFragment implements RetrofitCallback<CollectionOnlineListBean>, ComicCollectionView {
 
     private ProgressLayout progressLayout;
     private CollectionComicAdapter adapter;
     private ComicLocalCollectionDao comicLocalCollectionDao;
+    private ComicCollectionPresenter mPresenter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,16 +73,19 @@ public class CollectionFragment extends BaseFragment implements RetrofitCallback
                 return ViewUtil.getScreenHeigth();
             }
         });
+
+        mPresenter = new ComicCollectionPresenter();
+        mPresenter.attachVM(this, new ComicCollectionModel());
     }
 
     @Override
     public void onResume() {
         super.onResume();
         if (SPUtils.getBooleanByName(getActivity(), SPUtils.APP_FIRST_INSTALL, false)) {
-            getNewestCollectionList();
+            mPresenter.getNewestCollectedComic();
         } else {
             getDataFromSQLite();
-            getNewestCollectionList();
+            mPresenter.getNewestCollectedComic();
         }
     }
 
@@ -90,20 +97,6 @@ public class CollectionFragment extends BaseFragment implements RetrofitCallback
         }
         adapter.setData(list);
         progressLayout.showContent();
-    }
-
-    private void getNewestCollectionList() {
-        Observable<BaseBean<CollectionOnlineListBean>> observable = RetrofitService.createApi(U17ComicApi.class, getCollectionMap()).queryComicCollectionListRDByObservable("");
-        RxUtil.comicSubscribe(observable, this);
-    }
-
-    @NonNull
-    public static Map<String, String> getCollectionMap() {
-        Map<String, String> map = new HashMap<>();
-        map.put("v", "3360100");
-        map.put("key", "387df5b33fc7fe893a7ca573591a9d82ee5695909ca89b94bc237d734e13762664c4437ea3069d86847388c198390f44b7c0947136188de4aca46c4adfd7eaf9c0844103fd9f7b9f554531ff99da3430222d17ed61d61cfede2d27cb667b3173%3A%3A%3Au17");
-        map.put("t", System.currentTimeMillis() + "");
-        return map;
     }
 
     @Override
@@ -138,5 +131,13 @@ public class CollectionFragment extends BaseFragment implements RetrofitCallback
         }
         GreenDaoUtil.getDb().setTransactionSuccessful();
         GreenDaoUtil.getDb().endTransaction();
+    }
+
+    @Override
+    public void onDestroy() {
+        if (mPresenter != null) {
+            mPresenter.detachVM();
+        }
+        super.onDestroy();
     }
 }
