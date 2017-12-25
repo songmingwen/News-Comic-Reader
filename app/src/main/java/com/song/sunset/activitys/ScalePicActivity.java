@@ -72,6 +72,8 @@ public class ScalePicActivity extends BaseActivity {
         initView();
         if (!setBitmapFromLocation()) {
             setBitmapFromNet();
+        } else {
+            mSavePicTip.setVisibility(View.GONE);
         }
     }
 
