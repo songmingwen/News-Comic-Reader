@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.RelativeLayout;
 
 import com.song.sunset.R;
@@ -49,7 +50,7 @@ public class PhoenixListFragment extends BaseFragment implements RetrofitCallbac
     private PhoenixListAdapter mAdapter;
     private PtrFrameLayout refreshLayout;
     private ProgressLayout progressLayout;
-    private boolean isLoading, isRefreshing = false;
+    private boolean isLoading, isRefreshing, isFirst = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,6 +60,7 @@ public class PhoenixListFragment extends BaseFragment implements RetrofitCallbac
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        isFirst = true;
         return inflater.inflate(R.layout.fragment_phoenix_list, container, false);
     }
 
@@ -116,14 +118,31 @@ public class PhoenixListFragment extends BaseFragment implements RetrofitCallbac
         if (isRefreshing) {
             isRefreshing = false;
             mAdapter.addDataAtTop(removeRepeatedList);
+            redirectPosition(20 - recyclerView.getHeight());
             refreshLayout.refreshComplete();
         } else {
             if (isLoading) {
                 isLoading = false;
             }
             mAdapter.addDataAtBottom(removeRepeatedList);
+            if (!isFirst) {
+                redirectPosition(recyclerView.getHeight() - 20);
+            }
             showProgress(false);
         }
+        isFirst = false;
+    }
+
+    private void redirectPosition(final int dy) {
+        if (recyclerView == null) {
+            return;
+        }
+        recyclerView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                recyclerView.smoothScrollBy(0, dy, new DecelerateInterpolator());
+            }
+        }, AppConfig.REFRESH_CLOSE_TIME);
     }
 
     @NonNull
