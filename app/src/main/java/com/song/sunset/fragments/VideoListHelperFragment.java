@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.song.sunset.R;
+import com.song.sunset.activitys.VideoListActivity;
 import com.song.sunset.adapters.VideoListHelperAdapter;
 import com.song.sunset.beans.VideoBean;
 import com.song.sunset.fragments.base.BaseFragment;
@@ -38,7 +39,7 @@ import rx.Observable;
 
 public class VideoListHelperFragment extends BaseFragment implements BaseQuickAdapter.RequestLoadMoreListener, PtrHandler {
 
-    private String typeid = "";
+    private String typeId = "";
     private RecyclerView recyclerView;
     private VideoListHelperAdapter mAdapter;
     private int currentPage = 1;
@@ -58,7 +59,7 @@ public class VideoListHelperFragment extends BaseFragment implements BaseQuickAd
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             Bundle bundle = getArguments();
-            typeid = bundle.getString("typeid");
+            typeId = bundle.getString(VideoListActivity.TYPE_ID);
         }
     }
 
@@ -101,7 +102,7 @@ public class VideoListHelperFragment extends BaseFragment implements BaseQuickAd
     }
 
     public void getDataFromRetrofit2(int page) {
-        Observable<List<VideoBean>> observable = RetrofitService.createApi(PhoenixNewsApi.class, WholeApi.PHOENIX_NEWS_BASE_URL).queryVideoObservable(page, "list", typeid);
+        Observable<List<VideoBean>> observable = RetrofitService.createApi(PhoenixNewsApi.class, WholeApi.PHOENIX_NEWS_BASE_URL).queryVideoObservable(page, "list", typeId);
         RxUtil.phoenixNewsSubscribe(observable, new RetrofitCallback<VideoBean>() {
             @Override
             public void onSuccess(VideoBean videoBean) {

@@ -35,10 +35,13 @@ import rx.Observable;
 public class VideoListActivity extends AppCompatActivity {
     public static final String TV_URL = "tv_url";
     public static final String TV_NAME = "tv_name";
+    public static final String CH_TYPE = "chType";
+    public static final String TYPE_ID = "typeId";
+    public static final String NAME = "name";
     private ViewPager viewPager;
     private SlidingTabLayout slidingTabLayout;
     private ProgressLayout progressLayout;
-    private RankingPagerAdapter rankingPagerAdapter;
+    private RankingPagerAdapter<Fragment> rankingPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +53,7 @@ public class VideoListActivity extends AppCompatActivity {
 
         viewPager = (ViewPager) findViewById(R.id.ranking_view_pager);
         slidingTabLayout = (SlidingTabLayout) findViewById(R.id.ranking_sliding_layout);
-        rankingPagerAdapter = new RankingPagerAdapter(getSupportFragmentManager());
+        rankingPagerAdapter = new RankingPagerAdapter<>(getSupportFragmentManager());
         viewPager.setAdapter(rankingPagerAdapter);
         viewPager.setOffscreenPageLimit(1);
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
@@ -89,9 +92,9 @@ public class VideoListActivity extends AppCompatActivity {
 
                 for (VideoBean.TypesBean item : list) {
                     Bundle bundle = new Bundle();
-                    bundle.putString("chType", item.getChType());
-                    bundle.putString("typeid", item.getId());
-                    bundle.putString("name", item.getName());
+                    bundle.putString(CH_TYPE, item.getChType());
+                    bundle.putString(TYPE_ID, item.getId());
+                    bundle.putString(NAME, item.getName());
                     if (TextUtils.equals(item.getName(), "凤凰卫视") || TextUtils.equals(item.getName(), "音频") || TextUtils.equals(item.getName(), "直播")) {
                         continue;
                     }

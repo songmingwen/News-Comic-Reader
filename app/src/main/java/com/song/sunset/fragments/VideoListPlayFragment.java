@@ -9,11 +9,11 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.song.sunset.R;
+import com.song.sunset.activitys.VideoListActivity;
 import com.song.sunset.adapters.VideoListAdapter;
 import com.song.sunset.beans.VideoBean;
 import com.song.sunset.fragments.base.BaseFragment;
 import com.song.sunset.interfaces.LoadingMoreListener;
-import com.song.sunset.utils.StringUtils;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.retrofit.RetrofitService;
@@ -35,7 +35,7 @@ import rx.Observable;
 public class VideoListPlayFragment extends BaseFragment implements LoadingMoreListener,
         VideoListAdapter.OnItemClickListener, VideoAutoPlayRecyclerView.VideoListPlayListener {
 
-    private String typeid = "";
+    private String typeId = "";
     private VideoAutoPlayRecyclerView recyclerView;
     private VideoListAdapter mAdapter;
     private int currentPage = 1;
@@ -58,7 +58,7 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
         first = true;
         if (getArguments() != null) {
             Bundle bundle = getArguments();
-            typeid = bundle.getString("typeid");
+            typeId = bundle.getString(VideoListActivity.TYPE_ID);
         }
     }
 
@@ -106,7 +106,7 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
     }
 
     public void getDataFromRetrofit2(int page) {
-        Observable<List<VideoBean>> observable = RetrofitService.createApi(PhoenixNewsApi.class, WholeApi.PHOENIX_NEWS_BASE_URL).queryVideoObservable(page, "list", typeid);
+        Observable<List<VideoBean>> observable = RetrofitService.createApi(PhoenixNewsApi.class, WholeApi.PHOENIX_NEWS_BASE_URL).queryVideoObservable(page, "list", typeId);
         RxUtil.phoenixNewsSubscribe(observable, new RetrofitCallback<VideoBean>() {
             @Override
             public void onSuccess(VideoBean videoBean) {
