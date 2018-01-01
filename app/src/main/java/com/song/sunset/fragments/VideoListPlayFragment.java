@@ -39,7 +39,7 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
     private VideoAutoPlayRecyclerView recyclerView;
     private VideoListAdapter mAdapter;
     private int currentPage = 1;
-    private boolean isLoading, isRefreshing = false, first;
+    private boolean isLoading, isRefreshing = false, first, shouldPlay;
     private ProgressLayout progressLayout;
     private RelativeLayout progressBar;
 
@@ -56,6 +56,7 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         first = true;
+        shouldPlay = true;
         if (getArguments() != null) {
             Bundle bundle = getArguments();
             typeId = bundle.getString(VideoListActivity.TYPE_ID);
@@ -91,7 +92,7 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
 
     @Override
     public void onResume() {
-        if (mPlayer != null && getUserVisibleHint()) {
+        if (mPlayer != null && getUserVisibleHint() && shouldPlay) {
             mPlayer.onResume();
         }
         super.onResume();
@@ -186,7 +187,7 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
     @Override
     public void playVideo(SimplePlayerLayout player, int position) {
         mPlayer = player;
-        if (mPlayer == null) return;
+        if (mPlayer == null || !shouldPlay) return;
         VideoBean.ItemBean mItemBean = mAdapter.getData().get(position);
         mPlayer.setCover(mItemBean.getImage());
         mPlayer.setTitle(mItemBean.getTitle());
@@ -208,12 +209,14 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
 
     public void restartVideo() {
         if (mPlayer == null) return;
+        shouldPlay = true;
         mPlayer.start();
     }
 
     public void pauseVideo() {
         if (mPlayer == null) return;
         if (mPlayer.getPlayState() == SimplePlayerLayout.STATUS_PAUSE) return;
+        shouldPlay = false;
         mPlayer.pause();
     }
 }
