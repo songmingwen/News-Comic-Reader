@@ -417,13 +417,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         if (newList.isEmpty()) {
             return;
         }
-        String content = "";
+        StringBuilder content = new StringBuilder();
         for (String name : newList) {
-            content += (name + "、");
+            content.append(name).append("、");
         }
-        content = content.substring(0, content.length() - 1);
-        content += "有更新";
-        showNotification(content);
+        content = new StringBuilder(content.substring(0, content.length() - 1));
+        content.append("有更新");
+        showNotification(content.toString());
     }
 
     private void showNotification(String content) {
@@ -446,7 +446,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 | Notification.FLAG_SHOW_LIGHTS
                 | Notification.FLAG_ONGOING_EVENT;
         NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        manager.notify(1, notification);
+        if (manager != null) {
+            manager.notify(1, notification);
+        }
     }
 
     @Override

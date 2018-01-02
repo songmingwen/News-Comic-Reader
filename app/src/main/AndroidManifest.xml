@@ -129,6 +129,17 @@
             android:enabled="true"
             android:exported="true">
         </provider>
+
+        <receiver android:name=".receivers.SunsetWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <action android:name="com.song.sunset.intent.action.APP_WIDGET_CLICK"/>
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/sunset_widget_info"/>
+        </receiver>
     </application>
 
 </manifest>

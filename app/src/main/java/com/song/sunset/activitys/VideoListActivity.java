@@ -15,6 +15,7 @@ import com.song.sunset.adapters.RankingPagerAdapter;
 import com.song.sunset.beans.VideoBean;
 import com.song.sunset.fragments.VideoListHelperFragment;
 import com.song.sunset.fragments.VideoListPlayFragment;
+import com.song.sunset.receivers.SunsetWidget;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.rxjava.RxUtil;
@@ -42,10 +43,14 @@ public class VideoListActivity extends AppCompatActivity {
     private SlidingTabLayout slidingTabLayout;
     private ProgressLayout progressLayout;
     private RankingPagerAdapter<Fragment> rankingPagerAdapter;
+    private boolean fromWidget = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getIntent() != null) {
+            fromWidget = getIntent().getBooleanExtra(SunsetWidget.FROM, false);
+        }
         setContentView(R.layout.activity_video);
 
         progressLayout = (ProgressLayout)findViewById(R.id.progress);
@@ -143,5 +148,13 @@ public class VideoListActivity extends AppCompatActivity {
     public static void start(Context context) {
         Intent intent = new Intent(context, VideoListActivity.class);
         context.startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (fromWidget) {
+            this.startActivity(new Intent(this, MainActivity.class));
+        }
+        super.onBackPressed();
     }
 }

@@ -142,4 +142,6 @@
     <string name="list_footer_network_error">点击重新加载</string>
     <string name="list_footer_loading">正在加载中…</string>
     <string name="string_save_pic">长按保存图片</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>
