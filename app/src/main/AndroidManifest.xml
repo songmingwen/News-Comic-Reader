@@ -79,7 +79,9 @@
         <activity android:name=".activitys.TempTestActivity"/>
         <activity android:name=".activitys.ComicDetailMVPActivity"/>
         <activity android:name=".activitys.TransTestActivity"/>
-        <activity android:name=".activitys.ComicCollectionActivity"/>
+        <activity
+            android:name=".activitys.ComicCollectionActivity"
+            android:launchMode="singleInstance"/>
         <activity
             android:name=".activitys.PhoenixNewsActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
