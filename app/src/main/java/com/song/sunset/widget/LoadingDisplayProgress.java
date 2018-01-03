@@ -5,8 +5,10 @@ import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.text.TextPaint;
 
 import com.song.sunset.utils.ViewUtil;
@@ -51,13 +53,12 @@ public class LoadingDisplayProgress extends Drawable {
     }
 
     @Override
-    public void draw(Canvas canvas) {
-        int width = canvas.getWidth();
-        int height = canvas.getHeight();
-
-
-        int centerX = width / 2;
-        int centerY = height / 2;
+    public void draw(@NonNull Canvas canvas) {
+        Rect rect = getBounds();
+        int width = rect.width();
+        int height = rect.height();
+        int centerX = rect.centerX();
+        int centerY = rect.centerY();
 
         int mainTextX = centerX - (int) (mainTextPaint.measureText(position + "")) / 2;
         int mainTextY = mainTextPaint.getFontMetricsInt().descent + centerY;
