@@ -27,6 +27,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.song.core.statusbar.StatusBarUtil;
 import com.song.sunset.IPush;
@@ -35,6 +36,7 @@ import com.song.sunset.activitys.base.BaseActivity;
 import com.song.sunset.beans.CollectionOnlineListBean;
 import com.song.sunset.beans.ComicCollectionBean;
 import com.song.sunset.beans.ComicLocalCollection;
+import com.song.sunset.beans.MusicInfo;
 import com.song.sunset.fragments.CollectionFragment;
 import com.song.sunset.fragments.ComicClassifyFragment;
 import com.song.sunset.fragments.ComicRankFragment;
@@ -43,16 +45,20 @@ import com.song.sunset.fragments.MVPComicListFragment;
 import com.song.sunset.mvp.models.ComicCollectionModel;
 import com.song.sunset.mvp.presenters.ComicCollectionPresenter;
 import com.song.sunset.mvp.views.ComicCollectionView;
+import com.song.sunset.services.MusicGetterService;
 import com.song.sunset.services.impl.BinderPoolImpl;
 import com.song.sunset.services.impl.PushImpl;
 import com.song.sunset.services.managers.BinderPool;
 import com.song.sunset.services.managers.MessengerManager;
+import com.song.sunset.services.managers.MusicGetterManager;
 import com.song.sunset.services.managers.PushManager;
+import com.song.sunset.utils.AppConfig;
 import com.song.sunset.utils.GreenDaoUtil;
 import com.song.sunset.utils.MusicLoader;
 import com.song.sunset.utils.SPUtils;
 import com.song.sunset.utils.process.AndroidProcesses;
 import com.song.sunset.utils.process.models.AndroidAppProcess;
+import com.squareup.haha.perflib.Main;
 import com.sunset.greendao.gen.ComicLocalCollectionDao;
 
 import java.util.ArrayList;
@@ -69,6 +75,8 @@ import rx.schedulers.Schedulers;
  * E-mail:z53520@qq.com
  */
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, ComicCollectionView {
+
+    public static final String TAG = MainActivity.class.getName();
 
     private Toolbar toolbar;
     private long lastBackPressedTime;
@@ -180,6 +188,18 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //                PushManager.getInstance().connect();
 //                PushManager.getInstance().sendMusicInfo(MusicLoader.instance().getMusicList().get(0));
 //                MessengerManager.getInstance().sendMessage();
+                MusicGetterManager.getInstance().setMusicCallBackListener(new MusicGetterManager.MusicCallBackListener() {
+                    @Override
+                    public void success(List<MusicInfo> list) {
+                        Log.i(TAG, list.toString());
+                    }
+
+                    @Override
+                    public void failure() {
+                        Log.i(TAG, "false");
+                    }
+                });
+                MusicGetterManager.getInstance().getMusicLists();
 //                useBinderPool();
 //                Log.i("music_list: ", MusicLoader.instance(MainActivity.this.getContentResolver()).getMusicList().toString());
 

@@ -11,10 +11,6 @@ import android.util.Log;
 
 import com.song.sunset.IBinderPool;
 import com.song.sunset.services.BinderPoolService;
-import com.song.sunset.services.impl.ComputeImpl;
-import com.song.sunset.services.impl.SecurityCenterImpl;
-
-import java.util.concurrent.CountDownLatch;
 
 /**
  * BInder连接池

@@ -142,6 +142,12 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/sunset_widget_info"/>
         </receiver>
+
+        <service
+            android:name=".services.MusicGetterService"
+            android:enabled="true"
+            android:exported="true">
+        </service>
     </application>
 
 </manifest>

@@ -21,8 +21,6 @@ public class MusicLoader {
 
     private static final String TAG = "com.example.nature.MusicLoader";
 
-    private static List<MusicInfo> musicList = new ArrayList<MusicInfo>();
-
     private static MusicLoader musicLoader;
 
     //Uri，指向external的database
@@ -49,45 +47,57 @@ public class MusicLoader {
 
     //利用ContentResolver的query函数来查询数据，然后将得到的结果放到MusicInfo对象中，最后放到数组中
     private MusicLoader() {
+    }
+
+    private List<MusicInfo> loadMusic() {
+        List<MusicInfo> musicList = new ArrayList<>();
         Cursor cursor = AppConfig.getApp().getContentResolver().query(contentUri, null, null, null, Media.DISPLAY_NAME);
         if (cursor == null) {
             Log.e(TAG, "MusicLoader: is null");
+            return null;
         } else if (!cursor.moveToFirst()) {
             Log.e(TAG, "MusicLoader: is not first");
+            return null;
         } else {
-            int displayNameCol = cursor.getColumnIndex(Media.DISPLAY_NAME);
-            int albumCol = cursor.getColumnIndex(Media.ALBUM);
-            int idCol = cursor.getColumnIndex(Media._ID);
-            int durationCol = cursor.getColumnIndex(Media.DURATION);
-            int sizeCol = cursor.getColumnIndex(Media.SIZE);
-            int artistCol = cursor.getColumnIndex(Media.ARTIST);
-            int urlCol = cursor.getColumnIndex(Media.DATA);
-            do {
-                String title = cursor.getString(displayNameCol);
-                String album = cursor.getString(albumCol);
-                long id = cursor.getLong(idCol);
-                int duration = cursor.getInt(durationCol);
-                long size = cursor.getLong(sizeCol);
-                String artist = cursor.getString(artistCol);
-                String url = cursor.getString(urlCol);
+            try {
+                int displayNameCol = cursor.getColumnIndex(Media.DISPLAY_NAME);
+                int albumCol = cursor.getColumnIndex(Media.ALBUM);
+                int idCol = cursor.getColumnIndex(Media._ID);
+                int durationCol = cursor.getColumnIndex(Media.DURATION);
+                int sizeCol = cursor.getColumnIndex(Media.SIZE);
+                int artistCol = cursor.getColumnIndex(Media.ARTIST);
+                int urlCol = cursor.getColumnIndex(Media.DATA);
+                do {
+                    String title = cursor.getString(displayNameCol);
+                    String album = cursor.getString(albumCol);
+                    long id = cursor.getLong(idCol);
+                    int duration = cursor.getInt(durationCol);
+                    long size = cursor.getLong(sizeCol);
+                    String artist = cursor.getString(artistCol);
+                    String url = cursor.getString(urlCol);
 
-                MusicInfo musicInfo = new MusicInfo();
-                musicInfo.setId(id);
-                musicInfo.setTitle(title);
-                musicInfo.setAlbum(album);
-                musicInfo.setDuration(duration);
-                musicInfo.setSize(size);
-                musicInfo.setArtist(artist);
-                musicInfo.setUrl(url);
-                musicList.add(musicInfo);
+                    MusicInfo musicInfo = new MusicInfo();
+                    musicInfo.setId(id);
+                    musicInfo.setTitle(title);
+                    musicInfo.setAlbum(album);
+                    musicInfo.setDuration(duration);
+                    musicInfo.setSize(size);
+                    musicInfo.setArtist(artist);
+                    musicInfo.setUrl(url);
+                    musicList.add(musicInfo);
 
-            } while (cursor.moveToNext());
-            cursor.close();
+                } while (cursor.moveToNext());
+                return musicList;
+            } catch (Exception e) {
+                return null;
+            } finally {
+                cursor.close();
+            }
         }
     }
 
     public List<MusicInfo> getMusicList() {
-        return musicList;
+        return loadMusic();
     }
 
     public Uri getMusicUriById(long id) {
