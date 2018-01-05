@@ -19,7 +19,7 @@ public class BinderPoolService extends Service {
     private static final String TAG = "BinderPoolService";
 
     //获取Binder连接池实现类，此类用于获取相应的Binder类
-    private Binder mBinderPool = new BinderPoolImpl();
+    private Binder mBinderPool = new BinderPoolImpl(this);
 
     @Override
     public IBinder onBind(Intent arg0) {

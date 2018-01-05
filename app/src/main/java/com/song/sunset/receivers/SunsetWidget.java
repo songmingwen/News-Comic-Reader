@@ -26,9 +26,6 @@ public class SunsetWidget extends AppWidgetProvider {
 
     public static final String FROM = "com.song.sunset.from";
 
-    public static final String[] APP_WIDGET_ACTION = {
-            "com.song.sunset.intent.action.APP_WIDGET_CLICK"};
-
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 

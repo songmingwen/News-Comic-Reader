@@ -100,24 +100,6 @@
             android:screenOrientation="portrait"/>
         <!-- 定位需要的服务 使用2.0的定位需要加上这个 -->
         <service android:name="com.amap.api.location.APSService"/>
-        <service
-            android:name=".services.PushService"
-            android:enabled="true"
-            android:exported="true"
-            android:process=":remote">
-        </service>
-        <service
-            android:name=".services.MessengerService"
-            android:enabled="true"
-            android:exported="true"
-            android:process=":remote">
-        </service>
-        <service
-            android:name=".services.BinderPoolService"
-            android:enabled="true"
-            android:exported="true"
-            android:process=":remote">
-        </service>
 
         <activity
             android:name=".activitys.ScrollingActivity"
@@ -144,9 +126,28 @@
         </receiver>
 
         <service
+            android:name=".services.PushService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":remote">
+        </service>
+        <service
+            android:name=".services.MessengerService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":remote">
+        </service>
+        <service
+            android:name=".services.BinderPoolService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":remote">
+        </service>
+        <service
             android:name=".services.MusicGetterService"
             android:enabled="true"
-            android:exported="true">
+            android:exported="true"
+            android:process=":remote">
         </service>
     </application>
 

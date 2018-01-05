@@ -5,7 +5,7 @@
     android:initialLayout="@layout/sunset_widget"
     android:minHeight="60dp"
     android:minWidth="250dp"
-    android:previewImage="@drawable/example_appwidget_preview"
+    android:previewImage="@drawable/widget_preview"
     android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="20000"
     android:widgetCategory="home_screen|keyguard">

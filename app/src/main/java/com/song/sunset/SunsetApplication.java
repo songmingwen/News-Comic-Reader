@@ -64,7 +64,7 @@ public class SunsetApplication extends MultiDexApplication {
         Fresco.initialize(this, config);
         CrashHandler.getInstance().init(this);
         PushManager.getInstance().init(this);
-        BinderPool.getInstance(this);
+        BinderPool.getInstance();
         MessengerManager.getInstance().init(this);
         MusicGetterManager.getInstance().init(this);
 

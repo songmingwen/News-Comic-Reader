@@ -1,10 +1,12 @@
 package com.song.sunset.utils;
 
 import android.content.ContentUris;
+import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Audio.Media;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.song.sunset.beans.MusicInfo;
@@ -49,9 +51,13 @@ public class MusicLoader {
     private MusicLoader() {
     }
 
-    private List<MusicInfo> loadMusic() {
+    private List<MusicInfo> loadMusic(Context context) {
         List<MusicInfo> musicList = new ArrayList<>();
-        Cursor cursor = AppConfig.getApp().getContentResolver().query(contentUri, null, null, null, Media.DISPLAY_NAME);
+        if (context == null) {
+            Log.i(TAG, "context == null");
+            return musicList;
+        }
+        Cursor cursor = context.getContentResolver().query(contentUri, null, null, null, Media.DISPLAY_NAME);
         if (cursor == null) {
             Log.e(TAG, "MusicLoader: is null");
             return null;
@@ -96,8 +102,8 @@ public class MusicLoader {
         }
     }
 
-    public List<MusicInfo> getMusicList() {
-        return loadMusic();
+    public List<MusicInfo> getMusicList(Context context) {
+        return loadMusic(context);
     }
 
     public Uri getMusicUriById(long id) {

@@ -30,6 +30,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.song.core.statusbar.StatusBarUtil;
+import com.song.sunset.IMusicCallBackListener;
+import com.song.sunset.IMusicGetter;
 import com.song.sunset.IPush;
 import com.song.sunset.R;
 import com.song.sunset.activitys.base.BaseActivity;
@@ -47,6 +49,8 @@ import com.song.sunset.mvp.presenters.ComicCollectionPresenter;
 import com.song.sunset.mvp.views.ComicCollectionView;
 import com.song.sunset.services.MusicGetterService;
 import com.song.sunset.services.impl.BinderPoolImpl;
+import com.song.sunset.services.impl.MusicCallBackListenerImpl;
+import com.song.sunset.services.impl.MusicGetterImpl;
 import com.song.sunset.services.impl.PushImpl;
 import com.song.sunset.services.managers.BinderPool;
 import com.song.sunset.services.managers.MessengerManager;
@@ -188,19 +192,22 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //                PushManager.getInstance().connect();
 //                PushManager.getInstance().sendMusicInfo(MusicLoader.instance().getMusicList().get(0));
 //                MessengerManager.getInstance().sendMessage();
-                MusicGetterManager.getInstance().setMusicCallBackListener(new MusicGetterManager.MusicCallBackListener() {
-                    @Override
-                    public void success(List<MusicInfo> list) {
-                        Log.i(TAG, list.toString());
-                    }
 
-                    @Override
-                    public void failure() {
-                        Log.i(TAG, "false");
-                    }
-                });
-                MusicGetterManager.getInstance().getMusicLists();
-//                useBinderPool();
+//                MusicGetterManager.getInstance().setMusicCallBackListener(new MusicGetterManager.MusicCallBackListener() {
+//                    @Override
+//                    public void success(List<MusicInfo> list) {
+//                        Log.i(TAG + "callback", list.toString());
+//                    }
+//
+//                    @Override
+//                    public void failure() {
+//                        Log.i(TAG, "false");
+//                    }
+//                });
+//                MusicGetterManager.getInstance().getMusicLists();
+
+                useBinderPool();
+
 //                Log.i("music_list: ", MusicLoader.instance(MainActivity.this.getContentResolver()).getMusicList().toString());
 
 //                switchDayNightMode();
@@ -263,15 +270,31 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }
     }
 
+    /**
+     * 使用binderPool过去对应的binder并且执行相应的方法（回调中获取结果，[异步]）
+     */
     private void useBinderPool() {
-        IBinder iBinder = BinderPool.getInstance(MainActivity.this).queryBinder(BinderPoolImpl.BINDER_PUSH);
-        IPush iPush = PushImpl.asInterface(iBinder);
+        IBinder iBinder = BinderPool.getInstance().queryBinder(BinderPoolImpl.BINDER_GET_MUSIC);
+        IMusicGetter iMusicGetter = MusicGetterImpl.asInterface(iBinder);
         try {
-            iPush.sendMusicInfo(MusicLoader.instance().getMusicList().get(0));
+            iMusicGetter.getMusicList(mIMusicCallBackListener);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
     }
+
+    private IMusicCallBackListener mIMusicCallBackListener = new MusicCallBackListenerImpl() {
+        @Override
+        public void success(List<MusicInfo> list) throws RemoteException {
+            super.success(list);
+            Log.i(TAG + "MainActivity", list.toString());
+        }
+
+        @Override
+        public void failure() throws RemoteException {
+            Log.i(TAG + "MainActivity", "get music failure");
+        }
+    };
 
     private void RecursiveTest() {
         long start2 = System.currentTimeMillis();

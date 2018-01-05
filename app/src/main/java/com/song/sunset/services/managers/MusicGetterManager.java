@@ -11,6 +11,7 @@ import com.song.sunset.IMusicCallBackListener;
 import com.song.sunset.IMusicGetter;
 import com.song.sunset.beans.MusicInfo;
 import com.song.sunset.services.MusicGetterService;
+import com.song.sunset.services.impl.MusicCallBackListenerImpl;
 
 import java.util.List;
 
@@ -66,9 +67,10 @@ public class MusicGetterManager {
         }
     }
 
-    private IMusicCallBackListener mIMusicCallBackListener = new IMusicCallBackListener.Stub() {
+    private IMusicCallBackListener mIMusicCallBackListener = new MusicCallBackListenerImpl() {
         @Override
         public void success(List<MusicInfo> list) throws RemoteException {
+            super.success(list);
             if (mMusicCallBackListener != null) {
                 mMusicCallBackListener.success(list);
             }

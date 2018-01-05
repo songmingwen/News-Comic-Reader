@@ -15,13 +15,12 @@ public class PushService extends Service {
 
     public static String TAG = "PushService.class";
 
-    Binder mBinder = new PushImpl();
+    private Binder mBinder = new PushImpl();
 
     @Override
     public IBinder onBind(Intent intent) {
         return mBinder;
     }
-
 
     @Override
     public boolean onUnbind(Intent intent) {

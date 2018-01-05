@@ -9,6 +9,6 @@ interface IMusicCallBackListener {
      * Demonstrates some basic types that you can use as parameters
      * and return values in AIDL.
      */
-    void success(out List<MusicInfo> list);
+    void success(in List<MusicInfo> list);
     void failure();
 }

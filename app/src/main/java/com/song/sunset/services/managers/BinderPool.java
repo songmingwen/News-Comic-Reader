@@ -11,32 +11,31 @@ import android.util.Log;
 
 import com.song.sunset.IBinderPool;
 import com.song.sunset.services.BinderPoolService;
+import com.song.sunset.utils.AppConfig;
 
 /**
- * BInder连接池
+ * Binder连接池
  * 主要的实现在这里
  */
 public class BinderPool {
 
     private static final String TAG = "BinderPool";
 
-    private Context mContext;
     private IBinderPool mBinderPool;
     private static volatile BinderPool sInstance;
     private long mStart;
 
-    private BinderPool(Context mcContext) {
+    private BinderPool() {
         super();
-        this.mContext = mcContext.getApplicationContext();
         //初始化的时候连接服务端Service
         connectBinderPoolService();
     }
 
-    public static BinderPool getInstance(Context context) {
+    public static BinderPool getInstance() {
         if (sInstance == null) {
             synchronized (BinderPool.class) {
                 if (sInstance == null) {
-                    sInstance = new BinderPool(context);
+                    sInstance = new BinderPool();
                 }
             }
         }
@@ -46,9 +45,9 @@ public class BinderPool {
     //这里会遇到到同步问题，所以会加上同步代码块
     private synchronized void connectBinderPoolService() {
         //绑定service
-        Intent service = new Intent(mContext, BinderPoolService.class);
+        Intent service = new Intent(AppConfig.getApp(), BinderPoolService.class);
         mStart = System.currentTimeMillis();
-        mContext.bindService(service, mBinderPoolConnection, Context.BIND_AUTO_CREATE);
+        AppConfig.getApp().bindService(service, mBinderPoolConnection, Context.BIND_AUTO_CREATE);
 
     }
 
