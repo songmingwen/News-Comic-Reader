@@ -11,7 +11,7 @@ import com.song.sunset.beans.ComicListBean;
 import com.song.sunset.beans.basebeans.BaseBean;
 import com.song.sunset.fragments.base.LoadableListFragment;
 import com.song.sunset.utils.ViewUtil;
-import com.song.sunset.utils.retrofit.RetrofitService;
+import com.song.sunset.utils.retrofit.RetrofitFactory;
 import com.song.sunset.utils.api.U17ComicApi;
 
 import java.util.List;
@@ -42,7 +42,7 @@ public class ComicRankListFragment extends LoadableListFragment<ComicListAdapter
 
     @Override
     protected Observable<BaseBean<ComicListBean>> getRetrofitApi(int page) {
-        return RetrofitService.createApi(U17ComicApi.class).queryComicListRDByObservable(page, argName, argValue);
+        return RetrofitFactory.createApi(U17ComicApi.class).queryComicListRDByObservable(page, argName, argValue);
     }
 
     @Override

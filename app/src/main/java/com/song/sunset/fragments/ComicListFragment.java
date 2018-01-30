@@ -24,7 +24,7 @@ import com.song.sunset.interfaces.LoadingMoreListener;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
-import com.song.sunset.utils.retrofit.RetrofitService;
+import com.song.sunset.utils.retrofit.RetrofitFactory;
 import com.song.sunset.utils.api.U17ComicApi;
 import com.song.sunset.widget.LoadMoreRecyclerView;
 
@@ -179,7 +179,7 @@ public class ComicListFragment extends BaseFragment implements LoadingMoreListen
     }
 
     public void getDataFromRetrofit2(int page) {
-        Observable<BaseBean<ComicListBean>> observable = RetrofitService.createApi(U17ComicApi.class).queryComicListRDByObservable(page, argName, argValue);
+        Observable<BaseBean<ComicListBean>> observable = RetrofitFactory.createApi(U17ComicApi.class).queryComicListRDByObservable(page, argName, argValue);
         RxUtil.comicSubscribe(observable, new RetrofitCallback<ComicListBean>() {
             @Override
             public void onSuccess(ComicListBean comicListBean) {

@@ -16,7 +16,7 @@ import com.song.sunset.fragments.base.BaseFragment;
 import com.song.sunset.interfaces.LoadingMoreListener;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
-import com.song.sunset.utils.retrofit.RetrofitService;
+import com.song.sunset.utils.retrofit.RetrofitFactory;
 import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.utils.api.PhoenixNewsApi;
 import com.song.sunset.utils.api.WholeApi;
@@ -107,7 +107,7 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
     }
 
     public void getDataFromRetrofit2(int page) {
-        Observable<List<VideoBean>> observable = RetrofitService.createApi(PhoenixNewsApi.class, WholeApi.PHOENIX_NEWS_BASE_URL).queryVideoObservable(page, "list", typeId);
+        Observable<List<VideoBean>> observable = RetrofitFactory.createApi(PhoenixNewsApi.class, WholeApi.PHOENIX_NEWS_BASE_URL).queryVideoObservable(page, "list", typeId);
         RxUtil.phoenixNewsSubscribe(observable, new RetrofitCallback<VideoBean>() {
             @Override
             public void onSuccess(VideoBean videoBean) {

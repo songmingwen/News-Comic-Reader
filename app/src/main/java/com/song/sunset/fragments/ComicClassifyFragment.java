@@ -17,7 +17,6 @@ import android.widget.ImageView;
 
 import com.song.sunset.adapters.ComicSearchListAdapter;
 import com.song.sunset.beans.ComicSearchResultBean;
-import com.song.sunset.utils.StringUtils;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.beans.basebeans.BaseBean;
 import com.song.sunset.beans.ComicClassifyBean;
@@ -26,11 +25,10 @@ import com.song.sunset.adapters.ComicClassifyAdapter;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
-import com.song.sunset.utils.retrofit.RetrofitService;
+import com.song.sunset.utils.retrofit.RetrofitFactory;
 import com.song.sunset.utils.api.U17ComicApi;
 import com.song.sunset.widget.RecyclerViewDivider;
 
-import java.net.URLEncoder;
 import java.util.List;
 
 import rx.Observable;
@@ -118,7 +116,7 @@ public class ComicClassifyFragment extends Fragment implements TextWatcher {
     }
 
     public void getDataFromRetrofit2() {
-        Observable<BaseBean<ComicClassifyBean>> observable = RetrofitService.createApi(U17ComicApi.class).queryComicClassifyBeanByObservable(2);
+        Observable<BaseBean<ComicClassifyBean>> observable = RetrofitFactory.createApi(U17ComicApi.class).queryComicClassifyBeanByObservable(2);
         RxUtil.comicSubscribe(observable, new RetrofitCallback<ComicClassifyBean>() {
             @Override
             public void onSuccess(ComicClassifyBean comicReadBean) {
@@ -156,7 +154,7 @@ public class ComicClassifyFragment extends Fragment implements TextWatcher {
             mSearchContent.setVisibility(View.GONE);
             return;
         }
-        Observable<BaseBean<List<ComicSearchResultBean>>> observable = RetrofitService.createApi(U17ComicApi.class).queryComicSearchResultRDByObservable(inputString);
+        Observable<BaseBean<List<ComicSearchResultBean>>> observable = RetrofitFactory.createApi(U17ComicApi.class).queryComicSearchResultRDByObservable(inputString);
         RxUtil.comicSubscribe(observable, new RetrofitCallback<List<ComicSearchResultBean>>() {
             @Override
             public void onSuccess(List<ComicSearchResultBean> comicSearchResultBeen) {

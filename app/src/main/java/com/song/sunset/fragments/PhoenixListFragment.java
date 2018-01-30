@@ -22,7 +22,7 @@ import com.song.sunset.utils.AppConfig;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
-import com.song.sunset.utils.retrofit.RetrofitService;
+import com.song.sunset.utils.retrofit.RetrofitFactory;
 import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.utils.api.PhoenixNewsApi;
 import com.song.sunset.utils.api.WholeApi;
@@ -102,7 +102,7 @@ public class PhoenixListFragment extends BaseFragment implements RetrofitCallbac
 
     private void getDataFromRetrofit2(String action) {
         long start = System.currentTimeMillis();
-        Observable<List<PhoenixNewsListBean>> observable = RetrofitService
+        Observable<List<PhoenixNewsListBean>> observable = RetrofitFactory
                 .createApi(PhoenixNewsApi.class, WholeApi.PHOENIX_NEWS_BASE_URL, "time", System.currentTimeMillis() + "")
                 .queryPhoenixListObservable(action);
         long end = System.currentTimeMillis();

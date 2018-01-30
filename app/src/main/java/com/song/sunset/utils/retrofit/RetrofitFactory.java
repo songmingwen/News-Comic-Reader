@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Email:z53520@qq.com
  */
 
-public class RetrofitService {
+public class RetrofitFactory {
 
     public static <T> T createApi(Class<T> clazz) {
         return createApi(clazz, WholeApi.COMIC_NEW_BASE_URL, null);

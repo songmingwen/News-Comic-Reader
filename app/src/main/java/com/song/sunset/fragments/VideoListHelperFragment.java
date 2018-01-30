@@ -18,7 +18,7 @@ import com.song.sunset.utils.AppConfig;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
-import com.song.sunset.utils.retrofit.RetrofitService;
+import com.song.sunset.utils.retrofit.RetrofitFactory;
 import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.utils.api.PhoenixNewsApi;
 import com.song.sunset.utils.api.WholeApi;
@@ -102,7 +102,7 @@ public class VideoListHelperFragment extends BaseFragment implements BaseQuickAd
     }
 
     public void getDataFromRetrofit2(int page) {
-        Observable<List<VideoBean>> observable = RetrofitService.createApi(PhoenixNewsApi.class, WholeApi.PHOENIX_NEWS_BASE_URL).queryVideoObservable(page, "list", typeId);
+        Observable<List<VideoBean>> observable = RetrofitFactory.createApi(PhoenixNewsApi.class, WholeApi.PHOENIX_NEWS_BASE_URL).queryVideoObservable(page, "list", typeId);
         RxUtil.phoenixNewsSubscribe(observable, new RetrofitCallback<VideoBean>() {
             @Override
             public void onSuccess(VideoBean videoBean) {

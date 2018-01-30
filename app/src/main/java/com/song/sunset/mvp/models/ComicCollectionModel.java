@@ -7,7 +7,7 @@ import com.song.sunset.beans.basebeans.BaseBean;
 import com.song.sunset.mvp.views.ComicCollectionView;
 import com.song.sunset.utils.api.U17ComicApi;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
-import com.song.sunset.utils.retrofit.RetrofitService;
+import com.song.sunset.utils.retrofit.RetrofitFactory;
 import com.song.sunset.utils.rxjava.RxUtil;
 
 import java.util.HashMap;
@@ -23,7 +23,7 @@ import rx.Observable;
 public class ComicCollectionModel {
 
     public void getNewestCollectedComic(final ComicCollectionView view) {
-        Observable<BaseBean<CollectionOnlineListBean>> observable = RetrofitService.createApi(U17ComicApi.class, getCollectionMap()).queryComicCollectionListRDByObservable("");
+        Observable<BaseBean<CollectionOnlineListBean>> observable = RetrofitFactory.createApi(U17ComicApi.class, getCollectionMap()).queryComicCollectionListRDByObservable("");
         RxUtil.comicSubscribe(observable, new RetrofitCallback<CollectionOnlineListBean>() {
             @Override
             public void onSuccess(CollectionOnlineListBean collectionOnlineListBean) {

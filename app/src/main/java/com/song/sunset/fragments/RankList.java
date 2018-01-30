@@ -15,7 +15,7 @@ import com.song.sunset.fragments.base.RVLoadableFragment;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.api.U17ComicApi;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
-import com.song.sunset.utils.retrofit.RetrofitService;
+import com.song.sunset.utils.retrofit.RetrofitFactory;
 import com.song.sunset.utils.rxjava.RxUtil;
 
 import in.srain.cube.views.ptr.PtrFrameLayout;
@@ -76,7 +76,7 @@ public class RankList extends RVLoadableFragment<ComicListAdapter, ComicListBean
     }
 
     private void loadData(int page, String argName, int argValue) {
-        Observable<BaseBean<ComicListBean>> observable = RetrofitService.createApi(U17ComicApi.class).queryComicListRDByObservable(page, argName, argValue);
+        Observable<BaseBean<ComicListBean>> observable = RetrofitFactory.createApi(U17ComicApi.class).queryComicListRDByObservable(page, argName, argValue);
         RxUtil.comicSubscribe(observable, RankList.this);
     }
 

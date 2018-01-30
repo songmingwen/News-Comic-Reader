@@ -1,21 +1,18 @@
 package com.song.sunset.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.song.sunset.R;
 import com.song.sunset.adapters.CollectionComicAdapter;
 import com.song.sunset.beans.CollectionOnlineListBean;
 import com.song.sunset.beans.ComicCollectionBean;
 import com.song.sunset.beans.ComicLocalCollection;
-import com.song.sunset.beans.basebeans.BaseBean;
 import com.song.sunset.fragments.base.BaseFragment;
 import com.song.sunset.mvp.models.ComicCollectionModel;
 import com.song.sunset.mvp.presenters.ComicCollectionPresenter;
@@ -23,18 +20,11 @@ import com.song.sunset.mvp.views.ComicCollectionView;
 import com.song.sunset.utils.GreenDaoUtil;
 import com.song.sunset.utils.SPUtils;
 import com.song.sunset.utils.ViewUtil;
-import com.song.sunset.utils.api.U17ComicApi;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
-import com.song.sunset.utils.retrofit.RetrofitService;
-import com.song.sunset.utils.rxjava.RxUtil;
 import com.sunset.greendao.gen.ComicLocalCollectionDao;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import rx.Observable;
 
 /**
  * Created by z5352_000 on 2016/10/29 0029.

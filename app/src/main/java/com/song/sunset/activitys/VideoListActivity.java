@@ -20,7 +20,7 @@ import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
-import com.song.sunset.utils.retrofit.RetrofitService;
+import com.song.sunset.utils.retrofit.RetrofitFactory;
 import com.song.sunset.utils.api.PhoenixNewsApi;
 import com.song.sunset.utils.api.WholeApi;
 
@@ -85,7 +85,7 @@ public class VideoListActivity extends AppCompatActivity {
     }
 
     private void loadNetData() {
-        Observable<List<VideoBean>> observable = RetrofitService.createApi(PhoenixNewsApi.class, WholeApi.PHOENIX_NEWS_BASE_URL).queryFirstVideoObservable(1);
+        Observable<List<VideoBean>> observable = RetrofitFactory.createApi(PhoenixNewsApi.class, WholeApi.PHOENIX_NEWS_BASE_URL).queryFirstVideoObservable(1);
         RxUtil.phoenixNewsSubscribe(observable, new RetrofitCallback<VideoBean>() {
             @Override
             public void onSuccess(VideoBean videoBean) {
