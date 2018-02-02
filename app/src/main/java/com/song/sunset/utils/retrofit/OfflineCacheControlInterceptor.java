@@ -18,8 +18,10 @@ import okhttp3.Response;
  */
 public class OfflineCacheControlInterceptor implements Interceptor {
 
-    private static final int MAX_STALE = 60 * 60 * 24 * 28;//4个星期
-    private static final int MAX_AGE = 0;
+    private static final int MAX_STALE = 60 * 60 * 24 * 28;//4个星期  这个缓存是本地的，无网络的时候会强制使用缓存。
+    private static final int MAX_AGE = 0;//max-age=60 表明60秒内只请求一次网络，只设置这个不设置上面的，无网情况不会显示缓存内容
+    private int retryNum = 0;
+    private static final int maxRetry = 3;
 
     @Override
     public Response intercept(Chain chain) throws IOException {
@@ -32,6 +34,11 @@ public class OfflineCacheControlInterceptor implements Interceptor {
         }
 
         Response response = chain.proceed(request);
+        while (!response.isSuccessful() && retryNum < maxRetry && NetWorkUtils.isNetWorking()) {
+            retryNum++;
+            response = chain.proceed(request);
+        }
+        retryNum = 0;
 
         if (NetWorkUtils.isNetWorking()) {
             //有网的时候读接口上的@Headers里的配置，可以在这里进行统一的设置

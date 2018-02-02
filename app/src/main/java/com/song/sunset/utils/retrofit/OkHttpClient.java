@@ -42,8 +42,9 @@ public class OkHttpClient {
                 //添加固定公共请求参数
                 .addInterceptor(getBasePublicParams(null))
 
-                //设置缓存
+                //这个缓存是本地的，无网络的时候会强制使用缓存
                 .addInterceptor(cacheInterceptor)
+                //这个缓存是网络的max-age=60 表明60秒内只请求一次网络，只设置这个不设置上面的，无网情况不会显示缓存内容
                 .addNetworkInterceptor(cacheInterceptor)
 
                 //设置Cache目录
@@ -82,8 +83,9 @@ public class OkHttpClient {
                 //添加固定公共请求参数
                 .addInterceptor(getBasePublicParams(map))
 
-                //设置缓存
+                //这个缓存是本地的，无网络的时候会强制使用缓存
                 .addInterceptor(cacheInterceptor)
+                //这个缓存是网络的max-age=60 表明60秒内只请求一次网络，只设置这个不设置上面的，无网情况不会显示缓存内容
                 .addNetworkInterceptor(cacheInterceptor)
 
                 //设置Cache目录
