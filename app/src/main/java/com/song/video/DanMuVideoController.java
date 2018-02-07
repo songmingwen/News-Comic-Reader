@@ -41,7 +41,7 @@ public class DanMuVideoController extends BaseVideoPlayerController
     private LinearLayout mTop, mBatteryTime, mBottom, mLoading, mChangePosition,
             mCompleted, mError, mChangeBrightness, mChangeVolume;
 
-    private TextView mTitle, danmuSwitch, mTime, mPosition, mDuration, mClarity,
+    private TextView mTitle, danMuSwitch, mTime, mPosition, mDuration, mClarity,
             mLength, mLoadText, mChangePositionCurrent, mRetry, mReplay, mShare;
 
     private SeekBar mSeek;
@@ -76,7 +76,7 @@ public class DanMuVideoController extends BaseVideoPlayerController
         mBack = (ImageView) findViewById(R.id.back);
         mTitle = (TextView) findViewById(R.id.title);
         mBatteryTime = (LinearLayout) findViewById(R.id.battery_time);
-        danmuSwitch = (TextView) findViewById(R.id.txt_danmu_switch);
+        danMuSwitch = (TextView) findViewById(R.id.txt_danmu_switch);
         mBattery = (ImageView) findViewById(R.id.battery);
         mTime = (TextView) findViewById(R.id.time);
 
@@ -117,7 +117,7 @@ public class DanMuVideoController extends BaseVideoPlayerController
         mRetry.setOnClickListener(this);
         mReplay.setOnClickListener(this);
         mShare.setOnClickListener(this);
-        danmuSwitch.setOnClickListener(this);
+        danMuSwitch.setOnClickListener(this);
         mSeek.setOnSeekBarChangeListener(this);
         this.setOnClickListener(this);
     }
@@ -331,15 +331,15 @@ public class DanMuVideoController extends BaseVideoPlayerController
      */
     @Override
     public void onClick(View v) {
-        if (v == danmuSwitch) {
+        if (v == danMuSwitch) {
             String close = mContext.getResources().getString(R.string.string_close_danmu);
             String open = mContext.getResources().getString(R.string.string_open_danmu);
-            String showText = (String) danmuSwitch.getText();
+            String showText = (String) danMuSwitch.getText();
             if (TextUtils.equals(open, showText)) {
-                danmuSwitch.setText(close);
+                danMuSwitch.setText(close);
                 mNormalVideoPlayer.openDanMu();
             } else {
-                danmuSwitch.setText(open);
+                danMuSwitch.setText(open);
                 mNormalVideoPlayer.closeDanMu();
             }
 
