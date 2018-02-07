@@ -23,7 +23,6 @@
         android:textSize="13sp"/>
 
     <RelativeLayout
-        android:id="@+id/rl_goods_image_content"
         android:layout_width="28dp"
         android:layout_height="28dp">
 

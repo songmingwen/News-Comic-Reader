@@ -1,7 +1,7 @@
 package com.song.sunset.utils.api;
 
 import com.song.sunset.beans.PhoenixNewsListBean;
-import com.song.sunset.beans.VideoBean;
+import com.song.sunset.beans.VideoListsBean;
 
 import java.util.List;
 
@@ -19,11 +19,11 @@ public interface PhoenixNewsApi {
     /**此处若不添加max-age信息，会统一在OfflineCacheControlInterceptor类中添加默认的max-age*/
     //    @Headers("Cache-Control: public, max-age=3600")
     @GET("ifengvideoList")
-    Observable<List<VideoBean>> queryFirstVideoObservable(
+    Observable<List<VideoListsBean>> queryFirstVideoObservable(
             @Query("page") int page);
 
     @GET("ifengvideoList")
-    Observable<List<VideoBean>> queryVideoObservable(
+    Observable<List<VideoListsBean>> queryVideoObservable(
             @Query("page") int page,
             @Query("listtype") String listtype,
             @Query("typeid") String typeid);

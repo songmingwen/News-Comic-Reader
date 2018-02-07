@@ -8,7 +8,6 @@
 
     <in.srain.cube.views.ptr.PtrFrameLayout
         xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/id_video_list_swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         cube_ptr:ptr_duration_to_close="200"
@@ -33,7 +32,6 @@
         android:visibility="gone">
 
         <ProgressBar
-            android:id="@+id/progress_bar_"
             style="?android:attr/progressBarStyle"
             android:layout_width="30dp"
             android:layout_height="30dp"

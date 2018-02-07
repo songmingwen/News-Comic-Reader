@@ -2,15 +2,10 @@ package com.song.sunset.holders;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.song.sunset.R;
-import com.song.sunset.utils.ViewUtil;
-import com.song.video.SimplePlayerLayout;
 
 /**
  * Created by Song on 2016/12/21.

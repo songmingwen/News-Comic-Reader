@@ -1,26 +1,25 @@
 package com.song.sunset.adapters;
 
 import android.app.Activity;
-import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.song.sunset.R;
-import com.song.sunset.activitys.PhoenixVideoActivity;
 import com.song.sunset.adapters.base.BaseRecyclerViewAdapter;
-import com.song.sunset.beans.VideoBean;
+import com.song.sunset.beans.VideoDetailBean;
+import com.song.sunset.beans.VideoListsBean;
 import com.song.sunset.holders.VideoListViewHolder;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.fresco.FrescoUtil;
+import com.song.video.NormalVideoPlayer;
 
 /**
  * Created by Song on 2016/12/21.
  * E-mail:z53520@qq.com
  */
-public class VideoListAdapter extends BaseRecyclerViewAdapter<VideoBean.ItemBean, VideoListViewHolder> {
+public class VideoListAdapter extends BaseRecyclerViewAdapter<VideoDetailBean, VideoListViewHolder> {
 
     private Activity context;
 
@@ -39,7 +38,7 @@ public class VideoListAdapter extends BaseRecyclerViewAdapter<VideoBean.ItemBean
             return;
         }
 
-        VideoBean.ItemBean bean = getData().get(position);
+        VideoDetailBean bean = getData().get(position);
         int realWidth = ViewUtil.getScreenWidth();
         int realHeight = realWidth * 9 / 16;
 
@@ -53,6 +52,10 @@ public class VideoListAdapter extends BaseRecyclerViewAdapter<VideoBean.ItemBean
         super.onViewDetachedFromWindow(holder);
         ViewGroup viewGroup = (ViewGroup) holder.itemView;
         if (viewGroup.getChildCount() > 2) {
+            View view = viewGroup.getChildAt(2);
+            if (view instanceof NormalVideoPlayer) {
+                ((NormalVideoPlayer) view).release();
+            }
             viewGroup.removeViewAt(2);
         }
     }

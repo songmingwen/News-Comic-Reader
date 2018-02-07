@@ -19,31 +19,10 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
-    <style name="SeekBarAppThemeNew">
-        <item name="android:indeterminateOnly">false</item>
-        <item name="android:focusable">true</item>
-        <item name="android:progressDrawable">
-            @drawable/simple_player_progress_horizontal_holo_dark_new
-        </item>
-        <item name="android:indeterminateDrawable">
-            @drawable/simple_player_progress_horizontal_holo_dark_new
-        </item>
-        <item name="android:thumb">@drawable/simple_player_control_selector_holo_dark_new</item>
-        <item name="android:minHeight">13dip</item>
-        <item name="android:maxHeight">13dip</item>
-        <item name="android:paddingLeft">15.0dip</item>
-        <item name="android:paddingRight">15.0dip</item>
-
-    </style>
-
     <style name="AppCardView" parent="@style/CardView.Light">
         <item name="cardPreventCornerOverlap">false</item>
         <item name="cardUseCompatPadding">true</item>
         <item name="android:foreground">?attr/selectableItemBackground</item>
     </style>
 
-    <style name="SwitchDayNightMode">
-        <item name="windowEnterAnimation">@anim/anim_fade_in</item>
-        <item name="windowExitAnimation">@anim/anim_fade_out</item>
-    </style>
 </resources>

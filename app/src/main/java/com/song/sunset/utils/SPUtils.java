@@ -3,6 +3,9 @@ package com.song.sunset.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
+
+import static android.preference.PreferenceManager.getDefaultSharedPreferencesName;
 
 /**
  * Created by Song on 2017/3/30 0030.
@@ -16,68 +19,88 @@ public class SPUtils {
     public static final String APP_ANDROID_ID_KEY = "app_androidid_key";
     public static final String APP_NIGHT_MODE = "night_mode";
     public static final String APP_FIRST_INSTALL = "app_first_install";
+    public static final String SP_APP_PLAY_POSITION = "normal_video_player_play_position";
+    public static final int NO_SP_MODE = -1;
 
-    public static String getStringByName(Context context, String name,
-                                         String default_value) {
+    public static String getStringByName(Context context, String key,
+                                         String defaultValue) {
+        return getStringByName(context, null, NO_SP_MODE, key, defaultValue);
+    }
 
-        return PreferenceManager.getDefaultSharedPreferences(context)
-                .getString(name, default_value);
+    public static String getStringByName(Context context, String spName, int spMode, String key, String defaultValue) {
+        SharedPreferences sp = getSharedPreferences(context, spName, spMode);
+        return sp.getString(key, defaultValue);
+    }
+
+    public static int getIntByName(Context context, String key,
+                                   int defaultValue) {
+        return getIntByName(context, null, NO_SP_MODE, key, defaultValue);
+    }
+
+    public static int getIntByName(Context context, String spName, int spMode, String key, int defaultValue) {
+        SharedPreferences sp = getSharedPreferences(context, spName, spMode);
+        return sp.getInt(key, defaultValue);
+    }
+
+    public static long getLongByName(Context context, String key, long defaultValue) {
+        return getLongByName(context, null, NO_SP_MODE, key, defaultValue);
 
     }
 
-    public static int getIntByName(Context context, String name,
-                                   int default_value) {
+    public static long getLongByName(Context context, String spName, int spMode, String key, long defaultValue) {
+        SharedPreferences sp = getSharedPreferences(context, spName, spMode);
+        return sp.getLong(key, defaultValue);
+    }
 
-        return PreferenceManager.getDefaultSharedPreferences(context).getInt(
-                name, default_value);
+    public static boolean getBooleanByName(Context context, String key,
+                                           boolean defaultValue) {
+        return getBooleanByName(context, null, NO_SP_MODE, key, defaultValue);
 
     }
 
-    public static long getLongByName(Context context, String name,
-                                     long default_value) {
-        return PreferenceManager.getDefaultSharedPreferences(context).getLong(
-                name, default_value);
-
+    public static boolean getBooleanByName(Context context, String spName, int spMode, String key, boolean defaultValue) {
+        SharedPreferences sp = getSharedPreferences(context, spName, spMode);
+        return sp.getBoolean(key, defaultValue);
     }
 
-    public static boolean getBooleanByName(Context context, String name,
-                                           boolean default_value) {
-        return PreferenceManager.getDefaultSharedPreferences(context)
-                .getBoolean(name, default_value);
-
-    }
-
-    public static void setStringByName(Context context, String name,
+    public static void setStringByName(Context context, String key,
                                        String value) {
-        SharedPreferences sp = PreferenceManager
-                .getDefaultSharedPreferences(context);
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putString(name, value);
+        setStringByName(context, null, NO_SP_MODE, key, value);
+    }
+
+    public static void setStringByName(Context context, String spName, int spMode, String key, String value) {
+        SharedPreferences.Editor editor = getEditor(context, spName, spMode);
+        editor.putString(key, value);
         editor.apply();
     }
 
-    public static void setBooleanByName(Context context, String name,
-                                        Boolean value) {
-        SharedPreferences sp = PreferenceManager
-                .getDefaultSharedPreferences(context);
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putBoolean(name, value);
+    public static void setBooleanByName(Context context, String key, Boolean value) {
+        setBooleanByName(context, null, NO_SP_MODE, key, value);
+    }
+
+    public static void setBooleanByName(Context context, String spName, int spMode, String key, Boolean value) {
+        SharedPreferences.Editor editor = getEditor(context, spName, spMode);
+        editor.putBoolean(key, value);
         editor.apply();
     }
 
-    public static void setIntByName(Context context, String name, int value) {
-        SharedPreferences sp = PreferenceManager
-                .getDefaultSharedPreferences(context);
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putInt(name, value);
+    public static void setIntByName(Context context, String key, int value) {
+        setIntByName(context, null, NO_SP_MODE, key, value);
+    }
+
+    public static void setIntByName(Context context, String spName, int spMode, String key, int value) {
+        SharedPreferences.Editor editor = getEditor(context, spName, spMode);
+        editor.putInt(key, value);
         editor.apply();
     }
 
-    public static void setLongByName(Context context, String name, long value) {
-        SharedPreferences sp = PreferenceManager
-                .getDefaultSharedPreferences(context);
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putLong(name, value);
+    public static void setLongByName(Context context, String key, long value) {
+        setLongByName(context, null, NO_SP_MODE, key, value);
+    }
+
+    public static void setLongByName(Context context, String spName, int spMode, String key, long value) {
+        SharedPreferences.Editor editor = getEditor(context, spName, spMode);
+        editor.putLong(key, value);
         editor.apply();
     }
 
@@ -95,5 +118,20 @@ public class SPUtils {
         SharedPreferences.Editor editor = pref.edit();
         editor.remove(name);
         editor.apply();
+    }
+
+    private static SharedPreferences.Editor getEditor(Context context, String spName, int spMode) {
+        SharedPreferences sp = getSharedPreferences(context, spName, spMode);
+        return sp.edit();
+    }
+
+    private static SharedPreferences getSharedPreferences(Context context, String spName, int spMode) {
+        SharedPreferences sp;
+        if (TextUtils.isEmpty(spName)) {
+            sp = PreferenceManager.getDefaultSharedPreferences(context);
+        } else {
+            sp = context.getSharedPreferences(spName, spMode);
+        }
+        return sp;
     }
 }

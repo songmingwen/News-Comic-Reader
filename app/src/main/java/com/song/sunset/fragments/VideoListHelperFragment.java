@@ -12,7 +12,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.song.sunset.R;
 import com.song.sunset.activitys.VideoListActivity;
 import com.song.sunset.adapters.VideoListHelperAdapter;
-import com.song.sunset.beans.VideoBean;
+import com.song.sunset.beans.VideoDetailBean;
+import com.song.sunset.beans.VideoListsBean;
 import com.song.sunset.fragments.base.BaseFragment;
 import com.song.sunset.utils.AppConfig;
 import com.song.sunset.utils.ViewUtil;
@@ -102,12 +103,12 @@ public class VideoListHelperFragment extends BaseFragment implements BaseQuickAd
     }
 
     public void getDataFromRetrofit2(int page) {
-        Observable<List<VideoBean>> observable = RetrofitFactory.createApi(PhoenixNewsApi.class, WholeApi.PHOENIX_NEWS_BASE_URL).queryVideoObservable(page, "list", typeId);
-        RxUtil.phoenixNewsSubscribe(observable, new RetrofitCallback<VideoBean>() {
+        Observable<List<VideoListsBean>> observable = RetrofitFactory.createApi(PhoenixNewsApi.class, WholeApi.PHOENIX_NEWS_BASE_URL).queryVideoObservable(page, "list", typeId);
+        RxUtil.phoenixNewsSubscribe(observable, new RetrofitCallback<VideoListsBean>() {
             @Override
-            public void onSuccess(VideoBean videoBean) {
+            public void onSuccess(VideoListsBean videoBean) {
                 progressLayout.showContent();
-                List<VideoBean.ItemBean> videoBeanList = videoBean.getItem();
+                List<VideoDetailBean> videoBeanList = videoBean.getItem();
                 if (isRefreshing) {
                     currentPage = 1;
                     isRefreshing = false;

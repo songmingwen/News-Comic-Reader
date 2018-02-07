@@ -33,7 +33,6 @@
         android:orientation="horizontal" >
 
         <RadioButton
-            android:id="@+id/gps_locate_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
@@ -41,14 +40,12 @@
             android:textColor="@android:color/black" />
 
         <RadioButton
-            android:id="@+id/gps_follow_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="gpsfollow"
             android:textColor="@android:color/black" />
 
         <RadioButton
-            android:id="@+id/gps_rotate_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="gpsrotate"

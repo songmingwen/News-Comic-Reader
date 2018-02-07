@@ -7,17 +7,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
 import com.song.sunset.R;
 import com.song.sunset.beans.DanmakuBean;
-import com.song.sunset.utils.StringUtils;
+import com.song.sunset.beans.VideoDetailBean;
 import com.song.sunset.utils.danmaku.SongDanmakuParser;
 import com.song.sunset.widget.GoodsTag;
-import com.song.video.SimplePlayer;
+import com.song.video.DanMuVideoController;
+import com.song.video.NormalVideoPlayer;
+import com.song.video.VideoPlayerManager;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -31,7 +35,6 @@ import master.flame.danmaku.danmaku.model.IDanmakus;
 import master.flame.danmaku.danmaku.model.IDisplayer;
 import master.flame.danmaku.danmaku.model.android.DanmakuContext;
 import master.flame.danmaku.danmaku.parser.BaseDanmakuParser;
-import master.flame.danmaku.ui.widget.DanmakuTextureView;
 import master.flame.danmaku.ui.widget.DanmakuView;
 
 /**
@@ -40,29 +43,22 @@ import master.flame.danmaku.ui.widget.DanmakuView;
  */
 public class PhoenixVideoActivity extends AppCompatActivity {
 
-    public static final String TV_URL = "tv_url";
-    public static final String TV_NAME = "tv_name";
-    public static final String TV_COVER = "tv_cover";
-    private String tvUrl, tvName, tvCover;
+    public static final String VIDEO_BEAN = "video_bean";
     private DanmakuView mDanmakuView;//弹幕view
     private DanmakuContext mDanmakuContext;
     private BaseDanmakuParser mParser;
-    private SimplePlayer player;
     private LinearLayout mLayout;
+    private VideoDetailBean mVideoDetailBean;
 
-    public static void start(Context context, String tvUrl, String tvName, String cover) {
+    public static void start(Context context, VideoDetailBean videoDetailBean) {
         Intent intent = new Intent(context, PhoenixVideoActivity.class);
-        intent.putExtra(TV_NAME, tvName);
-        intent.putExtra(TV_URL, tvUrl);
-        intent.putExtra(TV_COVER, cover);
+        intent.putExtra(VIDEO_BEAN, videoDetailBean);
         context.startActivity(intent);
     }
 
     private void getExtra() {
         if (getIntent() != null) {
-            tvName = getIntent().getStringExtra(TV_NAME);
-            tvUrl = getIntent().getStringExtra(TV_URL);
-            tvCover = getIntent().getStringExtra(TV_COVER);
+            mVideoDetailBean = getIntent().getParcelableExtra(VIDEO_BEAN);
         }
     }
 
@@ -74,16 +70,30 @@ public class PhoenixVideoActivity extends AppCompatActivity {
 
         setContentView(R.layout.video_detail_layout);
 
+        initDanmakuContext();
+        initDanmakuView();
+
         mLayout = (LinearLayout) findViewById(R.id.box);
-        startVideo();
+
+        NormalVideoPlayer player = (NormalVideoPlayer) findViewById(R.id.id_normal_video_player);
+        DanMuVideoController controller = new DanMuVideoController(this);
+        controller.setTitle(mVideoDetailBean.getTitle());
+        controller.setLenght(mVideoDetailBean.getDuration());
+        player.setDanMuView(mDanmakuView);
+        player.setController(controller);
+        Glide.with(this)
+                .load(mVideoDetailBean.getImage())
+                .apply(RequestOptions.placeholderOf(R.mipmap.logo))
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(controller.imageView());
+        player.setUp(mVideoDetailBean.getVideo_url(), null);
+        player.start();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (player != null) {
-            player.onResume();
-        }
+        VideoPlayerManager.instance().resumeNiceVideoPlayer();
         if (mDanmakuView != null && mDanmakuView.isPrepared() && mDanmakuView.isPaused()) {
             mDanmakuView.resume();
         }
@@ -92,9 +102,7 @@ public class PhoenixVideoActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if (player != null) {
-            player.onPause();
-        }
+        VideoPlayerManager.instance().suspendNiceVideoPlayer();
         if (mDanmakuView != null && mDanmakuView.isPrepared()) {
             mDanmakuView.pause();
         }
@@ -103,9 +111,7 @@ public class PhoenixVideoActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (player != null) {
-            player.onDestroy();
-        }
+        VideoPlayerManager.instance().releaseNiceVideoPlayer();
         if (mDanmakuView != null) {
             mDanmakuView.release();
             mDanmakuView = null;
@@ -115,9 +121,6 @@ public class PhoenixVideoActivity extends AppCompatActivity {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        if (player != null) {
-            player.onConfigurationChanged(newConfig);
-        }
         if (mDanmakuContext == null || mDanmakuView == null) {
             return;
         }
@@ -130,18 +133,8 @@ public class PhoenixVideoActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (player != null && player.onBackPressed()) {
-            return;
-        }
+        if (VideoPlayerManager.instance().onBackPressd()) return;
         super.onBackPressed();
-    }
-
-    private void startVideo() {
-        if (TextUtils.isEmpty(tvUrl)) return;
-        player = new SimplePlayer(this);
-        player.setTitle(tvName);
-        player.setCover(tvCover);
-        player.play(tvUrl);
     }
 
     public void addDanmaku(View view) {
@@ -193,7 +186,7 @@ public class PhoenixVideoActivity extends AppCompatActivity {
     }
 
     private void initDanmakuView() {
-        mDanmakuView = (DanmakuView) findViewById(R.id.danmaku_view);
+        mDanmakuView = new DanmakuView(this);
         mParser = new SongDanmakuParser(getDanmakuList());
         mDanmakuView.setCallback(new master.flame.danmaku.controller.DrawHandler.Callback() {
             @Override
@@ -213,6 +206,7 @@ public class PhoenixVideoActivity extends AppCompatActivity {
             @Override
             public void prepared() {
                 mDanmakuView.start();
+                mDanmakuView.hide();
             }
         });
         mDanmakuView.setOnDanmakuClickListener(new IDanmakuView.OnDanmakuClickListener() {

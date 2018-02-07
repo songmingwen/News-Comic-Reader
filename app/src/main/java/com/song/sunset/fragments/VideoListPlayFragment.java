@@ -8,10 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
 import com.song.sunset.R;
 import com.song.sunset.activitys.VideoListActivity;
 import com.song.sunset.adapters.VideoListAdapter;
-import com.song.sunset.beans.VideoBean;
+import com.song.sunset.beans.VideoDetailBean;
+import com.song.sunset.beans.VideoListsBean;
 import com.song.sunset.fragments.base.BaseFragment;
 import com.song.sunset.interfaces.LoadingMoreListener;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
@@ -21,7 +25,9 @@ import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.utils.api.PhoenixNewsApi;
 import com.song.sunset.utils.api.WholeApi;
 import com.song.sunset.widget.VideoAutoPlayRecyclerView;
-import com.song.video.SimplePlayerLayout;
+import com.song.video.NormalVideoPlayer;
+import com.song.video.VideoPlayerManager;
+import com.song.video.NormalVideoPlayerController;
 
 import java.util.List;
 
@@ -42,8 +48,6 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
     private boolean isLoading, isRefreshing = false, first, shouldPlay;
     private ProgressLayout progressLayout;
     private RelativeLayout progressBar;
-
-    private SimplePlayerLayout mPlayer;
 
     private View.OnClickListener errorClickListener = new View.OnClickListener() {
         @Override
@@ -92,27 +96,23 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
 
     @Override
     public void onResume() {
-        if (mPlayer != null && getUserVisibleHint() && shouldPlay) {
-            mPlayer.onResume();
-        }
+        VideoPlayerManager.instance().resumeNiceVideoPlayer();
         super.onResume();
     }
 
     @Override
     public void onPause() {
-        if (mPlayer != null) {
-            mPlayer.onPause();
-        }
+        VideoPlayerManager.instance().suspendNiceVideoPlayer();
         super.onPause();
     }
 
     public void getDataFromRetrofit2(int page) {
-        Observable<List<VideoBean>> observable = RetrofitFactory.createApi(PhoenixNewsApi.class, WholeApi.PHOENIX_NEWS_BASE_URL).queryVideoObservable(page, "list", typeId);
-        RxUtil.phoenixNewsSubscribe(observable, new RetrofitCallback<VideoBean>() {
+        Observable<List<VideoListsBean>> observable = RetrofitFactory.createApi(PhoenixNewsApi.class, WholeApi.PHOENIX_NEWS_BASE_URL).queryVideoObservable(page, "list", typeId);
+        RxUtil.phoenixNewsSubscribe(observable, new RetrofitCallback<VideoListsBean>() {
             @Override
-            public void onSuccess(VideoBean videoBean) {
+            public void onSuccess(VideoListsBean videoBean) {
                 progressLayout.showContent();
-                List<VideoBean.ItemBean> videoBeanList = videoBean.getItem();
+                List<VideoDetailBean> videoBeanList = videoBean.getItem();
                 if (isRefreshing) {
                     currentPage = 1;
                     isRefreshing = false;
@@ -163,9 +163,7 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
 
     @Override
     public void onDestroy() {
-        if (mPlayer != null) {
-            mPlayer.onDestroy();
-        }
+        VideoPlayerManager.instance().releaseNiceVideoPlayer();
         super.onDestroy();
     }
 
@@ -185,20 +183,27 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
     }
 
     @Override
-    public void playVideo(SimplePlayerLayout player, int position) {
-        mPlayer = player;
-        if (mPlayer == null || !shouldPlay) return;
-        VideoBean.ItemBean mItemBean = mAdapter.getData().get(position);
-        mPlayer.setCover(mItemBean.getImage());
-        mPlayer.setTitle(mItemBean.getTitle());
-        mPlayer.play(mItemBean.getVideo_url());
+    public void playVideo(NormalVideoPlayer player, int position) {
+        if (player == null || !shouldPlay) return;
+        VideoDetailBean mItemBean = mAdapter.getData().get(position);
+
+        NormalVideoPlayerController controller = new NormalVideoPlayerController(getContext());
+        player.setController(controller);
+
+        controller.setTitle(mItemBean.getTitle());
+        controller.setLenght(mItemBean.getDuration());
+        Glide.with(getContext())
+                .load(mItemBean.getImage())
+                .apply(RequestOptions.placeholderOf(R.mipmap.logo))
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(controller.imageView());
+        player.setUp(mItemBean.getVideo_url(), null);
+        player.start();
     }
 
     @Override
     public void stopVideo() {
-        if (mPlayer != null) {
-            mPlayer.onDestroy();
-        }
+        VideoPlayerManager.instance().releaseNiceVideoPlayer();
     }
 
     @Override
@@ -208,15 +213,10 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
     }
 
     public void restartVideo() {
-        if (mPlayer == null) return;
-        shouldPlay = true;
-        mPlayer.start();
+        VideoPlayerManager.instance().resumeNiceVideoPlayer();
     }
 
     public void pauseVideo() {
-        if (mPlayer == null) return;
-        if (mPlayer.getPlayState() == SimplePlayerLayout.STATUS_PAUSE) return;
-        shouldPlay = false;
-        mPlayer.pause();
+        VideoPlayerManager.instance().suspendNiceVideoPlayer();
     }
 }

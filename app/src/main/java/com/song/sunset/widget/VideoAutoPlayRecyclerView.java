@@ -6,10 +6,11 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.song.sunset.utils.ViewUtil;
-import com.song.video.SimplePlayerLayout;
+import com.song.video.NormalVideoPlayer;
 
 /**
  * Created by Song on 2017/7/3 0003.
@@ -22,14 +23,14 @@ public class VideoAutoPlayRecyclerView extends LoadMoreRecyclerView implements R
 
     private int mCenterLine;
 
-    private SimplePlayerLayout mPlayer;
+    private NormalVideoPlayer mPlayer;
 
     private int currentPlayerPosition = RecyclerView.NO_POSITION;
 
     private TextView mTextView;
 
     public interface VideoListPlayListener {
-        void playVideo(SimplePlayerLayout player, int position);
+        void playVideo(NormalVideoPlayer player, int position);
 
         void stopVideo();
     }
@@ -115,7 +116,9 @@ public class VideoAutoPlayRecyclerView extends LoadMoreRecyclerView implements R
                 }
 
                 targetView.addView(mPlayer);
-
+                if (mPlayer != null) {
+                    mPlayer.release();
+                }
                 videoListPlayListener.playVideo(mPlayer, currentPlayerPosition);
             }
         }
@@ -149,10 +152,21 @@ public class VideoAutoPlayRecyclerView extends LoadMoreRecyclerView implements R
 
     private void initData() {
         mCenterLine = ViewUtil.getScreenHeigth() / 2;
-        mPlayer = new SimplePlayerLayout(getContext());
-        mPlayer.setOnScrollListener(false);
-        mPlayer.setCanChangeOrientation(false);
-        mPlayer.onComplete(this);
+
+        mPlayer = new NormalVideoPlayer(getContext());
+        ViewGroup.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.width = ViewUtil.getScreenWidth(); // 宽度为屏幕宽度
+        params.height = (int) (params.width * 9f / 16f);    // 高度为宽度的9/16
+        mPlayer.setLayoutParams(params);
+
+        mPlayer.setOnPlayStateChangedListener(new NormalVideoPlayer.OnPlayStateChanged() {
+            @Override
+            public void onPlayStateChanged(int state) {
+                if (state == NormalVideoPlayer.STATE_COMPLETED) {
+                    setClickViewToCenter(currentPlayerPosition + 1);
+                }
+            }
+        });
     }
 
 

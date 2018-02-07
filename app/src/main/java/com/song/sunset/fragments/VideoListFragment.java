@@ -11,7 +11,8 @@ import android.widget.RelativeLayout;
 
 import com.song.sunset.R;
 import com.song.sunset.adapters.VideoListAdapter;
-import com.song.sunset.beans.VideoBean;
+import com.song.sunset.beans.VideoDetailBean;
+import com.song.sunset.beans.VideoListsBean;
 import com.song.sunset.fragments.base.BaseFragment;
 import com.song.sunset.interfaces.LoadingMoreListener;
 import com.song.sunset.utils.AppConfig;
@@ -148,12 +149,12 @@ public class VideoListFragment extends BaseFragment implements LoadingMoreListen
     }
 
     public void getDataFromRetrofit2(int page) {
-        Observable<List<VideoBean>> observable = RetrofitFactory.createApi(PhoenixNewsApi.class, WholeApi.PHOENIX_NEWS_BASE_URL).queryVideoObservable(page, "list", typeid);
-        RxUtil.phoenixNewsSubscribe(observable, new RetrofitCallback<VideoBean>() {
+        Observable<List<VideoListsBean>> observable = RetrofitFactory.createApi(PhoenixNewsApi.class, WholeApi.PHOENIX_NEWS_BASE_URL).queryVideoObservable(page, "list", typeid);
+        RxUtil.phoenixNewsSubscribe(observable, new RetrofitCallback<VideoListsBean>() {
             @Override
-            public void onSuccess(VideoBean videoBean) {
+            public void onSuccess(VideoListsBean videoBean) {
                 progressLayout.showContent();
-                List<VideoBean.ItemBean> videoBeanList = videoBean.getItem();
+                List<VideoDetailBean> videoBeanList = videoBean.getItem();
                 if (isRefreshing) {
                     currentPage = 1;
                     isRefreshing = false;

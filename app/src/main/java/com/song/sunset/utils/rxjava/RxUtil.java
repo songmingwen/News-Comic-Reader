@@ -65,7 +65,7 @@ public class RxUtil {
 
                     @Override
                     public void onError(Throwable e) {
-                        retrofitCallback.onFailure(-1, "服务器错误");
+//                        retrofitCallback.onFailure(-1, "服务器错误");
                     }
 
                     @Override

@@ -1,42 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/video_layout"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include
-        android:id="@+id/app_video_box"
-        layout="@layout/simple_player"
+    <com.song.video.NormalVideoPlayer
+        android:id="@+id/id_normal_video_player"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="202.5dp"/>
 
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/app_video_box"
         android:layout_alignParentLeft="true"
+        android:layout_below="@+id/id_normal_video_player"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="24dp"
         android:onClick="closeDanmaku"
-        android:src="@android:drawable/ic_menu_close_clear_cancel" />
+        android:src="@android:drawable/ic_menu_close_clear_cancel"/>
 
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/app_video_box"
         android:layout_alignParentRight="true"
+        android:layout_below="@+id/id_normal_video_player"
         android:layout_marginRight="24dp"
         android:layout_marginTop="24dp"
         android:onClick="addDanmaku"
-        android:src="@android:drawable/ic_input_add" />
+        android:src="@android:drawable/ic_input_add"/>
 
     <LinearLayout
         android:id="@+id/box"
-        android:layout_below="@+id/app_video_box"
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/id_normal_video_player"
+        android:orientation="vertical">
 
     </LinearLayout>
 </RelativeLayout>

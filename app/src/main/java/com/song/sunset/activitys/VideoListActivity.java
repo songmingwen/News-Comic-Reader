@@ -12,7 +12,8 @@ import android.view.View;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.song.sunset.R;
 import com.song.sunset.adapters.RankingPagerAdapter;
-import com.song.sunset.beans.VideoBean;
+import com.song.sunset.beans.VideoListsBean;
+import com.song.sunset.beans.VideoListsTypeBean;
 import com.song.sunset.fragments.VideoListHelperFragment;
 import com.song.sunset.fragments.VideoListPlayFragment;
 import com.song.sunset.receivers.SunsetWidget;
@@ -23,6 +24,7 @@ import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.retrofit.RetrofitFactory;
 import com.song.sunset.utils.api.PhoenixNewsApi;
 import com.song.sunset.utils.api.WholeApi;
+import com.song.video.VideoPlayerManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,17 +87,17 @@ public class VideoListActivity extends AppCompatActivity {
     }
 
     private void loadNetData() {
-        Observable<List<VideoBean>> observable = RetrofitFactory.createApi(PhoenixNewsApi.class, WholeApi.PHOENIX_NEWS_BASE_URL).queryFirstVideoObservable(1);
-        RxUtil.phoenixNewsSubscribe(observable, new RetrofitCallback<VideoBean>() {
+        Observable<List<VideoListsBean>> observable = RetrofitFactory.createApi(PhoenixNewsApi.class, WholeApi.PHOENIX_NEWS_BASE_URL).queryFirstVideoObservable(1);
+        RxUtil.phoenixNewsSubscribe(observable, new RetrofitCallback<VideoListsBean>() {
             @Override
-            public void onSuccess(VideoBean videoBean) {
-                List<VideoBean.TypesBean> list = videoBean.getTypes();
+            public void onSuccess(VideoListsBean videoBean) {
+                List<VideoListsTypeBean> list = videoBean.getTypes();
 
                 List<Fragment> fragmentList = new ArrayList<>();
 
                 List<String> titleList = new ArrayList<>();
 
-                for (VideoBean.TypesBean item : list) {
+                for (VideoListsTypeBean item : list) {
                     Bundle bundle = new Bundle();
                     bundle.putString(CH_TYPE, item.getChType());
                     bundle.putString(TYPE_ID, item.getId());
@@ -152,6 +154,7 @@ public class VideoListActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        if (VideoPlayerManager.instance().onBackPressd()) return;
         if (fromWidget) {
             this.startActivity(new Intent(this, MainActivity.class));
         }

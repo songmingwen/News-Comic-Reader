@@ -6,7 +6,8 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.song.sunset.R;
 import com.song.sunset.activitys.PhoenixVideoActivity;
-import com.song.sunset.beans.VideoBean;
+import com.song.sunset.beans.VideoDetailBean;
+import com.song.sunset.beans.VideoListsBean;
 import com.song.sunset.holders.VideoListHelperHolder;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.fresco.FrescoUtil;
@@ -15,7 +16,7 @@ import com.song.sunset.utils.fresco.FrescoUtil;
  * Created by Song on 2017/3/13.
  * E-mail:z53520@qq.com
  */
-public class VideoListHelperAdapter extends BaseQuickAdapter<VideoBean.ItemBean, VideoListHelperHolder> {
+public class VideoListHelperAdapter extends BaseQuickAdapter<VideoDetailBean, VideoListHelperHolder> {
 
     private Activity context;
 
@@ -25,7 +26,7 @@ public class VideoListHelperAdapter extends BaseQuickAdapter<VideoBean.ItemBean,
     }
 
     @Override
-    protected void convert(VideoListHelperHolder helper, final VideoBean.ItemBean item) {
+    protected void convert(VideoListHelperHolder helper, final VideoDetailBean item) {
         if (item == null) {
             return;
         }
@@ -38,7 +39,7 @@ public class VideoListHelperAdapter extends BaseQuickAdapter<VideoBean.ItemBean,
         helper.cover.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PhoenixVideoActivity.start(context, item.getVideo_url(), item.getTitle(), item.getImage());
+                PhoenixVideoActivity.start(context, item);
             }
         });
     }

@@ -17,8 +17,4 @@
         <item name="android:windowContentTransitions">true</item>
     </style>
 
-    <style name="SwitchDayNightMode">
-        <item name="windowEnterAnimation">@anim/anim_fade_in</item>
-        <item name="windowExitAnimation">@anim/anim_fade_out</item>
-    </style>
 </resources>
