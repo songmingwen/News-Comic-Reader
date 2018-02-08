@@ -211,13 +211,13 @@ public class NormalVideoPlayer extends FrameLayout
     @Override
     public void start() {
         if (mCurrentState == STATE_IDLE) {
-            VideoManager.instance().setCurrentNiceVideoPlayer(this);
+            VideoManager.instance().setCurrentNromalVideoPlayer(this);
             initAudioManager();
             initMediaPlayer();
             initTextureView();
             addTextureView();
         } else {
-            Log.d(TAG, "NiceVideoPlayer只有在mCurrentState == STATE_IDLE时才能调用start方法.");
+            Log.d(TAG, "NormalVideoPlayer只有在mCurrentState == STATE_IDLE时才能调用start方法.");
         }
     }
 
@@ -243,7 +243,7 @@ public class NormalVideoPlayer extends FrameLayout
             mMediaPlayer.reset();
             openMediaPlayer();
         } else {
-            Log.d(TAG, "NiceVideoPlayer在mCurrentState == " + mCurrentState + "时不能调用restart()方法.");
+            Log.d(TAG, "NormalVideoPlayer在mCurrentState == " + mCurrentState + "时不能调用restart()方法.");
         }
     }
 

@@ -32,7 +32,7 @@ import java.util.Locale;
  * E-mail: z53520@qq.com
  */
 public class NormalVideoController extends BaseVideoController
-        implements View.OnClickListener, SeekBar.OnSeekBarChangeListener, ChangeClarityDialog.OnClarityChangedListener {
+        implements View.OnClickListener, SeekBar.OnSeekBarChangeListener, ChangeResolutionDialog.OnClarityChangedListener {
 
     private Context mContext;
     private ImageView mImage;
@@ -81,7 +81,7 @@ public class NormalVideoController extends BaseVideoController
     private List<Resolution> clarities;
     private int defaultClarityIndex;
 
-    private ChangeClarityDialog mClarityDialog;
+    private ChangeResolutionDialog mClarityDialog;
 
     private boolean hasRegisterBatteryReceiver; // 是否已经注册了电池广播
 
@@ -190,7 +190,7 @@ public class NormalVideoController extends BaseVideoController
             }
             mClarity.setText(clarities.get(defaultClarityIndex).grade);
             // 初始化切换清晰度对话框
-            mClarityDialog = new ChangeClarityDialog(mContext);
+            mClarityDialog = new ChangeResolutionDialog(mContext);
             mClarityDialog.setClarityGrade(clarityGrades, defaultClarityIndex);
             mClarityDialog.setOnClarityCheckedListener(this);
             // 给播放器配置视频链接地址

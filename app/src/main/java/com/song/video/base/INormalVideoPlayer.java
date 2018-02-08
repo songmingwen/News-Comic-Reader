@@ -101,7 +101,7 @@ public interface INormalVideoPlayer {
     int getVolume();
 
     /**
-     * 获取办法给总时长，毫秒
+     * 获取总时长，毫秒
      *
      * @return 视频总时长ms
      */
@@ -168,7 +168,7 @@ public interface INormalVideoPlayer {
     void releasePlayer();
 
     /**
-     * 释放INiceVideoPlayer，释放后，内部的播放器被释放掉，同时如果在全屏、小窗口模式下都会退出
+     * 释放INormalVideoPlayer，释放后，内部的播放器被释放掉，同时如果在全屏、小窗口模式下都会退出
      * 并且控制器的UI也应该恢复到最初始的状态.
      */
     void release();

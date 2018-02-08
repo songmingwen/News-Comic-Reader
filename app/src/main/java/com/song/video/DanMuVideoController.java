@@ -34,7 +34,7 @@ import java.util.Locale;
  */
 
 public class DanMuVideoController extends BaseVideoController
-        implements View.OnClickListener, SeekBar.OnSeekBarChangeListener, ChangeClarityDialog.OnClarityChangedListener {
+        implements View.OnClickListener, SeekBar.OnSeekBarChangeListener, ChangeResolutionDialog.OnClarityChangedListener {
 
     private Context mContext;
 
@@ -43,7 +43,7 @@ public class DanMuVideoController extends BaseVideoController
     private LinearLayout mTop, mBatteryTime, mBottom, mLoading, mChangePosition,
             mCompleted, mError, mChangeBrightness, mChangeVolume;
 
-    private TextView mTitle, danMuSwitch, mTime, mPosition, mDuration, mClarity,
+    private TextView mTitle, danMuSwitch, mTime, mPosition, mDuration, mResolution,
             mLength, mLoadText, mChangePositionCurrent, mRetry, mReplay, mShare;
 
     private SeekBar mSeek;
@@ -52,13 +52,13 @@ public class DanMuVideoController extends BaseVideoController
 
     private boolean topBottomVisible;
 
-    private int defaultClarityIndex;
+    private int defaultResolutionsIndex;
 
     private CountDownTimer mDismissTopBottomCountDownTimer;
 
     private List<Resolution> mResolutions;
 
-    private ChangeClarityDialog mClarityDialog;
+    private ChangeResolutionDialog mResolutionDialog;
 
     private boolean hasRegisterBatteryReceiver; // 是否已经注册了电池广播
 
@@ -88,7 +88,7 @@ public class DanMuVideoController extends BaseVideoController
         mDuration = (TextView) findViewById(R.id.duration);
         mSeek = (SeekBar) findViewById(R.id.seek);
         mFullScreen = (ImageView) findViewById(R.id.full_screen);
-        mClarity = (TextView) findViewById(R.id.clarity);
+        mResolution = (TextView) findViewById(R.id.clarity);
         mLength = (TextView) findViewById(R.id.length);
 
         mLoading = (LinearLayout) findViewById(R.id.loading);
@@ -115,7 +115,7 @@ public class DanMuVideoController extends BaseVideoController
         mBack.setOnClickListener(this);
         mRestartPause.setOnClickListener(this);
         mFullScreen.setOnClickListener(this);
-        mClarity.setOnClickListener(this);
+        mResolution.setOnClickListener(this);
         mRetry.setOnClickListener(this);
         mReplay.setOnClickListener(this);
         mShare.setOnClickListener(this);
@@ -149,32 +149,32 @@ public class DanMuVideoController extends BaseVideoController
         super.setNormalVideoPlayer(normalVideoPlayer);
         // 给播放器配置视频链接地址
         if (mResolutions != null && mResolutions.size() > 1) {
-            mNormalVideoPlayer.setUp(mResolutions.get(defaultClarityIndex).videoUrl, null);
+            mNormalVideoPlayer.setUp(mResolutions.get(defaultResolutionsIndex).videoUrl, null);
         }
     }
 
     /**
      * 设置清晰度
      *
-     * @param clarities 清晰度及链接
+     * @param resolutions 清晰度及链接
      */
-    public void setClarity(List<Resolution> clarities, int defaultClarityIndex) {
-        if (clarities != null && clarities.size() > 1) {
-            this.mResolutions = clarities;
-            this.defaultClarityIndex = defaultClarityIndex;
+    public void setResolutions(List<Resolution> resolutions, int defaultResolutionIndex) {
+        if (resolutions != null && resolutions.size() > 1) {
+            this.mResolutions = resolutions;
+            this.defaultResolutionsIndex = defaultResolutionIndex;
 
             List<String> clarityGrades = new ArrayList<>();
-            for (Resolution clarity : clarities) {
+            for (Resolution clarity : resolutions) {
                 clarityGrades.add(clarity.grade + " " + clarity.p);
             }
-            mClarity.setText(clarities.get(defaultClarityIndex).grade);
+            mResolution.setText(resolutions.get(defaultResolutionIndex).grade);
             // 初始化切换清晰度对话框
-            mClarityDialog = new ChangeClarityDialog(mContext);
-            mClarityDialog.setClarityGrade(clarityGrades, defaultClarityIndex);
-            mClarityDialog.setOnClarityCheckedListener(this);
+            mResolutionDialog = new ChangeResolutionDialog(mContext);
+            mResolutionDialog.setClarityGrade(clarityGrades, defaultResolutionIndex);
+            mResolutionDialog.setOnClarityCheckedListener(this);
             // 给播放器配置视频链接地址
             if (mNormalVideoPlayer != null) {
-                mNormalVideoPlayer.setUp(clarities.get(defaultClarityIndex).videoUrl, null);
+                mNormalVideoPlayer.setUp(resolutions.get(defaultResolutionIndex).videoUrl, null);
             }
         }
     }
@@ -242,7 +242,7 @@ public class DanMuVideoController extends BaseVideoController
                 mBack.setVisibility(View.GONE);
                 mFullScreen.setImageResource(R.drawable.ic_player_enlarge);
                 mFullScreen.setVisibility(View.VISIBLE);
-                mClarity.setVisibility(View.GONE);
+                mResolution.setVisibility(View.GONE);
                 mBatteryTime.setVisibility(View.GONE);
                 if (hasRegisterBatteryReceiver) {
                     mContext.unregisterReceiver(mBatterReceiver);
@@ -254,7 +254,7 @@ public class DanMuVideoController extends BaseVideoController
 //                mFullScreen.setVisibility(View.GONE);
                 mFullScreen.setImageResource(R.drawable.ic_player_shrink);
                 if (mResolutions != null && mResolutions.size() > 1) {
-                    mClarity.setVisibility(View.VISIBLE);
+                    mResolution.setVisibility(View.VISIBLE);
                 }
                 mBatteryTime.setVisibility(View.VISIBLE);
                 if (!hasRegisterBatteryReceiver) {
@@ -265,7 +265,7 @@ public class DanMuVideoController extends BaseVideoController
                 break;
             case NormalVideoPlayer.MODE_TINY_WINDOW:
                 mBack.setVisibility(View.VISIBLE);
-                mClarity.setVisibility(View.GONE);
+                mResolution.setVisibility(View.GONE);
                 break;
         }
     }
@@ -367,9 +367,9 @@ public class DanMuVideoController extends BaseVideoController
             } else if (mNormalVideoPlayer.isFullScreen()) {
                 mNormalVideoPlayer.exitFullScreen();
             }
-        } else if (v == mClarity) {
+        } else if (v == mResolution) {
             setTopBottomVisible(false); // 隐藏top、bottom
-            mClarityDialog.show();     // 显示清晰度对话框
+            mResolutionDialog.show();     // 显示清晰度对话框
         } else if (v == mRetry) {
             mNormalVideoPlayer.restart();
         } else if (v == mReplay) {
@@ -390,7 +390,7 @@ public class DanMuVideoController extends BaseVideoController
     public void onClarityChanged(int clarityIndex) {
         // 根据切换后的清晰度索引值，设置对应的视频链接地址，并从当前播放位置接着播放
         Resolution clarity = mResolutions.get(clarityIndex);
-        mClarity.setText(clarity.grade);
+        mResolution.setText(clarity.grade);
         long currentPosition = mNormalVideoPlayer.getCurrentPosition();
         mNormalVideoPlayer.releasePlayer();
         mNormalVideoPlayer.setUp(clarity.videoUrl, null);

@@ -17,7 +17,7 @@ import com.song.video.NormalVideoPlayer;
  * E-mail: z53520@qq.com
  */
 
-public class VideoAutoPlayRecyclerView extends LoadMoreRecyclerView implements Runnable {
+public class VideoAutoPlayRecyclerView extends LoadMoreRecyclerView {
 
     private boolean changed = false;
 
@@ -26,8 +26,6 @@ public class VideoAutoPlayRecyclerView extends LoadMoreRecyclerView implements R
     private NormalVideoPlayer mPlayer;
 
     private int currentPlayerPosition = RecyclerView.NO_POSITION;
-
-    private TextView mTextView;
 
     public interface VideoListPlayListener {
         void playVideo(NormalVideoPlayer player, int position);
@@ -96,10 +94,6 @@ public class VideoAutoPlayRecyclerView extends LoadMoreRecyclerView implements R
                     if (isCenterItemView(tempView)) {
                         if (currentPlayerPosition != currentPosition) {
                             changed = true;
-                            ViewGroup viewGroup = (ViewGroup) linearManager.findViewByPosition(currentPlayerPosition);
-                            if (viewGroup != null) {
-                                viewGroup.removeView(mPlayer);
-                            }
                         } else {
                             changed = false;
                         }
@@ -109,6 +103,12 @@ public class VideoAutoPlayRecyclerView extends LoadMoreRecyclerView implements R
                 }
             }
             if (changed) {
+                for (int index = firstPosition; index < lastPosition + 1; index++) {
+                    ViewGroup tempView = (ViewGroup) linearManager.findViewByPosition(index);
+                    if (tempView != null) {
+                        tempView.removeView(mPlayer);
+                    }
+                }
                 ViewGroup targetView = (ViewGroup) linearManager.findViewByPosition(currentPlayerPosition);
                 float top = getTopPosition(targetView);
                 if (top == Float.MIN_VALUE) {
@@ -169,12 +169,6 @@ public class VideoAutoPlayRecyclerView extends LoadMoreRecyclerView implements R
         });
     }
 
-
-    @Override
-    public void run() {
-        setClickViewToCenter(currentPlayerPosition + 1);
-    }
-
     /**
      * 设置点击的itemView，使其滑动到屏幕中间
      *
@@ -187,5 +181,9 @@ public class VideoAutoPlayRecyclerView extends LoadMoreRecyclerView implements R
             int dy = getDy(targetView);
             this.smoothScrollBy(0, dy);
         }
+    }
+
+    public void resetCurrentPlayerPosition() {
+        this.currentPlayerPosition = NO_POSITION;
     }
 }

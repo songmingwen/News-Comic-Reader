@@ -3,6 +3,7 @@ package com.song.sunset.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -96,13 +97,13 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
 
     @Override
     public void onResume() {
-        VideoManager.instance().resumeNiceVideoPlayer();
+        VideoManager.instance().resumeNormalVideoPlayer();
         super.onResume();
     }
 
     @Override
     public void onPause() {
-        VideoManager.instance().suspendNiceVideoPlayer();
+        VideoManager.instance().suspendNormalVideoPlayer();
         super.onPause();
     }
 
@@ -163,7 +164,7 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
 
     @Override
     public void onDestroy() {
-        VideoManager.instance().releaseNiceVideoPlayer();
+        VideoManager.instance().releaseNormalVideoPlayer();
         super.onDestroy();
     }
 
@@ -191,7 +192,7 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
         player.setController(controller);
 
         controller.setTitle(mItemBean.getTitle());
-        controller.setLenght(mItemBean.getDuration());
+        controller.setLenght(mItemBean.getDuration() * 1000);
         Glide.with(getContext())
                 .load(mItemBean.getImage())
                 .apply(RequestOptions.placeholderOf(R.mipmap.logo))
@@ -203,7 +204,7 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
 
     @Override
     public void stopVideo() {
-        VideoManager.instance().releaseNiceVideoPlayer();
+        VideoManager.instance().releaseNormalVideoPlayer();
     }
 
     @Override
@@ -213,10 +214,15 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
     }
 
     public void restartVideo() {
-        VideoManager.instance().resumeNiceVideoPlayer();
+        if (VideoManager.instance().getCurrentNormalVideoPlayer() != null) {
+            VideoManager.instance().resumeNormalVideoPlayer();
+        } else {
+            recyclerView.resetCurrentPlayerPosition();
+            recyclerView.onScrollStateChanged(RecyclerView.SCROLL_STATE_IDLE);
+        }
     }
 
     public void pauseVideo() {
-        VideoManager.instance().suspendNiceVideoPlayer();
+        VideoManager.instance().suspendNormalVideoPlayer();
     }
 }

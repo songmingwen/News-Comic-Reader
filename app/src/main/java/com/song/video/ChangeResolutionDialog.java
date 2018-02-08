@@ -19,12 +19,12 @@ import java.util.List;
  * Created by Song on 2017/4/27 0027.
  * E-mail: z53520@qq.com
  */
-public class ChangeClarityDialog extends Dialog {
+public class ChangeResolutionDialog extends Dialog {
 
     private LinearLayout mLinearLayout;
     private int mCurrentCheckedIndex;
 
-    public ChangeClarityDialog(Context context) {
+    public ChangeResolutionDialog(Context context) {
         super(context, R.style.dialog_change_clarity);
         init(context);
     }
@@ -39,7 +39,7 @@ public class ChangeClarityDialog extends Dialog {
                 if (mListener != null) {
                     mListener.onClarityNotChanged();
                 }
-                ChangeClarityDialog.this.dismiss();
+                ChangeResolutionDialog.this.dismiss();
             }
         });
 
@@ -81,7 +81,7 @@ public class ChangeClarityDialog extends Dialog {
                             mListener.onClarityNotChanged();
                         }
                     }
-                    ChangeClarityDialog.this.dismiss();
+                    ChangeResolutionDialog.this.dismiss();
                 }
             });
             itemView.setText(items.get(i));

@@ -21,6 +21,7 @@ import com.song.sunset.utils.danmaku.SongDanmakuParser;
 import com.song.sunset.widget.GoodsTag;
 import com.song.video.DanMuVideoController;
 import com.song.video.NormalVideoPlayer;
+import com.song.video.Resolution;
 import com.song.video.VideoManager;
 
 import java.util.ArrayList;
@@ -78,7 +79,7 @@ public class PhoenixVideoActivity extends AppCompatActivity {
         NormalVideoPlayer player = (NormalVideoPlayer) findViewById(R.id.id_normal_video_player);
         DanMuVideoController controller = new DanMuVideoController(this);
         controller.setTitle(mVideoDetailBean.getTitle());
-        controller.setLenght(mVideoDetailBean.getDuration());
+        controller.setLenght(mVideoDetailBean.getDuration() * 1000);
         player.setDanMuView(mDanmakuView);
         player.setController(controller);
         Glide.with(this)
@@ -87,13 +88,29 @@ public class PhoenixVideoActivity extends AppCompatActivity {
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(controller.imageView());
         player.setUp(mVideoDetailBean.getVideo_url(), null);
+//        controller.setResolutions(getResolutions(), 0);
         player.start();
+    }
+
+    /**
+     * 多视频源使用
+     */
+    @NonNull
+    private ArrayList<Resolution> getResolutions() {
+        Resolution P = new Resolution("普清", "480", mVideoDetailBean.getVideo_url());
+        Resolution Hp = new Resolution("高清清", "720", mVideoDetailBean.getVideo_url());
+        Resolution Chp = new Resolution("超清清", "1080", mVideoDetailBean.getVideo_url());
+        ArrayList<Resolution> list = new ArrayList<>();
+        list.add(P);
+        list.add(Hp);
+        list.add(Chp);
+        return list;
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        VideoManager.instance().resumeNiceVideoPlayer();
+        VideoManager.instance().resumeNormalVideoPlayer();
         if (mDanmakuView != null && mDanmakuView.isPrepared() && mDanmakuView.isPaused()) {
             mDanmakuView.resume();
         }
@@ -102,7 +119,7 @@ public class PhoenixVideoActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        VideoManager.instance().suspendNiceVideoPlayer();
+        VideoManager.instance().suspendNormalVideoPlayer();
         if (mDanmakuView != null && mDanmakuView.isPrepared()) {
             mDanmakuView.pause();
         }
@@ -111,7 +128,7 @@ public class PhoenixVideoActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        VideoManager.instance().releaseNiceVideoPlayer();
+        VideoManager.instance().releaseNormalVideoPlayer();
         if (mDanmakuView != null) {
             mDanmakuView.release();
             mDanmakuView = null;

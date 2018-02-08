@@ -20,30 +20,30 @@ public class VideoManager {
         return sInstance;
     }
 
-    public NormalVideoPlayer getCurrentNiceVideoPlayer() {
+    public NormalVideoPlayer getCurrentNormalVideoPlayer() {
         return mVideoPlayer;
     }
 
-    public void setCurrentNiceVideoPlayer(NormalVideoPlayer videoPlayer) {
+    public void setCurrentNromalVideoPlayer(NormalVideoPlayer videoPlayer) {
         if (mVideoPlayer != videoPlayer) {
-            releaseNiceVideoPlayer();
+            releaseNormalVideoPlayer();
             mVideoPlayer = videoPlayer;
         }
     }
 
-    public void suspendNiceVideoPlayer() {
+    public void suspendNormalVideoPlayer() {
         if (mVideoPlayer != null && (mVideoPlayer.isPlaying() || mVideoPlayer.isBufferingPlaying())) {
             mVideoPlayer.pause();
         }
     }
 
-    public void resumeNiceVideoPlayer() {
+    public void resumeNormalVideoPlayer() {
         if (mVideoPlayer != null && (mVideoPlayer.isPaused() || mVideoPlayer.isBufferingPaused())) {
             mVideoPlayer.restart();
         }
     }
 
-    public void releaseNiceVideoPlayer() {
+    public void releaseNormalVideoPlayer() {
         if (mVideoPlayer != null) {
             mVideoPlayer.release();
             mVideoPlayer = null;
