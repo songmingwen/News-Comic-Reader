@@ -18,6 +18,8 @@ import com.song.sunset.utils.SPUtils;
 import com.song.sunset.utils.ScreenUtils;
 import com.song.sunset.utils.StringUtils;
 import com.song.sunset.utils.ViewUtil;
+import com.song.video.base.BaseVideoController;
+import com.song.video.base.INormalVideoPlayer;
 
 import java.io.IOException;
 import java.util.Map;
@@ -102,7 +104,7 @@ public class NormalVideoPlayer extends FrameLayout
     private IMediaPlayer mMediaPlayer;
     private FrameLayout mContainer;
     private NormalTextureView mTextureView;
-    private BaseVideoPlayerController mController;
+    private BaseVideoController mController;
     private DanmakuView mDanmakuView;
     private SurfaceTexture mSurfaceTexture;
     private Surface mSurface;
@@ -150,7 +152,7 @@ public class NormalVideoPlayer extends FrameLayout
     /**
      * 视频播放UI控制层，弹幕层要在controller层下方-->先调用setDanMuView-->在调用setController
      */
-    public void setController(BaseVideoPlayerController controller) {
+    public void setController(BaseVideoController controller) {
         if (controller == null) {
             return;
         }
@@ -209,7 +211,7 @@ public class NormalVideoPlayer extends FrameLayout
     @Override
     public void start() {
         if (mCurrentState == STATE_IDLE) {
-            VideoPlayerManager.instance().setCurrentNiceVideoPlayer(this);
+            VideoManager.instance().setCurrentNiceVideoPlayer(this);
             initAudioManager();
             initMediaPlayer();
             initTextureView();

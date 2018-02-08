@@ -24,7 +24,7 @@ import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.retrofit.RetrofitFactory;
 import com.song.sunset.utils.api.PhoenixNewsApi;
 import com.song.sunset.utils.api.WholeApi;
-import com.song.video.VideoPlayerManager;
+import com.song.video.VideoManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -154,7 +154,7 @@ public class VideoListActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (VideoPlayerManager.instance().onBackPressd()) return;
+        if (VideoManager.instance().onBackPressd()) return;
         if (fromWidget) {
             this.startActivity(new Intent(this, MainActivity.class));
         }

@@ -1,4 +1,4 @@
-package com.song.video;
+package com.song.video.base;
 
 import java.util.Map;
 

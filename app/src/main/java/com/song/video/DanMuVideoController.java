@@ -19,6 +19,8 @@ import android.widget.Toast;
 
 import com.song.sunset.R;
 import com.song.sunset.utils.DateTimeUtils;
+import com.song.video.base.BaseVideoController;
+import com.song.video.base.INormalVideoPlayer;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,7 +33,7 @@ import java.util.Locale;
  * E-mail: z53520@qq.com
  */
 
-public class DanMuVideoController extends BaseVideoPlayerController
+public class DanMuVideoController extends BaseVideoController
         implements View.OnClickListener, SeekBar.OnSeekBarChangeListener, ChangeClarityDialog.OnClarityChangedListener {
 
     private Context mContext;
@@ -178,7 +180,7 @@ public class DanMuVideoController extends BaseVideoPlayerController
     }
 
     @Override
-    protected void onPlayStateChanged(int playState) {
+    public void onPlayStateChanged(int playState) {
         switch (playState) {
             case NormalVideoPlayer.STATE_IDLE:
                 break;
@@ -234,7 +236,7 @@ public class DanMuVideoController extends BaseVideoPlayerController
     }
 
     @Override
-    protected void onPlayModeChanged(int playMode) {
+    public void onPlayModeChanged(int playMode) {
         switch (playMode) {
             case NormalVideoPlayer.MODE_NORMAL:
                 mBack.setVisibility(View.GONE);
@@ -302,7 +304,7 @@ public class DanMuVideoController extends BaseVideoPlayerController
     };
 
     @Override
-    protected void reset() {
+    public void reset() {
         topBottomVisible = false;
         cancelUpdateProgressTimer();
         cancelDismissTopBottomTimer();

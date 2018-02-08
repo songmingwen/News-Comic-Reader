@@ -1,4 +1,4 @@
-package com.song.video;
+package com.song.video.base;
 
 import android.content.Context;
 import android.support.annotation.DrawableRes;
@@ -9,6 +9,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.song.sunset.utils.ScreenUtils;
+import com.song.video.NormalVideoPlayer;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -17,7 +18,7 @@ import java.util.TimerTask;
  * Created by Song on 2017/4/27 0027.
  * E-mail: z53520@qq.com
  */
-public abstract class BaseVideoPlayerController
+public abstract class BaseVideoController
         extends FrameLayout implements View.OnTouchListener {
 
     private Context mContext;
@@ -37,7 +38,7 @@ public abstract class BaseVideoPlayerController
     private int mGestureDownVolume;
     private long mNewPosition;
 
-    public BaseVideoPlayerController(Context context) {
+    public BaseVideoController(Context context) {
         super(context);
         mContext = context;
         this.setOnTouchListener(this);
@@ -89,7 +90,7 @@ public abstract class BaseVideoPlayerController
      *                  <li>{@link NormalVideoPlayer#STATE_COMPLETED}</li>
      *                  </ul>
      */
-    protected abstract void onPlayStateChanged(int playState);
+    public abstract void onPlayStateChanged(int playState);
 
     /**
      * 当播放器的播放模式发生变化，在此方法中更新不同模式下的控制器界面。
@@ -101,12 +102,12 @@ public abstract class BaseVideoPlayerController
      *                 <li>{@link NormalVideoPlayer#MODE_TINY_WINDOW}</li>
      *                 </ul>
      */
-    protected abstract void onPlayModeChanged(int playMode);
+    public abstract void onPlayModeChanged(int playMode);
 
     /**
      * 重置控制器，将控制器恢复到初始状态。
      */
-    protected abstract void reset();
+    public abstract void reset();
 
     /**
      * 开启更新进度的计时器。
@@ -120,7 +121,7 @@ public abstract class BaseVideoPlayerController
             mUpdateProgressTimerTask = new TimerTask() {
                 @Override
                 public void run() {
-                    BaseVideoPlayerController.this.post(new Runnable() {
+                    BaseVideoController.this.post(new Runnable() {
                         @Override
                         public void run() {
                             updateProgress();

@@ -21,7 +21,7 @@ import com.song.sunset.utils.danmaku.SongDanmakuParser;
 import com.song.sunset.widget.GoodsTag;
 import com.song.video.DanMuVideoController;
 import com.song.video.NormalVideoPlayer;
-import com.song.video.VideoPlayerManager;
+import com.song.video.VideoManager;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -93,7 +93,7 @@ public class PhoenixVideoActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        VideoPlayerManager.instance().resumeNiceVideoPlayer();
+        VideoManager.instance().resumeNiceVideoPlayer();
         if (mDanmakuView != null && mDanmakuView.isPrepared() && mDanmakuView.isPaused()) {
             mDanmakuView.resume();
         }
@@ -102,7 +102,7 @@ public class PhoenixVideoActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        VideoPlayerManager.instance().suspendNiceVideoPlayer();
+        VideoManager.instance().suspendNiceVideoPlayer();
         if (mDanmakuView != null && mDanmakuView.isPrepared()) {
             mDanmakuView.pause();
         }
@@ -111,7 +111,7 @@ public class PhoenixVideoActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        VideoPlayerManager.instance().releaseNiceVideoPlayer();
+        VideoManager.instance().releaseNiceVideoPlayer();
         if (mDanmakuView != null) {
             mDanmakuView.release();
             mDanmakuView = null;
@@ -133,7 +133,7 @@ public class PhoenixVideoActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (VideoPlayerManager.instance().onBackPressd()) return;
+        if (VideoManager.instance().onBackPressd()) return;
         super.onBackPressed();
     }
 

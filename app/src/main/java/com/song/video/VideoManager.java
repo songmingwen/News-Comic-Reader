@@ -4,18 +4,18 @@ package com.song.video;
  * Created by Song on 2017/4/27 0027.
  * E-mail: z53520@qq.com
  */
-public class VideoPlayerManager {
+public class VideoManager {
 
     private NormalVideoPlayer mVideoPlayer;
 
-    private VideoPlayerManager() {
+    private VideoManager() {
     }
 
-    private static VideoPlayerManager sInstance;
+    private static VideoManager sInstance;
 
-    public static synchronized VideoPlayerManager instance() {
+    public static synchronized VideoManager instance() {
         if (sInstance == null) {
-            sInstance = new VideoPlayerManager();
+            sInstance = new VideoManager();
         }
         return sInstance;
     }

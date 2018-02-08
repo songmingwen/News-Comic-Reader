@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import com.song.sunset.R;
 import com.song.sunset.utils.DateTimeUtils;
+import com.song.video.base.BaseVideoController;
+import com.song.video.base.INormalVideoPlayer;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -29,7 +31,7 @@ import java.util.Locale;
  * Created by Song on 2017/4/27 0027.
  * E-mail: z53520@qq.com
  */
-public class NormalVideoPlayerController extends BaseVideoPlayerController
+public class NormalVideoController extends BaseVideoController
         implements View.OnClickListener, SeekBar.OnSeekBarChangeListener, ChangeClarityDialog.OnClarityChangedListener {
 
     private Context mContext;
@@ -83,7 +85,7 @@ public class NormalVideoPlayerController extends BaseVideoPlayerController
 
     private boolean hasRegisterBatteryReceiver; // 是否已经注册了电池广播
 
-    public NormalVideoPlayerController(Context context) {
+    public NormalVideoController(Context context) {
         super(context);
         mContext = context;
         init();
@@ -199,7 +201,7 @@ public class NormalVideoPlayerController extends BaseVideoPlayerController
     }
 
     @Override
-    protected void onPlayStateChanged(int playState) {
+    public void onPlayStateChanged(int playState) {
         switch (playState) {
             case NormalVideoPlayer.STATE_IDLE:
                 break;
@@ -255,7 +257,7 @@ public class NormalVideoPlayerController extends BaseVideoPlayerController
     }
 
     @Override
-    protected void onPlayModeChanged(int playMode) {
+    public void onPlayModeChanged(int playMode) {
         switch (playMode) {
             case NormalVideoPlayer.MODE_NORMAL:
                 mBack.setVisibility(View.GONE);
@@ -323,7 +325,7 @@ public class NormalVideoPlayerController extends BaseVideoPlayerController
     };
 
     @Override
-    protected void reset() {
+    public void reset() {
         topBottomVisible = false;
         cancelUpdateProgressTimer();
         cancelDismissTopBottomTimer();

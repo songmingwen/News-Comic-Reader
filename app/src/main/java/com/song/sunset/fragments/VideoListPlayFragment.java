@@ -26,8 +26,8 @@ import com.song.sunset.utils.api.PhoenixNewsApi;
 import com.song.sunset.utils.api.WholeApi;
 import com.song.sunset.widget.VideoAutoPlayRecyclerView;
 import com.song.video.NormalVideoPlayer;
-import com.song.video.VideoPlayerManager;
-import com.song.video.NormalVideoPlayerController;
+import com.song.video.VideoManager;
+import com.song.video.NormalVideoController;
 
 import java.util.List;
 
@@ -96,13 +96,13 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
 
     @Override
     public void onResume() {
-        VideoPlayerManager.instance().resumeNiceVideoPlayer();
+        VideoManager.instance().resumeNiceVideoPlayer();
         super.onResume();
     }
 
     @Override
     public void onPause() {
-        VideoPlayerManager.instance().suspendNiceVideoPlayer();
+        VideoManager.instance().suspendNiceVideoPlayer();
         super.onPause();
     }
 
@@ -163,7 +163,7 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
 
     @Override
     public void onDestroy() {
-        VideoPlayerManager.instance().releaseNiceVideoPlayer();
+        VideoManager.instance().releaseNiceVideoPlayer();
         super.onDestroy();
     }
 
@@ -187,7 +187,7 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
         if (player == null || !shouldPlay) return;
         VideoDetailBean mItemBean = mAdapter.getData().get(position);
 
-        NormalVideoPlayerController controller = new NormalVideoPlayerController(getContext());
+        NormalVideoController controller = new NormalVideoController(getContext());
         player.setController(controller);
 
         controller.setTitle(mItemBean.getTitle());
@@ -203,7 +203,7 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
 
     @Override
     public void stopVideo() {
-        VideoPlayerManager.instance().releaseNiceVideoPlayer();
+        VideoManager.instance().releaseNiceVideoPlayer();
     }
 
     @Override
@@ -213,10 +213,10 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
     }
 
     public void restartVideo() {
-        VideoPlayerManager.instance().resumeNiceVideoPlayer();
+        VideoManager.instance().resumeNiceVideoPlayer();
     }
 
     public void pauseVideo() {
-        VideoPlayerManager.instance().suspendNiceVideoPlayer();
+        VideoManager.instance().suspendNiceVideoPlayer();
     }
 }
