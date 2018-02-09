@@ -108,13 +108,14 @@ public class SdCardUtil {
      */
     public static ArrayList<String> getSDCardPathEx() {
         ArrayList<String> list = new ArrayList<String>();
+        BufferedReader br = null;
         try {
             Runtime runtime = Runtime.getRuntime();
             Process proc = runtime.exec("mount");
             InputStream is = proc.getInputStream();
             InputStreamReader isr = new InputStreamReader(is);
             String line;
-            BufferedReader br = new BufferedReader(isr);
+            br = new BufferedReader(isr);
             while ((line = br.readLine()) != null) {
                 Log.i(TAG, "mount:  " + line);
                 if (line.contains("secure")) {
@@ -136,10 +137,17 @@ public class SdCardUtil {
                     }
                 }
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            br.close();
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return list;
     }

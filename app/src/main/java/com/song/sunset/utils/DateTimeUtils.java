@@ -111,7 +111,7 @@ public class DateTimeUtils {
         TimeZone mPhoneZone = TimeZone.getDefault();
         // Eastern eight zones.
         TimeZone defaultZone = parseFormat.getTimeZone();
-        if (mPhoneZone.getID() == defaultZone.getID()) {
+        if (TextUtils.equals(mPhoneZone.getID(), defaultZone.getID())) {
             // The time zone is Eastern eight zones.
             return mPhoneNow;
         } else {

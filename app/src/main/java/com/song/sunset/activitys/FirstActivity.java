@@ -9,6 +9,7 @@ import android.view.animation.Animation;
 import android.widget.RelativeLayout;
 
 import com.song.sunset.R;
+import com.song.sunset.utils.DateTimeUtils;
 
 /**
  * Created by Song on 2016/9/14 0014.
@@ -20,7 +21,7 @@ public class FirstActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
-
+        DateTimeUtils.CURRENT_TIME = DateTimeUtils.monthDayFormat.format(DateTimeUtils.now());
         RelativeLayout first = (RelativeLayout) findViewById(R.id.id_first);
 
         AlphaAnimation animation = new AlphaAnimation(0f, 1f);
