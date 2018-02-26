@@ -69,6 +69,7 @@ import com.sunset.greendao.gen.ComicLocalCollectionDao;
 import java.util.ArrayList;
 import java.util.List;
 
+import rapid.decoder.cache.DiskLruCache;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -142,26 +143,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //    }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
-
-    @Override
     public boolean swipeBackPriority() {
         return false;
     }
@@ -175,7 +156,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private void initDrawer() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         StatusBarUtil.setColorForDrawerLayout(this, drawer, getResources().getColor(R.color.transparent));
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.navView);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
