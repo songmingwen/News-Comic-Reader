@@ -39,6 +39,7 @@ import com.song.sunset.beans.CollectionOnlineListBean;
 import com.song.sunset.beans.ComicCollectionBean;
 import com.song.sunset.beans.ComicLocalCollection;
 import com.song.sunset.beans.MusicInfo;
+import com.song.sunset.enums.Weeks;
 import com.song.sunset.fragments.CollectionFragment;
 import com.song.sunset.fragments.ComicClassifyFragment;
 import com.song.sunset.fragments.ComicRankFragment;
@@ -141,8 +142,23 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //    }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 
     @Override
@@ -207,6 +223,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //                MusicGetterManager.getInstance().getMusicLists();
 
                 useBinderPool();
+
+//                Log.i(TAG, "Weeks.SUNDAY.getDate() = " + Weeks.SUNDAY.getDate());
 
 //                Log.i("music_list: ", MusicLoader.instance(MainActivity.this.getContentResolver()).getMusicList().toString());
 

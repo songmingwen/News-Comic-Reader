@@ -33,7 +33,7 @@ import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.volley.SampleVolleyFactory;
 import com.song.sunset.mvp.views.ComicDetailView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 import static com.song.sunset.adapters.ComicDetailAdapter.COMIC_LIST_TYPE;
@@ -45,11 +45,11 @@ import static com.song.sunset.adapters.ComicDetailAdapter.COMIC_LIST_TYPE;
 
 public class ComicDetailMVPActivity extends CoreBaseActivity<ComicDetailPresenter, ComicDetailModel> implements ComicDetailView {
 
-    @Bind(R.id.id_comic_detail_recycler)
+    @BindView(R.id.id_comic_detail_recycler)
     RecyclerView recyclerView;
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.id_comic_detail_fab)
+    @BindView(R.id.id_comic_detail_fab)
     FloatingActionButton floatingActionButton;
 
     private ProgressLayout progressLayout;
@@ -184,6 +184,26 @@ public class ComicDetailMVPActivity extends CoreBaseActivity<ComicDetailPresente
         });
         mImageRequest.setRetryPolicy(new DefaultRetryPolicy());
         queue.add(mImageRequest);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 
     @Override

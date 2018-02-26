@@ -333,4 +333,11 @@ public class TempTestActivity extends BaseActivity {
         ss.setSpan(downSpan, "[up_quote]".length() + text.length(), "[up_quote]".length() + text.length() + "[down_quote]".length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
         return ss;
     }
+
+    @Override
+    protected void onDestroy() {
+        mAnimatorSet.cancel();
+        mAnimatorSet = null;
+        super.onDestroy();
+    }
 }

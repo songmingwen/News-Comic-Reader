@@ -2,20 +2,23 @@
 apply from: "config.gradle"
 buildscript {
     /**kotlin配置*/
-//    ext.kotlin_version = '1.0.4'
+    ext.kotlin_version = '1.1.1'
     /** kotlin配置*/
     repositories {
         jcenter()
+        mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.1'
+        classpath 'com.android.tools.build:gradle:2.3.3'
 
         /**greenDao配置*/
         classpath 'org.greenrobot:greendao-gradle-plugin:3.2.1'
         /**greenDao配置*/
 
+        classpath 'com.jakewharton:butterknife-gradle-plugin:8.5.1'
+
         /** kotlin配置*/
-//        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         /** kotlin配置*/
 
         /**dagger配置*/

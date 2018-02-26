@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
 
@@ -25,6 +26,7 @@ public abstract class CoreBaseFragment<T extends CoreBasePresenter, E extends Co
     public E mModel;
     protected Context mContext;
     protected Activity mActivity;
+    private Unbinder mUnbinder;
 
     @Override
     public void onAttach(Context context) {
@@ -47,7 +49,7 @@ public abstract class CoreBaseFragment<T extends CoreBasePresenter, E extends Co
         //设置状态栏透明
         mActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         TAG = getClass().getSimpleName();
-        ButterKnife.bind(this, view);
+        mUnbinder = ButterKnife.bind(this, view);
         mPresenter = TUtil.getT(this, 0);
         mModel = TUtil.getT(this, 1);
         initUI(view, savedInstanceState);
@@ -60,7 +62,7 @@ public abstract class CoreBaseFragment<T extends CoreBasePresenter, E extends Co
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        mUnbinder.unbind();
     }
 
     @Override

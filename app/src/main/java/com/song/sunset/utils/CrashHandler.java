@@ -62,12 +62,13 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
 
             @Override
             public void run() {
-                Looper.prepare();
-
-                android.os.Process.killProcess(android.os.Process.myPid());
-                System.exit(0);
-
-                Looper.loop();
+                //异常处理
+//                Looper.prepare();
+//
+//                android.os.Process.killProcess(android.os.Process.myPid());
+//                System.exit(0);
+//
+//                Looper.loop();
             }
         }).start();
     }
