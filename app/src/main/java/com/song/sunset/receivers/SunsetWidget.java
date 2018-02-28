@@ -15,7 +15,6 @@ import com.song.sunset.R;
 import com.song.sunset.activitys.ComicCollectionActivity;
 import com.song.sunset.activitys.MainActivity;
 import com.song.sunset.activitys.VideoListActivity;
-import com.squareup.haha.perflib.Main;
 
 import java.util.Arrays;
 

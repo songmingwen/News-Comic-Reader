@@ -37,7 +37,7 @@ class FirstKotlinActivity : AppCompatActivity() {
     }
 
     private fun startMainActivity() {
-        startActivity(Intent(this, MainKotlinActivity::class.java))
+        startActivity(Intent(this, MainActivity::class.java))
         overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_fade_out)
         Handler().postDelayed({ this@FirstKotlinActivity.finish() }, 200)
     }

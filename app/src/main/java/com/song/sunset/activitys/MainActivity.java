@@ -12,6 +12,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.design.widget.FloatingActionButton;
@@ -29,6 +30,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.meituan.robust.Patch;
+import com.meituan.robust.PatchExecutor;
+import com.meituan.robust.PatchManipulate;
+import com.meituan.robust.RobustCallBack;
+import com.meituan.robust.patch.annotaion.Add;
+import com.meituan.robust.patch.annotaion.Modify;
 import com.song.core.statusbar.StatusBarUtil;
 import com.song.sunset.IMusicCallBackListener;
 import com.song.sunset.IMusicGetter;
@@ -63,9 +70,9 @@ import com.song.sunset.utils.MusicLoader;
 import com.song.sunset.utils.SPUtils;
 import com.song.sunset.utils.process.AndroidProcesses;
 import com.song.sunset.utils.process.models.AndroidAppProcess;
-import com.squareup.haha.perflib.Main;
 import com.sunset.greendao.gen.ComicLocalCollectionDao;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -214,6 +221,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //                PrintProcess();
 //                getTopApp();
 //                Log.i("recent_song", getTaskList());
+
+                //热修复
+//                startRobust();
             }
         });
     }
@@ -497,4 +507,75 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public void onFailure(int errorCode, String errorMsg) {
 
     }
+
+
+//    @Modify
+//    private void startRobust() {
+//        new PatchExecutor(getApplicationContext(), new PatchManipulate() {
+//            @Override
+//            protected List<Patch> fetchPatchList(Context context) {
+//                Patch patch = new Patch();
+//                patch.setName("first patch");
+//                patch.setLocalPath(Environment.getExternalStorageDirectory().getPath()
+//                        + File.separator
+//                        + "sunset"
+//                        + File.separator
+//                        + "patch");
+//                patch.setPatchesInfoImplClassFullName("com.song.sunset.patch.PatchesInfoImpl");
+//                List<Patch> patches = new ArrayList<>();
+//                patches.add(patch);
+//                return patches;
+//            }
+//
+//            @Override
+//            protected boolean verifyPatch(Context context, Patch patch) {
+//                if (patch != null) {
+//                    Log.i(TAG, "verifyPatch: " + patch.getName());
+//                    return true;
+//                }
+//                return false;
+//            }
+//
+//            @Override
+//            protected boolean ensurePatchExist(Patch patch) {
+//                if (patch != null) {
+//                    Log.i(TAG, "ensurePatchExist: " + patch.getName());
+//                    return true;
+//                }
+//                return false;
+//            }
+//        }, new RobustCallBack() {
+//            @Override
+//            public void onPatchListFetched(boolean b, boolean b1) {
+//                Log.i(TAG, "onPatchListFetched: " + b + b1);
+//            }
+//
+//            @Override
+//            public void onPatchFetched(boolean b, boolean b1, Patch patch) {
+//                Log.i(TAG, "onPatchFetched: " + b + b1 + patch.getName());
+//            }
+//
+//            @Override
+//            public void onPatchApplied(boolean b, Patch patch) {
+//                Log.i(TAG, "onPatchApplied: " + b + patch.getName());
+//            }
+//
+//            @Override
+//            public void logNotify(String s, String s1) {
+//                Log.i(TAG, "logNotify: " + s + "; " + s1);
+//            }
+//
+//            @Override
+//            public void exceptionNotify(Throwable throwable, String s) {
+//                Log.i(TAG, "exceptionNotify: " + throwable.getMessage() + "; " + s);
+//            }
+//        });
+//
+//        addToast();
+//    }
+//
+//    @Add
+//    private void addToast() {
+//        Toast.makeText(AppConfig.getApp(), "添加成功", Toast.LENGTH_SHORT).show();
+//    }
 }

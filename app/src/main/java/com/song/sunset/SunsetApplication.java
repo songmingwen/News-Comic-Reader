@@ -62,7 +62,7 @@ public class SunsetApplication extends MultiDexApplication {
 
         //FrescoUtil.getDefaultImagePipelineConfig(this)
         Fresco.initialize(this, config);
-//        CrashHandler.getInstance().init(this);
+//        CrashHandler.getInstance().init();
         PushManager.getInstance().init(this);
         BinderPool.getInstance();
         MessengerManager.getInstance().init(this);

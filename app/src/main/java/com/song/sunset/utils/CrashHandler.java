@@ -1,6 +1,5 @@
 package com.song.sunset.utils;
 
-import android.content.Context;
 import android.os.Looper;
 import android.widget.Toast;
 
@@ -11,14 +10,13 @@ import android.widget.Toast;
 
 public class CrashHandler implements Thread.UncaughtExceptionHandler {
 
-    private static Object lock = new Object();
+    private static final Object lock = new Object();
 
     private CrashHandler() {
         // Empty Constractor
     }
 
     private static CrashHandler mCrashHandler;
-    private Context mContext;
     private Thread.UncaughtExceptionHandler defaultUncaughtExceptionHandler;
 
     public static CrashHandler getInstance() {
@@ -35,8 +33,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     }
 
     /* 初始化 */
-    public void init(Context context) {
-        this.mContext = context;
+    public void init() {
         Thread.setDefaultUncaughtExceptionHandler(this);
         defaultUncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
     }

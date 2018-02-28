@@ -22,6 +22,10 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import com.meituan.robust.Patch
+import com.meituan.robust.PatchExecutor
+import com.meituan.robust.PatchManipulate
+import com.meituan.robust.RobustCallBack
 import com.song.core.statusbar.StatusBarUtil
 import com.song.sunset.R
 import com.song.sunset.activitys.base.BaseActivity
@@ -158,7 +162,7 @@ class MainKotlinActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
             //                });
             //                MusicGetterManager.getInstance().getMusicLists();
 
-            useBinderPool()
+//            useBinderPool()
 
             //                Log.i(TAG, "Weeks.SUNDAY.getDate() = " + Weeks.SUNDAY.getDate());
 
