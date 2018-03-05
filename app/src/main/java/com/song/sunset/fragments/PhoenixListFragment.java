@@ -14,11 +14,15 @@ import android.widget.RelativeLayout;
 
 import com.song.sunset.R;
 import com.song.sunset.adapters.PhoenixListAdapter;
+import com.song.sunset.adapters.base.BaseRecyclerViewAdapter;
 import com.song.sunset.beans.PhoenixChannelBean;
 import com.song.sunset.beans.PhoenixNewsListBean;
+import com.song.sunset.beans.basebeans.PageEntity;
 import com.song.sunset.fragments.base.BaseFragment;
+import com.song.sunset.fragments.base.RVLoadableFragment;
 import com.song.sunset.interfaces.LoadingMoreListener;
 import com.song.sunset.utils.AppConfig;
+import com.song.sunset.utils.ScreenUtils;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
@@ -43,61 +47,75 @@ import rx.Observable;
  * E-mail: z53520@qq.com
  */
 
-public class PhoenixListFragment extends BaseFragment implements RetrofitCallback<PhoenixNewsListBean>, PtrHandler, LoadingMoreListener {
-
-    private RelativeLayout progressBar;
-    private LoadMoreRecyclerView recyclerView;
-    private PhoenixListAdapter mAdapter;
-    private PtrFrameLayout refreshLayout;
-    private ProgressLayout progressLayout;
-    private boolean isLoading, isRefreshing, isFirst = false;
+public class PhoenixListFragment extends RVLoadableFragment<PhoenixListAdapter, PhoenixNewsListBean> {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        isFirst = true;
-        return inflater.inflate(R.layout.fragment_phoenix_list, container, false);
+    protected void loadFirstPage() {
+        getDataFromRetrofit2(PhoenixNewsApi.DOWN);
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        progressLayout = (ProgressLayout) view.findViewById(R.id.progress);
-        progressLayout.showLoading();
+    protected void refreshMore() {
+        getDataFromRetrofit2(PhoenixNewsApi.DOWN);
+    }
 
-        progressBar = (RelativeLayout) view.findViewById(R.id.id_loading_more_progress);
-        showProgress(false);
+    @Override
+    protected void loadMore(int pageNum) {
+        getDataFromRetrofit2(PhoenixNewsApi.UP);
+    }
 
-        refreshLayout = (PtrFrameLayout) view.findViewById(R.id.id_phoenix_list_swipe_refresh);
-        StoreHouseHeader header = new StoreHouseHeader(getContext());
-        header.setPadding(0, ViewUtil.dip2px(2), 0, ViewUtil.dip2px(2));
-        header.initWithString("Song");
-        header.setTextColor(getResources().getColor(R.color.colorPrimary));
-        header.setBackgroundColor(getResources().getColor(R.color.white));
+    @Override
+    public int getLayout() {
+        return R.layout.fragment_phoenix_list;
+    }
 
-        refreshLayout.setDurationToCloseHeader(AppConfig.REFRESH_CLOSE_TIME);
-        refreshLayout.setHeaderView(header);
-        refreshLayout.addPtrUIHandler(header);
-        refreshLayout.setPtrHandler(this);
+    @Override
+    protected ProgressLayout getWrapper(View rootView) {
+        return rootView.findViewById(R.id.progress);
+    }
 
-        recyclerView = (LoadMoreRecyclerView) view.findViewById(R.id.id_recyclerview_phoenix_list);
-        mAdapter = new PhoenixListAdapter(getActivity());
-        recyclerView.setAdapter(mAdapter);
-        recyclerView.setLoadingMoreListener(this);
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1) {
+    @Override
+    protected PtrFrameLayout getPtrLayout(View rootView) {
+        return rootView.findViewById(R.id.id_phoenix_list_swipe_refresh);
+    }
+
+    @Override
+    protected PhoenixListAdapter getAdapter() {
+        return new PhoenixListAdapter(getActivity());
+    }
+
+    @Override
+    public RecyclerView getRecyclerView(View rootView) {
+        return rootView.findViewById(R.id.id_recyclerview_phoenix_list);
+    }
+
+    @Override
+    protected RecyclerView.LayoutManager getLayoutManager() {
+        return new GridLayoutManager(getActivity(), 1) {
             @Override
             protected int getExtraLayoutSpace(RecyclerView.State state) {
                 return ViewUtil.getScreenHeigth() / 3;
             }
-        });
-        //添加分割线
-//        recyclerView.addItemDecoration(new RecyclerViewDivider(getActivity(), LinearLayoutManager.HORIZONTAL));
-        getDataFromRetrofit2(PhoenixNewsApi.DOWN);
+        };
+    }
+
+    @Override
+    public <BeanData extends PageEntity> void addData(boolean atTop, BeanData bean) {
+        List<PhoenixChannelBean> removeRepeatedList = getRemoveRepeatList(bean.getData());
+        if (atTop) {
+            mInnerAdapter.addDataAtTop(removeRepeatedList);
+            redirectPosition(ViewUtil.dip2px(7) - mRecyclerView.getHeight());
+        } else {
+            mInnerAdapter.addDataAtBottom(removeRepeatedList);
+            if (!mPresenter.isFirstLoading()) {
+                redirectPosition(mRecyclerView.getHeight() - ViewUtil.dip2px(7) - ViewUtil.dip2px(60));
+            }
+        }
     }
 
     private void getDataFromRetrofit2(String action) {
@@ -110,44 +128,21 @@ public class PhoenixListFragment extends BaseFragment implements RetrofitCallbac
         RxUtil.phoenixNewsSubscribe(observable, this);
     }
 
-    @Override
-    public void onSuccess(PhoenixNewsListBean phoenixNewsListBean) {
-        if (mAdapter == null) return;
-        progressLayout.showContent();
-        List<PhoenixChannelBean> removeRepeatedList = getRemoveRepeatList(phoenixNewsListBean.getItem());
-        if (isRefreshing) {
-            isRefreshing = false;
-            mAdapter.addDataAtTop(removeRepeatedList);
-            redirectPosition(20 - recyclerView.getHeight());
-            refreshLayout.refreshComplete();
-        } else {
-            if (isLoading) {
-                isLoading = false;
-            }
-            mAdapter.addDataAtBottom(removeRepeatedList);
-            if (!isFirst) {
-                redirectPosition(recyclerView.getHeight() - 20);
-            }
-            showProgress(false);
-        }
-        isFirst = false;
-    }
-
     private void redirectPosition(final int dy) {
-        if (recyclerView == null) {
+        if (mRecyclerView == null) {
             return;
         }
-        recyclerView.postDelayed(new Runnable() {
+        mRecyclerView.postDelayed(new Runnable() {
             @Override
             public void run() {
-                recyclerView.smoothScrollBy(0, dy, new DecelerateInterpolator());
+                mRecyclerView.smoothScrollBy(0, dy, new DecelerateInterpolator());
             }
         }, AppConfig.REFRESH_CLOSE_TIME);
     }
 
     @NonNull
     private List<PhoenixChannelBean> getRemoveRepeatList(List<PhoenixChannelBean> phoenixChannelBeanList) {
-        List<PhoenixChannelBean> total = mAdapter.getData();
+        List<PhoenixChannelBean> total = mInnerAdapter.getData();
 
         HashSet<String> set = new HashSet<>();
         for (PhoenixChannelBean item : total) {
@@ -161,58 +156,5 @@ public class PhoenixListFragment extends BaseFragment implements RetrofitCallbac
             }
         }
         return removeRepeatedList;
-    }
-
-    @Override
-    public void onFailure(int errorCode, String errorMsg) {
-        if (isRefreshing) {
-            isRefreshing = false;
-            refreshLayout.refreshComplete();
-        } else {
-            if (isLoading) {
-                isLoading = false;
-                showProgress(false);
-            } else {
-                progressLayout.showError(getResources().getDrawable(R.drawable.icon_new_style_failure), "连接失败",
-                        "无法建立连接",
-                        "点击重试", errorClickListener, null);
-            }
-        }
-    }
-
-    private View.OnClickListener errorClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            progressLayout.showLoading();
-            getDataFromRetrofit2(PhoenixNewsApi.DOWN);
-        }
-    };
-
-    @Override
-    public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
-        return PtrDefaultHandler.checkContentCanBePulledDown(frame, content, header);
-    }
-
-    @Override
-    public void onRefreshBegin(PtrFrameLayout frame) {
-        if (isRefreshing) {
-            return;
-        }
-        isRefreshing = true;
-        getDataFromRetrofit2(PhoenixNewsApi.DOWN);
-    }
-
-    @Override
-    public void onLoadingMore() {
-        if (isLoading) {
-            return;
-        }
-        showProgress(true);
-        isLoading = true;
-        getDataFromRetrofit2(PhoenixNewsApi.UP);
-    }
-
-    public void showProgress(boolean flag) {
-        progressBar.setVisibility(flag ? View.VISIBLE : View.GONE);
     }
 }

@@ -8,7 +8,7 @@ import java.util.List;
  * @author 13leaf
  *
  */
-public interface PageEntity extends Serializable {
+public interface PageEntity<T> extends Serializable {
 	int getPageSum();
-	List<?> getData();
+	List<T> getData();
 }

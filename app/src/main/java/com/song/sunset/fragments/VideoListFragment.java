@@ -164,7 +164,7 @@ public class VideoListFragment extends BaseFragment implements LoadingMoreListen
                     if (isLoading) {
                         isLoading = false;
                     }
-                    adapter.addDatas(videoBeanList);
+                    adapter.addDataAtBottom(videoBeanList);
                     showProgress(false);
                 }
             }

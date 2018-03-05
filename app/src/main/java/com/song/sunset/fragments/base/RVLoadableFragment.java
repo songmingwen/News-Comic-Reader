@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.song.sunset.adapters.base.BaseRVAdapterWithoutVH;
 import com.song.sunset.interfaces.EndlessRecyclerOnScrollListener;
 import com.song.sunset.mvp.views.ListCallView;
 import com.song.sunset.utils.AppConfig;
@@ -26,7 +27,7 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
 import in.srain.cube.views.ptr.header.StoreHouseHeader;
 
-public abstract class RVLoadableFragment<Adapter extends BaseRecyclerViewAdapter, Bean extends PageEntity>
+public abstract class RVLoadableFragment<Adapter extends BaseRVAdapterWithoutVH, Bean extends PageEntity>
         extends BaseFragment implements PtrHandler, RetrofitCallback<Bean>, ListCallView {
 
     protected Adapter mInnerAdapter;

@@ -33,7 +33,12 @@ public class ListModel {
             view.showContent();
             view.changeFooterState(LoadingFooter.State.Loading);
         }
-        if (isRefreshing) {
+        if (isFirstLoading) {
+            if (view != null) {
+                view.addData(true,bean);
+                isFirstLoading = false;
+            }
+        } else if (isRefreshing) {
             isRefreshing = false;
             if (view != null) {
                 view.addData(true, bean);
@@ -46,9 +51,6 @@ public class ListModel {
             if (view != null) {
                 view.addData(false, bean);
             }
-        }
-        if (isFirstLoading) {
-            isFirstLoading = false;
         }
     }
 
@@ -103,5 +105,9 @@ public class ListModel {
 
     public void setIgnoreTotalPage(boolean ignoreTotalPage) {
         this.ignoreTotalPage = ignoreTotalPage;
+    }
+
+    public boolean isFirstLoading() {
+        return isFirstLoading;
     }
 }

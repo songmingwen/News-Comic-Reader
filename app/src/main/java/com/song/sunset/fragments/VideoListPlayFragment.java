@@ -125,7 +125,7 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
                         isLoading = false;
                     }
                     if (mAdapter != null) {
-                        mAdapter.addDatas(videoBeanList);
+                        mAdapter.addDataAtBottom(videoBeanList);
                         showProgress(false);
                     }
                 }

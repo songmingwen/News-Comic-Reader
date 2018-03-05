@@ -50,6 +50,11 @@ public class ComicGenericListFragment extends RVLoadableFragment<ComicListAdapte
     }
 
     @Override
+    public int getLayout() {
+        return R.layout.fragment_loadable_list;
+    }
+
+    @Override
     protected ProgressLayout getWrapper(View rootView) {
         return (ProgressLayout) rootView.findViewById(R.id.id_loadable_fragment_progress);
     }
@@ -82,11 +87,6 @@ public class ComicGenericListFragment extends RVLoadableFragment<ComicListAdapte
     private void loadData(int page, String argName, int argValue) {
         Observable<BaseBean<ComicListBean>> observable = RetrofitFactory.createApi(U17ComicApi.class).queryComicListRDByObservable(page, argName, argValue);
         RxUtil.comicSubscribe(observable, ComicGenericListFragment.this);
-    }
-
-    @Override
-    public int getLayout() {
-        return R.layout.fragment_loadable_list;
     }
 
     @Override

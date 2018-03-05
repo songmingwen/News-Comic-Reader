@@ -4,6 +4,8 @@ package com.song.sunset.beans;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.song.sunset.beans.basebeans.PageEntity;
+
 import java.util.List;
 
 /**
@@ -11,7 +13,7 @@ import java.util.List;
  * E-mail: z53520@qq.com
  */
 
-public class PhoenixNewsListBean implements Parcelable {
+public class PhoenixNewsListBean implements Parcelable, PageEntity<PhoenixChannelBean> {
 
     private String listId;
     private String type;
@@ -117,4 +119,14 @@ public class PhoenixNewsListBean implements Parcelable {
             return new PhoenixNewsListBean[size];
         }
     };
+
+    @Override
+    public int getPageSum() {
+        return totalPage;
+    }
+
+    @Override
+    public List<PhoenixChannelBean> getData() {
+        return getItem();
+    }
 }

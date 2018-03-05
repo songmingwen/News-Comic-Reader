@@ -77,6 +77,10 @@ public class ListPresenter {
         }
     }
 
+    public boolean isFirstLoading() {
+        return isDestroyed() || model.isFirstLoading();
+    }
+
     private boolean isDestroyed() {
         return model == null || view == null;
     }

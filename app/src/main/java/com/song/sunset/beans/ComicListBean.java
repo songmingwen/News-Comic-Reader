@@ -11,7 +11,7 @@ import java.util.List;
  * Created by Song on 2016/9/22 0022.
  * Email:z53520@qq.com
  */
-public class ComicListBean implements PageEntity, Parcelable {
+public class ComicListBean implements PageEntity<ComicsBean>, Parcelable {
 
     private boolean hasMore;
 
@@ -82,7 +82,7 @@ public class ComicListBean implements PageEntity, Parcelable {
     }
 
     @Override
-    public List<?> getData() {
+    public List<ComicsBean> getData() {
         return getComics();
     }
 }
