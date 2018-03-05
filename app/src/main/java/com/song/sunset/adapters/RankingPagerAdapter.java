@@ -2,10 +2,9 @@ package com.song.sunset.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.song.sunset.fragments.ComicRankListFragment;
+import com.song.sunset.fragments.ComicGenericListFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +67,7 @@ public class RankingPagerAdapter<T extends Fragment> extends FragmentStatePagerA
         if (position == 0) {
             if (fragments != null &&
                     fragments.get(0) != null &&
-                    fragments.get(0) instanceof ComicRankListFragment) {
+                    fragments.get(0) instanceof ComicGenericListFragment) {
                 return 1.5f;
             }
         }

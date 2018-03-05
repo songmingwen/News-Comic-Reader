@@ -12,7 +12,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.design.widget.FloatingActionButton;
@@ -28,55 +27,39 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.meituan.robust.Patch;
-import com.meituan.robust.PatchExecutor;
-import com.meituan.robust.PatchManipulate;
-import com.meituan.robust.RobustCallBack;
-import com.meituan.robust.patch.annotaion.Add;
-import com.meituan.robust.patch.annotaion.Modify;
 import com.song.core.statusbar.StatusBarUtil;
 import com.song.sunset.IMusicCallBackListener;
 import com.song.sunset.IMusicGetter;
-import com.song.sunset.IPush;
 import com.song.sunset.R;
 import com.song.sunset.activitys.base.BaseActivity;
 import com.song.sunset.beans.CollectionOnlineListBean;
 import com.song.sunset.beans.ComicCollectionBean;
 import com.song.sunset.beans.ComicLocalCollection;
 import com.song.sunset.beans.MusicInfo;
-import com.song.sunset.enums.Weeks;
 import com.song.sunset.fragments.CollectionFragment;
 import com.song.sunset.fragments.ComicClassifyFragment;
 import com.song.sunset.fragments.ComicRankFragment;
+import com.song.sunset.fragments.ComicGenericListFragment;
 import com.song.sunset.fragments.PhoenixListFragment;
-import com.song.sunset.fragments.MVPComicListFragment;
 import com.song.sunset.mvp.models.ComicCollectionModel;
 import com.song.sunset.mvp.presenters.ComicCollectionPresenter;
 import com.song.sunset.mvp.views.ComicCollectionView;
-import com.song.sunset.services.MusicGetterService;
 import com.song.sunset.services.impl.BinderPoolImpl;
 import com.song.sunset.services.impl.MusicCallBackListenerImpl;
 import com.song.sunset.services.impl.MusicGetterImpl;
-import com.song.sunset.services.impl.PushImpl;
 import com.song.sunset.services.managers.BinderPool;
 import com.song.sunset.services.managers.MessengerManager;
-import com.song.sunset.services.managers.MusicGetterManager;
 import com.song.sunset.services.managers.PushManager;
-import com.song.sunset.utils.AppConfig;
 import com.song.sunset.utils.GreenDaoUtil;
-import com.song.sunset.utils.MusicLoader;
 import com.song.sunset.utils.SPUtils;
 import com.song.sunset.utils.process.AndroidProcesses;
 import com.song.sunset.utils.process.models.AndroidAppProcess;
 import com.sunset.greendao.gen.ComicLocalCollectionDao;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import rapid.decoder.cache.DiskLruCache;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -392,7 +375,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         int id = item.getItemId();
 
         if (id == R.id.nav_gallery) {
-            switchFragmentDelay(MVPComicListFragment.class.getName(), getResources().getString(R.string.newest_comic));
+            switchFragmentDelay(ComicGenericListFragment.class.getName(), getResources().getString(R.string.newest_comic));
         } else if (id == R.id.nav_classify_comic) {
             switchFragmentDelay(ComicClassifyFragment.class.getName(), getResources().getString(R.string.classify_comic));
         } else if (id == R.id.nav_video) {

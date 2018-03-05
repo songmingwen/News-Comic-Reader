@@ -26,7 +26,7 @@ import rx.Observable;
  * E-mail: z53520@qq.com
  */
 
-public class RankList extends RVLoadableFragment<ComicListAdapter, ComicListBean> {
+public class ComicGenericListFragment extends RVLoadableFragment<ComicListAdapter, ComicListBean> {
 
     private String argName = "";
     private int argValue;
@@ -47,7 +47,6 @@ public class RankList extends RVLoadableFragment<ComicListAdapter, ComicListBean
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        RecyclerViewUtils.setHeaderView(mRecyclerView, new SampleHeader(getActivity()));
     }
 
     @Override
@@ -66,6 +65,11 @@ public class RankList extends RVLoadableFragment<ComicListAdapter, ComicListBean
     }
 
     @Override
+    protected void loadFirstPage() {
+        loadData(1, argName, argValue);
+    }
+
+    @Override
     protected void refreshMore() {
         loadData(1, argName, argValue);
     }
@@ -77,7 +81,7 @@ public class RankList extends RVLoadableFragment<ComicListAdapter, ComicListBean
 
     private void loadData(int page, String argName, int argValue) {
         Observable<BaseBean<ComicListBean>> observable = RetrofitFactory.createApi(U17ComicApi.class).queryComicListRDByObservable(page, argName, argValue);
-        RxUtil.comicSubscribe(observable, RankList.this);
+        RxUtil.comicSubscribe(observable, ComicGenericListFragment.this);
     }
 
     @Override

@@ -92,11 +92,11 @@ repositories {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile "com.android.support:appcompat-v7:${rootProject.ext.android.ANDROID_APPCOMPAT_VERSION}"
-    compile "com.android.support:design:${rootProject.ext.android.ANDROID_APPCOMPAT_VERSION}"
-    compile "com.android.support:cardview-v7:${rootProject.ext.android.ANDROID_APPCOMPAT_VERSION}"
-    compile "com.android.support:palette-v7:${rootProject.ext.android.ANDROID_APPCOMPAT_VERSION}"
-    compile "com.android.support:support-v4:${rootProject.ext.android.ANDROID_APPCOMPAT_VERSION}"
+    compile rootProject.ext.android["appcompat-v7"]
+    compile rootProject.ext.android["design"]
+    compile rootProject.ext.android["support-v4"]
+    compile rootProject.ext.android["cardview-v7"]
+    compile rootProject.ext.android["palette-v7"]
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     testCompile 'junit:junit:4.12'

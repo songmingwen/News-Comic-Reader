@@ -2,17 +2,13 @@ package com.song.sunset.fragments.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.song.core.recyclerviewwithheadandfoot.EndlessRecyclerOnScrollListener;
-import com.song.core.recyclerviewwithheadandfoot.HeaderAndFooterRecyclerViewAdapter;
-import com.song.core.recyclerviewwithheadandfoot.HeaderSpanSizeLookup;
-import com.song.core.recyclerviewwithheadandfoot.RecyclerViewStateUtils;
+import com.song.sunset.interfaces.EndlessRecyclerOnScrollListener;
 import com.song.sunset.mvp.views.ListCallView;
 import com.song.sunset.utils.AppConfig;
 import com.song.sunset.widget.LoadingFooter;
@@ -23,20 +19,22 @@ import com.song.sunset.mvp.presenters.ListPresenter;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
+import com.song.sunset.widget.RecyclerViewWithHF;
 
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
 import in.srain.cube.views.ptr.header.StoreHouseHeader;
 
-public abstract class RVLoadableFragment<Adapter extends BaseRecyclerViewAdapter
-        , Bean extends PageEntity> extends BaseFragment implements PtrHandler, RetrofitCallback<Bean>, ListCallView {
+public abstract class RVLoadableFragment<Adapter extends BaseRecyclerViewAdapter, Bean extends PageEntity>
+        extends BaseFragment implements PtrHandler, RetrofitCallback<Bean>, ListCallView {
 
     protected Adapter mInnerAdapter;
     protected ProgressLayout mProgressLayout;
     protected PtrFrameLayout mPtrFrameLayout;
     protected RecyclerView mRecyclerView;
     protected ListPresenter mPresenter;
+    private LoadingFooter mFooterView;
 
     private View.OnClickListener errorClickListener = new View.OnClickListener() {
         @Override
@@ -48,6 +46,7 @@ public abstract class RVLoadableFragment<Adapter extends BaseRecyclerViewAdapter
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mPresenter = new ListPresenter(this);
     }
 
     @Override
@@ -82,22 +81,23 @@ public abstract class RVLoadableFragment<Adapter extends BaseRecyclerViewAdapter
         }
 
         mInnerAdapter = getAdapter();
-        HeaderAndFooterRecyclerViewAdapter outAdapter = new HeaderAndFooterRecyclerViewAdapter(mInnerAdapter);
-        mRecyclerView.setAdapter(outAdapter);
+        mRecyclerView.setAdapter(mInnerAdapter);
 
         RecyclerView.LayoutManager layoutManager = getLayoutManager();
         if (layoutManager == null) {
             layoutManager = new LinearLayoutManager(getActivity());
         }
-        if (layoutManager instanceof GridLayoutManager) {
-            GridLayoutManager manager = (GridLayoutManager) layoutManager;
-            HeaderAndFooterRecyclerViewAdapter adapter = (HeaderAndFooterRecyclerViewAdapter) mRecyclerView.getAdapter();
-            manager.setSpanSizeLookup(new HeaderSpanSizeLookup(adapter, manager.getSpanCount()));
-        }
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.addOnScrollListener(mOnScrollListener);
 
-        mPresenter = new ListPresenter(this);
+        //添加分割线，无默认分割线
+        RecyclerView.ItemDecoration itemDecoration = getRecyclerViewDecoration();
+        if (itemDecoration != null) {
+            mRecyclerView.addItemDecoration(itemDecoration);
+        }
+        mRecyclerView.addOnScrollListener(mOnScrollListener);
+
+        mPresenter.firstLoading();
     }
 
     @Override
@@ -140,7 +140,7 @@ public abstract class RVLoadableFragment<Adapter extends BaseRecyclerViewAdapter
         if (mProgressLayout != null) {
             mProgressLayout.showLoading();
         }
-        loadMore(1);
+        loadFirstPage();
     }
 
     @Override
@@ -197,7 +197,16 @@ public abstract class RVLoadableFragment<Adapter extends BaseRecyclerViewAdapter
                 }
             };
         }
-        RecyclerViewStateUtils.setFooterViewState(getActivity(), mRecyclerView, state, onClickListener);
+        //只有RecyclerViewWithHF 才有添加foot，head的功能
+        if (mRecyclerView instanceof RecyclerViewWithHF) {
+            RecyclerViewWithHF recyclerView = (RecyclerViewWithHF) mRecyclerView;
+            if (mFooterView == null) {
+                mFooterView = new LoadingFooter(getActivity());
+                recyclerView.addFooterView(mFooterView);
+            }
+            mFooterView.setOnClickListener(onClickListener);
+            mFooterView.setState(state);
+        }
     }
 
     private void loadMoreSafely() {
@@ -205,6 +214,8 @@ public abstract class RVLoadableFragment<Adapter extends BaseRecyclerViewAdapter
             mPresenter.loadMore();
         }
     }
+
+    protected abstract void loadFirstPage();
 
     protected abstract void refreshMore();
 
@@ -221,4 +232,8 @@ public abstract class RVLoadableFragment<Adapter extends BaseRecyclerViewAdapter
     public abstract RecyclerView getRecyclerView(View rootView);
 
     protected abstract RecyclerView.LayoutManager getLayoutManager();
+
+    public RecyclerView.ItemDecoration getRecyclerViewDecoration() {
+        return null;
+    }
 }

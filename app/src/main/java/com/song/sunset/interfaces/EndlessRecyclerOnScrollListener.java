@@ -1,4 +1,4 @@
-package com.song.core.recyclerviewwithheadandfoot;
+package com.song.sunset.interfaces;
 
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;

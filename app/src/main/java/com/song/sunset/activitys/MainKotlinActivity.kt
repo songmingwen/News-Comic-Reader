@@ -22,10 +22,6 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import com.meituan.robust.Patch
-import com.meituan.robust.PatchExecutor
-import com.meituan.robust.PatchManipulate
-import com.meituan.robust.RobustCallBack
 import com.song.core.statusbar.StatusBarUtil
 import com.song.sunset.R
 import com.song.sunset.activitys.base.BaseActivity
@@ -319,7 +315,7 @@ class MainKotlinActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         val id = item.itemId
 
         when (id) {
-            R.id.nav_gallery -> switchFragmentDelay(MVPComicListFragment::class.java.name, resources.getString(R.string.newest_comic))
+            R.id.nav_gallery -> switchFragmentDelay(ComicGenericListFragment::class.java.name, resources.getString(R.string.newest_comic))
             R.id.nav_classify_comic -> switchFragmentDelay(ComicClassifyFragment::class.java.name, resources.getString(R.string.classify_comic))
             R.id.nav_video -> VideoListActivity.start(this)
             R.id.nav_rank_comic -> switchFragmentDelay(ComicRankFragment::class.java.name, resources.getString(R.string.rank_comic))

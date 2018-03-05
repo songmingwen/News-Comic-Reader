@@ -16,7 +16,6 @@ public class ListPresenter {
     public ListPresenter(ListCallView view) {
         this.view = view;
         model = new ListModel();
-        firstLoading();
     }
 
     /**

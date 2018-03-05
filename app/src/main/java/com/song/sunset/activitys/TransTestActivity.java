@@ -40,8 +40,6 @@ import java.util.ArrayList;
 
 public class TransTestActivity extends BaseActivity {
 
-    private RecyclerView mRecyclerView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,9 +67,9 @@ public class TransTestActivity extends BaseActivity {
         list.add(new VignetteFilterTransformation(this));
 
         TransAdapter transAdapter = new TransAdapter(this);
-        mRecyclerView = (RecyclerView) findViewById(R.id.id_recyclerview_trans);
-        mRecyclerView.setAdapter(transAdapter);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.id_recyclerview_trans);
+        recyclerView.setAdapter(transAdapter);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         transAdapter.setData(list);
     }
 }

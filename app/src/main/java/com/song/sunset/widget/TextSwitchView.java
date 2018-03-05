@@ -25,18 +25,18 @@ public class TextSwitchView extends TextSwitcher implements ViewSwitcher.ViewFac
     private int index = -1;
     private Context context;
 
-    private Handler mHandler = new Handler() {
-        public void handleMessage(Message msg) {
+    private Handler mHandler = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
                     index = next(); //取得下标值
-                    updateText();  //更新TextSwitcherd显示内容;
+                    updateText();  //更新TextSwitcher显示内容;
                     break;
             }
+            return true;
         }
-
-        ;
-    };
+    });
 
     private String[] resources = {
             "不要踏入静谧的良夜",
@@ -75,9 +75,8 @@ public class TextSwitchView extends TextSwitcher implements ViewSwitcher.ViewFac
     public void setTextStillTime(long time) {
         if (timer == null) {
             timer = new Timer();
-        } else {
-            timer.scheduleAtFixedRate(new MyTask(), 1, time);
         }
+        timer.scheduleAtFixedRate(new MyTask(), 1, time);
     }
 
     private class MyTask extends TimerTask {

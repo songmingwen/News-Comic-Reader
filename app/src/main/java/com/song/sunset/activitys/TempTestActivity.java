@@ -106,7 +106,7 @@ public class TempTestActivity extends BaseActivity {
     }
 
     public void onTempTestFlowButtonClick(View view) {
-//        textSwitchView.setTextStillTime(3000);
+        textSwitchView.setTextStillTime(3000);
 
 //        AnimationSet animationSet = (AnimationSet) AnimationUtils.loadAnimation(this, R.anim.anim_dot_scale_alpha);
 //        dot.startAnimation(animationSet);

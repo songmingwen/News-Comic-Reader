@@ -39,9 +39,8 @@ import static com.song.sunset.activitys.ComicListActivity.ARG_VALUE;
 public class ComicRankFragment extends BaseFragment {
 
     private static final String BUNDLE_KEY_PAGE_INDEX = "page_index";
-    private RankViewPager rankingViewPager;
     private SlidingTabLayout rankingSlidingTabLayout;
-    private RankingPagerAdapter<ComicRankListFragment> rankingPagerAdapter;
+    private RankingPagerAdapter<ComicGenericListFragment> rankingPagerAdapter;
     private ProgressLayout progressLayout;
     private int mCurrPos = 0;
 
@@ -64,7 +63,7 @@ public class ComicRankFragment extends BaseFragment {
     }
 
     private void initView(View view) {
-        rankingViewPager = (RankViewPager) view.findViewById(R.id.ranking_view_pager);
+        RankViewPager rankingViewPager = (RankViewPager) view.findViewById(R.id.ranking_view_pager);
         rankingSlidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.ranking_sliding_layout);
 
         rankingPagerAdapter = new RankingPagerAdapter<>(getChildFragmentManager());
@@ -107,14 +106,14 @@ public class ComicRankFragment extends BaseFragment {
                 progressLayout.showContent();
                 List<ComicRankListBean.RankinglistBean> rankingTypeItemList = comicRankListBean.getRankinglist();
 
-                List<ComicRankListFragment> fragmentList = new ArrayList<>();
+                List<ComicGenericListFragment> fragmentList = new ArrayList<>();
                 List<String> titleList = new ArrayList<>();
 
                 for (ComicRankListBean.RankinglistBean rankingTypeItem : rankingTypeItemList) {
                     Bundle bundle = new Bundle();
                     bundle.putString(ARG_NAME, rankingTypeItem.getArgName());
                     bundle.putInt(ARG_VALUE, Integer.parseInt(rankingTypeItem.getArgValue()));
-                    ComicRankListFragment fragment = (ComicRankListFragment) Fragment.instantiate(getActivity(), ComicRankListFragment.class.getName(), bundle);
+                    ComicGenericListFragment fragment = (ComicGenericListFragment) Fragment.instantiate(getActivity(), ComicGenericListFragment.class.getName(), bundle);
 
                     fragmentList.add(fragment);
                     titleList.add(rankingTypeItem.getTitle());

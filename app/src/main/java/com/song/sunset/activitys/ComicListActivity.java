@@ -7,7 +7,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.song.sunset.R;
 import com.song.sunset.activitys.base.BaseActivity;
-import com.song.sunset.fragments.MVPComicListFragment;
+import com.song.sunset.fragments.ComicGenericListFragment;
 
 /**
  * Created by Song on 2016/9/5 0005.
@@ -41,7 +41,7 @@ public class ComicListActivity extends BaseActivity {
         Bundle bundle = new Bundle();
         bundle.putString(ARG_NAME, argName);
         bundle.putInt(ARG_VALUE, argValue);
-        loadFragment(getBaseContext(), R.id.id_comic_list_framelayout, MVPComicListFragment.class.getName(), bundle, false);
+        loadFragment(getBaseContext(), R.id.id_comic_list_framelayout, ComicGenericListFragment.class.getName(), bundle, false);
     }
 
     public static void start(Context context, String argName, int argValue, String sortName) {
