@@ -16,6 +16,6 @@ public class ComicDetailListItemViewHolder extends RecyclerView.ViewHolder {
 
     public ComicDetailListItemViewHolder(View itemView) {
         super(itemView);
-        comicListText = (TextView) itemView.findViewById(R.id.id_comic_detail_list_item_text);
+        comicListText = itemView.findViewById(R.id.id_comic_detail_list_item_text);
     }
 }

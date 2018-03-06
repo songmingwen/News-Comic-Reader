@@ -18,7 +18,7 @@ public class VideoListHelperHolder extends BaseViewHolder {
 
     public VideoListHelperHolder(View view) {
         super(view);
-        cover = (SimpleDraweeView) itemView.findViewById(R.id.video_drawee);
-        videoName = (TextView) itemView.findViewById(R.id.video_text);
+        cover = itemView.findViewById(R.id.video_drawee);
+        videoName = itemView.findViewById(R.id.video_text);
     }
 }

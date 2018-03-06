@@ -17,6 +17,6 @@ public class ComicSearchResultViewHolder extends RecyclerView.ViewHolder{
 
     public ComicSearchResultViewHolder(View itemView) {
         super(itemView);
-        mName = (TextView) itemView.findViewById(R.id.txt_search);
+        mName = itemView.findViewById(R.id.txt_search);
     }
 }

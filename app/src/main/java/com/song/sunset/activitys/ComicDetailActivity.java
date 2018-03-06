@@ -45,7 +45,6 @@ public class ComicDetailActivity extends BaseActivity {
     private ProgressLayout progressLayout;
     public static final String COMIC_ID = "comic_id";
     private int comicId = -1;
-    private RecyclerView recyclerView;
     private ComicDetailAdapter adapter;
     private int color;
     private Toolbar toolbar;
@@ -69,7 +68,7 @@ public class ComicDetailActivity extends BaseActivity {
 
         floatingActionButton = (FloatingActionButton) findViewById(R.id.id_comic_detail_fab);
 
-        recyclerView = (RecyclerView) findViewById(R.id.id_comic_detail_recycler);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.id_comic_detail_recycler);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         adapter = new ComicDetailAdapter(this);
         recyclerView.setAdapter(adapter);

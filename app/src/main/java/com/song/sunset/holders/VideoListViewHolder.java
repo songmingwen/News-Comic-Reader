@@ -18,7 +18,7 @@ public class VideoListViewHolder extends RecyclerView.ViewHolder {
 
     public VideoListViewHolder(View itemView) {
         super(itemView);
-        cover = (SimpleDraweeView) itemView.findViewById(R.id.video_drawee);
-        videoName = (TextView) itemView.findViewById(R.id.video_text);
+        cover = itemView.findViewById(R.id.video_drawee);
+        videoName = itemView.findViewById(R.id.video_text);
     }
 }

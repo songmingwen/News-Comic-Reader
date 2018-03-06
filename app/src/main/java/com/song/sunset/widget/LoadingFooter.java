@@ -96,11 +96,11 @@ public class LoadingFooter extends RelativeLayout {
                 }
 
                 if (mLoadingView == null) {
-                    ViewStub viewStub = (ViewStub) findViewById(R.id.loading_viewstub);
+                    ViewStub viewStub = findViewById(R.id.loading_viewstub);
                     mLoadingView = viewStub.inflate();
 
-                    mLoadingProgress = (ProgressBar) mLoadingView.findViewById(R.id.loading_progress);
-                    mLoadingText = (TextView) mLoadingView.findViewById(R.id.loading_text);
+                    mLoadingProgress = mLoadingView.findViewById(R.id.loading_progress);
+                    mLoadingText = mLoadingView.findViewById(R.id.loading_text);
                 } else {
                     mLoadingView.setVisibility(VISIBLE);
                 }
@@ -121,7 +121,7 @@ public class LoadingFooter extends RelativeLayout {
                 }
 
                 if (mTheEndView == null) {
-                    ViewStub viewStub = (ViewStub) findViewById(R.id.end_viewstub);
+                    ViewStub viewStub = findViewById(R.id.end_viewstub);
                     mTheEndView = viewStub.inflate();
                 } else {
                     mTheEndView.setVisibility(VISIBLE);
@@ -140,7 +140,7 @@ public class LoadingFooter extends RelativeLayout {
                 }
 
                 if (mNetworkErrorView == null) {
-                    ViewStub viewStub = (ViewStub) findViewById(R.id.network_error_viewstub);
+                    ViewStub viewStub = findViewById(R.id.network_error_viewstub);
                     mNetworkErrorView = viewStub.inflate();
                 } else {
                     mNetworkErrorView.setVisibility(VISIBLE);

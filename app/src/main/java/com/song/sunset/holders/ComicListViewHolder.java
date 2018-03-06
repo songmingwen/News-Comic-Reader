@@ -24,12 +24,12 @@ public class ComicListViewHolder extends RecyclerView.ViewHolder {
     public ComicListViewHolder(View itemview) {
         super(itemview);
 //        comicListLayout = (RelativeLayout) itemview.findViewById(R.id.id_comic_list_item);
-        simpleDraweeView = (SimpleDraweeView) itemview.findViewById(R.id.id_comic_list_simple_drawee_view);
-        cover = (ImageView) itemview.findViewById(R.id.id_comic_list_image_view);
-        comicName = (TextView) itemview.findViewById(R.id.id_comic_list_simple_comic_name);
-        comicDesc = (TextView) itemview.findViewById(R.id.id_comic_list_simple_comic_desc);
-        comicAuthor = (TextView) itemview.findViewById(R.id.id_comic_list_simple_comic_author);
-        comicTags = (TextView) itemview.findViewById(R.id.id_comic_list_simple_comic_tags);
-        haveUpdate = (TextView) itemview.findViewById(R.id.id_comic_collection_have_update);
+        simpleDraweeView = itemview.findViewById(R.id.id_comic_list_simple_drawee_view);
+        cover = itemview.findViewById(R.id.id_comic_list_image_view);
+        comicName = itemview.findViewById(R.id.id_comic_list_simple_comic_name);
+        comicDesc = itemview.findViewById(R.id.id_comic_list_simple_comic_desc);
+        comicAuthor = itemview.findViewById(R.id.id_comic_list_simple_comic_author);
+        comicTags = itemview.findViewById(R.id.id_comic_list_simple_comic_tags);
+        haveUpdate = itemview.findViewById(R.id.id_comic_collection_have_update);
     }
 }

@@ -18,9 +18,9 @@ public class LiveImageViewHolder extends RecyclerView.ViewHolder {
 
     public LiveImageViewHolder(View inflate) {
         super(inflate);
-        image = (SimpleDraweeView)inflate.findViewById(R.id.phoenix_image);
-        title = (TextView)inflate.findViewById(R.id.title);
-        time = (TextView)inflate.findViewById(R.id.tx_live_time);
-        tag = (TextView)inflate.findViewById(R.id.tx_live_tag);
+        image = inflate.findViewById(R.id.phoenix_image);
+        title = inflate.findViewById(R.id.title);
+        time = inflate.findViewById(R.id.tx_live_time);
+        tag = inflate.findViewById(R.id.tx_live_tag);
     }
 }

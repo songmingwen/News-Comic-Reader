@@ -18,11 +18,11 @@ public class MatchScoreViewHolder extends RecyclerView.ViewHolder {
 
     public MatchScoreViewHolder(View inflate) {
         super(inflate);
-        leftLogo = (SimpleDraweeView) inflate.findViewById(R.id.img_left_logo);
-        rightLogo = (SimpleDraweeView) inflate.findViewById(R.id.img_right_logo);
-        leftTeam = (TextView) inflate.findViewById(R.id.tx_left_team);
-        rightTeam = (TextView) inflate.findViewById(R.id.tx_right_team);
-        score = (TextView) inflate.findViewById(R.id.tx_score);
-        beginTime = (TextView) inflate.findViewById(R.id.tx_begin_time);
+        leftLogo = inflate.findViewById(R.id.img_left_logo);
+        rightLogo = inflate.findViewById(R.id.img_right_logo);
+        leftTeam = inflate.findViewById(R.id.tx_left_team);
+        rightTeam = inflate.findViewById(R.id.tx_right_team);
+        score = inflate.findViewById(R.id.tx_score);
+        beginTime = inflate.findViewById(R.id.tx_begin_time);
     }
 }

@@ -15,7 +15,7 @@ import com.song.sunset.utils.BitmapUtil;
 public class ComicDetailBottomViewHolder extends RecyclerView.ViewHolder {
     public ComicDetailBottomViewHolder(View inflate) {
         super(inflate);
-        ImageView imageView = (ImageView) inflate.findViewById(R.id.icon_comic_detail_end);
+        ImageView imageView = inflate.findViewById(R.id.icon_comic_detail_end);
         BitmapUtil.setIconColor(imageView, 43, 186, 216, 255);
     }
 }

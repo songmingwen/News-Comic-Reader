@@ -15,6 +15,6 @@ public class MatchImageViewHolder extends MatchScoreViewHolder {
 
     public MatchImageViewHolder(View inflate) {
         super(inflate);
-        bg = (SimpleDraweeView) inflate.findViewById(R.id.phoenix_image_bg);
+        bg = inflate.findViewById(R.id.phoenix_image_bg);
     }
 }

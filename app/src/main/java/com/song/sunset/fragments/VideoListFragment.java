@@ -85,13 +85,13 @@ public class VideoListFragment extends BaseFragment implements LoadingMoreListen
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        progressLayout = (ProgressLayout) view.findViewById(R.id.progress__);
+        progressLayout = view.findViewById(R.id.progress__);
         progressLayout.showLoading();
 
-        progressBar = (RelativeLayout) view.findViewById(R.id.id_loading_more_progress);
+        progressBar = view.findViewById(R.id.id_loading_more_progress);
         showProgress(false);
 
-        refreshLayout = (PtrFrameLayout) view.findViewById(R.id.id_comic_list_swipe_refresh);
+        refreshLayout = view.findViewById(R.id.id_comic_list_swipe_refresh);
 //        refreshLayout.setOnRefreshListener(this);
 //        refreshLayout.setColorSchemeResources(R.color.color_2bbad8, R.color.color_ffa200);
         StoreHouseHeader header = new StoreHouseHeader(getContext());
@@ -105,7 +105,7 @@ public class VideoListFragment extends BaseFragment implements LoadingMoreListen
         refreshLayout.addPtrUIHandler(header);
         refreshLayout.setPtrHandler(this);
 
-        recyclerView = (LoadMoreRecyclerView) view.findViewById(R.id.id_recyclerview_comiclist);
+        recyclerView = view.findViewById(R.id.id_recyclerview_comiclist);
         adapter = new VideoListAdapter(getActivity());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1) {

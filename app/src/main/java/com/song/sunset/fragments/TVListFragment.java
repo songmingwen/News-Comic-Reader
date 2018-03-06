@@ -47,7 +47,7 @@ public class TVListFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        recyclerView = (RecyclerView) view.findViewById(R.id.id_tv_list_recycler);
+        recyclerView = view.findViewById(R.id.id_tv_list_recycler);
         adapter = new TVListAdapter(getActivity());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

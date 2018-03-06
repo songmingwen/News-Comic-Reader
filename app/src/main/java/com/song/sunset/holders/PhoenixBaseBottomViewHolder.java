@@ -19,11 +19,11 @@ public class PhoenixBaseBottomViewHolder extends RecyclerView.ViewHolder {
 
     public PhoenixBaseBottomViewHolder(View itemView) {
         super(itemView);
-        title = (TextView) itemView.findViewById(R.id.title);
-        txSource = (TextView) itemView.findViewById(R.id.tx_source);
-        commentCount = (TextView) itemView.findViewById(R.id.comment_count);
-        picCount = (TextView) itemView.findViewById(R.id.pic_count);
-        updateTime = (TextView) itemView.findViewById(R.id.update_time);
-        imgSource = (SimpleDraweeView) itemView.findViewById(R.id.img_source);
+        title = itemView.findViewById(R.id.title);
+        txSource = itemView.findViewById(R.id.tx_source);
+        commentCount = itemView.findViewById(R.id.comment_count);
+        picCount = itemView.findViewById(R.id.pic_count);
+        updateTime = itemView.findViewById(R.id.update_time);
+        imgSource = itemView.findViewById(R.id.img_source);
     }
 }

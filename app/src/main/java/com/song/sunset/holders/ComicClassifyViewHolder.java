@@ -18,7 +18,7 @@ public class ComicClassifyViewHolder extends RecyclerView.ViewHolder {
 
     public ComicClassifyViewHolder(View itemView) {
         super(itemView);
-        simpleDraweeView = (SimpleDraweeView) itemView.findViewById(R.id.id_comic_classify_item);
-        textView = (TextView) itemView.findViewById(R.id.id_comic_classify_item_text);
+        simpleDraweeView = itemView.findViewById(R.id.id_comic_classify_item);
+        textView = itemView.findViewById(R.id.id_comic_classify_item_text);
     }
 }

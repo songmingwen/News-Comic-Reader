@@ -55,7 +55,7 @@ public class ComicRankFragment extends BaseFragment {
         if (savedInstanceState != null) {
             mCurrPos = savedInstanceState.getInt(BUNDLE_KEY_PAGE_INDEX, 0);
         }
-        progressLayout = (ProgressLayout) view.findViewById(R.id.progress);
+        progressLayout = view.findViewById(R.id.progress);
         progressLayout.showLoading();
 
         initView(view);
@@ -63,8 +63,8 @@ public class ComicRankFragment extends BaseFragment {
     }
 
     private void initView(View view) {
-        RankViewPager rankingViewPager = (RankViewPager) view.findViewById(R.id.ranking_view_pager);
-        rankingSlidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.ranking_sliding_layout);
+        RankViewPager rankingViewPager = view.findViewById(R.id.ranking_view_pager);
+        rankingSlidingTabLayout = view.findViewById(R.id.ranking_sliding_layout);
 
         rankingPagerAdapter = new RankingPagerAdapter<>(getChildFragmentManager());
         rankingViewPager.setAdapter(rankingPagerAdapter);

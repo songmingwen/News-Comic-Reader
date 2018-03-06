@@ -17,6 +17,6 @@ public class TransViewHolder extends RecyclerView.ViewHolder {
 
     public TransViewHolder(View itemView) {
         super(itemView);
-        image = (ImageView) itemView.findViewById(R.id.id_image_trans);
+        image = itemView.findViewById(R.id.id_image_trans);
     }
 }

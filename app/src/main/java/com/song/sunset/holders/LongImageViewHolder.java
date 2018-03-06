@@ -18,7 +18,7 @@ public class LongImageViewHolder extends RecyclerView.ViewHolder {
 
     public LongImageViewHolder(View inflate) {
         super(inflate);
-        title = (TextView) itemView.findViewById(R.id.title);
-        image = (SimpleDraweeView) inflate.findViewById(R.id.phoenix_image);
+        title = itemView.findViewById(R.id.title);
+        image = inflate.findViewById(R.id.phoenix_image);
     }
 }

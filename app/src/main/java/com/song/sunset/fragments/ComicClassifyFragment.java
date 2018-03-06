@@ -64,9 +64,9 @@ public class ComicClassifyFragment extends Fragment implements TextWatcher {
     }
 
     private void initView(View view) {
-        progressLayout = (ProgressLayout) view.findViewById(R.id.progress);
+        progressLayout = view.findViewById(R.id.progress);
         progressLayout.showLoading();
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.id_comic_classify_recycler);
+        RecyclerView recyclerView = view.findViewById(R.id.id_comic_classify_recycler);
         adapter = new ComicClassifyAdapter(getActivity());
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 6) {
@@ -91,16 +91,16 @@ public class ComicClassifyFragment extends Fragment implements TextWatcher {
 
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(adapter);
-        mSearchEdit = (EditText) view.findViewById(R.id.et_search);
+        mSearchEdit = view.findViewById(R.id.et_search);
         mSearchContent = view.findViewById(R.id.id_comic_classify_search_list);
-        RecyclerView searchRecyclerView = (RecyclerView) view.findViewById(R.id.id_comic_classify_search_recycler);
+        RecyclerView searchRecyclerView = view.findViewById(R.id.id_comic_classify_search_recycler);
         mSearchListAdapter = new ComicSearchListAdapter(getActivity());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         searchRecyclerView.setLayoutManager(linearLayoutManager);
         searchRecyclerView.setAdapter(mSearchListAdapter);
         searchRecyclerView.addItemDecoration(new RecyclerViewDivider(getActivity(), LinearLayoutManager.HORIZONTAL, 1, getActivity().getResources().getColor(R.color.Grey_200)));
         mSearchEdit.addTextChangedListener(this);
-        ImageView clear = (ImageView) view.findViewById(R.id.img_clear);
+        ImageView clear = view.findViewById(R.id.img_clear);
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

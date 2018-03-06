@@ -16,6 +16,6 @@ public class TVListViewHolder extends RecyclerView.ViewHolder {
 
     public TVListViewHolder(View itemView) {
         super(itemView);
-        textView = (TextView) itemView.findViewById(R.id.id_tv_list_text);
+        textView = itemView.findViewById(R.id.id_tv_list_text);
     }
 }

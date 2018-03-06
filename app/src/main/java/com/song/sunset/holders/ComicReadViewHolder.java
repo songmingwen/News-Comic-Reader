@@ -17,6 +17,6 @@ public class ComicReadViewHolder extends RecyclerView.ViewHolder {
 
     public ComicReadViewHolder(final View itemView) {
         super(itemView);
-        simpleDraweeView = (SimpleDraweeView) itemView.findViewById(R.id.id_comic_read_simple_drawee_view);
+        simpleDraweeView = itemView.findViewById(R.id.id_comic_read_simple_drawee_view);
     }
 }

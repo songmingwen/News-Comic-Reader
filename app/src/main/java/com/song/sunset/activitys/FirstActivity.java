@@ -22,7 +22,7 @@ public class FirstActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
         DateTimeUtils.CURRENT_TIME = DateTimeUtils.monthDayFormat.format(DateTimeUtils.now());
-        RelativeLayout first = (RelativeLayout) findViewById(R.id.idFirst);
+        RelativeLayout first = findViewById(R.id.idFirst);
 
         AlphaAnimation animation = new AlphaAnimation(0f, 1f);
         animation.setAnimationListener(new Animation.AnimationListener() {

@@ -15,8 +15,8 @@ public class SlideImage2ViewHolder extends PhoenixBaseBottomViewHolder {
 
     public SlideImage2ViewHolder(View inflate) {
         super(inflate);
-        image1 = (SimpleDraweeView) inflate.findViewById(R.id.phoenix_image_1);
-        image2 = (SimpleDraweeView) inflate.findViewById(R.id.phoenix_image_2);
-        image3 = (SimpleDraweeView) inflate.findViewById(R.id.phoenix_image_3);
+        image1 = inflate.findViewById(R.id.phoenix_image_1);
+        image2 = inflate.findViewById(R.id.phoenix_image_2);
+        image3 = inflate.findViewById(R.id.phoenix_image_3);
     }
 }

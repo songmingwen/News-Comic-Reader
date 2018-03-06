@@ -17,7 +17,7 @@ public class TitleImageViewHolder extends PhoenixBaseBottomViewHolder {
 
     public TitleImageViewHolder(View inflate) {
         super(inflate);
-        image = (SimpleDraweeView) inflate.findViewById(R.id.phoenix_image);
-        videoImage = (ImageView) inflate.findViewById(R.id.img_title_image_video);
+        image = inflate.findViewById(R.id.phoenix_image);
+        videoImage = inflate.findViewById(R.id.img_title_image_video);
     }
 }

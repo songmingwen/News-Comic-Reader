@@ -51,10 +51,10 @@ public class CollectionFragment extends BaseFragment implements RetrofitCallback
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        progressLayout = (ProgressLayout) view.findViewById(R.id.progress);
+        progressLayout = view.findViewById(R.id.progress);
         progressLayout.showLoading();
 
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.id_comic_collection);
+        RecyclerView recyclerView = view.findViewById(R.id.id_comic_collection);
         adapter = new CollectionComicAdapter(getActivity());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3) {

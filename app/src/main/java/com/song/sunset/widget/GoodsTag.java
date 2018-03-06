@@ -50,11 +50,11 @@ public class GoodsTag extends RelativeLayout implements View.OnClickListener {
 
     private void init() {
         LayoutInflater.from(getContext()).inflate(R.layout.layout_slide_goos_tags, this);
-        content = (LinearLayout) findViewById(R.id.ll_goods_content);
-        mLeftText = (TextView) findViewById(R.id.text_slide_goods_left);
-        mRightText = (TextView) findViewById(R.id.text_slide_goods_right);
-        dot = (ImageView) findViewById(R.id.image_dot);
-        dotBack = (ImageView) findViewById(R.id.image_dot_back);
+        content = findViewById(R.id.ll_goods_content);
+        mLeftText = findViewById(R.id.text_slide_goods_left);
+        mRightText = findViewById(R.id.text_slide_goods_right);
+        dot = findViewById(R.id.image_dot);
+        dotBack = findViewById(R.id.image_dot_back);
         content.setOnClickListener(this);
         initAnimator();
     }

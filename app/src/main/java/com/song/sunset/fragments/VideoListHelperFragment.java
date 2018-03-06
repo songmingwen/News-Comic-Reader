@@ -73,10 +73,10 @@ public class VideoListHelperFragment extends BaseFragment implements BaseQuickAd
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        progressLayout = (ProgressLayout) view.findViewById(R.id.progress);
+        progressLayout = view.findViewById(R.id.progress);
         progressLayout.showLoading();
 
-        refreshLayout = (PtrFrameLayout) view.findViewById(R.id.id_comic_list_swipe_refresh);
+        refreshLayout = view.findViewById(R.id.id_comic_list_swipe_refresh);
         StoreHouseHeader header = new StoreHouseHeader(getContext());
         header.setPadding(0, ViewUtil.dip2px(2), 0, ViewUtil.dip2px(2));
         header.initWithString("Song");
@@ -88,7 +88,7 @@ public class VideoListHelperFragment extends BaseFragment implements BaseQuickAd
         refreshLayout.addPtrUIHandler(header);
         refreshLayout.setPtrHandler(this);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.rv_video_list);
+        recyclerView = view.findViewById(R.id.rv_video_list);
         mAdapter = new VideoListHelperAdapter(getActivity());
         mAdapter.setOnLoadMoreListener(this, recyclerView);
         mAdapter.setLoadMoreView(new BaseLoadMoreView());

@@ -77,13 +77,13 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        progressLayout = (ProgressLayout) view.findViewById(R.id.progress__);
+        progressLayout = view.findViewById(R.id.progress__);
         progressLayout.showLoading();
 
-        progressBar = (RelativeLayout) view.findViewById(R.id.id_loading_more_progress);
+        progressBar = view.findViewById(R.id.id_loading_more_progress);
         showProgress(false);
 
-        recyclerView = (VideoAutoPlayRecyclerView) view.findViewById(R.id.rv_video_list);
+        recyclerView = view.findViewById(R.id.rv_video_list);
 
         mAdapter = new VideoListAdapter(getActivity());
         mAdapter.setOnItemClickListener(this);
