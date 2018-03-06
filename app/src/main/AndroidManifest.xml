@@ -67,9 +67,6 @@
             android:name=".activitys.base.BaseActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".activitys.ComicDetailActivity"
-            android:screenOrientation="portrait"/>
-        <activity
             android:name=".activitys.ComicReadActivity"
             android:screenOrientation="portrait"/>
         <activity

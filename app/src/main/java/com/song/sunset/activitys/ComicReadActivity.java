@@ -43,7 +43,7 @@ public class ComicReadActivity extends BaseActivity implements RetrofitCallback<
 
     public static void start(Context context, String comicId, int openPosition) {
         Intent intent = new Intent(context, ComicReadActivity.class);
-        intent.putExtra(ComicDetailActivity.COMIC_ID, comicId);
+        intent.putExtra(ComicDetailMVPActivity.COMIC_ID, comicId);
         intent.putExtra(OPEN_POSITION, openPosition);
         context.startActivity(intent);
     }
@@ -57,7 +57,7 @@ public class ComicReadActivity extends BaseActivity implements RetrofitCallback<
         progressLayout.showLoading();
 
         if (getIntent() != null) {
-            comicId = getIntent().getStringExtra(ComicDetailActivity.COMIC_ID);
+            comicId = getIntent().getStringExtra(ComicDetailMVPActivity.COMIC_ID);
             openPosition = getIntent().getIntExtra(OPEN_POSITION, -1);
         }
 

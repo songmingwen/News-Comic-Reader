@@ -1,9 +1,9 @@
 package com.song.sunset.holders;
 
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -15,7 +15,7 @@ import com.song.sunset.R;
  */
 public class ComicDetailHeaderViewHolder extends RecyclerView.ViewHolder {
 
-    public RelativeLayout comicDetailLayout;
+    public ConstraintLayout comicDetailLayout;
     public SimpleDraweeView simpleDraweeView;
     public TextView comicName;
     public TextView authorName;
