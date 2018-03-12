@@ -52,4 +52,5 @@
     <string name="string_open_danmu">开启弹幕</string>
     <string name="title_activity_first">First</string>
     <string name="title_activity_first_kotlin">FirstKotlinActivity</string>
+    <string name="title_activity_rx_java">RxJavaActivity</string>
 </resources>

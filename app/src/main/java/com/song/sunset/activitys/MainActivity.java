@@ -60,12 +60,6 @@ import com.sunset.greendao.gen.ComicLocalCollectionDao;
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
-
 /**
  * Created by Song on 2016/12/2.
  * E-mail:z53520@qq.com
@@ -164,6 +158,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //                MainActivity.this.startActivity(new Intent(MainActivity.this, SubScaleViewActivity.class));
 //                MainActivity.this.startActivity(new Intent(MainActivity.this, TouchEventTestActivity.class));
                 MainActivity.this.startActivity(new Intent(MainActivity.this, TempTestActivity.class));
+//                MainActivity.this.startActivity(new Intent(MainActivity.this, RxJavaActivity.class));
 //                MainActivity.this.startActivity(new Intent(MainActivity.this, TransTestActivity.class));
 //                ScrollingActivity.start(MainActivity.this);
 //                new ImageViewer.Builder(MainActivity.this, new String[]{"http://img2.niutuku.com/1312/0831/0831-niutuku.com-28071.jpg",
@@ -193,7 +188,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //                });
 //                MusicGetterManager.getInstance().getMusicLists();
 
-                useBinderPool();
+//                useBinderPool();
 
 //                Log.i(TAG, "Weeks.SUNDAY.getDate() = " + Weeks.SUNDAY.getDate());
 
@@ -288,33 +283,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }
     };
 
-    private void RecursiveTest() {
-        long start2 = System.currentTimeMillis();
-        long result2 = getPlus(1000L);
-        long end2 = System.currentTimeMillis();
-        Log.i("结果对比", "result2=" + result2 + "; time2 = " + (end2 - start2) + "millis");
-
-        final long start1 = System.currentTimeMillis();
-
-        Observable.just(1000L)
-                .map(new Func1<Long, Long>() {
-                    @Override
-                    public Long call(Long aLong) {
-                        return getOrderPlus(aLong);
-                    }
-                })
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<Long>() {
-                    @Override
-                    public void call(Long aLong) {
-                        long result1 = aLong;
-                        long end1 = System.currentTimeMillis();
-                        Log.i("结果对比", "result1=" + result1 + "; time1 = " + (end1 - start1) + "millis");
-                    }
-                });
-    }
-
     private long getFactorial(long endNum) {
         if (endNum <= 1) {
             return 1;
@@ -335,14 +303,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     private long getOrderPlus(long endNum, long sum) {
         return endNum == 1 ? sum : getOrderPlus(endNum - 1, sum + endNum);
-    }
-
-    private long getPlus(long endNum) {
-        int sum = 0;
-        for (long i = 0; i < endNum + 1; i++) {
-            sum += i;
-        }
-        return sum;
     }
 
     @Override

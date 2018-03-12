@@ -1,13 +1,16 @@
 package com.song.sunset.activitys;
 
 import android.animation.Animator;
+import android.animation.AnimatorInflater;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.IntDef;
 import android.support.annotation.StringDef;
 import android.support.design.widget.FloatingActionButton;
@@ -17,7 +20,6 @@ import android.text.SpannableString;
 import android.text.style.ImageSpan;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -25,13 +27,14 @@ import android.widget.Toast;
 
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.TimePickerView;
-import com.bumptech.glide.Glide;
 import com.song.sunset.R;
 import com.song.sunset.activitys.base.BaseActivity;
+import com.song.sunset.utils.BitmapUtil;
 import com.song.sunset.utils.DateTimeUtils;
 import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.widget.TextSwitchView;
 
+import java.io.File;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.SoftReference;
@@ -40,9 +43,15 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import io.reactivex.ObservableSource;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.functions.Predicate;
 import rx.Observable;
 import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Song on 2016/12/2.
@@ -51,9 +60,11 @@ import rx.functions.Func1;
 
 public class TempTestActivity extends BaseActivity {
 
+    public static final String TAG = TempTestActivity.class.getName();
+
     private FloatingActionButton button;
     private TextSwitchView textSwitchView;
-    private ImageView dot, dotBack, ic_svg;
+    private ImageView dot, dotBack, ic_svg, bottom;
     private AnimatorSet mAnimatorSet;
     private boolean first;
     private TimePickerView pvTime;
@@ -97,6 +108,7 @@ public class TempTestActivity extends BaseActivity {
         button = (FloatingActionButton) findViewById(R.id.button);
         dot = (ImageView) findViewById(R.id.image_dot);
         dotBack = (ImageView) findViewById(R.id.image_dot_back);
+        bottom = (ImageView) findViewById(R.id.image_bottom);
 //        ic_svg = (ImageView) findViewById(R.id.ic_svg);
         textSwitchView = (TextSwitchView) findViewById(R.id.textswitch);
         initAnimator();
@@ -128,6 +140,19 @@ public class TempTestActivity extends BaseActivity {
 
         String string_1 = softReference.get();
         Snackbar.make(view, string_1, Snackbar.LENGTH_LONG).setAction("Action", null).show();
+
+        final Animator animator = AnimatorInflater.loadAnimator(this, R.animator.negative_page_guide);
+        animator.setTarget(bottom);
+        animator.start();
+        animator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                animator.setStartDelay(2000);
+                animator.start();
+            }
+        });
+
+        RxJavaContrast();
     }
 
     private void showMessageFormat() {
@@ -339,5 +364,85 @@ public class TempTestActivity extends BaseActivity {
         mAnimatorSet.cancel();
         mAnimatorSet = null;
         super.onDestroy();
+    }
+
+    private void RxJavaContrast() {
+        final File file = new File(Environment.getExternalStorageDirectory().getPath() + File.separator + "sunset");
+        final File[] folders = file.listFiles();
+        Log.i(TAG, "song----以下是rxjava_1.3版本");
+        Observable.from(folders)
+                .flatMap(new Func1<File, Observable<File>>() {
+                    @Override
+                    public Observable<File> call(File files) {
+                        Log.i(TAG, "song----flatMap");
+                        return Observable.from(files.listFiles());
+                    }
+                })
+                .filter(new Func1<File, Boolean>() {
+                    @Override
+                    public Boolean call(File file) {
+                        Log.i(TAG, "song----filter");
+                        return file.getName().endsWith(".png") || file.getName().endsWith(".jpg");
+                    }
+                })
+                .map(new Func1<File, Bitmap>() {
+                    @Override
+                    public Bitmap call(File file) {
+                        Log.i(TAG, "song----map");
+                        return BitmapUtil.getSmallBitmap(file.getPath(), 200, 200);
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<Bitmap>() {
+                    @Override
+                    public void onCompleted() {
+                        Log.i(TAG, "song----onCompleted");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.i(TAG, "song----onError");
+                    }
+
+                    @Override
+                    public void onNext(Bitmap bitmap) {
+                        Log.i(TAG, "song----run: width = " + bitmap.getWidth() + ";height=" + bitmap.getHeight());
+                    }
+                });
+
+        Log.i(TAG, "song----以下是rxjava_2.1.10版本");
+        io.reactivex.Observable.fromArray(folders)
+                .flatMap(new Function<File, ObservableSource<File>>() {
+                    @Override
+                    public ObservableSource<File> apply(File file) throws Exception {
+                        return io.reactivex.Observable.fromArray(file.listFiles());
+                    }
+                })
+                .filter(new Predicate<File>() {
+                    @Override
+                    public boolean test(File file) throws Exception {
+                        return file.getName().endsWith(".png") || file.getName().endsWith(".jpg");
+                    }
+                })
+                .map(new Function<File, Bitmap>() {
+                    @Override
+                    public Bitmap apply(File file) throws Exception {
+                        return BitmapUtil.getSmallBitmap(file.getPath(), 200, 200);
+                    }
+                })
+                .subscribeOn(io.reactivex.schedulers.Schedulers.io())
+                .observeOn(io.reactivex.android.schedulers.AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Bitmap>() {
+                    @Override
+                    public void accept(Bitmap bitmap) throws Exception {
+                        Log.i(TAG, "song----run: width = " + bitmap.getWidth() + ";height=" + bitmap.getHeight());
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Log.i(TAG, "song----error");
+                    }
+                });
     }
 }

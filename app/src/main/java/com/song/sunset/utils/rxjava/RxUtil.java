@@ -2,7 +2,6 @@ package com.song.sunset.utils.rxjava;
 
 import com.song.sunset.beans.basebeans.BaseBean;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
-import com.tbruyelle.rxpermissions.RxPermissions;
 
 import java.util.List;
 
