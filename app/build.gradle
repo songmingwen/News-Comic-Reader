@@ -30,21 +30,21 @@ android {
     }
     signingConfigs {
         release {
-            storeFile file('D:/Sunset/comic.jks')
-            storePassword KEYSTORE_PASSWORD
-            keyAlias KEY_ALIAS
-            keyPassword KEY_PASSWORD
+            keyAlias 'comic'
+            keyPassword '53520song'
+            storeFile file('/Users/songmingwen/Documents/News-Comic-Reader/app/comic.jks')
+            storePassword '53520song'
         }
     }
     buildTypes {
         debug {
             debuggable true
             jniDebuggable true
-            signingConfig signingConfigs.release
+//            signingConfig signingConfigs.release
             renderscriptDebuggable true
             minifyEnabled false
 //            minifyEnabled true
-//            proguardFile 'D:/Sunset/Comic/app/proguard-rules.pro'
+            proguardFile '/Users/songmingwen/Documents/News-Comic-Reader/app/proguard-rules.pro'
         }
         release {
             debuggable false
@@ -52,7 +52,7 @@ android {
             signingConfig signingConfigs.release
             renderscriptDebuggable false
             minifyEnabled true
-            proguardFile 'D:/Sunset/Comic/app/proguard-rules.pro'
+            proguardFile '/Users/songmingwen/Documents/News-Comic-Reader/app/proguard-rules.pro'
             zipAlignEnabled true
         }
     }
@@ -75,7 +75,7 @@ android {
 //        sourceCompatibility 1.8
 //        targetCompatibility 1.8
 //    }
-    buildToolsVersion '25.0.3'
+    buildToolsVersion '26.0.2'
 }
 //--------------------------greenDao配置--------------------------
 apply plugin: 'org.greenrobot.greendao'
@@ -93,16 +93,13 @@ repositories {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-
-    compile "com.android.support:appcompat-v7:26.0.0"
-    compile "com.android.support:design:26.0.0"
-    compile "com.android.support:support-v4:26.0.0"
-    compile "com.android.support:cardview-v7:26.0.0"
-    compile "com.android.support:palette-v7:26.0.0"
-    compile "com.android.support.constraint:constraint-layout:1.0.2"
-
+    compile 'com.android.support:appcompat-v7:26.0.0'
+    compile 'com.android.support:design:26.0.0'
+    compile 'com.android.support:support-v4:26.0.0'
+    compile 'com.android.support:cardview-v7:26.0.0'
+    compile 'com.android.support:palette-v7:26.0.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-
     compile rootProject.ext.dependencies["multidex"]
     compile rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
     //    compile rootProject.ext.dependencies["glide"]
@@ -127,7 +124,7 @@ dependencies {
     compile rootProject.ext.dependencies["rxandroid_1_2"]
     compile rootProject.ext.dependencies["rxandroid_2_1_10"]
     compile rootProject.ext.dependencies["rxjava"]
-//    compile rootProject.ext.dependencies["rxpermissions"]
+    //    compile rootProject.ext.dependencies["rxpermissions"]
     compile rootProject.ext.dependencies["fragmentation"]
     compile rootProject.ext.dependencies["fragmentation_swipeback"]
     compile rootProject.ext.dependencies["butterknife"]
@@ -147,6 +144,5 @@ dependencies {
     compile rootProject.ext.dependencies["ndkbitmap-x86"]
     debugCompile rootProject.ext.dependencies["leakcanary_debug"]
     releaseCompile rootProject.ext.dependencies["leakcanary_release"]
-
     compile 'com.meituan.robust:robust:0.3.3'
 }
