@@ -392,6 +392,10 @@ class MainKotlinActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         showNotification(content.toString())
     }
 
+    override fun onFailure(errorCode: Int, errorMsg: String) {
+
+    }
+
     private fun showNotification(content: String) {
         val intent = Intent(this, ComicCollectionActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -415,7 +419,4 @@ class MainKotlinActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         manager.notify(1, notification)
     }
 
-    override fun onFailure(errorCode: Int, errorMsg: String) {
-
-    }
 }

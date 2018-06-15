@@ -31,7 +31,7 @@ ext {
             // If you want to use the GPU Filters
             "volley"                       : "com.android.volley:volley:1.0.0",
             "swipebacklayout"              : "me.imid.swipebacklayout.lib:library:1.0.0",
-            "subsampling_scale_image_view" : "com.davemorrissey.labs:subsampling-scale-image-view:3.6.0",
+            "subsampling_scale_image_view" : "com.davemorrissey.labs:subsampling-scale-image-view:3.10.0",
 //            "ijkplayer"                    : "com.dou361.ijkplayer:jjdxm-ijkplayer:1.0.6",
             //    "jiecaovideoplayer": "fm.jiecao:jiecaovideoplayer:4.6.5",
             "okhttp3"                      : "com.squareup.okhttp3:okhttp:3.9.0",

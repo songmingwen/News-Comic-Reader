@@ -100,6 +100,16 @@ public class TempTestActivity extends BaseActivity {
     public @interface WeekDays {
     }
 
+    //加上注解，只能返回Days里面的数据，不能直接返回1-7；
+    @Days
+    public int getInt() {
+        return Days.MON;
+    }
+
+    //加上注解，只能设置WeekDays里面的数据，不能直接设置"string"
+    public void setString(@WeekDays String string) {
+        Toast.makeText(this, string, Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +125,8 @@ public class TempTestActivity extends BaseActivity {
         first = true;
         initTimePicker();
         initOptionsPicker();
+
+        setString(SUNDAY);
     }
 
     public void onTempTestFlowButtonClick(View view) {

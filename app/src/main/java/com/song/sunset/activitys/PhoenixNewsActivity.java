@@ -4,9 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Picture;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.webkit.GeolocationPermissions;
@@ -22,6 +26,7 @@ import android.widget.Toast;
 import com.song.core.statusbar.StatusBarUtil;
 import com.song.sunset.R;
 import com.song.sunset.activitys.base.BaseActivity;
+import com.song.sunset.utils.FileUtils;
 import com.song.sunset.utils.ScreenUtils;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
 
@@ -53,10 +58,11 @@ public class PhoenixNewsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         ScreenUtils.fullscreen(this, true);
         StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimary));
+        WebView.enableSlowWholeDocumentDraw();
         setContentView(R.layout.activity_phoenix_news_layout);
         video_fullView = (FrameLayout) findViewById(R.id.video_fullView);
 
-        progressLayout = (ProgressLayout)findViewById(R.id.progress);
+        progressLayout = (ProgressLayout) findViewById(R.id.progress);
         progressLayout.showLoading();
         if (getIntent() != null) {
             url = getIntent().getStringExtra(PHOENIX_NEWS_URL);
@@ -206,8 +212,16 @@ public class PhoenixNewsActivity extends BaseActivity {
         }
 
         @Override
-        public void onPageFinished(WebView view, String url) {
+        public void onPageFinished(WebView view, final String url) {
             super.onPageFinished(view, url);
+//            new Handler().postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    Bitmap bitmap = createLongImg();
+//                    String fileName = url.substring(url.lastIndexOf("/"));
+//                    FileUtils.saveFile(bitmap, "/Sunset/SavedCover", fileName + ".jpg");
+//                }
+//            }, 3000);
         }
 
         @Override
@@ -226,6 +240,26 @@ public class PhoenixNewsActivity extends BaseActivity {
         public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
             handler.proceed();//解决https网址webView无法展示的问题
         }
+    }
+
+    private Bitmap createLongImg() {
+//        mWebView.measure(View.MeasureSpec.makeMeasureSpec(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED),
+//                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+//        mWebView.layout(0, 0, mWebView.getMeasuredWidth(), mWebView.getMeasuredHeight());
+//        mWebView.setDrawingCacheEnabled(true);
+//        mWebView.buildDrawingCache();
+//        Bitmap longImg = Bitmap.createBitmap(mWebView.getMeasuredWidth(), mWebView.getMeasuredHeight(), Bitmap.Config.ARGB_4444);
+//        Canvas canvas = new Canvas(longImg);
+//        Paint paint = new Paint();
+//        canvas.drawBitmap(longImg, 0, mWebView.getMeasuredHeight(), paint);
+//        mWebView.draw(canvas);
+
+        Picture snapShot = mWebView.capturePicture();
+
+        Bitmap longImg = Bitmap.createBitmap(snapShot.getWidth(), snapShot.getHeight(), Bitmap.Config.ARGB_4444);
+        Canvas canvas = new Canvas(longImg);
+        snapShot.draw(canvas);
+        return longImg;
     }
 
     /**

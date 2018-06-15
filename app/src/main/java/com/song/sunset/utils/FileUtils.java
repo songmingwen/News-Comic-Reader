@@ -99,10 +99,6 @@ public class FileUtils {
                 fs.write(bo.toByteArray());
                 fs.flush();
                 fs.close();
-            } catch (FileNotFoundException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-                return false;
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

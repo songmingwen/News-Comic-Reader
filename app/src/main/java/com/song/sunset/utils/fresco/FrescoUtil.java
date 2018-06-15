@@ -7,16 +7,23 @@ import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.facebook.binaryresource.BinaryResource;
+import com.facebook.binaryresource.FileBinaryResource;
+import com.facebook.cache.common.CacheKey;
 import com.facebook.cache.disk.DiskCacheConfig;
 import com.facebook.common.disk.NoOpDiskTrimmableRegistry;
+import com.facebook.common.executors.CallerThreadExecutor;
 import com.facebook.common.internal.Supplier;
 import com.facebook.common.memory.MemoryTrimType;
 import com.facebook.common.memory.MemoryTrimmable;
 import com.facebook.common.memory.NoOpMemoryTrimmableRegistry;
+import com.facebook.common.references.CloseableReference;
 import com.facebook.common.util.ByteConstants;
+import com.facebook.datasource.DataSource;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.controller.BaseControllerListener;
 import com.facebook.drawee.controller.ControllerListener;
@@ -26,10 +33,14 @@ import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.generic.RoundingParams;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.cache.DefaultCacheKeyFactory;
 import com.facebook.imagepipeline.cache.MemoryCacheParams;
 import com.facebook.imagepipeline.common.ResizeOptions;
+import com.facebook.imagepipeline.core.ImagePipeline;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.imagepipeline.core.ImagePipelineFactory;
+import com.facebook.imagepipeline.datasource.BaseBitmapDataSubscriber;
+import com.facebook.imagepipeline.image.CloseableImage;
 import com.facebook.imagepipeline.image.ImageInfo;
 import com.facebook.imagepipeline.request.BasePostprocessor;
 import com.facebook.imagepipeline.request.ImageRequest;
@@ -38,6 +49,8 @@ import com.facebook.imagepipeline.request.Postprocessor;
 import com.song.sunset.R;
 import com.song.sunset.utils.AppConfig;
 import com.song.sunset.widget.LoadingDisplayProgress;
+
+import java.io.File;
 
 /**
  * Created by Song on 2016/8/29 0029.
@@ -73,6 +86,49 @@ public class FrescoUtil {
         simpleDraweeView.getLayoutParams().height = height;
         simpleDraweeView.setHierarchy(getHierarchy(position, hasBorder));
         simpleDraweeView.setController(getController(simpleDraweeView, lowResUrl, originalUrl, width, height, userBlur));
+    }
+
+    /**
+     * 拿到缓存的文件
+     *
+     * @return file or null
+     */
+    public static File getCachedImageOnDisk(String pUrl, Object pCaller) {
+        File localFile = null;
+        if (!TextUtils.isEmpty(pUrl)) {
+            CacheKey cacheKey = DefaultCacheKeyFactory.getInstance().getEncodedCacheKey(ImageRequest.fromUri(pUrl),
+                    pCaller);
+            BinaryResource resource = null;
+            if (ImagePipelineFactory.getInstance().getMainFileCache().hasKey(cacheKey)) {
+                resource = ImagePipelineFactory.getInstance().getMainFileCache().getResource(cacheKey);
+            } else if (ImagePipelineFactory.getInstance().getSmallImageFileCache().hasKey(cacheKey)) {
+                resource = ImagePipelineFactory.getInstance().getSmallImageFileCache().getResource(cacheKey);
+            }
+            if (resource != null) {
+                localFile = ((FileBinaryResource) resource).getFile();
+            }
+        }
+        return localFile;
+    }
+
+    public static DataSource<CloseableReference<CloseableImage>> getDataSource(String url) {
+        ImageRequest imageRequest = ImageRequest.fromUri(url);
+
+        if (imageRequest == null) {
+            return null;
+        }
+
+        ImagePipeline imagePipeline = Fresco.getImagePipeline();
+        DataSource<CloseableReference<CloseableImage>> dataSource =
+                imagePipeline.fetchDecodedImage(imageRequest, url);
+
+        return dataSource;
+    }
+
+    public static void getCachedImageBitmap(@NonNull DataSource<CloseableReference<CloseableImage>> dataSource, @NonNull
+            BaseBitmapDataSubscriber
+            dataSubscriber) {
+        dataSource.subscribe(dataSubscriber, CallerThreadExecutor.getInstance());
     }
 
     /**
