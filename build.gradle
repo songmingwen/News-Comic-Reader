@@ -34,6 +34,9 @@ buildscript {
         classpath 'com.meituan.robust:auto-patch-plugin:0.3.3'
         /**Robust  美团热修复技术*/
 
+        /**批量打包*/
+        classpath 'com.meituan.android.walle:plugin:1.1.6'
+
 //        classpath "com.tencent.bugly:tinker-support:latest.release"//微信热修复
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

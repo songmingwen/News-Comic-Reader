@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 //apply from: 'tinker-support.gradle'//微信热修复
 apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'walle'
 
 /**Robust  美团热修复技术*/
 //apply plugin: 'auto-patch-plugin'//生成patch时打开
@@ -21,8 +22,8 @@ android {
         applicationId "com.song.sunset"
         minSdkVersion rootProject.ext.android.ANDROID_BUILD_MIN_SDK_VERSION
         targetSdkVersion rootProject.ext.android.ANDROID_TARGET_SDK_VERSION
-        versionCode rootProject.ext.android.ANDROID_VERSION_CODE
-        versionName rootProject.ext.android.ANDROID_VERSION_NAME
+        versionCode 1
+        versionName "1.0"
 //        jackOptions {
 //            enabled true
 //        }
@@ -71,12 +72,23 @@ android {
         debug.setRoot('build-types/debug')
         release.setRoot('build-types/release')
     }
-//    compileOptions {
-//        sourceCompatibility 1.8
-//        targetCompatibility 1.8
-//    }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
     buildToolsVersion '26.0.2'
 }
+
+walle {
+    // 指定渠道包的输出路径
+    apkOutputFolder = new File("${project.buildDir}/outputs/channels");
+    // 定制渠道包的APK的文件名称
+    apkFileNameFormat = '${projectName}-${channel}-${buildType}-v${versionName}-${versionCode}.apk';
+    // 渠道配置文件
+//    channelFile = new File("${project.getProjectDir()}/channel")
+    configFile = new File("${project.getProjectDir()}/channels.json")
+}
+
 //--------------------------greenDao配置--------------------------
 apply plugin: 'org.greenrobot.greendao'
 greendao {
@@ -145,4 +157,5 @@ dependencies {
     debugCompile rootProject.ext.dependencies["leakcanary_debug"]
     releaseCompile rootProject.ext.dependencies["leakcanary_release"]
     api 'com.meituan.robust:robust:0.3.3'
+    api 'com.meituan.android.walle:library:1.1.6'
 }

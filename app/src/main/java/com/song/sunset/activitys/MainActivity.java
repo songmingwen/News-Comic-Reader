@@ -28,6 +28,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.meituan.android.walle.ChannelInfo;
+import com.meituan.android.walle.WalleChannelReader;
 import com.song.core.statusbar.StatusBarUtil;
 import com.song.sunset.IMusicCallBackListener;
 import com.song.sunset.IMusicGetter;
@@ -59,6 +61,7 @@ import com.sunset.greendao.gen.ComicLocalCollectionDao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Song on 2016/12/2.
@@ -100,6 +103,16 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //                        MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS);
 //            }
 //        }
+        //获取渠道
+//        String channel = WalleChannelReader.getChannel(this.getApplicationContext());
+        ChannelInfo channelInfo = WalleChannelReader.getChannelInfo(this.getApplicationContext());
+        if (channelInfo != null) {
+            String channel = channelInfo.getChannel();
+            Map<String, String> extraInfo = channelInfo.getExtraInfo();
+            Log.d(TAG, "onCreate: " + channel + ";extra:" + extraInfo.get("installerId"));
+        } else {
+            Log.d(TAG, "onCreate: " + "null------");
+        }
     }
 
 

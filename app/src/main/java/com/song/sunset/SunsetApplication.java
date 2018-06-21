@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.backends.okhttp3.OkHttpImagePipelineConfigFactory;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
+import com.song.core.FrescoInitializer;
 import com.song.sunset.activitys.MainActivity;
 import com.song.sunset.services.managers.BinderPool;
 import com.song.sunset.services.managers.MusicGetterManager;
@@ -54,14 +55,18 @@ public class SunsetApplication extends MultiDexApplication {
 
         GreenDaoUtil.initGreenDao();
 
-        OkHttpClient okHttpClient = new okhttp3.OkHttpClient.Builder().sslSocketFactory(HttpsUtil.createDefaultSSLSocketFactory()).build();
+//        OkHttpClient okHttpClient = new okhttp3.OkHttpClient.Builder().sslSocketFactory(HttpsUtil.createDefaultSSLSocketFactory()).build();
+//
+//        ImagePipelineConfig config = OkHttpImagePipelineConfigFactory
+//                .newBuilder(this, okHttpClient)
+//                .build();
 
-        ImagePipelineConfig config = OkHttpImagePipelineConfigFactory
-                .newBuilder(this, okHttpClient)
-                .build();
+//        FrescoUtil.getDefaultImagePipelineConfig(this);
+//        Fresco.initialize(this, config);
 
-        //FrescoUtil.getDefaultImagePipelineConfig(this)
-        Fresco.initialize(this, config);
+        FrescoInitializer.getDefaultInstance().initialize(this);
+
+
 //        CrashHandler.getInstance().init();
         PushManager.getInstance().init(this);
         BinderPool.getInstance();

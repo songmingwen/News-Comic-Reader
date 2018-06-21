@@ -36,41 +36,41 @@ import com.song.sunset.mvp.models.base.RecyclerViewAdapterModel;
  */
 public class PhoenixBaseAdapterModel implements RecyclerViewAdapterModel<PhoenixChannelBean> {
 
-    public static final String SINGLE_TITLE = "singletitle";               //单标题
-    public static final String TITLE_IMAGE = "titleimg";                  //左图右文
-    public static final String SLIDE_IMAGE = "slideimg";                  //三小图
-    public static final String SLIDE_IMAGE2 = "slideimg2";               //一大两小
-    public static final String BIG_IMG = "bigimg";                           //大图
-    public static final String BIG_IMG2 = "bigimg2";                        //美女段子大图
-    public static final String VIDEO = "video";                                //视频当前页播放
-    public static final String MATCH_SCORE = "matchscore";           //比赛有比分
-    public static final String MATCH_SCOMPRE = "matchscompre";   //比赛无比分
-    public static final String MATCH_IMG = "matchimg";                  //比赛底图
-    public static final String LONG_IMG = "longimg";                       //直播长图
-    public static final String LIVE_IMG = "liveimg";                         //直播浮层
-    public static final String BIG_TOPIC = "bigtopic";                      //大专题
-    public static final String LIST_FOCUS_SLIDER = "focusslider";
-    public static final String TOPIC_TITLE = "topictitle";
-    public static final String TOPIC_BANNER_ADV = "topicbanneradv";
-    public static final String VIDEO_BIG_IMG = "videobigimg";           //视频大图当页播放样式
+    private static final String SINGLE_TITLE = "singletitle";            //单标题
+    private static final String TITLE_IMAGE = "titleimg";                //左图右文
+    private static final String SLIDE_IMAGE = "slideimg";                //三小图
+    private static final String SLIDE_IMAGE2 = "slideimg2";              //一大两小
+    private static final String BIG_IMG = "bigimg";                      //大图
+    private static final String BIG_IMG2 = "bigimg2";                    //美女段子大图
+    private static final String VIDEO = "video";                         //视频当前页播放
+    private static final String MATCH_SCORE = "matchscore";              //比赛有比分
+    private static final String MATCH_SCOMPRE = "matchscompre";          //比赛无比分
+    private static final String MATCH_IMG = "matchimg";                  //比赛底图
+    private static final String LONG_IMG = "longimg";                    //直播长图
+    private static final String LIVE_IMG = "liveimg";                    //直播浮层
+    private static final String BIG_TOPIC = "bigtopic";                  //大专题
+    private static final String LIST_FOCUS_SLIDER = "focusslider";
+    private static final String TOPIC_TITLE = "topictitle";
+    private static final String TOPIC_BANNER_ADV = "topicbanneradv";
+    private static final String VIDEO_BIG_IMG = "videobigimg";           //视频大图当页播放样式
 
-    public static final int SINGLE_TITLE_VIEW_TYPE = 0;             //单标题
-    public static final int TITLE_IMAGE_VIEW_TYPE = 1;              //左图右文
-    public static final int SLIDE_IMAGE_VIEW_TYPE = 2;              //三小图
-    public static final int SLIDE_IMAGE2_VIEW_TYPE = 3;            //一大两小
-    public static final int BIG_IMG_VIEW_TYPE = 4;                     //大图
-    public static final int BIG_IMG2_VIEW_TYPE = 5;                   //美女段子大图
-    public static final int VIDEO_VIEW_TYPE = 6;                        //视频当前页播放
-    public static final int MATCH_SCORE_VIEW_TYPE = 7;           //比赛有比分
-    public static final int MATCH_SCOMPRE_VIEW_TYPE = 8;       //比赛无比分
-    public static final int MATCH_IMG_VIEW_TYPE = 9;                //比赛底图
-    public static final int LONG_IMG_VIEW_TYPE = 10;                //直播长图
-    public static final int LIVE_IMG_VIEW_TYPE = 11;                  //直播浮层
-    public static final int BIG_TOPIC_VIEW_TYPE = 12;                //大专题
-    public static final int LIST_FOCUS_SLIDER_VIEW_TYPE = 13;
-    public static final int TOPIC_TITLE_VIEW_TYPE = 14;
-    public static final int TOPIC_BANNER_ADV_VIEW_TYPE = 15;
-    public static final int VIDEO_BIG_IMG_VIEW_TYPE = 16;          //视频大图当页播放样式
+    private static final int SINGLE_TITLE_VIEW_TYPE = 0;                 //单标题
+    private static final int TITLE_IMAGE_VIEW_TYPE = 1;                  //左图右文
+    private static final int SLIDE_IMAGE_VIEW_TYPE = 2;                  //三小图
+    private static final int SLIDE_IMAGE2_VIEW_TYPE = 3;                 //一大两小
+    private static final int BIG_IMG_VIEW_TYPE = 4;                      //大图
+    private static final int BIG_IMG2_VIEW_TYPE = 5;                     //美女段子大图
+    private static final int VIDEO_VIEW_TYPE = 6;                        //视频当前页播放
+    private static final int MATCH_SCORE_VIEW_TYPE = 7;                  //比赛有比分
+    private static final int MATCH_SCOMPRE_VIEW_TYPE = 8;                //比赛无比分
+    private static final int MATCH_IMG_VIEW_TYPE = 9;                    //比赛底图
+    private static final int LONG_IMG_VIEW_TYPE = 10;                    //直播长图
+    private static final int LIVE_IMG_VIEW_TYPE = 11;                    //直播浮层
+    private static final int BIG_TOPIC_VIEW_TYPE = 12;                   //大专题
+    private static final int LIST_FOCUS_SLIDER_VIEW_TYPE = 13;
+    private static final int TOPIC_TITLE_VIEW_TYPE = 14;
+    private static final int TOPIC_BANNER_ADV_VIEW_TYPE = 15;
+    private static final int VIDEO_BIG_IMG_VIEW_TYPE = 16;               //视频大图当页播放样式
 
     public int getViewType(PhoenixChannelBean phoenixChannelBean) {
         if (phoenixChannelBean == null
@@ -160,12 +160,7 @@ public class PhoenixBaseAdapterModel implements RecyclerViewAdapterModel<Phoenix
     }
 
     public void render(final Context context, int itemViewType, RecyclerView.ViewHolder holder, final PhoenixChannelBean phoenixChannelBean) {
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PhoenixNewsActivity.start(context, phoenixChannelBean.getLink().getWeburl());
-            }
-        });
+        holder.itemView.setOnClickListener(v -> PhoenixNewsActivity.start(context, phoenixChannelBean.getLink().getWeburl()));
 
         PhoenixBaseRenderModel model;
 

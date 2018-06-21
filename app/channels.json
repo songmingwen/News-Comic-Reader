@@ -1,0 +1,52 @@
+{
+	"channelInfoList": [
+		{
+			"channel": "play",
+			"extraInfo": {
+				"installerId": "Google Play"
+			}
+		},
+		{
+			"channel": "meituan",
+			"extraInfo": {
+				"installerId": "美团"
+			}
+		},
+		{
+			"channel": "samsungapps",
+			"extraInfo": {
+				"installerId": "三星"
+			}
+		},
+		{
+			"channel": "xiaomi",
+			"extraInfo": {
+				"installerId": "小米"
+			}
+		},
+		{
+			"channel": "huawei",
+			"extraInfo": {
+				"installerId": "华为"
+			}
+		},
+		{
+			"channel": "baidu",
+			"extraInfo": {
+				"installerId": "百度"
+			}
+		},
+		{
+			"channel": "meizu",
+			"extraInfo": {
+				"installerId": "魅族"
+			}
+		},
+		{
+			"channel": "zhihu",
+			"extraInfo": {
+				"installerId": "知乎"
+			}
+		}
+	]
+}
