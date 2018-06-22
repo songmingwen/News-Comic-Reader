@@ -7,11 +7,10 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.song.sunset.R
 import com.song.sunset.utils.BitmapUtil
+import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
 
 import kotlinx.android.synthetic.main.activity_rx_java.*
-import rx.Observable
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
 import java.io.File
 
 
@@ -49,14 +48,12 @@ class RxJavaActivity : AppCompatActivity() {
             }
         }.start()
 
-        Observable.from(folders!!)
-                .flatMap { files -> Observable.just(files) }
-                .filter { it.name.endsWith(".png") || it.name.endsWith(".jpg") }
-                .map { BitmapUtil.getSmallBitmap(it.path, 200, 200) }
+        Observable.fromArray(folders!!)
+                .flatMap { filesDir -> Observable.just(filesDir) }
+                .filter{file.name.endsWith(".png")||file.name.endsWith(".jpg")}
+                .map { BitmapUtil.getSmallBitmap(file.path, 200, 200) }
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { bitmap -> Log.i(TAG, "run: width = " + bitmap.width + ";height=" + bitmap.height) }
-
+                .subscribe{ bitmap -> Log.i(TAG, "run: width = " + bitmap.width + ";height=" + bitmap.height)}
     }
 
 }

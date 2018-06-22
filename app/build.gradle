@@ -133,7 +133,7 @@ dependencies {
     api rootProject.ext.dependencies["retrofit2_converter_gson"]
     api rootProject.ext.dependencies["retrofit2_adapter_rxjava"]
     api rootProject.ext.dependencies["okhttp3_logging_interceptor"]
-    api rootProject.ext.dependencies["rxandroid_1_2"]
+//    api rootProject.ext.dependencies["rxandroid_1_2"]
     api rootProject.ext.dependencies["rxandroid_2_1_10"]
     api rootProject.ext.dependencies["rxjava"]
     //    api rootProject.ext.dependencies["rxpermissions"]
@@ -154,8 +154,8 @@ dependencies {
     api rootProject.ext.dependencies["ndkbitmap-armv7a"]
     api rootProject.ext.dependencies["ndkbitmap-armv5"]
     api rootProject.ext.dependencies["ndkbitmap-x86"]
+    api rootProject.ext.dependencies["robust"]
+    api rootProject.ext.dependencies["walle"]
     debugCompile rootProject.ext.dependencies["leakcanary_debug"]
     releaseCompile rootProject.ext.dependencies["leakcanary_release"]
-    api 'com.meituan.robust:robust:0.3.3'
-    api 'com.meituan.android.walle:library:1.1.6'
 }

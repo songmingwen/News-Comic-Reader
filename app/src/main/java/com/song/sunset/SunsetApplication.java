@@ -2,32 +2,21 @@ package com.song.sunset;
 
 import android.app.ActivityManager;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.os.Process;
 import android.support.multidex.MultiDexApplication;
-import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.imagepipeline.backends.okhttp3.OkHttpImagePipelineConfigFactory;
-import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.song.core.FrescoInitializer;
-import com.song.sunset.activitys.MainActivity;
 import com.song.sunset.services.managers.BinderPool;
 import com.song.sunset.services.managers.MusicGetterManager;
-import com.song.sunset.utils.CrashHandler;
 import com.song.sunset.utils.GreenDaoUtil;
 import com.song.sunset.services.managers.MessengerManager;
 import com.song.sunset.services.managers.PushManager;
 import com.song.sunset.utils.SPUtils;
-import com.song.sunset.utils.fresco.FrescoUtil;
 import com.song.sunset.utils.AppConfig;
-import com.song.sunset.utils.retrofit.HttpsUtil;
-import com.squareup.leakcanary.LeakCanary;
 
 import java.util.List;
 
-import okhttp3.OkHttpClient;
 
 /**
  * Created by Song on 2016/8/29 0029.
@@ -55,15 +44,6 @@ public class SunsetApplication extends MultiDexApplication {
 
         GreenDaoUtil.initGreenDao();
 
-//        OkHttpClient okHttpClient = new okhttp3.OkHttpClient.Builder().sslSocketFactory(HttpsUtil.createDefaultSSLSocketFactory()).build();
-//
-//        ImagePipelineConfig config = OkHttpImagePipelineConfigFactory
-//                .newBuilder(this, okHttpClient)
-//                .build();
-
-//        FrescoUtil.getDefaultImagePipelineConfig(this);
-//        Fresco.initialize(this, config);
-
         FrescoInitializer.getDefaultInstance().initialize(this);
 
 
@@ -73,12 +53,12 @@ public class SunsetApplication extends MultiDexApplication {
         MessengerManager.getInstance().init(this);
         MusicGetterManager.getInstance().init(this);
 
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            // This process is dedicated to LeakCanary for heap analysis.
-            // You should not init your app in this process.
-            return;
-        }
-        LeakCanary.install(this);
+//        if (LeakCanary.isInAnalyzerProcess(this)) {
+//            // This process is dedicated to LeakCanary for heap analysis.
+//            // You should not init your app in this process.
+//            return;
+//        }
+//        LeakCanary.install(this);
     }
 
     private void initProcess() {

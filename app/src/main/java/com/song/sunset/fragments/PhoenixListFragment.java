@@ -6,41 +6,29 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.RelativeLayout;
 
 import com.song.sunset.R;
 import com.song.sunset.adapters.PhoenixListAdapter;
-import com.song.sunset.adapters.base.BaseRecyclerViewAdapter;
 import com.song.sunset.beans.PhoenixChannelBean;
 import com.song.sunset.beans.PhoenixNewsListBean;
 import com.song.sunset.beans.basebeans.PageEntity;
-import com.song.sunset.fragments.base.BaseFragment;
 import com.song.sunset.fragments.base.RVLoadableFragment;
-import com.song.sunset.interfaces.LoadingMoreListener;
 import com.song.sunset.utils.AppConfig;
-import com.song.sunset.utils.ScreenUtils;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
-import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.retrofit.RetrofitFactory;
 import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.utils.api.PhoenixNewsApi;
 import com.song.sunset.utils.api.WholeApi;
-import com.song.sunset.widget.LoadMoreRecyclerView;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
-import in.srain.cube.views.ptr.PtrHandler;
-import in.srain.cube.views.ptr.header.StoreHouseHeader;
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * Created by Song on 2017/3/30 0030.

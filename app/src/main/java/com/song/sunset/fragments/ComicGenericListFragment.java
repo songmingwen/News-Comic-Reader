@@ -19,7 +19,7 @@ import com.song.sunset.utils.retrofit.RetrofitFactory;
 import com.song.sunset.utils.rxjava.RxUtil;
 
 import in.srain.cube.views.ptr.PtrFrameLayout;
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * Created by Song on 2017/11/13 0013.

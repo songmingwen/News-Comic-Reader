@@ -7,7 +7,7 @@ import java.util.List;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * Created by Song on 2017/3/30 .

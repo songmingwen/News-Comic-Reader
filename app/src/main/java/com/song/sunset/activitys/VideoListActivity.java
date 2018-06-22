@@ -29,7 +29,7 @@ import com.song.video.VideoManager;
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * Created by Song on 2016/9/1 0001.

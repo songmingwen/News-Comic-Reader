@@ -31,7 +31,7 @@ import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
 import in.srain.cube.views.ptr.header.StoreHouseHeader;
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * Created by Song on 2017/3/13.

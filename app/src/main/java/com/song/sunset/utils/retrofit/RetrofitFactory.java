@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -41,7 +41,7 @@ public class RetrofitFactory {
                 //设置OKHttpClient
                 .client(OkHttpClient.getInstance().createClient(map))
                 //Rx转换器
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 //gson转化器
                 .addConverterFactory(GsonConverterFactory.create())
                 //String转换器

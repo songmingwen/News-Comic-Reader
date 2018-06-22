@@ -32,7 +32,7 @@ import com.song.video.NormalVideoController;
 
 import java.util.List;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * Created by Song on 2017/4/27 0027.

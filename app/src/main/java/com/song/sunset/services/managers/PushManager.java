@@ -48,8 +48,12 @@ public class PushManager {
         application.bindService(binderIntent, mServiceConnection, Context.BIND_AUTO_CREATE);
     }
 
-    public void destory(Context application){
-        application.unbindService(mServiceConnection);
+    public void destroy(Context application){
+        try {
+            application.unbindService(mServiceConnection);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     //通过AIDL远程调用

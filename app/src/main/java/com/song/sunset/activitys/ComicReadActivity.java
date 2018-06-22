@@ -25,7 +25,7 @@ import com.song.sunset.widget.ScaleRecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * Created by Song on 2016/8/30 0030.

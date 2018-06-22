@@ -27,7 +27,7 @@ import com.song.sunset.widget.RankViewPager;
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 import static com.song.sunset.activitys.ComicListActivity.ARG_NAME;
 import static com.song.sunset.activitys.ComicListActivity.ARG_VALUE;

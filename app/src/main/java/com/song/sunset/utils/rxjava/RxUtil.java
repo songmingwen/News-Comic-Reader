@@ -3,13 +3,14 @@ package com.song.sunset.utils.rxjava;
 import com.song.sunset.beans.basebeans.BaseBean;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 
+
 import java.util.List;
 
-import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.ObservableTransformer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Song on 2016/12/6.
@@ -19,73 +20,42 @@ import rx.schedulers.Schedulers;
 public class RxUtil {
 
     public static <T> void comicSubscribe(Observable<BaseBean<T>> observable, final RetrofitCallback<T> retrofitCallback) {
-        observable
-                .map(new Func1<BaseBean<T>, T>() {
-                    @Override
-                    public T call(BaseBean<T> tBaseBean) {
-                        if (tBaseBean == null ||
-                                tBaseBean.data == null ||
-                                tBaseBean.data.returnData == null ||
-                                tBaseBean.data.stateCode == 0) {
-                            return null;
-                        } else {
-                            return tBaseBean.data.returnData;
-                        }
+        Disposable disposable = observable
+                .map(tBaseBean -> {
+                    if (tBaseBean == null ||
+                            tBaseBean.data == null ||
+                            tBaseBean.data.returnData == null ||
+                            tBaseBean.data.stateCode == 0) {
+                        return null;
+                    } else {
+                        return tBaseBean.data.returnData;
                     }
                 })
-                .compose(RxUtil.<T>rxSchedulerHelper())
-                .subscribe(new Subscriber<T>() {
-                    @Override
-                    public void onCompleted() {
+                .compose(getDefaultScheduler())
+                .subscribe(o -> {
+                    if (o == null) retrofitCallback.onFailure(-1, "无数据");
+                    else retrofitCallback.onSuccess(o);
+                }, throwable -> retrofitCallback.onFailure(-1, "服务器错误"));
 
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        retrofitCallback.onFailure(-1, "服务器错误");
-                    }
-
-                    @Override
-                    public void onNext(T t) {
-                        if (t == null) retrofitCallback.onFailure(-1, "无数据");
-                        else retrofitCallback.onSuccess(t);
-                    }
-                });
     }
 
     public static <T> void phoenixNewsSubscribe(Observable<List<T>> observable, final RetrofitCallback<T> retrofitCallback) {
-        observable
-                .compose(RxUtil.<List<T>>rxSchedulerHelper())
-                .subscribe(new Subscriber<List<T>>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
+        Disposable disposable = observable
+                .compose(getDefaultScheduler())
+                .subscribe(ts -> {
+                    if (ts == null) retrofitCallback.onFailure(-1, "无数据");
+                    else retrofitCallback.onSuccess(ts.get(0));
+                }, throwable -> {
 //                        retrofitCallback.onFailure(-1, "服务器错误");
-                    }
-
-                    @Override
-                    public void onNext(List<T> t) {
-                        if (t == null) retrofitCallback.onFailure(-1, "无数据");
-                        else retrofitCallback.onSuccess(t.get(0));
-                    }
                 });
     }
 
     /**
      * compose简化线程
      */
-    public static <T> Observable.Transformer<T, T> rxSchedulerHelper() {
-        return new Observable.Transformer<T, T>() {
-            @Override
-            public Observable<T> call(Observable<T> observable) {
-                return observable.subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .unsubscribeOn(Schedulers.io());
-            }
-        };
+    public static <T> ObservableTransformer<T, T> getDefaultScheduler() {
+        return upstream -> upstream.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .unsubscribeOn(Schedulers.io());
     }
 }

@@ -14,7 +14,7 @@ import com.song.sunset.utils.api.U17ComicApi;
 import com.song.sunset.utils.rxjava.RxUtil;
 import com.sunset.greendao.gen.ComicLocalCollectionDao;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * Created by Song on 2016/12/8.

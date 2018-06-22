@@ -40,11 +40,11 @@ import com.song.sunset.services.managers.PushManager
 import com.song.sunset.utils.GreenDaoUtil
 import com.song.sunset.utils.SPUtils
 import com.song.sunset.utils.process.AndroidProcesses
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import rx.Observable
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
 import java.util.ArrayList
 
 class MainKotlinActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener, ComicCollectionView {
@@ -348,7 +348,7 @@ class MainKotlinActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
             mPresenter!!.detachVM()
         }
         MessengerManager.getInstance().destroy(this)
-        PushManager.getInstance().destory(this)
+        PushManager.getInstance().destroy(this)
         super.onDestroy()
     }
 

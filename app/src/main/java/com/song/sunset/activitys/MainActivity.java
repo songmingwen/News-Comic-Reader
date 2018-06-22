@@ -52,7 +52,9 @@ import com.song.sunset.services.impl.MusicCallBackListenerImpl;
 import com.song.sunset.services.impl.MusicGetterImpl;
 import com.song.sunset.services.managers.BinderPool;
 import com.song.sunset.services.managers.MessengerManager;
+import com.song.sunset.services.managers.MusicGetterManager;
 import com.song.sunset.services.managers.PushManager;
+import com.song.sunset.utils.AppConfig;
 import com.song.sunset.utils.GreenDaoUtil;
 import com.song.sunset.utils.SPUtils;
 import com.song.sunset.utils.process.AndroidProcesses;
@@ -387,8 +389,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         if (mPresenter != null) {
             mPresenter.detachVM();
         }
-        MessengerManager.getInstance().destroy(this);
-        PushManager.getInstance().destory(this);
+        MessengerManager.getInstance().destroy(AppConfig.getApp());
+        PushManager.getInstance().destroy(AppConfig.getApp());
         super.onDestroy();
     }
 

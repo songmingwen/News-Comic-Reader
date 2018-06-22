@@ -6,11 +6,11 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Process;
 import android.support.annotation.IntDef;
 import android.support.annotation.StringDef;
 import android.support.design.widget.FloatingActionButton;
@@ -43,15 +43,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
-import io.reactivex.functions.Consumer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
-import io.reactivex.functions.Predicate;
-import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Song on 2016/12/2.
@@ -135,7 +132,7 @@ public class TempTestActivity extends BaseActivity {
 //        AnimationSet animationSet = (AnimationSet) AnimationUtils.loadAnimation(this, R.anim.anim_dot_scale_alpha);
 //        dot.startAnimation(animationSet);
 
-//        test();
+        test();
 
 //        playSvg();
 //        playDot();
@@ -273,35 +270,18 @@ public class TempTestActivity extends BaseActivity {
         list.add(int02);
         list.add(int03);
 
-        Observable.from(list)
-                .flatMap(new Func1<Integer[], Observable<Integer>>() {
-                    @Override
-                    public Observable<Integer> call(Integer[] strings) {
-                        return Observable.from(strings);
-                    }
+        Disposable disposable = Observable.fromIterable(list)
+                .flatMap((Function<Integer[], ObservableSource<Integer>>) Observable::fromArray)
+                .map(integer -> {
+                    int tId = Process.myTid();
+                    Log.d(TAG, "sub:" + tId);
+                    return integer.toString();
                 })
-                .map(new Func1<Integer, String>() {
-                    @Override
-                    public String call(Integer i) {
-                        return i.toString();
-                    }
-                })
-                .compose(RxUtil.<String>rxSchedulerHelper())
-                .subscribe(new Subscriber<String>() {
-                    @Override
-                    public void onCompleted() {
-                        Toast.makeText(TempTestActivity.this, "完成", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onNext(String s) {
-                        Toast.makeText(TempTestActivity.this, s, Toast.LENGTH_SHORT).show();
-                    }
+                .compose(RxUtil.getDefaultScheduler())
+                .subscribe(s -> {
+                    int tId = Process.myTid();
+                    Log.d(TAG, "obs:" + tId);
+                    Log.d(TAG, s);
                 });
     }
 
@@ -381,80 +361,14 @@ public class TempTestActivity extends BaseActivity {
     private void RxJavaContrast() {
         final File file = new File(Environment.getExternalStorageDirectory().getPath() + File.separator + "sunset");
         final File[] folders = file.listFiles();
-        Log.i(TAG, "song----以下是rxjava_1.3版本");
-        Observable.from(folders)
-                .flatMap(new Func1<File, Observable<File>>() {
-                    @Override
-                    public Observable<File> call(File files) {
-                        Log.i(TAG, "song----flatMap");
-                        return Observable.from(files.listFiles());
-                    }
-                })
-                .filter(new Func1<File, Boolean>() {
-                    @Override
-                    public Boolean call(File file) {
-                        Log.i(TAG, "song----filter");
-                        return file.getName().endsWith(".png") || file.getName().endsWith(".jpg");
-                    }
-                })
-                .map(new Func1<File, Bitmap>() {
-                    @Override
-                    public Bitmap call(File file) {
-                        Log.i(TAG, "song----map");
-                        return BitmapUtil.getSmallBitmap(file.getPath(), 200, 200);
-                    }
-                })
+
+        Log.i(TAG, "song----以下是rxjava_2版本");
+        Disposable disposable = Observable.fromArray(folders)
+                .flatMap((Function<File, ObservableSource<File>>) file1 -> Observable.fromArray(file1.listFiles()))
+                .filter(file12 -> file12.getName().endsWith(".png") || file12.getName().endsWith(".jpg"))
+                .map(file13 -> BitmapUtil.getSmallBitmap(file13.getPath(), 200, 200))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<Bitmap>() {
-                    @Override
-                    public void onCompleted() {
-                        Log.i(TAG, "song----onCompleted");
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.i(TAG, "song----onError");
-                    }
-
-                    @Override
-                    public void onNext(Bitmap bitmap) {
-                        Log.i(TAG, "song----run: width = " + bitmap.getWidth() + ";height=" + bitmap.getHeight());
-                    }
-                });
-
-        Log.i(TAG, "song----以下是rxjava_2.1.10版本");
-        io.reactivex.Observable.fromArray(folders)
-                .flatMap(new Function<File, ObservableSource<File>>() {
-                    @Override
-                    public ObservableSource<File> apply(File file) throws Exception {
-                        return io.reactivex.Observable.fromArray(file.listFiles());
-                    }
-                })
-                .filter(new Predicate<File>() {
-                    @Override
-                    public boolean test(File file) throws Exception {
-                        return file.getName().endsWith(".png") || file.getName().endsWith(".jpg");
-                    }
-                })
-                .map(new Function<File, Bitmap>() {
-                    @Override
-                    public Bitmap apply(File file) throws Exception {
-                        return BitmapUtil.getSmallBitmap(file.getPath(), 200, 200);
-                    }
-                })
-                .subscribeOn(io.reactivex.schedulers.Schedulers.io())
-                .observeOn(io.reactivex.android.schedulers.AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Bitmap>() {
-                    @Override
-                    public void accept(Bitmap bitmap) throws Exception {
-                        Log.i(TAG, "song----run: width = " + bitmap.getWidth() + ";height=" + bitmap.getHeight());
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        Log.i(TAG, "song----error");
-                    }
-                });
+                .subscribe(bitmap -> Log.i(TAG, "song----run: width = " + bitmap.getWidth() + ";height=" + bitmap.getHeight()), throwable -> Log.i(TAG, "song----error"));
     }
 }
