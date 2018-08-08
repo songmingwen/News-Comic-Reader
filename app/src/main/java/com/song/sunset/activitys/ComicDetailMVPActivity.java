@@ -21,6 +21,10 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
+import com.facebook.common.references.CloseableReference;
+import com.facebook.datasource.DataSource;
+import com.facebook.imagepipeline.datasource.BaseBitmapDataSubscriber;
+import com.facebook.imagepipeline.image.CloseableImage;
 import com.song.core.base.CoreBaseActivity;
 import com.song.sunset.R;
 import com.song.sunset.adapters.ComicDetailAdapter;
@@ -29,6 +33,7 @@ import com.song.sunset.mvp.models.ComicDetailModel;
 import com.song.sunset.mvp.presenters.ComicDetailPresenter;
 import com.song.sunset.utils.BitmapUtil;
 import com.song.sunset.utils.ViewUtil;
+import com.song.sunset.utils.fresco.FrescoUtil;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.volley.SampleVolleyFactory;
 import com.song.sunset.mvp.views.ComicDetailView;
@@ -59,7 +64,6 @@ public class ComicDetailMVPActivity extends CoreBaseActivity<ComicDetailPresente
     private int color;
 
     private ComicDetailBean comicDetailBean;
-    private ImageRequest mImageRequest;
 
     public static void start(Context context, int comicId) {
         Intent intent = new Intent(context, ComicDetailMVPActivity.class);
@@ -157,33 +161,27 @@ public class ComicDetailMVPActivity extends CoreBaseActivity<ComicDetailPresente
 
     @Override
     public void showError(String msg) {
-        progressLayout.showError(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progressLayout.showLoading();
-                mPresenter.showData(comicId);
-            }
+        progressLayout.showError(v -> {
+            progressLayout.showLoading();
+            mPresenter.showData(comicId);
         });
     }
 
     public void setExtractionColorFromBitmap(ComicDetailBean comicDetailRD) {
-        RequestQueue queue = SampleVolleyFactory.getRequestQueue(this);
-        mImageRequest = new ImageRequest(comicDetailRD.getComic().getCover(),
-                new Response.Listener<Bitmap>() {
-                    @Override
-                    public void onResponse(Bitmap response) {
-                        if (ComicDetailMVPActivity.this.isFinishing()) return;
-                        color = BitmapUtil.getColorFromBitmap(response);
-                        adapter.setColor(color);
-                        toolbar.setBackgroundColor(color);
-                    }
-                }, 64, 64, Bitmap.Config.ALPHA_8, new Response.ErrorListener() {
+        FrescoUtil.getCachedImageBitmap(FrescoUtil.getDataSource(comicDetailRD.getComic().getCover()), new BaseBitmapDataSubscriber() {
             @Override
-            public void onErrorResponse(VolleyError error) {
+            protected void onNewResultImpl(Bitmap bitmap) {
+                if (ComicDetailMVPActivity.this.isFinishing()) return;
+                color = BitmapUtil.getColorFromBitmap(bitmap);
+                adapter.setColor(color);
+                toolbar.setBackgroundColor(color);
+            }
+
+            @Override
+            protected void onFailureImpl(DataSource<CloseableReference<CloseableImage>> dataSource) {
+
             }
         });
-        mImageRequest.setRetryPolicy(new DefaultRetryPolicy());
-        queue.add(mImageRequest);
     }
 
     @Override
@@ -209,7 +207,5 @@ public class ComicDetailMVPActivity extends CoreBaseActivity<ComicDetailPresente
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        RequestQueue queue = SampleVolleyFactory.getRequestQueue(this);
-        queue.cancelAll(mImageRequest);
     }
 }

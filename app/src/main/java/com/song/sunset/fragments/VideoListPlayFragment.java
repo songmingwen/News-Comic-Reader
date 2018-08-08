@@ -50,12 +50,7 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
     private ProgressLayout progressLayout;
     private RelativeLayout progressBar;
 
-    private View.OnClickListener errorClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            getDataFromRetrofit2(1);
-        }
-    };
+    private View.OnClickListener errorClickListener = v -> getDataFromRetrofit2(1);
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

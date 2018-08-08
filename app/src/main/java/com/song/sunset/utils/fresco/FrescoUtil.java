@@ -48,6 +48,7 @@ import java.io.File;
 public class FrescoUtil {
 
     public static final int NO_PARAMS = -1;
+    public static final int NO_CIRCLE = -2;
 
     public static void setFrescoImage(SimpleDraweeView simpleDraweeView, String url) {
         simpleDraweeView.setHierarchy(getHierarchy(NO_PARAMS, false));
@@ -78,49 +79,6 @@ public class FrescoUtil {
     }
 
     /**
-     * 拿到缓存的文件
-     *
-     * @return file or null
-     */
-    public static File getCachedImageOnDisk(String pUrl, Object pCaller) {
-        File localFile = null;
-        if (!TextUtils.isEmpty(pUrl)) {
-            CacheKey cacheKey = DefaultCacheKeyFactory.getInstance().getEncodedCacheKey(ImageRequest.fromUri(pUrl),
-                    pCaller);
-            BinaryResource resource = null;
-            if (ImagePipelineFactory.getInstance().getMainFileCache().hasKey(cacheKey)) {
-                resource = ImagePipelineFactory.getInstance().getMainFileCache().getResource(cacheKey);
-            } else if (ImagePipelineFactory.getInstance().getSmallImageFileCache().hasKey(cacheKey)) {
-                resource = ImagePipelineFactory.getInstance().getSmallImageFileCache().getResource(cacheKey);
-            }
-            if (resource != null) {
-                localFile = ((FileBinaryResource) resource).getFile();
-            }
-        }
-        return localFile;
-    }
-
-    public static DataSource<CloseableReference<CloseableImage>> getDataSource(String url) {
-        ImageRequest imageRequest = ImageRequest.fromUri(url);
-
-        if (imageRequest == null) {
-            return null;
-        }
-
-        ImagePipeline imagePipeline = Fresco.getImagePipeline();
-        DataSource<CloseableReference<CloseableImage>> dataSource =
-                imagePipeline.fetchDecodedImage(imageRequest, url);
-
-        return dataSource;
-    }
-
-    public static void getCachedImageBitmap(@NonNull DataSource<CloseableReference<CloseableImage>> dataSource, @NonNull
-            BaseBitmapDataSubscriber
-            dataSubscriber) {
-        dataSource.subscribe(dataSubscriber, CallerThreadExecutor.getInstance());
-    }
-
-    /**
      * DraweeHierarchy 用于组织和维护最终绘制和呈现的 Drawable 对象，相当于MVC中的M。
      */
     public static GenericDraweeHierarchy getHierarchy(int position, boolean hasBorder) {
@@ -137,7 +95,7 @@ public class FrescoUtil {
     }
 
     public static Drawable getProgressBarImage(int position) {
-        if (position == NO_PARAMS * 2) {
+        if (position == NO_CIRCLE) {
             return null;
         } else {
             return new LoadingDisplayProgress(position);
@@ -180,6 +138,7 @@ public class FrescoUtil {
                 .setProgressiveRenderingEnabled(false) //渐变加载
                 .setLocalThumbnailPreviewsEnabled(true)
                 .setPostprocessor(getPostProcessor(userBlur))
+//                .setCacheChoice(ImageRequest.CacheChoice.DEFAULT)
 //                .setResizeOptions(getResizeOption(width, height))
 //                .setLowestPermittedRequestLevel(ImageRequest.RequestLevel.FULL_FETCH)
 //                .setImageDecodeOptions()
@@ -241,6 +200,53 @@ public class FrescoUtil {
         } else {
             return null;
         }
+    }
+
+
+    /**
+     * 拿到缓存的文件
+     *
+     * @return file or null
+     */
+    public static File getCachedImageOnDisk(String pUrl, Object pCaller) {
+        File localFile = null;
+        if (!TextUtils.isEmpty(pUrl)) {
+            CacheKey cacheKey = DefaultCacheKeyFactory.getInstance().getEncodedCacheKey(ImageRequest.fromUri(pUrl),
+                    pCaller);
+            BinaryResource resource = null;
+            if (ImagePipelineFactory.getInstance().getMainFileCache().hasKey(cacheKey)) {
+                resource = ImagePipelineFactory.getInstance().getMainFileCache().getResource(cacheKey);
+            } else if (ImagePipelineFactory.getInstance().getSmallImageFileCache().hasKey(cacheKey)) {
+                resource = ImagePipelineFactory.getInstance().getSmallImageFileCache().getResource(cacheKey);
+            }
+            if (resource != null) {
+                localFile = ((FileBinaryResource) resource).getFile();
+            }
+        }
+        return localFile;
+    }
+
+    /**
+     * 通过图片 url 获取对应的 DataSource
+     */
+    public static DataSource<CloseableReference<CloseableImage>> getDataSource(String url) {
+        ImageRequest imageRequest = ImageRequest.fromUri(url);
+
+        if (imageRequest == null) {
+            return null;
+        }
+
+        ImagePipeline imagePipeline = Fresco.getImagePipeline();
+        return imagePipeline.fetchDecodedImage(imageRequest, url);
+
+    }
+
+    /**
+     * 通过 DataSource 获取对应的 bitmap
+     */
+    public static void getCachedImageBitmap(@NonNull DataSource<CloseableReference<CloseableImage>> dataSource, @NonNull
+            BaseBitmapDataSubscriber dataSubscriber) {
+        dataSource.subscribe(dataSubscriber, CallerThreadExecutor.getInstance());
     }
 
 }

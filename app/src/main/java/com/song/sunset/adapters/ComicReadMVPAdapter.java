@@ -39,7 +39,7 @@ public class ComicReadMVPAdapter extends BaseRecyclerViewAdapter<ComicReadImageL
             ComicReadImageListBean imageListBean = data.get(position);
             int realWidth = ViewUtil.getScreenWidth();
             int realHeight = realWidth * imageListBean.getHeight() / imageListBean.getWidth();
-            FrescoUtil.setFrescoCoverImage(comicReadViewHolder.simpleDraweeView, data.get(position).getImg50(), realWidth, realHeight, false);
+            FrescoUtil.setFrescoComicImage(comicReadViewHolder.simpleDraweeView, data.get(position).getImg50(), position + 1, realWidth, realHeight);
         }
     }
 

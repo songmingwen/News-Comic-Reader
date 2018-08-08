@@ -25,9 +25,13 @@ import com.facebook.common.memory.MemoryTrimType;
 import com.facebook.common.memory.NoOpMemoryTrimmableRegistry;
 import com.facebook.common.util.ByteConstants;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.backends.okhttp3.OkHttpImagePipelineConfigFactory;
 import com.facebook.imagepipeline.cache.MemoryCacheParams;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.imagepipeline.core.ImagePipelineFactory;
+import com.song.sunset.utils.retrofit.HttpsUtil;
+
+import okhttp3.OkHttpClient;
 
 /**
  * Fresco 的 Image Pipeline 负责图片的获取和管理。图片可以来自远程服务器，本地文件，
@@ -103,7 +107,10 @@ public class FrescoInitializer implements ApplicationInitializer {
                 .build();
 
         //缓存图片配置
-        ImagePipelineConfig.Builder configBuilder = ImagePipelineConfig.newBuilder(context)
+        //自定义网络加载
+        OkHttpClient okHttpClient = new OkHttpClient.Builder().sslSocketFactory(HttpsUtil.createDefaultSSLSocketFactory()).build();
+
+        ImagePipelineConfig.Builder configBuilder = OkHttpImagePipelineConfigFactory.newBuilder(context, okHttpClient)
                 .setBitmapsConfig(Bitmap.Config.RGB_565)
                 .setBitmapMemoryCacheParamsSupplier(mSupplierMemoryCacheParams)
                 .setSmallImageDiskCacheConfig(diskSmallCacheConfig)

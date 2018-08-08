@@ -21,7 +21,7 @@ import java.util.List;
 
 public class MusicLoader {
 
-    private static final String TAG = "com.example.nature.MusicLoader";
+    private static final String TAG = "MusicLoader";
 
     private static MusicLoader musicLoader;
 

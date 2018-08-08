@@ -159,12 +159,9 @@ public class VideoAutoPlayRecyclerView extends LoadMoreRecyclerView {
         params.height = (int) (params.width * 9f / 16f);    // 高度为宽度的9/16
         mPlayer.setLayoutParams(params);
 
-        mPlayer.setOnPlayStateChangedListener(new NormalVideoPlayer.OnPlayStateChanged() {
-            @Override
-            public void onPlayStateChanged(int state) {
-                if (state == NormalVideoPlayer.STATE_COMPLETED) {
-                    setClickViewToCenter(currentPlayerPosition + 1);
-                }
+        mPlayer.setOnPlayStateChangedListener(state -> {
+            if (state == NormalVideoPlayer.STATE_COMPLETED) {
+                setClickViewToCenter(currentPlayerPosition + 1);
             }
         });
     }

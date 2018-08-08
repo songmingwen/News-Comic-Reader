@@ -39,6 +39,25 @@ public class RxUtil {
 
     }
 
+    public static <T> Disposable comic(Observable<BaseBean<T>> observable, final RetrofitCallback<T> retrofitCallback) {
+        return observable
+                .map(tBaseBean -> {
+                    if (tBaseBean == null ||
+                            tBaseBean.data == null ||
+                            tBaseBean.data.returnData == null ||
+                            tBaseBean.data.stateCode == 0) {
+                        return null;
+                    } else {
+                        return tBaseBean.data.returnData;
+                    }
+                })
+                .compose(getDefaultScheduler())
+                .subscribe(o -> {
+                    if (o == null) retrofitCallback.onFailure(-1, "无数据");
+                    else retrofitCallback.onSuccess(o);
+                }, throwable -> retrofitCallback.onFailure(-1, "服务器错误"));
+    }
+
     public static <T> void phoenixNewsSubscribe(Observable<List<T>> observable, final RetrofitCallback<T> retrofitCallback) {
         Disposable disposable = observable
                 .compose(getDefaultScheduler())

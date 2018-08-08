@@ -91,6 +91,7 @@ public class MusicInfo implements Parcelable {
     }
 
     public MusicInfo() {
+        long a = id>size?id:size;
     }
 
     protected MusicInfo(Parcel in) {

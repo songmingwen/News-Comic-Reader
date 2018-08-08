@@ -53,9 +53,9 @@ public abstract class CoreBaseActivity<P extends CoreBasePresenter, M extends Co
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         mUnbinder.unbind();
         if (mPresenter != null) mPresenter.detachVM();
+        super.onDestroy();
     }
 
     @Override

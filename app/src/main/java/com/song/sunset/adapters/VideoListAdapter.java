@@ -15,6 +15,9 @@ import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.fresco.FrescoUtil;
 import com.song.video.NormalVideoPlayer;
 
+import io.reactivex.Completable;
+import io.reactivex.schedulers.Schedulers;
+
 /**
  * Created by Song on 2016/12/21.
  * E-mail:z53520@qq.com
@@ -49,15 +52,17 @@ public class VideoListAdapter extends BaseRecyclerViewAdapter<VideoDetailBean, V
 
     @Override
     public void onViewDetachedFromWindow(RecyclerView.ViewHolder holder) {
-        super.onViewDetachedFromWindow(holder);
         ViewGroup viewGroup = (ViewGroup) holder.itemView;
         if (viewGroup.getChildCount() > 2) {
             View view = viewGroup.getChildAt(2);
             if (view instanceof NormalVideoPlayer) {
-                ((NormalVideoPlayer) view).release();
+                Completable.fromRunnable(((NormalVideoPlayer) view)::pause)
+                        .subscribeOn(Schedulers.io()) // 挑选对应的调度器
+                        .subscribe();
             }
             viewGroup.removeViewAt(2);
         }
+        super.onViewDetachedFromWindow(holder);
     }
 
     protected void onItemClick(View view, int position) {
