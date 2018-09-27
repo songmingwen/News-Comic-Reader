@@ -3,49 +3,57 @@
 		{
 			"channel": "play",
 			"extraInfo": {
-				"installerId": "Google Play"
+				"installerId": "Google Play",
+				"extraId":"GP"
 			}
 		},
 		{
 			"channel": "meituan",
 			"extraInfo": {
-				"installerId": "美团"
+				"installerId": "美团",
+				"extraId":"MT"
 			}
 		},
 		{
 			"channel": "samsungapps",
 			"extraInfo": {
-				"installerId": "三星"
+				"installerId": "三星",
+				"extraId":"SX"
 			}
 		},
 		{
 			"channel": "xiaomi",
 			"extraInfo": {
-				"installerId": "小米"
+				"installerId": "小米",
+				"extraId":"XM"
 			}
 		},
 		{
 			"channel": "huawei",
 			"extraInfo": {
-				"installerId": "华为"
+				"installerId": "华为",
+				"extraId":"HW"
 			}
 		},
 		{
 			"channel": "baidu",
 			"extraInfo": {
-				"installerId": "百度"
+				"installerId": "百度",
+				"extraId":"BD"
 			}
 		},
 		{
 			"channel": "meizu",
 			"extraInfo": {
-				"installerId": "魅族"
+				"installerId": "魅族",
+				"extraId":"MZ"
 			}
 		},
 		{
 			"channel": "zhihu",
 			"extraInfo": {
-				"installerId": "知乎"
+				"installerId": "知乎",
+				"extraId":"ZH"
 			}
 		}
 	]

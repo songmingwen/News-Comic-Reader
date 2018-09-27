@@ -112,6 +112,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             String channel = channelInfo.getChannel();
             Map<String, String> extraInfo = channelInfo.getExtraInfo();
             Log.d(TAG, "onCreate: " + channel + ";extra:" + extraInfo.get("installerId"));
+            Log.d(TAG, "onCreate: " + channel + ";extra:" + extraInfo.get("extraId"));
         } else {
             Log.d(TAG, "onCreate: " + "null------");
         }
@@ -172,7 +173,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             public void onClick(View v) {
 //                MainActivity.this.startActivity(new Intent(MainActivity.this, SubScaleViewActivity.class));
 //                MainActivity.this.startActivity(new Intent(MainActivity.this, TouchEventTestActivity.class));
-                MainActivity.this.startActivity(new Intent(MainActivity.this, TempTestActivity.class));
+//                MainActivity.this.startActivity(new Intent(MainActivity.this, TempTestActivity.class));
 //                MainActivity.this.startActivity(new Intent(MainActivity.this, RxJavaActivity.class));
 //                MainActivity.this.startActivity(new Intent(MainActivity.this, TransTestActivity.class));
 //                ScrollingActivity.start(MainActivity.this);
@@ -217,6 +218,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
                 //热修复
 //                startRobust();
+
+//                RxjavaActivity.start(MainActivity.this);
+//                TouchEventTestActivity.start(MainActivity.this);
+                FrescoProcessorActivity.start(MainActivity.this);
             }
         });
     }

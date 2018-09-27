@@ -1,5 +1,7 @@
 package com.song.sunset.activitys;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -23,7 +25,7 @@ public class TouchEventTestActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_touch_event);
-        FloorView floorView = (FloorView) findViewById(R.id.floor_view);
+//        FloorView floorView = (FloorView) findViewById(R.id.floor_view);
         ArrayList<Comment> list = new ArrayList<>();
         for (int i = 0; i < 24; i++) {
             Comment comment = new Comment();
@@ -45,7 +47,7 @@ public class TouchEventTestActivity extends BaseActivity {
             comment.setUser(user);
             list.add(comment);
         }
-        floorView.setComments(list);
+//        floorView.setComments(list);
     }
 
     public void buttonOnClick(View view) {
@@ -63,6 +65,11 @@ public class TouchEventTestActivity extends BaseActivity {
                 return false;
             }
         });
+    }
+
+    public static void start(Context context) {
+        Intent starter = new Intent(context, TouchEventTestActivity.class);
+        context.startActivity(starter);
     }
 
     @Override

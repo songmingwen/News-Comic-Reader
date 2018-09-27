@@ -1,4 +1,4 @@
-package com.song.sunset.activitys
+package com.kotlin
 
 import android.os.Bundle
 import android.os.Environment
@@ -14,9 +14,9 @@ import kotlinx.android.synthetic.main.activity_rx_java.*
 import java.io.File
 
 
-class RxJavaActivity : AppCompatActivity() {
+class RxJavaKotlinActivity : AppCompatActivity() {
 
-    val TAG = RxJavaActivity::class.java.name
+    val TAG = RxJavaKotlinActivity::class.java.name
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +41,7 @@ class RxJavaActivity : AppCompatActivity() {
                     files!!.forEach { file ->
                         if (file.name.endsWith(".png") || file.name.endsWith(".jpg")) {
                             val bitmap = BitmapUtil.getSmallBitmap(file.path, 200, 200)
-                            this@RxJavaActivity.runOnUiThread({ Log.i(TAG, "run: width = " + bitmap.width + ";height=" + bitmap.height) })
+                            this@RxJavaKotlinActivity.runOnUiThread({ Log.i(TAG, "run: width = " + bitmap.width + ";height=" + bitmap.height) })
                         }
                     }
                 }

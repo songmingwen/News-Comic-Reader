@@ -53,4 +53,6 @@
     <string name="title_activity_first">First</string>
     <string name="title_activity_first_kotlin">FirstKotlinActivity</string>
     <string name="title_activity_rx_java">RxJavaActivity</string>
+    <string name="title_activity_rxjava">RxjavaActivity</string>
+    <string name="title_activity_fresco_processor">FrescoProcessorActivity</string>
 </resources>

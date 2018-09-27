@@ -6,12 +6,13 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 
 /**
  * Created by Song on 2016/12/2.
  */
 
-public class TouchEventInnerViewGroup extends RelativeLayout {
+public class TouchEventInnerViewGroup extends ScrollView {
 
     public TouchEventInnerViewGroup(Context context) {
         super(context);
@@ -61,6 +62,6 @@ public class TouchEventInnerViewGroup extends RelativeLayout {
                 Log.i("Inner_touch", "-----move");
                 break;
         }
-        return true;
+        return super.onTouchEvent(event);
     }
 }

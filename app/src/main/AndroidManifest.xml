@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="com.song.sunset">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.song.sunset">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION"/>
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
-    <uses-permission android:name="android.permission.READ_LOGS"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-permission
         android:name="android.permission.PACKAGE_USAGE_STATS"
-        tools:ignore="ProtectedPermissions"/>
+        tools:ignore="ProtectedPermissions" />
 
     <application
         android:name=".SunsetApplication"
@@ -30,14 +30,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activitys.FirstKotlinActivity"
+            android:name="com.kotlin.FirstKotlinActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
@@ -57,118 +57,121 @@
             android:name=".activitys.MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".activitys.MainKotlinActivity"
+            android:name="com.kotlin.MainKotlinActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activitys.base.BaseActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activitys.ComicReadActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activitys.VideoListActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
             android:name=".activitys.ScalePicActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activitys.ComicListActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.subscaleview.sample.SubScaleViewActivity"/>
-        <activity android:name="com.subscaleview.sample.animation.AnimationActivity"/>
-        <activity android:name="com.subscaleview.sample.basicfeatures.BasicFeaturesActivity"/>
-        <activity android:name="com.subscaleview.sample.configuration.ConfigurationActivity"/>
-        <activity android:name="com.subscaleview.sample.eventhandling.EventHandlingActivity"/>
-        <activity android:name="com.subscaleview.sample.eventhandlingadvanced.AdvancedEventHandlingActivity"/>
-        <activity android:name="com.subscaleview.sample.extension.ExtensionActivity"/>
-        <activity android:name="com.subscaleview.sample.viewpager.ViewPagerActivity"/>
-        <activity android:name="com.subscaleview.sample.imagedisplay.ImageDisplayActivity"/>
-        <activity android:name=".activitys.MediaPlayerActivity"/>
-        <activity android:name=".activitys.VideoViewActivity"/>
-        <activity android:name=".activitys.TouchEventTestActivity"/>
-        <activity android:name=".activitys.TempTestActivity"/>
-        <activity android:name=".activitys.ComicDetailMVPActivity"/>
-        <activity android:name=".activitys.TransTestActivity"/>
+            android:screenOrientation="portrait" />
+        <activity android:name="com.subscaleview.sample.SubScaleViewActivity" />
+        <activity android:name="com.subscaleview.sample.animation.AnimationActivity" />
+        <activity android:name="com.subscaleview.sample.basicfeatures.BasicFeaturesActivity" />
+        <activity android:name="com.subscaleview.sample.configuration.ConfigurationActivity" />
+        <activity android:name="com.subscaleview.sample.eventhandling.EventHandlingActivity" />
+        <activity android:name="com.subscaleview.sample.eventhandlingadvanced.AdvancedEventHandlingActivity" />
+        <activity android:name="com.subscaleview.sample.extension.ExtensionActivity" />
+        <activity android:name="com.subscaleview.sample.viewpager.ViewPagerActivity" />
+        <activity android:name="com.subscaleview.sample.imagedisplay.ImageDisplayActivity" />
+        <activity android:name=".activitys.MediaPlayerActivity" />
+        <activity android:name=".activitys.VideoViewActivity" />
+        <activity android:name=".activitys.TouchEventTestActivity" />
+        <activity android:name=".activitys.TempTestActivity" />
+        <activity android:name=".activitys.ComicDetailMVPActivity" />
+        <activity android:name=".activitys.TransTestActivity" />
         <activity
             android:name=".activitys.ComicCollectionActivity"
-            android:launchMode="singleInstance"/>
+            android:launchMode="singleInstance" />
         <activity
             android:name=".activitys.PhoenixNewsActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
             android:name=".activitys.PhoenixVideoActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize" />
 
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="1b85142155dba7f4c7f243bfd78cb7c4"/>
+            android:value="1b85142155dba7f4c7f243bfd78cb7c4" />
 
-        <activity android:name=".activitys.LocationMarkerActivity"/>
-        <activity android:name=".activitys.BasicMapActivity"/>
+        <activity android:name=".activitys.LocationMarkerActivity" />
+        <activity android:name=".activitys.BasicMapActivity" />
         <activity
             android:name=".activitys.ComicReadMVPActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <!-- 定位需要的服务 使用2.0的定位需要加上这个 -->
-        <service android:name="com.amap.api.location.APSService"/>
+        <service android:name="com.amap.api.location.APSService" />
 
         <activity
             android:name=".activitys.ScrollingActivity"
             android:label="@string/title_activity_scrolling"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:theme="@style/AppTheme" />
 
         <provider
             android:name=".providers.BookProvider"
             android:authorities="com.song.sunset.providers.bookprovider"
             android:enabled="true"
-            android:exported="true">
-        </provider>
+            android:exported="true" />
 
         <receiver android:name=".receivers.SunsetWidget">
             <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
-                <action android:name="com.song.sunset.intent.action.APP_WIDGET_CLICK"/>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.song.sunset.intent.action.APP_WIDGET_CLICK" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/sunset_widget_info"/>
+                android:resource="@xml/sunset_widget_info" />
         </receiver>
 
         <service
             android:name=".services.PushService"
             android:enabled="true"
             android:exported="true"
-            android:process=":remote">
-        </service>
+            android:process=":remote" />
         <service
             android:name=".services.MessengerService"
             android:enabled="true"
             android:exported="true"
-            android:process=":remote">
-        </service>
+            android:process=":remote" />
         <service
             android:name=".services.BinderPoolService"
             android:enabled="true"
             android:exported="true"
-            android:process=":remote">
-        </service>
+            android:process=":remote" />
         <service
             android:name=".services.MusicGetterService"
             android:enabled="true"
             android:exported="true"
-            android:process=":remote">
-        </service>
+            android:process=":remote" />
 
         <activity
-            android:name=".activitys.RxJavaActivity"
+            android:name="com.kotlin.RxJavaKotlinActivity"
             android:label="@string/title_activity_rx_java"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activitys.RxjavaActivity"
+            android:label="@string/title_activity_rxjava"
+            android:theme="@style/AppTheme" />
+        <activity android:name="com.kotlin.LearnKotlin" />
+        <activity
+            android:name=".activitys.base.FrescoProcessorActivity"
+            android:label="@string/title_activity_fresco_processor"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".activitys.FrescoProcessorActivity"></activity>
     </application>
 
 </manifest>

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.song.sunset.activitys.FirstKotlinActivity"
+    tools:context="com.song.sunset.com.kotlin.FirstKotlinActivity"
     tools:showIn="@layout/activity_first_kotlin">
 
 </android.support.constraint.ConstraintLayout>

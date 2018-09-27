@@ -1,4 +1,4 @@
-package com.song.sunset.activitys
+package com.kotlin
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import com.song.sunset.R
+import com.song.sunset.activitys.MainActivity
 import com.song.sunset.utils.DateTimeUtils
 import kotlinx.android.synthetic.main.activity_first.*
 

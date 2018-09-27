@@ -12,12 +12,57 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <!--<Button-->
-                <!--android:id="@+id/button"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:onClick="buttonOnClick"-->
-                <!--android:visibility="gone" />-->
+            <com.song.sunset.widget.TouchButton
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible" >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text="skdjfalsjdf"
+                    android:layout_height="100dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text="skdjfalsjdf"
+                    android:layout_height="100dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text="skdjfalsjdf"
+                    android:layout_height="100dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text="skdjfalsjdf"
+                    android:layout_height="100dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text="skdjfalsjdf"
+                    android:layout_height="100dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text="skdjfalsjdf"
+                    android:layout_height="100dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text="skdjfalsjdf"
+                    android:layout_height="100dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text="skdjfalsjdf"
+                    android:layout_height="100dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text="skdjfalsjdf"
+                    android:layout_height="100dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text="skdjfalsjdf"
+                    android:layout_height="100dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text="skdjfalsjdf"
+                    android:layout_height="100dp" />
+            </com.song.sunset.widget.TouchButton>
 
             <!--<com.song.sunset.views.MatrixImageView-->
             <!--android:layout_width="match_parent"-->
@@ -40,24 +85,24 @@
             <!--android:layout_width="match_parent"-->
             <!--android:layout_height="wrap_content" />-->
 
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:paddingBottom="25dp">
+            <!--<ScrollView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:clipToPadding="false"-->
+                <!--android:paddingBottom="25dp">-->
 
-                <com.song.sunset.widget.FloorView
-                    android:id="@+id/floor_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" />
-            </ScrollView>
+                <!--<com.song.sunset.widget.FloorView-->
+                    <!--android:id="@+id/floor_view"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="vertical" />-->
+            <!--</ScrollView>-->
 
-            <com.song.sunset.widget.WaveView
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_alignParentBottom="true"
-                android:layout_centerInParent="true" />
+            <!--<com.song.sunset.widget.WaveView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_centerInParent="true" />-->
         </com.song.sunset.widget.TouchEventInnerViewGroup>
     </com.song.sunset.widget.TouchEventOuterViewGroup>
 </LinearLayout>

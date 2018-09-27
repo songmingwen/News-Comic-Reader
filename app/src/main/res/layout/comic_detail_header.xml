@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="280dp">
 
-    <ImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/img_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -49,12 +49,12 @@
             android:layout_width="113dp"
             android:layout_height="143dp"/>
 
-        <ImageView
-            android:id="@+id/id_comic_detail_header_img"
-            android:layout_width="113dp"
-            android:layout_height="143dp"
-            android:scaleType="fitXY"
-            android:visibility="gone"/>
+        <!--<ImageView-->
+            <!--android:id="@+id/id_comic_detail_header_img"-->
+            <!--android:layout_width="113dp"-->
+            <!--android:layout_height="143dp"-->
+            <!--android:scaleType="fitXY"-->
+            <!--android:visibility="gone"/>-->
     </android.support.v7.widget.CardView>
 
     <TextView

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.song.sunset.activitys.RxJavaActivity"
+    tools:context="com.song.sunset.com.kotlin.RxJavaKotlinActivity"
     tools:showIn="@layout/activity_rx_java">
 
 </android.support.constraint.ConstraintLayout>

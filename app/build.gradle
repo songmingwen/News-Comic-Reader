@@ -111,7 +111,8 @@ dependencies {
     api 'com.android.support:cardview-v7:26.0.0'
     api 'com.android.support:palette-v7:26.0.0'
     api 'com.android.support.constraint:constraint-layout:1.0.2'
-    api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    api 'com.google.android:flexbox:1.0.0'
+
     api rootProject.ext.dependencies["multidex"]
     api rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
     //    api rootProject.ext.dependencies["glide"]
@@ -156,6 +157,10 @@ dependencies {
     api rootProject.ext.dependencies["ndkbitmap-x86"]
     api rootProject.ext.dependencies["robust"]
     api rootProject.ext.dependencies["walle"]
+//    api rootProject.ext.dependencies["kotlin_anko"]
+//    api rootProject.ext.dependencies["kotlin_stdlib"]
+    api rootProject.ext.dependencies["kotlinx_core"]
+//    api rootProject.ext.dependencies["kotlinx_android"]
     debugCompile rootProject.ext.dependencies["leakcanary_debug"]
     releaseCompile rootProject.ext.dependencies["leakcanary_release"]
 }

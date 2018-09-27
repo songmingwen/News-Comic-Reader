@@ -8,6 +8,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableTransformer;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -20,7 +21,7 @@ import io.reactivex.schedulers.Schedulers;
 public class RxUtil {
 
     public static <T> void comicSubscribe(Observable<BaseBean<T>> observable, final RetrofitCallback<T> retrofitCallback) {
-        Disposable disposable = observable
+        observable
                 .map(tBaseBean -> {
                     if (tBaseBean == null ||
                             tBaseBean.data == null ||
@@ -32,11 +33,28 @@ public class RxUtil {
                     }
                 })
                 .compose(getDefaultScheduler())
-                .subscribe(o -> {
-                    if (o == null) retrofitCallback.onFailure(-1, "无数据");
-                    else retrofitCallback.onSuccess(o);
-                }, throwable -> retrofitCallback.onFailure(-1, "服务器错误"));
+                .subscribe(new Observer<T>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
 
+                    }
+
+                    @Override
+                    public void onNext(T t) {
+                        if (t == null) retrofitCallback.onFailure(-1, "无数据");
+                        else retrofitCallback.onSuccess(t);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        retrofitCallback.onFailure(-1, "服务器错误");
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     public static <T> Disposable comic(Observable<BaseBean<T>> observable, final RetrofitCallback<T> retrofitCallback) {

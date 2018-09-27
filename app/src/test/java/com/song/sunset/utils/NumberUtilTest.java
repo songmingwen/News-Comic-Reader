@@ -1,5 +1,7 @@
 package com.song.sunset.utils;
 
+import com.kotlin.LearnKotlin;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,12 +18,46 @@ public class NumberUtilTest {
 
     @Test
     public void convertToint() throws Exception {
-        assertEquals(NumberUtil.convertToint("77", 0), 77);
+        List<String> ls = new ArrayList<>();
+        List<Integer> li = new ArrayList<>();
+        System.out.println(ls.getClass() == li.getClass());
     }
 
     @Test
     public void convertTolong() throws Exception {
-        assertEquals(NumberUtil.convertTolong("77", 1L), 77L);
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                if (j == 2) {
+                    continue;
+                }
+                System.out.println("1-j=" + j);
+            }
+        }
+        w:
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                if (j == 2) {
+                    continue w;
+                }
+                System.out.println("2--j=" + j);
+            }
+        }
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                if (j == 2) {
+                    break;
+                }
+                System.out.println("3---j=" + j);
+            }
+        }
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                if (j == 2) {
+                    return;
+                }
+                System.out.println("4----j=" + j);
+            }
+        }
     }
 
     @Test

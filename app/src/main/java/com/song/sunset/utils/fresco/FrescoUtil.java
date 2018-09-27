@@ -51,7 +51,7 @@ public class FrescoUtil {
     public static final int NO_CIRCLE = -2;
 
     public static void setFrescoImage(SimpleDraweeView simpleDraweeView, String url) {
-        simpleDraweeView.setHierarchy(getHierarchy(NO_PARAMS, false));
+        simpleDraweeView.setHierarchy(getHierarchy(NO_CIRCLE, false));
         simpleDraweeView.setImageURI(url);
     }
 
@@ -194,7 +194,7 @@ public class FrescoUtil {
 
                 @Override
                 public void process(Bitmap bitmap) {
-                    BitmapBlurHelper.blur(bitmap, 35);
+                    BitmapBlurHelper.blur(bitmap, 20);
                 }
             };
         } else {

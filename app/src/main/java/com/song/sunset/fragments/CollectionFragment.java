@@ -22,9 +22,17 @@ import com.song.sunset.utils.SPUtils;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
+import com.song.sunset.utils.rxjava.RxUtil;
 import com.sunset.greendao.gen.ComicLocalCollectionDao;
 
 import java.util.List;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 
 /**
  * Created by z5352_000 on 2016/10/29 0029.
@@ -71,17 +79,12 @@ public class CollectionFragment extends BaseFragment implements RetrofitCallback
     @Override
     public void onResume() {
         super.onResume();
-        if (SPUtils.getBooleanByName(getActivity(), SPUtils.APP_FIRST_INSTALL, false)) {
-            mPresenter.getNewestCollectedComic();
-        } else {
-            getDataFromSQLite();
-            mPresenter.getNewestCollectedComic();
-        }
+        mPresenter.getNewestCollectedComic();
     }
 
     private void getDataFromSQLite() {
         List<ComicLocalCollection> list = comicLocalCollectionDao.loadAll();
-        if (list == null || list.size() <= 0) {
+        if (list == null || list.size() <= 0 || adapter == null) {
             progressLayout.showEmpty();
             return;
         }
@@ -91,12 +94,17 @@ public class CollectionFragment extends BaseFragment implements RetrofitCallback
 
     @Override
     public void onSuccess(CollectionOnlineListBean collectionOnlineListBean) {
-        if (SPUtils.getBooleanByName(getActivity(), SPUtils.APP_FIRST_INSTALL, true)) {
-            saveCollectedComic(collectionOnlineListBean);
-            getDataFromSQLite();
-        }
-        if (adapter == null) return;
-        adapter.setCollectionList(collectionOnlineListBean.getFavList());
+        Disposable disposable = Observable.create((ObservableOnSubscribe<Boolean>)
+                emitter -> emitter.onNext(saveCollectedComic(collectionOnlineListBean)))
+                .compose(RxUtil.getDefaultScheduler())
+                .subscribe(aBoolean -> {
+                    if (aBoolean) {
+                        getDataFromSQLite();
+                    } else {
+                        if (adapter == null) return;
+                        adapter.setCollectionList(collectionOnlineListBean.getFavList());
+                    }
+                });
     }
 
     @Override
@@ -106,9 +114,9 @@ public class CollectionFragment extends BaseFragment implements RetrofitCallback
         }
     }
 
-    private void saveCollectedComic(CollectionOnlineListBean collectionOnlineListBean) {
+    private boolean saveCollectedComic(CollectionOnlineListBean collectionOnlineListBean) {
         if (collectionOnlineListBean == null || collectionOnlineListBean.getFavList().isEmpty())
-            return;
+            return false;
         GreenDaoUtil.getDb().beginTransaction();
         for (ComicCollectionBean bean : collectionOnlineListBean.getFavList()) {
             ComicLocalCollection localCollection = new ComicLocalCollection();
@@ -117,10 +125,11 @@ public class CollectionFragment extends BaseFragment implements RetrofitCallback
             localCollection.setCover(bean.getCover());
             localCollection.setName(bean.getName());
             localCollection.setChapterNum(String.valueOf(bean.getPass_chapter_num()));
-            comicLocalCollectionDao.insert(localCollection);
+            comicLocalCollectionDao.insertOrReplace(localCollection);
         }
         GreenDaoUtil.getDb().setTransactionSuccessful();
         GreenDaoUtil.getDb().endTransaction();
+        return true;
     }
 
     @Override

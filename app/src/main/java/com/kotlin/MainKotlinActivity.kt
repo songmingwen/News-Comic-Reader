@@ -1,4 +1,4 @@
-package com.song.sunset.activitys
+package com.kotlin
 
 import android.app.ActivityManager
 import android.app.Notification
@@ -11,19 +11,23 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.os.RemoteException
+import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.NavigationView
 import android.support.v4.app.ActivityCompat
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.NotificationCompat
+import android.support.v7.widget.Toolbar
 import android.text.TextUtils
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import com.meituan.android.walle.WalleChannelReader
 import com.song.core.statusbar.StatusBarUtil
 import com.song.sunset.R
+import com.song.sunset.activitys.*
 import com.song.sunset.activitys.base.BaseActivity
 import com.song.sunset.beans.CollectionOnlineListBean
 import com.song.sunset.beans.MusicInfo
@@ -37,24 +41,27 @@ import com.song.sunset.services.impl.MusicGetterImpl
 import com.song.sunset.services.managers.BinderPool
 import com.song.sunset.services.managers.MessengerManager
 import com.song.sunset.services.managers.PushManager
+import com.song.sunset.utils.AppConfig
 import com.song.sunset.utils.GreenDaoUtil
 import com.song.sunset.utils.SPUtils
 import com.song.sunset.utils.process.AndroidProcesses
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.app_bar_main.*
 import java.util.ArrayList
 
 class MainKotlinActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener, ComicCollectionView {
-    val TAG = MainKotlinActivity::class.java.name!!
 
+
+    private var toolbar: Toolbar? = null
     private var lastBackPressedTime: Long = 0
+    private var fab: FloatingActionButton? = null
+    private var navigationView: NavigationView? = null
     private val MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS = 1001
     private var mPresenter: ComicCollectionPresenter? = null
-    private val REQUEST_EXTERNAL_STORAGE = 1
-    private val PERMISSIONS_STORAGE = arrayOf("android.permission.READ_EXTERNAL_STORAGE", "android.permission.WRITE_EXTERNAL_STORAGE")
+
+    companion object {
+        private val TAG = MainActivity::class.java.name
+        private const val REQUEST_EXTERNAL_STORAGE = 1
+        private val PERMISSIONS_STORAGE = arrayOf("android.permission.READ_EXTERNAL_STORAGE", "android.permission.WRITE_EXTERNAL_STORAGE")
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         //夜间模式一定要包含日间模式的配置文件：如color，style......
@@ -76,10 +83,20 @@ class MainKotlinActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         //                        MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS);
         //            }
         //        }
+        //获取渠道
+        //        String channel = WalleChannelReader.getChannel(this.getApplicationContext());
+        val channelInfo = WalleChannelReader.getChannelInfo(this.applicationContext)
+        if (channelInfo != null) {
+            val channel = channelInfo.channel
+            val extraInfo = channelInfo.extraInfo
+            Log.d(TAG, "onCreate: " + channel + ";extra:" + extraInfo["installerId"])
+        } else {
+            Log.d(TAG, "onCreate: " + "null------")
+        }
     }
 
 
-    private fun verifyStoragePermissions() {
+    fun verifyStoragePermissions() {
         try {
             //检测是否有写的权限
             val permission = ActivityCompat.checkSelfPermission(this,
@@ -108,27 +125,31 @@ class MainKotlinActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
     }
 
     private fun initView() {
+        toolbar = findViewById(R.id.toolbar) as Toolbar
         toolbar!!.setLogo(R.mipmap.logo)
+        fab = findViewById(R.id.fab) as FloatingActionButton
     }
 
     private fun initDrawer() {
         val drawer = findViewById(R.id.drawer_layout) as DrawerLayout
         StatusBarUtil.setColorForDrawerLayout(this, drawer, resources.getColor(R.color.transparent))
+        navigationView = findViewById(R.id.navView) as NavigationView
         val toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer.addDrawerListener(toggle)
         toggle.syncState()
-        navView!!.setCheckedItem(R.id.nav_news)
-        navView!!.itemIconTintList = null
+        navigationView!!.setCheckedItem(R.id.nav_news)
+        navigationView!!.itemIconTintList = null
         setDrawerLeftEdgeSize(this, drawer, 0.35f)
     }
 
     private fun setUpListener() {
-        navView!!.setNavigationItemSelectedListener(this)
+        navigationView!!.setNavigationItemSelectedListener(this)
 
         fab!!.setOnClickListener {
             //                MainActivity.this.startActivity(new Intent(MainActivity.this, SubScaleViewActivity.class));
             //                MainActivity.this.startActivity(new Intent(MainActivity.this, TouchEventTestActivity.class));
-            this@MainKotlinActivity.startActivity(Intent(this@MainKotlinActivity, TempTestActivity::class.java))
+            //                MainActivity.this.startActivity(new Intent(MainActivity.this, TempTestActivity.class));
+            //                MainActivity.this.startActivity(new Intent(MainActivity.this, RxJavaActivity.class));
             //                MainActivity.this.startActivity(new Intent(MainActivity.this, TransTestActivity.class));
             //                ScrollingActivity.start(MainActivity.this);
             //                new ImageViewer.Builder(MainActivity.this, new String[]{"http://img2.niutuku.com/1312/0831/0831-niutuku.com-28071.jpg",
@@ -158,7 +179,7 @@ class MainKotlinActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
             //                });
             //                MusicGetterManager.getInstance().getMusicLists();
 
-//            useBinderPool()
+            //                useBinderPool();
 
             //                Log.i(TAG, "Weeks.SUNDAY.getDate() = " + Weeks.SUNDAY.getDate());
 
@@ -169,6 +190,12 @@ class MainKotlinActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
             //                PrintProcess();
             //                getTopApp();
             //                Log.i("recent_song", getTaskList());
+
+            //热修复
+            //                startRobust();
+
+            //                RxjavaActivity.start(MainActivity.this);
+            TouchEventTestActivity.start(this@MainKotlinActivity)
         }
     }
 
@@ -179,16 +206,19 @@ class MainKotlinActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         }
         val am = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
         val pm = packageManager
-        return try {
+        try {
             val list = am.getRecentTasks(64, 0)
-            list.asSequence()
-                    .map { it.baseIntent }
-                    .mapNotNull { pm.resolveActivity(it, 0) }
-                    .forEach { apps = if (apps == "") it.loadLabel(pm).toString() + "" else apps + "," + it.loadLabel(pm) }
-            apps
+            for (ti in list) {
+                val intent = ti.baseIntent
+                val resolveInfo = pm.resolveActivity(intent, 0)
+                if (resolveInfo != null) {
+                    apps = if (apps == "") resolveInfo.loadLabel(pm).toString() + "" else apps + "," + resolveInfo.loadLabel(pm)
+                }
+            }
+            return apps
         } catch (se: SecurityException) {
             se.printStackTrace()
-            apps
+            return apps
         }
 
     }
@@ -204,22 +234,25 @@ class MainKotlinActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
     private fun getTopApp() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             val m = getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
-            val now = System.currentTimeMillis()
-            //获取600秒之内的应用数据
-            val stats = m.queryUsageStats(UsageStatsManager.INTERVAL_BEST, now - 600 * 1000, now)
-            Log.i("song", "Running app number in last 600 seconds : " + stats.size)
+            if (m != null) {
+                val now = System.currentTimeMillis()
+                //获取600秒之内的应用数据
+                val stats = m.queryUsageStats(UsageStatsManager.INTERVAL_BEST, now - 600 * 1000, now)
+                Log.i("song", "Running app number in last 600 seconds : " + stats.size)
 
-            //取得最近运行的一个app，即当前运行的app
-            if (!stats.isEmpty()) {
-                for (i in stats.indices) {
-                    Log.i("song", "top running app is : " + stats[i].packageName)
+                //取得最近运行的一个app，即当前运行的app
+                if (!stats.isEmpty()) {
+                    for (i in stats.indices) {
+                        Log.i("song", "top running app is : " + stats[i].packageName)
+                    }
                 }
+
             }
         }
     }
 
     /**
-     * 使用binderPool过去对应的binder并且执行相应的方法（回调中获取结果，<异步>）
+     * 使用binderPool过去对应的binder并且执行相应的方法（回调中获取结果，[异步]）
      */
     private fun useBinderPool() {
         val iBinder = BinderPool.getInstance().queryBinder(BinderPoolImpl.BINDER_GET_MUSIC)
@@ -245,25 +278,6 @@ class MainKotlinActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         }
     }
 
-    private fun RecursiveTest() {
-        val start2 = System.currentTimeMillis()
-        val result2 = getPlus(1000L)
-        val end2 = System.currentTimeMillis()
-        Log.i("结果对比", "result2=" + result2 + "; time2 = " + (end2 - start2) + "millis")
-
-        val start1 = System.currentTimeMillis()
-
-        Observable.just(1000L)
-                .map { aLong -> getOrderPlus(aLong!!) }
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { aLong ->
-                    val result1 = aLong!!
-                    val end1 = System.currentTimeMillis()
-                    Log.i("结果对比", "result1=" + result1 + "; time1 = " + (end1 - start1) + "millis")
-                }
-    }
-
     private fun getFactorial(endNum: Long): Long {
         return if (endNum <= 1) {
             1
@@ -284,11 +298,6 @@ class MainKotlinActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
 
     private fun getOrderPlus(endNum: Long, sum: Long): Long {
         return if (endNum == 1L) sum else getOrderPlus(endNum - 1, sum + endNum)
-    }
-
-    private fun getPlus(endNum: Long): Long {
-        val sum = (0 until endNum + 1).sumBy { it.toInt() }
-        return sum.toLong()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -314,13 +323,18 @@ class MainKotlinActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
 
-        when (id) {
-            R.id.nav_gallery -> switchFragmentDelay(ComicGenericListFragment::class.java.name, resources.getString(R.string.newest_comic))
-            R.id.nav_classify_comic -> switchFragmentDelay(ComicClassifyFragment::class.java.name, resources.getString(R.string.classify_comic))
-            R.id.nav_video -> VideoListActivity.start(this)
-            R.id.nav_rank_comic -> switchFragmentDelay(ComicRankFragment::class.java.name, resources.getString(R.string.rank_comic))
-            R.id.nav_news -> switchFragmentDelay(PhoenixListFragment::class.java.name, resources.getString(R.string.phoenix_news))
-            R.id.nav_collection -> switchFragmentDelay(CollectionFragment::class.java.name, resources.getString(R.string.collection_comic))
+        if (id == R.id.nav_gallery) {
+            switchFragmentDelay(ComicGenericListFragment::class.java.name, resources.getString(R.string.newest_comic))
+        } else if (id == R.id.nav_classify_comic) {
+            switchFragmentDelay(ComicClassifyFragment::class.java.name, resources.getString(R.string.classify_comic))
+        } else if (id == R.id.nav_video) {
+            VideoListActivity.start(this)
+        } else if (id == R.id.nav_rank_comic) {
+            switchFragmentDelay(ComicRankFragment::class.java.name, resources.getString(R.string.rank_comic))
+        } else if (id == R.id.nav_news) {
+            switchFragmentDelay(PhoenixListFragment::class.java.name, resources.getString(R.string.phoenix_news))
+        } else if (id == R.id.nav_collection) {
+            switchFragmentDelay(CollectionFragment::class.java.name, resources.getString(R.string.collection_comic))
         }
 
         val drawer = findViewById(R.id.drawer_layout) as DrawerLayout
@@ -347,8 +361,8 @@ class MainKotlinActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         if (mPresenter != null) {
             mPresenter!!.detachVM()
         }
-        MessengerManager.getInstance().destroy(this)
-        PushManager.getInstance().destroy(this)
+        MessengerManager.getInstance().destroy(AppConfig.getApp())
+        PushManager.getInstance().destroy(AppConfig.getApp())
         super.onDestroy()
     }
 
@@ -371,14 +385,11 @@ class MainKotlinActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
             return
         val newList = ArrayList<String>()
         for (bean in list) {
-            collectionOnlineListBean.favList
-                    .filter {
-                        TextUtils.equals(bean.comicId.toString(), it.comic_id)
-                                && !TextUtils.equals(bean.chapterNum, it.pass_chapter_num.toString())
-                    }
-                    .mapTo(newList) {
-                        it.name
-                    }
+            for (onlineBean in collectionOnlineListBean.favList) {
+                if (TextUtils.equals(bean.comicId.toString() + "", onlineBean.comic_id) && !TextUtils.equals(bean.chapterNum, onlineBean.pass_chapter_num.toString() + "")) {
+                    newList.add(onlineBean.name)
+                }
+            }
         }
         if (newList.isEmpty()) {
             return
@@ -390,10 +401,6 @@ class MainKotlinActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         content = StringBuilder(content.substring(0, content.length - 1))
         content.append("有更新")
         showNotification(content.toString())
-    }
-
-    override fun onFailure(errorCode: Int, errorMsg: String) {
-
     }
 
     private fun showNotification(content: String) {
@@ -416,7 +423,11 @@ class MainKotlinActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
                 or Notification.FLAG_SHOW_LIGHTS
                 or Notification.FLAG_ONGOING_EVENT)
         val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        manager.notify(1, notification)
+        manager?.notify(1, notification)
+    }
+
+    override fun onFailure(errorCode: Int, errorMsg: String) {
+
     }
 
 }

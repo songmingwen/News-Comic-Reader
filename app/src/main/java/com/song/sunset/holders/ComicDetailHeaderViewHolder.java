@@ -16,16 +16,14 @@ import com.song.sunset.R;
 public class ComicDetailHeaderViewHolder extends RecyclerView.ViewHolder {
 
     public ConstraintLayout comicDetailLayout;
-    public SimpleDraweeView simpleDraweeView;
+    public SimpleDraweeView simpleDraweeView, imageBg;
     public TextView comicName;
     public TextView authorName;
-    public ImageView cover, imageBg;
 
     public ComicDetailHeaderViewHolder(View itemview) {
         super(itemview);
         comicDetailLayout = itemview.findViewById(R.id.id_comic_detail_header_layout);
         simpleDraweeView = itemview.findViewById(R.id.id_comic_detail_header_image);
-        cover = itemview.findViewById(R.id.id_comic_detail_header_img);
         comicName = itemview.findViewById(R.id.id_comic_detail_header_comic_name);
         authorName = itemview.findViewById(R.id.id_comic_detail_header_author_name);
         imageBg = itemview.findViewById(R.id.img_bg);
