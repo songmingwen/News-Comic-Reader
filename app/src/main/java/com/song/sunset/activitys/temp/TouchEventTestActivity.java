@@ -1,4 +1,4 @@
-package com.song.sunset.activitys;
+package com.song.sunset.activitys.temp;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +11,6 @@ import com.song.sunset.R;
 import com.song.sunset.activitys.base.BaseActivity;
 import com.song.sunset.beans.Comment;
 import com.song.sunset.beans.User;
-import com.song.sunset.widget.FloorView;
 
 import java.util.ArrayList;
 

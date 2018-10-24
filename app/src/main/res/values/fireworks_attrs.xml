@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="FireworksView">
+        <!--单个图层显示的最大元素个数-->
+        <attr name="element_amount" format="integer" />
+        <!--最大图层数量-->
+        <attr name="max_layer" format="integer" />
+        <!--刷新频率-->
+        <attr name="interval_frame_rate" format="integer" />
+    </declare-styleable>
+</resources>

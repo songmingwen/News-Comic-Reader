@@ -29,6 +29,7 @@ import com.song.core.statusbar.StatusBarUtil
 import com.song.sunset.R
 import com.song.sunset.activitys.*
 import com.song.sunset.activitys.base.BaseActivity
+import com.song.sunset.activitys.temp.TouchEventTestActivity
 import com.song.sunset.beans.CollectionOnlineListBean
 import com.song.sunset.beans.MusicInfo
 import com.song.sunset.fragments.*

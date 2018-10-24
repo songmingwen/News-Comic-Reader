@@ -21,7 +21,7 @@ android {
     defaultConfig {
         applicationId "com.song.sunset"
         minSdkVersion rootProject.ext.android.ANDROID_BUILD_MIN_SDK_VERSION
-        targetSdkVersion rootProject.ext.android.ANDROID_TARGET_SDK_VERSION
+        targetSdkVersion 24
         versionCode 1
         versionName "1.0"
 //        jackOptions {

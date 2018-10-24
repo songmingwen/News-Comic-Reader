@@ -1,4 +1,4 @@
-package com.song.sunset.activitys;
+package com.song.sunset.activitys.temp;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.facebook.imagepipeline.request.ImageRequest;

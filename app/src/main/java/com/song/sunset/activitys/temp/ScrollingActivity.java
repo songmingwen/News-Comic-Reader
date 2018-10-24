@@ -1,4 +1,4 @@
-package com.song.sunset.activitys;
+package com.song.sunset.activitys.temp;
 
 import android.app.Activity;
 import android.content.Intent;

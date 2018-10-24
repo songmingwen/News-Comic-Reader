@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Grey_500">
@@ -12,42 +11,43 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_margin="20dp"
-        android:onClick="onTempTestFlowButtonClick"/>
+        android:onClick="onTempTestFlowButtonClick" />
 
     <ImageView
         android:id="@+id/image_dot_back"
         android:layout_width="14px"
         android:layout_height="14px"
         android:layout_centerInParent="true"
-        android:src="@drawable/goods_black_dot"/>
+        android:src="@drawable/goods_black_dot" />
 
     <ImageView
         android:id="@+id/image_dot"
         android:layout_width="20px"
         android:layout_height="20px"
         android:layout_centerInParent="true"
-        android:src="@drawable/goods_white_dot"/>
+        android:src="@drawable/goods_white_dot" />
 
     <com.song.sunset.widget.MultiCircleView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
     <com.song.sunset.widget.TouchFollowView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true" />
 
     <com.song.sunset.widget.TextSwitchView
         android:id="@+id/textswitch"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
 
     <ImageView
         android:id="@+id/image_bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:src="@drawable/daffy"/>
+        android:layout_centerInParent="true"
+        android:src="@drawable/daffy" />
 
     <!--<ImageView-->
     <!--android:id="@+id/ic_svg"-->

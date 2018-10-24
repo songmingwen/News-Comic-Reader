@@ -1,10 +1,10 @@
-package com.song.sunset.activitys;
+package com.song.sunset.activitys.temp;
 
 import android.animation.Animator;
-import android.animation.AnimatorInflater;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
@@ -150,14 +150,22 @@ public class TempTestActivity extends BaseActivity {
         String string_1 = softReference.get();
         Snackbar.make(view, string_1, Snackbar.LENGTH_LONG).setAction("Action", null).show();
 
-        final Animator animator = AnimatorInflater.loadAnimator(this, R.animator.negative_page_guide);
-        animator.setTarget(bottom);
-        animator.start();
-        animator.addListener(new AnimatorListenerAdapter() {
+//        final Animator animator = AnimatorInflater.loadAnimator(this, R.animator.negative_page_guide);
+//        animator.setTarget(bottom);
+//        animator.start();
+//        animator.addListener(new AnimatorListenerAdapter() {
+//            @Override
+//            public void onAnimationEnd(Animator animation) {
+//                animator.setStartDelay(2000);
+//                animator.start();
+//            }
+//        });
+
+        ValueAnimator animator = ValueAnimator.ofFloat(0, 100);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
-            public void onAnimationEnd(Animator animation) {
-                animator.setStartDelay(2000);
-                animator.start();
+            public void onAnimationUpdate(ValueAnimator animation) {
+                animation.getAnimatedValue();
             }
         });
 

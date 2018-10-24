@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <Button
+                style="@style/style_button_main_activity"
+                android:onClick="showFrescoProcessor"
+                android:text="Fresco 图片处理器效果展示" />
+
+            <Button
+                style="@style/style_button_main_activity"
+                android:onClick="showFireworks"
+                android:text="🎆" />
+
+            <!--复制上面的 button 添加点击事件，从而跳转到自己的功能页面-->
+
+        </LinearLayout>
+    </ScrollView>
+
+    <com.song.sunset.widget.fireworks.FireworksView
+        android:id="@+id/fireworks_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:element_amount="12"
+        app:interval_frame_rate="16"
+        app:max_layer="7" />
+</FrameLayout>

@@ -35,6 +35,8 @@ import com.song.sunset.IMusicCallBackListener;
 import com.song.sunset.IMusicGetter;
 import com.song.sunset.R;
 import com.song.sunset.activitys.base.BaseActivity;
+import com.song.sunset.activitys.temp.FunctionListActivity;
+import com.song.sunset.activitys.temp.TempTestActivity;
 import com.song.sunset.beans.CollectionOnlineListBean;
 import com.song.sunset.beans.ComicCollectionBean;
 import com.song.sunset.beans.ComicLocalCollection;
@@ -52,11 +54,14 @@ import com.song.sunset.services.impl.MusicCallBackListenerImpl;
 import com.song.sunset.services.impl.MusicGetterImpl;
 import com.song.sunset.services.managers.BinderPool;
 import com.song.sunset.services.managers.MessengerManager;
-import com.song.sunset.services.managers.MusicGetterManager;
 import com.song.sunset.services.managers.PushManager;
 import com.song.sunset.utils.AppConfig;
+import com.song.sunset.utils.DefaultPreinstallHandler;
 import com.song.sunset.utils.GreenDaoUtil;
+import com.song.sunset.utils.HuaweiPreinstallHandler;
 import com.song.sunset.utils.SPUtils;
+import com.song.sunset.utils.VivoPreinstallHandler;
+import com.song.sunset.utils.XiaomiPreinstallHandler;
 import com.song.sunset.utils.process.AndroidProcesses;
 import com.song.sunset.utils.process.models.AndroidAppProcess;
 import com.sunset.greendao.gen.ComicLocalCollectionDao;
@@ -168,161 +173,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private void setUpListener() {
         navigationView.setNavigationItemSelectedListener(this);
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                MainActivity.this.startActivity(new Intent(MainActivity.this, SubScaleViewActivity.class));
-//                MainActivity.this.startActivity(new Intent(MainActivity.this, TouchEventTestActivity.class));
-//                MainActivity.this.startActivity(new Intent(MainActivity.this, TempTestActivity.class));
-//                MainActivity.this.startActivity(new Intent(MainActivity.this, RxJavaActivity.class));
-//                MainActivity.this.startActivity(new Intent(MainActivity.this, TransTestActivity.class));
-//                ScrollingActivity.start(MainActivity.this);
-//                new ImageViewer.Builder(MainActivity.this, new String[]{"http://img2.niutuku.com/1312/0831/0831-niutuku.com-28071.jpg",
-//                        "http://img2.niutuku.com/desk/130220/52/52-niutuku.com-984.jpg",
-//                        "http://img01.sogoucdn.com/app/a/100540002/490110.jpg",
-//                        "http://att.x2.hiapk.com/forum/201409/10/173524pydcdt4ccz928j8d.jpg",
-//                        "http://cdn.duitang.com/uploads/item/201409/07/20140907233240_VYNvH.jpeg"})
-//                        .setStartPosition(0)
-//                        .hideStatusBar(false)
-//                        .show();
-
-//                RecursiveTest();
-//                PushManager.getInstance().connect();
-//                PushManager.getInstance().sendMusicInfo(MusicLoader.instance().getMusicList().get(0));
-//                MessengerManager.getInstance().sendMessage();
-
-//                MusicGetterManager.getInstance().setMusicCallBackListener(new MusicGetterManager.MusicCallBackListener() {
-//                    @Override
-//                    public void success(List<MusicInfo> list) {
-//                        Log.i(TAG + "callback", list.toString());
-//                    }
-//
-//                    @Override
-//                    public void failure() {
-//                        Log.i(TAG, "false");
-//                    }
-//                });
-//                MusicGetterManager.getInstance().getMusicLists();
-
-//                useBinderPool();
-
-//                Log.i(TAG, "Weeks.SUNDAY.getDate() = " + Weeks.SUNDAY.getDate());
-
-//                Log.i("music_list: ", MusicLoader.instance(MainActivity.this.getContentResolver()).getMusicList().toString());
-
-//                switchDayNightMode();
-
-//                PrintProcess();
-//                getTopApp();
-//                Log.i("recent_song", getTaskList());
-
-                //热修复
-//                startRobust();
-
-//                RxjavaActivity.start(MainActivity.this);
-//                TouchEventTestActivity.start(MainActivity.this);
-                FrescoProcessorActivity.start(MainActivity.this);
-            }
-        });
-    }
-
-    public String getTaskList() {
-        String apps = "";
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            return apps;
-        }
-        ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        PackageManager pm = getPackageManager();
-        try {
-            List<ActivityManager.RecentTaskInfo> list = am.getRecentTasks(64, 0);
-            for (ActivityManager.RecentTaskInfo ti : list) {
-                Intent intent = ti.baseIntent;
-                ResolveInfo resolveInfo = pm.resolveActivity(intent, 0);
-                if (resolveInfo != null) {
-                    apps = apps.equals("") ? resolveInfo.loadLabel(pm) + "" : apps + "," + resolveInfo.loadLabel(pm);
-                }
-            }
-            return apps;
-        } catch (SecurityException se) {
-            se.printStackTrace();
-            return apps;
-        }
-    }
-
-    private void PrintProcess() {
-        List<AndroidAppProcess> processes = AndroidProcesses.getRunningAppProcesses();
-
-        for (AndroidAppProcess process : processes) {
-            Log.d("process_song", process.getPackageName());
-        }
-    }
-
-    private void getTopApp() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            UsageStatsManager m = (UsageStatsManager) getSystemService(Context.USAGE_STATS_SERVICE);
-            if (m != null) {
-                long now = System.currentTimeMillis();
-                //获取600秒之内的应用数据
-                List<UsageStats> stats = m.queryUsageStats(UsageStatsManager.INTERVAL_BEST, now - 600 * 1000, now);
-                Log.i("song", "Running app number in last 600 seconds : " + stats.size());
-
-                //取得最近运行的一个app，即当前运行的app
-                if (!stats.isEmpty()) {
-                    for (int i = 0; i < stats.size(); i++) {
-                        Log.i("song", "top running app is : " + stats.get(i).getPackageName());
-                    }
-                }
-
-            }
-        }
-    }
-
-    /**
-     * 使用binderPool过去对应的binder并且执行相应的方法（回调中获取结果，[异步]）
-     */
-    private void useBinderPool() {
-        IBinder iBinder = BinderPool.getInstance().queryBinder(BinderPoolImpl.BINDER_GET_MUSIC);
-        IMusicGetter iMusicGetter = MusicGetterImpl.asInterface(iBinder);
-        try {
-            iMusicGetter.getMusicList(mIMusicCallBackListener);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private IMusicCallBackListener mIMusicCallBackListener = new MusicCallBackListenerImpl() {
-        @Override
-        public void success(List<MusicInfo> list) throws RemoteException {
-            super.success(list);
-            Log.i(TAG + "MainActivity", list.toString());
-        }
-
-        @Override
-        public void failure() throws RemoteException {
-            Log.i(TAG + "MainActivity", "get music failure");
-        }
-    };
-
-    private long getFactorial(long endNum) {
-        if (endNum <= 1) {
-            return 1;
-        } else {
-            return getFactorial(endNum - 1) * endNum;
-        }
-    }
-
-    /**
-     * Java没有实现编译器尾递归的优化
-     *
-     * @param endNum
-     * @return
-     */
-    private long getOrderPlus(long endNum) {
-        return endNum == 1 ? 1 : getOrderPlus(endNum, 1);
-    }
-
-    private long getOrderPlus(long endNum, long sum) {
-        return endNum == 1 ? sum : getOrderPlus(endNum - 1, sum + endNum);
+        fab.setOnClickListener(v -> FunctionListActivity.start(MainActivity.this));
     }
 
     @Override
@@ -471,74 +322,4 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     }
 
-
-//    @Modify
-//    private void startRobust() {
-//        new PatchExecutor(getApplicationContext(), new PatchManipulate() {
-//            @Override
-//            protected List<Patch> fetchPatchList(Context context) {
-//                Patch patch = new Patch();
-//                patch.setName("first patch");
-//                patch.setLocalPath(Environment.getExternalStorageDirectory().getPath()
-//                        + File.separator
-//                        + "sunset"
-//                        + File.separator
-//                        + "patch");
-//                patch.setPatchesInfoImplClassFullName("com.song.sunset.patch.PatchesInfoImpl");
-//                List<Patch> patches = new ArrayList<>();
-//                patches.add(patch);
-//                return patches;
-//            }
-//
-//            @Override
-//            protected boolean verifyPatch(Context context, Patch patch) {
-//                if (patch != null) {
-//                    Log.i(TAG, "verifyPatch: " + patch.getName());
-//                    return true;
-//                }
-//                return false;
-//            }
-//
-//            @Override
-//            protected boolean ensurePatchExist(Patch patch) {
-//                if (patch != null) {
-//                    Log.i(TAG, "ensurePatchExist: " + patch.getName());
-//                    return true;
-//                }
-//                return false;
-//            }
-//        }, new RobustCallBack() {
-//            @Override
-//            public void onPatchListFetched(boolean b, boolean b1) {
-//                Log.i(TAG, "onPatchListFetched: " + b + b1);
-//            }
-//
-//            @Override
-//            public void onPatchFetched(boolean b, boolean b1, Patch patch) {
-//                Log.i(TAG, "onPatchFetched: " + b + b1 + patch.getName());
-//            }
-//
-//            @Override
-//            public void onPatchApplied(boolean b, Patch patch) {
-//                Log.i(TAG, "onPatchApplied: " + b + patch.getName());
-//            }
-//
-//            @Override
-//            public void logNotify(String s, String s1) {
-//                Log.i(TAG, "logNotify: " + s + "; " + s1);
-//            }
-//
-//            @Override
-//            public void exceptionNotify(Throwable throwable, String s) {
-//                Log.i(TAG, "exceptionNotify: " + throwable.getMessage() + "; " + s);
-//            }
-//        });
-//
-//        addToast();
-//    }
-//
-//    @Add
-//    private void addToast() {
-//        Toast.makeText(AppConfig.getApp(), "添加成功", Toast.LENGTH_SHORT).show();
-//    }
 }
