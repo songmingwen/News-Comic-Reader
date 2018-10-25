@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.song.core.statusbar.StatusBarUtil;
 import com.song.sunset.IMusicCallBackListener;
 import com.song.sunset.IMusicGetter;
 import com.song.sunset.R;
@@ -34,6 +35,7 @@ import com.song.sunset.utils.VivoPreinstallHandler;
 import com.song.sunset.utils.XiaomiPreinstallHandler;
 import com.song.sunset.utils.process.AndroidProcesses;
 import com.song.sunset.utils.process.models.AndroidAppProcess;
+import com.song.sunset.widget.fireworks.BitmapProvider;
 import com.song.sunset.widget.fireworks.FireworksView;
 
 import java.util.List;
@@ -88,6 +90,8 @@ public class FunctionListActivity extends BaseActivity {
     }
 
     public void showFireworks(View view) {
+        mFireworksView.setProvider(getFireworksProvider());
+
         if (mFireworksView == null) {
             return;
         }
@@ -209,5 +213,16 @@ public class FunctionListActivity extends BaseActivity {
 
             }
         }
+    }
+
+    private BitmapProvider.Provider getFireworksProvider() {
+        return new BitmapProvider.Builder(this)
+                .setDrawableArray(new int[]{R.drawable.fireworks_emoji001, R.drawable.fireworks_emoji002, R.drawable.fireworks_emoji003,
+                        R.drawable.fireworks_emoji004, R.drawable.fireworks_emoji005, R.drawable.fireworks_emoji006, R.drawable.fireworks_emoji007,
+                        R.drawable.fireworks_emoji008, R.drawable.fireworks_emoji009, R.drawable.fireworks_emoji010, R.drawable.fireworks_emoji011,
+                        R.drawable.fireworks_emoji012, R.drawable.fireworks_emoji013, R.drawable.fireworks_emoji014, R.drawable.fireworks_emoji015,
+                        R.drawable.fireworks_emoji016, R.drawable.fireworks_emoji017, R.drawable.fireworks_emoji018, R.drawable.fireworks_emoji019,
+                        R.drawable.fireworks_emoji020, R.drawable.fireworks_emoji021})
+                .build();
     }
 }

@@ -211,8 +211,8 @@ public class FrescoUtil {
     public static File getCachedImageOnDisk(String pUrl, Object pCaller) {
         File localFile = null;
         if (!TextUtils.isEmpty(pUrl)) {
-            CacheKey cacheKey = DefaultCacheKeyFactory.getInstance().getEncodedCacheKey(ImageRequest.fromUri(pUrl),
-                    pCaller);
+            CacheKey cacheKey = DefaultCacheKeyFactory.getInstance()
+                    .getEncodedCacheKey(ImageRequest.fromUri(pUrl), pCaller);
             BinaryResource resource = null;
             if (ImagePipelineFactory.getInstance().getMainFileCache().hasKey(cacheKey)) {
                 resource = ImagePipelineFactory.getInstance().getMainFileCache().getResource(cacheKey);

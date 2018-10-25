@@ -2,7 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingTop="32dp">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -33,7 +34,7 @@
         android:id="@+id/fireworks_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:element_amount="12"
+        app:element_amount="21"
         app:interval_frame_rate="16"
         app:max_layer="7" />
 </FrameLayout>

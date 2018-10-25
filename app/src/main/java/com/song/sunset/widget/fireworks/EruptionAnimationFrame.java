@@ -60,7 +60,7 @@ public class EruptionAnimationFrame extends BaseAnimationFrame {
         /**
          * 重力加速度px/s
          */
-        private static final float GRAVITY = 0;
+        private static final float GRAVITY = 5000;
         private Bitmap bitmap;
 
         public EruptionElement(double angle, double speed, Bitmap bitmap) {
