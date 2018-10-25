@@ -29,6 +29,7 @@ import com.song.core.statusbar.StatusBarUtil
 import com.song.sunset.R
 import com.song.sunset.activitys.*
 import com.song.sunset.activitys.base.BaseActivity
+import com.song.sunset.activitys.temp.FunctionListActivity
 import com.song.sunset.activitys.temp.TouchEventTestActivity
 import com.song.sunset.beans.CollectionOnlineListBean
 import com.song.sunset.beans.MusicInfo
@@ -147,56 +148,7 @@ class MainKotlinActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         navigationView!!.setNavigationItemSelectedListener(this)
 
         fab!!.setOnClickListener {
-            //                MainActivity.this.startActivity(new Intent(MainActivity.this, SubScaleViewActivity.class));
-            //                MainActivity.this.startActivity(new Intent(MainActivity.this, TouchEventTestActivity.class));
-            //                MainActivity.this.startActivity(new Intent(MainActivity.this, TempTestActivity.class));
-            //                MainActivity.this.startActivity(new Intent(MainActivity.this, RxJavaActivity.class));
-            //                MainActivity.this.startActivity(new Intent(MainActivity.this, TransTestActivity.class));
-            //                ScrollingActivity.start(MainActivity.this);
-            //                new ImageViewer.Builder(MainActivity.this, new String[]{"http://img2.niutuku.com/1312/0831/0831-niutuku.com-28071.jpg",
-            //                        "http://img2.niutuku.com/desk/130220/52/52-niutuku.com-984.jpg",
-            //                        "http://img01.sogoucdn.com/app/a/100540002/490110.jpg",
-            //                        "http://att.x2.hiapk.com/forum/201409/10/173524pydcdt4ccz928j8d.jpg",
-            //                        "http://cdn.duitang.com/uploads/item/201409/07/20140907233240_VYNvH.jpeg"})
-            //                        .setStartPosition(0)
-            //                        .hideStatusBar(false)
-            //                        .show();
-
-            //                RecursiveTest();
-            //                PushManager.getInstance().connect();
-            //                PushManager.getInstance().sendMusicInfo(MusicLoader.instance().getMusicList().get(0));
-            //                MessengerManager.getInstance().sendMessage();
-
-            //                MusicGetterManager.getInstance().setMusicCallBackListener(new MusicGetterManager.MusicCallBackListener() {
-            //                    @Override
-            //                    public void success(List<MusicInfo> list) {
-            //                        Log.i(TAG + "callback", list.toString());
-            //                    }
-            //
-            //                    @Override
-            //                    public void failure() {
-            //                        Log.i(TAG, "false");
-            //                    }
-            //                });
-            //                MusicGetterManager.getInstance().getMusicLists();
-
-            //                useBinderPool();
-
-            //                Log.i(TAG, "Weeks.SUNDAY.getDate() = " + Weeks.SUNDAY.getDate());
-
-            //                Log.i("music_list: ", MusicLoader.instance(MainActivity.this.getContentResolver()).getMusicList().toString());
-
-            //                switchDayNightMode();
-
-            //                PrintProcess();
-            //                getTopApp();
-            //                Log.i("recent_song", getTaskList());
-
-            //热修复
-            //                startRobust();
-
-            //                RxjavaActivity.start(MainActivity.this);
-            TouchEventTestActivity.start(this@MainKotlinActivity)
+            FunctionListActivity.start(this@MainKotlinActivity)
         }
     }
 
