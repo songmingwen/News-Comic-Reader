@@ -1,4 +1,4 @@
-package com.song.sunset.utils;
+package com.song.sunset.utils.preinstall;
 
 import android.text.TextUtils;
 
@@ -9,15 +9,15 @@ import java.lang.reflect.Method;
  * @description
  * @since 2018/10/9
  */
-public class VivoPreinstallHandler implements PreinstallHandler {
+public class HuaweiPreinstallHandler implements PreinstallHandler {
 
-    private static final String VIVO_PREINSTALL_KEY = "ro.preinstall.path";
+    public static final String HUAWEI_PREINSTALL_KEY = "ro.huawei.channel.zhihu";//华为预装约定的key值不得超过30字节，value目前是huawei_preinstall。value要小于60字节
 
     private PreinstallHandler mNextPreinstallHandler;
 
     @Override
     public String getPreinstallInfo() {
-        String info = getVivoPreinstallSystemInfo();
+        String info = getHuaweiPreinstallSystemInfo();
         if (!TextUtils.isEmpty(info)) {
             return info;
         } else {
@@ -34,15 +34,13 @@ public class VivoPreinstallHandler implements PreinstallHandler {
         mNextPreinstallHandler = preinstallHandler;
     }
 
-    public String getVivoPreinstallSystemInfo() {
-        String value = "";
+    private String getHuaweiPreinstallSystemInfo() {
         try {
             Class<?> clazz = Class.forName("android.os.SystemProperties");
             Method method = clazz.getDeclaredMethod("get", String.class, String.class);
-            value = (String) method.invoke(clazz, VIVO_PREINSTALL_KEY, "");
+            return (String) method.invoke(clazz, HUAWEI_PREINSTALL_KEY, "");
         } catch (Exception e) {
-        } finally {
-            return value;
         }
+        return "";
     }
 }

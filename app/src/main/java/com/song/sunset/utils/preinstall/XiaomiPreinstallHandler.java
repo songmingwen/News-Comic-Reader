@@ -1,4 +1,4 @@
-package com.song.sunset.utils;
+package com.song.sunset.utils.preinstall;
 
 import android.text.TextUtils;
 
@@ -9,15 +9,13 @@ import java.lang.reflect.Method;
  * @description
  * @since 2018/10/9
  */
-public class HuaweiPreinstallHandler implements PreinstallHandler {
-
-    public static final String HUAWEI_PREINSTALL_KEY = "ro.huawei.channel.zhihu";//华为预装约定的key值不得超过30字节，value目前是huawei_preinstall。value要小于60字节
+public class XiaomiPreinstallHandler implements PreinstallHandler {
 
     private PreinstallHandler mNextPreinstallHandler;
 
     @Override
     public String getPreinstallInfo() {
-        String info = getHuaweiPreinstallSystemInfo();
+        String info = getXiaomiPresinstallSystemInfo();
         if (!TextUtils.isEmpty(info)) {
             return info;
         } else {
@@ -34,11 +32,12 @@ public class HuaweiPreinstallHandler implements PreinstallHandler {
         mNextPreinstallHandler = preinstallHandler;
     }
 
-    private String getHuaweiPreinstallSystemInfo() {
+    private String getXiaomiPresinstallSystemInfo() {
         try {
-            Class<?> clazz = Class.forName("android.os.SystemProperties");
-            Method method = clazz.getDeclaredMethod("get", String.class, String.class);
-            return (String) method.invoke(clazz, HUAWEI_PREINSTALL_KEY, "");
+            String packageName = "com.zhihu.android";
+            Class<?> miui = Class.forName("miui.os.MiuiInit");
+            Method method = miui.getMethod("getMiuiChannelPath", String.class);
+            return (String) method.invoke(null, packageName);
         } catch (Exception e) {
         }
         return "";

@@ -1,4 +1,4 @@
-package com.song.sunset.utils;
+package com.song.sunset.utils.preinstall;
 
 /**
  * @author songmingwen

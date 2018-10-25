@@ -1,7 +1,6 @@
-package com.song.sunset.utils;
+package com.song.sunset.utils.preinstall;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import java.lang.reflect.Method;
 
@@ -10,13 +9,15 @@ import java.lang.reflect.Method;
  * @description
  * @since 2018/10/9
  */
-public class XiaomiPreinstallHandler implements PreinstallHandler {
+public class VivoPreinstallHandler implements PreinstallHandler {
+
+    private static final String VIVO_PREINSTALL_KEY = "ro.preinstall.path";
 
     private PreinstallHandler mNextPreinstallHandler;
 
     @Override
     public String getPreinstallInfo() {
-        String info = getXiaomiPresinstallSystemInfo();
+        String info = getVivoPreinstallSystemInfo();
         if (!TextUtils.isEmpty(info)) {
             return info;
         } else {
@@ -33,14 +34,15 @@ public class XiaomiPreinstallHandler implements PreinstallHandler {
         mNextPreinstallHandler = preinstallHandler;
     }
 
-    private String getXiaomiPresinstallSystemInfo() {
+    public String getVivoPreinstallSystemInfo() {
+        String value = "";
         try {
-            String packageName = "com.zhihu.android";
-            Class<?> miui = Class.forName("miui.os.MiuiInit");
-            Method method = miui.getMethod("getMiuiChannelPath", String.class);
-            return (String) method.invoke(null, packageName);
+            Class<?> clazz = Class.forName("android.os.SystemProperties");
+            Method method = clazz.getDeclaredMethod("get", String.class, String.class);
+            value = (String) method.invoke(clazz, VIVO_PREINSTALL_KEY, "");
         } catch (Exception e) {
+        } finally {
+            return value;
         }
-        return "";
     }
 }
