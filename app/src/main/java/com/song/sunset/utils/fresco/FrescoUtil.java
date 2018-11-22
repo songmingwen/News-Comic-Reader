@@ -1,5 +1,6 @@
 package com.song.sunset.utils.fresco;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Animatable;
@@ -7,7 +8,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.facebook.binaryresource.BinaryResource;
 import com.facebook.binaryresource.FileBinaryResource;
@@ -166,19 +166,16 @@ public class FrescoUtil {
             @Override
             public void onSubmit(String id, Object callerContext) {
                 super.onSubmit(id, callerContext);
-//                Log.i("onSubmit", "---" + id + "---");
             }
 
             @Override
             public void onRelease(String id) {
                 super.onRelease(id);
-//                Log.i("onRelease", "---" + id + "---");
             }
 
             @Override
             public void onFailure(String id, Throwable throwable) {
                 super.onFailure(id, throwable);
-                Log.i("onFailure", "---" + id + "---" + throwable.toString());
             }
         };
         return listener;
@@ -202,6 +199,10 @@ public class FrescoUtil {
         }
     }
 
+    public static void PrefetchImg(ImageRequest imageRequest, Context context) {
+        ImagePipeline imagePipeline = Fresco.getImagePipeline();
+        imagePipeline.prefetchToDiskCache(imageRequest, context);
+    }
 
     /**
      * 拿到缓存的文件

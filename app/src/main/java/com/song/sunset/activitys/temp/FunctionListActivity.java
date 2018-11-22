@@ -79,10 +79,22 @@ public class FunctionListActivity extends BaseActivity {
 //        switchDayNightMode();
     }
 
+    /**
+     * Click 点击
+     */
+    public void showFrescoXML(View view) {
+        FrescoXMLActivity.start(this);
+    }
+    /**
+     * Click 点击
+     */
     public void showFrescoProcessor(View view) {
         FrescoProcessorActivity.start(this);
     }
 
+    /**
+     * Click 点击
+     */
     public void showFireworks(View view) {
         mFireworksView.setProvider(getFireworksProvider());
 

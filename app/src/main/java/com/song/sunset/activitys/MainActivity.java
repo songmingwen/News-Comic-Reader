@@ -24,6 +24,7 @@ import android.view.MenuItem;
 import com.meituan.android.walle.ChannelInfo;
 import com.meituan.android.walle.WalleChannelReader;
 import com.song.core.statusbar.StatusBarUtil;
+import com.song.sunset.BuildConfig;
 import com.song.sunset.R;
 import com.song.sunset.activitys.base.BaseActivity;
 import com.song.sunset.activitys.temp.FunctionListActivity;
@@ -43,6 +44,7 @@ import com.song.sunset.services.managers.PushManager;
 import com.song.sunset.utils.AppConfig;
 import com.song.sunset.utils.GreenDaoUtil;
 import com.song.sunset.utils.SPUtils;
+import com.song.sunset.utils.preinstall.DefaultPreinstallHandler;
 import com.sunset.greendao.gen.ComicLocalCollectionDao;
 
 import java.util.ArrayList;
@@ -100,6 +102,14 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         } else {
             Log.d(TAG, "onCreate: " + "null------");
         }
+
+        Log.d(TAG, "flavors:APPLICATION_ID  " + BuildConfig.APPLICATION_ID);
+        Log.d(TAG, "flavors:BUILD_TYPE  " + BuildConfig.BUILD_TYPE);
+        Log.d(TAG, "flavors:FLAVOR  " + BuildConfig.FLAVOR);
+        Log.d(TAG, "flavors:VERSION_NAME  " + BuildConfig.VERSION_NAME);
+        Log.d(TAG, "flavors:DEBUG  " + BuildConfig.DEBUG);
+        Log.d(TAG, "flavors:VERSION_CODE  " + BuildConfig.VERSION_CODE);
+        Log.d(TAG, "flavors:preinstall  " + new DefaultPreinstallHandler().getPreinstallInfo());
     }
 
 

@@ -52,7 +52,7 @@ public class FrescoProcessorActivity extends AppCompatActivity {
 
         list.add(getProcessorImageRequest(null));
         list.add(getProcessorImageRequest(new BlurPostprocessor(this, 20)));                     //高斯
-        list.add(getProcessorImageRequest(new MaskPostprocessor(this, R.drawable.end)));                //蒙版处理
+        list.add(getProcessorImageRequest(new MaskPostprocessor(this, R.drawable.icon_zhihu_logo)));    //蒙版处理
         list.add(getProcessorImageRequest(new ColorFilterPostprocessor(R.color.color_smooth_red)));             //颜色筛选
         list.add(getProcessorImageRequest(new GrayscalePostprocessor()));                                       //灰度处理
 
@@ -81,6 +81,6 @@ public class FrescoProcessorActivity extends AppCompatActivity {
     }
 
     private Uri getRes() {
-        return new Uri.Builder().scheme("res").path(String.valueOf(R.drawable.animals_eagle)).build();
+        return new Uri.Builder().scheme("res").path(String.valueOf(R.drawable.windows_pic)).build();
     }
 }

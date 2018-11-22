@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:scrollbars="none"
+    tools:context=".activitys.temp.FrescoXMLActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                fresco:actualImageScaleType="fitXY"
+                fresco:actualImageResource="@mipmap/zhihu"
+                fresco:roundAsCircle="true"
+                fresco:viewAspectRatio="1" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                fresco:actualImageScaleType="fitXY"
+                fresco:actualImageResource="@mipmap/zhihu"
+                fresco:roundBottomLeft="true"
+                fresco:roundBottomRight="true"
+                fresco:roundTopLeft="true"
+                fresco:roundTopRight="true"
+                fresco:roundedCornerRadius="20dp"
+                fresco:viewAspectRatio="1" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                fresco:actualImageScaleType="fitXY"
+                fresco:actualImageResource="@mipmap/zhihu"
+                fresco:roundBottomRight="false"
+                fresco:roundTopRight="false"
+                fresco:roundBottomLeft="false"
+                fresco:roundTopLeft="true"
+                fresco:roundedCornerRadius="32dp"
+                fresco:viewAspectRatio="1" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                fresco:actualImageScaleType="fitXY"
+                fresco:actualImageResource="@mipmap/zhihu"
+                fresco:roundBottomRight="false"
+                fresco:roundTopRight="true"
+                fresco:roundBottomLeft="false"
+                fresco:roundTopLeft="false"
+                fresco:roundedCornerRadius="32dp"
+                fresco:viewAspectRatio="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                fresco:actualImageScaleType="fitXY"
+                fresco:actualImageResource="@mipmap/zhihu"
+                fresco:roundBottomRight="false"
+                fresco:roundTopRight="false"
+                fresco:roundBottomLeft="true"
+                fresco:roundTopLeft="false"
+                fresco:roundedCornerRadius="32dp"
+                fresco:viewAspectRatio="1" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                fresco:actualImageScaleType="fitXY"
+                fresco:actualImageResource="@mipmap/zhihu"
+                fresco:roundBottomRight="true"
+                fresco:roundTopRight="false"
+                fresco:roundBottomLeft="false"
+                fresco:roundTopLeft="false"
+                fresco:roundedCornerRadius="32dp"
+                fresco:viewAspectRatio="1" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+</ScrollView>

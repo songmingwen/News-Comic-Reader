@@ -13,10 +13,10 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <!--<uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />-->
-    <!--<uses-permission android:name="android.permission.WRITE_SETTINGS" />-->
-    <!--<uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />-->
-    <!--<uses-permission android:name="android.permission.READ_LOGS" />-->
+    <!-- <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" /> -->
+    <!-- <uses-permission android:name="android.permission.WRITE_SETTINGS" /> -->
+    <!-- <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" /> -->
+    <!-- <uses-permission android:name="android.permission.READ_LOGS" /> -->
     <uses-permission
         android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />
@@ -174,6 +174,7 @@
         <activity
             android:name=".activitys.temp.FunctionListActivity"
             android:theme="@style/AppTheme" />
+        <activity android:name=".activitys.temp.FrescoXMLActivity"></activity>
     </application>
 
 </manifest>

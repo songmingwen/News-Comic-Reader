@@ -17,8 +17,13 @@
 
             <Button
                 style="@style/style_button_main_activity"
+                android:onClick="showFrescoXML"
+                android:text="Fresco XML params display" />
+
+            <Button
+                style="@style/style_button_main_activity"
                 android:onClick="showFrescoProcessor"
-                android:text="Fresco 图片处理器效果展示" />
+                android:text="Fresco post processor display" />
 
             <Button
                 style="@style/style_button_main_activity"
