@@ -3,7 +3,7 @@ package com.kotlin
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import com.song.sunset.R

@@ -47,7 +47,7 @@
             android:textColor="@color/color_accent"
             tools:text="@string/progressActivityErrorContentPlaceholder"/>
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/button_content"
             style="@style/AppCardView"
             android:layout_width="wrap_content"
@@ -67,7 +67,7 @@
                 android:paddingTop="5dp"
                 android:text="@string/progressActivityErrorButton"
                 android:textColor="@color/color_accent"/>
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 

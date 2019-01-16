@@ -3,7 +3,7 @@ package com.song.sunset.activitys;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 
 import com.song.sunset.R;
 import com.song.sunset.activitys.base.BaseActivity;

@@ -1,6 +1,6 @@
 package com.song.sunset.mvp.models.base;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by Song on 2017/4/18 0018.

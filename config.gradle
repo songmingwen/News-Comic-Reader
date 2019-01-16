@@ -2,8 +2,8 @@
 ext {
 
     android = [
-            ANDROID_COMPILE_SDK_VERSION  : 26,
-            ANDROID_BUILD_TOOLS_VERSION  : "24.0.3",
+            ANDROID_COMPILE_SDK_VERSION  : 28,
+            ANDROID_BUILD_TOOLS_VERSION  : "28.0.3",
             ANDROID_BUILD_MIN_SDK_VERSION: 21,
             ANDROID_TARGET_SDK_VERSION   : 26,
             ANDROID_VERSION_CODE         : 1,
@@ -58,7 +58,6 @@ ext {
             "rapid_decoder_library"        : "rapid.decoder:library:0.3.0",
             "rapid_jpeg_decoder"           : "rapid.decoder:jpeg-decoder:0.3.0",
             "rapid_png_decoder"            : "rapid.decoder:png-decoder:0.3.0",
-            //    "kotlin": "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
             //    "pickview": "com.brucetoo.pickview:library:1.2.2",
             //    "pickerview": "com.bigkoo:pickerview:2.1.1",
             //    "jsoup": "org.jsoup:jsoup:1.10.1",
@@ -89,6 +88,10 @@ ext {
             "kotlin_stdlib"                : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
             "kotlin_anko"                  : "org.jetbrains.anko:anko-commons:$anko_version",
             "kotlinx_core"                 : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinx_coroutines_version",
-            "kotlinx_android"              : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinx_coroutines_version"
+            "kotlinx_android"              : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinx_coroutines_version",
+            "viewmode"                     : "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version",
+            "livedata"                     : "androidx.lifecycle:lifecycle-livedata:$lifecycle_version",
+            "lifecycle_extensions"         : "androidx.lifecycle:lifecycle-extensions:$lifecycle_version",
+            "lifecycle_compiler"           : "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
     ]
 }

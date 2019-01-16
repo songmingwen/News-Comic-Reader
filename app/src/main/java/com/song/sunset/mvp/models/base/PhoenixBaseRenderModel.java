@@ -6,7 +6,7 @@ package com.song.sunset.mvp.models.base;
  * E-mail: z53520@qq.com
  */
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.song.sunset.beans.PhoenixChannelBean;
 

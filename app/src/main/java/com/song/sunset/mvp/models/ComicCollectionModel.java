@@ -1,6 +1,6 @@
 package com.song.sunset.mvp.models;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.song.sunset.beans.CollectionOnlineListBean;
 import com.song.sunset.beans.basebeans.BaseBean;

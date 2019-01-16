@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 //apply from: 'tinker-support.gradle'//微信热修复
-apply plugin: 'com.jakewharton.butterknife'
+//apply plugin: 'com.jakewharton.butterknife'
 apply plugin: 'walle'
 
 /**Robust  美团热修复技术*/
@@ -12,7 +12,7 @@ apply plugin: 'walle'
 
 android {
     compileSdkVersion rootProject.ext.android.ANDROID_COMPILE_SDK_VERSION
-    buildToolsVersion rootProject.ext.android.ANDROID_BUILD_TOOLS_VERSION
+//    buildToolsVersion rootProject.ext.android.ANDROID_BUILD_TOOLS_VERSION
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
@@ -21,7 +21,7 @@ android {
     defaultConfig {
         applicationId "com.song.sunset"
         minSdkVersion rootProject.ext.android.ANDROID_BUILD_MIN_SDK_VERSION
-        targetSdkVersion 24
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
 //        jackOptions {
@@ -96,7 +96,6 @@ android {
         sourceCompatibility 1.8
         targetCompatibility 1.8
     }
-    buildToolsVersion '26.0.2'
 }
 
 walle {
@@ -125,13 +124,13 @@ repositories {
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
-    api 'com.android.support:appcompat-v7:26.0.0'
-    api 'com.android.support:design:26.0.0'
-    api 'com.android.support:support-v4:26.0.0'
-    api 'com.android.support:cardview-v7:26.0.0'
-    api 'com.android.support:palette-v7:26.0.0'
-    api 'com.android.support.constraint:constraint-layout:1.0.2'
-    api 'com.google.android:flexbox:1.0.0'
+    api 'androidx.appcompat:appcompat:1.1.0-alpha01'
+    api 'com.google.android.material:material:1.1.0-alpha02'
+    api 'androidx.legacy:legacy-support-v4:1.0.0'
+    api 'androidx.cardview:cardview:1.0.0'
+    api 'androidx.palette:palette:1.0.0'
+    api 'androidx.constraintlayout:constraintlayout:2.0.0-alpha3'
+    api 'com.google.android:flexbox:1.1.0'
     api rootProject.ext.dependencies["multidex"]
     api rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
     //    api rootProject.ext.dependencies["glide"]
@@ -159,8 +158,8 @@ dependencies {
     //    api rootProject.ext.dependencies["rxpermissions"]
     api rootProject.ext.dependencies["fragmentation"]
     api rootProject.ext.dependencies["fragmentation_swipeback"]
-    api rootProject.ext.dependencies["butterknife"]
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+//    api rootProject.ext.dependencies["butterknife"]
+//    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     api rootProject.ext.dependencies["FlycoTabLayout_Lib"]
     api rootProject.ext.dependencies["nineoldandroids"]
     api rootProject.ext.dependencies["greendao_generator"]
@@ -180,6 +179,11 @@ dependencies {
     //    api rootProject.ext.dependencies["kotlin_stdlib"]
     api rootProject.ext.dependencies["kotlinx_core"]
     //    api rootProject.ext.dependencies["kotlinx_android"]
+//    api rootProject.ext.dependencies["viewmode"]
+//    api rootProject.ext.dependencies["livedata"]
+    api rootProject.ext.dependencies["lifecycle_extensions"]
+    annotationProcessor rootProject.ext.dependencies["lifecycle_compiler"]
+
     debugImplementation rootProject.ext.dependencies["leakcanary_debug"]
     releaseImplementation rootProject.ext.dependencies["leakcanary_release"]
 }

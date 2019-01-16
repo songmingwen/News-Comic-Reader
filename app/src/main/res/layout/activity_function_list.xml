@@ -16,16 +16,19 @@
             android:padding="15dp">
 
             <Button
+                android:id="@+id/show_fresco_xml"
                 style="@style/style_button_main_activity"
                 android:onClick="showFrescoXML"
                 android:text="Fresco XML params display" />
 
             <Button
+                android:id="@+id/show_fresco_processor"
                 style="@style/style_button_main_activity"
                 android:onClick="showFrescoProcessor"
                 android:text="Fresco post processor display" />
 
             <Button
+                android:id="@+id/show_fireworks"
                 style="@style/style_button_main_activity"
                 android:onClick="showFireworks"
                 android:text="🎆" />

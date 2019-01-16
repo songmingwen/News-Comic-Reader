@@ -9,9 +9,6 @@ import android.widget.Toast;
 
 
 import com.song.core.statusbar.StatusBarUtil;
-
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
@@ -27,7 +24,6 @@ public abstract class CoreBaseActivity<P extends CoreBasePresenter, M extends Co
     public P mPresenter;
     public M mModel;
     protected Context mContext;
-    private Unbinder mUnbinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +38,6 @@ public abstract class CoreBaseActivity<P extends CoreBasePresenter, M extends Co
         TAG = getClass().getSimpleName();
 
         this.setContentView(this.getLayoutId());
-        mUnbinder = ButterKnife.bind(this);
         mContext = this;
         mPresenter = TUtil.getT(this, 0);
         mModel = TUtil.getT(this, 1);
@@ -53,7 +48,6 @@ public abstract class CoreBaseActivity<P extends CoreBasePresenter, M extends Co
 
     @Override
     protected void onDestroy() {
-        mUnbinder.unbind();
         if (mPresenter != null) mPresenter.detachVM();
         super.onDestroy();
     }

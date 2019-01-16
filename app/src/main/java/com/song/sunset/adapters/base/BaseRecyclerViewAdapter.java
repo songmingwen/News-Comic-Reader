@@ -1,13 +1,10 @@
 package com.song.sunset.adapters.base;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.song.sunset.interfaces.OnRVItemClickListener;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Song on 2016/8/27 0027.

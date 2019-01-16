@@ -3,7 +3,7 @@ package com.song.sunset;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.os.Process;
-import android.support.multidex.MultiDexApplication;
+import androidx.multidex.MultiDexApplication;
 import android.text.TextUtils;
 
 import com.song.core.FrescoInitializer;

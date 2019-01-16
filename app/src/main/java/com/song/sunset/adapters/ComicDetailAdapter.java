@@ -3,16 +3,12 @@ package com.song.sunset.adapters;
 import android.content.Context;
 import android.graphics.Color;
 import android.net.Uri;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
-import com.song.glide_40_transformations.BlurTransformation;
 import com.song.sunset.R;
 import com.song.sunset.activitys.ComicReadMVPActivity;
 import com.song.sunset.activitys.ScalePicActivity;
@@ -21,7 +17,6 @@ import com.song.sunset.beans.ComicDetailBean;
 import com.song.sunset.holders.ComicDetailBottomViewHolder;
 import com.song.sunset.holders.ComicDetailHeaderViewHolder;
 import com.song.sunset.holders.ComicDetailListItemViewHolder;
-import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.fresco.FrescoUtil;
 
 import java.util.ArrayList;

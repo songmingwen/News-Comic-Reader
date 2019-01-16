@@ -7,17 +7,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.NotificationCompat;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.core.app.ActivityCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar;
+import com.google.android.material.navigation.NavigationView;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -32,6 +31,7 @@ import com.song.sunset.beans.CollectionOnlineListBean;
 import com.song.sunset.beans.ComicCollectionBean;
 import com.song.sunset.beans.ComicLocalCollection;
 import com.song.sunset.fragments.CollectionFragment;
+import com.song.sunset.fragments.CollectionKotlinFragment;
 import com.song.sunset.fragments.ComicClassifyFragment;
 import com.song.sunset.fragments.ComicRankFragment;
 import com.song.sunset.fragments.ComicGenericListFragment;
@@ -50,6 +50,8 @@ import com.sunset.greendao.gen.ComicLocalCollectionDao;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import androidx.core.app.NotificationCompat;
 
 /**
  * Created by Song on 2016/12/2.
@@ -205,7 +207,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         } else if (id == R.id.nav_news) {
             switchFragmentDelay(PhoenixListFragment.class.getName(), getResources().getString(R.string.phoenix_news));
         } else if (id == R.id.nav_collection) {
-            switchFragmentDelay(CollectionFragment.class.getName(), getResources().getString(R.string.collection_comic));
+            switchFragmentDelay(CollectionKotlinFragment.class.getName(), getResources().getString(R.string.collection_comic));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

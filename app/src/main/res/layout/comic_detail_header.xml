@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:auto="http://schemas.android.com/apk/res-auto"
     android:id="@+id/id_comic_detail_header_layout"
@@ -28,7 +28,7 @@
         android:background="@color/white"
         auto:layout_constraintBottom_toBottomOf="parent"/>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/id_comic_detail_header_image_layout"
         style="@style/AppCardView"
         android:layout_width="wrap_content"
@@ -55,7 +55,7 @@
             <!--android:layout_height="143dp"-->
             <!--android:scaleType="fitXY"-->
             <!--android:visibility="gone"/>-->
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/id_comic_detail_header_comic_name"
@@ -75,4 +75,4 @@
         auto:layout_constraintEnd_toEndOf="parent"
         auto:layout_constraintStart_toStartOf="parent"
         auto:layout_constraintTop_toBottomOf="@+id/id_comic_detail_header_comic_name"/>
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

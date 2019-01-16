@@ -2,11 +2,13 @@
 apply from: "config.gradle"
 buildscript {
     /**kotlin配置*/
-    ext.kotlin_version = '1.2.51'
+    ext.kotlin_version = '1.2.71'
     ext.kotlinx_coroutines_version = '0.22.5'
     ext.anko_version = '0.10.4'
+    ext.lifecycle_version = '2.0.0'
     /** kotlin配置*/
     repositories {
+        google()
         jcenter()
         mavenCentral()
         maven {
@@ -15,13 +17,13 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.2.1'
 
         /**greenDao配置*/
         classpath 'org.greenrobot:greendao-gradle-plugin:3.2.1'
         /**greenDao配置*/
 
-        classpath 'com.jakewharton:butterknife-gradle-plugin:8.5.1'
+//        classpath 'com.jakewharton:butterknife-gradle-plugin:8.5.1'
 
         /** kotlin配置*/
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"

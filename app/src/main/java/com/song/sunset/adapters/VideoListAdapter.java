@@ -1,7 +1,7 @@
 package com.song.sunset.adapters;
 
 import android.app.Activity;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import com.song.sunset.R;
 import com.song.sunset.adapters.base.BaseRecyclerViewAdapter;
 import com.song.sunset.beans.VideoDetailBean;
-import com.song.sunset.beans.VideoListsBean;
 import com.song.sunset.holders.VideoListViewHolder;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.fresco.FrescoUtil;

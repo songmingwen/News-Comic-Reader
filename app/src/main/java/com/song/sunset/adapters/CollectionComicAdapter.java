@@ -1,7 +1,7 @@
 package com.song.sunset.adapters;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,12 +59,7 @@ public class CollectionComicAdapter extends RecyclerView.Adapter<ComicListViewHo
                     }
                 }
             }
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ComicDetailMVPActivity.start(context, comicId);
-                }
-            });
+            holder.itemView.setOnClickListener(v -> ComicDetailMVPActivity.start(context, comicId));
         }
     }
 

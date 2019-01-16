@@ -1,9 +1,9 @@
 package com.song.sunset.fragments.base;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +15,6 @@ import com.song.sunset.utils.AppConfig;
 import com.song.sunset.widget.LoadingFooter;
 import com.song.sunset.beans.basebeans.PageEntity;
 import com.song.sunset.R;
-import com.song.sunset.adapters.base.BaseRecyclerViewAdapter;
 import com.song.sunset.mvp.presenters.ListPresenter;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;

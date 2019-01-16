@@ -3,10 +3,10 @@ package com.song.sunset.activitys.temp;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
@@ -46,7 +46,7 @@ public class FrescoProcessorActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.id_recyclerview_processor);
         FrescoProcessorAdapter adapter = new FrescoProcessorAdapter(this);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
 
         ArrayList<ImageRequest> list = new ArrayList<>();
 

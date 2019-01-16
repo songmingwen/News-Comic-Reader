@@ -1,13 +1,18 @@
 package com.song.sunset.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.Nullable;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.song.sunset.CollectionViewModel;
 import com.song.sunset.R;
 import com.song.sunset.adapters.CollectionComicAdapter;
 import com.song.sunset.beans.CollectionOnlineListBean;
@@ -28,27 +33,37 @@ import com.sunset.greendao.gen.ComicLocalCollectionDao;
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 
 /**
  * Created by z5352_000 on 2016/10/29 0029.
  * E-mail:z53520@qq.com
  */
-public class CollectionFragment extends BaseFragment implements RetrofitCallback<CollectionOnlineListBean>, ComicCollectionView {
+public class CollectionFragment extends BaseFragment implements RetrofitCallback<CollectionOnlineListBean>, ComicCollectionView, Observer<List<ComicLocalCollection>> {
 
     private ProgressLayout progressLayout;
     private CollectionComicAdapter adapter;
     private ComicLocalCollectionDao comicLocalCollectionDao;
     private ComicCollectionPresenter mPresenter;
+    private CollectionViewModel mCollectionViewModel;
+
+    /**
+     * liveData 接收数据变化的回调
+     */
+    @Override
+    public void onChanged(List<ComicLocalCollection> comicLocalCollections) {
+        if (adapter != null && comicLocalCollections != null && !comicLocalCollections.isEmpty()) {
+            adapter.setData(comicLocalCollections);
+        }
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         comicLocalCollectionDao = GreenDaoUtil.getDaoSession().getComicLocalCollectionDao();
+        mCollectionViewModel = ViewModelProviders.of(this).get(CollectionViewModel.class);
+        mCollectionViewModel.getLocalCollectedLiveData().observe(this, this);
     }
 
     @Nullable
@@ -88,12 +103,13 @@ public class CollectionFragment extends BaseFragment implements RetrofitCallback
             progressLayout.showEmpty();
             return;
         }
-        adapter.setData(list);
+        mCollectionViewModel.getLocalCollectedLiveData().postValue(list);
         progressLayout.showContent();
     }
 
     @Override
     public void onSuccess(CollectionOnlineListBean collectionOnlineListBean) {
+
         Disposable disposable = Observable.create((ObservableOnSubscribe<Boolean>)
                 emitter -> emitter.onNext(saveCollectedComic(collectionOnlineListBean)))
                 .compose(RxUtil.getDefaultScheduler())
@@ -105,6 +121,7 @@ public class CollectionFragment extends BaseFragment implements RetrofitCallback
                         adapter.setCollectionList(collectionOnlineListBean.getFavList());
                     }
                 });
+
     }
 
     @Override

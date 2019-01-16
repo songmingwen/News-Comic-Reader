@@ -2,13 +2,11 @@ package com.song.sunset.activitys.temp;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.load.Transformation;
-import com.bumptech.glide.request.RequestOptions;
 import com.song.glide_40_transformations.BlurTransformation;
 import com.song.glide_40_transformations.ColorFilterTransformation;
 import com.song.glide_40_transformations.CropCircleTransformation;

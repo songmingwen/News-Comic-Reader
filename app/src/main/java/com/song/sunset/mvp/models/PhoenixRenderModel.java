@@ -1,6 +1,7 @@
 package com.song.sunset.mvp.models;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
+
 import android.text.TextUtils;
 import android.view.View;
 
@@ -62,7 +63,7 @@ public class PhoenixRenderModel {
             viewHolder.commentCount.setText(phoenixChannelBean.getCommentsall());
         }
 
-        if (phoenixChannelBean.getUpdateTime() != null) {
+        if (!TextUtils.isEmpty(phoenixChannelBean.getUpdateTime()) && phoenixChannelBean.getUpdateTime().length() > 12) {
             viewHolder.updateTime.setText(phoenixChannelBean.getUpdateTime().substring(11));
         }
     }

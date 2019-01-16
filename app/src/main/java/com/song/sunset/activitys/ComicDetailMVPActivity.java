@@ -7,20 +7,18 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.OnScrollListener;
-import android.support.v7.widget.Toolbar;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.OnScrollListener;
+import androidx.appcompat.widget.Toolbar;
+
 import android.view.View;
 
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageRequest;
 import com.facebook.common.references.CloseableReference;
 import com.facebook.datasource.DataSource;
 import com.facebook.imagepipeline.datasource.BaseBitmapDataSubscriber;
@@ -35,11 +33,7 @@ import com.song.sunset.utils.BitmapUtil;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.fresco.FrescoUtil;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
-import com.song.sunset.utils.volley.SampleVolleyFactory;
 import com.song.sunset.mvp.views.ComicDetailView;
-
-import butterknife.BindView;
-import butterknife.OnClick;
 
 import static com.song.sunset.adapters.ComicDetailAdapter.COMIC_LIST_TYPE;
 
@@ -48,13 +42,10 @@ import static com.song.sunset.adapters.ComicDetailAdapter.COMIC_LIST_TYPE;
  * E-mail:z53520@qq.com
  */
 
-public class ComicDetailMVPActivity extends CoreBaseActivity<ComicDetailPresenter, ComicDetailModel> implements ComicDetailView {
+public class ComicDetailMVPActivity extends CoreBaseActivity<ComicDetailPresenter, ComicDetailModel> implements ComicDetailView, View.OnClickListener {
 
-    @BindView(R.id.id_comic_detail_recycler)
     RecyclerView recyclerView;
-    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.id_comic_detail_fab)
     FloatingActionButton floatingActionButton;
 
     private ProgressLayout progressLayout;
@@ -89,6 +80,12 @@ public class ComicDetailMVPActivity extends CoreBaseActivity<ComicDetailPresente
 
     @Override
     public void initView(Bundle savedInstanceState) {
+
+        recyclerView = (RecyclerView) findViewById(R.id.id_comic_detail_recycler);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        floatingActionButton = (FloatingActionButton) findViewById(R.id.id_comic_detail_fab);
+        floatingActionButton.setOnClickListener(this);
+
         progressLayout = (ProgressLayout) findViewById(R.id.progress);
         progressLayout.showLoading();
 
@@ -129,8 +126,8 @@ public class ComicDetailMVPActivity extends CoreBaseActivity<ComicDetailPresente
         mPresenter.showCollectedStated(comicId);
     }
 
-    @OnClick(R.id.id_comic_detail_fab)
-    public void onClick() {
+    @Override
+    public void onClick(View view) {
         mPresenter.changeCollectedState(comicDetailBean);
     }
 
@@ -138,6 +135,7 @@ public class ComicDetailMVPActivity extends CoreBaseActivity<ComicDetailPresente
     public void setData(ComicDetailBean comicDetailBean) {
         this.comicDetailBean = comicDetailBean;
         progressLayout.showContent();
+        floatingActionButton.setVisibility(View.VISIBLE);
         toolbar.setTitle(comicDetailBean.getComic().getName());
 //        toolbar.setLogo(R.mipmap.logo);
         adapter.setData(comicDetailBean);
@@ -163,6 +161,7 @@ public class ComicDetailMVPActivity extends CoreBaseActivity<ComicDetailPresente
     public void showError(String msg) {
         progressLayout.showError(v -> {
             progressLayout.showLoading();
+            floatingActionButton.setVisibility(View.GONE);
             mPresenter.showData(comicId);
         });
     }

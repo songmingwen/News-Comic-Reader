@@ -17,7 +17,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
-import android.support.v7.graphics.Palette;
+import androidx.palette.graphics.Palette;
 import android.util.Base64;
 import android.widget.ImageView;
 

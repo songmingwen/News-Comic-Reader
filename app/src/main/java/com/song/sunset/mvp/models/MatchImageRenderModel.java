@@ -1,6 +1,6 @@
 package com.song.sunset.mvp.models;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.song.sunset.beans.PhoenixChannelBean;
 import com.song.sunset.holders.MatchImageViewHolder;

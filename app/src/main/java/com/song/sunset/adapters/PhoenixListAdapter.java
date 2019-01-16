@@ -1,7 +1,7 @@
 package com.song.sunset.adapters;
 
 import android.app.Activity;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.ViewGroup;
 
 import com.song.sunset.adapters.base.BaseRVAdapterWithoutVH;

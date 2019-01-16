@@ -2,8 +2,8 @@ package com.kotlin
 
 import android.os.Bundle
 import android.os.Environment
-import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
+import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import com.song.sunset.R
 import com.song.sunset.utils.BitmapUtil

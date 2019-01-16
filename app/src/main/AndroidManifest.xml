@@ -24,11 +24,14 @@
     <application
         android:name=".SunsetApplication"
         android:allowBackup="true"
+        android:appComponentFactory="song"
         android:configChanges="keyboardHidden|orientation|screenSize"
         android:icon="@mipmap/logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:replace="android:appComponentFactory">
         <activity
             android:name="com.kotlin.FirstKotlinActivity"
             android:label="@string/app_name"
@@ -174,7 +177,8 @@
         <activity
             android:name=".activitys.temp.FunctionListActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".activitys.temp.FrescoXMLActivity"></activity>
+        <activity android:name=".activitys.temp.FrescoXMLActivity" />
+        <activity android:name=".activitys.temp.FunctionListKotlinActivity" />
     </application>
 
 </manifest>

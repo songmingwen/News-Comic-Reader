@@ -3,7 +3,7 @@ package com.song.sunset.widget.fireworks;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.annotation.DrawableRes;
+import androidx.annotation.DrawableRes;
 import android.util.LruCache;
 
 import com.song.sunset.R;

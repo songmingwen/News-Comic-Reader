@@ -1,15 +1,14 @@
 package com.song.sunset.adapters.base;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.song.sunset.R;
 import com.song.sunset.activitys.ComicDetailMVPActivity;
-import com.song.sunset.beans.ComicListBean;
 import com.song.sunset.beans.ComicsBean;
 import com.song.sunset.holders.ComicListViewHolder;
 import com.song.sunset.utils.ViewUtil;
