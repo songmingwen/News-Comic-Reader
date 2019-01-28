@@ -25,9 +25,6 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
 
-/**
- * Created by zhouym on 2017/3/14.
- */
 public class HttpsUtil {
 
     /*static {

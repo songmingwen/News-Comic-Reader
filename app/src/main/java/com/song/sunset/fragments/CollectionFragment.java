@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.song.sunset.CollectionViewModel;
 import com.song.sunset.R;
 import com.song.sunset.adapters.CollectionComicAdapter;
@@ -22,6 +23,7 @@ import com.song.sunset.fragments.base.BaseFragment;
 import com.song.sunset.mvp.models.ComicCollectionModel;
 import com.song.sunset.mvp.presenters.ComicCollectionPresenter;
 import com.song.sunset.mvp.views.ComicCollectionView;
+import com.song.sunset.utils.AppConfig;
 import com.song.sunset.utils.GreenDaoUtil;
 import com.song.sunset.utils.SPUtils;
 import com.song.sunset.utils.ViewUtil;
@@ -40,6 +42,7 @@ import io.reactivex.disposables.Disposable;
  * Created by z5352_000 on 2016/10/29 0029.
  * E-mail:z53520@qq.com
  */
+@Route(path = "/song/f/comic/collection")
 public class CollectionFragment extends BaseFragment implements RetrofitCallback<CollectionOnlineListBean>, ComicCollectionView, Observer<List<ComicLocalCollection>> {
 
     private ProgressLayout progressLayout;
@@ -114,12 +117,9 @@ public class CollectionFragment extends BaseFragment implements RetrofitCallback
                 emitter -> emitter.onNext(saveCollectedComic(collectionOnlineListBean)))
                 .compose(RxUtil.getDefaultScheduler())
                 .subscribe(aBoolean -> {
-                    if (aBoolean) {
-                        getDataFromSQLite();
-                    } else {
-                        if (adapter == null) return;
-                        adapter.setCollectionList(collectionOnlineListBean.getFavList());
-                    }
+                    getDataFromSQLite();
+                    if (adapter == null) return;
+                    adapter.setCollectionList(collectionOnlineListBean.getFavList());
                 });
 
     }
@@ -134,6 +134,9 @@ public class CollectionFragment extends BaseFragment implements RetrofitCallback
     private boolean saveCollectedComic(CollectionOnlineListBean collectionOnlineListBean) {
         if (collectionOnlineListBean == null || collectionOnlineListBean.getFavList().isEmpty())
             return false;
+        if (!SPUtils.getBooleanByName(AppConfig.getApp(), SPUtils.APP_FIRST_INSTALL, true)) {
+            return false;
+        }
         GreenDaoUtil.getDb().beginTransaction();
         for (ComicCollectionBean bean : collectionOnlineListBean.getFavList()) {
             ComicLocalCollection localCollection = new ComicLocalCollection();

@@ -3,6 +3,7 @@ package com.song.sunset.activitys;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.song.sunset.R;
 import com.song.sunset.activitys.base.BaseActivity;
 import com.song.sunset.fragments.CollectionFragment;
@@ -13,6 +14,7 @@ import com.song.sunset.receivers.SunsetWidget;
  * E-mail: z53520@qq.com
  */
 
+@Route(path = "/song/comic/collection")
 public class ComicCollectionActivity extends BaseActivity {
 
     private boolean fromWidget = false;

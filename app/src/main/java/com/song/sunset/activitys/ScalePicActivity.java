@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -35,6 +36,7 @@ import java.io.File;
  * Created by Song on 2016/9/2 0002.
  * Email:z53520@qq.com
  */
+@Route(path = "/song/pic/scale")
 public class ScalePicActivity extends BaseActivity {
 
     public static final String PIC_URL = "pic_url";

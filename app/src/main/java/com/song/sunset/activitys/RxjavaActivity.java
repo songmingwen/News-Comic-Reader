@@ -3,6 +3,8 @@ package com.song.sunset.activitys;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -29,7 +31,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
-
+@Route(path = "/song/rxjava")
 public class RxjavaActivity extends AppCompatActivity {
 
 

@@ -1,11 +1,15 @@
 package com.song.sunset.fragments;
 
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.text.TextUtils;
 import android.view.View;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.song.sunset.R;
 import com.song.sunset.activitys.ComicListActivity;
 import com.song.sunset.adapters.ComicListAdapter;
@@ -25,7 +29,7 @@ import io.reactivex.Observable;
  * Created by Song on 2017/11/13 0013.
  * E-mail: z53520@qq.com
  */
-
+@Route(path = "/song/comic/newest")
 public class ComicGenericListFragment extends RVLoadableFragment<ComicListAdapter, ComicListBean> {
 
     private String argName = "";
@@ -38,7 +42,9 @@ public class ComicGenericListFragment extends RVLoadableFragment<ComicListAdapte
             Bundle bundle = getArguments();
             argName = bundle.getString(ComicListActivity.ARG_NAME);
             argValue = bundle.getInt(ComicListActivity.ARG_VALUE);
-        } else {//每日更新的标识
+        }
+        if (TextUtils.isEmpty(argName)) {
+            //每日更新的标识
             argName = "sort";
             argValue = 0;
         }

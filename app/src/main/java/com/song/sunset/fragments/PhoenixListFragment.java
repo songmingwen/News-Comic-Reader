@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.song.sunset.R;
 import com.song.sunset.adapters.PhoenixListAdapter;
 import com.song.sunset.beans.PhoenixChannelBean;
@@ -34,7 +35,7 @@ import io.reactivex.Observable;
  * Created by Song on 2017/3/30 0030.
  * E-mail: z53520@qq.com
  */
-
+@Route(path = "/song/phoenix/list")
 public class PhoenixListFragment extends RVLoadableFragment<PhoenixListAdapter, PhoenixNewsListBean> {
 
     @Override

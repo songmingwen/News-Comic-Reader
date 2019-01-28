@@ -7,16 +7,24 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import androidx.core.app.ActivityCompat;
+
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+
 import com.google.android.material.navigation.NavigationView;
+
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
+
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -52,11 +60,13 @@ import java.util.List;
 import java.util.Map;
 
 import androidx.core.app.NotificationCompat;
+import androidx.fragment.app.Fragment;
 
 /**
  * Created by Song on 2016/12/2.
  * E-mail:z53520@qq.com
  */
+@Route(path = "/song/main")
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, ComicCollectionView {
 
     public static final String TAG = MainActivity.class.getName();
@@ -83,7 +93,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         initDrawer();
         setUpListener();
 
-        switchFragmentDelay(PhoenixListFragment.class.getName(), getResources().getString(R.string.phoenix_news), 0);
+//        switchFragmentDelay(PhoenixListFragment.class.getName(), getResources().getString(R.string.phoenix_news), 0);
+        swithFragmentByRouter("/song/phoenix/list", getResources().getString(R.string.phoenix_news));
         mPresenter = new ComicCollectionPresenter();
         mPresenter.attachVM(this, new ComicCollectionModel());
         mPresenter.getNewestCollectedComic();
@@ -197,17 +208,23 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         int id = item.getItemId();
 
         if (id == R.id.nav_gallery) {
-            switchFragmentDelay(ComicGenericListFragment.class.getName(), getResources().getString(R.string.newest_comic));
+//            switchFragmentDelay(ComicGenericListFragment.class.getName(), getResources().getString(R.string.newest_comic));
+            swithFragmentByRouter("/song/comic/newest", getResources().getString(R.string.newest_comic));
         } else if (id == R.id.nav_classify_comic) {
-            switchFragmentDelay(ComicClassifyFragment.class.getName(), getResources().getString(R.string.classify_comic));
+//            switchFragmentDelay(ComicClassifyFragment.class.getName(), getResources().getString(R.string.classify_comic));
+            swithFragmentByRouter("/song/comic/classify", getResources().getString(R.string.classify_comic));
         } else if (id == R.id.nav_video) {
-            VideoListActivity.start(this);
+//            VideoListActivity.start(this);
+            ARouter.getInstance().build("/song/phoenix/video/list").navigation();
         } else if (id == R.id.nav_rank_comic) {
-            switchFragmentDelay(ComicRankFragment.class.getName(), getResources().getString(R.string.rank_comic));
+//            switchFragmentDelay(ComicRankFragment.class.getName(), getResources().getString(R.string.rank_comic));
+            swithFragmentByRouter("/song/comic/rank", getResources().getString(R.string.rank_comic));
         } else if (id == R.id.nav_news) {
-            switchFragmentDelay(PhoenixListFragment.class.getName(), getResources().getString(R.string.phoenix_news));
+//            switchFragmentDelay(PhoenixListFragment.class.getName(), getResources().getString(R.string.phoenix_news));
+            swithFragmentByRouter("/song/phoenix/list", getResources().getString(R.string.phoenix_news));
         } else if (id == R.id.nav_collection) {
-            switchFragmentDelay(CollectionKotlinFragment.class.getName(), getResources().getString(R.string.collection_comic));
+//            switchFragmentDelay(CollectionKotlinFragment.class.getName(), getResources().getString(R.string.collection_comic));
+            swithFragmentByRouter("/song/f/comic/collection", getResources().getString(R.string.collection_comic));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -254,6 +271,16 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 toolbar.setTitle(title);
             }
         }, delayTime);
+    }
+
+    private void swithFragmentByRouter(String routerUrl, String title) {
+        fab.setVisibility(TextUtils.equals(routerUrl, "/song/phoenix/list") ? View.VISIBLE : View.GONE);
+
+        getmHandler().postDelayed(() -> {
+            toolbar.setTitle(title);
+            Fragment fragment = (Fragment) ARouter.getInstance().build(routerUrl).navigation();
+            switchFragment(fragment, R.id.activity_framelayout_main);
+        }, 300);
     }
 
     @Override

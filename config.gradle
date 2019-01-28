@@ -92,6 +92,8 @@ ext {
             "viewmode"                     : "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version",
             "livedata"                     : "androidx.lifecycle:lifecycle-livedata:$lifecycle_version",
             "lifecycle_extensions"         : "androidx.lifecycle:lifecycle-extensions:$lifecycle_version",
-            "lifecycle_compiler"           : "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+            "lifecycle_compiler"           : "androidx.lifecycle:lifecycle-compiler:$lifecycle_version",
+            "arouter"                      : "com.alibaba:arouter-api:1.4.1",
+            "arouter_compiler"             : "com.alibaba:arouter-compiler:1.2.2"
     ]
 }

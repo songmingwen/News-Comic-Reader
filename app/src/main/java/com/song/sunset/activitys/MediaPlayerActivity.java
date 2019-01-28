@@ -20,13 +20,14 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.LinearLayout;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.song.sunset.R;
 import com.song.sunset.activitys.base.BaseActivity;
 
 /**
  * Created by z5352_000 on 2016/10/20 0020.
  */
-
+@Route(path = "/song/player")
 public class MediaPlayerActivity extends BaseActivity implements OnCompletionListener, OnErrorListener, OnInfoListener,
         OnPreparedListener, OnSeekCompleteListener, OnVideoSizeChangedListener, SurfaceHolder.Callback {
     private Display currDisplay;

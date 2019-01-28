@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.song.sunset.adapters.ComicSearchListAdapter;
 import com.song.sunset.beans.ComicSearchResultBean;
 import com.song.sunset.utils.ViewUtil;
@@ -38,6 +39,7 @@ import io.reactivex.Observable;
  * Created by Song on 2016/9/2 0002.
  * Email:z53520@qq.com
  */
+@Route(path = "/song/comic/classify")
 public class ComicClassifyFragment extends Fragment implements TextWatcher {
 
     private ProgressLayout progressLayout;

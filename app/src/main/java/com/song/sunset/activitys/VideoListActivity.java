@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.song.sunset.R;
 import com.song.sunset.adapters.RankingPagerAdapter;
@@ -35,6 +36,7 @@ import io.reactivex.Observable;
  * Created by Song on 2016/9/1 0001.
  * Email:z53520@qq.com
  */
+@Route(path = "/song/phoenix/video/list")
 public class VideoListActivity extends AppCompatActivity {
     public static final String TV_URL = "tv_url";
     public static final String TV_NAME = "tv_name";

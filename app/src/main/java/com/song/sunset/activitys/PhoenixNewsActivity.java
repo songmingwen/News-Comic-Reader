@@ -23,6 +23,7 @@ import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.song.core.statusbar.StatusBarUtil;
 import com.song.sunset.R;
 import com.song.sunset.activitys.base.BaseActivity;
@@ -34,7 +35,7 @@ import com.song.sunset.utils.loadingmanager.ProgressLayout;
  * Created by Song on 2017/4/6 0006.
  * E-mail: z53520@qq.com
  */
-
+@Route(path = "/song/phoenix/news")
 public class PhoenixNewsActivity extends BaseActivity {
 
     public static final String PHOENIX_NEWS_URL = "phoenix_news_url";

@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.core.app.ActivityCompat;
@@ -41,7 +42,7 @@ import static com.song.sunset.adapters.ComicDetailAdapter.COMIC_LIST_TYPE;
  * Created by Song on 2016/12/8.
  * E-mail:z53520@qq.com
  */
-
+@Route(path = "/song/comic/detail")
 public class ComicDetailMVPActivity extends CoreBaseActivity<ComicDetailPresenter, ComicDetailModel> implements ComicDetailView, View.OnClickListener {
 
     RecyclerView recyclerView;

@@ -10,6 +10,8 @@ apply plugin: 'walle'
 //apply plugin: 'robust'//生成apk时打开
 /**Robust  美团热修复技术*/
 
+//apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion rootProject.ext.android.ANDROID_COMPILE_SDK_VERSION
 //    buildToolsVersion rootProject.ext.android.ANDROID_BUILD_TOOLS_VERSION
@@ -21,13 +23,18 @@ android {
     defaultConfig {
         applicationId "com.song.sunset"
         minSdkVersion rootProject.ext.android.ANDROID_BUILD_MIN_SDK_VERSION
-        targetSdkVersion 26
+        targetSdkVersion rootProject.ext.android.ANDROID_TARGET_SDK_VERSION
         versionCode 1
         versionName "1.0"
 //        jackOptions {
 //            enabled true
 //        }
         multiDexEnabled true
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName(), AROUTER_GENERATE_DOC: "enable"]
+            }
+        }
     }
     signingConfigs {
         release {
@@ -121,6 +128,12 @@ repositories {
     mavenCentral()
 }
 
+//kapt {
+//    arguments {
+//        arg("AROUTER_MODULE_NAME", project.getName())
+//    }
+//}
+
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
@@ -183,6 +196,9 @@ dependencies {
 //    api rootProject.ext.dependencies["livedata"]
     api rootProject.ext.dependencies["lifecycle_extensions"]
     annotationProcessor rootProject.ext.dependencies["lifecycle_compiler"]
+
+    api rootProject.ext.dependencies["arouter"]
+    annotationProcessor rootProject.ext.dependencies["arouter_compiler"]
 
     debugImplementation rootProject.ext.dependencies["leakcanary_debug"]
     releaseImplementation rootProject.ext.dependencies["leakcanary_release"]

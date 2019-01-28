@@ -6,12 +6,14 @@ import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.customview.widget.ViewDragHelper;
 import androidx.appcompat.app.AppCompatDelegate;
+
 import android.text.TextUtils;
 import android.view.WindowManager;
 
@@ -61,12 +63,36 @@ public class BaseActivity extends SwipeBackActivity {
         }
         fragment = supportFragmentManager.findFragmentByTag(className);
         if (fragment == null) {
-            fragment = Fragment.instantiate(this, className);
+//            fragment = Fragment.instantiate(this, className);
+            fragment = supportFragmentManager.getFragmentFactory().instantiate(this.getClassLoader(), className, null);
             fragmentTransaction.add(layoutId, fragment, className);
         } else {
             fragmentTransaction.show(fragment);
         }
         currTag = className;
+        fragmentTransaction.commitAllowingStateLoss();
+    }
+
+    protected void switchFragment(Fragment fragment, int layoutId) {
+        if (!TextUtils.isEmpty(currTag) && currTag.equals(fragment.getClass().toString())) {
+            return;
+        }
+        FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
+        Fragment innerFragment;
+        if (!TextUtils.isEmpty(currTag)) {
+            innerFragment = supportFragmentManager.findFragmentByTag(currTag);
+            if (innerFragment != null && !innerFragment.isDetached()) {
+                fragmentTransaction.hide(innerFragment);
+            }
+        }
+        innerFragment = supportFragmentManager.findFragmentByTag(fragment.getClass().toString());
+        if (innerFragment == null) {
+            innerFragment = fragment;
+            fragmentTransaction.add(layoutId, innerFragment, innerFragment.getClass().toString());
+        } else {
+            fragmentTransaction.show(innerFragment);
+        }
+        currTag = fragment.getClass().toString();
         fragmentTransaction.commitAllowingStateLoss();
     }
 

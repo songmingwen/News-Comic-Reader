@@ -100,4 +100,4 @@ fun Context.dp2px(dp: Int): Int {
  * 扩展属性
  */
 val <E> List<E>.lastIndex: Int
-    get()= size -1
+    get() = size - 1

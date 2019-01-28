@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.song.sunset.activitys.base.BaseActivity;
 import com.song.sunset.utils.ScreenUtils;
 import com.song.sunset.beans.basebeans.BaseBean;

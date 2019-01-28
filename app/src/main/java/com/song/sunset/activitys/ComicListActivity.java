@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.song.core.statusbar.StatusBarUtil;
 import com.song.sunset.R;
 import com.song.sunset.activitys.base.BaseActivity;
 import com.song.sunset.fragments.ComicGenericListFragment;
@@ -13,6 +15,7 @@ import com.song.sunset.fragments.ComicGenericListFragment;
  * Created by Song on 2016/9/5 0005.
  * Email:z53520@qq.com
  */
+@Route(path = "/song/comic/list")
 public class ComicListActivity extends BaseActivity {
 
     public static final String ARG_NAME = "argName";

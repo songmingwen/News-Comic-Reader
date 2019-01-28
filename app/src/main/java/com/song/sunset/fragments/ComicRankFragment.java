@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.song.sunset.R;
 import com.song.sunset.adapters.RankingPagerAdapter;
@@ -36,6 +37,7 @@ import static com.song.sunset.activitys.ComicListActivity.ARG_VALUE;
  * Created by Song on 2016/9/28 0028.
  * Email:z53520@qq.com
  */
+@Route(path = "/song/comic/rank")
 public class ComicRankFragment extends BaseFragment {
 
     private static final String BUNDLE_KEY_PAGE_INDEX = "page_index";

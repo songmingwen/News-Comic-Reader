@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.song.sunset.R;
 import com.song.sunset.activitys.base.BaseActivity;
 import com.song.sunset.adapters.ComicReadMVPAdapter;
@@ -28,7 +29,7 @@ import java.util.List;
  * Created by Song on 2017/8/2 0002.
  * E-mail: z53520@qq.com
  */
-
+@Route(path = "/song/comic/read")
 public class ComicReadMVPActivity extends BaseActivity implements ComicReadMVPRecyclerView.ComicLoadListener, ComicReadView, ScaleRecyclerView.OnSingleTapListener {
 
     public static final String OPEN_POSITION = "open_position";
