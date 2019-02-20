@@ -51,7 +51,6 @@ android {
 //            signingConfig signingConfigs.release
             renderscriptDebuggable true
             minifyEnabled false
-//            minifyEnabled true
             proguardFile '/Users/songmingwen/Documents/News-Comic-Reader/app/proguard-rules.pro'
         }
         release {

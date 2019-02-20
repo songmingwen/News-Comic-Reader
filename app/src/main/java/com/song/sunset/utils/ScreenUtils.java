@@ -21,8 +21,7 @@ import android.view.WindowManager;
  */
 public class ScreenUtils {
 
-    private ScreenUtils() {
-        throw new AssertionError();
+    public ScreenUtils() {
     }
 
     public static float dp2Px(Context context, float dp) {

@@ -17,6 +17,7 @@ import android.view.View;
 import com.song.sunset.IMusicCallBackListener;
 import com.song.sunset.IMusicGetter;
 import com.song.sunset.R;
+import com.song.sunset.activitys.RxjavaActivity;
 import com.song.sunset.activitys.base.BaseActivity;
 import com.song.sunset.beans.MusicInfo;
 import com.song.sunset.services.impl.BinderPoolImpl;
@@ -85,6 +86,7 @@ public class FunctionListActivity extends BaseActivity {
     public void showFrescoXML(View view) {
         FrescoXMLActivity.start(this);
     }
+
     /**
      * Click 点击
      */
@@ -106,6 +108,20 @@ public class FunctionListActivity extends BaseActivity {
         int x = itemPosition[0] + view.getWidth() / 2;
         int y = itemPosition[1];
         mFireworksView.launch(x, y);
+    }
+
+    /**
+     * Click 点击
+     */
+    public void showRxJava(View view) {
+        RxjavaActivity.start(this);
+    }
+
+    /**
+     *
+     */
+    public void showReflection(View view) {
+        ReflectionActivity.Companion.start(this);
     }
 
     private IMusicCallBackListener mIMusicCallBackListener = new MusicCallBackListenerImpl() {

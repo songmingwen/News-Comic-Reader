@@ -2,12 +2,15 @@ package com.song.sunset.activitys;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.wifi.aware.PublishConfig;
 import android.os.Bundle;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +19,8 @@ import com.song.sunset.R;
 import com.song.sunset.utils.rxjava.RxUtil;
 
 import java.io.Serializable;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.Callable;
@@ -26,11 +31,16 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.Single;
+import io.reactivex.SingleEmitter;
 import io.reactivex.SingleObserver;
+import io.reactivex.SingleOnSubscribe;
+import io.reactivex.SingleSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
+import io.reactivex.subjects.PublishSubject;
+
 @Route(path = "/song/rxjava")
 public class RxjavaActivity extends AppCompatActivity {
 
@@ -407,5 +417,42 @@ public class RxjavaActivity extends AppCompatActivity {
                 })
                 .subscribe(integer -> Log.e(TAG, "accept: " + integer));
         mDisposables.add(disposable);
+    }
+
+    /**
+     * 只有在在接收到 onNext 的改变时才触发订阅结果。打印结果 1 2 3
+     */
+    public void distinctUntilChanged(View view) {
+        PublishSubject<Object> publishSubject = PublishSubject.create();
+        Disposable disposable = publishSubject
+                .distinctUntilChanged()
+                .flatMapSingle((Function<Object, SingleSource<Boolean>>) o -> Single.create(emitter -> {
+                    Log.e(TAG, "accept: " + o);
+                    emitter.onSuccess(true);
+                }))
+                .subscribe(o -> {
+                    Log.e(TAG, "accept: " + o);
+                }, throwable -> {
+                });
+        mDisposables.add(disposable);
+        publishSubject.onNext(1);
+        publishSubject.onNext(1);
+        publishSubject.onNext(1);
+        publishSubject.onNext(2);
+        publishSubject.onNext(3);
+
+        try {
+            Class<?> clazz = Class.forName("com.song.sunset.utils.ScreenUtils");
+            Constructor<?> constructor = clazz.getConstructor();
+            Object instance = constructor.newInstance();
+            Method dp2px = clazz.getMethod("dp2Px", Context.class, float.class);
+            dp2px.setAccessible(true);
+            float px = (float) dp2px.invoke(instance, this, 2f);
+            Log.e(TAG, "反射：" + px);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
     }
 }

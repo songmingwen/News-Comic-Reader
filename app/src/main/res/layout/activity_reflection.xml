@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <Button
+            style="@style/style_button_main_activity"
+            android:onClick="loadClass"
+            android:text="加载类" />
+
+        <Button
+            style="@style/style_button_main_activity"
+            android:onClick="loadConstructor"
+            android:text="获取类的无参构造函数，并实例化类" />
+
+        <Button
+            style="@style/style_button_main_activity"
+            android:onClick="loadParamConstructor"
+            android:text="获取类的含参私有构造函数，并实例化类" />
+
+        <Button
+            style="@style/style_button_main_activity"
+            android:onClick="loadMethod"
+            android:text="获取并调用类的无参方法" />
+
+        <Button
+            style="@style/style_button_main_activity"
+            android:onClick="loadParamMethod"
+            android:text="获取并调用类的含参方法" />
+
+        <Button
+            style="@style/style_button_main_activity"
+            android:onClick="loadFiled"
+            android:text="获取类的字段" />
+    </LinearLayout>
+
+</ScrollView>

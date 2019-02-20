@@ -12,8 +12,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <!-- <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" /> -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" /> -->
     <!-- <uses-permission android:name="android.permission.WRITE_SETTINGS" /> -->
     <!-- <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" /> -->
     <!-- <uses-permission android:name="android.permission.READ_LOGS" /> -->
@@ -32,37 +31,36 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:appComponentFactory">
-
+        <activity android:name=".activitys.temp.ReflectionActivity"></activity>
         <activity android:name=".activitys.SchemeFilterActivity">
 
             <!-- Schame -->
             <intent-filter>
                 <data
                     android:host="*"
-                    android:scheme="song"/>
+                    android:scheme="song" />
 
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.VIEW" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
 
             <!-- App Links -->
             <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.VIEW" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
                     android:host="*"
-                    android:scheme="http"/>
+                    android:scheme="http" />
                 <data
                     android:host="*"
-                    android:scheme="https"/>
+                    android:scheme="https" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="com.kotlin.FirstKotlinActivity"
             android:label="@string/app_name"
@@ -73,17 +71,13 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- <activity -->
+        </activity> <!-- <activity -->
         <!-- android:name=".activitys.FirstActivity" -->
         <!-- android:label="@string/app_name" -->
         <!-- android:screenOrientation="portrait" -->
         <!-- android:theme="@style/AppTheme.NoActionBar"> -->
         <!-- <intent-filter> -->
         <!-- <action android:name="android.intent.action.MAIN"/> -->
-
-
         <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
         <!-- </intent-filter> -->
         <!-- </activity> -->
@@ -145,8 +139,7 @@
         <activity android:name=".activitys.BasicMapActivity" />
         <activity
             android:name=".activitys.ComicReadMVPActivity"
-            android:screenOrientation="portrait" />
-        <!-- 定位需要的服务 使用2.0的定位需要加上这个 -->
+            android:screenOrientation="portrait" /> <!-- 定位需要的服务 使用2.0的定位需要加上这个 -->
         <service android:name="com.amap.api.location.APSService" />
 
         <activity

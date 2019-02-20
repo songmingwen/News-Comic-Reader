@@ -161,6 +161,12 @@
                 android:onClick="scan"
                 android:text="scan" />
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="distinctUntilChanged"
+                android:text="distinctUntilChanged" />
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

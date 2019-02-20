@@ -33,6 +33,17 @@
                 android:onClick="showFireworks"
                 android:text="🎆" />
 
+            <Button
+                android:id="@+id/rxjava_lean"
+                style="@style/style_button_main_activity"
+                android:onClick="showRxJava"
+                android:text="RxJava" />
+
+            <Button
+                style="@style/style_button_main_activity"
+                android:onClick="showReflection"
+                android:text="Reflection" />
+
             <!--复制上面的 button 添加点击事件，从而跳转到自己的功能页面-->
 
         </LinearLayout>
