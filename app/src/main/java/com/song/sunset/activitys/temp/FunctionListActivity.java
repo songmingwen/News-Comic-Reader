@@ -14,18 +14,22 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.song.kotlin.activitys.temp.DynamicProxyActivity;
+import com.song.kotlin.activitys.temp.ReflectionActivity;
 import com.song.sunset.IMusicCallBackListener;
 import com.song.sunset.IMusicGetter;
 import com.song.sunset.R;
-import com.song.sunset.activitys.RxjavaActivity;
 import com.song.sunset.activitys.base.BaseActivity;
 import com.song.sunset.beans.MusicInfo;
+import com.song.kotlin.interfaces.IOrigin;
 import com.song.sunset.services.impl.BinderPoolImpl;
 import com.song.sunset.services.impl.MusicCallBackListenerImpl;
 import com.song.sunset.services.impl.MusicGetterImpl;
 import com.song.sunset.services.managers.BinderPool;
+import com.song.kotlin.utils.JdkDynamicProxy;
+import com.song.kotlin.utils.OriginImpl;
 import com.song.sunset.utils.preinstall.DefaultPreinstallHandler;
-import com.song.sunset.utils.preinstall.HuaweiPreinstallHandler;
+import com.song.kotlin.utils.preinstall.HuaweiPreinstallHandler;
 import com.song.sunset.utils.preinstall.VivoPreinstallHandler;
 import com.song.sunset.utils.preinstall.XiaomiPreinstallHandler;
 import com.song.sunset.utils.process.AndroidProcesses;
@@ -118,10 +122,19 @@ public class FunctionListActivity extends BaseActivity {
     }
 
     /**
-     *
+     * Click 点击
      */
     public void showReflection(View view) {
         ReflectionActivity.Companion.start(this);
+    }
+
+    /**
+     * Click 点击
+     */
+    public void showDynamicProxy(View view) {
+        DynamicProxyActivity.Companion.start(this);
+        JdkDynamicProxy proxy = new JdkDynamicProxy();
+        IOrigin iOrigin = (IOrigin) proxy.bind(new OriginImpl());
     }
 
     private IMusicCallBackListener mIMusicCallBackListener = new MusicCallBackListenerImpl() {

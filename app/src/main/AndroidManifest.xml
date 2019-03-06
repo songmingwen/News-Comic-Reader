@@ -31,7 +31,8 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".activitys.temp.ReflectionActivity"></activity>
+        <activity android:name="com.song.kotlin.activitys.temp.DynamicProxyActivity"/>
+        <activity android:name="com.song.kotlin.activitys.temp.ReflectionActivity" />
         <activity android:name=".activitys.SchemeFilterActivity">
 
             <!-- Schame -->
@@ -62,7 +63,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.kotlin.FirstKotlinActivity"
+            android:name="com.song.kotlin.FirstKotlinActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -87,7 +88,7 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.kotlin.MainKotlinActivity"
+            android:name="com.song.kotlin.MainKotlinActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
@@ -186,14 +187,14 @@
             android:process=":remote" />
 
         <activity
-            android:name="com.kotlin.RxJavaKotlinActivity"
+            android:name="com.song.kotlin.RxJavaKotlinActivity"
             android:label="@string/title_activity_rx_java"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".activitys.RxjavaActivity"
+            android:name=".activitys.temp.RxjavaActivity"
             android:label="@string/title_activity_rxjava"
             android:theme="@style/AppTheme" />
-        <activity android:name="com.kotlin.LearnKotlin" />
+        <activity android:name="com.song.kotlin.LearnKotlin" />
         <activity
             android:name=".activitys.temp.FrescoProcessorActivity"
             android:label="@string/title_activity_fresco_processor"
@@ -202,7 +203,7 @@
             android:name=".activitys.temp.FunctionListActivity"
             android:theme="@style/AppTheme" />
         <activity android:name=".activitys.temp.FrescoXMLActivity" />
-        <activity android:name=".activitys.temp.FunctionListKotlinActivity" />
+        <activity android:name="com.song.kotlin.activitys.temp.FunctionListKotlinActivity" />
     </application>
 
 </manifest>

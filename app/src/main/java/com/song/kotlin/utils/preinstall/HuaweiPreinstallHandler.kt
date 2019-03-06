@@ -1,8 +1,6 @@
-package com.song.sunset.utils.preinstall
+package com.song.kotlin.utils.preinstall
 
 import android.text.TextUtils
-
-import java.lang.reflect.Method
 
 /**
  * @author songmingwen

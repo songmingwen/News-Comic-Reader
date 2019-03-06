@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.song.kotlin.activitys.temp.DynamicProxyActivity">
+
+    <Button
+        android:id="@+id/button2"
+        style="@style/style_button_main_activity"
+        android:onClick="origin"
+        android:text="原始方法" />
+
+    <Button
+        style="@style/style_button_main_activity"
+        android:onClick="dynamicProxy"
+        android:text="DynamicProxy" />
+
+</LinearLayout>

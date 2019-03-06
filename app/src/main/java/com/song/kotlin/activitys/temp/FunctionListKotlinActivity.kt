@@ -1,21 +1,22 @@
-package com.song.sunset.activitys.temp
+package com.song.kotlin.activitys.temp
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.IBinder
 import android.os.RemoteException
 import android.util.Log
-import com.song.sunset.IMusicGetter
 import com.song.sunset.R
 import com.song.sunset.activitys.base.BaseActivity
+import com.song.sunset.activitys.temp.FrescoProcessorActivity
+import com.song.sunset.activitys.temp.FrescoXMLActivity
+import com.song.sunset.activitys.temp.FunctionListActivity
 import com.song.sunset.beans.MusicInfo
 import com.song.sunset.services.impl.BinderPoolImpl
 import com.song.sunset.services.impl.MusicCallBackListenerImpl
 import com.song.sunset.services.impl.MusicGetterImpl
 import com.song.sunset.services.managers.BinderPool
 import com.song.sunset.utils.preinstall.DefaultPreinstallHandler
-import com.song.sunset.utils.preinstall.HuaweiPreinstallHandler
+import com.song.kotlin.utils.preinstall.HuaweiPreinstallHandler
 import com.song.sunset.utils.preinstall.VivoPreinstallHandler
 import com.song.sunset.utils.preinstall.XiaomiPreinstallHandler
 import com.song.sunset.widget.fireworks.BitmapProvider

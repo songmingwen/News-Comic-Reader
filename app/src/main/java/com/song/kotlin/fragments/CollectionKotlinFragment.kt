@@ -1,4 +1,4 @@
-package com.song.sunset.fragments
+package com.song.kotlin.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.alibaba.android.arouter.facade.annotation.Route
 import com.song.sunset.CollectionViewModel
 import com.song.sunset.R
 import com.song.sunset.adapters.CollectionComicAdapter

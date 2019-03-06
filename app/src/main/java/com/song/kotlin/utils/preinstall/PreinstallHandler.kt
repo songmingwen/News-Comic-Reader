@@ -1,4 +1,4 @@
-package com.song.sunset.utils.preinstall
+package com.song.kotlin.utils.preinstall
 
 /**
  * @author songmingwen
