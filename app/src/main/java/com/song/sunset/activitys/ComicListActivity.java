@@ -38,7 +38,7 @@ public class ComicListActivity extends BaseActivity {
         }
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setLogo(R.mipmap.logo);
+        toolbar.setLogo(R.mipmap.ic_launcher_round);
         toolbar.setTitle(sortName);
 
         Bundle bundle = new Bundle();

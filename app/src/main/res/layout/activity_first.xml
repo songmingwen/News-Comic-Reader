@@ -20,5 +20,5 @@
         android:layout_below="@+id/id_first_image"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
-        android:src="@mipmap/logo"/>
+        android:src="@mipmap/ic_launcher"/>
 </RelativeLayout>

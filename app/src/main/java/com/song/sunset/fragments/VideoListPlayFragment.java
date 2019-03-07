@@ -190,7 +190,7 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
         controller.setLenght(mItemBean.getDuration() * 1000);
         Glide.with(getContext())
                 .load(mItemBean.getImage())
-                .apply(RequestOptions.placeholderOf(R.mipmap.logo))
+                .apply(RequestOptions.placeholderOf(R.mipmap.ic_launcher_round))
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(controller.imageView());
         player.setUp(mItemBean.getVideo_url(), null);
