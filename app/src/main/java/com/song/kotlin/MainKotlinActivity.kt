@@ -127,7 +127,7 @@ class MainKotlinActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
 
     private fun initView() {
         toolbar = findViewById(R.id.toolbar) as Toolbar
-        toolbar!!.setLogo(R.mipmap.ic_launcher_round)
+        toolbar!!.setLogo(R.mipmap.logo_black)
         fab = findViewById(R.id.fab) as FloatingActionButton
     }
 
@@ -364,7 +364,7 @@ class MainKotlinActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
                 intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         val nBuilder = NotificationCompat.Builder(this)
-        nBuilder.setSmallIcon(R.mipmap.ic_launcher_round)
+        nBuilder.setSmallIcon(R.mipmap.logo_black)
                 .setContentIntent(pendingIntent)
                 .setContentTitle("漫画有更新")
                 .setContentText(content)

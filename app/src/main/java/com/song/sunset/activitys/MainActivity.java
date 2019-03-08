@@ -151,7 +151,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     private void initView() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setLogo(R.mipmap.ic_launcher_round);
+        toolbar.setLogo(R.mipmap.logo_black);
         fab = (FloatingActionButton) findViewById(R.id.fab);
     }
 
@@ -314,7 +314,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder nBuilder = new NotificationCompat.Builder(this);
-        nBuilder.setSmallIcon(R.mipmap.ic_launcher_round)
+        nBuilder.setSmallIcon(R.mipmap.logo_black)
                 .setContentIntent(pendingIntent)
                 .setContentTitle("漫画有更新")
                 .setContentText(content)

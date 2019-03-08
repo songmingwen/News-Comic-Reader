@@ -59,8 +59,11 @@ class ReflectionActivity : AppCompatActivity() {
     }
 
     fun loadFiled(view: View) {
-        val field = getClazz()?.getField("pubField")
-        val value = field?.get(getInstance())
+        val clazz = getClazz()
+        val field = clazz?.getField("pubField")
+        val instance = clazz?.newInstance()
+        field?.set(instance, 7.77f)
+        val value = field?.get(instance)
         val type = field?.type
         Log.e(TAG, value.toString() + "-------" + type.toString())
     }

@@ -84,7 +84,6 @@ public class PhoenixVideoActivity extends AppCompatActivity {
         player.setController(controller);
         Glide.with(this)
                 .load(mVideoDetailBean.getImage())
-                .apply(RequestOptions.placeholderOf(R.mipmap.ic_launcher_round))
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(controller.imageView());
         player.setUp(mVideoDetailBean.getVideo_url(), null);
