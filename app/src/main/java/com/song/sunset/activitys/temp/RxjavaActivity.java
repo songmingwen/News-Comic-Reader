@@ -168,13 +168,15 @@ public class RxjavaActivity extends AppCompatActivity {
             emitter.onNext("A");
             Thread.sleep(2000);
             emitter.onNext("B");
+            emitter.tryOnError(new NullPointerException());//错误会中断 zip 所有的后续操作
             Thread.sleep(3000);
             emitter.onNext("C");
         });
         Disposable disposable = Observable.zip(intObservable, stringObservable,
                 (integer, s) -> integer.toString() + "---" + s)
                 .compose(RxUtil.getDefaultScheduler())
-                .subscribe(o -> Log.e(TAG, "zip: " + o));
+                .subscribe(o -> Log.e(TAG, "zip: " + o),
+                        throwable -> Log.e(TAG, "accept: error"));
 
         mDisposables.add(disposable);
 
@@ -186,7 +188,12 @@ public class RxjavaActivity extends AppCompatActivity {
      */
     public void concat(View view) {
         Observable<Integer> intObservable = Observable.just(1, 2, 3);
-        Observable<String> stringObservable = Observable.just("A", "B", "C");
+        Observable<String> stringObservable = Observable.create(emitter -> {
+            emitter.onNext("A");
+            emitter.onNext("B");
+            emitter.tryOnError(new NullPointerException());//错误会中断所有的后续操作
+            emitter.onNext("C");
+        });
         Disposable disposable = Observable.concat(intObservable, stringObservable)
                 .compose(RxUtil.getDefaultScheduler())
                 .subscribe((Consumer<Serializable>) serializable -> {
@@ -197,7 +204,7 @@ public class RxjavaActivity extends AppCompatActivity {
                         String string = (String) serializable;
                         Log.e(TAG, "accept: " + string);
                     }
-                });
+                }, throwable -> Log.e(TAG, "accept: error"));
         mDisposables.add(disposable);
 
     }
@@ -254,7 +261,7 @@ public class RxjavaActivity extends AppCompatActivity {
     public void buffer(View view) {
         Disposable disposable = Observable.just(1, 2, 3, 4, 5, 6)
                 .buffer(2, 3)
-                .subscribe(integers -> Log.e(TAG, "accept: size = " + integers.size() + "item = " + integers.toString()));
+                .subscribe(integers -> Log.e(TAG, "accept: size = " + integers.size() + "；item = " + integers.toString()));
         mDisposables.add(disposable);
     }
 
@@ -386,9 +393,58 @@ public class RxjavaActivity extends AppCompatActivity {
     }
 
     public void merge(View view) {
-        Disposable disposable = Observable.merge(Observable.just(1, 2), Observable.just(3, 4, 5))
-                .subscribe(integer -> Log.e(TAG, "merge :" + integer + "\n"));
+        Observable<String> stringObservable = Observable.create(emitter -> {
+            emitter.onNext("A");
+            emitter.onNext("B");
+            emitter.tryOnError(new NullPointerException());
+            emitter.onNext("C");
+        });
+        Observable<Integer> intObservable = Observable.just(1, 2, 3, 4);
+        Disposable disposable = Observable.merge(stringObservable, intObservable)
+                .subscribe((Consumer<Serializable>) serializable -> {
+                    if (serializable instanceof Integer) {
+                        Log.e(TAG, "accept: " + serializable.toString());
+                    } else if (serializable instanceof String) {
+                        Log.e(TAG, "accept: " + serializable.toString());
+                    }
+                }, throwable -> Log.e(TAG, "mergeDelayError-accept: error"));
         mDisposables.add(disposable);
+    }
+
+    public void mergeDelayError(View view) {
+        Observable<String> stringObservable = Observable.create(emitter -> {
+            emitter.tryOnError(new NullPointerException());//所有成功的操作都会被返回，最后会执行错误操作。
+            emitter.onNext("A");
+            emitter.onNext("B");
+            emitter.onNext("C");
+        });
+        Observable<String> stringObservable2 = Observable.create(emitter -> {
+            emitter.onNext("D");
+            emitter.onNext("E");
+//            emitter.tryOnError(new NullPointerException());//所有成功的操作都会被返回，最后会执行错误操作。
+            emitter.onNext("F");
+        });
+        Observable<Integer> intObservable = Observable.just(1, 2, 3, 4);
+
+        Disposable disposable = Observable.mergeDelayError(stringObservable, intObservable)
+                .subscribe((Consumer<Serializable>) serializable -> {
+                    if (serializable instanceof Integer) {
+                        Log.e(TAG, "accept: " + serializable.toString());
+                    } else if (serializable instanceof String) {
+                        Log.e(TAG, "accept: " + serializable.toString());
+                    }
+                }, throwable -> Log.e(TAG, "mergeDelayError-accept: error"));
+
+        Disposable disposable2 = Observable.mergeDelayError(stringObservable, stringObservable2, intObservable)
+                .subscribe((Consumer<Serializable>) serializable -> {
+                    if (serializable instanceof Integer) {
+                        Log.e(TAG, "accept: " + serializable.toString());
+                    } else if (serializable instanceof String) {
+                        Log.e(TAG, "accept: " + serializable.toString());
+                    }
+                }, throwable -> Log.e(TAG, "mergeDelayError-accept: error"));
+        mDisposables.add(disposable);
+        mDisposables.add(disposable2);
     }
 
     /**
@@ -437,19 +493,5 @@ public class RxjavaActivity extends AppCompatActivity {
         publishSubject.onNext(1);
         publishSubject.onNext(2);
         publishSubject.onNext(3);
-
-        try {
-            Class<?> clazz = Class.forName("com.song.sunset.utils.ScreenUtils");
-            Constructor<?> constructor = clazz.getConstructor();
-            Object instance = constructor.newInstance();
-            Method dp2px = clazz.getMethod("dp2Px", Context.class, float.class);
-            dp2px.setAccessible(true);
-            float px = (float) dp2px.invoke(instance, this, 2f);
-            Log.e(TAG, "反射：" + px);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
     }
 }

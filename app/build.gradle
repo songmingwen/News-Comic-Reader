@@ -199,6 +199,8 @@ dependencies {
     api rootProject.ext.dependencies["arouter"]
     annotationProcessor rootProject.ext.dependencies["arouter_compiler"]
 
+//    api 'com.facebook.soloader:soloader:0.5.1'
+
     debugImplementation rootProject.ext.dependencies["leakcanary_debug"]
     releaseImplementation rootProject.ext.dependencies["leakcanary_release"]
 }

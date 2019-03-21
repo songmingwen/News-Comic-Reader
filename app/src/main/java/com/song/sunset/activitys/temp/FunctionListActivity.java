@@ -137,16 +137,30 @@ public class FunctionListActivity extends BaseActivity {
         IOrigin iOrigin = (IOrigin) proxy.bind(new OriginImpl());
     }
 
+    /**
+     * Click 点击
+     */
+    public void coordinatorLayout(View view) {
+        ScrollingActivity.start(this);
+    }
+
+    /**
+     * Click 点击
+     */
+    public void binderPool(View view) {
+        useBinderPool();
+    }
+
     private IMusicCallBackListener mIMusicCallBackListener = new MusicCallBackListenerImpl() {
         @Override
         public void success(List<MusicInfo> list) throws RemoteException {
             super.success(list);
-            Log.i(TAG + "MainActivity", list.toString());
+            Log.i(TAG + "MainActivity：", list.toString());
         }
 
         @Override
         public void failure() throws RemoteException {
-            Log.i(TAG + "MainActivity", "get music failure");
+            Log.i(TAG + "MainActivity：", "get music failure");
         }
     };
 

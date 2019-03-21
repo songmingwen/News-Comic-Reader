@@ -78,15 +78,12 @@ public class ComicRankFragment extends BaseFragment {
         rankingViewPager.setAdapter(rankingPagerAdapter);
         rankingViewPager.setOffscreenPageLimit(2);
         rankingViewPager.setCurrentItem(mCurrPos);
-        rankingViewPager.setPageTransformer(false, new ViewPager.PageTransformer() {
-            @Override
-            public void transformPage(View page, float position) {
-                final float normalizedposition = Math.abs(Math.abs(position) - 1);
-                float realRotate = normalizedposition / 10 + 0.9f;
-                page.setAlpha(realRotate);
-                page.setScaleX(realRotate);
-                page.setScaleY(realRotate);
-            }
+        rankingViewPager.setPageTransformer(false, (page, position) -> {
+            final float normalizedPosition = Math.abs(Math.abs(position) - 1);
+            float realRotate = normalizedPosition / 10 + 0.9f;
+            page.setAlpha(realRotate);
+            page.setScaleX(realRotate);
+            page.setScaleY(realRotate);
         });
         rankingViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
