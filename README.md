@@ -2,7 +2,7 @@
 
 ## 一款可以看新闻、看漫画的app软件
 
-![App icon](https://raw.githubusercontent.com/songmingwen/News-Comic-Reader/master/app/src/main/res/mipmap-xxhdpi/logo.png)
+![App icon](https://github.com/songmingwen/News-Comic-Reader/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
 
 1、网络框架使用的是Retrofit2,
   灵活设置网络缓存时间：支持单独设置接口缓存过期时间，未设置缓存过期时间的走默认值过期时间。
