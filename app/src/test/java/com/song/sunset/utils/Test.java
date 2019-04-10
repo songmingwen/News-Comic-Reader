@@ -18,28 +18,5 @@ public class Test {
 
     private void trans(int[] array) {
         // TODO 此处答题
-        for (int i = 0; i<array.length/2; i++ ){
-            if (array[i] % 2 == 0){
-                // 如果为偶数
-                i++;
-                continue;
-            } else {
-                // 如果为奇数
-                for (int j = array.length-1; j>=0; j--){
-                    if (array[j] % 2 != 0){
-                        continue;
-                    } else {
-                        swap(array,i, j);
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
-    void swap(int[] array, int i, int j){
-        int temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
     }
 }

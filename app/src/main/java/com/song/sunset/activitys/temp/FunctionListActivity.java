@@ -151,6 +151,13 @@ public class FunctionListActivity extends BaseActivity {
         useBinderPool();
     }
 
+    /**
+     * Click 点击
+     */
+    public void neural(View view) {
+        NeuralNetWorks.Companion.start(this);
+    }
+
     private IMusicCallBackListener mIMusicCallBackListener = new MusicCallBackListenerImpl() {
         @Override
         public void success(List<MusicInfo> list) throws RemoteException {

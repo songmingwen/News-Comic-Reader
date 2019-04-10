@@ -115,9 +115,9 @@ public class PhoenixNewsActivity extends BaseActivity {
 
     protected void initWebView(WebView webView) {
         initSettings(webView.getSettings());
-        webView.setScrollbarFadingEnabled(false);
-        webView.setHorizontalScrollBarEnabled(false);
-        webView.setVerticalScrollBarEnabled(false);
+        webView.setScrollbarFadingEnabled(true);
+        webView.setHorizontalScrollBarEnabled(true);
+        webView.setVerticalScrollBarEnabled(true);
         // android 5.0以上默认不支持Mixed Content
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             webView.getSettings().setMixedContentMode(

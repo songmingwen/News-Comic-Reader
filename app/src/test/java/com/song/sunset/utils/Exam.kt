@@ -17,6 +17,7 @@ class Exam{
 
     private fun trans(array: IntArray) {
         // TODO 此处答题
+
     }
 
 }

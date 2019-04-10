@@ -18,8 +18,6 @@ import com.song.sunset.R;
 import com.song.sunset.utils.rxjava.RxUtil;
 
 import java.io.Serializable;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.Callable;
@@ -194,7 +192,8 @@ public class RxjavaActivity extends AppCompatActivity {
             emitter.tryOnError(new NullPointerException());//错误会中断所有的后续操作
             emitter.onNext("C");
         });
-        Disposable disposable = Observable.concat(intObservable, stringObservable)
+        Observable<Integer> intObservable2 = Observable.just(4, 5, 6);
+        Disposable disposable = Observable.concat(intObservable, stringObservable, intObservable2)
                 .compose(RxUtil.getDefaultScheduler())
                 .subscribe((Consumer<Serializable>) serializable -> {
                     if (serializable instanceof Integer) {
