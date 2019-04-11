@@ -74,10 +74,6 @@ class NeuralWallPaperService : WallpaperService() {
 
         }
 
-        override fun onSurfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
-            super.onSurfaceChanged(holder, format, width, height)
-        }
-
         override fun onVisibilityChanged(visible: Boolean) {
             super.onVisibilityChanged(visible)
             mVisible = visible
@@ -110,14 +106,12 @@ class NeuralWallPaperService : WallpaperService() {
         }
 
         private fun drawFrame() {
-            mHandler.removeCallbacks(drawTarget)
-
             val holder = surfaceHolder
             val canvas = holder.lockCanvas()
             if (canvas != null) {
                 canvas.drawColor(Color.BLACK)
                 if (mDots == null || mDots!!.isEmpty()) {
-                    mHandler.postDelayed(drawTarget, 16.6.toLong())
+                    mHandler.post(drawTarget)
                 }
 
                 drawLines(canvas)
@@ -129,7 +123,7 @@ class NeuralWallPaperService : WallpaperService() {
 
             if (mVisible) {
                 next()
-                mHandler.postDelayed(drawTarget, 16.6.toLong())
+                mHandler.post(drawTarget)
             }
         }
 
