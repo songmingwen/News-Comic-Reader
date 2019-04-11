@@ -1,16 +1,20 @@
 package com.song.sunset.widget.neural
 
-import android.content.Intent
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import android.os.Bundle
 import android.os.Handler
 import android.service.wallpaper.WallpaperService
-import android.view.MotionEvent
+import android.text.TextUtils
 import android.view.SurfaceHolder
 
 import com.song.sunset.R
+import com.song.sunset.utils.JsonUtil
+import com.song.sunset.utils.RxBus
+import com.song.sunset.utils.SPUtils
+import com.song.sunset.utils.SPUtils.SP_NEURAL_NET_WORKS
+import com.song.sunset.utils.SPUtils.SP_NEURAL_NET_WORKS_PREVIEW
+import com.song.sunset.utils.rxjava.RxUtil
 
 import java.util.ArrayList
 
@@ -19,62 +23,47 @@ import java.util.ArrayList
  * @description
  * @since 2019/4/4
  */
-class WallPaperService : WallpaperService() {
+class NeuralWallPaperService : WallpaperService() {
 
-    companion object {
+    private var mParams: NeuralParams? = null
 
-        const val NEURAL_PARAMS = "com_song_sunset_neural_params"
-    }
-
-    private var mParams: NeuralParams? = NeuralParams(128, 128, 4, 0F)
+    private var neuralNetWorksModel: NeuralNetWorksModel? = null
 
     override fun onCreateEngine(): WallpaperService.Engine {
-//        mParams = intent?.getBundleExtra(NEURAL_PARAMS) as NeuralParams?
-
-        return WallPaperEngine()
+//        return GLWallPagerEngine(this)
+        return NeuralWallPaperEngine()
     }
 
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        return super.onStartCommand(intent, flags, startId)
-    }
+    internal inner class NeuralWallPaperEngine : WallpaperService.Engine() {
 
-    internal inner class WallPaperEngine : WallpaperService.Engine() {
         private var mVisible: Boolean = false
-
-        private val DEFAULT_DOT_COLOR = resources.getColor(R.color.Grey_500)
-
-        private val DEFAULT_LINE_COLOR = resources.getColor(R.color.Grey_500)
 
         private var mDotPaint: Paint? = null
 
         private var mLinePaint: Paint? = null
 
-        /**
-         * 控件宽度
-         */
         private var mWidth: Int = 0
 
-        /**
-         * 控件高度
-         */
         private var mHeight: Int = 0
 
         private var mDots: ArrayList<Dot>? = null
 
-        var mHandler = Handler()
+        private var mHandler = Handler()
 
         private val drawTarget = Runnable { this.drawFrame() }
 
         override fun onCreate(surfaceHolder: SurfaceHolder) {
             super.onCreate(surfaceHolder)
 
+            neuralNetWorksModel = NeuralNetWorksModel()
+
             mDotPaint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.DITHER_FLAG)
             mLinePaint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.DITHER_FLAG)
-            mDotPaint!!.color = DEFAULT_DOT_COLOR
-            mLinePaint!!.color = DEFAULT_LINE_COLOR
+            mDotPaint!!.color = resources.getColor(R.color.white)
+            mLinePaint!!.color = resources.getColor(R.color.white)
 
             //  设置壁纸的触碰事件为true
-            setTouchEventsEnabled(true)
+            setTouchEventsEnabled(false)
         }
 
         override fun onSurfaceCreated(holder: SurfaceHolder) {
@@ -82,35 +71,42 @@ class WallPaperService : WallpaperService() {
             val rect = holder.surfaceFrame
             mWidth = rect.right
             mHeight = rect.bottom
-            mDots = NeuralNetWorksModel.getInstance().getDotList(mParams!!.elementAmount, mWidth.toFloat(), mHeight.toFloat(), mParams!!.speed.toFloat(), mParams!!.radius)
 
-            drawFrame()
         }
 
         override fun onSurfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
             super.onSurfaceChanged(holder, format, width, height)
-            drawFrame()
         }
 
         override fun onVisibilityChanged(visible: Boolean) {
             super.onVisibilityChanged(visible)
             mVisible = visible
             if (visible) {
+                initData()
                 mHandler.post(drawTarget)
             } else {
-                //  如果界面不可见，删除回调
                 mHandler.removeCallbacks(drawTarget)
             }
         }
 
         override fun onDestroy() {
             super.onDestroy()
-            //  删除回调
-            mHandler.removeCallbacks(drawTarget)
+            mHandler.removeCallbacksAndMessages(null)
         }
 
-        override fun onTouchEvent(event: MotionEvent) {
-            super.onTouchEvent(event)
+        private fun initData() {
+            var string = SPUtils.getStringByName(this@NeuralWallPaperService, SP_NEURAL_NET_WORKS_PREVIEW, "")
+            if (TextUtils.isEmpty(string)) {
+                string = SPUtils.getStringByName(this@NeuralWallPaperService, SP_NEURAL_NET_WORKS, "")
+            }
+
+            mParams = JsonUtil.gsonToBean(
+                    string,
+                    NeuralParams::class.java)
+            if (mParams != null) {
+                mDots = neuralNetWorksModel!!.getDotList(mParams!!.elementAmount,
+                        mWidth.toFloat(), mHeight.toFloat(), mParams!!.speed.toFloat(), mParams!!.radius)
+            }
         }
 
         private fun drawFrame() {
@@ -121,7 +117,7 @@ class WallPaperService : WallpaperService() {
             if (canvas != null) {
                 canvas.drawColor(Color.BLACK)
                 if (mDots == null || mDots!!.isEmpty()) {
-                    return
+                    mHandler.postDelayed(drawTarget, 16.6.toLong())
                 }
 
                 drawLines(canvas)
@@ -138,13 +134,19 @@ class WallPaperService : WallpaperService() {
         }
 
         private fun drawLines(canvas: Canvas) {
-            for (line in NeuralNetWorksModel.getInstance().linesList) {
+            if (mDots == null) {
+                return
+            }
+            for (line in neuralNetWorksModel!!.linesList) {
                 mLinePaint!!.alpha = line.alpha
                 canvas.drawLine(line.startX, line.startY, line.stopX, line.stopY, mLinePaint!!)
             }
         }
 
         private fun drawDots(canvas: Canvas) {
+            if (mDots == null) {
+                return
+            }
             for (dot in mDots!!) {
                 mDotPaint!!.alpha = dot.alpha
                 canvas.drawCircle(dot.x, dot.y, dot.radius, mDotPaint!!)
@@ -152,7 +154,10 @@ class WallPaperService : WallpaperService() {
         }
 
         private operator fun next() {
-            NeuralNetWorksModel.getInstance().next(mParams!!.connectionThreshold.toFloat())
+            if (mDots == null) {
+                return
+            }
+            neuralNetWorksModel!!.next(mParams!!.connectionThreshold.toFloat())
         }
     }
 

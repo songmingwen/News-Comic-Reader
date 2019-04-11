@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black"
-        app:neural_connection_threshold="256"
+        app:neural_connection_threshold="128"
         app:neural_dot_color="@color/white"
         app:neural_dot_radius="2"
         app:neural_element_amount="64"
@@ -50,7 +50,7 @@
         android:id="@+id/ll_setting_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_transparent_88"
+        android:background="@color/color_transparent_bb"
         android:clipChildren="false"
         android:clipToPadding="false"
         android:orientation="vertical"
@@ -112,7 +112,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            tools:text="连线阀值：256" />
+            tools:text="连线阀值：128" />
 
         <SeekBar
             android:id="@+id/sb_connection_threshold"
@@ -157,7 +157,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:background="@drawable/shape_interest_selection_blue_bg"
-            android:onClick="preview"
+            android:onClick="confirm"
             android:padding="10dp"
             android:text="预览"
             android:textColor="@color/white" />

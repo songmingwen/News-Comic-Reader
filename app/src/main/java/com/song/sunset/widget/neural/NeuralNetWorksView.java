@@ -78,6 +78,7 @@ public class NeuralNetWorksView extends View {
     private int mHeight;
 
     private ArrayList<Dot> mDots;
+    private NeuralNetWorksModel mNeuralNetWorksModel;
 
     public NeuralNetWorksView(Context context) {
         this(context, null);
@@ -123,7 +124,14 @@ public class NeuralNetWorksView extends View {
 
     private void setDots() {
         mDots.clear();
-        mDots = NeuralNetWorksModel.getInstance().getDotList(mElementAmount, mWidth, mHeight, mSpeed, mRadius);
+        mDots = getInstance().getDotList(mElementAmount, mWidth, mHeight, mSpeed, mRadius);
+    }
+
+    private NeuralNetWorksModel getInstance() {
+        if (mNeuralNetWorksModel == null) {
+            mNeuralNetWorksModel = new NeuralNetWorksModel();
+        }
+        return mNeuralNetWorksModel;
     }
 
     @Override
@@ -144,11 +152,11 @@ public class NeuralNetWorksView extends View {
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        NeuralNetWorksModel.getInstance().clear();
+        getInstance().clear();
     }
 
     private void drawLines(Canvas canvas) {
-        for (Line line : NeuralNetWorksModel.getInstance().getLinesList()) {
+        for (Line line : getInstance().getLinesList()) {
             mLinePaint.setAlpha(line.getAlpha());
             canvas.drawLine(line.getStartX() + getPaddingLeft(), line.getStartY() + getPaddingTop(),
                     line.getStopX() + getPaddingLeft(), line.getStopY() + getPaddingTop(), mLinePaint);
@@ -163,7 +171,7 @@ public class NeuralNetWorksView extends View {
     }
 
     private void next() {
-        NeuralNetWorksModel.getInstance().next(mConnectionThreshold);
+        getInstance().next(mConnectionThreshold);
     }
 
     public void setConnectionThreshold(int connectionThreshold) {

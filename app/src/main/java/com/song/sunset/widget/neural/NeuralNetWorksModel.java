@@ -13,13 +13,7 @@ class NeuralNetWorksModel {
 
     private ArrayList<Line> mLines = new ArrayList<>();
 
-    private static final NeuralNetWorksModel ourInstance = new NeuralNetWorksModel();
-
-    static NeuralNetWorksModel getInstance() {
-        return ourInstance;
-    }
-
-    private NeuralNetWorksModel() {
+    public NeuralNetWorksModel() {
     }
 
     ArrayList<Dot> getDotList(int amount, float width, float height, float dD, float radius) {

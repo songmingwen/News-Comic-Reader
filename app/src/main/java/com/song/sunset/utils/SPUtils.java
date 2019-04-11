@@ -20,6 +20,8 @@ public class SPUtils {
     public static final String APP_NIGHT_MODE = "night_mode";
     public static final String APP_FIRST_INSTALL = "app_first_install";
     public static final String SP_APP_PLAY_POSITION = "normal_video_player_play_position";
+    public static final String SP_NEURAL_NET_WORKS = "neural_net_works_preview";
+    public static final String SP_NEURAL_NET_WORKS_PREVIEW = "neural_net_works";
     public static final int NO_SP_MODE = -1;
 
     public static String getStringByName(Context context, String key,

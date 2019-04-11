@@ -1,8 +1,12 @@
 apply plugin: 'com.android.application'
+
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
 //apply from: 'tinker-support.gradle'//微信热修复
 //apply plugin: 'com.jakewharton.butterknife'
+
 apply plugin: 'walle'
 
 /**Robust  美团热修复技术*/
@@ -10,11 +14,12 @@ apply plugin: 'walle'
 //apply plugin: 'robust'//生成apk时打开
 /**Robust  美团热修复技术*/
 
-//apply plugin: 'kotlin-kapt'
+apply from: file('../dependencies.gradle')
 
 android {
     compileSdkVersion rootProject.ext.android.ANDROID_COMPILE_SDK_VERSION
-//    buildToolsVersion rootProject.ext.android.ANDROID_BUILD_TOOLS_VERSION
+    buildToolsVersion rootProject.ext.android.ANDROID_BUILD_TOOLS_VERSION
+
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
@@ -78,17 +83,7 @@ android {
     }
 
     sourceSets {
-//        main.java.srcDirs += 'src/main/kotlin'
-
-        // Move the tests to tests/java, tests/res, etc...
         androidTest.setRoot('tests')
-
-        // Move the build types to build-types/<type>
-        // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
-        // This moves them out of them default location under src/<type>/... which would
-        // conflict with src/ being used by the main source set.
-        // Adding new build types or product flavors should be accompanied
-        // by a similar customization.
         debug.setRoot('build-types/debug')
         release.setRoot('build-types/release')
 
@@ -127,80 +122,8 @@ repositories {
     mavenCentral()
 }
 
-//kapt {
-//    arguments {
-//        arg("AROUTER_MODULE_NAME", project.getName())
-//    }
-//}
-
-dependencies {
-    api fileTree(include: ['*.jar'], dir: 'libs')
-    testImplementation 'junit:junit:4.12'
-    api 'androidx.appcompat:appcompat:1.1.0-alpha01'
-    api 'com.google.android.material:material:1.1.0-alpha02'
-    api 'androidx.legacy:legacy-support-v4:1.0.0'
-    api 'androidx.cardview:cardview:1.0.0'
-    api 'androidx.palette:palette:1.0.0'
-    api 'androidx.constraintlayout:constraintlayout:2.0.0-alpha3'
-    api 'com.google.android:flexbox:1.1.0'
-    api rootProject.ext.dependencies["multidex"]
-    api rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
-    //    api rootProject.ext.dependencies["glide"]
-    //    api rootProject.ext.dependencies["glide-transformations"]
-    api rootProject.ext.dependencies["glide-4.0-transformations"]
-    api rootProject.ext.dependencies["gpuimage_library"]
-    api rootProject.ext.dependencies["fresco"]
-    api rootProject.ext.dependencies["fresco_processors"]
-    api rootProject.ext.dependencies["imagepipeline-okhttp3"]
-    api rootProject.ext.dependencies["volley"]
-    api rootProject.ext.dependencies["swipebacklayout"]
-    api rootProject.ext.dependencies["subsampling_scale_image_view"]
-    api rootProject.ext.dependencies["ijkplayer_java"]
-    api rootProject.ext.dependencies["ijkplayer_armv7a"]
-    api rootProject.ext.dependencies["ijkplayer_arm64"]
-    //    api rootProject.ext.dependencies["ijkplayer_x86_64"]
-    api rootProject.ext.dependencies["okhttp3"]
-    api rootProject.ext.dependencies["retrofit2"]
-    api rootProject.ext.dependencies["retrofit2_converter_gson"]
-    api rootProject.ext.dependencies["retrofit2_adapter_rxjava"]
-    api rootProject.ext.dependencies["okhttp3_logging_interceptor"]
-    //    api rootProject.ext.dependencies["rxandroid_1_2"]
-    api rootProject.ext.dependencies["rxandroid_2_1_10"]
-    api rootProject.ext.dependencies["rxjava"]
-    //    api rootProject.ext.dependencies["rxpermissions"]
-    api rootProject.ext.dependencies["fragmentation"]
-    api rootProject.ext.dependencies["fragmentation_swipeback"]
-//    api rootProject.ext.dependencies["butterknife"]
-//    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
-    api rootProject.ext.dependencies["FlycoTabLayout_Lib"]
-    api rootProject.ext.dependencies["nineoldandroids"]
-    api rootProject.ext.dependencies["greendao_generator"]
-    api rootProject.ext.dependencies["greendao"]
-    api rootProject.ext.dependencies["rapid_decoder_library"]
-    api rootProject.ext.dependencies["rapid_jpeg_decoder"]
-    api rootProject.ext.dependencies["rapid_png_decoder"]
-    api rootProject.ext.dependencies["ultra_ptr"]
-    api rootProject.ext.dependencies["switchbutton"]
-    api rootProject.ext.dependencies["DanmakuFlameMaster"]
-    api rootProject.ext.dependencies["ndkbitmap-armv7a"]
-    api rootProject.ext.dependencies["ndkbitmap-armv5"]
-    api rootProject.ext.dependencies["ndkbitmap-x86"]
-    api rootProject.ext.dependencies["robust"]
-    api rootProject.ext.dependencies["walle"]
-    //    api rootProject.ext.dependencies["kotlin_anko"]
-    //    api rootProject.ext.dependencies["kotlin_stdlib"]
-    api rootProject.ext.dependencies["kotlinx_core"]
-    //    api rootProject.ext.dependencies["kotlinx_android"]
-//    api rootProject.ext.dependencies["viewmode"]
-//    api rootProject.ext.dependencies["livedata"]
-    api rootProject.ext.dependencies["lifecycle_extensions"]
-    annotationProcessor rootProject.ext.dependencies["lifecycle_compiler"]
-
-    api rootProject.ext.dependencies["arouter"]
-    annotationProcessor rootProject.ext.dependencies["arouter_compiler"]
-
-//    api 'com.facebook.soloader:soloader:0.5.1'
-
-    debugImplementation rootProject.ext.dependencies["leakcanary_debug"]
-    releaseImplementation rootProject.ext.dependencies["leakcanary_release"]
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
 }
