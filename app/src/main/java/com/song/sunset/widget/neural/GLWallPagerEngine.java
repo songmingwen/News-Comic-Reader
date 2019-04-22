@@ -7,7 +7,7 @@ import android.opengl.GLSurfaceView;
 import android.service.wallpaper.WallpaperService;
 import android.view.SurfaceHolder;
 
-import com.song.sunset.widget.opengl.render.OpenGLRenderFirst;
+import com.song.sunset.widget.opengl.render.GLRenderFirst;
 
 /**
  * @author songmingwen
@@ -66,7 +66,7 @@ class GLWallPagerEngine extends WallpaperService.Engine {
             boolean supportEs2 = configurationInfo.reqGlEsVersion >= 0x20000;
             if (supportEs2) {
                 setEGLContextClientVersion(2);
-                setRenderer(new OpenGLRenderFirst(getContext()));
+                setRenderer(new GLRenderFirst(getContext()));
                 // 只有当绘制数据变化时，才绘制视图。
                 setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
             }

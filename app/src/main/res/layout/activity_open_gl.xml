@@ -25,6 +25,11 @@
                 android:onClick="render3D"
                 android:text="render3D" />
 
+            <Button
+                style="@style/style_button_main_activity"
+                android:onClick="renderTexture"
+                android:text="renderTexture" />
+
             <!--复制上面的 button 添加点击事件，从而跳转到自己的功能页面-->
 
         </LinearLayout>

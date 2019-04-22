@@ -1,4 +1,4 @@
-package com.song.sunset.activitys.opengl
+package com.song.sunset.activitys.opengl.render
 
 import android.content.Context
 import android.content.Intent

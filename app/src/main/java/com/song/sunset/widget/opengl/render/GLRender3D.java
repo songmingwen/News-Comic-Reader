@@ -4,8 +4,8 @@ import android.content.Context;
 import android.opengl.GLSurfaceView;
 
 import com.song.sunset.R;
-import com.song.sunset.utils.ShaderHelper;
-import com.song.sunset.utils.ShaderReader;
+import com.song.sunset.widget.opengl.utils.ShaderHelper;
+import com.song.sunset.widget.opengl.utils.TextResourceReader;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -14,15 +14,33 @@ import java.nio.FloatBuffer;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-import static android.opengl.GLES20.*;
-import static android.opengl.Matrix.*;
+import static android.opengl.GLES20.GL_COLOR_BUFFER_BIT;
+import static android.opengl.GLES20.GL_FLOAT;
+import static android.opengl.GLES20.GL_LINES;
+import static android.opengl.GLES20.GL_POINTS;
+import static android.opengl.GLES20.GL_TRIANGLE_FAN;
+import static android.opengl.GLES20.glClear;
+import static android.opengl.GLES20.glClearColor;
+import static android.opengl.GLES20.glDrawArrays;
+import static android.opengl.GLES20.glEnableVertexAttribArray;
+import static android.opengl.GLES20.glGetAttribLocation;
+import static android.opengl.GLES20.glGetUniformLocation;
+import static android.opengl.GLES20.glUniformMatrix4fv;
+import static android.opengl.GLES20.glUseProgram;
+import static android.opengl.GLES20.glVertexAttribPointer;
+import static android.opengl.GLES20.glViewport;
+import static android.opengl.Matrix.multiplyMM;
+import static android.opengl.Matrix.perspectiveM;
+import static android.opengl.Matrix.rotateM;
+import static android.opengl.Matrix.setIdentityM;
+import static android.opengl.Matrix.translateM;
 
 /**
  * @author songmingwen
  * @description
- * @since 2019/4/15
+ * @since 2019/4/22
  */
-public class OpenGLRenderFirst implements GLSurfaceView.Renderer {
+public class GLRender3D implements GLSurfaceView.Renderer {
 
     private FloatBuffer verticalsBuffer;
 
@@ -62,7 +80,7 @@ public class OpenGLRenderFirst implements GLSurfaceView.Renderer {
             0.0f, 0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f,
     };
 
-    public OpenGLRenderFirst(Context context) {
+    public GLRender3D(Context context) {
         mContext = context;
     }
 
@@ -74,9 +92,9 @@ public class OpenGLRenderFirst implements GLSurfaceView.Renderer {
                 .asFloatBuffer()
                 .put(circleArray);
 
-        int vertexShader = ShaderHelper.compileVertexShader(ShaderReader.readTextFileFromResource(mContext, R.raw.vertex_shader_first));
+        int vertexShader = ShaderHelper.compileVertexShader(TextResourceReader.readTextFileFromResource(mContext, R.raw.vertex_shader_3d));
 
-        int fragmentShader = ShaderHelper.compileFragmentShader(ShaderReader.readTextFileFromResource(mContext, R.raw.fragment_shader_first));
+        int fragmentShader = ShaderHelper.compileFragmentShader(TextResourceReader.readTextFileFromResource(mContext, R.raw.fragment_shader_3d));
 
         mProgramId = ShaderHelper.linkProgram(vertexShader, fragmentShader);
 

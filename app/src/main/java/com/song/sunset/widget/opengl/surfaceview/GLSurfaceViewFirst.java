@@ -3,7 +3,7 @@ package com.song.sunset.widget.opengl.surfaceview;
 import android.content.Context;
 import android.util.AttributeSet;
 
-import com.song.sunset.widget.opengl.render.OpenGLRenderFirst;
+import com.song.sunset.widget.opengl.render.GLRenderFirst;
 
 /**
  * @author songmingwen
@@ -21,6 +21,6 @@ public class GLSurfaceViewFirst extends BaseGLSurfaceView {
 
     @Override
     protected Renderer getRender() {
-        return new OpenGLRenderFirst(getContext());
+        return new GLRenderFirst(getContext());
     }
 }

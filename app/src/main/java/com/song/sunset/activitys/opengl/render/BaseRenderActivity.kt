@@ -1,4 +1,4 @@
-package com.song.sunset.activitys.opengl
+package com.song.sunset.activitys.opengl.render
 
 import android.os.Bundle
 import android.view.View

@@ -3,7 +3,7 @@ package com.song.sunset.widget.opengl.surfaceview;
 import android.content.Context;
 import android.util.AttributeSet;
 
-import com.song.sunset.widget.opengl.render.OpenGLRender3D;
+import com.song.sunset.widget.opengl.render.GLRender3D;
 
 /**
  * @author songmingwen
@@ -21,6 +21,6 @@ public class GLSurfaceView3D extends BaseGLSurfaceView {
 
     @Override
     protected Renderer getRender() {
-        return new OpenGLRender3D(getContext());
+        return new GLRender3D(getContext());
     }
 }

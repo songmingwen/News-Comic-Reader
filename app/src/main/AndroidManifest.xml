@@ -39,9 +39,10 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".activitys.opengl.RenderFirstActivity"></activity>
-        <activity android:name=".activitys.opengl.BaseRenderActivity" />
-        <activity android:name=".activitys.opengl.Render3DActivity" />
+        <activity android:name=".activitys.opengl.render.RenderTextureActivity"></activity>
+        <activity android:name=".activitys.opengl.render.RenderFirstActivity" />
+        <activity android:name=".activitys.opengl.render.BaseRenderActivity" />
+        <activity android:name=".activitys.opengl.render.Render3DActivity" />
         <activity android:name=".activitys.opengl.OpenGLActivity" />
         <activity android:name=".activitys.temp.BilliardsActivity" />
 

@@ -3,7 +3,7 @@ package com.song.sunset.widget.opengl.surfaceview;
 import android.content.Context;
 import android.util.AttributeSet;
 
-import com.song.sunset.widget.opengl.render.OpenGlRenderTextured;
+import com.song.sunset.widget.opengl.render.GLRenderTextured;
 
 
 /**
@@ -22,6 +22,6 @@ public class GLSurfaceViewTextured extends BaseGLSurfaceView {
 
     @Override
     protected Renderer getRender() {
-        return new OpenGlRenderTextured(getContext());
+        return new GLRenderTextured(getContext());
     }
 }
