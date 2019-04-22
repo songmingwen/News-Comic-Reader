@@ -40,8 +40,7 @@ public class TextureShaderProgram extends ShaderProgram {
 
         // Retrieve attribute locations for the shader program.
         aPositionLocation = glGetAttribLocation(program, A_POSITION);
-        aTextureCoordinatesLocation =
-                glGetAttribLocation(program, A_TEXTURE_COORDINATES);
+        aTextureCoordinatesLocation = glGetAttribLocation(program, A_TEXTURE_COORDINATES);
     }
 
     public void setUniforms(float[] matrix, int textureId) {

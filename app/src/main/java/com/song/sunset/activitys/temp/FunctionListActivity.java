@@ -134,8 +134,6 @@ public class FunctionListActivity extends BaseActivity {
      */
     public void showDynamicProxy(View view) {
         DynamicProxyActivity.Companion.start(this);
-        JdkDynamicProxy proxy = new JdkDynamicProxy();
-        IOrigin iOrigin = (IOrigin) proxy.bind(new OriginImpl());
     }
 
     /**

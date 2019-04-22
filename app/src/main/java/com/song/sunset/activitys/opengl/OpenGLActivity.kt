@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import com.song.sunset.R
 import com.song.sunset.activitys.base.BaseActivity
+import com.song.sunset.activitys.opengl.render.BaseRenderActivity
 import com.song.sunset.activitys.opengl.render.Render3DActivity
 import com.song.sunset.activitys.opengl.render.RenderFirstActivity
 import com.song.sunset.activitys.opengl.render.RenderTextureActivity
@@ -24,14 +25,14 @@ class OpenGLActivity : BaseActivity() {
     }
 
     fun first(view: View) {
-        RenderFirstActivity.start(this)
+        BaseRenderActivity.start(this, RenderFirstActivity::class.java)
     }
 
     fun render3D(view: View) {
-        Render3DActivity.start(this)
+        BaseRenderActivity.start(this, Render3DActivity::class.java)
     }
 
     fun renderTexture(view: View) {
-        RenderTextureActivity.start(this)
+        BaseRenderActivity.start(this, RenderTextureActivity::class.java)
     }
 }
