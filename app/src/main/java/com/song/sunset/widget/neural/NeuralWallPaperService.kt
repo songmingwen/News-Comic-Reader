@@ -10,11 +10,9 @@ import android.view.SurfaceHolder
 
 import com.song.sunset.R
 import com.song.sunset.utils.JsonUtil
-import com.song.sunset.utils.RxBus
 import com.song.sunset.utils.SPUtils
 import com.song.sunset.utils.SPUtils.SP_NEURAL_NET_WORKS
 import com.song.sunset.utils.SPUtils.SP_NEURAL_NET_WORKS_PREVIEW
-import com.song.sunset.utils.rxjava.RxUtil
 
 import java.util.ArrayList
 
@@ -100,7 +98,7 @@ class NeuralWallPaperService : WallpaperService() {
                     string,
                     NeuralParams::class.java)
             if (mParams != null) {
-                mDots = neuralNetWorksModel!!.getDotList(mParams!!.elementAmount,
+                mDots = neuralNetWorksModel!!.createDotsList(mParams!!.elementAmount,
                         mWidth.toFloat(), mHeight.toFloat(), mParams!!.speed.toFloat(), mParams!!.radius)
             }
         }

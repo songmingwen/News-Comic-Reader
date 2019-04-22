@@ -16,10 +16,10 @@ class NeuralNetWorksModel {
     public NeuralNetWorksModel() {
     }
 
-    ArrayList<Dot> getDotList(int amount, float width, float height, float dD, float radius) {
+    ArrayList<Dot> createDotsList(int amount, float width, float height, float dD, float radius) {
         mDots.clear();
         for (int i = 0; i < amount; i++) {
-            mDots.add(obtain(width, height, dD, radius));
+            mDots.add(new Dot().obtain(width, height, dD, radius));
         }
         return mDots;
     }
@@ -28,8 +28,12 @@ class NeuralNetWorksModel {
         return mLines;
     }
 
-    private Dot obtain(float width, float height, float dD, float radius) {
-        return new Dot().obtain(width, height, dD, radius);
+    ArrayList<Dot> getDotsList() {
+        return mDots;
+    }
+
+    void addDotToList(float width, float height, float x, float y, float dX, float dY, float radius) {
+        mDots.add(new Dot().obtain(width, height, x, y, dX, dY, radius));
     }
 
     void next(float connection_threshold) {

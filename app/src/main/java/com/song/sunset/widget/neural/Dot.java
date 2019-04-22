@@ -100,6 +100,17 @@ class Dot {
 
     }
 
+    Dot obtain(float width, float height, float x, float y, float dX, float dY, float radius) {
+        this.radius = radius;
+        this.width = width;
+        this.height = height;
+        this.x = x;
+        this.y = y;
+        this.dX = dX;
+        this.dY = dY;
+        return this;
+    }
+
     private boolean isPositive() {
         return Math.random() > 0.5;
     }

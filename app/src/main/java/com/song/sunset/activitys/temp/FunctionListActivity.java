@@ -20,6 +20,7 @@ import com.song.sunset.IMusicCallBackListener;
 import com.song.sunset.IMusicGetter;
 import com.song.sunset.R;
 import com.song.sunset.activitys.base.BaseActivity;
+import com.song.sunset.activitys.opengl.OpenGLActivity;
 import com.song.sunset.beans.MusicInfo;
 import com.song.kotlin.interfaces.IOrigin;
 import com.song.sunset.services.impl.BinderPoolImpl;
@@ -153,9 +154,31 @@ public class FunctionListActivity extends BaseActivity {
 
     /**
      * Click 点击
+     * @param view
+     */
+    public void openGL(View view) {
+        OpenGLActivity.Companion.start(this);
+    }
+
+    /**
+     * Click 点击
      */
     public void neural(View view) {
-        NeuralNetWorks.Companion.start(this);
+        NeuralNetWorksActivity.Companion.start(this);
+    }
+
+    /**
+     * Click 点击
+     */
+    public void billiards(View view) {
+        BilliardsActivity.Companion.start(this);
+    }
+
+    /**
+     * Click 点击
+     */
+    public void test(View view) {
+        TempTestActivity.start(this);
     }
 
     private IMusicCallBackListener mIMusicCallBackListener = new MusicCallBackListenerImpl() {

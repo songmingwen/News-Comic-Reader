@@ -6,15 +6,19 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Process;
+
 import androidx.annotation.IntDef;
 import androidx.annotation.StringDef;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ImageSpan;
@@ -61,7 +65,7 @@ public class TempTestActivity extends BaseActivity {
 
     private FloatingActionButton button;
     private TextSwitchView textSwitchView;
-    private ImageView dot, dotBack, ic_svg, bottom;
+    private ImageView dot, dotBack, ic_svg;
     private AnimatorSet mAnimatorSet;
     private boolean first;
     private TimePickerView pvTime;
@@ -108,6 +112,11 @@ public class TempTestActivity extends BaseActivity {
         Toast.makeText(this, string, Toast.LENGTH_SHORT).show();
     }
 
+    public static void start(Context context) {
+        Intent starter = new Intent(context, TempTestActivity.class);
+        context.startActivity(starter);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,7 +124,6 @@ public class TempTestActivity extends BaseActivity {
         button = (FloatingActionButton) findViewById(R.id.button);
         dot = (ImageView) findViewById(R.id.image_dot);
         dotBack = (ImageView) findViewById(R.id.image_dot_back);
-        bottom = (ImageView) findViewById(R.id.image_bottom);
 //        ic_svg = (ImageView) findViewById(R.id.ic_svg);
         textSwitchView = (TextSwitchView) findViewById(R.id.textswitch);
         initAnimator();

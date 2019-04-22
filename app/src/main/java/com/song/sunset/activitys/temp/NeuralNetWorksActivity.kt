@@ -9,11 +9,9 @@ import com.song.sunset.R
 import com.song.sunset.utils.ScreenUtils
 import android.content.ComponentName
 import android.os.Build
-import android.os.Handler
 import android.view.View
 import android.widget.SeekBar
 import com.song.sunset.utils.JsonUtil
-import com.song.sunset.utils.RxBus
 import com.song.sunset.utils.SPUtils
 import com.song.sunset.utils.SPUtils.SP_NEURAL_NET_WORKS
 import com.song.sunset.utils.SPUtils.SP_NEURAL_NET_WORKS_PREVIEW
@@ -22,11 +20,11 @@ import com.song.sunset.widget.neural.NeuralWallPaperService
 import kotlinx.android.synthetic.main.activity_neural_net_works.*
 
 
-class NeuralNetWorks : Activity(), SeekBar.OnSeekBarChangeListener {
+class NeuralNetWorksActivity : Activity(), SeekBar.OnSeekBarChangeListener {
 
     companion object {
         fun start(context: Context) {
-            context.startActivity(Intent(context, NeuralNetWorks::class.java))
+            context.startActivity(Intent(context, NeuralNetWorksActivity::class.java))
         }
     }
 

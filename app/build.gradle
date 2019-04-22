@@ -127,3 +127,8 @@ kapt {
         arg("AROUTER_MODULE_NAME", project.getName())
     }
 }
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.0.0-beta01'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
+}

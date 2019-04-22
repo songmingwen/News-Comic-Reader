@@ -3,7 +3,6 @@ package com.song.sunset.widget.neural;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
@@ -77,7 +76,6 @@ public class NeuralNetWorksView extends View {
      */
     private int mHeight;
 
-    private ArrayList<Dot> mDots;
     private NeuralNetWorksModel mNeuralNetWorksModel;
 
     public NeuralNetWorksView(Context context) {
@@ -112,7 +110,6 @@ public class NeuralNetWorksView extends View {
         mDotPaint.setColor(mDotColor);
         mLinePaint.setColor(mLineColor);
 
-        mDots = new ArrayList<>();
     }
 
     @Override
@@ -123,8 +120,8 @@ public class NeuralNetWorksView extends View {
     }
 
     private void setDots() {
-        mDots.clear();
-        mDots = getInstance().getDotList(mElementAmount, mWidth, mHeight, mSpeed, mRadius);
+        getInstance().clear();
+        getInstance().createDotsList(mElementAmount, mWidth, mHeight, mSpeed, mRadius);
     }
 
     private NeuralNetWorksModel getInstance() {
@@ -136,7 +133,7 @@ public class NeuralNetWorksView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        if (mDots == null || mDots.isEmpty()) {
+        if (getInstance().getDotsList() == null || getInstance().getDotsList().isEmpty()) {
             return;
         }
 
@@ -164,7 +161,7 @@ public class NeuralNetWorksView extends View {
     }
 
     private void drawDots(Canvas canvas) {
-        for (Dot dot : mDots) {
+        for (Dot dot : getInstance().getDotsList()) {
             mDotPaint.setAlpha(dot.getAlpha());
             canvas.drawCircle(dot.getX() + getPaddingLeft(), dot.getY() + getPaddingTop(), dot.getRadius(), mDotPaint);
         }

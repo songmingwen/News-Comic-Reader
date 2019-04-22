@@ -15,12 +15,10 @@ import java.util.Map;
  */
 public class JsonUtil {
 
-    private static Gson gson = null;
+    private static Gson gson;
 
     static {
-        if (gson == null) {
-            gson = new GsonBuilder().disableHtmlEscaping().create();
-        }
+        gson = new GsonBuilder().disableHtmlEscaping().create();
     }
 
     /**
