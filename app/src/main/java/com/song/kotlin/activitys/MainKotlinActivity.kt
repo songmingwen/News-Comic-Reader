@@ -1,4 +1,4 @@
-package com.song.kotlin
+package com.song.kotlin.activitys
 
 import android.app.ActivityManager
 import android.app.Notification

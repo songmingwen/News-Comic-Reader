@@ -1,4 +1,4 @@
-package com.song.kotlin
+package com.song.kotlin.activitys
 
 import android.content.Intent
 import android.os.Bundle
