@@ -1,3 +1,5 @@
+apply from: file("../functions.gradle")
+
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
@@ -16,15 +18,27 @@ apply plugin: 'walle'
 
 apply from: file('../dependencies.gradle')
 
+boolean hasDefaultPreinstallHandler = isRunningTask("Dev") || isRunningTask("Alpha")
+
 android {
     compileSdkVersion rootProject.ext.android.ANDROID_COMPILE_SDK_VERSION
     buildToolsVersion rootProject.ext.android.ANDROID_BUILD_TOOLS_VERSION
 
     sourceSets {
+        androidTest.setRoot('tests')
+        debug.setRoot('build-types/debug')
+        release.setRoot('build-types/release')
+
         main {
             jniLibs.srcDirs = ['libs']
+            java {
+                if (!hasDefaultPreinstallHandler) {
+                    java.srcDirs += ['src/market/java']
+                }
+            }
         }
     }
+
     defaultConfig {
         applicationId "com.song.sunset"
         minSdkVersion rootProject.ext.android.ANDROID_BUILD_MIN_SDK_VERSION
@@ -80,17 +94,14 @@ android {
         alpha {
             versionNameSuffix '-alpha'
         }
-    }
-
-    sourceSets {
-        androidTest.setRoot('tests')
-        debug.setRoot('build-types/debug')
-        release.setRoot('build-types/release')
-
-        main {
-            java {
-                exclude '**/DefaultPreinstallHandler.java'
-            }
+        xiaomi {
+            versionNameSuffix '-xiaomi'
+        }
+        vivo {
+            versionNameSuffix '-vivo'
+        }
+        huawei {
+            versionNameSuffix '-huawei'
         }
     }
     compileOptions {

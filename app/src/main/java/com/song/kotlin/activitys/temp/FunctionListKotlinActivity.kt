@@ -16,7 +16,7 @@ import com.song.sunset.services.impl.MusicCallBackListenerImpl
 import com.song.sunset.services.impl.MusicGetterImpl
 import com.song.sunset.services.managers.BinderPool
 import com.song.sunset.utils.preinstall.DefaultPreinstallHandler
-import com.song.kotlin.utils.preinstall.HuaweiPreinstallHandler
+import com.song.sunset.utils.preinstall.HuaweiPreinstallHandler
 import com.song.sunset.utils.preinstall.VivoPreinstallHandler
 import com.song.sunset.utils.preinstall.XiaomiPreinstallHandler
 import com.song.sunset.widget.fireworks.BitmapProvider

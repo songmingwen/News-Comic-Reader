@@ -47,7 +47,7 @@ import com.song.sunset.services.managers.PushManager;
 import com.song.sunset.utils.AppConfig;
 import com.song.sunset.utils.GreenDaoUtil;
 import com.song.sunset.utils.SPUtils;
-import com.song.sunset.utils.preinstall.DefaultPreinstallHandler;
+import com.song.sunset.utils.preinstall.*;
 import com.sunset.greendao.gen.ComicLocalCollectionDao;
 
 import java.util.ArrayList;

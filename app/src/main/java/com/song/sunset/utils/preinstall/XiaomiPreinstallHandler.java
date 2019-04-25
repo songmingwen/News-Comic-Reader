@@ -2,7 +2,7 @@ package com.song.sunset.utils.preinstall;
 
 import android.text.TextUtils;
 
-import com.song.kotlin.utils.preinstall.PreinstallHandler;
+import com.song.sunset.utils.preinstall.PreinstallHandler;
 
 import java.lang.reflect.Method;
 

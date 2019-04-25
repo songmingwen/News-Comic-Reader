@@ -8,7 +8,7 @@ package com.song.sunset.utils.preinstall;
 public class DefaultPreinstallHandler implements PreinstallHandler {
     @Override
     public String getPreinstallInfo() {
-        return "dev";
+        return "market";
     }
 
     @Override

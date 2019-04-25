@@ -1,7 +1,5 @@
 package com.song.sunset.utils.preinstall;
 
-import com.song.kotlin.utils.preinstall.PreinstallHandler;
-
 /**
  * @author songmingwen
  * @description
