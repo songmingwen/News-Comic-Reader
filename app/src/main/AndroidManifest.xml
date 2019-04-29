@@ -39,7 +39,8 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".activitys.opengl.render.RenderTextureActivity"></activity>
+        <activity android:name=".activitys.opengl.render.RenderAirHockeyActivity"></activity>
+        <activity android:name=".activitys.opengl.render.RenderTextureActivity" />
         <activity android:name=".activitys.opengl.render.RenderFirstActivity" />
         <activity android:name=".activitys.opengl.render.BaseRenderActivity" />
         <activity android:name=".activitys.opengl.render.Render3DActivity" />

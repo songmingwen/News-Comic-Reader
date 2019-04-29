@@ -6,10 +6,7 @@ import android.os.Bundle
 import android.view.View
 import com.song.sunset.R
 import com.song.sunset.activitys.base.BaseActivity
-import com.song.sunset.activitys.opengl.render.BaseRenderActivity
-import com.song.sunset.activitys.opengl.render.Render3DActivity
-import com.song.sunset.activitys.opengl.render.RenderFirstActivity
-import com.song.sunset.activitys.opengl.render.RenderTextureActivity
+import com.song.sunset.activitys.opengl.render.*
 
 class OpenGLActivity : BaseActivity() {
 
@@ -34,5 +31,9 @@ class OpenGLActivity : BaseActivity() {
 
     fun renderTexture(view: View) {
         BaseRenderActivity.start(this, RenderTextureActivity::class.java)
+    }
+
+    fun renderAir(view: View) {
+        BaseRenderActivity.start(this, RenderAirHockeyActivity::class.java)
     }
 }

@@ -30,7 +30,7 @@ public abstract class BaseGLSurfaceView extends GLSurfaceView {
             setEGLContextClientVersion(2);
             setRenderer(getRender());
 //             只有当绘制数据变化时，才绘制视图。
-            setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
+//            setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
         }
     }
 
