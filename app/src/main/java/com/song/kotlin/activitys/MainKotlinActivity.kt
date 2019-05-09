@@ -286,7 +286,7 @@ class MainKotlinActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         } else if (id == R.id.nav_news) {
             switchFragmentDelay(PhoenixListFragment::class.java.name, resources.getString(R.string.phoenix_news))
         } else if (id == R.id.nav_collection) {
-            switchFragmentDelay(CollectionFragment::class.java.name, resources.getString(R.string.collection_comic))
+            switchFragmentDelay(CollectionKotlinFragment::class.java.name, resources.getString(R.string.collection_comic))
         }
 
         val drawer = findViewById(R.id.drawer_layout) as DrawerLayout

@@ -1,5 +1,7 @@
 package com.song.sunset.widget.neural;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 /**
@@ -48,6 +50,9 @@ class NeuralNetWorksModel {
             for (int j = i + 1; j < mDots.size(); j++) {
                 Dot dot = mDots.get(i);
                 Dot dot2 = mDots.get(j);
+                if (Math.abs(dot.getX() - dot2.getX()) >= connection_threshold || Math.abs(dot.getY() - dot2.getY()) >= connection_threshold) {
+                    continue;
+                }
                 double length = Math.sqrt(Math.pow(dot.getX() - dot2.getX(), 2) + Math.pow(dot.getY() - dot2.getY(), 2));
                 if (length <= connection_threshold) {
                     Line line = new Line(dot.getX(), dot.getY(), dot2.getX(), dot2.getY(), connection_threshold);

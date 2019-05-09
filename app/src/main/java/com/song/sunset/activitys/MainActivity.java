@@ -164,7 +164,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         toggle.syncState();
         navigationView.setCheckedItem(R.id.nav_news);
         navigationView.setItemIconTintList(null);
-        setDrawerLeftEdgeSize(this, drawer, 0.35f);
+//        setDrawerLeftEdgeSize(this, drawer, 0.35f);
     }
 
     private void setUpListener() {

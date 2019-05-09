@@ -37,7 +37,7 @@ class NeuralNetWorksActivity : Activity(), SeekBar.OnSeekBarChangeListener {
         sb_dot_speed.setOnSeekBarChangeListener(this)
         sb_connection_threshold.setOnSeekBarChangeListener(this)
         sb_dot_radius.setOnSeekBarChangeListener(this)
-
+        preView()
     }
 
     fun addWallPaper(view: View) {

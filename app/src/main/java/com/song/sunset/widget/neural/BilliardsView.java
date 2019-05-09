@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -75,7 +74,6 @@ public class BilliardsView extends View implements View.OnTouchListener {
 
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            Log.e("song_onFling: ", velocityX + " --- " + velocityY);
             mNeuralNetWorksModel.addDotToList(mWidth, mHeight, e2.getX(), e2.getY(), velocityX / 100, velocityY / 100, 2);
             return true;
         }

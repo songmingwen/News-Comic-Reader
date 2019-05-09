@@ -9,8 +9,6 @@ import android.view.View;
 
 import com.song.sunset.R;
 
-import java.util.ArrayList;
-
 import androidx.annotation.Nullable;
 
 /**

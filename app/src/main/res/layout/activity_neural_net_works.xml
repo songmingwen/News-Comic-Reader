@@ -11,12 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black"
-        app:neural_connection_threshold="128"
         app:neural_dot_color="@color/white"
-        app:neural_dot_radius="2"
-        app:neural_element_amount="64"
-        app:neural_line_color="@color/white"
-        app:neural_speed="4" />
+        app:neural_line_color="@color/white" />
 
     <Button
         android:id="@+id/add_wall_paper"
@@ -68,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            tools:text="圆点数量：64个" />
+            tools:text="圆点数量：100个" />
 
         <SeekBar
             android:id="@+id/sb_dot_amount"
@@ -76,12 +72,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:background="@null"
-            android:max="256"
+            android:max="200"
             android:maxHeight="2dp"
             android:minHeight="2dp"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:progress="64"
+            android:progress="100"
             android:progressDrawable="@drawable/seek_progress"
             android:thumb="@drawable/seek_thumb" />
 
@@ -112,7 +108,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            tools:text="连线阀值：128" />
+            tools:text="连线阀值：100" />
 
         <SeekBar
             android:id="@+id/sb_connection_threshold"
@@ -120,12 +116,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:background="@null"
-            android:max="256"
+            android:max="200"
             android:maxHeight="2dp"
             android:minHeight="2dp"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:progress="128"
+            android:progress="100"
             android:progressDrawable="@drawable/seek_progress"
             android:thumb="@drawable/seek_thumb" />
 

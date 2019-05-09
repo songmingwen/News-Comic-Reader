@@ -1,5 +1,9 @@
 package com.song.sunset.widget.neural;
 
+import android.util.Log;
+
+import java.util.ArrayList;
+
 /**
  * @author songmingwen
  * @description
@@ -10,6 +14,8 @@ class Dot {
     private static final float MIN_DD = 0.1f;
 
     private static final float SCALE_RATE = 0.5f;
+
+    private boolean hasGravitational = false;
 
     /**
      * 点的 x 坐标
@@ -42,6 +48,8 @@ class Dot {
 
     private float lineAmount;
 
+    private ArrayList<Dot> aroundDots = new ArrayList<>();
+
     Dot() {
 
     }
@@ -72,6 +80,10 @@ class Dot {
 
     void addLineAmount() {
         lineAmount++;
+    }
+
+    private void clearLineAmount() {
+        lineAmount = 0;
     }
 
     /**
@@ -120,27 +132,52 @@ class Dot {
         float tempX = x + dX;
 
         if (tempX > width) {
-            x = width - (tempX - width);
-            dX = -dX;
+            int roundX = (int) (tempX / width);
+            float remainderX = tempX % width;
+            if (roundX % 2 != 0) {
+                x = width - remainderX;
+                dX = -dX;
+            } else {
+                x = remainderX;
+            }
         } else if (tempX < 0) {
-            x = -tempX;
-            dX = -dX;
+            int roundX = (int) (-tempX / width);
+            float remainderX = -tempX % width;
+            if (roundX % 2 != 0) {
+                x = width - remainderX;
+            } else {
+                dX = -dX;
+                x = remainderX;
+            }
         } else {
             x = tempX;
         }
 
         float tempY = y + dY;
+
         if (tempY > height) {
-            y = height - (tempY - height);
-            dY = -dY;
+            int roundY = (int) (tempY / height);
+            float remainderY = tempY % height;
+            if (roundY % 2 != 0) {
+                y = height - remainderY;
+                dY = -dY;
+            } else {
+                y = remainderY;
+            }
         } else if (tempY < 0) {
-            y = -tempY;
-            dY = -dY;
+            int roundY = (int) (-tempY / height);
+            float remainderY = -tempY % height;
+            if (roundY % 2 != 0) {
+                y = height - remainderY;
+            } else {
+                dY = -dY;
+                y = remainderY;
+            }
         } else {
             y = tempY;
         }
 
-        lineAmount = 0;
+        clearLineAmount();
 
     }
 }

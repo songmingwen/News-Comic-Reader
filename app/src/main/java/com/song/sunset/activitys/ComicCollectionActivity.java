@@ -6,7 +6,7 @@ import android.os.Bundle;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.song.sunset.R;
 import com.song.sunset.activitys.base.BaseActivity;
-import com.song.sunset.fragments.CollectionFragment;
+import com.song.sunset.fragments.CollectionKotlinFragment;
 import com.song.sunset.receivers.SunsetWidget;
 
 /**
@@ -26,7 +26,7 @@ public class ComicCollectionActivity extends BaseActivity {
             fromWidget = getIntent().getBooleanExtra(SunsetWidget.FROM, false);
         }
         setContentView(R.layout.activity_comic_collection);
-        switchFragment(CollectionFragment.class.getName(), R.id.id_comic_collection_content);
+        switchFragment(CollectionKotlinFragment.class.getName(), R.id.id_comic_collection_content);
     }
 
     @Override
