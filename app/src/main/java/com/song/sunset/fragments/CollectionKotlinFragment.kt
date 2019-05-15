@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.song.sunset.CollectionViewModel
 import com.song.sunset.R
 import com.song.sunset.adapters.CollectionComicAdapter
@@ -21,6 +22,7 @@ import kotlinx.android.synthetic.main.fragment_comic_collection.*
  * @description
  * @since 2019/1/15
  */
+@Route(path = "/song/f/comic/collection")
 class CollectionKotlinFragment : BaseFragment() {
 
     private var collectionViewModel: CollectionViewModel? = null
