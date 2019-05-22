@@ -105,6 +105,7 @@ class NeuralNetWorksActivity : Activity(), SeekBar.OnSeekBarChangeListener {
             ll_setting_layout.visibility = View.GONE
             return
         }
+        nnw.cancel()
         super.onBackPressed()
     }
 

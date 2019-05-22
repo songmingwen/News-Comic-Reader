@@ -147,6 +147,10 @@ public class NeuralNetWorksView extends View {
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
+        cancel();
+    }
+
+    public void cancel() {
         getInstance().clear();
     }
 

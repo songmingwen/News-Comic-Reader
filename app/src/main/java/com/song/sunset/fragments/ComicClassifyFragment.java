@@ -104,12 +104,7 @@ public class ComicClassifyFragment extends Fragment implements TextWatcher {
         searchRecyclerView.addItemDecoration(new RecyclerViewDivider(getActivity(), LinearLayoutManager.HORIZONTAL, 1, getActivity().getResources().getColor(R.color.Grey_200)));
         mSearchEdit.addTextChangedListener(this);
         ImageView clear = view.findViewById(R.id.img_clear);
-        clear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resetEdit();
-            }
-        });
+        clear.setOnClickListener(v -> resetEdit());
     }
 
     private void resetEdit() {
@@ -129,12 +124,9 @@ public class ComicClassifyFragment extends Fragment implements TextWatcher {
 
             @Override
             public void onFailure(int errorCode, String errorMsg) {
-                progressLayout.showRetry(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        progressLayout.showLoading();
-                        getDataFromRetrofit2();
-                    }
+                progressLayout.showRetry(v -> {
+                    progressLayout.showLoading();
+                    getDataFromRetrofit2();
                 });
             }
         });
