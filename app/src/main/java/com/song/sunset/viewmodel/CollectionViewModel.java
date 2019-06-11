@@ -1,4 +1,4 @@
-package com.song.sunset;
+package com.song.sunset.viewmodel;
 
 import com.song.sunset.beans.CollectionOnlineListBean;
 import com.song.sunset.beans.ComicCollectionBean;

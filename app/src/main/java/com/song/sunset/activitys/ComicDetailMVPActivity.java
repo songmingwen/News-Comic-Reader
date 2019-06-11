@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.core.app.ActivityCompat;
@@ -36,13 +37,14 @@ import com.song.sunset.utils.fresco.FrescoUtil;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.mvp.views.ComicDetailView;
 
+import static com.song.sunset.activitys.ComicDetailActivity.COMIC_ID;
 import static com.song.sunset.adapters.ComicDetailAdapter.COMIC_LIST_TYPE;
 
 /**
  * Created by Song on 2016/12/8.
  * E-mail:z53520@qq.com
  */
-@Route(path = "/song/comic/detail")
+//@Route(path = "/song/comic/detail")
 public class ComicDetailMVPActivity extends CoreBaseActivity<ComicDetailPresenter, ComicDetailModel> implements ComicDetailView, View.OnClickListener {
 
     RecyclerView recyclerView;
@@ -70,7 +72,8 @@ public class ComicDetailMVPActivity extends CoreBaseActivity<ComicDetailPresente
             Bundle comic_cover = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context, view, "comic_cover").toBundle();
             ActivityCompat.startActivity(context, intent, comic_cover);
         } else {
-            start(context, comicId);
+            ARouter.getInstance().build("/song/comic/detail").withInt(COMIC_ID, comicId).navigation();
+
         }
     }
 

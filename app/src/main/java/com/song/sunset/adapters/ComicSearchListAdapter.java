@@ -6,11 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.song.sunset.R;
 import com.song.sunset.activitys.ComicDetailMVPActivity;
 import com.song.sunset.adapters.base.BaseRecyclerViewAdapter;
 import com.song.sunset.beans.ComicSearchResultBean;
 import com.song.sunset.holders.ComicSearchResultViewHolder;
+
+import static com.song.sunset.activitys.ComicDetailActivity.COMIC_ID;
 
 /**
  * Created by Song on 2017/12/12 0012.
@@ -42,7 +45,7 @@ public class ComicSearchListAdapter extends BaseRecyclerViewAdapter<ComicSearchR
     @Override
     protected void onItemClick(View view, int position) {
         if (getData() != null) {
-            ComicDetailMVPActivity.start(mContent, getData().get(position).getComic_id());
+            ARouter.getInstance().build("/song/comic/detail").withInt(COMIC_ID, getData().get(position).getComic_id()).navigation();
         }
     }
 }

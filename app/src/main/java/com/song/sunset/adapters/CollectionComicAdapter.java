@@ -1,12 +1,15 @@
 package com.song.sunset.adapters;
 
 import android.content.Context;
+
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.song.sunset.R;
 import com.song.sunset.activitys.ComicDetailMVPActivity;
 import com.song.sunset.beans.ComicCollectionBean;
@@ -16,6 +19,8 @@ import com.song.sunset.utils.fresco.FrescoUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.song.sunset.activitys.ComicDetailActivity.COMIC_ID;
 
 /**
  * Created by z5352_000 on 2016/10/29 0029.
@@ -59,7 +64,9 @@ public class CollectionComicAdapter extends RecyclerView.Adapter<ComicListViewHo
                     }
                 }
             }
-            holder.itemView.setOnClickListener(v -> ComicDetailMVPActivity.start(context, comicId));
+            holder.itemView.setOnClickListener(v -> {
+                ARouter.getInstance().build("/song/comic/detail").withInt(COMIC_ID, comicId).navigation();
+            });
         }
     }
 

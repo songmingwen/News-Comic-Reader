@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.song.sunset.CollectionViewModel
+import com.song.sunset.viewmodel.CollectionViewModel
 import com.song.sunset.R
 import com.song.sunset.adapters.CollectionComicAdapter
 import com.song.sunset.beans.ComicCollectionBean

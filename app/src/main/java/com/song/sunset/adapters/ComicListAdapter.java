@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.song.sunset.R;
 import com.song.sunset.activitys.ComicDetailMVPActivity;
 import com.song.sunset.adapters.base.BaseRecyclerViewAdapter;
@@ -14,6 +15,8 @@ import com.song.sunset.beans.ComicsBean;
 import com.song.sunset.holders.ComicListViewHolder;
 import com.song.sunset.utils.fresco.FrescoUtil;
 import com.song.sunset.utils.ViewUtil;
+
+import static com.song.sunset.activitys.ComicDetailActivity.COMIC_ID;
 
 /**
  * Created by Song on 2016/8/27 0027.
@@ -60,6 +63,6 @@ public class ComicListAdapter extends BaseRecyclerViewAdapter<ComicsBean, ComicL
 
     @Override
     protected void onItemClick(View view, int position) {
-        ComicDetailMVPActivity.start(context, getData().get(position).getComicId());
+        ARouter.getInstance().build("/song/comic/detail").withInt(COMIC_ID, getData().get(position).getComicId()).navigation();
     }
 }
