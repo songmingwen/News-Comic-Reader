@@ -17,6 +17,10 @@
     <!-- <uses-permission android:name="android.permission.WRITE_SETTINGS" /> -->
     <!-- <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" /> -->
     <!-- <uses-permission android:name="android.permission.READ_LOGS" /> -->
+    <!-- 二维码扫码所需权限 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
     <uses-permission
         android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" /> <!-- GL相关配置 -->
@@ -39,7 +43,8 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".activitys.ComicDetailActivity"></activity>
+        <activity android:name=".activitys.temp.QRCodeActivity"></activity>
+        <activity android:name=".activitys.ComicDetailActivity" />
         <activity android:name=".activitys.opengl.render.RenderAirHockeyActivity" />
         <activity android:name=".activitys.opengl.render.RenderTextureActivity" />
         <activity android:name=".activitys.opengl.render.RenderFirstActivity" />
@@ -65,8 +70,8 @@
         <activity
             android:name=".activitys.temp.NeuralNetWorksActivity"
             android:theme="@android:style/Theme.Wallpaper.NoTitleBar" />
-        <activity android:name="com.song.kotlin.activitys.temp.DynamicProxyActivity" />
-        <activity android:name="com.song.kotlin.activitys.temp.ReflectionActivity" />
+        <activity android:name=".activitys.temp.DynamicProxyActivity" />
+        <activity android:name=".activitys.temp.ReflectionActivity" />
         <activity android:name=".activitys.SchemeFilterActivity">
 
             <!-- Schame -->
@@ -97,7 +102,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.song.kotlin.activitys.FirstKotlinActivity"
+            android:name=".activitys.FirstKotlinActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -122,7 +127,7 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.song.kotlin.activitys.MainKotlinActivity"
+            android:name=".activitys.MainKotlinActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
@@ -221,14 +226,13 @@
             android:process=":remote" />
 
         <activity
-            android:name="com.song.kotlin.activitys.RxJavaKotlinActivity"
+            android:name=".activitys.RxJavaKotlinActivity"
             android:label="@string/title_activity_rx_java"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".activitys.temp.RxjavaActivity"
             android:label="@string/title_activity_rxjava"
             android:theme="@style/AppTheme" />
-        <activity android:name="com.song.kotlin.utils.LearnKotlin" />
         <activity
             android:name=".activitys.temp.FrescoProcessorActivity"
             android:label="@string/title_activity_fresco_processor"
@@ -237,7 +241,6 @@
             android:name=".activitys.temp.FunctionListActivity"
             android:theme="@style/AppTheme" />
         <activity android:name=".activitys.temp.FrescoXMLActivity" />
-        <activity android:name="com.song.kotlin.activitys.temp.FunctionListKotlinActivity" />
     </application>
 
 </manifest>

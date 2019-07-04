@@ -1,4 +1,4 @@
-package com.song.kotlin.utils
+package com.song.kotlin
 
 import android.content.Context
 import android.util.AttributeSet
@@ -81,10 +81,27 @@ class SuperD : SuperA(), SuperB {
     }
 }
 
-class M(b: Boolean) {
+/**
+ * 幕后字段 field、幕后属性 _table
+ */
+open class M(b: Boolean) {
+
     var m = 0
         set(value) {
             if (value > 0) field = value
+        }
+        get() {
+            return if (field > 0) field else -field
+        }
+
+
+    private var _table: Map<String, Int>? = null
+    open val table: Map<String, Int>
+        get() {
+            if (_table == null) {
+                _table = HashMap() // 类型参数已推断出
+            }
+            return _table ?: throw AssertionError("Set to null by another thread")
         }
 }
 

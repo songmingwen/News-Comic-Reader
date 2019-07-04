@@ -1,4 +1,4 @@
-package com.song.kotlin.activitys.temp
+package com.song.sunset.activitys.temp
 
 import android.content.Context
 import android.content.Intent
@@ -6,9 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.song.sunset.R
-import com.song.kotlin.interfaces.IOrigin
-import com.song.kotlin.utils.JdkDynamicProxy
-import com.song.kotlin.utils.OriginImpl
+import com.song.sunset.interfaces.IOrigin
+import com.song.sunset.utils.JdkDynamicProxy
+import com.song.sunset.utils.OriginImpl
 
 class DynamicProxyActivity : AppCompatActivity() {
 

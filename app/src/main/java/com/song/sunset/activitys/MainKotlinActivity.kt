@@ -1,4 +1,4 @@
-package com.song.kotlin.activitys
+package com.song.sunset.activitys
 
 import android.app.ActivityManager
 import android.app.Notification
@@ -27,7 +27,6 @@ import androidx.core.app.NotificationCompat
 import com.meituan.android.walle.WalleChannelReader
 import com.song.core.statusbar.StatusBarUtil
 import com.song.sunset.R
-import com.song.sunset.activitys.*
 import com.song.sunset.activitys.base.BaseActivity
 import com.song.sunset.activitys.temp.FunctionListActivity
 import com.song.sunset.beans.CollectionOnlineListBean

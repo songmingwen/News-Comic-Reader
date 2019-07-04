@@ -170,7 +170,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private void setUpListener() {
         navigationView.setNavigationItemSelectedListener(this);
 
-        fab.setOnClickListener(v -> FunctionListActivity.start(MainActivity.this));
+        fab.setOnClickListener(v -> FunctionListActivity.Companion.start(MainActivity.this));
     }
 
     @Override

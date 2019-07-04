@@ -1,7 +1,7 @@
-package com.song.kotlin.utils
+package com.song.sunset.utils
 
 import android.util.Log
-import com.song.kotlin.interfaces.IOrigin
+import com.song.sunset.interfaces.IOrigin
 
 /**
  * @author songmingwen

@@ -10,76 +10,11 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/ll_function_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="15dp">
-
-            <Button
-                android:id="@+id/show_fresco_xml"
-                style="@style/style_button_main_activity"
-                android:onClick="showFrescoXML"
-                android:text="Fresco XML params display" />
-
-            <Button
-                android:id="@+id/show_fresco_processor"
-                style="@style/style_button_main_activity"
-                android:onClick="showFrescoProcessor"
-                android:text="Fresco post processor display" />
-
-            <Button
-                android:id="@+id/show_fireworks"
-                style="@style/style_button_main_activity"
-                android:onClick="showFireworks"
-                android:text="🎆" />
-
-            <Button
-                android:id="@+id/rxjava_lean"
-                style="@style/style_button_main_activity"
-                android:onClick="showRxJava"
-                android:text="RxJava" />
-
-            <Button
-                style="@style/style_button_main_activity"
-                android:onClick="showReflection"
-                android:text="Reflection" />
-
-            <Button
-                style="@style/style_button_main_activity"
-                android:onClick="showDynamicProxy"
-                android:text="DynamicProxy" />
-
-            <Button
-                style="@style/style_button_main_activity"
-                android:onClick="coordinatorLayout"
-                android:text="CoordinatorLayout" />
-
-            <Button
-                style="@style/style_button_main_activity"
-                android:onClick="binderPool"
-                android:text="binderPool" />
-
-            <Button
-                style="@style/style_button_main_activity"
-                android:onClick="openGL"
-                android:text="openGL" />
-
-            <Button
-                style="@style/style_button_main_activity"
-                android:onClick="neural"
-                android:text="neural" />
-
-            <Button
-                style="@style/style_button_main_activity"
-                android:onClick="billiards"
-                android:text="billiards" />
-
-            <Button
-                style="@style/style_button_main_activity"
-                android:onClick="test"
-                android:text="test" />
-
-            <!--复制上面的 button 添加点击事件，从而跳转到自己的功能页面-->
 
         </LinearLayout>
     </ScrollView>
