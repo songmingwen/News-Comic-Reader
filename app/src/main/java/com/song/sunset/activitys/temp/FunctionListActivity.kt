@@ -129,6 +129,7 @@ class FunctionListActivity : BaseActivity() {
         addButton("neural") { NeuralNetWorksActivity.start(this@FunctionListActivity) }
         addButton("billiards") { BilliardsActivity.start(this@FunctionListActivity) }
         addButton("QR code") { QRCodeActivity.start(this@FunctionListActivity) }
+        addButton("MotionLayout") { MotionLayoutActivity.start(this@FunctionListActivity) }
     }
 
     private fun LinearLayout.addButton(title: String, onClick: () -> Unit): Button {

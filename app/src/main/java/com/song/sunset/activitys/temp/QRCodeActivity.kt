@@ -14,12 +14,13 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.google.android.material.snackbar.Snackbar
 import com.song.sunset.R
+import com.song.sunset.activitys.base.BaseActivity
 import com.song.sunset.utils.AppConfig
 import com.song.sunset.utils.SnackBarUtils
 import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.android.synthetic.main.activity_qrcode.*
 
-class QRCodeActivity : AppCompatActivity() {
+class QRCodeActivity : BaseActivity() {
 
     var lightOpen = false
     var manualIntervention = false

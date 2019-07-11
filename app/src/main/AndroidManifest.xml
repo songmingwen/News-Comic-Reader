@@ -20,7 +20,6 @@
     <!-- 二维码扫码所需权限 -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
-
     <uses-permission
         android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" /> <!-- GL相关配置 -->
@@ -43,12 +42,12 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".activitys.temp.QRCodeActivity"></activity>
+        <activity android:name=".activitys.temp.MotionLayoutActivity"></activity>
+        <activity android:name=".activitys.temp.QRCodeActivity" />
         <activity android:name=".activitys.ComicDetailActivity" />
         <activity android:name=".activitys.opengl.render.RenderAirHockeyActivity" />
         <activity android:name=".activitys.opengl.render.RenderTextureActivity" />
         <activity android:name=".activitys.opengl.render.RenderFirstActivity" />
-        <activity android:name=".activitys.opengl.render.BaseRenderActivity" />
         <activity android:name=".activitys.opengl.render.Render3DActivity" />
         <activity android:name=".activitys.opengl.OpenGLActivity" />
         <activity android:name=".activitys.temp.BilliardsActivity" />
@@ -125,7 +124,7 @@
             android:name=".activitys.MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="sensor" />
         <activity
             android:name=".activitys.MainKotlinActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/motion_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="48dp"
+    app:layoutDescription="@xml/scene_trans"
+    tools:showPaths="true">
+
+    <TextView
+        android:id="@+id/id_1"
+        style="@style/style_trans_text"
+        android:text="1"
+        app:layout_constraintEnd_toStartOf="@+id/id_2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/id_2"
+        style="@style/style_trans_text"
+        android:text="2"
+        app:layout_constraintEnd_toStartOf="@id/id_3"
+        app:layout_constraintStart_toEndOf="@id/id_1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/id_3"
+        style="@style/style_trans_text"
+        android:text="3"
+        app:layout_constraintEnd_toStartOf="@id/id_4"
+        app:layout_constraintStart_toEndOf="@+id/id_2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/id_4"
+        style="@style/style_trans_text"
+        android:text="4"
+        app:layout_constraintEnd_toStartOf="@+id/id_5"
+        app:layout_constraintStart_toEndOf="@id/id_3"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/id_5"
+        style="@style/style_trans_text"
+        android:text="5"
+        app:layout_constraintEnd_toStartOf="@id/id_6"
+        app:layout_constraintStart_toEndOf="@id/id_4"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/id_6"
+        style="@style/style_trans_text"
+        android:text="6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/id_5"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/id_7"
+        style="@style/style_trans_text"
+        android:text="7"
+        app:layout_constraintEnd_toStartOf="@id/id_8"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/id_8"
+        style="@style/style_trans_text"
+        android:text="8"
+        app:layout_constraintEnd_toStartOf="@id/id_9"
+        app:layout_constraintStart_toEndOf="@id/id_7" />
+
+    <TextView
+        android:id="@+id/id_9"
+        style="@style/style_trans_text"
+        android:text="9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/id_8" />
+</androidx.constraintlayout.motion.widget.MotionLayout>

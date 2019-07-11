@@ -1,80 +1,83 @@
 dependencies {
-    api fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
-    api 'androidx.appcompat:appcompat:1.1.0-alpha04'
-    api 'com.google.android.material:material:1.1.0-alpha05'
-    api 'androidx.legacy:legacy-support-v4:1.0.0'
-    api 'androidx.cardview:cardview:1.0.0'
-    api 'androidx.palette:palette:1.0.0'
-    api 'androidx.constraintlayout:constraintlayout:2.0.0-alpha4'
-    api 'com.google.android:flexbox:1.1.0'
-    api 'com.android.support:multidex:1.0.3'
+    implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
+    implementation 'com.google.android.material:material:1.1.0-alpha07'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.palette:palette:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta2'
+    implementation 'com.google.android:flexbox:1.1.0'
+    implementation 'com.android.support:multidex:1.0.3'
 
 
-    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.8.6'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.8.6'
 
-    api 'com.github.songmingwen:glide-4.0-transformations:1.1'
+    implementation 'com.github.songmingwen:glide-4.0-transformations:1.1'
 
-    api 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
+    implementation 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
 
-    api 'com.facebook.fresco:fresco:1.11.0'
-    api 'jp.wasabeef:fresco-processors:2.1.0'
-    api 'com.facebook.fresco:imagepipeline-okhttp3:1.11.0'
+    implementation 'com.facebook.fresco:fresco:1.11.0'
+    implementation 'jp.wasabeef:fresco-processors:2.1.0'
+    implementation 'com.facebook.fresco:imagepipeline-okhttp3:1.11.0'
 
-    api 'com.android.volley:volley:1.1.0'
+    implementation 'com.android.volley:volley:1.1.0'
 
-    api 'me.imid.swipebacklayout.lib:library:1.0.0'
+    implementation 'me.imid.swipebacklayout.lib:library:1.0.0'
 
-    api 'com.davemorrissey.labs:subsampling-scale-image-view:3.10.0'
+    implementation 'com.davemorrissey.labs:subsampling-scale-image-view:3.10.0'
 
-    api 'tv.danmaku.ijk.media:ijkplayer-java:0.8.4'
-    api 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.8.4'
-    api 'tv.danmaku.ijk.media:ijkplayer-arm64:0.8.4'
+    implementation 'tv.danmaku.ijk.media:ijkplayer-java:0.8.4'
+    implementation 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.8.4'
+    implementation 'tv.danmaku.ijk.media:ijkplayer-arm64:0.8.4'
 
-    api 'com.squareup.okhttp3:okhttp:3.14.2'
-    api 'com.squareup.retrofit2:retrofit:2.4.0'
-    api 'com.squareup.retrofit2:converter-gson:2.4.0'
-    api 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
-    api 'com.squareup.okhttp3:logging-interceptor:3.4.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.14.2'
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.4.0'
 
-    api 'io.reactivex.rxjava2:rxandroid:2.1.0'
-    api 'io.reactivex.rxjava2:rxjava:2.2.2'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.2'
 
-    api 'me.yokeyword:fragmentation:0.8.4'
-    api 'me.yokeyword:fragmentation-swipeback:0.7.9'
+    implementation 'me.yokeyword:fragmentation:0.8.4'
+    implementation 'me.yokeyword:fragmentation-swipeback:0.7.9'
 
-    api 'com.flyco.tablayout:FlycoTabLayout_Lib:2.0.0@aar'
+    implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.0.0@aar'
 
-    api 'com.nineoldandroids:library:2.4.0'
+    implementation 'com.nineoldandroids:library:2.4.0'
 
-    api 'org.greenrobot:greendao-generator:3.2.0'
-    api 'org.greenrobot:greendao:3.2.0'
+    implementation 'org.greenrobot:greendao-generator:3.2.0'
+    implementation 'org.greenrobot:greendao:3.2.0'
 
-    api 'rapid.decoder:library:0.3.0'
-    api 'rapid.decoder:jpeg-decoder:0.3.0'
-    api 'rapid.decoder:png-decoder:0.3.0'
+    implementation 'rapid.decoder:library:0.3.0'
+    implementation 'rapid.decoder:jpeg-decoder:0.3.0'
+    implementation 'rapid.decoder:png-decoder:0.3.0'
 
-    api 'in.srain.cube:ultra-ptr:1.0.11'
+    implementation 'in.srain.cube:ultra-ptr:1.0.11'
 
-    api 'com.kyleduo.switchbutton:library:1.4.5'
+    implementation 'com.kyleduo.switchbutton:library:1.4.5'
 
-    api 'com.github.ctiao:DanmakuFlameMaster:0.7.4'
-    api 'com.github.ctiao:ndkbitmap-armv7a:0.7.4'
-    api 'com.github.ctiao:ndkbitmap-armv5:0.7.4'
-    api 'com.github.ctiao:ndkbitmap-x86:0.7.4'
+    implementation 'com.github.ctiao:DanmakuFlameMaster:0.7.4'
+    implementation 'com.github.ctiao:ndkbitmap-armv7a:0.7.4'
+    implementation 'com.github.ctiao:ndkbitmap-armv5:0.7.4'
+    implementation 'com.github.ctiao:ndkbitmap-x86:0.7.4'
 
-    api 'com.meituan.robust:robust:0.3.3'
-    api 'com.meituan.android.walle:library:1.1.6'
+    implementation 'com.meituan.robust:robust:0.3.3'
+    implementation 'com.meituan.android.walle:library:1.1.6'
 
-    api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinx_coroutines_version"
-    api "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinx_coroutines_version"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 
-    api "com.dlazaro66.qrcodereaderview:qrcodereaderview:2.0.3"
-    api "com.github.tbruyelle:rxpermissions:0.10.2"
+    implementation "com.dlazaro66.qrcodereaderview:qrcodereaderview:2.0.3"
+    implementation "com.github.tbruyelle:rxpermissions:0.10.2"
 
-    api 'com.alibaba:arouter-api:1.4.1'
+    //mmap 的高性能通用 key-value 组件（替代 sp splite 等，使用简单可以多进程使用）
+    implementation 'com.tencent:mmkv:1.0.22'
+
+    implementation 'com.alibaba:arouter-api:1.4.1'
     kapt 'com.alibaba:arouter-compiler:1.2.2'
 
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.2'

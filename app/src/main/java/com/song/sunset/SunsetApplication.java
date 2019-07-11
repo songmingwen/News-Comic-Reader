@@ -7,6 +7,7 @@ import android.os.Process;
 import androidx.multidex.MultiDexApplication;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.song.core.FrescoInitializer;
@@ -17,6 +18,7 @@ import com.song.sunset.services.managers.MessengerManager;
 import com.song.sunset.services.managers.PushManager;
 import com.song.sunset.utils.SPUtils;
 import com.song.sunset.utils.AppConfig;
+import com.tencent.mmkv.MMKV;
 
 import java.util.List;
 
@@ -55,6 +57,14 @@ public class SunsetApplication extends MultiDexApplication {
 
         FrescoInitializer.getDefaultInstance().initialize(this);
 
+        String dir = MMKV.initialize(this);
+        Log.i("initInMainProcess: ", dir);
+
+        MMKV mmkv = MMKV.defaultMMKV();
+        mmkv.encode("boolean", true);
+        mmkv.encode("string", "string");
+        mmkv.encode("int", 7777777);
+        Log.i("initInMainProcess: ", mmkv.decodeString("string") + "," + mmkv.decodeBool("boolean") + "," + mmkv.decodeInt("int"));
 
 //        CrashHandler.getInstance().init();
         PushManager.getInstance().init(this);

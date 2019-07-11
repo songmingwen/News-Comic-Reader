@@ -64,7 +64,7 @@ public class BaseActivity extends SwipeBackActivity {
         fragment = supportFragmentManager.findFragmentByTag(className);
         if (fragment == null) {
 //            fragment = Fragment.instantiate(this, className);
-            fragment = supportFragmentManager.getFragmentFactory().instantiate(this.getClassLoader(), className, null);
+            fragment = supportFragmentManager.getFragmentFactory().instantiate(this.getClassLoader(), className);
             fragmentTransaction.add(layoutId, fragment, className);
         } else {
             fragmentTransaction.show(fragment);
