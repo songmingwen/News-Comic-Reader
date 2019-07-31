@@ -11,7 +11,6 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
-import androidx.core.widget.TextViewCompat
 
 import com.song.sunset.R
 import com.song.sunset.activitys.base.BaseActivity
@@ -21,6 +20,7 @@ import com.song.sunset.services.impl.BinderPoolImpl
 import com.song.sunset.services.impl.MusicCallBackListenerImpl
 import com.song.sunset.services.impl.MusicGetterImpl
 import com.song.sunset.services.managers.BinderPool
+import com.song.sunset.utils.ViewUtil
 import com.song.sunset.utils.preinstall.*
 import com.song.sunset.utils.process.AndroidProcesses
 import com.song.sunset.widget.fireworks.BitmapProvider
@@ -131,16 +131,6 @@ class FunctionListActivity : BaseActivity() {
         addButton("MotionLayout") { MotionLayoutActivity.start(this@FunctionListActivity) }
     }
 
-    private fun LinearLayout.addButton(title: String, onClick: () -> Unit): Button {
-        val button = Button(this@FunctionListActivity).apply {
-            TextViewCompat.setTextAppearance(this, R.style.style_button_main_activity)
-            text = title
-            setOnClickListener { onClick() }
-        }
-        addView(button)
-        return button
-    }
-
     private fun showFireworks(view: View) {
         mFireworksView!!.provider = fireworksProvider
 
@@ -241,4 +231,20 @@ class FunctionListActivity : BaseActivity() {
             context.startActivity(starter)
         }
     }
+}
+
+fun LinearLayout.addButton(title: String, onClick: () -> Unit): Button {
+    val button = Button(context).apply {
+        text = title
+        textSize = 15f
+        setTextColor(resources.getColor(R.color.white))
+        setBackgroundResource(R.drawable.shape_interest_selection_blue_bg)
+        setOnClickListener { onClick() }
+    }
+    val params = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+    params.topMargin = ViewUtil.dip2px(5f)
+    params.bottomMargin = ViewUtil.dip2px(5f)
+    addView(button, params)
+    return button
 }

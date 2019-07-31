@@ -1,6 +1,5 @@
 package com.song.sunset.activitys.opengl.render
 
-import com.song.sunset.activitys.opengl.BaseRenderActivity
 import com.song.sunset.widget.opengl.render.GLRender3D
 import com.song.sunset.widget.opengl.surfaceview.BaseGLSurfaceView
 

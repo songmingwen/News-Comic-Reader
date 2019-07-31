@@ -26,7 +26,7 @@ class GLRenderTeachOne(context: Context) : GLSurfaceView.Renderer {
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
 
         //设置清空屏幕用的颜色
-        glClearColor(0f, 0f, 0f, 0f)
+        glClearColor(0f, 0f, 1f, 0f)
         val buffer = ByteBuffer.allocateDirect(TeachObjectBuilder.getSourceArray().size * BYTES_PRE_FLOAT)
                 .order(ByteOrder.nativeOrder())
                 .asFloatBuffer()

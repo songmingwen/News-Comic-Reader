@@ -1,6 +1,6 @@
 package com.song.sunset.activitys.opengl.teach
 
-import com.song.sunset.activitys.opengl.BaseRenderActivity
+import com.song.sunset.activitys.opengl.render.BaseRenderActivity
 import com.song.sunset.widget.opengl.render.teach.GLRenderTeachOne
 import com.song.sunset.widget.opengl.surfaceview.BaseGLSurfaceView
 

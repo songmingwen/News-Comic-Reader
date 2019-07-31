@@ -131,7 +131,7 @@ public class NeuralNetWorksView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        if (getInstance().getDotsList() == null || getInstance().getDotsList().isEmpty()) {
+        if (getInstance().getDotsList() == null) {
             return;
         }
 
