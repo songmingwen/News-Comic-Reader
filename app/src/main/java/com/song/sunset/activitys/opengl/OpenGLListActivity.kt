@@ -8,11 +8,11 @@ import com.song.sunset.R
 import com.song.sunset.activitys.base.BaseActivity
 import com.song.sunset.activitys.opengl.render.*
 
-class OpenGLActivity : BaseActivity() {
+class OpenGLListActivity : BaseActivity() {
 
     companion object {
         fun start(context: Context) {
-            context.startActivity(Intent(context, OpenGLActivity::class.java))
+            context.startActivity(Intent(context, OpenGLListActivity::class.java))
         }
     }
 

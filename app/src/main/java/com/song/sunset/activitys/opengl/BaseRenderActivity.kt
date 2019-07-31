@@ -1,4 +1,4 @@
-package com.song.sunset.activitys.opengl.render
+package com.song.sunset.activitys.opengl
 
 import android.content.Context
 import android.content.Intent
@@ -15,22 +15,23 @@ abstract class BaseRenderActivity : BaseActivity() {
         }
     }
 
-    private var glSurfaceView: BaseGLSurfaceView? = null
+    private lateinit var glSurfaceView: BaseGLSurfaceView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(getGLSurfaceView())
+        glSurfaceView = getGLSurfaceView()
+        setContentView(glSurfaceView)
     }
 
-    abstract fun getGLSurfaceView(): View
+    abstract fun getGLSurfaceView(): BaseGLSurfaceView
 
     override fun onResume() {
         super.onResume()
-        glSurfaceView?.onResume()
+        glSurfaceView.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        glSurfaceView?.onPause()
+        glSurfaceView.onPause()
     }
 }

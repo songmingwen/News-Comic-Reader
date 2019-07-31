@@ -15,7 +15,7 @@ import androidx.core.widget.TextViewCompat
 
 import com.song.sunset.R
 import com.song.sunset.activitys.base.BaseActivity
-import com.song.sunset.activitys.opengl.OpenGLActivity
+import com.song.sunset.activitys.opengl.OpenGLListActivity
 import com.song.sunset.beans.MusicInfo
 import com.song.sunset.services.impl.BinderPoolImpl
 import com.song.sunset.services.impl.MusicCallBackListenerImpl
@@ -112,20 +112,19 @@ class FunctionListActivity : BaseActivity() {
     }
 
     private fun LinearLayout.addButtonList() {
-        addButton("test") { TempTestActivity.start(this@FunctionListActivity) }
-        addButton("Fresco XML params display") { FrescoXMLActivity.start(this@FunctionListActivity) }
-        addButton("Fresco post processor display") { FrescoProcessorActivity.start(this@FunctionListActivity) }
-
         addButton("🎆") {}.apply {
             setOnClickListener { showFireworks(this) }
         }
 
+        addButton("test") { TempTestActivity.start(this@FunctionListActivity) }
+        addButton("Fresco XML params display") { FrescoXMLActivity.start(this@FunctionListActivity) }
+        addButton("Fresco post processor display") { FrescoProcessorActivity.start(this@FunctionListActivity) }
         addButton("RxJava") { RxjavaActivity.start(this@FunctionListActivity) }
         addButton("Reflection") { ReflectionActivity.start(this@FunctionListActivity) }
         addButton("DynamicProxy") { DynamicProxyActivity.start(this@FunctionListActivity) }
         addButton("CoordinatorLayout") { ScrollingActivity.start(this@FunctionListActivity) }
         addButton("binderPool") { useBinderPool() }
-        addButton("openGL") { OpenGLActivity.start(this@FunctionListActivity) }
+        addButton("openGL") { OpenGLListActivity.start(this@FunctionListActivity) }
         addButton("neural") { NeuralNetWorksActivity.start(this@FunctionListActivity) }
         addButton("billiards") { BilliardsActivity.start(this@FunctionListActivity) }
         addButton("QR code") { QRCodeActivity.start(this@FunctionListActivity) }

@@ -1,11 +1,12 @@
 package com.song.sunset.activitys.opengl.render
 
-import android.view.View
+import com.song.sunset.activitys.opengl.BaseRenderActivity
+import com.song.sunset.widget.opengl.surfaceview.BaseGLSurfaceView
 import com.song.sunset.widget.opengl.surfaceview.GLSurfaceViewAirHockey
 
 class RenderAirHockeyActivity : BaseRenderActivity() {
 
-    override fun getGLSurfaceView(): View {
+    override fun getGLSurfaceView(): BaseGLSurfaceView {
         return GLSurfaceViewAirHockey(this)
     }
 

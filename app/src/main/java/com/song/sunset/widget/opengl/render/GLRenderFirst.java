@@ -46,7 +46,7 @@ public class GLRenderFirst implements GLSurfaceView.Renderer {
     private int mProgramId;
     private int mMatrixLocation;
 
-    private float[] circleArray = {
+    private float[] mCircleSourceArray = {
 
             0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f,
             0.5f, -0.8f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f,
@@ -69,10 +69,10 @@ public class GLRenderFirst implements GLSurfaceView.Renderer {
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         glClearColor(0, 0, 0, 0);
-        verticalsBuffer = ByteBuffer.allocateDirect(circleArray.length * BYTES_PRE_FLOAT)
+        verticalsBuffer = ByteBuffer.allocateDirect(mCircleSourceArray.length * BYTES_PRE_FLOAT)
                 .order(ByteOrder.nativeOrder())
                 .asFloatBuffer()
-                .put(circleArray);
+                .put(mCircleSourceArray);
 
         int vertexShader = ShaderHelper.compileVertexShader(TextResourceReader.readTextFileFromResource(mContext, R.raw.vertex_shader_first));
 
@@ -131,7 +131,9 @@ public class GLRenderFirst implements GLSurfaceView.Renderer {
         glUniformMatrix4fv(mMatrixLocation, 1, false, mProjectionMatrix, 0);
         //绘制矩形
         glDrawArrays(GL_TRIANGLE_FAN, 0, 6);
+        //绘制线段
         glDrawArrays(GL_LINES, 6, 2);
+        //绘制点
         glDrawArrays(GL_POINTS, 8, 1);
         glDrawArrays(GL_POINTS, 9, 1);
     }
