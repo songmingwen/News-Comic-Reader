@@ -17,28 +17,20 @@ import javax.microedition.khronos.opengles.GL10
 
 class GLRenderTeachOne(context: Context) : GLSurfaceView.Renderer {
 
-    companion object {
-        private const val BYTES_PRE_FLOAT = 4
-    }
-
-    private var mContext: Context = context
-
+    //当 Surface 被创建的时候 GLSurfaceView 会调用此方法；程序初次运行或者切换 activity 时都可能触发此方法
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
-
         //设置清空屏幕用的颜色
-        glClearColor(0f, 0f, 1f, 0f)
-        val buffer = ByteBuffer.allocateDirect(TeachObjectBuilder.getSourceArray().size * BYTES_PRE_FLOAT)
-                .order(ByteOrder.nativeOrder())
-                .asFloatBuffer()
-                .put(TeachObjectBuilder.getSourceArray())
+        glClearColor(0f, 0f, 1f, 1f)
 
     }
 
+    //每次 Surface 尺寸发生变化时，此方法会被 GLSurfaceView 调用；横竖屏切换时，Surface 尺寸会变化
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
         //设置视口尺寸
         glViewport(0, 0, width, height)
     }
 
+    //当绘制一帧时，此方法会被 GLSurfaceView 调用
     override fun onDrawFrame(gl: GL10?) {
         //清空屏幕。屏幕会填充 glClearColor 中设置的颜色
         glClear(GL_COLOR_BUFFER_BIT)

@@ -12,9 +12,8 @@ import com.song.sunset.widget.opengl.surfaceview.BaseGLSurfaceView
 class TeachOneActivity : BaseRenderActivity() {
     override fun getGLSurfaceView(): BaseGLSurfaceView {
         return object : BaseGLSurfaceView(this) {
-            override fun getRender(): Renderer {
-                return GLRenderTeachOne(context)
-            }
+            override val render: Renderer
+                get() = GLRenderTeachOne(context)
         }
     }
 }

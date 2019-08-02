@@ -7,9 +7,8 @@ class Render3DActivity : BaseRenderActivity() {
 
     override fun getGLSurfaceView(): BaseGLSurfaceView {
         return object : BaseGLSurfaceView(this) {
-            override fun getRender(): Renderer {
-                return GLRender3D(context)
-            }
+            override val render: Renderer
+                get() =  GLRender3D(context)
         }
     }
 }

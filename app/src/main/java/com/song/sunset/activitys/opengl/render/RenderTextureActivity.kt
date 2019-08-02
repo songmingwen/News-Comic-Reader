@@ -7,9 +7,8 @@ class RenderTextureActivity : BaseRenderActivity() {
 
     override fun getGLSurfaceView(): BaseGLSurfaceView {
         return object : BaseGLSurfaceView(this) {
-            override fun getRender(): Renderer {
-                return GLRenderTextured(context)
-            }
+            override val render: Renderer
+                get() = GLRenderTextured(context)
         }
     }
 }
