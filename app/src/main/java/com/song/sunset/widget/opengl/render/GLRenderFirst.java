@@ -134,7 +134,6 @@ public class GLRenderFirst implements GLSurfaceView.Renderer {
         //绘制线段
         glDrawArrays(GL_LINES, 6, 2);
         //绘制点
-        glDrawArrays(GL_POINTS, 8, 1);
-        glDrawArrays(GL_POINTS, 9, 1);
+        glDrawArrays(GL_POINTS, 8, 2);
     }
 }

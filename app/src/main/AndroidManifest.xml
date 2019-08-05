@@ -240,8 +240,9 @@
             android:name=".activitys.temp.FunctionListActivity"
             android:theme="@style/AppTheme" />
         <activity android:name=".activitys.temp.FrescoXMLActivity" />
-        <activity android:name=".activitys.opengl.teach.TeachOneActivity" />
         <activity android:name=".activitys.opengl.teach.OpenGLTeachListActivity" />
+        <activity android:name=".activitys.opengl.teach.TeachOneActivity" />
+        <activity android:name=".activitys.opengl.teach.TeachTwoActivity" />
     </application>
 
 </manifest>

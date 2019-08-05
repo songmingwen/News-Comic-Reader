@@ -8,7 +8,21 @@ package com.song.sunset.widget.opengl.air.objects
 object TeachObjectBuilder {
 
     fun getSourceArray(): FloatArray {
-        return floatArrayOf(0f,2f)
+        return floatArrayOf(
+                //两个三角
+                -0.5f, -0.5f,
+                0.5f, -0.5f,
+                0.5f, 0.5f,
+                -0.5f, -0.5f,
+                0.5f, 0.5f,
+                -0.5f, 0.5f
+                //线段
+                - 0.5f, 0f,
+                0.5f, 0f,
+                //两个点
+                0f, 0.25f,
+                0f, -0.25f
+        )
     }
 
 }

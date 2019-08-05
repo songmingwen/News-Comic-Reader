@@ -3,9 +3,6 @@ package com.song.sunset.widget.opengl.render.teach
 import android.content.Context
 import android.opengl.GLES20.*
 import android.opengl.GLSurfaceView
-import com.song.sunset.widget.opengl.air.objects.TeachObjectBuilder
-import java.nio.ByteBuffer
-import java.nio.ByteOrder
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 

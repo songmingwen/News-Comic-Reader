@@ -29,6 +29,7 @@ class OpenGLTeachListActivity : BaseActivity() {
 
     private fun LinearLayout.addButtonList() {
         addButton("One"){ BaseRenderActivity.start(this@OpenGLTeachListActivity, TeachOneActivity::class.java) }
+        addButton("Two"){ BaseRenderActivity.start(this@OpenGLTeachListActivity, TeachTwoActivity::class.java) }
     }
 
 }
