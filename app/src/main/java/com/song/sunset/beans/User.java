@@ -8,13 +8,26 @@ import java.util.ArrayList;
 /**
  * Created by Song on 2016/12/5.
  */
-public class User implements Parcelable ,Cloneable{
+public class User implements Parcelable, Cloneable {
 
     private String userName;
 
     private String address;
 
     private String phone;
+
+    private Boolean isSelected;
+
+    public Boolean getSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(Boolean selected) {
+        isSelected = selected;
+    }
+
+    public User() {
+    }
 
     public User(String userName, String address, String phone) {
         this.userName = userName;
@@ -46,27 +59,6 @@ public class User implements Parcelable ,Cloneable{
         this.address = address;
     }
 
-    public User clone() {
-        try {
-            User user = (User) super.clone();
-            user.userName = this.userName;
-            user.address = this.address;
-            user.phone = this.phone;
-            return user;
-        } catch (CloneNotSupportedException e) {
-            return null;
-        }
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userName='" + userName + '\'' +
-                ", address='" + address + '\'' +
-                ", phone='" + phone + '\'' +
-                '}';
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -77,18 +69,17 @@ public class User implements Parcelable ,Cloneable{
         dest.writeString(this.userName);
         dest.writeString(this.address);
         dest.writeString(this.phone);
-    }
-
-    public User() {
+        dest.writeValue(this.isSelected);
     }
 
     protected User(Parcel in) {
         this.userName = in.readString();
         this.address = in.readString();
         this.phone = in.readString();
+        this.isSelected = (Boolean) in.readValue(Boolean.class.getClassLoader());
     }
 
-    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
+    public static final Creator<User> CREATOR = new Creator<User>() {
         @Override
         public User createFromParcel(Parcel source) {
             return new User(source);

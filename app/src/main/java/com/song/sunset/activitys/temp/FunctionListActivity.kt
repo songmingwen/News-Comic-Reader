@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
+import com.bubblepicker.BubbleActivity
 
 import com.song.sunset.R
 import com.song.sunset.activitys.base.BaseActivity
@@ -129,6 +130,7 @@ class FunctionListActivity : BaseActivity() {
         addButton("billiards") { BilliardsActivity.start(this@FunctionListActivity) }
         addButton("QR code") { QRCodeActivity.start(this@FunctionListActivity) }
         addButton("MotionLayout") { MotionLayoutActivity.start(this@FunctionListActivity) }
+        addButton("Bubble") { BubbleActivity.start(this@FunctionListActivity) }
     }
 
     private fun showFireworks(view: View) {

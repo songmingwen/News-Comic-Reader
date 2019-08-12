@@ -9,8 +9,6 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta2'
     implementation 'com.google.android:flexbox:1.1.0'
     implementation 'com.android.support:multidex:1.0.3'
-
-
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.8.6'
 
     implementation 'com.github.songmingwen:glide-4.0-transformations:1.1'

@@ -1,25 +1,17 @@
 apply from: file("../functions.gradle")
-
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-
 //apply from: 'tinker-support.gradle'//微信热修复
 //apply plugin: 'com.jakewharton.butterknife'
-
 apply plugin: 'walle'
-
 /**Robust  美团热修复技术*/
 //apply plugin: 'auto-patch-plugin'//生成patch时打开
 //apply plugin: 'robust'//生成apk时打开
 /**Robust  美团热修复技术*/
-
 apply from: file('../dependencies.gradle')
-
 boolean hasDefaultPreinstallHandler = isRunningTask("Dev") || isRunningTask("Alpha")
-
 android {
     compileSdkVersion rootProject.ext.android.ANDROID_COMPILE_SDK_VERSION
     buildToolsVersion rootProject.ext.android.ANDROID_BUILD_TOOLS_VERSION
@@ -109,7 +101,6 @@ android {
         targetCompatibility 1.8
     }
 }
-
 walle {
     // 指定渠道包的输出路径
     apkOutputFolder = new File("${project.buildDir}/outputs/channels");
@@ -119,7 +110,6 @@ walle {
 //    channelFile = new File("${project.getProjectDir()}/channel")
     configFile = new File("${project.getProjectDir()}/channels.json")
 }
-
 //--------------------------greenDao配置--------------------------
 apply plugin: 'org.greenrobot.greendao'
 greendao {
@@ -128,18 +118,14 @@ greendao {
     targetGenDir 'src/main/java'
 }
 //--------------------------greenDao配置--------------------------
-
 repositories {
     mavenCentral()
 }
-
 kapt {
     arguments {
         arg("AROUTER_MODULE_NAME", project.getName())
     }
 }
-
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.0.0-beta01'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
+    implementation files('libs/jbox2d-library-2.1.2.2.jar')
 }

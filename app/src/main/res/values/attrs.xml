@@ -52,4 +52,9 @@
     <declare-styleable name="SkinnableButton">
         <attr name="android:textColor" />
     </declare-styleable>
+
+    <declare-styleable name="BubblePicker">
+        <attr name="maxSelectedCount" format="integer" />
+        <attr name="backgroundColor" format="color" />
+    </declare-styleable>
 </resources>
