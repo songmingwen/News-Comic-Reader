@@ -4,45 +4,62 @@ import com.bubblepicker.rendering.Item
 import com.bubblepicker.sqr
 import org.jbox2d.common.Vec2
 import org.jbox2d.dynamics.World
-import java.util.*
+import java.util.Random
 
 object Engine {
 
     val selectedBodies: List<CircleBody>
-        get() = bodies.filter { it.increased || it.toBeIncreased || it.isIncreasing }
+        get() = bodies.filter { (it.increased&& !it.toBeDecreased) || it.toBeIncreased || it.isIncreasing }
+
     var maxSelectedCount: Int? = null
-    var radius = 50
+
+    const val DEFAULT_RADIUS = 25
+    const val TOTAL_AMOUNT = 100
+    var radius = DEFAULT_RADIUS
         set(value) {
             field = value
-            bubbleRadius = interpolate(0.1f, 0.25f, value / 100f)
-            gravity = interpolate(20f, 80f, value / 100f)
-            standardIncreasedGravity = interpolate(500f, 800f, value / 100f)
+            bubbleRadius = interpolate(0.1f, 0.25f, value / TOTAL_AMOUNT.toFloat())
+            gravity = interpolate(20f, 80f, value / TOTAL_AMOUNT.toFloat())
+            standardIncreasedGravity = interpolate(500f, 800f, value / TOTAL_AMOUNT.toFloat())
         }
+
     var centerImmediately = false
-    private var standardIncreasedGravity = interpolate(500f, 800f, 0.5f)
-    private var bubbleRadius = 0.17f
+
+    private var bubbleRadius = interpolate(0.1f, 0.25f, DEFAULT_RADIUS / TOTAL_AMOUNT.toFloat())
+    private var gravity = interpolate(20f, 80f, DEFAULT_RADIUS / TOTAL_AMOUNT.toFloat())
+    private var standardIncreasedGravity = interpolate(500f, 800f, DEFAULT_RADIUS / TOTAL_AMOUNT.toFloat())
 
     private val world = World(Vec2(0f, 0f), false)
-    private val step = 0.0005f
+    private const val STEP = 0.0005f
+    private const val RESIZE_STEP = 0.005f
+
     private val bodies: ArrayList<CircleBody> = ArrayList()
     private var borders: ArrayList<Border> = ArrayList()
-    private val resizeStep = 0.005f
+
     private var scaleX = 0f
     private var scaleY = 0f
+
     private var touch = false
-    private var gravity = 6f
+
     private var increasedGravity = 55f
     private var gravityCenter = Vec2(0f, 0f)
     private val currentGravity: Float
         get() = if (touch) increasedGravity else gravity
+
     private val toBeResized = ArrayList<Item>()
+    /**
+     * 气泡开始时的位置，值越大越远离圆心
+     */
     private val startX
-        get() = if (centerImmediately) 0.5f else 2.2f
+        get() = if (centerImmediately) 0.5f else 1.5f
     private var stepsCount = 0
 
+    private const val DENSITY_START_VALUE = 0.8f
+    private const val DENSITY_END_VALUE = 0.2f
+
     fun build(bodiesCount: Int, scaleX: Float, scaleY: Float): List<CircleBody> {
-        val density = interpolate(0.8f, 0.2f, radius / 100f)
-        for (i in 0..bodiesCount - 1) {
+        val density = interpolate(DENSITY_START_VALUE, DENSITY_END_VALUE, radius / TOTAL_AMOUNT.toFloat())
+        for (i in 0 until bodiesCount) {
             val x = if (Random().nextBoolean()) -startX else startX
             val y = if (Random().nextBoolean()) -0.5f / scaleY else 0.5f / scaleY
             bodies.add(CircleBody(world, Vec2(x, y), bubbleRadius * scaleX, (bubbleRadius * scaleX) * 1.3f, density))
@@ -55,8 +72,8 @@ object Engine {
     }
 
     fun move() {
-        toBeResized.forEach { it.circleBody.resize(resizeStep) }
-        world.step(if (centerImmediately) 0.035f else step, 11, 11)
+        toBeResized.forEach { it.circleBody.resize(RESIZE_STEP) }
+        world.step(if (centerImmediately) 0.035f else STEP, 11, 11)
         bodies.forEach { move(it) }
         toBeResized.removeAll(toBeResized.filter { it.circleBody.finished })
         stepsCount++
@@ -110,7 +127,7 @@ object Engine {
             val direction = gravityCenter.sub(position)
             val distance = direction.length()
             val gravity = if (body.increased) 1.3f * currentGravity else currentGravity
-            if (distance > step * 200) {
+            if (distance > STEP * 200) {
                 applyForce(direction.mul(gravity / distance.sqr()), position)
             }
         }

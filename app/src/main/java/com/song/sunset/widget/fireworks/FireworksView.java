@@ -5,15 +5,17 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.os.Handler;
 import android.os.Message;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
+
 
 import com.song.sunset.R;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * @author songmingwen
@@ -134,7 +136,7 @@ public class FireworksView extends View implements AnimationEndListener {
     }
 
     private static final class AnimationHandler extends Handler {
-        public static final int MESSAGE_CODE_REFRESH_ANIMATION = 1001;
+        public static final int MESSAGE_CODE_REFRESH_ANIMATION = 1200;
         private WeakReference<FireworksView> weakReference;
 
         public AnimationHandler(FireworksView superLikeLayout) {

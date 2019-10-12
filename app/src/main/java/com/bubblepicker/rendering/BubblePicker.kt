@@ -10,49 +10,69 @@ import com.bubblepicker.BubblePickerListener
 import com.bubblepicker.adapter.BubblePickerAdapter
 import com.bubblepicker.model.Color
 import com.bubblepicker.model.PickerItem
+import com.bubblepicker.physics.Engine.DEFAULT_RADIUS
+import com.bubblepicker.physics.Engine.TOTAL_AMOUNT
 import com.song.sunset.R
 
 class BubblePicker : GLSurfaceView {
 
+    /**
+     * 背景色
+     */
     @ColorInt
     var background: Int = 0
         set(value) {
             field = value
             renderer.backgroundColor = Color(value)
         }
-    @Deprecated(level = DeprecationLevel.WARNING,
-            message = "Use BubblePickerAdapter for the view setup instead")
-    var items: ArrayList<PickerItem>? = null
-        set(value) {
-            field = value
-            renderer.items = value ?: ArrayList()
-        }
+
     var adapter: BubblePickerAdapter? = null
         set(value) {
-            field = value
             if (value != null) {
+                field = value
                 renderer.items = ArrayList((0 until value.totalCount)
                         .map { value.getItem(it) }.toList())
             }
         }
+
+    /**
+     * 最多可以选中的数量
+     */
     var maxSelectedCount: Int? = null
         set(value) {
-            renderer.maxSelectedCount = value
             field = value
+            renderer.maxSelectedCount = value
         }
+
+    /**
+     * 点击气泡监听：选中、取消选中
+     */
     var listener: BubblePickerListener? = null
         set(value) {
+            field = value
             renderer.listener = value
         }
-    var bubbleSize = 50
+
+    /**
+     * 气泡大小，最小是 1，最大是 100；否则默认为默认值：TOTAL_AMOUNT
+     */
+    var bubbleSize = DEFAULT_RADIUS
         set(value) {
-            if (value in 1..100) {
+            if (value in 1..TOTAL_AMOUNT) {
+                field = value
                 renderer.bubbleSize = value
             }
         }
+
+    /**
+     * 获取选中的所有项目
+     */
     val selectedItems: List<PickerItem?>
         get() = renderer.selectedItems
 
+    /**
+     * 是否立刻在屏幕中心显示
+     */
     var centerImmediately = false
         set(value) {
             field = value
@@ -73,7 +93,7 @@ class BubblePicker : GLSurfaceView {
         holder.setFormat(PixelFormat.RGBA_8888)
         setRenderer(renderer)
         renderMode = RENDERMODE_CONTINUOUSLY
-        attrs?.let { retrieveAttrubutes(attrs) }
+        attrs?.let { retrieveAttributes(attrs) }
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -109,7 +129,7 @@ class BubblePicker : GLSurfaceView {
 
     private fun isSwipe(event: MotionEvent) = Math.abs(event.x - previousX) > 20 && Math.abs(event.y - previousY) > 20
 
-    private fun retrieveAttrubutes(attrs: AttributeSet) {
+    private fun retrieveAttributes(attrs: AttributeSet) {
         val array = context.obtainStyledAttributes(attrs, R.styleable.BubblePicker)
 
         if (array.hasValue(R.styleable.BubblePicker_maxSelectedCount)) {

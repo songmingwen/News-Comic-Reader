@@ -75,6 +75,8 @@ dependencies {
     //mmap 的高性能通用 key-value 组件（替代 sp splite 等，使用简单可以多进程使用）
     implementation 'com.tencent:mmkv:1.0.22'
 
+    implementation "com.airbnb.android:lottie:2.7.0"
+
     implementation 'com.alibaba:arouter-api:1.4.1'
     kapt 'com.alibaba:arouter-compiler:1.2.2'
 

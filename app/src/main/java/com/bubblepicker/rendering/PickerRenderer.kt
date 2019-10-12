@@ -8,6 +8,7 @@ import com.bubblepicker.*
 import com.bubblepicker.model.Color
 import com.bubblepicker.model.PickerItem
 import com.bubblepicker.physics.Engine
+import com.bubblepicker.physics.Engine.DEFAULT_RADIUS
 import com.bubblepicker.rendering.BubbleShader.A_POSITION
 import com.bubblepicker.rendering.BubbleShader.A_UV
 import com.bubblepicker.rendering.BubbleShader.U_BACKGROUND
@@ -19,15 +20,17 @@ import java.util.*
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
-class PickerRenderer(val glView: View) : GLSurfaceView.Renderer {
+class PickerRenderer(private val glView: View) : GLSurfaceView.Renderer {
 
     var backgroundColor: Color? = null
     var maxSelectedCount: Int? = null
         set(value) {
+            field = value
             Engine.maxSelectedCount = value
         }
-    var bubbleSize = 50
+    var bubbleSize = DEFAULT_RADIUS
         set(value) {
+            field = value
             Engine.radius = value
         }
     var listener: BubblePickerListener? = null
@@ -131,13 +134,13 @@ class PickerRenderer(val glView: View) : GLSurfaceView.Renderer {
         glUseProgram(programId)
     }
 
-    fun createProgram(vertexShader: Int, fragmentShader: Int) = glCreateProgram().apply {
+    private fun createProgram(vertexShader: Int, fragmentShader: Int) = glCreateProgram().apply {
         glAttachShader(this, vertexShader)
         glAttachShader(this, fragmentShader)
         glLinkProgram(this)
     }
 
-    fun createShader(type: Int, shader: String) = GLES20.glCreateShader(type).apply {
+    private fun createShader(type: Int, shader: String) = GLES20.glCreateShader(type).apply {
         glShaderSource(this, shader)
         glCompileShader(this)
     }
@@ -150,7 +153,7 @@ class PickerRenderer(val glView: View) : GLSurfaceView.Renderer {
     private fun getItem(position: Vec2) = position.let {
         val x = it.x.convertPoint(glView.width, scaleX)
         val y = it.y.convertPoint(glView.height, scaleY)
-        circles.find { Math.sqrt(((x - it.x).sqr() + (y - it.y).sqr()).toDouble()) <= it.radius }
+        circles.find { item -> Math.sqrt(((x - item.x).sqr() + (y - item.y).sqr()).toDouble()) <= item.radius }
     }
 
     fun resize(x: Float, y: Float) = getItem(Vec2(x, glView.height - y))?.apply {

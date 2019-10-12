@@ -36,6 +36,7 @@ import com.song.sunset.activitys.base.BaseActivity;
 import com.song.sunset.utils.BitmapUtil;
 import com.song.sunset.utils.DateTimeUtils;
 import com.song.sunset.utils.rxjava.RxUtil;
+import com.song.sunset.widget.CircleProgress;
 import com.song.sunset.widget.TextSwitchView;
 
 import java.io.File;
@@ -132,6 +133,11 @@ public class TempTestActivity extends BaseActivity {
         initOptionsPicker();
 
         setString(SUNDAY);
+
+        CircleProgress circleProgress = (CircleProgress) findViewById(R.id.circle_progress);
+        circleProgress.setOnClickListener(v -> {
+            circleProgress.setAngleRate(circleProgress.getCurrnetAngle() == 0 ? 360 : 0);
+        });
     }
 
     public void onTempTestFlowButtonClick(View view) {

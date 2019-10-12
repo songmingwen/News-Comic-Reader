@@ -11,31 +11,31 @@ import com.bubblepicker.adapter.BubblePickerAdapter
 import com.bubblepicker.model.PickerItem
 import com.song.sunset.R
 import com.song.sunset.beans.User
+import com.song.sunset.utils.ViewUtil
 import kotlinx.android.synthetic.main.activity_bubble.*
 
 class BubbleActivity : AppCompatActivity() {
 
     companion object {
-
         fun start(context: Context) {
             context.startActivity(Intent(context, BubbleActivity::class.java))
         }
     }
 
     val list = arrayOf(
-            User("songmingwen", "湖北", "110"),
-            User("liuwei", "山东", "110"),
-            User("duke", "湖北", "110"),
-            User("lipengfei", "河南", "110"),
-            User("huge", "上海", "110"),
-            User("pengyuyan", "台湾", "110"),
-            User("wuweibo", "山东", "110"),
-            User("wangsongxiang", "浙江", "110"),
-            User("luyezhang", "湖北", "110"),
-            User("tanxiao", "四川", "110"),
-            User("yangyufei", "山东", "110"),
-            User("duweigang", "陕西", "110"),
-            User("zhuyongqing", "青海", "110"))
+            User("宋明文", "湖北", "110"),
+            User("明", "山东", "110"),
+            User("宋", "湖北", "110"),
+            User("宋明文童", "河南", "110"),
+            User("明", "上海", "110"),
+            User("明文", "台湾", "110"),
+            User("宋明文童年区", "山东", "110"),
+            User("宋明文", "浙江", "110"),
+            User("宋明文", "湖北", "110"),
+            User("宋明文", "四川", "110"),
+            User("宋明文", "山东", "110"),
+            User("宋明文", "陕西", "110"),
+            User("宋明文", "青海", "110"))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,14 +55,15 @@ class BubbleActivity : AppCompatActivity() {
                 return PickerItem().apply {
                     title = list[position].userName
                     textColor = ContextCompat.getColor(this@BubbleActivity, android.R.color.white)
+                    textSize = ViewUtil.dip2px(20f).toFloat()
                     color = this@BubbleActivity.resources.getColor(R.color.colorAccent)
                     customData = list[position]
                 }
             }
         }
 
-
-        picker.bubbleSize = 20
+        picker.bubbleSize = 25
+        picker.centerImmediately = false
         picker.listener = object : BubblePickerListener {
             override fun onBubbleSelected(item: PickerItem) {
                 val user = item.customData as User

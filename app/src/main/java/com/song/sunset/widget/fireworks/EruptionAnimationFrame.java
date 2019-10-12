@@ -36,7 +36,7 @@ public class EruptionAnimationFrame extends BaseAnimationFrame {
         List<Element> elements = new ArrayList<>(elementSize);
         for (int i = 0; i < elementSize; i++) {
 
-            int upCount = (int) (elementSize * 0.75);//向上抛的占 75%
+            int upCount = (int) (elementSize * 0.7);//向上抛的占 70%
 
             double startAngle,speed;
             if (i <= upCount) {
@@ -60,7 +60,7 @@ public class EruptionAnimationFrame extends BaseAnimationFrame {
         /**
          * 重力加速度px/s
          */
-        private static final float GRAVITY = 5000;
+        private static final float GRAVITY = 3000;
         private Bitmap bitmap;
 
         public EruptionElement(double angle, double speed, Bitmap bitmap) {

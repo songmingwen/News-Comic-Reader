@@ -66,4 +66,19 @@
         <attr name="neural_line_color" format="color" />
 
     </declare-styleable>
+
+    <declare-styleable name="CircleProgress">
+        <!--圆环的颜色-->
+        <attr name="circle_color" format="color" />
+        <!--圆环宽度-->
+        <attr name="circle_stroke_width" format="float" />
+        <!--背景圆环颜色-->
+        <attr name="bg_circle_color" format="color" />
+        <!--背景圆环宽度-->
+        <attr name="bg_circle_stroke_width" format="float" />
+        <!--圆环扫过的角度-->
+        <attr name="current_angle_rate" format="integer" />
+        <!--圆环扫描速度-->
+        <attr name="circle_speed" format="integer" />
+    </declare-styleable>
 </resources>

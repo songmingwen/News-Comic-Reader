@@ -4,13 +4,13 @@ import org.jbox2d.collision.shapes.CircleShape
 import org.jbox2d.common.Vec2
 import org.jbox2d.dynamics.*
 
-class CircleBody(val world: World, var position: Vec2, var radius: Float, var increasedRadius: Float, var density: Float) {
+class CircleBody(private val world: World, var position: Vec2, var radius: Float, private var increasedRadius: Float, var density: Float) {
 
-    val decreasedRadius: Float = radius
+    private val decreasedRadius: Float = radius
 
     var isIncreasing = false
 
-    var isDecreasing = false
+    private var isDecreasing = false
 
     var toBeIncreased = false
 
@@ -66,7 +66,7 @@ class CircleBody(val world: World, var position: Vec2, var radius: Float, var in
 
     fun resize(step: Float) = if (increased) decrease(step) else increase(step)
 
-    fun decrease(step: Float) {
+    private fun decrease(step: Float) {
         isDecreasing = true
         radius -= step
         reset()
@@ -77,7 +77,7 @@ class CircleBody(val world: World, var position: Vec2, var radius: Float, var in
         }
     }
 
-    fun increase(step: Float) {
+    private fun increase(step: Float) {
         isIncreasing = true
         radius += step
         reset()

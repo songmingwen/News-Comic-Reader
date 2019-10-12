@@ -128,4 +128,5 @@ kapt {
 }
 dependencies {
     implementation files('libs/jbox2d-library-2.1.2.2.jar')
+    implementation files('libs/slf4j-api-1.7.22.jar')
 }

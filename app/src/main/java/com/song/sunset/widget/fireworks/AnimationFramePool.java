@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class AnimationFramePool {
 
-    private static final int DURATION = 700;
+    private static final int DURATION = 1000;
     private List<AnimationFrame> runningFrameList;
     private List<AnimationFrame> idleFrameList;
 

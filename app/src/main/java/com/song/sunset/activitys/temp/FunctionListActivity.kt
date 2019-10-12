@@ -72,7 +72,14 @@ class FunctionListActivity : BaseActivity() {
 
     private val fireworksProvider: BitmapProvider.Provider
         get() = BitmapProvider.Builder(this)
-                .setDrawableArray(intArrayOf(R.drawable.fireworks_emoji001, R.drawable.fireworks_emoji002, R.drawable.fireworks_emoji003, R.drawable.fireworks_emoji004, R.drawable.fireworks_emoji005, R.drawable.fireworks_emoji006, R.drawable.fireworks_emoji007, R.drawable.fireworks_emoji008, R.drawable.fireworks_emoji009, R.drawable.fireworks_emoji010, R.drawable.fireworks_emoji011, R.drawable.fireworks_emoji012, R.drawable.fireworks_emoji013, R.drawable.fireworks_emoji014, R.drawable.fireworks_emoji015, R.drawable.fireworks_emoji016, R.drawable.fireworks_emoji017, R.drawable.fireworks_emoji018, R.drawable.fireworks_emoji019, R.drawable.fireworks_emoji020, R.drawable.fireworks_emoji021))
+                .setDrawableResArray(
+                        arrayOf(R.drawable.fireworks_emoji001, R.drawable.fireworks_emoji002, R.drawable.fireworks_emoji003,
+                                R.drawable.fireworks_emoji004, R.drawable.fireworks_emoji005, R.drawable.fireworks_emoji006,
+                                R.drawable.fireworks_emoji007, R.drawable.fireworks_emoji008, R.drawable.fireworks_emoji009,
+                                R.drawable.fireworks_emoji010, R.drawable.fireworks_emoji011, R.drawable.fireworks_emoji012,
+                                R.drawable.fireworks_emoji013, R.drawable.fireworks_emoji014, R.drawable.fireworks_emoji015,
+                                R.drawable.fireworks_emoji016, R.drawable.fireworks_emoji017, R.drawable.fireworks_emoji018,
+                                R.drawable.fireworks_emoji019, R.drawable.fireworks_emoji020, R.drawable.fireworks_emoji021).toList())
                 .build()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -131,6 +138,7 @@ class FunctionListActivity : BaseActivity() {
         addButton("QR code") { QRCodeActivity.start(this@FunctionListActivity) }
         addButton("MotionLayout") { MotionLayoutActivity.start(this@FunctionListActivity) }
         addButton("Bubble") { BubbleActivity.start(this@FunctionListActivity) }
+        addButton("Lottie") { LottieActivity.start(this@FunctionListActivity) }
     }
 
     private fun showFireworks(view: View) {

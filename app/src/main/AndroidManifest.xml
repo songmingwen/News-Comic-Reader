@@ -244,6 +244,7 @@
         <activity android:name=".activitys.opengl.teach.TeachOneActivity" />
         <activity android:name=".activitys.opengl.teach.TeachTwoActivity" />
         <activity android:name="com.bubblepicker.BubbleActivity" />
+        <activity android:name=".activitys.temp.LottieActivity" />
     </application>
 
 </manifest>

@@ -11,7 +11,7 @@ object BubbleShader {
     const val A_UV = "a_UV"
 
     // language=GLSL
-    val vertexShader = """
+    const val vertexShader = """
         uniform mat4 u_Matrix;
 
         attribute vec4 a_Position;
@@ -27,7 +27,7 @@ object BubbleShader {
     """
 
     // language=GLSL
-    val fragmentShader = """
+    const val fragmentShader = """
         precision mediump float;
 
         uniform vec4 u_Background;
