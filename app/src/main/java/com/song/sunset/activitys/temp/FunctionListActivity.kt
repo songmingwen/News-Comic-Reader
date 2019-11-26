@@ -4,6 +4,7 @@ import android.app.ActivityManager
 import android.app.usage.UsageStatsManager
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Build
 import android.os.RemoteException
 import android.os.Bundle
@@ -117,6 +118,37 @@ class FunctionListActivity : BaseActivity() {
 
 
         //        switchDayNightMode();
+        Log.i("屏幕旋转生命周期","onCreate")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.i("屏幕旋转生命周期", "onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.i("屏幕旋转生命周期", "onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.i("屏幕旋转生命周期", "onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.i("屏幕旋转生命周期", "onStop")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.i("屏幕旋转生命周期", "onDestroy")
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        Log.i("屏幕旋转生命周期", "onConfigurationChanged")
     }
 
     private fun LinearLayout.addButtonList() {

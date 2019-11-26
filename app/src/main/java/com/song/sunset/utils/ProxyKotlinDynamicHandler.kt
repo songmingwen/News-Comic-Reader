@@ -12,7 +12,7 @@ import java.lang.reflect.Proxy
  */
 class ProxyKotlinDynamicHandler : InvocationHandler {
 
-    var mTarget: Any? = null
+    private var mTarget: Any? = null
 
     fun newInstance(target: Any): Any {
         this.mTarget = target
