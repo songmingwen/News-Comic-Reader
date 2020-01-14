@@ -1,6 +1,7 @@
 package com.song.sunset.utils
 
 import java.util.*
+import org.junit.Test
 
 /**
  * @author Song
@@ -8,7 +9,7 @@ import java.util.*
  */
 class Exam{
 
-    @org.junit.Test
+    @Test
     fun test(){
         val a = intArrayOf(1, 2, 3, 4, 5, 6, 7)
         trans(a)
