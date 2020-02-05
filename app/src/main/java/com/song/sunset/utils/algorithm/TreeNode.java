@@ -1,7 +1,9 @@
 package com.song.sunset.utils.algorithm;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -103,5 +105,47 @@ public class TreeNode {
             }
         }
     }
+
+/**
+ * 广度优先遍历
+ */
+public static void widthFirst(TreeNode root) {
+    Queue<TreeNode> queue = new LinkedList<>();
+    if (root != null) {
+        queue.add(root);
+    }
+
+    while (!queue.isEmpty()) {
+        root = queue.poll();
+        System.out.print(root.value + " ");
+
+        if (root.leftChild != null) {
+            queue.offer(root.leftChild);
+        }
+        if (root.rightChild != null) {
+            queue.offer(root.rightChild);
+        }
+    }
+}
+
+/**
+ * 深度优先遍历
+ */
+public static void depthFirst(TreeNode root) {
+    Stack<TreeNode> stack = new Stack<>();
+    stack.push(root);
+
+    while (!stack.isEmpty()) {
+        root = stack.pop();
+        System.out.print(root.value + ",");
+
+        if (root.rightChild != null) {
+            stack.push(root.rightChild);
+        }
+        if (root.leftChild != null) {
+            stack.push(root.leftChild);
+        }
+    }
+}
 
 }

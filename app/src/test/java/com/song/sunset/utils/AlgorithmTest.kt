@@ -131,7 +131,9 @@ class AlgorithmTest {
 
         node1.leftChild = node2
         node1.rightChild = node3
-
+//           1
+//         2   3
+//        4 5 6 7
         rootNode = node1
     }
 
@@ -151,6 +153,12 @@ class AlgorithmTest {
         TreeNode.postOrder(rootNode)
         println()
         TreeNode.postOrderWithOutRecursive(rootNode)
+
+        println("\n广度")
+        TreeNode.widthFirst(rootNode)
+
+        println("\n深度")
+        TreeNode.depthFirst(rootNode)
     }
 
 }
