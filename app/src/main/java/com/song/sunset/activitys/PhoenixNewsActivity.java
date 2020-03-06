@@ -93,18 +93,6 @@ public class PhoenixNewsActivity extends BaseActivity {
     }
 
     @Override
-    public void onBackPressedSupport() {
-        if (inCustomView()) {
-            hideCustomView();
-            return;
-        }
-        if (mWebView != null && mWebView.canGoBack())
-            mWebView.goBack();
-        else
-            super.onBackPressedSupport();
-    }
-
-    @Override
     protected void onDestroy() {
         if (null != mWebView) {
             mWebView.removeAllViews();

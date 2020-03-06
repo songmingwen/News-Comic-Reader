@@ -29,11 +29,4 @@ public class ComicCollectionActivity extends BaseActivity {
         switchFragment(CollectionKotlinFragment.class.getName(), R.id.id_comic_collection_content);
     }
 
-    @Override
-    public void onBackPressedSupport() {
-        if (fromWidget) {
-            this.startActivity(new Intent(this, MainActivity.class));
-        }
-        super.onBackPressedSupport();
-    }
 }

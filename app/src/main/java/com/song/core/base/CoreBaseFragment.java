@@ -10,14 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import me.yokeyword.fragmentation.anim.FragmentAnimator;
-import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
+import com.trello.rxlifecycle3.components.RxFragment;
 
 /**
  * Created by hpw on 16/10/27.
  */
 
-public abstract class CoreBaseFragment<T extends CoreBasePresenter, E extends CoreBaseModel> extends SwipeBackFragment {
+public abstract class CoreBaseFragment<T extends CoreBasePresenter, E extends CoreBaseModel> extends RxFragment {
     protected String TAG;
 
     public T mPresenter;
@@ -69,14 +68,6 @@ public abstract class CoreBaseFragment<T extends CoreBasePresenter, E extends Co
     public void onDestroy() {
         super.onDestroy();
         if (mPresenter != null) mPresenter.detachVM();
-    }
-
-    @Override
-    protected FragmentAnimator onCreateFragmentAnimator() {
-        FragmentAnimator fragmentAnimator = _mActivity.getFragmentAnimator();
-        fragmentAnimator.setEnter(0);
-        fragmentAnimator.setExit(0);
-        return fragmentAnimator;
     }
 
     public abstract int getLayoutId();

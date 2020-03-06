@@ -120,10 +120,6 @@ class MainKotlinActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
 //        return mode == AppOpsManager.MODE_ALLOWED;
 //    }
 
-    override fun swipeBackPriority(): Boolean {
-        return false
-    }
-
     private fun initView() {
         toolbar = findViewById(R.id.toolbar) as Toolbar
         toolbar!!.setLogo(R.mipmap.logo_black)
@@ -291,21 +287,6 @@ class MainKotlinActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         val drawer = findViewById(R.id.drawer_layout) as DrawerLayout
         drawer.closeDrawer(GravityCompat.START)
         return true
-    }
-
-    override fun onBackPressedSupport() {
-        val drawer = findViewById(R.id.drawer_layout) as DrawerLayout
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START)
-        } else {
-            if (System.currentTimeMillis() - lastBackPressedTime < 2000) {
-                //                moveTaskToBack(true);
-                SPUtils.setBooleanByName(this, SPUtils.APP_FIRST_INSTALL, false)
-                finish()
-            } else {
-                lastBackPressedTime = System.currentTimeMillis()
-            }
-        }
     }
 
     override fun onDestroy() {

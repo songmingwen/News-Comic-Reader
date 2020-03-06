@@ -9,15 +9,13 @@ import android.widget.Toast;
 
 
 import com.song.core.statusbar.StatusBarUtil;
-import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
-import me.yokeyword.fragmentation.anim.FragmentAnimator;
-import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
+import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
 
 /**
  * Created by hpw on 16/10/12.
  */
 
-public abstract class CoreBaseActivity<P extends CoreBasePresenter, M extends CoreBaseModel> extends SwipeBackActivity {
+public abstract class CoreBaseActivity<P extends CoreBasePresenter, M extends CoreBaseModel> extends RxAppCompatActivity {
 
     protected String TAG;
 
@@ -74,23 +72,6 @@ public abstract class CoreBaseActivity<P extends CoreBasePresenter, M extends Co
     public abstract int getLayoutId();
 
     public abstract void initView(Bundle savedInstanceState);
-
-    @Override
-    public void onBackPressedSupport() {
-        supportFinishAfterTransition();
-    }
-
-    @Override
-    protected FragmentAnimator onCreateFragmentAnimator() {
-        // 设置横向(和安卓4.x动画相同)
-        return new DefaultHorizontalAnimator();
-        // 设置无动画
-//        return new DefaultNoAnimator();
-        // 设置自定义动画
-        // return new FragmentAnimator(enter,exit,popEnter,popExit);
-        // 默认竖向(和安卓5.0以上的动画相同)
-//        return super.onCreateFragmentAnimator();
-    }
 
     public void setStatusBarColor() {
         StatusBarUtil.setTransparent(this);

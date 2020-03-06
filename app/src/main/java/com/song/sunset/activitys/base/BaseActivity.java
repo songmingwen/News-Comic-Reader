@@ -18,17 +18,22 @@ import android.text.TextUtils;
 import android.view.WindowManager;
 
 import com.song.sunset.utils.SPUtils;
+import com.song.sunset.utils.net.NetworkLifecycleTransformer;
+import com.song.sunset.utils.net.SchedulerTransformer;
+import com.song.sunset.utils.net.SimplifyRequestTransformer;
+import com.trello.rxlifecycle3.android.ActivityEvent;
+import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
 
 import java.lang.reflect.Field;
 
-import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
-
+import io.reactivex.ObservableTransformer;
+import retrofit2.Response;
 
 /**
  * Created by Song on 2016/8/27 0027.
  * Email:z53520@qq.com
  */
-public class BaseActivity extends SwipeBackActivity {
+public class BaseActivity extends RxAppCompatActivity {
     private String currTag = "";
     protected FragmentManager supportFragmentManager;
     protected Handler mHandler = new Handler();
@@ -43,6 +48,31 @@ public class BaseActivity extends SwipeBackActivity {
 //            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         }
         supportFragmentManager = getSupportFragmentManager();
+    }
+
+    /**
+     * 返回一个只添加了线程切换的 Transform
+     */
+    public final <T> SchedulerTransformer<T> bindScheduler() {
+        return new SchedulerTransformer<>();
+    }
+
+    /**
+     * 1. 执行线程切换
+     * 2. 绑定生命周期
+     */
+    public final <T> NetworkLifecycleTransformer<T> bindLifecycleAndScheduler() {
+        return new NetworkLifecycleTransformer<>(bindUntilEvent(ActivityEvent.DESTROY));
+    }
+
+    /**
+     * 用于简化 RxJava 请求使用它会：
+     * 1. 执行线程切换
+     * 2. 绑定生命周期
+     * 3. Response 剥离，将 Response[T] 中 T 的剥离
+     */
+    public final <T> ObservableTransformer<Response<T>, T> simplifyRequest() {
+        return new SimplifyRequestTransformer<>(bindUntilEvent(ActivityEvent.DESTROY));
     }
 
     public Handler getmHandler() {

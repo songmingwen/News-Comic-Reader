@@ -144,11 +144,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //        return mode == AppOpsManager.MODE_ALLOWED;
 //    }
 
-    @Override
-    public boolean swipeBackPriority() {
-        return false;
-    }
-
     private void initView() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setLogo(R.mipmap.logo_black);
@@ -225,22 +220,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    @Override
-    public void onBackPressedSupport() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            if (System.currentTimeMillis() - lastBackPressedTime < 2000) {
-//                moveTaskToBack(true);
-                SPUtils.setBooleanByName(this, SPUtils.APP_FIRST_INSTALL, false);
-                finish();
-            } else {
-                lastBackPressedTime = System.currentTimeMillis();
-            }
-        }
     }
 
     @Override
