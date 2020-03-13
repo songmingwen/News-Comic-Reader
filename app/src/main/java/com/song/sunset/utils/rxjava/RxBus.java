@@ -1,4 +1,4 @@
-package com.song.sunset.utils;
+package com.song.sunset.utils.rxjava;
 
 import io.reactivex.Observable;
 import io.reactivex.subjects.PublishSubject;

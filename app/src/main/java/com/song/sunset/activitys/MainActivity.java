@@ -1,11 +1,12 @@
 package com.song.sunset.activitys;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -285,6 +286,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     private void showNotification(String content) {
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        //Android 8.0 以后必须设置 channel 否则不显示通知
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("growth", "growth", NotificationManager.IMPORTANCE_DEFAULT);
+            notificationManager.createNotificationChannel(channel);
+        }
+
         Intent intent = new Intent(this, ComicCollectionActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                 | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
@@ -292,7 +300,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         PendingIntent pendingIntent = PendingIntent.getActivity(this, (int) (Math.random() * 100000),
                 intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        NotificationCompat.Builder nBuilder = new NotificationCompat.Builder(this);
+        //Android 8.0 以后必须设置 channel 否则不显示通知
+        NotificationCompat.Builder nBuilder = new NotificationCompat.Builder(this, "growth");
         nBuilder.setSmallIcon(R.mipmap.logo_black)
                 .setContentIntent(pendingIntent)
                 .setContentTitle("漫画有更新")
@@ -303,9 +312,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         notification.flags = notification.flags | Notification.FLAG_AUTO_CANCEL
                 | Notification.FLAG_SHOW_LIGHTS
                 | Notification.FLAG_ONGOING_EVENT;
-        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        if (manager != null) {
-            manager.notify(1, notification);
+
+        if (notificationManager != null) {
+            notificationManager.notify(1, notification);
         }
     }
 

@@ -2,7 +2,7 @@ package com.song.sunset.utils.retrofit;
 
 import android.text.TextUtils;
 
-import com.song.sunset.utils.NetWorkUtils;
+import com.song.sunset.utils.net.NetWorkUtils;
 
 import java.io.IOException;
 

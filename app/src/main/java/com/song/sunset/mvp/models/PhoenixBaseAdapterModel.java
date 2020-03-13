@@ -162,9 +162,10 @@ public class PhoenixBaseAdapterModel implements RecyclerViewAdapterModel<Phoenix
     }
 
     public void render(final Context context, int itemViewType, RecyclerView.ViewHolder holder, final PhoenixChannelBean phoenixChannelBean) {
-        holder.itemView.setOnClickListener(v -> ARouter.getInstance().build("/song/phoenix/news")
-                .withString(PhoenixNewsActivity.PHOENIX_NEWS_URL, phoenixChannelBean.getLink().getWeburl())
-                .navigation());
+        holder.itemView.setOnClickListener(v ->
+                ARouter.getInstance().build("/song/phoenix/news")
+                        .withString(PhoenixNewsActivity.PHOENIX_NEWS_URL, phoenixChannelBean.getLink().getWeburl())
+                        .navigation());
 
         PhoenixBaseRenderModel model;
 

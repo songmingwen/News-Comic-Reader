@@ -228,7 +228,7 @@ public static java.lang.String TABLENAME;
   public static final android.os.Parcelable$Creator *;
 }
 
-
+#阿里Arouter
 -keep public class com.alibaba.android.arouter.routes.**{*;}
 -keep public class com.alibaba.android.arouter.facade.**{*;}
 -keep class * implements com.alibaba.android.arouter.facade.template.ISyringe{*;}

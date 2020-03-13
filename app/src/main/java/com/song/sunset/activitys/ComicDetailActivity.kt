@@ -38,6 +38,7 @@ open class ComicDetailActivity : AppCompatActivity() {
     private var comicId = -1
     private var adapter: ComicDetailAdapter? = null
     private var comicDetailBean: ComicDetailBean? = null
+    private lateinit var vm: ComicDetailViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +48,70 @@ open class ComicDetailActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_comic_detail_mvvm)
 
+        initView()
+
+        addListener()
+
+        addObserver()
+
+        vm.getComicDetailData(comicId)
+        vm.getCollectionStatus(comicId)
+    }
+
+    private fun addObserver() {
+        vm.comicDetailBean.observe(this, Observer {
+            comicDetailBean = it
+            toolbar.title = it.comic.name
+            adapter?.setData(it)
+            setExtractionColorFromBitmap(it)
+            vm.updateCollectedComicData(it)
+        })
+
+        vm.dataStatus.observe(this, Observer {
+            if (it) {
+                progress.showContent()
+                id_comic_detail_fab.visibility = View.VISIBLE
+            } else {
+                progress.showError {
+                    progress.showLoading()
+                    id_comic_detail_fab.visibility = View.GONE
+                    vm.getComicDetailData(comicId)
+                }
+            }
+        })
+
+        vm.collectionStatus.observe(this, Observer {
+            val res = if (it) android.R.drawable.star_big_on else android.R.drawable.star_big_off
+            id_comic_detail_fab.setImageDrawable(resources.getDrawable(res))
+        })
+
+        vm.showTips.observe(this, Observer {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        })
+    }
+
+    private fun addListener() {
+        var distance = 0
+        id_comic_detail_recycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                distance += dy
+                var rate = distance * 1.0f / ViewUtil.dip2px(200F)
+                if (rate > 1) {
+                    rate = 1F
+                } else if (rate < 0) {
+                    rate = 0F
+                }
+                toolbar.alpha = rate
+            }
+        })
+
+        id_comic_detail_fab.setOnClickListener {
+            vm.changeCollectedStatus(comicDetailBean!!)
+        }
+    }
+
+    private fun initView() {
+        vm = ViewModelProviders.of(this).get(ComicDetailViewModel::class.java)
         progress.showLoading()
 
         if (intent != null) {
@@ -66,59 +131,6 @@ open class ComicDetailActivity : AppCompatActivity() {
             }
         }
         id_comic_detail_recycler.layoutManager = layoutManager
-
-        var distance = 0
-        id_comic_detail_recycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                distance += dy
-                var rate = distance * 1.0f / ViewUtil.dip2px(200F)
-                if (rate > 1) {
-                    rate = 1F
-                } else if (rate < 0) {
-                    rate = 0F
-                }
-                toolbar.alpha = rate
-            }
-        })
-
-        val comicDetailViewModel = ViewModelProviders.of(this).get(ComicDetailViewModel::class.java)
-
-        comicDetailViewModel.comicDetailBean.observe(this, Observer {
-            comicDetailBean = it
-            toolbar.title = it.comic.name
-            adapter?.setData(it)
-            setExtractionColorFromBitmap(it)
-            comicDetailViewModel.updateCollectedComicData(it)
-        })
-
-        comicDetailViewModel.dataStatus.observe(this, Observer {
-            if (it) {
-                progress.showContent()
-                id_comic_detail_fab.visibility = View.VISIBLE
-            } else {
-                progress.showError {
-                    progress.showLoading()
-                    id_comic_detail_fab.visibility = View.GONE
-                    comicDetailViewModel.getComicDetailData(comicId)
-                }
-            }
-        })
-
-        comicDetailViewModel.collectionStatus.observe(this, Observer {
-            val res = if (it) android.R.drawable.star_big_on else android.R.drawable.star_big_off
-            id_comic_detail_fab.setImageDrawable(resources.getDrawable(res))
-        })
-
-        comicDetailViewModel.showTips.observe(this, Observer {
-            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-        })
-
-        id_comic_detail_fab.setOnClickListener {
-            comicDetailViewModel.changeCollectedStatus(comicDetailBean!!)
-        }
-
-        comicDetailViewModel.getComicDetailData(comicId)
-        comicDetailViewModel.getCollectionStatus(comicId)
     }
 
     private fun setExtractionColorFromBitmap(comicDetailRD: ComicDetailBean) {

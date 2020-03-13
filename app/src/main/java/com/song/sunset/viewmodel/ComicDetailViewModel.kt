@@ -27,17 +27,19 @@ open class ComicDetailViewModel : ViewModel() {
     private var dispose = CompositeDisposable()
 
     fun getComicDetailData(comicId: Int) {
-        val dis = RxUtil.comic(RetrofitFactory.createApi(U17ComicApi::class.java).queryComicDetailRDByObservable(comicId), object : RetrofitCallback<ComicDetailBean> {
-            override fun onSuccess(t: ComicDetailBean?) {
-                comicDetailBean.value = t
-                dataStatus.value = true
-            }
+        val dis = RxUtil.comic(
+                RetrofitFactory.createApi(U17ComicApi::class.java).queryComicDetailRDByObservable(comicId),
+                object : RetrofitCallback<ComicDetailBean> {
+                    override fun onSuccess(t: ComicDetailBean?) {
+                        comicDetailBean.value = t
+                        dataStatus.value = true
+                    }
 
-            override fun onFailure(errorCode: Int, errorMsg: String?) {
-                dataStatus.value = false
-            }
+                    override fun onFailure(errorCode: Int, errorMsg: String?) {
+                        dataStatus.value = false
+                    }
 
-        })
+                })
         dispose.add(dis)
     }
 

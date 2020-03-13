@@ -1,16 +1,22 @@
 package com.song.sunset;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
+import android.os.Bundle;
 import android.os.Process;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.multidex.MultiDexApplication;
+import io.reactivex.Observable;
 
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.song.core.FrescoInitializer;
+import com.song.sunset.enums.Weeks;
 import com.song.sunset.services.managers.BinderPool;
 import com.song.sunset.services.managers.MusicGetterManager;
 import com.song.sunset.utils.GreenDaoUtil;
@@ -18,8 +24,12 @@ import com.song.sunset.services.managers.MessengerManager;
 import com.song.sunset.services.managers.PushManager;
 import com.song.sunset.utils.SPUtils;
 import com.song.sunset.utils.AppConfig;
+import com.song.sunset.utils.lifecycle.BaseActivityLifecycle;
+import com.song.sunset.utils.lifecycle.LifecycleManager;
+import com.song.sunset.utils.net.RxNetWork;
 import com.tencent.mmkv.MMKV;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -78,6 +88,27 @@ public class SunsetApplication extends MultiDexApplication {
 //            return;
 //        }
 //        LeakCanary.install(this);
+
+        addLifecycleListener();
+    }
+
+    private void addLifecycleListener() {
+        LifecycleManager lifecycleManager = new LifecycleManager(this);
+        lifecycleManager.addLifeCycle("测试", new BaseActivityLifecycle() {
+            @Override
+            public void onFirstCreate(Activity firstActivity) {
+                super.onFirstCreate(firstActivity);
+            }
+
+            @Override
+            public void onLastDestroy(Activity lastActivity) {
+                super.onLastDestroy(lastActivity);
+            }
+        });
+        lifecycleManager.init();
+
+
+
     }
 
     private void initProcess() {

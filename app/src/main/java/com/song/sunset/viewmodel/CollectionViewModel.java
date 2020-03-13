@@ -31,26 +31,12 @@ import io.reactivex.disposables.Disposable;
  */
 public class CollectionViewModel extends ViewModel {
 
-    private MutableLiveData<List<ComicLocalCollection>> mLocalCollectionLiveData;
-    private MutableLiveData<List<ComicCollectionBean>> mCollectionLiveData;
+    private MutableLiveData<List<ComicLocalCollection>> mLocalCollectionLiveData = new MutableLiveData<>();
+    private MutableLiveData<List<ComicCollectionBean>> mCollectionLiveData = new MutableLiveData<>();
     private static ComicLocalCollectionDao comicLocalCollectionDao;
 
     static {
         comicLocalCollectionDao = GreenDaoUtil.getDaoSession().getComicLocalCollectionDao();
-    }
-
-    public MutableLiveData<List<ComicLocalCollection>> getLocalCollectedLiveData() {
-        if (mLocalCollectionLiveData == null) {
-            mLocalCollectionLiveData = new MutableLiveData<>();
-        }
-        return mLocalCollectionLiveData;
-    }
-
-    public MutableLiveData<List<ComicCollectionBean>> getCollectedLiveData() {
-        if (mCollectionLiveData == null) {
-            mCollectionLiveData = new MutableLiveData<>();
-        }
-        return mCollectionLiveData;
     }
 
     public void getNewestCollectedComic() {
@@ -70,7 +56,7 @@ public class CollectionViewModel extends ViewModel {
 
     public void getLocalCollectedComic() {
         createDao();
-        getLocalCollectedLiveData().postValue(comicLocalCollectionDao.loadAll());
+        mLocalCollectionLiveData.postValue(comicLocalCollectionDao.loadAll());
     }
 
     private void save(CollectionOnlineListBean collectionOnlineListBean) {
@@ -82,7 +68,7 @@ public class CollectionViewModel extends ViewModel {
                         createDao();
                         getLocalCollectedComic();
                     }
-                    getCollectedLiveData().postValue(collectionOnlineListBean.getFavList());
+                    mCollectionLiveData.postValue(collectionOnlineListBean.getFavList());
                 });
     }
 
