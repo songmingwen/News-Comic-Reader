@@ -31,8 +31,8 @@ import io.reactivex.disposables.Disposable;
  */
 public class CollectionViewModel extends ViewModel {
 
-    private MutableLiveData<List<ComicLocalCollection>> mLocalCollectionLiveData = new MutableLiveData<>();
-    private MutableLiveData<List<ComicCollectionBean>> mCollectionLiveData = new MutableLiveData<>();
+    public MutableLiveData<List<ComicLocalCollection>> mLocalCollectionLiveData = new MutableLiveData<>();
+    public MutableLiveData<List<ComicCollectionBean>> mCollectionLiveData = new MutableLiveData<>();
     private static ComicLocalCollectionDao comicLocalCollectionDao;
 
     static {

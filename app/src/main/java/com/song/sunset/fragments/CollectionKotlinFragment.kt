@@ -32,14 +32,14 @@ class CollectionKotlinFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         collectionViewModel = ViewModelProviders.of(this).get(CollectionViewModel::class.java)
-        collectionViewModel!!.localCollectedLiveData.observe(this, Observer {
+        collectionViewModel!!.mLocalCollectionLiveData.observe(this, Observer {
             collectionViewModel!!.getNewestCollectedComic()
             if (it != null && !it.isEmpty()) {
                 progress.showContent()
                 adapter.setData(it)
             }
         })
-        collectionViewModel!!.collectedLiveData.observe(this, Observer<List<ComicCollectionBean>> {
+        collectionViewModel!!.mCollectionLiveData.observe(this, Observer<List<ComicCollectionBean>> {
             progress.showContent()
             adapter.setCollectionList(it)
             if (it == null || it.isEmpty()) {
