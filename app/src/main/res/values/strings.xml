@@ -37,7 +37,7 @@
     <string name="rank_comic">排行漫画</string>
     <string name="collection_comic">收藏漫画</string>
     <string name="phoenix_news">凤凰新闻</string>
-    <string name="phoenix_video">凤凰视频</string>
+    <string name="phoenix_video">视频</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="without_content">没有内容</string>
     <string name="loading_failure">加载失败</string>

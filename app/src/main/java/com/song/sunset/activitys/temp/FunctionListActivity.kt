@@ -118,32 +118,43 @@ class FunctionListActivity : BaseActivity() {
 
 
         //        switchDayNightMode();
-        Log.i("屏幕旋转生命周期","onCreate")
+        Log.i("屏幕旋转生命周期", "onCreate")
+        Log.i("A -> B", "A : onCreate")
     }
 
     override fun onStart() {
         super.onStart()
         Log.i("屏幕旋转生命周期", "onStart")
+        Log.i("A -> B", "A : onStart")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.i("A -> B", "A : onRestart")
     }
 
     override fun onResume() {
         super.onResume()
         Log.i("屏幕旋转生命周期", "onResume")
+        Log.i("A -> B", "A : onResume")
     }
 
     override fun onPause() {
         super.onPause()
         Log.i("屏幕旋转生命周期", "onPause")
+        Log.i("A -> B", "A : onPause")
     }
 
     override fun onStop() {
         super.onStop()
         Log.i("屏幕旋转生命周期", "onStop")
+        Log.i("A -> B", "A : onStop")
     }
 
     override fun onDestroy() {
         super.onDestroy()
         Log.i("屏幕旋转生命周期", "onDestroy")
+        Log.i("A -> B", "A : onDestroy")
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
@@ -152,10 +163,7 @@ class FunctionListActivity : BaseActivity() {
     }
 
     private fun LinearLayout.addButtonList() {
-        addButton("🎆") {}.apply {
-            setOnClickListener { showFireworks(this) }
-        }
-
+        addButton("🎆") {}.apply { setOnClickListener { showFireworks(this) } }
         addButton("test") { TempTestActivity.start(this@FunctionListActivity) }
         addButton("Fresco XML params display") { FrescoXMLActivity.start(this@FunctionListActivity) }
         addButton("Fresco post processor display") { FrescoProcessorActivity.start(this@FunctionListActivity) }
@@ -171,6 +179,10 @@ class FunctionListActivity : BaseActivity() {
         addButton("MotionLayout") { MotionLayoutActivity.start(this@FunctionListActivity) }
         addButton("Bubble") { BubbleActivity.start(this@FunctionListActivity) }
         addButton("Lottie") { LottieActivity.start(this@FunctionListActivity) }
+        addButton("WorkManager") { WorkManagerActivity.start(this@FunctionListActivity) }
+        addButton("GlobalFlow") { GlobalFlowActivity.start(this@FunctionListActivity) }
+        addButton("Camera") { CameraActivity.start(this@FunctionListActivity) }
+        addButton("ServiceProvider") { ServiceProviderActivity.start(this@FunctionListActivity) }
     }
 
     private fun showFireworks(view: View) {

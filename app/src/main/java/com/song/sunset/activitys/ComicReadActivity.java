@@ -72,6 +72,7 @@ public class ComicReadActivity extends BaseActivity implements RetrofitCallback<
         adapter = new ComicReadAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(getLinearLayoutManager());
+
     }
 
     @NonNull

@@ -9,6 +9,7 @@ import android.os.Process;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.multidex.MultiDexApplication;
+import io.flutter.view.FlutterMain;
 import io.reactivex.Observable;
 
 import android.text.TextUtils;
@@ -16,6 +17,7 @@ import android.util.Log;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.song.core.FrescoInitializer;
+import com.song.sunset.activitys.temp.GlobalFlowActivity;
 import com.song.sunset.enums.Weeks;
 import com.song.sunset.services.managers.BinderPool;
 import com.song.sunset.services.managers.MusicGetterManager;
@@ -27,6 +29,7 @@ import com.song.sunset.utils.AppConfig;
 import com.song.sunset.utils.lifecycle.BaseActivityLifecycle;
 import com.song.sunset.utils.lifecycle.LifecycleManager;
 import com.song.sunset.utils.net.RxNetWork;
+import com.song.sunset.widget.GlobalFlowView;
 import com.tencent.mmkv.MMKV;
 
 import java.util.ArrayList;
@@ -89,26 +92,29 @@ public class SunsetApplication extends MultiDexApplication {
 //        }
 //        LeakCanary.install(this);
 
+        //生命周期监听
         addLifecycleListener();
+
+        FlutterMain.startInitialization(this);
     }
 
     private void addLifecycleListener() {
         LifecycleManager lifecycleManager = new LifecycleManager(this);
         lifecycleManager.addLifeCycle("测试", new BaseActivityLifecycle() {
-            @Override
-            public void onFirstCreate(Activity firstActivity) {
-                super.onFirstCreate(firstActivity);
-            }
 
             @Override
-            public void onLastDestroy(Activity lastActivity) {
-                super.onLastDestroy(lastActivity);
+            public void onActivityResumed(Activity activity) {
+                super.onActivityResumed(activity);
+                MMKV store = MMKV.defaultMMKV();
+                boolean show = store.getBoolean("show_global_flow", true);
+                if (show) {
+                    GlobalFlowActivity.Companion.showGlobalFlowView(activity);
+                } else {
+                    GlobalFlowActivity.Companion.hideView(activity);
+                }
             }
         });
         lifecycleManager.init();
-
-
-
     }
 
     private void initProcess() {

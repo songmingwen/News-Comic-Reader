@@ -153,8 +153,8 @@ public class FrescoUtil {
         }
     }
 
-    public static ControllerListener<? super ImageInfo> getControllerListener() {
-        ControllerListener listener = new BaseControllerListener() {
+    public static ControllerListener getControllerListener() {
+        return new BaseControllerListener() {
             @Override
             public void onFinalImageSet(String id, Object imageInfo, Animatable animatable) {
                 if (animatable != null) {
@@ -178,7 +178,6 @@ public class FrescoUtil {
                 super.onFailure(id, throwable);
             }
         };
-        return listener;
     }
 
     public static Postprocessor getPostProcessor(boolean userBlur) {

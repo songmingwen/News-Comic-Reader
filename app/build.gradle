@@ -10,8 +10,12 @@ apply plugin: 'walle'
 //apply plugin: 'auto-patch-plugin'//生成patch时打开
 //apply plugin: 'robust'//生成apk时打开
 /**Robust  美团热修复技术*/
+
+//dependencies 配置在此文件添加
 apply from: file('../dependencies.gradle')
+
 boolean hasDefaultPreinstallHandler = isRunningTask("Dev") || isRunningTask("Alpha")
+
 android {
     compileSdkVersion rootProject.ext.android.ANDROID_COMPILE_SDK_VERSION
     buildToolsVersion rootProject.ext.android.ANDROID_BUILD_TOOLS_VERSION
@@ -43,8 +47,13 @@ android {
         multiDexEnabled true
         javaCompileOptions {
             annotationProcessorOptions {
+                includeCompileClasspath = true
                 arguments = [AROUTER_MODULE_NAME: project.getName(), AROUTER_GENERATE_DOC: "enable"]
             }
+        }
+
+        ndk {
+            abiFilters "armeabi-v7a"
         }
     }
     signingConfigs {
@@ -126,7 +135,15 @@ kapt {
         arg("AROUTER_MODULE_NAME", project.getName())
     }
 }
+
 dependencies {
     implementation files('libs/jbox2d-library-2.1.2.2.jar')
     implementation files('libs/slf4j-api-1.7.22.jar')
+
+    implementation project(':annotation')
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    kapt project(':processor')
+
+    implementation project(':flutter')
 }

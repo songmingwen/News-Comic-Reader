@@ -1,5 +1,9 @@
 package com.song.video;
 
+import android.content.Context;
+
+import com.song.sunset.utils.AppConfig;
+
 /**
  * Created by Song on 2017/4/27 0027.
  * E-mail: z53520@qq.com
@@ -20,7 +24,10 @@ public class VideoManager {
         return sInstance;
     }
 
-    public NormalVideoPlayer getCurrentNormalVideoPlayer() {
+    public NormalVideoPlayer getCurrentNormalVideoPlayer(Context context) {
+        if (mVideoPlayer == null) {
+            mVideoPlayer = new NormalVideoPlayer(context);
+        }
         return mVideoPlayer;
     }
 

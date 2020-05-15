@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.fragment_comic_collection.*
  * @description
  * @since 2019/1/15
  */
-@Route(path = "/song/f/comic/collection")
+@Route(path = "/song/comic/collection")
 class CollectionKotlinFragment : BaseFragment() {
 
     private var collectionViewModel: CollectionViewModel? = null

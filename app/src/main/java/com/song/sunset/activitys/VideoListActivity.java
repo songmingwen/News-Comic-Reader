@@ -99,6 +99,10 @@ public class VideoListActivity extends AppCompatActivity {
 
                 List<String> titleList = new ArrayList<>();
 
+                if (list == null || list.isEmpty()) {
+                    progressLayout.showEmpty();
+                }
+
                 for (VideoListsTypeBean item : list) {
                     Bundle bundle = new Bundle();
                     bundle.putString(CH_TYPE, item.getChType());

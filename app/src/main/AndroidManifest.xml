@@ -3,33 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.song.sunset">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.SET_WALLPAPER" /> <!-- <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" /> -->
-    <!-- <uses-permission android:name="android.permission.WRITE_SETTINGS" /> -->
-    <!-- <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" /> -->
-    <!-- <uses-permission android:name="android.permission.READ_LOGS" /> -->
-    <!-- 二维码扫码所需权限 -->
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.FLASHLIGHT" />
-    <uses-permission
-        android:name="android.permission.PACKAGE_USAGE_STATS"
-        tools:ignore="ProtectedPermissions" /> <!-- GL相关配置 -->
-    <uses-feature
-        android:glEsVersion="0x00030000"
-        android:required="true" />
-
-    <supports-gl-texture android:name="GL_OES_compressed_ETC1_RGB8_texture" />
-    <supports-gl-texture android:name="GL_OES_compressed_paletted_texture" />
-
     <application
         android:name=".SunsetApplication"
         android:allowBackup="true"
@@ -42,7 +15,12 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".activitys.temp.MotionLayoutActivity"></activity>
+        <activity android:name=".activitys.temp.ServiceProviderActivity"></activity>
+        <activity
+            android:name=".activitys.FlutterComicActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activitys.temp.GlobalFlowActivity" />
+        <activity android:name=".activitys.temp.MotionLayoutActivity" />
         <activity android:name=".activitys.temp.QRCodeActivity" />
         <activity android:name=".activitys.ComicDetailActivity" />
         <activity android:name=".activitys.opengl.render.RenderAirHockeyActivity" />
@@ -52,37 +30,24 @@
         <activity android:name=".activitys.opengl.OpenGLListActivity" />
         <activity android:name=".activitys.temp.BilliardsActivity" />
 
-        <service
-            android:name=".widget.neural.NeuralWallPaperService"
-            android:enabled="true"
-            android:label="@string/app_name"
-            android:permission="android.permission.BIND_WALLPAPER">
-            <intent-filter>
-                <action android:name="android.service.wallpaper.WallpaperService" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.service.wallpaper"
-                android:resource="@xml/my_wallpaper" />
-        </service>
-
         <activity
             android:name=".activitys.temp.NeuralNetWorksActivity"
             android:theme="@android:style/Theme.Wallpaper.NoTitleBar" />
+
         <activity android:name=".activitys.temp.DynamicProxyActivity" />
         <activity android:name=".activitys.temp.ReflectionActivity" />
         <activity android:name=".activitys.SchemeFilterActivity">
 
             <!-- Schame -->
             <intent-filter>
-                <data
-                    android:host="*"
-                    android:scheme="song" />
-
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="*"
+                    android:scheme="song" />
             </intent-filter>
 
             <!-- App Links -->
@@ -110,7 +75,12 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- <activity -->
+        </activity>
+        <activity
+            android:name=".activitys.MainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTask"
+            android:screenOrientation="sensor" /> <!-- <activity -->
         <!-- android:name=".activitys.FirstActivity" -->
         <!-- android:label="@string/app_name" -->
         <!-- android:screenOrientation="portrait" -->
@@ -120,11 +90,6 @@
         <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
         <!-- </intent-filter> -->
         <!-- </activity> -->
-        <activity
-            android:name=".activitys.MainActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:launchMode="singleTask"
-            android:screenOrientation="sensor" />
         <activity
             android:name=".activitys.MainKotlinActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -169,29 +134,64 @@
         <activity
             android:name=".activitys.PhoenixVideoActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
-
-        <meta-data
-            android:name="com.amap.api.v2.apikey"
-            android:value="1b85142155dba7f4c7f243bfd78cb7c4" />
-
         <activity android:name=".activitys.LocationMarkerActivity" />
+
         <activity android:name=".activitys.BasicMapActivity" />
+
         <activity
             android:name=".activitys.ComicReadMVPActivity"
-            android:screenOrientation="portrait" /> <!-- 定位需要的服务 使用2.0的定位需要加上这个 -->
-        <service android:name="com.amap.api.location.APSService" />
-
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activitys.temp.ScrollingActivity"
             android:label="@string/title_activity_scrolling"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activitys.RxJavaKotlinActivity"
+            android:label="@string/title_activity_rx_java"
+            android:theme="@style/AppTheme" /> <!-- 定位需要的服务 使用2.0的定位需要加上这个 -->
+        <activity
+            android:name=".activitys.temp.RxjavaActivity"
+            android:label="@string/title_activity_rxjava"
+            android:theme="@style/AppTheme" />
 
+        <activity
+            android:name=".activitys.temp.FrescoProcessorActivity"
+            android:label="@string/title_activity_fresco_processor"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".activitys.temp.FunctionListActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/AppTheme" />
+
+        <activity android:name=".activitys.temp.FrescoXMLActivity" />
+
+        <activity android:name=".activitys.opengl.teach.OpenGLTeachListActivity" />
+        <activity android:name=".activitys.opengl.teach.TeachOneActivity" />
+        <activity android:name=".activitys.opengl.teach.TeachTwoActivity" />
+        <activity android:name="com.bubblepicker.BubbleActivity" />
+
+        <activity android:name=".activitys.temp.LottieActivity" />
+        <activity android:name=".activitys.temp.WorkManagerActivity" />
+        <activity
+            android:name=".activitys.temp.CameraActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="io.flutter.embedding.android.FlutterActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize" />
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="1b85142155dba7f4c7f243bfd78cb7c4" />
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2" />
         <provider
             android:name=".providers.BookProvider"
             android:authorities="com.song.sunset.providers.bookprovider"
             android:enabled="true"
             android:exported="true" />
-
         <receiver android:name=".receivers.SunsetWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -202,7 +202,20 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/sunset_widget_info" />
         </receiver>
+        <service
+            android:name=".widget.neural.NeuralWallPaperService"
+            android:enabled="true"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_WALLPAPER">
+            <intent-filter>
+                <action android:name="android.service.wallpaper.WallpaperService" />
+            </intent-filter>
 
+            <meta-data
+                android:name="android.service.wallpaper"
+                android:resource="@xml/my_wallpaper" />
+        </service>
+        <service android:name="com.amap.api.location.APSService" />
         <service
             android:name=".services.PushService"
             android:enabled="true"
@@ -218,34 +231,42 @@
             android:enabled="true"
             android:exported="true"
             android:process=":remote" />
+        <!--
+ Don't delete the meta-data below.
+             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+        -->
         <service
             android:name=".services.MusicGetterService"
             android:enabled="true"
             android:exported="true"
             android:process=":remote" />
-
-        <activity
-            android:name=".activitys.RxJavaKotlinActivity"
-            android:label="@string/title_activity_rx_java"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".activitys.temp.RxjavaActivity"
-            android:label="@string/title_activity_rxjava"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".activitys.temp.FrescoProcessorActivity"
-            android:label="@string/title_activity_fresco_processor"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".activitys.temp.FunctionListActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".activitys.temp.FrescoXMLActivity" />
-        <activity android:name=".activitys.opengl.teach.OpenGLTeachListActivity" />
-        <activity android:name=".activitys.opengl.teach.TeachOneActivity" />
-        <activity android:name=".activitys.opengl.teach.TeachTwoActivity" />
-        <activity android:name="com.bubblepicker.BubbleActivity" />
-        <activity android:name=".activitys.temp.LottieActivity" />
     </application>
+    <supports-gl-texture android:name="GL_OES_compressed_ETC1_RGB8_texture" />
+    <supports-gl-texture android:name="GL_OES_compressed_paletted_texture" />
+    <uses-feature
+        android:glEsVersion="0x00030000"
+        android:required="true" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" /> -->
+    <!-- <uses-permission android:name="android.permission.WRITE_SETTINGS" /> -->
+    <!-- <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" /> -->
+    <!-- <uses-permission android:name="android.permission.READ_LOGS" /> -->
+    <!-- 二维码扫码所需权限 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- GL相关配置 -->
+    <uses-permission android:name="android.permission.SET_WALLPAPER" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
+    <uses-permission
+        android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
 
 </manifest>

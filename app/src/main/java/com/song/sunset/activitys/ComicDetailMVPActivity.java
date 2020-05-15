@@ -26,6 +26,7 @@ import com.facebook.datasource.DataSource;
 import com.facebook.imagepipeline.datasource.BaseBitmapDataSubscriber;
 import com.facebook.imagepipeline.image.CloseableImage;
 import com.song.core.base.CoreBaseActivity;
+import com.song.sunset.BindView;
 import com.song.sunset.R;
 import com.song.sunset.adapters.ComicDetailAdapter;
 import com.song.sunset.beans.ComicDetailBean;
@@ -81,6 +82,9 @@ public class ComicDetailMVPActivity extends CoreBaseActivity<ComicDetailPresente
     public int getLayoutId() {
         return R.layout.activity_comic_detail;
     }
+
+    @BindView(R.id.id_comic_detail_recycler)
+    RecyclerView mRecyclerView;
 
     @Override
     public void initView(Bundle savedInstanceState) {

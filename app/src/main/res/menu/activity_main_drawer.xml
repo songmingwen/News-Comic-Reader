@@ -33,6 +33,10 @@
                     android:id="@+id/nav_video"
                     android:icon="@drawable/icon_video"
                     android:title="@string/phoenix_video"/>
+                <item
+                    android:id="@+id/nav_flutter"
+                    android:icon="@drawable/icon_comic"
+                    android:title="@string/newest_comic"/>
             </menu>
         </item>
     </group>

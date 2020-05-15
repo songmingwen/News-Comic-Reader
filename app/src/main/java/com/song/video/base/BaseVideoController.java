@@ -21,7 +21,7 @@ import java.util.TimerTask;
 public abstract class BaseVideoController
         extends FrameLayout implements View.OnTouchListener {
 
-    private Context mContext;
+    protected Context mContext;
     protected INormalVideoPlayer mNormalVideoPlayer;
 
     private Timer mUpdateProgressTimer;

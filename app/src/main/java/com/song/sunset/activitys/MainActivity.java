@@ -28,10 +28,12 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 
 import com.meituan.android.walle.ChannelInfo;
 import com.meituan.android.walle.WalleChannelReader;
 import com.song.core.statusbar.StatusBarUtil;
+import com.song.sunset.BindView;
 import com.song.sunset.BuildConfig;
 import com.song.sunset.R;
 import com.song.sunset.activitys.base.BaseActivity;
@@ -46,9 +48,10 @@ import com.song.sunset.mvp.views.ComicCollectionView;
 import com.song.sunset.services.managers.MessengerManager;
 import com.song.sunset.services.managers.PushManager;
 import com.song.sunset.utils.AppConfig;
+import com.song.sunset.utils.BindViewTools;
 import com.song.sunset.utils.GreenDaoUtil;
-import com.song.sunset.utils.SPUtils;
 import com.song.sunset.utils.preinstall.*;
+import com.song.video.VideoManager;
 import com.sunset.greendao.gen.ComicLocalCollectionDao;
 
 import java.util.ArrayList;
@@ -57,6 +60,7 @@ import java.util.Map;
 
 import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
+import io.flutter.embedding.android.FlutterActivity;
 
 /**
  * Created by Song on 2016/12/2.
@@ -77,6 +81,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private static String[] PERMISSIONS_STORAGE = {
             "android.permission.READ_EXTERNAL_STORAGE",
             "android.permission.WRITE_EXTERNAL_STORAGE"};
+    private FrameLayout mContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,10 +150,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //        return mode == AppOpsManager.MODE_ALLOWED;
 //    }
 
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
+
     private void initView() {
+        BindViewTools.bind(this);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setLogo(R.mipmap.logo_black);
         fab = (FloatingActionButton) findViewById(R.id.fab);
+        mContent = findViewById(R.id.activity_framelayout_main);
     }
 
     private void initDrawer() {
@@ -198,29 +208,43 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.nav_gallery) {
-//            switchFragmentDelay(ComicGenericListFragment.class.getName(), getResources().getString(R.string.newest_comic));
-            swithFragmentByRouter("/song/comic/newest", getResources().getString(R.string.newest_comic));
-        } else if (id == R.id.nav_classify_comic) {
-//            switchFragmentDelay(ComicClassifyFragment.class.getName(), getResources().getString(R.string.classify_comic));
-            swithFragmentByRouter("/song/comic/classify", getResources().getString(R.string.classify_comic));
-        } else if (id == R.id.nav_video) {
-//            VideoListActivity.start(this);
-            ARouter.getInstance().build("/song/phoenix/video/list").navigation();
-        } else if (id == R.id.nav_rank_comic) {
-//            switchFragmentDelay(ComicRankFragment.class.getName(), getResources().getString(R.string.rank_comic));
-            swithFragmentByRouter("/song/comic/rank", getResources().getString(R.string.rank_comic));
-        } else if (id == R.id.nav_news) {
-//            switchFragmentDelay(PhoenixListFragment.class.getName(), getResources().getString(R.string.phoenix_news));
-            swithFragmentByRouter("/song/phoenix/list", getResources().getString(R.string.phoenix_news));
-        } else if (id == R.id.nav_collection) {
-//            switchFragmentDelay(CollectionKotlinFragment.class.getName(), getResources().getString(R.string.collection_comic));
-            swithFragmentByRouter("/song/f/comic/collection", getResources().getString(R.string.collection_comic));
+        switch (id) {
+            case R.id.nav_gallery:
+                swithFragmentByRouter("/song/comic/newest", getResources().getString(R.string.newest_comic));
+                break;
+            case R.id.nav_classify_comic:
+                swithFragmentByRouter("/song/comic/classify", getResources().getString(R.string.classify_comic));
+                break;
+            case R.id.nav_video:
+                swithFragmentByRouter("/song/video/tv","TV");
+                break;
+            case R.id.nav_rank_comic:
+                swithFragmentByRouter("/song/comic/rank", getResources().getString(R.string.rank_comic));
+                break;
+            case R.id.nav_news:
+                swithFragmentByRouter("/song/phoenix/list", getResources().getString(R.string.phoenix_news));
+                break;
+            case R.id.nav_collection:
+                swithFragmentByRouter("/song/comic/collection", getResources().getString(R.string.collection_comic));
+                break;
+            case R.id.nav_flutter:
+                startActivity(new Intent(this, FlutterComicActivity.class));
+                break;
+            default:
+                break;
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (VideoManager.instance().onBackPressd()) {
+            return;
+        }
+        super.onBackPressed();
     }
 
     @Override

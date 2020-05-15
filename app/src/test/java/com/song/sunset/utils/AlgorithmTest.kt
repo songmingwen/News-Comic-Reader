@@ -73,7 +73,7 @@ class AlgorithmTest {
 
     @Test
     fun mergeSortFromBottomToUp() {
-        println("mergeSort")
+        println("mergeSortFromBottomToUp")
         val array = AlgorithmKt.generateRandomArray(30000, 0, 10000)
         val start = System.currentTimeMillis()
         Algorithm.mergeSortFromBottomToUp(array, array.size)
@@ -109,15 +109,15 @@ class AlgorithmTest {
     @Before
     fun createNodeTree() {
         val node1 = TreeNode()
-        node1.value = 1
+        node1.value = 4
         val node2 = TreeNode()
         node2.value = 2
         val node3 = TreeNode()
-        node3.value = 3
+        node3.value = 5
         val node4 = TreeNode()
-        node4.value = 4
+        node4.value = 1
         val node5 = TreeNode()
-        node5.value = 5
+        node5.value = 3
         val node6 = TreeNode()
         node6.value = 6
         val node7 = TreeNode()
@@ -131,9 +131,9 @@ class AlgorithmTest {
 
         node1.leftChild = node2
         node1.rightChild = node3
-//           1
-//         2   3
-//        4 5 6 7
+//           4
+//         2   5
+//        1 3 6 7
         rootNode = node1
     }
 
@@ -159,6 +159,7 @@ class AlgorithmTest {
 
         println("\n深度")
         TreeNode.depthFirst(rootNode)
+        println()
     }
 
 }

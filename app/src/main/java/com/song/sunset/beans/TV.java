@@ -10,22 +10,10 @@ public class TV {
         this.tvUrl = tvUrl;
     }
 
-    private String tvName;
-    private String tvUrl;
-
-    public void setTvUrl(String tvUrl) {
-        this.tvUrl = tvUrl;
-    }
-
-    public void setTvName(String tvName) {
-        this.tvName = tvName;
-    }
-
-    public String getTvName() {
-        return tvName;
-    }
-
-    public String getTvUrl() {
-        return tvUrl;
-    }
+    public
+    String tvName;
+    public
+    String tvUrl;
+    public
+    boolean selected;
 }

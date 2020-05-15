@@ -36,8 +36,6 @@ import java.util.Locale;
 public class DanMuVideoController extends BaseVideoController
         implements View.OnClickListener, SeekBar.OnSeekBarChangeListener, ChangeResolutionDialog.OnClarityChangedListener {
 
-    private Context mContext;
-
     private ImageView mImage, mCenterStart, mBack, mBattery, mRestartPause, mFullScreen;
 
     private LinearLayout mTop, mBatteryTime, mBottom, mLoading, mChangePosition,
@@ -64,7 +62,6 @@ public class DanMuVideoController extends BaseVideoController
 
     public DanMuVideoController(Context context) {
         super(context);
-        mContext = context;
         init();
     }
 

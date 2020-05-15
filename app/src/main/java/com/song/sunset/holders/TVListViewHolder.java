@@ -2,6 +2,7 @@ package com.song.sunset.holders;
 
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.song.sunset.R;
@@ -13,9 +14,11 @@ import com.song.sunset.R;
 public class TVListViewHolder extends RecyclerView.ViewHolder {
 
     public TextView textView;
+    public FrameLayout content;
 
     public TVListViewHolder(View itemView) {
         super(itemView);
         textView = itemView.findViewById(R.id.id_tv_list_text);
+        content = itemView.findViewById(R.id.content_container);
     }
 }

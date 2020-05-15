@@ -103,7 +103,11 @@ public class ScreenUtils {
     }
 
     public static void hideActionBar(Context context) {
-        ActionBar ab = getAppCompActivity(context).getSupportActionBar();
+        AppCompatActivity appCompatActivity = getAppCompActivity(context);
+        if (appCompatActivity == null) {
+            return;
+        }
+        ActionBar ab = appCompatActivity.getSupportActionBar();
         if (ab != null) {
             ab.setShowHideAnimationEnabled(false);
             ab.hide();

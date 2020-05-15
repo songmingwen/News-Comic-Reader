@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -25,6 +26,7 @@ import com.trello.rxlifecycle3.android.ActivityEvent;
 import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 
 import io.reactivex.ObservableTransformer;
 import retrofit2.Response;
@@ -38,9 +40,12 @@ public class BaseActivity extends RxAppCompatActivity {
     protected FragmentManager supportFragmentManager;
     protected Handler mHandler = new Handler();
 
+    protected static ArrayList<BaseActivity> sActivityStack = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sActivityStack.add(this);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             //透明状态栏
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -48,6 +53,24 @@ public class BaseActivity extends RxAppCompatActivity {
 //            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         }
         supportFragmentManager = getSupportFragmentManager();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        sActivityStack.remove(this);
+    }
+
+    @Nullable
+    public static BaseActivity getTopActivity() {
+        if (sActivityStack.size() > 0) {
+            return sActivityStack.get(sActivityStack.size() - 1);
+        }
+        return null;
+    }
+
+    public static ArrayList<BaseActivity> getActivityStack() {
+        return sActivityStack;
     }
 
     /**

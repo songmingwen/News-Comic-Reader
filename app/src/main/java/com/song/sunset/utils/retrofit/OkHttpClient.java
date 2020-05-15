@@ -65,7 +65,7 @@ public class OkHttpClient {
                 .build();
     }
 
-    okhttp3.OkHttpClient createClient(Map<String, String> map) {
+    public okhttp3.OkHttpClient createClient(Map<String, String> map) {
         if (map == null) {
             if (okHttpClientBuilder == null) {
                 initClient();

@@ -208,7 +208,7 @@ public class VideoListPlayFragment extends BaseFragment implements LoadingMoreLi
     }
 
     public void restartVideo() {
-        if (VideoManager.instance().getCurrentNormalVideoPlayer() != null) {
+        if (VideoManager.instance().getCurrentNormalVideoPlayer(getActivity()) != null) {
             VideoManager.instance().resumeNormalVideoPlayer();
         } else {
             recyclerView.resetCurrentPlayerPosition();
