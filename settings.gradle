@@ -3,7 +3,8 @@ include ':processor'
 include ':app'
 
 setBinding(new Binding([gradle: this]))
+//flutter module 对应的 include_flutter.groovy 实际目录地址
 evaluate(new File(
-        settingsDir.parentFile,
-        'flutter_module/.android/include_flutter.groovy'
+        settingsDir,
+        'flutter_comic/.android/include_flutter.groovy'
 ))
