@@ -80,7 +80,7 @@ public class ScalePicActivity extends BaseActivity {
     }
 
     private void initView() {
-        imageView = (SubsamplingScaleImageView) findViewById(R.id.id_pic_activity_image);
+        imageView = findViewById(R.id.id_pic_activity_image);
         imageView.setDoubleTapZoomDuration(200);
         imageView.setDoubleTapZoomScale(2.5f);
         imageView.setPanLimit(SubsamplingScaleImageView.PAN_LIMIT_INSIDE);

@@ -241,6 +241,14 @@ public class FrescoUtil {
 
     }
 
+    public static DataSource<CloseableReference<CloseableImage>> getDataSource(int res) {
+        ImageRequest imageRequest = ImageRequestBuilder.newBuilderWithResourceId(res).build();
+
+        ImagePipeline imagePipeline = Fresco.getImagePipeline();
+        return imagePipeline.fetchDecodedImage(imageRequest, res);
+
+    }
+
     /**
      * 通过 DataSource 获取对应的 bitmap
      */

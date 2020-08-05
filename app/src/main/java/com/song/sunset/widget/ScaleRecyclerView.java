@@ -52,6 +52,7 @@ public class ScaleRecyclerView extends RecyclerView implements View.OnTouchListe
 
     private OnSingleTapListener mOnSingleTapListener;
     private Scroller mScroller;
+    private int mMixSlop;
 
     public interface OnSingleTapListener {
         void onSingleTap();
@@ -85,7 +86,8 @@ public class ScaleRecyclerView extends RecyclerView implements View.OnTouchListe
 
     private void init() {
         mScroller = new Scroller(getContext());
-        int mixSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();//获取系统能识别的最小滑动距离
+        //获取系统能识别的最小滑动距离
+        mMixSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
         scaleGestureDetector = new ScaleGestureDetector(context, this);
         mGestureDetector = new GestureDetector(context, new ScaleRecyclerViewGestureListener());
         this.setOnTouchListener(this);

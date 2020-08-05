@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:auto="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/tools"
     android:id="@+id/id_comic_detail_header_layout"
     android:layout_width="match_parent"
     android:layout_height="280dp">
@@ -75,4 +75,89 @@
         auto:layout_constraintEnd_toEndOf="parent"
         auto:layout_constraintStart_toStartOf="parent"
         auto:layout_constraintTop_toBottomOf="@+id/id_comic_detail_header_comic_name"/>
+
+    <!--视频长宽比在 > 16/9 时，封面及视频播放高度撑满容器，宽度居中裁切（卡片1） -->
+    <RelativeLayout
+        android:id="@+id/rl_1"
+        android:layout_width="160dp"
+        android:layout_height="90dp"
+        auto:layout_constraintStart_toStartOf="parent"
+        auto:layout_constraintTop_toTopOf="parent">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/bg_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/fg_1"
+            android:layout_width="100dp"
+            fresco:failureImageScaleType="centerCrop"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+
+    <!--视频长宽比在 4/3 ～16/9 时，封面及视频播放宽度撑满容器，高度居中裁切（卡片1）-->
+    <RelativeLayout
+        android:id="@+id/rl_2"
+        android:layout_width="160dp"
+        android:layout_height="90dp"
+        auto:layout_constraintEnd_toEndOf="parent"
+        auto:layout_constraintTop_toTopOf="parent">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/bg_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/fg_2"
+            android:layout_width="100dp"
+            fresco:failureImageScaleType="centerCrop"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+
+    <!--视频长宽比在 3/4 ～ 4/3 时，视频播放高度撑满容器，宽度以视频比例自适应-->
+    <RelativeLayout
+        android:id="@+id/rl_3"
+        android:layout_width="160dp"
+        android:layout_height="90dp"
+        auto:layout_constraintStart_toStartOf="parent"
+        auto:layout_constraintTop_toBottomOf="@+id/rl_1">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/bg_3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/fg_3"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            fresco:failureImageScaleType="centerCrop"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
+
+    <!--视频长宽比在 < 3/4 时，视频长款比例固定 3:4-->
+    <RelativeLayout
+        android:id="@+id/rl_4"
+        android:layout_width="160dp"
+        android:layout_height="90dp"
+        auto:layout_constraintEnd_toEndOf="@+id/img_bg"
+        auto:layout_constraintTop_toBottomOf="@+id/rl_2">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/bg_4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/fg_4"
+            android:layout_width="100dp"
+            fresco:failureImageScaleType="centerCrop"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

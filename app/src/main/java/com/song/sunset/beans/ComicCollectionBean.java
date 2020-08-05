@@ -56,6 +56,8 @@ public class ComicCollectionBean {
     private int last_read_chapter_index;
     private int sort;
 
+    public String updateInfo;
+
     public String getComic_id() {
         return comic_id;
     }

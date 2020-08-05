@@ -183,6 +183,7 @@ class FunctionListActivity : BaseActivity() {
         addButton("GlobalFlow") { GlobalFlowActivity.start(this@FunctionListActivity) }
         addButton("Camera") { CameraActivity.start(this@FunctionListActivity) }
         addButton("ServiceProvider") { ServiceProviderActivity.start(this@FunctionListActivity) }
+        addButton("CenteredImageSpan") { CenteredImageSpanActivity.start(this@FunctionListActivity) }
     }
 
     private fun showFireworks(view: View) {

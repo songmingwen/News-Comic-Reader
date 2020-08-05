@@ -2,10 +2,11 @@ package com.song.sunset.utils
 
 import com.song.sunset.utils.algorithm.Algorithm
 import com.song.sunset.utils.algorithm.AlgorithmKt
+import com.song.sunset.utils.algorithm.ListNode
 import com.song.sunset.utils.algorithm.TreeNode
-import org.junit.Test
 import org.junit.Assert.assertTrue
 import org.junit.Before
+import org.junit.Test
 
 /**
  * @author songmingwen
@@ -160,6 +161,29 @@ class AlgorithmTest {
         println("\n深度")
         TreeNode.depthFirst(rootNode)
         println()
+    }
+
+    @Test
+    fun testListNodeRevert() {
+        val node1 = ListNode(1)
+        val node2 = ListNode(2)
+        val node3 = ListNode(3)
+        val node4 = ListNode(4)
+
+        node3.next = node4
+        node2.next = node3
+        node1.next = node2
+
+        val temp: ListNode? = node1
+        ListNode.printListNode(temp)
+
+//        val revert = ListNode.reverse(node1)
+//        println()
+//        ListNode.printListNode(revert)
+
+        val tempRevert: ListNode? = ListNode.reverseKGroup(node1, 2)
+        println()
+        ListNode.printListNode(tempRevert)
     }
 
 }

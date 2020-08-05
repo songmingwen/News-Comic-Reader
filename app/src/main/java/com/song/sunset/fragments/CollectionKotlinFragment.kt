@@ -32,16 +32,16 @@ class CollectionKotlinFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         collectionViewModel = ViewModelProviders.of(this).get(CollectionViewModel::class.java)
-        collectionViewModel!!.mLocalCollectionLiveData.observe(this, Observer {
+        collectionViewModel!!.mLocalData.observe(this, Observer {
             collectionViewModel!!.getNewestCollectedComic()
-            if (it != null && !it.isEmpty()) {
+            if (it != null && it.isNotEmpty()) {
                 progress.showContent()
-                adapter.setData(it)
+                adapter.setLocalData(it)
             }
         })
-        collectionViewModel!!.mCollectionLiveData.observe(this, Observer<List<ComicCollectionBean>> {
+        collectionViewModel!!.mOnlineData.observe(this, Observer<List<ComicCollectionBean>> {
             progress.showContent()
-            adapter.setCollectionList(it)
+            adapter.setOnlineList(it)
             if (it == null || it.isEmpty()) {
                 progress.showEmpty()
             }
@@ -54,7 +54,8 @@ class CollectionKotlinFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         progress.showLoading()
-        adapter = CollectionComicAdapter(activity)
+        adapter = CollectionComicAdapter(this.context!!)
+        adapter.setOnItemClickListener { collectionViewModel?.save(it) }
         id_comic_collection.adapter = adapter
         id_comic_collection.layoutManager = object : GridLayoutManager(activity, 3) {
             override fun getExtraLayoutSpace(state: RecyclerView.State): Int {

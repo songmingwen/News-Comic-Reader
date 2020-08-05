@@ -77,10 +77,6 @@ public class FrescoProcessorActivity extends AppCompatActivity {
     }
 
     private ImageRequestBuilder getBuilder() {
-        return ImageRequestBuilder.newBuilderWithSource(getRes());
-    }
-
-    private Uri getRes() {
-        return new Uri.Builder().scheme("res").path(String.valueOf(R.drawable.windows_pic)).build();
+        return ImageRequestBuilder.newBuilderWithResourceId(R.drawable.windows_pic);
     }
 }

@@ -1,12 +1,12 @@
 package com.song.sunset.viewmodel;
 
+import android.text.TextUtils;
+
 import com.song.sunset.beans.CollectionOnlineListBean;
 import com.song.sunset.beans.ComicCollectionBean;
 import com.song.sunset.beans.ComicLocalCollection;
 import com.song.sunset.beans.basebeans.BaseBean;
-import com.song.sunset.utils.AppConfig;
 import com.song.sunset.utils.GreenDaoUtil;
-import com.song.sunset.utils.SPUtils;
 import com.song.sunset.utils.api.U17ComicApi;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
 import com.song.sunset.utils.retrofit.RetrofitFactory;
@@ -21,8 +21,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import io.reactivex.Observable;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.disposables.Disposable;
+import java8.util.Optional;
+import java8.util.stream.StreamSupport;
 
 /**
  * @author songmingwen
@@ -31,9 +31,11 @@ import io.reactivex.disposables.Disposable;
  */
 public class CollectionViewModel extends ViewModel {
 
-    public MutableLiveData<List<ComicLocalCollection>> mLocalCollectionLiveData = new MutableLiveData<>();
-    public MutableLiveData<List<ComicCollectionBean>> mCollectionLiveData = new MutableLiveData<>();
+    public MutableLiveData<List<ComicLocalCollection>> mLocalData = new MutableLiveData<>();
+    public MutableLiveData<List<ComicCollectionBean>> mOnlineData = new MutableLiveData<>();
     private static ComicLocalCollectionDao comicLocalCollectionDao;
+
+    private CollectionOnlineListBean mCollectionOnlineListBean;
 
     static {
         comicLocalCollectionDao = GreenDaoUtil.getDaoSession().getComicLocalCollectionDao();
@@ -44,7 +46,8 @@ public class CollectionViewModel extends ViewModel {
         RxUtil.comicSubscribe(observable, new RetrofitCallback<CollectionOnlineListBean>() {
             @Override
             public void onSuccess(CollectionOnlineListBean collectionOnlineListBean) {
-                save(collectionOnlineListBean);
+                mCollectionOnlineListBean = collectionOnlineListBean;
+                mOnlineData.postValue(collectionOnlineListBean.getFavList());
             }
 
             @Override
@@ -56,40 +59,31 @@ public class CollectionViewModel extends ViewModel {
 
     public void getLocalCollectedComic() {
         createDao();
-        mLocalCollectionLiveData.postValue(comicLocalCollectionDao.loadAll());
+        mLocalData.postValue(comicLocalCollectionDao.loadAll());
     }
 
-    private void save(CollectionOnlineListBean collectionOnlineListBean) {
-        Disposable disposable = Observable.create((ObservableOnSubscribe<Boolean>)
-                emitter -> emitter.onNext(saveCollectedComic(collectionOnlineListBean)))
-                .compose(RxUtil.getDefaultScheduler())
-                .subscribe(aBoolean -> {
-                    if (aBoolean) {
-                        createDao();
-                        getLocalCollectedComic();
-                    }
-                    mCollectionLiveData.postValue(collectionOnlineListBean.getFavList());
-                });
+    public void save(String id) {
+        Optional.ofNullable(mCollectionOnlineListBean.getFavList())
+                .stream()
+                .flatMap(StreamSupport::stream)
+                .filter(bean -> TextUtils.equals(bean.getComic_id(), id))
+                .findFirst()
+                .ifPresent(this::saveCollectedComic);
     }
 
-    private boolean saveCollectedComic(CollectionOnlineListBean collectionOnlineListBean) {
-        if (collectionOnlineListBean == null || collectionOnlineListBean.getFavList().isEmpty())
+    private boolean saveCollectedComic(ComicCollectionBean bean) {
+        if (bean == null)
             return false;
-        if (!SPUtils.getBooleanByName(AppConfig.getApp(), SPUtils.APP_FIRST_INSTALL, true)) {
-            return false;
-        }
 
         GreenDaoUtil.getDb().beginTransaction();
         createDao();
-        for (ComicCollectionBean bean : collectionOnlineListBean.getFavList()) {
-            ComicLocalCollection localCollection = new ComicLocalCollection();
-            localCollection.setAuthor(bean.getAuthor_name());
-            localCollection.setComicId(Long.parseLong(bean.getComic_id()));
-            localCollection.setCover(bean.getCover());
-            localCollection.setName(bean.getName());
-            localCollection.setChapterNum(String.valueOf(bean.getPass_chapter_num()));
-            comicLocalCollectionDao.insertOrReplace(localCollection);
-        }
+        ComicLocalCollection localCollection = new ComicLocalCollection();
+        localCollection.setAuthor(bean.getAuthor_name());
+        localCollection.setComicId(Long.parseLong(bean.getComic_id()));
+        localCollection.setCover(bean.getCover());
+        localCollection.setName(bean.getName());
+        localCollection.setChapterNum(String.valueOf(bean.getPass_chapter_num()));
+        comicLocalCollectionDao.insertOrReplace(localCollection);
         GreenDaoUtil.getDb().setTransactionSuccessful();
         GreenDaoUtil.getDb().endTransaction();
         return true;

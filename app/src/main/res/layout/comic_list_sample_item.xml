@@ -8,7 +8,7 @@
     android:layout_gravity="center"
     card_view:cardCornerRadius="3dp">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -16,6 +16,8 @@
             android:id="@+id/id_comic_list_simple_drawee_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent"
             fresco:viewAspectRatio="0.79" />
 
         <TextView
@@ -28,16 +30,31 @@
             android:paddingLeft="3dp"
             android:paddingRight="3dp"
             android:textColor="@color/white"
-            android:visibility="gone" />
+            android:visibility="visible"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:background="@color/white"
+            card_view:layout_constraintBottom_toBottomOf="@+id/id_comic_list_simple_drawee_view" />
 
         <TextView
             android:id="@+id/id_comic_list_simple_comic_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/id_comic_list_simple_drawee_view"
-            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginLeft="-10dp"
+            android:layout_marginRight="-10dp"
+            android:layout_marginBottom="-10dp"
+            android:background="@drawable/shape_circle_white"
+            android:gravity="center"
             android:singleLine="true"
-            android:text="漫画名称"
-            android:textSize="12sp" />
-    </RelativeLayout>
+            android:text="名称"
+            android:textSize="12sp"
+            card_view:layout_constraintBottom_toBottomOf="@+id/id_comic_list_simple_drawee_view"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

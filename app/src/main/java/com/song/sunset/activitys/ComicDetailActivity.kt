@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -138,7 +139,7 @@ open class ComicDetailActivity : AppCompatActivity() {
             override fun onNewResultImpl(bitmap: Bitmap?) {
                 if (this@ComicDetailActivity.isFinishing) return
                 color = BitmapUtil.getColorFromBitmap(bitmap)
-                adapter?.setColor(color)
+                Handler().post { adapter?.setColor(color) }
                 toolbar.setBackgroundColor(color)
             }
 

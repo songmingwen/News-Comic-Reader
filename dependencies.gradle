@@ -51,8 +51,8 @@ dependencies {
 
     implementation 'com.nineoldandroids:library:2.4.0'
 
-    implementation 'org.greenrobot:greendao-generator:3.2.0'
-    implementation 'org.greenrobot:greendao:3.2.0'
+    implementation 'org.greenrobot:greendao-generator:3.3.0'
+    implementation 'org.greenrobot:greendao:3.3.0'
 
     implementation 'rapid.decoder:library:0.3.0'
     implementation 'rapid.decoder:jpeg-decoder:0.3.0'
