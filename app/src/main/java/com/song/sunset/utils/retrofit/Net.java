@@ -14,27 +14,27 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Email:z53520@qq.com
  */
 
-public class RetrofitFactory {
+public class Net {
 
-    public static <T> T createApi(Class<T> clazz) {
-        return createApi(clazz, WholeApi.COMIC_NEW_BASE_URL, null);
+    public static <T> T createService(Class<T> clazz) {
+        return createService(clazz, WholeApi.COMIC_NEW_BASE_URL, null);
     }
 
-    public static <T> T createApi(Class<T> clazz, Map<String, String> map) {
-        return createApi(clazz, WholeApi.COMIC_NEW_BASE_URL, map);
+    public static <T> T createService(Class<T> clazz, Map<String, String> map) {
+        return createService(clazz, WholeApi.COMIC_NEW_BASE_URL, map);
     }
 
-    public static <T> T createApi(Class<T> clazz, String baseUrl) {
-        return createApi(clazz, baseUrl, null);
+    public static <T> T createService(Class<T> clazz, String baseUrl) {
+        return createService(clazz, baseUrl, null);
     }
 
-    public static <T> T createApi(Class<T> clazz, String baseUrl, String key, String value) {
+    public static <T> T createService(Class<T> clazz, String baseUrl, String key, String value) {
         Map<String, String> map = new HashMap<>();
         map.put(key, value);
-        return createApi(clazz, baseUrl, map);
+        return createService(clazz, baseUrl, map);
     }
 
-    public static <T> T createApi(Class<T> clazz, String baseUrl, Map<String, String> map) {
+    public static <T> T createService(Class<T> clazz, String baseUrl, Map<String, String> map) {
         Retrofit retrofit = new Retrofit.Builder()
                 //设置baseUrl
                 .baseUrl(baseUrl)

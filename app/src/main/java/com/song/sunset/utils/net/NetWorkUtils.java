@@ -8,8 +8,12 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
 import com.song.sunset.utils.AppConfig;
+import com.song.sunset.utils.retrofit.Net;
+import com.trello.rxlifecycle3.LifecycleTransformer;
 
 import androidx.annotation.NonNull;
+import io.reactivex.ObservableTransformer;
+import retrofit2.Response;
 
 /**
  * Created by Song on 2016/8/29 0029.
@@ -38,6 +42,54 @@ public class NetWorkUtils {
         NetworkInfo netinfo = cm.getActiveNetworkInfo();
         result = netinfo != null && netinfo.isConnected();
         return result;
+    }
+
+    public static <T> T createService(@NonNull Class<T> service) {
+        return Net.createService(service);
+    }
+
+    /**
+     * 使用它会：
+     * 线程切换
+     */
+    public static <T> SchedulerTransformer<T> getScheduler() {
+        return new SchedulerTransformer<>();
+    }
+
+    /**
+     * 使用它会：
+     * 1. 线程切换
+     * 2. Response 剥离
+     */
+    public static <T> SimplifyRequestTransformer<T> simplifyRequest() {
+        return new SimplifyRequestTransformer<>();
+    }
+
+    /**
+     * 使用它会：
+     * 1. 线程切换
+     * 2. 绑定生命周期
+     * 3. Response 剥离
+     */
+    public static <T> SimplifyRequestTransformer<T> simplifyRequest(LifecycleTransformer<Response<T>> lifecycleTransformer) {
+        return new SimplifyRequestTransformer<>(lifecycleTransformer);
+    }
+
+    /**
+     * 如果某一个请求，无论网络挂掉还是 API 返回错误都执行相同的错误处理逻辑
+     * 那么就可以使用此方法简化操作, 统一在 onError 里处理
+     * 如果需要执行不同的逻辑，那么不要使用此方法
+     * @param <T>
+     * @return
+     */
+    public static <T> ObservableTransformer<Response<T>, Response<T>> throwAPIError() {
+        return upper -> upper.doOnNext(response -> {
+            if (!response.isSuccessful()) throw new RetrofitAPIError(response);
+        });
+    }
+
+    public static boolean isNetworkAvailable(Context context) {
+        return getNetworkState(context) != NETWORK_NONE;
     }
 
     /**

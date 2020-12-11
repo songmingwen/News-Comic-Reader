@@ -208,4 +208,32 @@ public class Algorithm {
         }
         return stack.empty();
     }
+
+    /**
+     * 最长公共子序列
+     * @param str1  字符串
+     * @param str2  字符串
+     * @return 子序列长度
+     */
+    public static int longestCommonSubsequence(String str1, String str2) {
+        int m = str1.length(), n = str2.length();
+        int[][] dp = new int[m + 1][n + 1];
+
+        System.out.println(dp.length);
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                // 获取两个串字符
+                char c1 = str1.charAt(i), c2 = str2.charAt(j);
+                if (c1 == c2) {
+                    // 去找它们前面各退一格的值加1即可
+                    dp[i + 1][j + 1] = dp[i][j] + 1;
+                } else {
+                    //要么是text1往前退一格，要么是text2往前退一格，两个的最大值
+                    dp[i + 1][j + 1] = Math.max(dp[i + 1][j], dp[i][j + 1]);
+                }
+            }
+        }
+        return dp[m][n];
+    }
 }

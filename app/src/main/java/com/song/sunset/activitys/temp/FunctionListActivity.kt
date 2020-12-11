@@ -12,6 +12,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
+import androidx.recyclerview.widget.RecyclerView
 import com.bubblepicker.BubbleActivity
 
 import com.song.sunset.R
@@ -184,6 +185,7 @@ class FunctionListActivity : BaseActivity() {
         addButton("Camera") { CameraActivity.start(this@FunctionListActivity) }
         addButton("ServiceProvider") { ServiceProviderActivity.start(this@FunctionListActivity) }
         addButton("CenteredImageSpan") { CenteredImageSpanActivity.start(this@FunctionListActivity) }
+        addButton("CenteredImageSpan") { RecyclerViewDragActivity.start(this@FunctionListActivity) }
     }
 
     private fun showFireworks(view: View) {

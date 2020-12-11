@@ -34,6 +34,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
+import io.reactivex.functions.Function3;
 import io.reactivex.subjects.PublishSubject;
 
 @Route(path = "/song/rxjava")
@@ -161,6 +162,7 @@ public class RxjavaActivity extends AppCompatActivity {
      */
     public void zip(View view) {
         Observable<Integer> intObservable = Observable.just(1, 2, 3, 4);
+        Observable<Long> longObservable = Observable.just(1L, 2L, 3L, 4L);
         Observable<String> stringObservable = Observable.create(emitter -> {
             Thread.sleep(1000);
             emitter.onNext("A");
@@ -170,8 +172,8 @@ public class RxjavaActivity extends AppCompatActivity {
             Thread.sleep(3000);
             emitter.onNext("C");
         });
-        Disposable disposable = Observable.zip(intObservable, stringObservable,
-                (integer, s) -> integer.toString() + "---" + s)
+        Disposable disposable = Observable.zip(intObservable, stringObservable, longObservable,
+                (integer, s, aLong) -> integer.toString() + "---" + s)
                 .compose(RxUtil.getDefaultScheduler())
                 .subscribe(o -> Log.e(TAG, "zip: " + o),
                         throwable -> Log.e(TAG, "accept: error"));

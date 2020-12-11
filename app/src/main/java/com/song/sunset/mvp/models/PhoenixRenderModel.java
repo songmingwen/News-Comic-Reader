@@ -2,9 +2,12 @@ package com.song.sunset.mvp.models;
 
 import androidx.annotation.NonNull;
 
+import android.net.Uri;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.song.sunset.beans.PhoenixChannelBean;
 import com.song.sunset.beans.PhoenixLiveExt;
@@ -14,6 +17,8 @@ import com.song.sunset.holders.MatchScoreViewHolder;
 import com.song.sunset.utils.fresco.FrescoUtil;
 
 import java.util.ArrayList;
+
+import static com.song.sunset.utils.fresco.FrescoUtil.NO_CIRCLE;
 
 /**
  * Created by Song on 2017/3/31 0031.
@@ -36,9 +41,24 @@ public class PhoenixRenderModel {
             if (phoenixChannelBean.getStyle().getImages() != null) {
                 int count = phoenixChannelBean.getStyle().getImages().size();
                 if (i <= count) {
-                    FrescoUtil.setFrescoImage(imageList.get(i), phoenixChannelBean.getStyle().getImages().get(i % count));
+                    SimpleDraweeView simpleDraweeView = imageList.get(i);
+                    DraweeController controller = Fresco.newDraweeControllerBuilder()
+                            .setUri(Uri.parse(phoenixChannelBean.getStyle().getImages().get(i % count)))
+                            .setAutoPlayAnimations(true)
+                            .setOldController(simpleDraweeView.getController())
+                            .build();
+                    simpleDraweeView.setHierarchy(FrescoUtil.getHierarchy(NO_CIRCLE, false));
+                    simpleDraweeView.setController(controller);
+
                 } else {
-                    FrescoUtil.setFrescoImage(imageList.get(i), null);
+                    SimpleDraweeView simpleDraweeView = imageList.get(i);
+                    DraweeController controller = Fresco.newDraweeControllerBuilder()
+                            .setUri(Uri.parse(phoenixChannelBean.getThumbnail()))
+                            .setAutoPlayAnimations(true)
+                            .setOldController(simpleDraweeView.getController())
+                            .build();
+                    simpleDraweeView.setHierarchy(FrescoUtil.getHierarchy(NO_CIRCLE, false));
+                    simpleDraweeView.setController(controller);
                 }
             }
         }

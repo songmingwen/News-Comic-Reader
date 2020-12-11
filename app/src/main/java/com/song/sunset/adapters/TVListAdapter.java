@@ -1,22 +1,22 @@
 package com.song.sunset.adapters;
 
 import android.app.Activity;
-import android.content.Context;
-
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.graphics.Outline;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewOutlineProvider;
 
 import com.song.sunset.R;
-import com.song.sunset.activitys.VideoListActivity;
 import com.song.sunset.adapters.base.BaseRecyclerViewAdapter;
 import com.song.sunset.beans.TV;
 import com.song.sunset.holders.TVListViewHolder;
+import com.song.sunset.utils.ViewUtil;
 import com.song.video.DanMuVideoController;
 import com.song.video.NormalVideoPlayer;
 import com.song.video.VideoManager;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by Song on 2016/9/1 0001.
@@ -43,10 +43,8 @@ public class TVListAdapter extends BaseRecyclerViewAdapter<TV, TVListViewHolder>
         }
 
         TV tv = getData().get(position);
-        mPlayer.release();
         TVListViewHolder tvListViewHolder = (TVListViewHolder) holder;
         tvListViewHolder.textView.setText(tv.tvName);
-        tvListViewHolder.content.removeView(mPlayer);
 
         if (tv.selected) {
             int width = tvListViewHolder.content.getWidth();
@@ -56,6 +54,16 @@ public class TVListAdapter extends BaseRecyclerViewAdapter<TV, TVListViewHolder>
             tvListViewHolder.content.setLayoutParams(params);
 
             tvListViewHolder.content.addView(mPlayer);
+
+            tvListViewHolder.content.setClipToOutline(true);
+            tvListViewHolder.content.setOutlineProvider(new ViewOutlineProvider() {
+                @Override
+                public void getOutline(View view, Outline outline) {
+                    int radius = ViewUtil.dip2px(8);
+                    outline.setRoundRect(0, 0, view.getWidth(), view.getHeight(), radius);
+                }
+            });
+
             DanMuVideoController controller = new DanMuVideoController(mActivity);
             controller.setTitle(tv.tvName);
             mPlayer.setController(controller);
@@ -70,6 +78,12 @@ public class TVListAdapter extends BaseRecyclerViewAdapter<TV, TVListViewHolder>
 
     @Override
     protected void onItemClick(View view, int position) {
+        ViewGroup content = (ViewGroup) mPlayer.getParent();
+        if (content != null) {
+            mPlayer.release();
+            content.removeView(mPlayer);
+        }
+
         for (int i = 0; i < getData().size(); i++) {
             getData().get(i).selected = i == position;
         }

@@ -26,7 +26,7 @@ import com.song.sunset.adapters.ComicClassifyAdapter;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
-import com.song.sunset.utils.retrofit.RetrofitFactory;
+import com.song.sunset.utils.retrofit.Net;
 import com.song.sunset.utils.api.U17ComicApi;
 import com.song.sunset.widget.RecyclerViewDivider;
 
@@ -114,7 +114,7 @@ public class ComicClassifyFragment extends Fragment implements TextWatcher {
     }
 
     public void getDataFromRetrofit2() {
-        Observable<BaseBean<ComicClassifyBean>> observable = RetrofitFactory.createApi(U17ComicApi.class).queryComicClassifyBeanByObservable(2);
+        Observable<BaseBean<ComicClassifyBean>> observable = Net.createService(U17ComicApi.class).queryComicClassifyBeanByObservable(2);
         RxUtil.comicSubscribe(observable, new RetrofitCallback<ComicClassifyBean>() {
             @Override
             public void onSuccess(ComicClassifyBean comicReadBean) {
@@ -149,7 +149,7 @@ public class ComicClassifyFragment extends Fragment implements TextWatcher {
             mSearchContent.setVisibility(View.GONE);
             return;
         }
-        Observable<BaseBean<List<ComicSearchResultBean>>> observable = RetrofitFactory.createApi(U17ComicApi.class).queryComicSearchResultRDByObservable(inputString);
+        Observable<BaseBean<List<ComicSearchResultBean>>> observable = Net.createService(U17ComicApi.class).queryComicSearchResultRDByObservable(inputString);
         RxUtil.comicSubscribe(observable, new RetrofitCallback<List<ComicSearchResultBean>>() {
             @Override
             public void onSuccess(List<ComicSearchResultBean> comicSearchResultBeen) {

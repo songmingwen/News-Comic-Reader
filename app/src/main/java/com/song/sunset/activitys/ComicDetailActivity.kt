@@ -3,11 +3,13 @@ package com.song.sunset.activitys
 import android.content.pm.ActivityInfo
 import android.graphics.Bitmap
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
@@ -108,6 +110,10 @@ open class ComicDetailActivity : AppCompatActivity() {
 
         id_comic_detail_fab.setOnClickListener {
             vm.changeCollectedStatus(comicDetailBean!!)
+            val uri = Uri.parse("zhihu://aaa/bbb/ccc?a=1&b=2")
+            Log.e("99999", (uri == null).toString())
+            Log.e("9999", (uri!!.scheme == null).toString())
+            Log.e("999", (uri!!.host == null).toString())
         }
     }
 

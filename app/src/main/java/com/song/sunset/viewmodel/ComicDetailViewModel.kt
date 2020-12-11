@@ -9,8 +9,8 @@ import com.song.sunset.beans.ComicLocalCollection
 import com.song.sunset.mvp.models.ComicCollectionModel
 import com.song.sunset.utils.GreenDaoUtil
 import com.song.sunset.utils.api.U17ComicApi
+import com.song.sunset.utils.retrofit.Net
 import com.song.sunset.utils.retrofit.RetrofitCallback
-import com.song.sunset.utils.retrofit.RetrofitFactory
 import com.song.sunset.utils.rxjava.RxUtil
 import com.sunset.greendao.gen.ComicLocalCollectionDao
 import io.reactivex.disposables.CompositeDisposable
@@ -28,7 +28,7 @@ open class ComicDetailViewModel : ViewModel() {
 
     fun getComicDetailData(comicId: Int) {
         val dis = RxUtil.comic(
-                RetrofitFactory.createApi(U17ComicApi::class.java).queryComicDetailRDByObservable(comicId),
+                Net.createService(U17ComicApi::class.java).queryComicDetailRDByObservable(comicId),
                 object : RetrofitCallback<ComicDetailBean> {
                     override fun onSuccess(t: ComicDetailBean?) {
                         comicDetailBean.value = t
@@ -50,7 +50,7 @@ open class ComicDetailViewModel : ViewModel() {
     }
 
     fun changeCollectedStatus(bean: ComicDetailBean) {
-        val dis = RxUtil.comic(RetrofitFactory.createApi(U17ComicApi::class.java, ComicCollectionModel.getCollectionMap()).queryComicCollectionListRDByObservable(getPostData(bean)),
+        val dis = RxUtil.comic(Net.createService(U17ComicApi::class.java, ComicCollectionModel.getCollectionMap()).queryComicCollectionListRDByObservable(getPostData(bean)),
                 object : RetrofitCallback<CollectionOnlineListBean> {
                     override fun onSuccess(t: CollectionOnlineListBean?) {
                         val collected = !getCollectionStatus(Integer.parseInt(bean.comic.comic_id))

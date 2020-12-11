@@ -11,12 +11,9 @@ import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.flyco.tablayout.SlidingTabLayout;
-import com.google.android.material.tabs.TabLayout;
 import com.song.sunset.R;
 import com.song.sunset.adapters.RankingPagerAdapter;
 import com.song.sunset.beans.ComicRankListBean;
@@ -26,11 +23,10 @@ import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
-import com.song.sunset.utils.retrofit.RetrofitFactory;
+import com.song.sunset.utils.retrofit.Net;
 import com.song.sunset.utils.api.U17ComicApi;
 import com.song.sunset.widget.RankViewPager;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -105,7 +101,7 @@ public class ComicRankFragment extends BaseFragment {
     }
 
     private void loadNetData() {
-        Observable<BaseBean<ComicRankListBean>> observable = RetrofitFactory.createApi(U17ComicApi.class).queryComicRankListBeanByObservable();
+        Observable<BaseBean<ComicRankListBean>> observable = Net.createService(U17ComicApi.class).queryComicRankListBeanByObservable();
         RxUtil.comicSubscribe(observable, new RetrofitCallback<ComicRankListBean>() {
             @Override
             public void onSuccess(ComicRankListBean comicRankListBean) {

@@ -6,7 +6,7 @@ import com.song.sunset.beans.basebeans.BaseBean;
 import com.song.sunset.interfaces.ComicReadView;
 import com.song.sunset.utils.api.U17ComicApi;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
-import com.song.sunset.utils.retrofit.RetrofitFactory;
+import com.song.sunset.utils.retrofit.Net;
 import com.song.sunset.utils.rxjava.RxUtil;
 
 import java.util.ArrayList;
@@ -44,8 +44,8 @@ public class ComicReadModel {
         mCurrentTopPosition = firstPosition - 1;
         mCurrentBottomPosition = firstPosition + 1;
         Observable<BaseBean<ComicReadChapterBean>> observable =
-                RetrofitFactory
-                        .createApi(U17ComicApi.class).
+                Net
+                        .createService(U17ComicApi.class).
                         queryNewComicReadRDByObservable(mChapterList.get(firstPosition).getChapter_id());
         RxUtil.comicSubscribe(observable, new RetrofitCallback<ComicReadChapterBean>() {
             @Override
@@ -83,7 +83,7 @@ public class ComicReadModel {
         }
         isLoadingTop = true;
         Observable<BaseBean<ComicReadChapterBean>> observable =
-                RetrofitFactory.createApi(U17ComicApi.class).
+                Net.createService(U17ComicApi.class).
                         queryNewComicReadRDByObservable(mChapterList.get(mCurrentTopPosition).getChapter_id());
         RxUtil.comicSubscribe(observable, new RetrofitCallback<ComicReadChapterBean>() {
             @Override
@@ -121,7 +121,7 @@ public class ComicReadModel {
         }
         isLoadingBottom = true;
         Observable<BaseBean<ComicReadChapterBean>> observable =
-                RetrofitFactory.createApi(U17ComicApi.class).
+                Net.createService(U17ComicApi.class).
                         queryNewComicReadRDByObservable(mChapterList.get(mCurrentBottomPosition).getChapter_id());
         RxUtil.comicSubscribe(observable, new RetrofitCallback<ComicReadChapterBean>() {
             @Override

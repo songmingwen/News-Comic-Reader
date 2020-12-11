@@ -1,9 +1,17 @@
 package com.song.sunset.adapters.base;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.annotation.SuppressLint;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
+import com.song.sunset.R;
 import com.song.sunset.interfaces.OnRVItemClickListener;
 
 /**
@@ -21,18 +29,16 @@ public abstract class BaseRecyclerViewAdapter<RD, VH extends RecyclerView.ViewHo
 
     protected abstract VH onCreatePersonalViewHolder(ViewGroup parent, int viewType);
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         onBindPersonalViewHolder(holder, position);
 
         if (getItemClickState()) {
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onItemClick(v, holder.getAdapterPosition());
-                    if (onRVItemClickListener != null) {
-                        onRVItemClickListener.onClick(v, holder.getAdapterPosition());
-                    }
+            holder.itemView.setOnClickListener(v -> {
+                onItemClick(v, holder.getAdapterPosition());
+                if (onRVItemClickListener != null) {
+                    onRVItemClickListener.onClick(v, holder.getAdapterPosition());
                 }
             });
         }

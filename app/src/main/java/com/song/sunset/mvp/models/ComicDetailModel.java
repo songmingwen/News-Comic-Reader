@@ -9,7 +9,7 @@ import com.song.sunset.beans.ComicLocalCollection;
 import com.song.sunset.beans.basebeans.BaseBean;
 import com.song.sunset.utils.GreenDaoUtil;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
-import com.song.sunset.utils.retrofit.RetrofitFactory;
+import com.song.sunset.utils.retrofit.Net;
 import com.song.sunset.utils.api.U17ComicApi;
 import com.song.sunset.utils.rxjava.RxUtil;
 import com.sunset.greendao.gen.ComicLocalCollectionDao;
@@ -29,7 +29,7 @@ public class ComicDetailModel implements CoreBaseModel {
     private ComicLocalCollectionDao comicLocalCollectionDao;
 
     public Observable<BaseBean<ComicDetailBean>> getData(int comicId) {
-        return RetrofitFactory.createApi(U17ComicApi.class).queryComicDetailRDByObservable(comicId);
+        return Net.createService(U17ComicApi.class).queryComicDetailRDByObservable(comicId);
     }
 
     public boolean isCollected(int comicId) {
@@ -43,7 +43,7 @@ public class ComicDetailModel implements CoreBaseModel {
      * 从网络添加、删除漫画
      */
     public void changeCollectedStateFromNet(final ComicDetailBean bean, final ChangeCollectionListener changeCollectionListener) {
-        Observable<BaseBean<CollectionOnlineListBean>> observable = RetrofitFactory.createApi(U17ComicApi.class, ComicCollectionModel.getCollectionMap()).queryComicCollectionListRDByObservable(getPostData(bean));
+        Observable<BaseBean<CollectionOnlineListBean>> observable = Net.createService(U17ComicApi.class, ComicCollectionModel.getCollectionMap()).queryComicCollectionListRDByObservable(getPostData(bean));
         RxUtil.comicSubscribe(observable, new RetrofitCallback<CollectionOnlineListBean>() {
             @Override
             public void onSuccess(CollectionOnlineListBean collectionOnlineListBean) {

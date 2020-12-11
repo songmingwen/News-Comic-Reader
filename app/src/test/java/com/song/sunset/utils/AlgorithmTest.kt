@@ -186,4 +186,12 @@ class AlgorithmTest {
         ListNode.printListNode(tempRevert)
     }
 
+    @Test
+    fun longestCommonSubsequence() {
+        val str1 = "abcde"
+        val str2 = "eca"
+        val length = Algorithm.longestCommonSubsequence(str1, str2)
+        println(length)
+    }
+
 }

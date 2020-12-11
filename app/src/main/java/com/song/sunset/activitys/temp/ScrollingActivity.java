@@ -4,11 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.view.View;
 
 import com.flyco.tablayout.SlidingTabLayout;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -24,7 +21,7 @@ import com.song.sunset.fragments.ComicGenericListFragment;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.api.U17ComicApi;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
-import com.song.sunset.utils.retrofit.RetrofitFactory;
+import com.song.sunset.utils.retrofit.Net;
 import com.song.sunset.utils.rxjava.RxUtil;
 import com.song.sunset.widget.RankViewPager;
 
@@ -90,7 +87,7 @@ public class ScrollingActivity extends BaseActivity {
     }
 
     private void loadNetData() {
-        Observable<BaseBean<ComicRankListBean>> observable = RetrofitFactory.createApi(U17ComicApi.class).queryComicRankListBeanByObservable();
+        Observable<BaseBean<ComicRankListBean>> observable = Net.createService(U17ComicApi.class).queryComicRankListBeanByObservable();
         RxUtil.comicSubscribe(observable, new RetrofitCallback<ComicRankListBean>() {
             @Override
             public void onSuccess(ComicRankListBean comicRankListBean) {

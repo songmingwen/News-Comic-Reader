@@ -5,7 +5,7 @@ import com.song.sunset.beans.basebeans.BaseBean;
 import com.song.sunset.interfaces.ComicListView;
 import com.song.sunset.utils.retrofit.RetrofitCall;
 import com.song.sunset.utils.retrofit.RetrofitCallback;
-import com.song.sunset.utils.retrofit.RetrofitFactory;
+import com.song.sunset.utils.retrofit.Net;
 import com.song.sunset.utils.api.U17ComicApi;
 
 import retrofit2.Call;
@@ -30,7 +30,7 @@ public class ComicListModel {
             comicListView.showLoading();
         }
         comicListView.showLoadingMoreProgress();
-        Call<BaseBean<ComicListBean>> call = RetrofitFactory.createApi(U17ComicApi.class).queryComicListRDByCall(page, argName, argValue);
+        Call<BaseBean<ComicListBean>> call = Net.createService(U17ComicApi.class).queryComicListRDByCall(page, argName, argValue);
         RetrofitCall.call(call, new RetrofitCallback<ComicListBean>() {
             @Override
             public void onSuccess(ComicListBean comicListBean) {
@@ -56,7 +56,7 @@ public class ComicListModel {
             return;
         }
         isRefreshing = true;
-        Call<BaseBean<ComicListBean>> call = RetrofitFactory.createApi(U17ComicApi.class).queryComicListRDByCall(1, argName, argValue);
+        Call<BaseBean<ComicListBean>> call = Net.createService(U17ComicApi.class).queryComicListRDByCall(1, argName, argValue);
         RetrofitCall.call(call, new RetrofitCallback<ComicListBean>() {
             @Override
             public void onSuccess(ComicListBean comicListBean) {
