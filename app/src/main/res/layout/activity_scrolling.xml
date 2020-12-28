@@ -24,7 +24,7 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="300dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/squirrel" />
 
@@ -34,34 +34,26 @@
             <!--android:layout_height="?attr/actionBarSize"-->
             <!--app:layout_collapseMode="pin" />-->
 
-            <com.flyco.tablayout.SlidingTabLayout
-                android:id="@+id/ranking_sliding_layout"
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:layout_gravity="bottom|center_horizontal"
                 android:background="@color/white"
-                app:tl_indicator_color="@color/colorPrimary"
-                app:tl_indicator_height="2dp"
-                app:tl_indicator_width="40dp"
-                app:tl_tab_width="60dp"
-                app:tl_textSelectColor="@color/colorPrimary"
-                app:tl_textUnselectColor="@color/color_transparent_88"
-                app:tl_textsize="15sp"
-                app:tl_underline_color="@color/color_transparent_88"
-                app:tl_underline_height="0.5dp" />
+                app:tabIndicatorFullWidth="false"
+                app:tabTextColor="@color/colorPrimary"
+                app:tabIndicatorColor="@color/colorPrimary"/>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
     <!--<include layout="@layout/content_scrolling"/>-->
 
-    <com.song.sunset.widget.RankViewPager
-        android:id="@+id/ranking_view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipChildren="false"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-    </com.song.sunset.widget.RankViewPager>
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/ranking_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

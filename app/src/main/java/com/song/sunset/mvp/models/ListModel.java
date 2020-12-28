@@ -27,7 +27,7 @@ public class ListModel {
 
     public <Bean extends PageEntity> void setData(ListCallView view, Bean bean) {
         if (bean != null) {
-            totalPage = bean.getPageSum();
+            totalPage = bean.getOnePageCount();
         }
         if (view != null) {
             view.showContent();

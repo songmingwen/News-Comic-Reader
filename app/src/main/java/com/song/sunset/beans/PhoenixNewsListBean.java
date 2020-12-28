@@ -121,8 +121,13 @@ public class PhoenixNewsListBean implements Parcelable, PageEntity<PhoenixChanne
     };
 
     @Override
-    public int getPageSum() {
+    public int getOnePageCount() {
         return totalPage;
+    }
+
+    @Override
+    public boolean isHasMore() {
+        return true;
     }
 
     @Override

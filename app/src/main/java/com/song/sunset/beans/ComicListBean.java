@@ -19,6 +19,7 @@ public class ComicListBean implements PageEntity<ComicsBean>, Parcelable {
 
     private List<ComicsBean> comics;
 
+    @Override
     public boolean isHasMore() {
         return hasMore;
     }
@@ -77,8 +78,13 @@ public class ComicListBean implements PageEntity<ComicsBean>, Parcelable {
     };
 
     @Override
-    public int getPageSum() {
+    public int getOnePageCount() {
         return 7;
+    }
+
+    @Override
+    public int getCurrentPage() {
+        return page;
     }
 
     @Override

@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.AndroidException;
+import android.view.View;
 
 import com.song.sunset.SunsetApplication;
 import com.song.sunset.utils.AppConfig;
@@ -19,6 +20,8 @@ import java.lang.annotation.Target;
 
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
 import io.reactivex.Observable;
 
 /**
@@ -158,11 +161,32 @@ public enum RxNetWork {
         return mIsMobileConnected || mIsWifiConnected;
     }
 
+    @NonNull
+    public Observable<ConnectInfo> onConnectionChangedForever() {
+        return RxBus.getInstance().toObservableForeverOrManualDispose(ConnectInfo.class);
+    }
+
     /**
-     * 可通过 observable 监听网络变化
+     * 将网络变化绑定生命周期
      */
     @NonNull
-    public Observable<ConnectInfo> onConnectionChanged() {
-        return RxBus.getInstance().toObservable(ConnectInfo.class);
+    public Observable<ConnectInfo> onConnectionChanged(@NonNull LifecycleOwner bindTo) {
+        return RxBus.getInstance().toObservable(ConnectInfo.class, bindTo);
+    }
+
+    /**
+     * 将网络变化绑定生命周期
+     */
+    @NonNull
+    public Observable<ConnectInfo> onConnectionChanged(@NonNull LifecycleOwner bindTo, @NonNull Lifecycle.Event until) {
+        return RxBus.getInstance().toObservable(ConnectInfo.class, bindTo, until);
+    }
+
+    /**
+     * 将网络变化绑定到一个 View 上
+     */
+    @NonNull
+    public Observable<ConnectInfo> onConnectionChanged(View view) {
+        return RxBus.getInstance().toObservable(ConnectInfo.class, view);
     }
 }

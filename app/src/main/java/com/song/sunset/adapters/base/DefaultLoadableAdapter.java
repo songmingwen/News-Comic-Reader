@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.song.sunset.R;
-import com.song.sunset.activitys.ComicDetailMVPActivity;
 import com.song.sunset.beans.ComicsBean;
 import com.song.sunset.holders.ComicListViewHolder;
 import com.song.sunset.utils.ViewUtil;
