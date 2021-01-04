@@ -20,7 +20,7 @@ class ARouterPlugin : FlutterPlugin, MethodChannel.MethodCallHandler {
 
         fun registerWith(registrar: BinaryMessenger) {
             val channel = MethodChannel(registrar, PLUGIN_NAME_ROUTER)
-            val instance: ARouterPlugin = ARouterPlugin()
+            val instance = ARouterPlugin()
             channel.setMethodCallHandler(instance)
         }
     }

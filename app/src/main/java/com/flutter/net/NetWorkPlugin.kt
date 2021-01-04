@@ -13,6 +13,7 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import io.reactivex.Single
 import io.reactivex.SingleEmitter
+import io.reactivex.SingleOnSubscribe
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import okhttp3.Call
@@ -27,7 +28,7 @@ class NetworkPlugin : FlutterPlugin, MethodCallHandler {
 
         fun registerWith(registrar: BinaryMessenger) {
             val channel = MethodChannel(registrar, PLUGIN_NAME_NET)
-            val instance: NetworkPlugin = NetworkPlugin()
+            val instance = NetworkPlugin()
             channel.setMethodCallHandler(instance)
         }
     }

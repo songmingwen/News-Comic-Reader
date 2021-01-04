@@ -48,7 +48,11 @@
         <activity android:name=".activitys.temp.ServiceProviderActivity"></activity>
         <activity
             android:name=".activitys.FlutterComicActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="io.flutter.embedding.android.SplashScreenDrawable"
+                android:resource="@drawable/transparent" />
+        </activity>
         <activity android:name=".activitys.temp.GlobalFlowActivity" />
         <activity android:name=".activitys.temp.MotionLayoutActivity" />
         <activity android:name=".activitys.temp.QRCodeActivity" />

@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_comic/bean/newest_comic_list_entity.dart';
 import 'package:flutter_comic/net/response.dart';
 import 'package:flutter_comic/router/arouter.dart';
@@ -19,6 +21,11 @@ class ComicList extends StatefulWidget {
 }
 
 class ComicStateList extends State<ComicList> {
+  static const EventChannel _eventChannel =
+      const EventChannel("plugins.flutter.song.sensor");
+
+  StreamSubscription _streamSubscription;
+
   List<NewestComicListDataReturnDataComic> comicList = List();
 
   ScrollController _scrollController = ScrollController(); //listview的控制器
@@ -28,6 +35,13 @@ class ComicStateList extends State<ComicList> {
   @override
   void initState() {
     super.initState();
+    print('sensor_event:initState');
+    _streamSubscription = _eventChannel.receiveBroadcastStream().listen((dynamic event) {
+      print('sensor_event_listen_success: $event');
+    }, onError: (dynamic error) {
+      print('sensor_event_listen_error: ${error.message}');
+    }, cancelOnError: true);
+
     _getData();
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
@@ -36,6 +50,21 @@ class ComicStateList extends State<ComicList> {
         _getMore();
       }
     });
+  }
+
+  @override
+  void deactivate() {
+    print('sensor_event:dispose');
+    if (_streamSubscription != null) {
+      _streamSubscription.cancel();
+      _streamSubscription = null;
+    }
+    super.deactivate();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -198,6 +227,6 @@ class ComicStateList extends State<ComicList> {
   }
 
   _onClick(NewestComicListDataReturnDataComic comic) {
-    ARouter.navigation("/song/comic/detail", {"comic_id": comic.comicId});
+    SRouter.navigation("/song/comic/detail", {"comic_id": comic.comicId});
   }
 }

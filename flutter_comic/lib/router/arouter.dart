@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
 
-class ARouter {
+class SRouter {
   static const MethodChannel _aRouterChannel =
       const MethodChannel("plugins.flutter.song.arouter");
 

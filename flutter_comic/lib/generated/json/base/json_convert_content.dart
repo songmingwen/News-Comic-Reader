@@ -7,48 +7,75 @@ import 'package:flutter_comic/bean/newest_comic_list_entity.dart';
 import 'package:flutter_comic/generated/json/newest_comic_list_entity_helper.dart';
 
 class JsonConvert<T> {
-	T fromJson(Map<String, dynamic> json) {
-		return _getFromJson<T>(runtimeType, this, json);
-	}
+  T fromJson(Map<String, dynamic> json) {
+    return _getFromJson<T>(runtimeType, this, json);
+  }
 
   Map<String, dynamic> toJson() {
-		return _getToJson<T>(runtimeType, this);
+    return _getToJson<T>(runtimeType, this);
   }
 
   static _getFromJson<T>(Type type, data, json) {
-    switch (type) {			case NewestComicListEntity:
-			return newestComicListEntityFromJson(data as NewestComicListEntity, json) as T;			case NewestComicListData:
-			return newestComicListDataFromJson(data as NewestComicListData, json) as T;			case NewestComicListDataReturnData:
-			return newestComicListDataReturnDataFromJson(data as NewestComicListDataReturnData, json) as T;			case NewestComicListDataReturnDataComic:
-			return newestComicListDataReturnDataComicFromJson(data as NewestComicListDataReturnDataComic, json) as T;    }
+    switch (type) {
+      case NewestComicListEntity:
+        return newestComicListEntityFromJson(
+            data as NewestComicListEntity, json) as T;
+      case NewestComicListData:
+        return newestComicListDataFromJson(data as NewestComicListData, json)
+            as T;
+      case NewestComicListDataReturnData:
+        return newestComicListDataReturnDataFromJson(
+            data as NewestComicListDataReturnData, json) as T;
+      case NewestComicListDataReturnDataComic:
+        return newestComicListDataReturnDataComicFromJson(
+            data as NewestComicListDataReturnDataComic, json) as T;
+    }
     return data as T;
   }
 
   static _getToJson<T>(Type type, data) {
-		switch (type) {			case NewestComicListEntity:
-			return newestComicListEntityToJson(data as NewestComicListEntity);			case NewestComicListData:
-			return newestComicListDataToJson(data as NewestComicListData);			case NewestComicListDataReturnData:
-			return newestComicListDataReturnDataToJson(data as NewestComicListDataReturnData);			case NewestComicListDataReturnDataComic:
-			return newestComicListDataReturnDataComicToJson(data as NewestComicListDataReturnDataComic);    }
+    switch (type) {
+      case NewestComicListEntity:
+        return newestComicListEntityToJson(data as NewestComicListEntity);
+      case NewestComicListData:
+        return newestComicListDataToJson(data as NewestComicListData);
+      case NewestComicListDataReturnData:
+        return newestComicListDataReturnDataToJson(
+            data as NewestComicListDataReturnData);
+      case NewestComicListDataReturnDataComic:
+        return newestComicListDataReturnDataComicToJson(
+            data as NewestComicListDataReturnDataComic);
+    }
     return data as T;
   }
+
   //Go back to a single instance by type
   static _fromJsonSingle(String type, json) {
-    switch (type) {			case 'NewestComicListEntity':
-			return NewestComicListEntity().fromJson(json);			case 'NewestComicListData':
-			return NewestComicListData().fromJson(json);			case 'NewestComicListDataReturnData':
-			return NewestComicListDataReturnData().fromJson(json);			case 'NewestComicListDataReturnDataComic':
-			return NewestComicListDataReturnDataComic().fromJson(json);    }
+    switch (type) {
+      case 'NewestComicListEntity':
+        return NewestComicListEntity().fromJson(json);
+      case 'NewestComicListData':
+        return NewestComicListData().fromJson(json);
+      case 'NewestComicListDataReturnData':
+        return NewestComicListDataReturnData().fromJson(json);
+      case 'NewestComicListDataReturnDataComic':
+        return NewestComicListDataReturnDataComic().fromJson(json);
+    }
     return null;
   }
 
   //empty list is returned by type
   static _getListFromType(String type) {
-    switch (type) {			case 'NewestComicListEntity':
-			return List<NewestComicListEntity>();			case 'NewestComicListData':
-			return List<NewestComicListData>();			case 'NewestComicListDataReturnData':
-			return List<NewestComicListDataReturnData>();			case 'NewestComicListDataReturnDataComic':
-			return List<NewestComicListDataReturnDataComic>();    }
+    switch (type) {
+      case 'NewestComicListEntity':
+        return List<NewestComicListEntity>();
+      case 'NewestComicListData':
+        return List<NewestComicListData>();
+      case 'NewestComicListDataReturnData':
+        return List<NewestComicListDataReturnData>();
+      case 'NewestComicListDataReturnDataComic':
+        return List<NewestComicListDataReturnDataComic>();
+    }
     return null;
   }
 

@@ -3,6 +3,7 @@ package com.song.sunset.activitys;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.flutter.SimpleEventPlugin;
 import com.flutter.net.NetworkPlugin;
 import com.flutter.router.ARouterPlugin;
 
@@ -20,13 +21,13 @@ public class FlutterComicActivity extends FlutterActivity {
     public void configureFlutterEngine(FlutterEngine flutterEngine) {
         NetworkPlugin.Companion.registerWith(flutterEngine.getDartExecutor());
         ARouterPlugin.Companion.registerWith(flutterEngine.getDartExecutor());
+        SimpleEventPlugin.Companion.registerWith(flutterEngine.getDartExecutor());
         Log.i("NetworkPlugin", "configureFlutterEngine");
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
 }
