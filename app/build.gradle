@@ -154,4 +154,6 @@ dependencies {
 
     implementation project(':flutter')
     implementation project(':comic')
+    implementation project(':widget')
+    implementation project(':flutter_plugin_battery')
 }

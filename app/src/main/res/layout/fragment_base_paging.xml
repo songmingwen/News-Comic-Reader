@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    <com.song.widget.PullRefreshLayout
         android:id="@+id/refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -15,6 +15,6 @@
             android:layout_height="match_parent"
             android:scrollbars="vertical" />
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </com.song.widget.PullRefreshLayout>
 </FrameLayout>
 

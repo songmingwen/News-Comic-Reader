@@ -28,8 +28,7 @@ class NetworkPlugin : FlutterPlugin, MethodCallHandler {
 
         fun registerWith(registrar: BinaryMessenger) {
             val channel = MethodChannel(registrar, PLUGIN_NAME_NET)
-            val instance = NetworkPlugin()
-            channel.setMethodCallHandler(instance)
+            channel.setMethodCallHandler(NetworkPlugin())
         }
     }
 

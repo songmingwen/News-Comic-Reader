@@ -298,9 +298,18 @@ public class RxjavaActivity extends AppCompatActivity {
     }
 
     public void take(View view) {
-        Disposable disposable = Observable.just(1, 2, 3, 4, 5, 6, 7)
-                .take(3).compose(RxUtil.getDefaultScheduler())
-                .subscribe(integer -> Log.e(TAG, "accept: take " + integer));
+        Disposable disposable = Observable
+                .create((ObservableOnSubscribe<Integer>) emitter -> {
+                    Thread.sleep(1000);
+                    emitter.onNext(7);
+                    emitter.onNext(8);
+                    emitter.onNext(9);
+//            emitter.onError(new NullPointerException());
+                    emitter.onComplete();
+                })
+                .timeout(2, TimeUnit.SECONDS)
+                .take(1).compose(RxUtil.getDefaultScheduler())
+                .subscribe(integer -> Log.e(TAG, "accept: take " + integer), error -> Log.e(TAG, "accept: take error"));
         mDisposables.add(disposable);
     }
 

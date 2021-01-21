@@ -11,6 +11,7 @@ import com.song.sunset.R;
 import com.song.sunset.beans.basebeans.PageEntity;
 import com.song.sunset.holders.DefaultLoadMoreProgressHolder;
 import com.song.sunset.holders.DefaultRefreshEmptyHolder;
+import com.song.widget.PullRefreshLayout;
 import com.zhihu.android.sugaradapter.SugarAdapter;
 
 import java.util.ArrayList;
@@ -24,7 +25,6 @@ import androidx.annotation.UiThread;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import okhttp3.ResponseBody;
 import retrofit2.Response;
 
@@ -35,7 +35,7 @@ import retrofit2.Response;
  */
 public abstract class BasePagingFragment<T extends PageEntity> extends BaseFragment {
     private static final String TAG = "BasePagingFragment";
-    protected SwipeRefreshLayout mSwipeRefreshLayout;
+    protected PullRefreshLayout mSwipeRefreshLayout;
     protected RecyclerView mRecyclerView;
     protected RecyclerView.LayoutManager mLayoutManager;
     protected SugarAdapter mAdapter;

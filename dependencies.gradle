@@ -1,15 +1,7 @@
-dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    testImplementation 'junit:junit:4.13'
-    implementation 'com.google.android.material:material:1.2.1'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.palette:palette:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
 
-    implementation 'com.google.android:flexbox:1.1.0'
-    implementation 'com.android.support:multidex:1.0.3'
+//dependencies 配置在此文件添加
+apply from: file('../dependencies_base.gradle')
+dependencies {
     implementation "android.arch.work:work-runtime:1.0.1"
 
     implementation 'com.google.auto.service:auto-service:1.0-rc6'
@@ -89,7 +81,7 @@ dependencies {
     //mmap 的高性能通用 key-value 组件（替代 sp splite 等，使用简单可以多进程使用）
     implementation 'com.tencent:mmkv:1.0.22'
 
-    implementation "com.airbnb.android:lottie:2.7.0"
+    implementation "com.airbnb.android:lottie:3.4.2"
 
     implementation 'com.alibaba:arouter-api:1.5.1'
     kapt 'com.alibaba:arouter-compiler:1.5.1'

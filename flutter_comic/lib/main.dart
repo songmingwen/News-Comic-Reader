@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_comic/bean/newest_comic_list_entity.dart';
 import 'package:flutter_comic/net/response.dart';
 import 'package:flutter_comic/router/arouter.dart';
+import 'package:flutter_comic/utils/BatteryUtils.dart';
 
 import 'net/net.dart';
 
@@ -35,6 +36,7 @@ class ComicStateList extends State<ComicList> {
   @override
   void initState() {
     super.initState();
+    printBatteryLevel();
     print('sensor_event:initState');
     _streamSubscription = _eventChannel.receiveBroadcastStream().listen((dynamic event) {
       print('sensor_event_listen_success: $event');
@@ -54,12 +56,16 @@ class ComicStateList extends State<ComicList> {
 
   @override
   void deactivate() {
-    print('sensor_event:dispose');
+    cancelSensor();
+    super.deactivate();
+  }
+
+  void cancelSensor() {
+    print('sensor_event:cancelSensor');
     if (_streamSubscription != null) {
       _streamSubscription.cancel();
       _streamSubscription = null;
     }
-    super.deactivate();
   }
 
   @override
@@ -78,6 +84,11 @@ class ComicStateList extends State<ComicList> {
         body: Center(child: _buildComicList()),
       ),
     );
+  }
+
+  void printBatteryLevel() async{
+    int level = await BatteryUtils.getBatteryLevel();
+    print("getBatteryLevel = " + level.toString());
   }
 
   void _getData() async {

@@ -35,13 +35,16 @@ class SimpleEventPlugin : FlutterPlugin, EventChannel.StreamHandler {
 
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
         registerWith(binding.binaryMessenger)
+        Log.i("SimpleEventPlugin", "onAttachedToEngine")
     }
 
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
+        Log.i(TAG, "native_onDetachedFromEngine")
+        onCancel(null)
     }
 
     override fun onListen(arguments: Any?, events: EventChannel.EventSink?) {
-        Log.i(TAG, "onListen")
+        Log.i(TAG, "native_onListen")
 
         sensorManager = AppConfig.getApp().getSystemService(SENSOR_SERVICE) as SensorManager
         val sensorType: Int = Sensor.TYPE_ACCELEROMETER
@@ -50,7 +53,7 @@ class SimpleEventPlugin : FlutterPlugin, EventChannel.StreamHandler {
 
             override fun onSensorChanged(sensorEvent: SensorEvent) {
                 if (sensorEvent.sensor.type == Sensor.TYPE_ACCELEROMETER) {
-                    Log.i(TAG, "onSensorChanged")
+                    Log.i(TAG, "native_onSensorChanged")
 
                     //图解中已经解释三个值的含义
                     val X_lateral = sensorEvent.values[0]
@@ -61,7 +64,7 @@ class SimpleEventPlugin : FlutterPlugin, EventChannel.StreamHandler {
             }
 
             override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-                Log.i(TAG, "onAccuracyChanged")
+                Log.i(TAG, "native_onAccuracyChanged")
             }
         }
 
@@ -70,7 +73,7 @@ class SimpleEventPlugin : FlutterPlugin, EventChannel.StreamHandler {
     }
 
     override fun onCancel(arguments: Any?) {
-        Log.i(TAG, "cancel")
+        Log.i(TAG, "native_cancel")
         sensorManager.unregisterListener(mAccelerometerListener)
     }
 
