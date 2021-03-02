@@ -6,7 +6,6 @@ import android.util.Log;
 import com.flutter.SimpleEventPlugin;
 import com.flutter.net.NetworkPlugin;
 import com.flutter.router.ARouterPlugin;
-import com.song.flutter_plugin_battery.FlutterPluginBatteryPlugin;
 
 import io.flutter.embedding.android.FlutterActivity;
 import io.flutter.embedding.engine.FlutterEngine;
@@ -26,7 +25,6 @@ public class FlutterComicActivity extends FlutterActivity {
         NetworkPlugin.Companion.registerWith(flutterEngine.getDartExecutor());
         ARouterPlugin.Companion.registerWith(flutterEngine.getDartExecutor());
         SimpleEventPlugin.Companion.registerWith(flutterEngine.getDartExecutor());
-        FlutterPluginBatteryPlugin.registerWith(flutterEngine.getDartExecutor(), this);
         Log.i("FlutterComicActivity", "configureFlutterEngine");
     }
 

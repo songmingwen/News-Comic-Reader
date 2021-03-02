@@ -1,3 +1,5 @@
+
+
 import 'package:flutter_comic/generated/json/base/json_convert_content.dart';
 
 class NewestComicListEntity with JsonConvert<NewestComicListEntity> {
