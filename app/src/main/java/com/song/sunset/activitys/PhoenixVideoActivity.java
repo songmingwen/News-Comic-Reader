@@ -1,12 +1,17 @@
 package com.song.sunset.activitys;
 
 import android.graphics.Color;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -18,11 +23,15 @@ import com.song.sunset.R;
 import com.song.sunset.beans.DanmakuBean;
 import com.song.sunset.beans.VideoDetailBean;
 import com.song.sunset.utils.danmaku.SongDanmakuParser;
+import com.song.sunset.utils.danmu.LinearGradientFontSpan;
+import com.song.sunset.utils.danmu.SpannedCacheSufferAdapter;
 import com.song.sunset.widget.GoodsTag;
 import com.song.video.DanMuVideoController;
 import com.song.video.NormalVideoPlayer;
 import com.song.video.Resolution;
 import com.song.video.VideoManager;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,7 +43,9 @@ import master.flame.danmaku.danmaku.model.BaseDanmaku;
 import master.flame.danmaku.danmaku.model.DanmakuTimer;
 import master.flame.danmaku.danmaku.model.IDanmakus;
 import master.flame.danmaku.danmaku.model.IDisplayer;
+import master.flame.danmaku.danmaku.model.android.BaseCacheStuffer;
 import master.flame.danmaku.danmaku.model.android.DanmakuContext;
+import master.flame.danmaku.danmaku.model.android.SpannedCacheStuffer;
 import master.flame.danmaku.danmaku.parser.BaseDanmakuParser;
 import master.flame.danmaku.ui.widget.DanmakuView;
 
@@ -87,7 +98,7 @@ public class PhoenixVideoActivity extends AppCompatActivity {
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(controller.imageView());
         player.setUp(mVideoDetailBean.getVideo_url(), null);
-//        controller.setResolutions(getResolutions(), 0);
+        //        controller.setResolutions(getResolutions(), 0);
         player.start();
     }
 
@@ -149,7 +160,9 @@ public class PhoenixVideoActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (VideoManager.instance().onBackPressd()) return;
+        if (VideoManager.instance().onBackPressd()) {
+            return;
+        }
         super.onBackPressed();
     }
 
@@ -165,7 +178,7 @@ public class PhoenixVideoActivity extends AppCompatActivity {
             }
         }
         GoodsTag goodsTag = new GoodsTag(this);
-        goodsTag.setData("19.9", 0);
+        goodsTag.setData(getSpannableString("29999.9"), 0);
         mLayout.addView(goodsTag);
     }
 
@@ -192,11 +205,12 @@ public class PhoenixVideoActivity extends AppCompatActivity {
 
         mDanmakuContext = DanmakuContext.create();
         mDanmakuContext.setDanmakuStyle(IDisplayer.DANMAKU_STYLE_SHADOW, 3)
+                .setCacheStuffer(new SpannedCacheStuffer(), new SpannedCacheSufferAdapter())
+                //                .setCacheStuffer(new SpannedCacheStuffer(), mCacheStufferAdapter) // 图文混排使用SpannedCacheStuffer
+                //                .setCacheStuffer(new BackgroundCacheStuffer())  // 绘制背景使用BackgroundCacheStuffer
                 .setDuplicateMergingEnabled(false)
                 .setScrollSpeedFactor(1.2f)
                 .setScaleTextSize(1.2f)
-//                .setCacheStuffer(new SpannedCacheStuffer(), mCacheStufferAdapter) // 图文混排使用SpannedCacheStuffer
-//                .setCacheStuffer(new BackgroundCacheStuffer())  // 绘制背景使用BackgroundCacheStuffer
                 .setMaximumLines(maxLinesPair)
                 .preventOverlapping(overlappingEnablePair).setDanmakuMargin(40);
     }
@@ -239,12 +253,17 @@ public class PhoenixVideoActivity extends AppCompatActivity {
             }
 
             @Override
+            public boolean onDanmakuLongClick(IDanmakus danmakus) {
+                return false;
+            }
+
+            @Override
             public boolean onViewClick(IDanmakuView view) {
                 return false;
             }
         });
         mDanmakuView.prepare(mParser, mDanmakuContext);
-//        mDanmakuView.showFPS(true);
+        //        mDanmakuView.showFPS(true);
         mDanmakuView.enableDanmakuDrawingCache(true);
     }
 
@@ -255,22 +274,32 @@ public class PhoenixVideoActivity extends AppCompatActivity {
         }
         Calendar c = Calendar.getInstance();
         c.setTime(new Date(System.currentTimeMillis()));
-        danmaku.text = "我发送的弹幕" + c.get(Calendar.YEAR) + "年"
-                + (1 + c.get(Calendar.MONTH)) + "月"
-                + c.get(Calendar.DAY_OF_MONTH) + "日"
-                + c.get(Calendar.HOUR_OF_DAY) + "时"
+        String text = "我发送的弹幕" + c.get(Calendar.HOUR_OF_DAY) + "时"
                 + c.get(Calendar.MINUTE) + "分"
                 + c.get(Calendar.SECOND) + "秒";
+
+        danmaku.text = getSpannableString(text);
         danmaku.padding = 5;
         danmaku.priority = 7;  // 可能会被各种过滤器过滤并隐藏显示
         danmaku.isLive = islive;
-        danmaku.setTime(mDanmakuView.getCurrentTime() + 1200);
-        danmaku.textSize = 20f * (mParser.getDisplayer().getDensity() - 0.6f);
-        danmaku.textColor = Color.GREEN;
-        danmaku.textShadowColor = Color.WHITE;
-//        danmaku.underlineColor = Color.GREEN;
-//        danmaku.borderColor = Color.GREEN;
+        danmaku.setTime(mDanmakuView.getCurrentTime() + 200);
+        //        danmaku.textSize = 20f * (mParser.getDisplayer().getDensity() - 0.6f);
+        //        danmaku.textColor = Color.GREEN;
+        danmaku.textShadowColor = Color.BLACK;
+        //        danmaku.underlineColor = Color.GREEN;
+//        danmaku.borderColor = Color.WHITE;
         mDanmakuView.addDanmaku(danmaku);
+    }
+
+    @NotNull
+    private SpannableString getSpannableString(String text) {
+        LinearGradientFontSpan linearGradientFontSpan =
+                new LinearGradientFontSpan(getResources().getColor(R.color.colorPrimary),
+                        getResources().getColor(R.color.colorAccent));
+        SpannableString spannableString = new SpannableString(text);
+        //第一个参数是格式，第二个参数起始位置，第三个结束位置（但不包括结束位置），,第四个模式，共有四种
+        spannableString.setSpan(linearGradientFontSpan, 0, text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return spannableString;
     }
 
     @NonNull

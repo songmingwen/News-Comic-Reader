@@ -6,25 +6,28 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Build
-import android.os.RemoteException
 import android.os.Bundle
+import android.os.RemoteException
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
-import androidx.recyclerview.widget.RecyclerView
 import com.bubblepicker.BubbleActivity
-
 import com.song.sunset.R
+import com.song.sunset.activitys.PhoenixVideoActivity
 import com.song.sunset.activitys.base.BaseActivity
 import com.song.sunset.activitys.opengl.OpenGLListActivity
 import com.song.sunset.beans.MusicInfo
+import com.song.sunset.beans.VideoDetailBean
 import com.song.sunset.services.impl.BinderPoolImpl
 import com.song.sunset.services.impl.MusicCallBackListenerImpl
 import com.song.sunset.services.impl.MusicGetterImpl
 import com.song.sunset.services.managers.BinderPool
 import com.song.sunset.utils.ViewUtil
-import com.song.sunset.utils.preinstall.*
+import com.song.sunset.utils.preinstall.DefaultPreinstallHandler
+import com.song.sunset.utils.preinstall.HuaweiPreinstallHandler
+import com.song.sunset.utils.preinstall.VivoPreinstallHandler
+import com.song.sunset.utils.preinstall.XiaomiPreinstallHandler
 import com.song.sunset.utils.process.AndroidProcesses
 import com.song.sunset.widget.fireworks.BitmapProvider
 import com.song.sunset.widget.fireworks.FireworksView
@@ -166,6 +169,7 @@ class FunctionListActivity : BaseActivity() {
     private fun LinearLayout.addButtonList() {
         addButton("🎆") {}.apply { setOnClickListener { showFireworks(this) } }
         addButton("test") { TempTestActivity.start(this@FunctionListActivity) }
+        addDanmu()
         addButton("Fresco XML params display") { FrescoXMLActivity.start(this@FunctionListActivity) }
         addButton("Fresco post processor display") { FrescoProcessorActivity.start(this@FunctionListActivity) }
         addButton("RxJava") { RxjavaActivity.start(this@FunctionListActivity) }
@@ -186,6 +190,13 @@ class FunctionListActivity : BaseActivity() {
         addButton("ServiceProvider") { ServiceProviderActivity.start(this@FunctionListActivity) }
         addButton("CenteredImageSpan") { CenteredImageSpanActivity.start(this@FunctionListActivity) }
         addButton("CenteredImageSpan") { RecyclerViewDragActivity.start(this@FunctionListActivity) }
+    }
+
+    private fun LinearLayout.addDanmu() {
+        val videoDetailBean = VideoDetailBean()
+        videoDetailBean.title = "搞笑视频"
+        videoDetailBean.video_url = "https://vd2.bdstatic.com//mda-ke9s31k9fwjvvuac//v1-cae//mda-ke9s31k9fwjvvuac.mp4"
+        addButton("弹幕") { PhoenixVideoActivity.start(this@FunctionListActivity, videoDetailBean) }
     }
 
     private fun showFireworks(view: View) {

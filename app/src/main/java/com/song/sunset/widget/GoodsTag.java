@@ -59,12 +59,12 @@ public class GoodsTag extends RelativeLayout implements View.OnClickListener {
         initAnimator();
     }
 
-    public void setData(String goodBean, int position) {
+    public void setData(CharSequence goodBean, int position) {
         this.mPosition = position;
         if (goodBean == null) {
             return;
         }
-        mLeftText.setText(TextUtils.isEmpty(goodBean) ? "查看价格" : "￥" + goodBean);
+        mLeftText.setText(TextUtils.isEmpty(goodBean) ? "查看价格" : goodBean);
         mRightText.setText(TextUtils.isEmpty(goodBean) ? "查看价格" : "￥" + goodBean);
         addAnimListener();
         playDot();
