@@ -25,11 +25,13 @@ import com.song.sunset.beans.VideoDetailBean;
 import com.song.sunset.utils.danmaku.SongDanmakuParser;
 import com.song.sunset.utils.danmu.LinearGradientFontSpan;
 import com.song.sunset.utils.danmu.SpannedCacheSufferAdapter;
+import com.song.sunset.utils.rxjava.RxBus;
 import com.song.sunset.widget.GoodsTag;
 import com.song.video.DanMuVideoController;
 import com.song.video.NormalVideoPlayer;
 import com.song.video.Resolution;
 import com.song.video.VideoManager;
+import com.song.video.model.SeekEvent;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -38,6 +40,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
+import io.reactivex.disposables.Disposable;
 import master.flame.danmaku.controller.IDanmakuView;
 import master.flame.danmaku.danmaku.model.BaseDanmaku;
 import master.flame.danmaku.danmaku.model.DanmakuTimer;
@@ -100,6 +103,12 @@ public class PhoenixVideoActivity extends AppCompatActivity {
         player.setUp(mVideoDetailBean.getVideo_url(), null);
         //        controller.setResolutions(getResolutions(), 0);
         player.start();
+
+        Disposable disposable = RxBus.getInstance().toObservable(SeekEvent.class, this).subscribe(seekEvent -> {
+            if (mDanmakuView != null) {
+                mDanmakuView.seekTo(seekEvent.getPosition());
+            }
+        });
     }
 
     /**
@@ -236,7 +245,6 @@ public class PhoenixVideoActivity extends AppCompatActivity {
             @Override
             public void prepared() {
                 mDanmakuView.start();
-                mDanmakuView.hide();
             }
         });
         mDanmakuView.setOnDanmakuClickListener(new IDanmakuView.OnDanmakuClickListener() {
@@ -307,9 +315,14 @@ public class PhoenixVideoActivity extends AppCompatActivity {
         ArrayList<DanmakuBean> list = new ArrayList<>();
         for (int x = 0; x < 1000; x++) {
             DanmakuBean bean = new DanmakuBean();
-            bean.setTime((int) (Math.random() * 500) * 1000 / 2);
+            long time = (long) ((Math.random() * 500) * 1000 / 2);
+            bean.setTime(time);
             bean.setColor(Color.WHITE);
-            bean.setType(BaseDanmaku.TYPE_SCROLL_RL);
+            if (specialTime(time)) {
+                bean.setType(BaseDanmaku.TYPE_SPECIAL);
+            } else {
+                bean.setType(BaseDanmaku.TYPE_SCROLL_RL);
+            }
             bean.setTextShadowColor(Color.BLACK);
             bean.setId(String.valueOf(x));
             bean.setTextSize(20f * (this.getResources().getDisplayMetrics().density - 0.6f));
@@ -318,5 +331,11 @@ public class PhoenixVideoActivity extends AppCompatActivity {
             list.add(bean);
         }
         return list;
+    }
+
+    private boolean specialTime(long time) {
+        return (time > 5000 && time < 7000) ||
+                (time > 10000 && time < 12000) ||
+                (time > 15000 && time < 17000);
     }
 }
