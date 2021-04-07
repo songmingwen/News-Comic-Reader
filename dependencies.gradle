@@ -2,6 +2,8 @@
 //dependencies 配置在此文件添加
 apply from: file('../dependencies_base.gradle')
 dependencies {
+    implementation "androidx.startup:startup-runtime:1.0.0"
+
     implementation "android.arch.work:work-runtime:1.0.1"
 
     implementation 'com.google.auto.service:auto-service:1.0-rc6'
@@ -29,7 +31,7 @@ dependencies {
 
     implementation 'me.imid.swipebacklayout.lib:library:1.0.0'
 
-    implementation 'com.davemorrissey.labs:subsampling-scale-image-view:3.10.0'
+    implementation 'com.davemorrissey.labs:subsampling-scale-image-view-androidx:3.10.0'
 
     implementation 'tv.danmaku.ijk.media:ijkplayer-java:0.8.4'
     implementation 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.8.4'
@@ -51,16 +53,12 @@ dependencies {
 
     implementation 'com.trello.rxlifecycle3:rxlifecycle-components:3.1.0'
 
-    implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.0.0@aar'
+    implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
 
     implementation 'com.nineoldandroids:library:2.4.0'
 
     implementation 'org.greenrobot:greendao-generator:3.3.0'
     implementation 'org.greenrobot:greendao:3.3.0'
-
-    implementation 'rapid.decoder:library:0.3.0'
-    implementation 'rapid.decoder:jpeg-decoder:0.3.0'
-    implementation 'rapid.decoder:png-decoder:0.3.0'
 
     implementation 'in.srain.cube:ultra-ptr:1.0.11'
 

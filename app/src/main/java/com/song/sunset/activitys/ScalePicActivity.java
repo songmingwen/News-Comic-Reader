@@ -68,6 +68,9 @@ public class ScalePicActivity extends BaseActivity {
 
         if (getIntent() != null) {
             picUrl = getIntent().getStringExtra(PIC_URL);
+            if (picUrl != null && picUrl.contains("ori.")) {
+                picUrl = picUrl.replace("ori.", "");
+            }
             picId = getIntent().getStringExtra(PIC_ID);
         }
 

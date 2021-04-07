@@ -23,6 +23,7 @@ import com.song.sunset.services.impl.BinderPoolImpl
 import com.song.sunset.services.impl.MusicCallBackListenerImpl
 import com.song.sunset.services.impl.MusicGetterImpl
 import com.song.sunset.services.managers.BinderPool
+import com.song.sunset.utils.RelayTest
 import com.song.sunset.utils.ViewUtil
 import com.song.sunset.utils.preinstall.DefaultPreinstallHandler
 import com.song.sunset.utils.preinstall.HuaweiPreinstallHandler
@@ -189,7 +190,8 @@ class FunctionListActivity : BaseActivity() {
         addButton("Camera") { CameraActivity.start(this@FunctionListActivity) }
         addButton("ServiceProvider") { ServiceProviderActivity.start(this@FunctionListActivity) }
         addButton("CenteredImageSpan") { CenteredImageSpanActivity.start(this@FunctionListActivity) }
-        addButton("CenteredImageSpan") { RecyclerViewDragActivity.start(this@FunctionListActivity) }
+        addButton("RecyclerViewDragActivity") { RecyclerViewDragActivity.start(this@FunctionListActivity) }
+        addButton("RelayTest") { RelayTest.testRelay() }
     }
 
     private fun LinearLayout.addDanmu() {

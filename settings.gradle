@@ -10,3 +10,5 @@ evaluate(new File(
         settingsDir,
         'flutter_comic/.android/include_flutter.groovy'
 ))
+
+include ':flutter_comic'

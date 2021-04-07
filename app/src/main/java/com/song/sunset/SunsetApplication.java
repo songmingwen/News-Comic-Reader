@@ -9,6 +9,8 @@ import android.os.Process;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.multidex.MultiDexApplication;
+import androidx.startup.AppInitializer;
+
 import io.flutter.view.FlutterMain;
 import io.reactivex.Observable;
 
@@ -18,6 +20,8 @@ import android.util.Log;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.song.core.FrescoInitializer;
 import com.song.sunset.activitys.temp.GlobalFlowActivity;
+import com.song.sunset.comic.startup.FiveInitializer;
+import com.song.sunset.comic.startup.FourInitializer;
 import com.song.sunset.enums.Weeks;
 import com.song.sunset.services.managers.BinderPool;
 import com.song.sunset.services.managers.MusicGetterManager;
@@ -96,6 +100,9 @@ public class SunsetApplication extends MultiDexApplication {
         addLifecycleListener();
 
         FlutterMain.startInitialization(this);
+
+        AppInitializer.getInstance(getApplicationContext()).initializeComponent(FiveInitializer.class);
+        AppInitializer.getInstance(getApplicationContext()).initializeComponent(FourInitializer.class);
     }
 
     private void addLifecycleListener() {
