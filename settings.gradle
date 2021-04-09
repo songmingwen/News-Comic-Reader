@@ -1,3 +1,4 @@
+include ':base'
 include ':widget'
 include ':comic'
 include ':annotation'
@@ -12,3 +13,33 @@ evaluate(new File(
 ))
 
 include ':flutter_comic'
+
+class Prj {
+    String name
+    String dir
+}
+
+def configs = [
+        "com.github.songmingwen:glide-4.0-transformations": new Prj(name: "glide_4.0_transformations", dir: "C:\\Ddisk\\Song\\glide-4.0-transformations\\glide_4.0_transformations")
+]
+
+configs.forEach { artifact, prj ->
+    include ":${prj.name}"
+    project(":${prj.name}").projectDir = new File(prj.dir)
+}
+
+gradle.allprojects { pro ->
+    if (pro == pro.rootProject) {
+        return
+    }
+    println("pro.name-----" + pro.name)
+    pro.configurations.all {
+        println("con-----")
+        resolutionStrategy.dependencySubstitution {
+            configs.forEach { artifact, prj ->
+                // 在这里进行替换
+                substitute module(artifact) with project(":${prj.name}")
+            }
+        }
+    }
+}

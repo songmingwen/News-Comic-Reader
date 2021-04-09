@@ -173,6 +173,7 @@ class FunctionListActivity : BaseActivity() {
         addDanmu()
         addButton("Fresco XML params display") { FrescoXMLActivity.start(this@FunctionListActivity) }
         addButton("Fresco post processor display") { FrescoProcessorActivity.start(this@FunctionListActivity) }
+        addButton("Glide post processor display") { TransTestActivity.start(this@FunctionListActivity) }
         addButton("RxJava") { RxjavaActivity.start(this@FunctionListActivity) }
         addButton("Reflection") { ReflectionActivity.start(this@FunctionListActivity) }
         addButton("DynamicProxy") { DynamicProxyActivity.start(this@FunctionListActivity) }

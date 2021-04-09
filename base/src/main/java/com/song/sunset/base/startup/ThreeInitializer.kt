@@ -1,10 +1,9 @@
-package com.song.sunset.comic.startup
+package com.song.sunset.base.startup
 
 import android.content.Context
 import androidx.startup.Initializer
-import com.song.sunset.comic.startup.base.BaseInitializer
-import com.song.sunset.comic.startup.task.FourStartUp
-import com.song.sunset.comic.startup.task.ThreeStartUp
+import com.song.sunset.base.startup.base.BaseInitializer
+import com.song.sunset.base.startup.task.ThreeStartUp
 
 /**
  * Desc:

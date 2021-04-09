@@ -155,5 +155,15 @@ dependencies {
     implementation project(':flutter')
     implementation project(':comic')
     implementation project(':widget')
+    implementation project(':base')
 //    implementation project(':flutter_plugin_battery')
+
+    implementation 'com.github.songmingwen:glide-4.0-transformations:1.1'
+//
+//    def allComponents = [
+//            "glide_4.0_transformations"
+//    ]
+//    allComponents.forEach { name ->
+//        implementation project(":${name}")
+//    }
 }

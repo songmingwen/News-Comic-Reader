@@ -1,4 +1,4 @@
-package com.song.sunset.comic.startup.base
+package com.song.sunset.base.startup.base
 
 import android.content.Context
 import android.util.Log

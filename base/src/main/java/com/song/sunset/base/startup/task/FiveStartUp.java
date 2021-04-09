@@ -1,4 +1,4 @@
-package com.song.sunset.comic.startup.task;
+package com.song.sunset.base.startup.task;
 
 import android.content.Context;
 import android.util.Log;

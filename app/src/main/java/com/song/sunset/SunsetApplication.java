@@ -3,42 +3,40 @@ package com.song.sunset;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
-import android.os.Bundle;
 import android.os.Process;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.multidex.MultiDexApplication;
-import androidx.startup.AppInitializer;
-
-import io.flutter.view.FlutterMain;
-import io.reactivex.Observable;
-
 import android.text.TextUtils;
 import android.util.Log;
+
+import androidx.multidex.MultiDexApplication;
+import androidx.startup.AppInitializer;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.song.core.FrescoInitializer;
 import com.song.sunset.activitys.temp.GlobalFlowActivity;
-import com.song.sunset.comic.startup.FiveInitializer;
-import com.song.sunset.comic.startup.FourInitializer;
-import com.song.sunset.enums.Weeks;
+import com.song.sunset.base.startup.FiveInitializer;
+import com.song.sunset.base.startup.FourInitializer;
 import com.song.sunset.services.managers.BinderPool;
-import com.song.sunset.services.managers.MusicGetterManager;
-import com.song.sunset.utils.GreenDaoUtil;
 import com.song.sunset.services.managers.MessengerManager;
+import com.song.sunset.services.managers.MusicGetterManager;
 import com.song.sunset.services.managers.PushManager;
-import com.song.sunset.utils.SPUtils;
 import com.song.sunset.utils.AppConfig;
+import com.song.sunset.utils.GreenDaoUtil;
+import com.song.sunset.utils.SPUtils;
 import com.song.sunset.utils.lifecycle.BaseActivityLifecycle;
 import com.song.sunset.utils.lifecycle.LifecycleManager;
-import com.song.sunset.utils.net.RxNetWork;
-import com.song.sunset.widget.GlobalFlowView;
 import com.tencent.mmkv.MMKV;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import io.flutter.view.FlutterMain;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Scheduler;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Song on 2016/8/29 0029.
@@ -101,8 +99,15 @@ public class SunsetApplication extends MultiDexApplication {
 
         FlutterMain.startInitialization(this);
 
-        AppInitializer.getInstance(getApplicationContext()).initializeComponent(FiveInitializer.class);
-        AppInitializer.getInstance(getApplicationContext()).initializeComponent(FourInitializer.class);
+        Disposable disposable = Observable
+                .create(emitter -> {
+                    AppInitializer.getInstance(getApplicationContext()).initializeComponent(FiveInitializer.class);
+                    AppInitializer.getInstance(getApplicationContext()).initializeComponent(FourInitializer.class);
+                })
+                .subscribeOn(Schedulers.io())
+                .subscribe(o -> {
+
+                });
     }
 
     private void addLifecycleListener() {

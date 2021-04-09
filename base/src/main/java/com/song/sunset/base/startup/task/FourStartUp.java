@@ -1,29 +1,29 @@
-package com.song.sunset.comic.startup.task;
+package com.song.sunset.base.startup.task;
 
 import android.content.Context;
 import android.util.Log;
 
 import org.jetbrains.annotations.NotNull;
 
-public class TwoStartUp {
-    private static TwoStartUp instance;
+public class FourStartUp {
+    private static FourStartUp instance;
 
-    private TwoStartUp() {
+    private FourStartUp() {
     }
 
-    public static TwoStartUp getInstance() {
+    public static FourStartUp getInstance() {
         if (instance == null) {
-            instance = new TwoStartUp();
+            instance = new FourStartUp();
         }
         return instance;
     }
 
     public void init(@NotNull Context context) {
         try {
-            Thread.sleep(200);
+            Thread.sleep(400);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Log.i("start_up_task", "2");
+        Log.i("start_up_task", "4");
     }
 }

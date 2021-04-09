@@ -1,5 +1,7 @@
 package com.song.sunset.activitys.temp;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 
@@ -29,6 +31,8 @@ import com.song.sunset.R;
 import com.song.sunset.activitys.base.BaseActivity;
 import com.song.sunset.adapters.TransAdapter;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 /**
@@ -37,6 +41,11 @@ import java.util.ArrayList;
  */
 
 public class TransTestActivity extends BaseActivity {
+
+    public static void start(@NotNull Activity activity) {
+        Intent starter = new Intent(activity, TransTestActivity.class);
+        activity.startActivity(starter);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
