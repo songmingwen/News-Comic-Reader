@@ -4,6 +4,7 @@ include ':comic'
 include ':annotation'
 include ':processor'
 include ':app'
+include ':flutter_comic'
 
 setBinding(new Binding([gradle: this]))
 //flutter module 对应的 include_flutter.groovy 实际目录地址
@@ -12,33 +13,42 @@ evaluate(new File(
         'flutter_comic/.android/include_flutter.groovy'
 ))
 
-include ':flutter_comic'
+/**------------------------------ 以下为本地联合打包配置 ------------------------------ */
+// 加载配置文件
+Properties properties = new Properties()
+properties.load(new FileInputStream("source.properties"))
 
-class Prj {
+class Source {
     String name
     String dir
 }
 
-def configs = [
-        "com.github.songmingwen:glide-4.0-transformations": new Prj(name: "glide_4.0_transformations", dir: "C:\\Ddisk\\Song\\glide-4.0-transformations\\glide_4.0_transformations")
-]
+// 把配置文件包装为键值对
+def configs = [:]
 
-configs.forEach { artifact, prj ->
-    include ":${prj.name}"
-    project(":${prj.name}").projectDir = new File(prj.dir)
+properties.forEach { artifact, dir ->
+    String[] str = artifact.split(':')
+    if (str.size() != 2) {
+        throw new Exception("「❌」source.properties 中 " + artifact + " 配置错误，请检查配置「❌」")
+    }
+    configs.put((artifact), new Source(name: str[1], dir: dir))
 }
 
+// include module
+configs.forEach { artifact, source ->
+    include ":${source.name}"
+    project(":${source.name}").projectDir = new File(source.dir)
+}
+
+// 依赖替换
 gradle.allprojects { pro ->
     if (pro == pro.rootProject) {
         return
     }
-    println("pro.name-----" + pro.name)
     pro.configurations.all {
-        println("con-----")
         resolutionStrategy.dependencySubstitution {
-            configs.forEach { artifact, prj ->
-                // 在这里进行替换
-                substitute module(artifact) with project(":${prj.name}")
+            configs.forEach { artifact, source ->
+                substitute module(artifact) with project(":${source.name}")
             }
         }
     }

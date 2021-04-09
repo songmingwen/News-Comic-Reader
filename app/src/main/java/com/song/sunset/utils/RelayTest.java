@@ -16,7 +16,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class RelayTest {
 
-    public static void testRelay(){
+    public static void testRelay() {
         Relay<Integer> relay = Relay.getInstance("song");
 
         Observable<Integer> accept1 = Observable.create((ObservableOnSubscribe<Integer>) emitter -> {
@@ -40,28 +40,6 @@ public class RelayTest {
         }, throwable -> {
 
         });
-
-//        new Observer<Integer>() {
-//            @Override
-//            public void onSubscribe(Disposable d) {
-//
-//            }
-//
-//            @Override
-//            public void onNext(Integer o) {
-//                System.out.println("onNext" + o.toString());
-//            }
-//
-//            @Override
-//            public void onError(Throwable e) {
-//                System.out.println(e.getMessage());
-//            }
-//
-//            @Override
-//            public void onComplete() {
-//                System.out.println("complete");
-//            }
-//        }
 
     }
 }
