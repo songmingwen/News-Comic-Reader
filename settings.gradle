@@ -26,12 +26,12 @@ class Source {
 // 把配置文件包装为键值对
 def configs = [:]
 
-properties.forEach { artifact, dir ->
-    String[] str = artifact.split(':')
+properties.forEach { artifact, moduleAndDir ->
+    String[] str = moduleAndDir.split('=')
     if (str.size() != 2) {
-        throw new Exception("「❌」source.properties 中 " + artifact + " 配置错误，请检查配置「❌」")
+        throw new Exception("「❌」source.properties 中 " + artifact + "=" + moduleAndDir + " 配置错误，请检查配置「❌」")
     }
-    configs.put((artifact), new Source(name: str[1], dir: dir))
+    configs.put((artifact), new Source(name: str[0], dir: str[1]))
 }
 
 // include module
