@@ -42,7 +42,7 @@ configs.forEach { artifact, source ->
 
 // 依赖替换
 gradle.allprojects { pro ->
-    if (pro == pro.rootProject) {
+    if (configs.size() <= 0 || pro == pro.rootProject) {
         return
     }
     pro.configurations.all {
