@@ -43,14 +43,6 @@ class ComicListAdapter(private val context: Context) : BaseRecyclerViewAdapter<C
 //        FrescoUtil.setFrescoCoverImage(comicListViewHolder.simpleDraweeView, comicsBean.getCover(), realWidth, realHeight);
     }
 
-    private suspend fun getDrawable(url:String):Drawable?{
-        // execute
-        val request = ImageRequest.Builder(context)
-                .data(url)
-                .build()
-        return context.imageLoader.execute(request).drawable
-    }
-
     private fun getTags(comicsBean: ComicsBean): StringBuffer {
         val stringBuffer = StringBuffer()
         for (tag in comicsBean.tags) {

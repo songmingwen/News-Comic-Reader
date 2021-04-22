@@ -30,6 +30,34 @@ public class Test {
 
     private void testRelay() {
 
+        Observable<String> success = Observable.create((ObservableOnSubscribe<String>) emitter -> {
+            emitter.onNext("success");
+            emitter.onComplete();//前面的 Observer 没有发送任何数据就 onComplete 或者 onError 的时候，后面的 Observer 才会执行
+        }).subscribeOn(Schedulers.io());
 
+
+        Observable<String> failure = Observable.create((ObservableOnSubscribe<String>) emitter -> {
+            emitter.onError(null);//前面的 Observer 没有发送任何数据就 onComplete 或者 onError 的时候，后面的 Observer 才会执行
+            emitter.onNext("ignore");
+            emitter.onComplete();
+        }).subscribeOn(Schedulers.io());
+
+
+        //测试接力第一棒成功
+        Relay<String> relay = Relay.getInstance("song");
+        relay.accept(success);
+        relay.accept(failure);
+        Observable<String> endObservable = Observable.create((ObservableOnSubscribe<String>) emitter -> {
+            emitter.onNext("3");
+        }).subscribeOn(Schedulers.io());
+        Disposable disposable = relay.end(endObservable).subscribe(string -> {
+            System.out.println("onNext:" + string);
+        }, throwable -> {
+
+        });
+
+        //测试接力非第一棒成功
+
+        //测试接力兜底帮成功
     }
 }

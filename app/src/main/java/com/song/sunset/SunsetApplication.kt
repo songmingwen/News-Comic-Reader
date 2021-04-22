@@ -108,7 +108,7 @@ class SunsetApplication : MultiDexApplication() {
             override fun onActivityResumed(activity: Activity) {
                 super.onActivityResumed(activity)
                 val store = MMKV.defaultMMKV()
-                val show = store.getBoolean("show_global_flow", true)
+                val show = store.getBoolean("show_global_flow", false)
                 if (show) {
                     showGlobalFlowView(activity)
                 } else {

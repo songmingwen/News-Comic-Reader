@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
-import static android.preference.PreferenceManager.getDefaultSharedPreferencesName;
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by Song on 2017/3/30 0030.
@@ -22,7 +22,7 @@ public class SPUtils {
     public static final String SP_APP_PLAY_POSITION = "normal_video_player_play_position";
     public static final String SP_NEURAL_NET_WORKS = "neural_net_works";
     public static final String SP_NEURAL_NET_WORKS_PREVIEW = "neural_net_works_preview";
-    public static final int NO_SP_MODE = -1;
+    public static final int NO_SP_MODE = MODE_PRIVATE;
 
     public static String getStringByName(Context context, String key,
                                          String defaultValue) {
@@ -104,6 +104,26 @@ public class SPUtils {
         SharedPreferences.Editor editor = getEditor(context, spName, spMode);
         editor.putLong(key, value);
         editor.apply();
+    }
+
+    public static void setFloatByName(Context context, String key, float value) {
+        setFloatByName(context, null, NO_SP_MODE, key, value);
+    }
+
+
+    public static float getFloatByName(Context context, String spName, int spMode, String key, float value) {
+        SharedPreferences sp = getSharedPreferences(context, spName, spMode);
+        return sp.getFloat(key, value);
+    }
+
+    public static void setFloatByName(Context context, String spName, int spMode, String key, float value) {
+        SharedPreferences.Editor editor = getEditor(context, spName, spMode);
+        editor.putFloat(key, value);
+        editor.apply();
+    }
+
+    public static float getFloatByName(Context context, String key, float value) {
+        return getFloatByName(context, null, NO_SP_MODE, key, value);
     }
 
     public static void clearValues(Context context) {

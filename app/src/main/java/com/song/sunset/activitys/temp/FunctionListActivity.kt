@@ -193,6 +193,7 @@ class FunctionListActivity : BaseActivity() {
         addButton("CenteredImageSpan") { CenteredImageSpanActivity.start(this@FunctionListActivity) }
         addButton("RecyclerViewDragActivity") { RecyclerViewDragActivity.start(this@FunctionListActivity) }
         addButton("RelayTest") { RelayTest.testRelay() }
+        addButton("MMKVTest") { RelayTest.testMMKV() }
     }
 
     private fun LinearLayout.addDanmu() {
