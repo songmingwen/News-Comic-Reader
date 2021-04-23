@@ -14,11 +14,11 @@ abstract class BaseInitializer<T> : Initializer<T> {
 
     override fun create(context: Context): T {
         val start: Long = System.currentTimeMillis()
-        val initializer = createInitializer(context)
+        val initializer = createStartUp(context)
         val end: Long = System.currentTimeMillis()
         Log.i("start_up_task", "Initializer name=" + javaClass.simpleName + "，time=" + (end - start))
         return initializer
     }
 
-    abstract fun createInitializer(context: Context): T
+    abstract fun createStartUp(context: Context): T
 }

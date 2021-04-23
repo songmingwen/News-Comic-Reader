@@ -14,9 +14,8 @@ import java.util.Collections.emptyList
  */
 class OneInitializer : BaseInitializer<OneStartUp>() {
 
-    override fun createInitializer(context: Context): OneStartUp {
-        OneStartUp.getInstance().init(context)
-        return OneStartUp.getInstance()
+    override fun createStartUp(context: Context): OneStartUp {
+        return OneStartUp.instance.init(context)
     }
 
     override fun dependencies(): List<Class<out Initializer<*>>> {

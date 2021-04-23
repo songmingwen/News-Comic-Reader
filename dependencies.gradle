@@ -91,6 +91,9 @@ dependencies {
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.2'
 
     api 'io.coil-kt:coil:1.1.1'
+    implementation 'io.coil-kt:coil-video:1.1.1'
+    implementation 'io.coil-kt:coil-svg:1.1.1'
+    implementation 'io.coil-kt:coil-gif:1.1.1'
 
     //下拉刷新相关
     implementation  'com.scwang.smart:refresh-layout-kernel:2.0.3'      //核心必须依赖

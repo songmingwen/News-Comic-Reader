@@ -217,6 +217,10 @@
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".activitys.temp.CenteredImageSpanActivity" />
 
+        <activity
+            android:name=".activitys.temp.SecondFloorActivity"
+            android:screenOrientation="portrait" />
+
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="1b85142155dba7f4c7f243bfd78cb7c4" />

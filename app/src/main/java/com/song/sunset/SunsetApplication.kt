@@ -8,9 +8,6 @@ import android.text.TextUtils
 import android.util.Log
 import androidx.multidex.MultiDexApplication
 import androidx.startup.AppInitializer
-import coil.Coil
-import coil.ImageLoader
-import coil.util.CoilUtils
 import com.alibaba.android.arouter.launcher.ARouter
 import com.song.core.FrescoInitializer
 import com.song.sunset.activitys.temp.GlobalFlowActivity.Companion.hideView
@@ -21,6 +18,7 @@ import com.song.sunset.services.managers.BinderPool
 import com.song.sunset.services.managers.MessengerManager
 import com.song.sunset.services.managers.MusicGetterManager
 import com.song.sunset.services.managers.PushManager
+import com.song.sunset.startup.CoilInitializer
 import com.song.sunset.utils.AppConfig
 import com.song.sunset.utils.GreenDaoUtil
 import com.song.sunset.utils.SPUtils
@@ -87,19 +85,11 @@ class SunsetApplication : MultiDexApplication() {
                 .create { emitter: ObservableEmitter<Any?>? ->
                     AppInitializer.getInstance(applicationContext).initializeComponent(FiveInitializer::class.java)
                     AppInitializer.getInstance(applicationContext).initializeComponent(FourInitializer::class.java)
+                    AppInitializer.getInstance(applicationContext).initializeComponent(CoilInitializer::class.java)
                 }
                 .subscribeOn(Schedulers.io())
                 .subscribe { o: Any? -> }
 
-        val imageLoader = ImageLoader.Builder(this)
-                .crossfade(true)
-                .okHttpClient {
-                    OkHttpClient.Builder()
-                            .cache(CoilUtils.createDefaultCache(this@SunsetApplication))
-                            .build()
-                }
-                .build()
-        Coil.setImageLoader(imageLoader)
     }
 
     private fun addLifecycleListener() {

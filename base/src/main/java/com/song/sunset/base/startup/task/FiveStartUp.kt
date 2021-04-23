@@ -1,31 +1,24 @@
-package com.song.sunset.base.startup.task;
+package com.song.sunset.base.startup.task
 
-import android.content.Context;
-import android.util.Log;
+import android.content.Context
+import android.util.Log
 
-import org.jetbrains.annotations.NotNull;
-
-public class FiveStartUp {
-    private static FiveStartUp instance;
-
-    private FiveStartUp() {
-    }
-
-    public static FiveStartUp getInstance() {
-        if (instance == null) {
-            instance = new FiveStartUp();
-        }
-        return instance;
-    }
-
-    public void init(@NotNull Context context) {
-        new Thread(() -> {
+class FiveStartUp private constructor() {
+    fun init(context: Context): FiveStartUp {
+        Thread {
             try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                Thread.sleep(500)
+            } catch (e: InterruptedException) {
+                e.printStackTrace()
             }
-            Log.i("start_up_task", "5");
-        }).start();
+            Log.i("start_up_task", "5")
+        }.start()
+        return instance
+    }
+
+    companion object {
+        val instance: FiveStartUp by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
+            FiveStartUp()
+        }
     }
 }

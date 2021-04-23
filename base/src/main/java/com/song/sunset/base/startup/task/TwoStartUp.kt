@@ -1,29 +1,22 @@
-package com.song.sunset.base.startup.task;
+package com.song.sunset.base.startup.task
 
-import android.content.Context;
-import android.util.Log;
+import android.content.Context
+import android.util.Log
 
-import org.jetbrains.annotations.NotNull;
-
-public class TwoStartUp {
-    private static TwoStartUp instance;
-
-    private TwoStartUp() {
-    }
-
-    public static TwoStartUp getInstance() {
-        if (instance == null) {
-            instance = new TwoStartUp();
-        }
-        return instance;
-    }
-
-    public void init(@NotNull Context context) {
+class TwoStartUp private constructor() {
+    fun init(context: Context): TwoStartUp {
         try {
-            Thread.sleep(200);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            Thread.sleep(200)
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
         }
-        Log.i("start_up_task", "2");
+        Log.i("start_up_task", "2")
+        return instance
+    }
+
+    companion object {
+        val instance: TwoStartUp by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
+            TwoStartUp()
+        }
     }
 }

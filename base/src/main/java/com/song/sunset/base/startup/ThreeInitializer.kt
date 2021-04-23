@@ -13,9 +13,8 @@ import com.song.sunset.base.startup.task.ThreeStartUp
  */
 class ThreeInitializer : BaseInitializer<ThreeStartUp>() {
 
-    override fun createInitializer(context: Context): ThreeStartUp {
-        ThreeStartUp.getInstance().init(context)
-        return ThreeStartUp.getInstance()
+    override fun createStartUp(context: Context): ThreeStartUp {
+        return ThreeStartUp.instance.init(context)
     }
 
     override fun dependencies(): List<Class<out Initializer<*>>> {

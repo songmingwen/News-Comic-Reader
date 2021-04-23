@@ -1,6 +1,5 @@
 package com.song.sunset.activitys.temp
 
-import android.app.ActivityManager
 import android.app.usage.UsageStatsManager
 import android.content.Context
 import android.content.Intent
@@ -36,45 +35,50 @@ import kotlinx.android.synthetic.main.activity_function_list.*
 
 class FunctionListActivity : BaseActivity() {
 
+    private fun LinearLayout.addButtonList() {
+        addButton("🎆") {}.apply { setOnClickListener { showFireworks(this) } }
+        addButton("test") { TempTestActivity.start(this@FunctionListActivity) }
+        addDanmu()
+        addButton("Fresco XML params display") { FrescoXMLActivity.start(this@FunctionListActivity) }
+        addButton("Fresco post processor display") { FrescoProcessorActivity.start(this@FunctionListActivity) }
+        addButton("Glide post processor display") { TransTestActivity.start(this@FunctionListActivity) }
+        addButton("RxJava") { RxjavaActivity.start(this@FunctionListActivity) }
+        addButton("Reflection") { ReflectionActivity.start(this@FunctionListActivity) }
+        addButton("DynamicProxy") { DynamicProxyActivity.start(this@FunctionListActivity) }
+        addButton("CoordinatorLayout") { ScrollingActivity.start(this@FunctionListActivity) }
+        addButton("SecondFloor") { SecondFloorActivity.start(this@FunctionListActivity) }
+        addButton("binderPool") { useBinderPool() }
+        addButton("openGL") { OpenGLListActivity.start(this@FunctionListActivity) }
+        addButton("neural") { NeuralNetWorksActivity.start(this@FunctionListActivity) }
+        addButton("billiards") { BilliardsActivity.start(this@FunctionListActivity) }
+        addButton("QR code") { QRCodeActivity.start(this@FunctionListActivity) }
+        addButton("MotionLayout") { MotionLayoutActivity.start(this@FunctionListActivity) }
+        addButton("Bubble") { BubbleActivity.start(this@FunctionListActivity) }
+        addButton("Lottie") { LottieActivity.start(this@FunctionListActivity) }
+        addButton("WorkManager") { WorkManagerActivity.start(this@FunctionListActivity) }
+        addButton("GlobalFlow") { GlobalFlowActivity.start(this@FunctionListActivity) }
+        addButton("Camera") { CameraActivity.start(this@FunctionListActivity) }
+        addButton("ServiceProvider") { ServiceProviderActivity.start(this@FunctionListActivity) }
+        addButton("CenteredImageSpan") { CenteredImageSpanActivity.start(this@FunctionListActivity) }
+        addButton("RecyclerViewDragActivity") { RecyclerViewDragActivity.start(this@FunctionListActivity) }
+        addButton("RelayTest") { RelayTest.testRelay() }
+        addButton("MMKVTest") { RelayTest.testMMKV() }
+    }
+
     private var mFireworksView: FireworksView? = null
 
     private val mIMusicCallBackListener = object : MusicCallBackListenerImpl() {
         @Throws(RemoteException::class)
         override fun success(list: List<MusicInfo>) {
             super.success(list)
-            Log.i(MusicCallBackListenerImpl.TAG + "MainActivity：", list.toString())
+            Log.i(TAG + "MainActivity：", list.toString())
         }
 
         @Throws(RemoteException::class)
         override fun failure() {
-            Log.i(MusicCallBackListenerImpl.TAG + "MainActivity：", "get music failure")
+            Log.i(TAG + "MainActivity：", "get music failure")
         }
     }
-
-    val taskList: String
-        get() {
-            var apps = ""
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                return apps
-            }
-            val am = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-            val pm = getPackageManager()
-            try {
-                val list = am.getRecentTasks(64, 0)
-                for (ti in list) {
-                    val intent = ti.baseIntent
-                    val resolveInfo = pm.resolveActivity(intent, 0)
-                    if (resolveInfo != null) {
-                        apps = if (apps == "") "" + resolveInfo!!.loadLabel(pm) else apps + "," + resolveInfo!!.loadLabel(pm)
-                    }
-                }
-                return apps
-            } catch (se: SecurityException) {
-                se.printStackTrace()
-                return apps
-            }
-
-        }
 
     private val fireworksProvider: BitmapProvider.Provider
         get() = BitmapProvider.Builder(this)
@@ -98,31 +102,6 @@ class FunctionListActivity : BaseActivity() {
             addButtonList()
         }
 
-        //        startActivity(new Intent(MainActivity.this, SubScaleViewActivity.class));
-
-
-        //        PushManager.getInstance().connect();
-        //        PushManager.getInstance().sendMusicInfo(MusicLoader.instance().getMusicList().get(0));
-        //        MessengerManager.getInstance().sendMessage();
-        //
-        //        MusicGetterManager.getInstance().setMusicCallBackListener(new MusicGetterManager.MusicCallBackListener() {
-        //            @Override
-        //            public void success(List<MusicInfo> list) {
-        //                Log.i(TAG + "callback", list.toString());
-        //            }
-        //
-        //            @Override
-        //            public void failure() {
-        //                Log.i(TAG, "false");
-        //            }
-        //        });
-        //        MusicGetterManager.getInstance().getMusicLists();
-
-
-        //        useBinderPool();
-
-
-        //        switchDayNightMode();
         Log.i("屏幕旋转生命周期", "onCreate")
         Log.i("A -> B", "A : onCreate")
     }
@@ -165,35 +144,6 @@ class FunctionListActivity : BaseActivity() {
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         Log.i("屏幕旋转生命周期", "onConfigurationChanged")
-    }
-
-    private fun LinearLayout.addButtonList() {
-        addButton("🎆") {}.apply { setOnClickListener { showFireworks(this) } }
-        addButton("test") { TempTestActivity.start(this@FunctionListActivity) }
-        addDanmu()
-        addButton("Fresco XML params display") { FrescoXMLActivity.start(this@FunctionListActivity) }
-        addButton("Fresco post processor display") { FrescoProcessorActivity.start(this@FunctionListActivity) }
-        addButton("Glide post processor display") { TransTestActivity.start(this@FunctionListActivity) }
-        addButton("RxJava") { RxjavaActivity.start(this@FunctionListActivity) }
-        addButton("Reflection") { ReflectionActivity.start(this@FunctionListActivity) }
-        addButton("DynamicProxy") { DynamicProxyActivity.start(this@FunctionListActivity) }
-        addButton("CoordinatorLayout") { ScrollingActivity.start(this@FunctionListActivity) }
-        addButton("binderPool") { useBinderPool() }
-        addButton("openGL") { OpenGLListActivity.start(this@FunctionListActivity) }
-        addButton("neural") { NeuralNetWorksActivity.start(this@FunctionListActivity) }
-        addButton("billiards") { BilliardsActivity.start(this@FunctionListActivity) }
-        addButton("QR code") { QRCodeActivity.start(this@FunctionListActivity) }
-        addButton("MotionLayout") { MotionLayoutActivity.start(this@FunctionListActivity) }
-        addButton("Bubble") { BubbleActivity.start(this@FunctionListActivity) }
-        addButton("Lottie") { LottieActivity.start(this@FunctionListActivity) }
-        addButton("WorkManager") { WorkManagerActivity.start(this@FunctionListActivity) }
-        addButton("GlobalFlow") { GlobalFlowActivity.start(this@FunctionListActivity) }
-        addButton("Camera") { CameraActivity.start(this@FunctionListActivity) }
-        addButton("ServiceProvider") { ServiceProviderActivity.start(this@FunctionListActivity) }
-        addButton("CenteredImageSpan") { CenteredImageSpanActivity.start(this@FunctionListActivity) }
-        addButton("RecyclerViewDragActivity") { RecyclerViewDragActivity.start(this@FunctionListActivity) }
-        addButton("RelayTest") { RelayTest.testRelay() }
-        addButton("MMKVTest") { RelayTest.testMMKV() }
     }
 
     private fun LinearLayout.addDanmu() {
@@ -254,9 +204,6 @@ class FunctionListActivity : BaseActivity() {
 
     /**
      * Java没有实现编译器尾递归的优化
-     *
-     * @param endNum
-     * @return
      */
     private fun getOrderPlus(endNum: Long): Long {
         return if (endNum == 1L) 1 else getOrderPlus(endNum, 1)
@@ -320,3 +267,24 @@ fun LinearLayout.addButton(title: String, onClick: () -> Unit): Button {
     addView(button, params)
     return button
 }
+
+//        startActivity(new Intent(MainActivity.this, SubScaleViewActivity.class));
+
+//        PushManager.getInstance().connect();
+//        PushManager.getInstance().sendMusicInfo(MusicLoader.instance().getMusicList().get(0));
+//        MessengerManager.getInstance().sendMessage();
+//
+//        MusicGetterManager.getInstance().setMusicCallBackListener(new MusicGetterManager.MusicCallBackListener() {
+//            @Override
+//            public void success(List<MusicInfo> list) {
+//                Log.i(TAG + "callback", list.toString());
+//            }
+//
+//            @Override
+//            public void failure() {
+//                Log.i(TAG, "false");
+//            }
+//        });
+//        MusicGetterManager.getInstance().getMusicLists();
+//        useBinderPool();
+//        switchDayNightMode();

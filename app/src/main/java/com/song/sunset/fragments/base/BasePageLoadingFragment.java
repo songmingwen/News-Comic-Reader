@@ -7,8 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.scwang.smart.refresh.header.ClassicsHeader;
+import com.scwang.smart.refresh.header.MaterialHeader;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
+import com.scwang.smart.refresh.layout.api.RefreshHeader;
 import com.song.sunset.R;
 import com.song.sunset.beans.basebeans.PageEntity;
 import com.song.sunset.holders.DefaultLoadMoreProgressHolder;
@@ -17,7 +18,6 @@ import com.zhihu.android.sugaradapter.SugarAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import androidx.annotation.CallSuper;
 import androidx.annotation.IntRange;
@@ -27,6 +27,9 @@ import androidx.annotation.UiThread;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.jetbrains.annotations.NotNull;
+
 import okhttp3.ResponseBody;
 import retrofit2.Response;
 
@@ -105,11 +108,16 @@ public abstract class BasePageLoadingFragment<T extends PageEntity> extends Base
             }
         });
 
-        mSwipeRefreshLayout.setRefreshHeader(new ClassicsHeader(Objects.requireNonNull(getContext())));
-        mSwipeRefreshLayout.setFooterHeightPx(0);
+        mSwipeRefreshLayout.setRefreshHeader(getRefreshHeader());
+        mSwipeRefreshLayout.setEnableLoadMore(false);
         mSwipeRefreshLayout.setOnRefreshListener(refreshlayout -> refresh(true));
 
         mSwipeRefreshLayout.autoRefresh();
+    }
+
+    @NotNull
+    protected RefreshHeader getRefreshHeader() {
+        return new MaterialHeader(getContext());
     }
 
     @CallSuper

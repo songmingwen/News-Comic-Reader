@@ -13,9 +13,8 @@ import com.song.sunset.base.startup.task.FourStartUp
  */
 class FourInitializer: BaseInitializer<FourStartUp>() {
 
-    override fun createInitializer(context: Context): FourStartUp {
-        FourStartUp.getInstance().init(context)
-        return FourStartUp.getInstance()
+    override fun createStartUp(context: Context): FourStartUp {
+        return FourStartUp.instance.init(context)
     }
 
     override fun dependencies(): List<Class<out Initializer<*>>> {

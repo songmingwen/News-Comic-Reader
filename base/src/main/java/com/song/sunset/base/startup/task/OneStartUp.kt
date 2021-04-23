@@ -1,28 +1,22 @@
-package com.song.sunset.base.startup.task;
+package com.song.sunset.base.startup.task
 
-import android.content.Context;
-import android.util.Log;
+import android.content.Context
+import android.util.Log
 
-public class OneStartUp {
-
-    private static OneStartUp instance;
-
-    private OneStartUp() {
-    }
-
-    public static OneStartUp getInstance() {
-        if (instance == null) {
-            instance = new OneStartUp();
-        }
-        return instance;
-    }
-
-    public void init(Context context) {
+class OneStartUp private constructor() {
+    fun init(context: Context?):OneStartUp {
         try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            Thread.sleep(100)
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
         }
-        Log.i("start_up_task", "1");
+        Log.i("start_up_task", "1")
+        return instance
+    }
+
+    companion object {
+        val instance: OneStartUp by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
+            OneStartUp()
+        }
     }
 }

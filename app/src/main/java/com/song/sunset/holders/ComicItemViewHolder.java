@@ -4,11 +4,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.song.sunset.R;
 import com.song.sunset.R2;
+import com.song.sunset.activitys.ComicDetailActivity;
 import com.song.sunset.beans.ComicsBean;
-import com.song.sunset.utils.ViewUtil;
 import com.zhihu.android.sugaradapter.Layout;
 import com.zhihu.android.sugaradapter.SugarHolder;
 
@@ -39,15 +40,15 @@ public class ComicItemViewHolder extends SugarHolder<ComicsBean> {
 
     @Override
     protected void onBindData(@NonNull ComicsBean comicsBean) {
-
-        int realWidth = ViewUtil.dip2px(113);
-        int realHeight = ViewUtil.dip2px(143);
-
         comicName.setText(comicsBean.getName());
         comicDesc.setText(comicsBean.getDescription());
         comicAuthor.setText(comicsBean.getAuthor());
         comicTags.setText(getTags(comicsBean));
         simpleDraweeView.setImageURI(comicsBean.getCover());
+        itemView.setOnClickListener(v -> ARouter.getInstance()
+                .build("/song/comic/detail")
+                .withInt(ComicDetailActivity.COMIC_ID, comicsBean.getComicId())
+                .navigation());
     }
 
     @NonNull

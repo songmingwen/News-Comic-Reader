@@ -18,7 +18,7 @@ import com.zhihu.android.sugaradapter.SugarAdapter.Builder
  * @description
  * @since 2020/12/16
  */
-class ComicBaseListFragment : BasePageLoadingFragment<ComicListBean>() {
+open class ComicBaseListFragment : BasePageLoadingFragment<ComicListBean>() {
 
     private var argName = ""
     private var argValue = 0

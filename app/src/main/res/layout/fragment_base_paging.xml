@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:srlAccentColor="@color/colorAccent"
+        app:srlEnableLoadMore="false"
         app:srlEnablePreviewInEditMode="true">
 
         <androidx.recyclerview.widget.RecyclerView

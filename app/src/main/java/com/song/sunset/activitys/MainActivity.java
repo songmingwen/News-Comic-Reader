@@ -41,6 +41,7 @@ import com.song.sunset.activitys.temp.FunctionListActivity;
 import com.song.sunset.beans.CollectionOnlineListBean;
 import com.song.sunset.beans.ComicCollectionBean;
 import com.song.sunset.beans.ComicLocalCollection;
+import com.song.sunset.fragments.ComicBaseListFragment;
 import com.song.sunset.fragments.PhoenixListFragment;
 import com.song.sunset.mvp.models.ComicCollectionModel;
 import com.song.sunset.mvp.presenters.ComicCollectionPresenter;
