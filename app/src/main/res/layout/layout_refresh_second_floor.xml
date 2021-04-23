@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        app:srlDragRate="0.618"
+        app:srlAccentColor="@android:color/white">
+
+        <com.scwang.smart.refresh.header.TwoLevelHeader
+            android:id="@+id/header"
+            app:srlEnablePullToCloseTwoLevel="true"
+            app:srlBottomPullUpToCloseRate="1"
+            app:srlFloorRate="1.618"
+            app:srlMaxRate="4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/second_floor"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:alpha="0"
+                android:src="@drawable/squirrel" />
+
+            <FrameLayout
+                android:id="@+id/second_floor_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ness" />
+            </FrameLayout>
+
+            <com.scwang.smart.refresh.header.ClassicsHeader
+                android:id="@+id/classics"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="?attr/actionBarSize" />
+        </com.scwang.smart.refresh.header.TwoLevelHeader>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:scrollbars="vertical" />
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:title="顶部 toolbar">
+
+    </androidx.appcompat.widget.Toolbar>
+</FrameLayout>

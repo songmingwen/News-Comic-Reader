@@ -5,11 +5,10 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.scwang.smart.refresh.header.MaterialHeader;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
-import com.scwang.smart.refresh.layout.api.RefreshHeader;
 import com.song.sunset.R;
 import com.song.sunset.beans.basebeans.PageEntity;
 import com.song.sunset.holders.DefaultLoadMoreProgressHolder;
@@ -27,8 +26,6 @@ import androidx.annotation.UiThread;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import org.jetbrains.annotations.NotNull;
 
 import okhttp3.ResponseBody;
 import retrofit2.Response;
@@ -81,10 +78,24 @@ public abstract class BasePageLoadingFragment<T extends PageEntity> extends Base
      * 如果要修改修改根布局，必须重新设置 mSwipeRefreshLayout mRecyclerView！
      */
     protected View providePagingRootView(LayoutInflater inflater, @Nullable ViewGroup container) {
-        View view = inflater.inflate(R.layout.fragment_base_paging, container, false);
-        mSwipeRefreshLayout = view.findViewById(R.id.refresh);
-        mRecyclerView = view.findViewById(R.id.recycler);
-        return view;
+        FrameLayout root = (FrameLayout) inflater.inflate(R.layout.fragment_base_paging, container, false);
+        View refreshContent = inflater.inflate(getRefreshLayoutId(), null, false);
+        root.addView(refreshContent);
+        mSwipeRefreshLayout = refreshContent.findViewById(getRefreshId());
+        mRecyclerView = refreshContent.findViewById(getRecyclerViewId());
+        return root;
+    }
+
+    protected int getRecyclerViewId() {
+        return R.id.recycler;
+    }
+
+    protected int getRefreshId() {
+        return R.id.refresh;
+    }
+
+    protected int getRefreshLayoutId() {
+        return R.layout.layout_refresh_default;
     }
 
     @Override
@@ -108,16 +119,9 @@ public abstract class BasePageLoadingFragment<T extends PageEntity> extends Base
             }
         });
 
-        mSwipeRefreshLayout.setRefreshHeader(getRefreshHeader());
         mSwipeRefreshLayout.setEnableLoadMore(false);
         mSwipeRefreshLayout.setOnRefreshListener(refreshlayout -> refresh(true));
-
-        mSwipeRefreshLayout.autoRefresh();
-    }
-
-    @NotNull
-    protected RefreshHeader getRefreshHeader() {
-        return new MaterialHeader(getContext());
+        mSwipeRefreshLayout.postDelayed(() -> mSwipeRefreshLayout.autoRefresh(), 100);
     }
 
     @CallSuper

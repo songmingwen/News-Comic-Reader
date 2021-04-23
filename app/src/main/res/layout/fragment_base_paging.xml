@@ -4,21 +4,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.scwang.smart.refresh.layout.SmartRefreshLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/refresh"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:srlAccentColor="@color/colorAccent"
-        app:srlEnableLoadMore="false"
-        app:srlEnablePreviewInEditMode="true">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical" />
-
-    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 </FrameLayout>
 

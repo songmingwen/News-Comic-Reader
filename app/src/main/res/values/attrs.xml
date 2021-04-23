@@ -57,4 +57,15 @@
         <attr name="maxSelectedCount" format="integer" />
         <attr name="backgroundColor" format="color" />
     </declare-styleable>
+
+    <declare-styleable name="StoreHouseHeader">
+        <attr name="shhText" format="string" />
+        <attr name="shhLineWidth" format="dimension" />
+        <attr name="shhDropHeight" format="dimension" />
+        <attr name="shhEnableFadeAnimation" format="boolean" />
+        <attr name="srlText" format="string" />
+        <attr name="srlLineWidth" format="dimension" />
+        <attr name="srlDropHeight" format="dimension" />
+        <attr name="srlEnableFadeAnimation" format="boolean" />
+    </declare-styleable>
 </resources>
