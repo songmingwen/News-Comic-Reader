@@ -44,7 +44,7 @@ public class ComicListActivity extends BaseActivity {
         Bundle bundle = new Bundle();
         bundle.putString(ARG_NAME, argName);
         bundle.putInt(ARG_VALUE, argValue);
-        loadFragment(getBaseContext(), R.id.id_comic_list_framelayout, ComicGenericListFragment.class.getName(), bundle, false);
+        loadFragment(getBaseContext(), R.id.id_comic_list_framelayout, ComicGenericListFragment.class.getName(), bundle, false, false);
     }
 
     public static void start(Context context, String argName, int argValue, String sortName) {

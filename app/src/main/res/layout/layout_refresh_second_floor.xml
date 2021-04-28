@@ -48,7 +48,11 @@
                 android:id="@+id/classics"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="?attr/actionBarSize" />
+                android:layout_marginTop="?attr/actionBarSize"
+                app:srlAccentColor="@color/colorAccent"
+                app:srlTextPulling="下拉刷新"
+                app:srlTextRelease="松开刷新，继续下拉进入二楼"
+                app:srlTextSecondary="松开进入二楼" />
         </com.scwang.smart.refresh.header.TwoLevelHeader>
 
         <androidx.recyclerview.widget.RecyclerView

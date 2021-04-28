@@ -602,6 +602,7 @@ public class NormalVideoPlayer extends FrameLayout
         ScreenUtils.hideActionBar(mContext);
         ScreenUtils.scanForActivity(mContext)
                 .setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        ScreenUtils.hideSystemUI(mContext);
 
         ViewGroup contentView = (ViewGroup) ScreenUtils.scanForActivity(mContext)
                 .findViewById(android.R.id.content);
@@ -634,6 +635,7 @@ public class NormalVideoPlayer extends FrameLayout
             ScreenUtils.showActionBar(mContext);
             ScreenUtils.scanForActivity(mContext)
                     .setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            ScreenUtils.showSystemUI(mContext);
 
             ViewGroup contentView = (ViewGroup) ScreenUtils.scanForActivity(mContext)
                     .findViewById(android.R.id.content);

@@ -1,5 +1,6 @@
 package com.song.sunset.viewmodel;
 
+import android.app.Application;
 import android.text.TextUtils;
 
 import com.song.sunset.beans.CollectionOnlineListBean;
@@ -20,6 +21,9 @@ import java.util.Map;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
+import org.jetbrains.annotations.NotNull;
+
 import io.reactivex.Observable;
 import java8.util.Optional;
 import java8.util.stream.StreamSupport;
@@ -29,7 +33,7 @@ import java8.util.stream.StreamSupport;
  * @description
  * @since 2019/1/10
  */
-public class CollectionViewModel extends ViewModel {
+public class CollectionViewModel extends BaseViewModel {
 
     public MutableLiveData<List<ComicLocalCollection>> mLocalData = new MutableLiveData<>();
     public MutableLiveData<List<ComicCollectionBean>> mOnlineData = new MutableLiveData<>();
@@ -39,6 +43,10 @@ public class CollectionViewModel extends ViewModel {
 
     static {
         comicLocalCollectionDao = GreenDaoUtil.getDaoSession().getComicLocalCollectionDao();
+    }
+
+    public CollectionViewModel(@NotNull Application application) {
+        super(application);
     }
 
     public void getNewestCollectedComic() {
@@ -107,8 +115,4 @@ public class CollectionViewModel extends ViewModel {
         return map;
     }
 
-    @Override
-    protected void onCleared() {
-        super.onCleared();
-    }
 }

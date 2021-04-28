@@ -8,13 +8,14 @@
         android:id="@+id/refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:srlAccentColor="@color/colorAccent"
+        app:srlAccentColor="@color/colorPrimary"
         app:srlEnableLoadMore="false"
         app:srlEnablePreviewInEditMode="true">
 
-        <com.scwang.smart.refresh.header.ClassicsHeader
+        <com.song.sunset.widget.refresh.StoreHouseHeader
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:srlText="song" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"

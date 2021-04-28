@@ -13,6 +13,7 @@ apply plugin: 'walle'
 
 //dependencies 配置在此文件添加
 apply from: file('../dependencies.gradle')
+apply from: file('../gradle/tools/so_scan.gradle')
 
 boolean hasDefaultPreinstallHandler = isRunningTask("Dev") || isRunningTask("Alpha")
 

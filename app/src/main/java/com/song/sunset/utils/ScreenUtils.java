@@ -6,6 +6,8 @@ import android.content.ContextWrapper;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ContextThemeWrapper;
+
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -116,5 +118,39 @@ public class ScreenUtils {
                 .getWindow()
                 .setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                         WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
+
+    /**
+     * 要启用沉浸模式，请调用 setSystemUiVisibility() 并将
+     * SYSTEM_UI_FLAG_IMMERSIVE 标志与 SYSTEM_UI_FLAG_FULLSCREEN 和 SYSTEM_UI_FLAG_HIDE_NAVIGATION 一起传递。
+     * 要启用粘性沉浸模式，请调用 setSystemUiVisibility() 并将
+     * SYSTEM_UI_FLAG_IMMERSIVE_STICKY 标志与 SYSTEM_UI_FLAG_FULLSCREEN 和 SYSTEM_UI_FLAG_HIDE_NAVIGATION 一起传递。
+     * @param context
+     */
+    public static void hideSystemUI(Context context) {
+        Activity activity = scanForActivity(context);
+        // Enables regular immersive mode.
+        // For "lean back" mode, remove SYSTEM_UI_FLAG_IMMERSIVE.
+        // Or for "sticky immersive," replace it with SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        View decorView = activity.getWindow().getDecorView();
+        decorView.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_IMMERSIVE
+                        // Set the content to appear under the system bars so that the
+                        // content doesn't resize when the system bars hide and show.
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                        // Hide the nav bar and status bar
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN);
+    }
+
+    // Shows the system bars by removing all the flags
+    // except for the ones that make the content appear under the system bars.
+    public static void showSystemUI(Context context) {
+        Activity activity = scanForActivity(context);
+        View decorView = activity.getWindow().getDecorView();
+        decorView.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
     }
 }

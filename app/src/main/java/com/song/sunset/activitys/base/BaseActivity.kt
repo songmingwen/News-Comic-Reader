@@ -1,89 +1,64 @@
-package com.song.sunset.activitys.base;
+package com.song.sunset.activitys.base
 
-import android.app.Activity;
-import android.content.Context;
-import android.graphics.Point;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Handler;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.customview.widget.ViewDragHelper;
-import androidx.appcompat.app.AppCompatDelegate;
-
-import android.text.TextUtils;
-import android.view.WindowManager;
-
-import com.song.sunset.utils.SPUtils;
-import com.song.sunset.utils.net.NetworkLifecycleTransformer;
-import com.song.sunset.utils.net.SchedulerTransformer;
-import com.song.sunset.utils.net.SimplifyRequestTransformer;
-import com.trello.rxlifecycle3.android.ActivityEvent;
-import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
-
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-
-import io.reactivex.ObservableTransformer;
-import retrofit2.Response;
+import android.app.Activity
+import android.content.Context
+import android.graphics.Point
+import android.os.Bundle
+import android.os.Handler
+import android.text.TextUtils
+import android.view.WindowManager
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.customview.widget.ViewDragHelper
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import com.song.sunset.utils.SPUtils
+import com.song.sunset.utils.net.NetworkLifecycleTransformer
+import com.song.sunset.utils.net.SchedulerTransformer
+import com.song.sunset.utils.net.SimplifyRequestTransformer
+import com.trello.rxlifecycle3.android.ActivityEvent
+import com.trello.rxlifecycle3.components.support.RxAppCompatActivity
+import io.reactivex.ObservableTransformer
+import io.reactivex.disposables.CompositeDisposable
+import retrofit2.Response
+import java.util.*
 
 /**
  * Created by Song on 2016/8/27 0027.
  * Email:z53520@qq.com
  */
-public class BaseActivity extends RxAppCompatActivity {
-    private String currTag = "";
-    protected FragmentManager supportFragmentManager;
-    protected Handler mHandler = new Handler();
+open class BaseActivity : RxAppCompatActivity() {
+    private var currTag = ""
+    protected var mHandler = Handler()
 
-    protected static ArrayList<BaseActivity> sActivityStack = new ArrayList<>();
+    val compositeDisposable: CompositeDisposable by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) { CompositeDisposable() }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        sActivityStack.add(this);
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        activityStack.add(this)
         //透明状态栏
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        //透明导航栏
-//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-        supportFragmentManager = getSupportFragmentManager();
+        window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        sActivityStack.remove(this);
-    }
-
-    @Nullable
-    public static BaseActivity getTopActivity() {
-        if (sActivityStack.size() > 0) {
-            return sActivityStack.get(sActivityStack.size() - 1);
-        }
-        return null;
-    }
-
-    public static ArrayList<BaseActivity> getActivityStack() {
-        return sActivityStack;
+    override fun onDestroy() {
+        compositeDisposable.clear()
+        super.onDestroy()
+        activityStack.remove(this)
     }
 
     /**
      * 返回一个只添加了线程切换的 Transform
      */
-    public final <T> SchedulerTransformer<T> bindScheduler() {
-        return new SchedulerTransformer<>();
+    fun <T> bindScheduler(): SchedulerTransformer<T> {
+        return SchedulerTransformer()
     }
 
     /**
      * 1. 执行线程切换
      * 2. 绑定生命周期
      */
-    public final <T> NetworkLifecycleTransformer<T> bindLifecycleAndScheduler() {
-        return new NetworkLifecycleTransformer<>(bindUntilEvent(ActivityEvent.DESTROY));
+    fun <T> bindLifecycleAndScheduler(): NetworkLifecycleTransformer<T> {
+        return NetworkLifecycleTransformer(bindUntilEvent(ActivityEvent.DESTROY))
     }
 
     /**
@@ -92,140 +67,137 @@ public class BaseActivity extends RxAppCompatActivity {
      * 2. 绑定生命周期
      * 3. Response 剥离，将 Response[T] 中 T 的剥离
      */
-    public final <T> ObservableTransformer<Response<T>, T> simplifyRequest() {
-        return new SimplifyRequestTransformer<>(bindUntilEvent(ActivityEvent.DESTROY));
+    fun <T> simplifyRequest(): ObservableTransformer<Response<T>, T> {
+        return SimplifyRequestTransformer(bindUntilEvent(ActivityEvent.DESTROY))
     }
 
-    public Handler getmHandler() {
-        return mHandler;
+    fun getmHandler(): Handler {
+        return mHandler
     }
 
-    protected void switchFragment(String className, int layoutId) {
-        if (!TextUtils.isEmpty(currTag) && currTag.equals(className)) {
-            return;
+    protected fun switchFragment(className: String, layoutId: Int) {
+        if (!TextUtils.isEmpty(currTag) && currTag == className) {
+            return
         }
-        FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
-        Fragment fragment;
+        val fragmentTransaction = supportFragmentManager!!.beginTransaction()
+        var fragment: Fragment?
         if (!TextUtils.isEmpty(currTag)) {
-            fragment = supportFragmentManager.findFragmentByTag(currTag);
-            if (fragment != null && !fragment.isDetached()) {
-                fragmentTransaction.hide(fragment);
+            fragment = supportFragmentManager!!.findFragmentByTag(currTag)
+            if (fragment != null && !fragment.isDetached) {
+                fragmentTransaction.hide(fragment)
             }
         }
-        fragment = supportFragmentManager.findFragmentByTag(className);
+        fragment = supportFragmentManager!!.findFragmentByTag(className)
         if (fragment == null) {
 //            fragment = Fragment.instantiate(this, className);
-            fragment = supportFragmentManager.getFragmentFactory().instantiate(this.getClassLoader(), className);
-            fragmentTransaction.add(layoutId, fragment, className);
+            fragment = supportFragmentManager!!.fragmentFactory.instantiate(this.classLoader, className)
+            fragmentTransaction.add(layoutId, fragment, className)
         } else {
-            fragmentTransaction.show(fragment);
+            fragmentTransaction.show(fragment)
         }
-        currTag = className;
-        fragmentTransaction.commitAllowingStateLoss();
+        currTag = className
+        fragmentTransaction.commitAllowingStateLoss()
     }
 
-    protected void switchFragment(Fragment fragment, int layoutId) {
-        if (!TextUtils.isEmpty(currTag) && currTag.equals(fragment.getClass().toString())) {
-            return;
+    protected fun switchFragment(fragment: Fragment, layoutId: Int) {
+        if (!TextUtils.isEmpty(currTag) && currTag == fragment.javaClass.toString()) {
+            return
         }
-        FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
-        Fragment innerFragment;
+        val fragmentTransaction = supportFragmentManager!!.beginTransaction()
+        var innerFragment: Fragment?
         if (!TextUtils.isEmpty(currTag)) {
-            innerFragment = supportFragmentManager.findFragmentByTag(currTag);
-            if (innerFragment != null && !innerFragment.isDetached()) {
-                fragmentTransaction.hide(innerFragment);
+            innerFragment = supportFragmentManager!!.findFragmentByTag(currTag)
+            if (innerFragment != null && !innerFragment.isDetached) {
+                fragmentTransaction.hide(innerFragment)
             }
         }
-        innerFragment = supportFragmentManager.findFragmentByTag(fragment.getClass().toString());
+        innerFragment = supportFragmentManager!!.findFragmentByTag(fragment.javaClass.toString())
         if (innerFragment == null) {
-            innerFragment = fragment;
-            fragmentTransaction.add(layoutId, innerFragment, innerFragment.getClass().toString());
+            innerFragment = fragment
+            fragmentTransaction.add(layoutId, innerFragment, innerFragment.javaClass.toString())
         } else {
-            fragmentTransaction.show(innerFragment);
+            fragmentTransaction.show(innerFragment)
         }
-        currTag = fragment.getClass().toString();
-        fragmentTransaction.commitAllowingStateLoss();
-    }
-
-    protected Fragment loadFragment(Context context, int layoutId, String className) {
-        return this.loadFragment(context, layoutId, className, null);
-    }
-
-    protected Fragment loadFragment(Context context, int layoutId, String className, Bundle bundle) {
-        return this.loadFragment(context, layoutId, className, bundle, false);
-    }
-
-    protected Fragment loadFragment(Context context, int layoutId, String className, Bundle bundle, boolean isAddToBackStack) {
-        return this.loadFragment(context, layoutId, className, bundle, isAddToBackStack, false);
+        currTag = fragment.javaClass.toString()
+        fragmentTransaction.commitAllowingStateLoss()
     }
 
     //如果某个fragment每次打开都需要重新加载界面则isUseOld设置为false
-    protected Fragment loadFragment(Context context, int layoutId, String className, Bundle bundle, boolean isAddToBackStack, boolean isUseOld) {
-        FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
-        Fragment mFragment = supportFragmentManager.findFragmentByTag(className);
+    protected fun loadFragment(context: Context?, layoutId: Int, className: String?, bundle: Bundle? = null, isAddToBackStack: Boolean = false, isUseOld: Boolean = false): Fragment {
+        val fragmentTransaction = supportFragmentManager!!.beginTransaction()
+        var mFragment = supportFragmentManager!!.findFragmentByTag(className)
         if (mFragment == null) {
-            mFragment = Fragment.instantiate(context, className, bundle);
-            fragmentTransaction.add(layoutId, mFragment, className);
+            mFragment = Fragment.instantiate(context!!, className!!, bundle)
+            fragmentTransaction.add(layoutId, mFragment, className)
         } else {
             if (isUseOld) {
                 //仅仅刷新界面
-                fragmentTransaction.detach(mFragment);
-                fragmentTransaction.attach(mFragment);
+                fragmentTransaction.detach(mFragment)
+                fragmentTransaction.attach(mFragment)
             }
-            if (!mFragment.isAdded()) {
-                fragmentTransaction.add(layoutId, mFragment, className);
+            if (!mFragment.isAdded) {
+                fragmentTransaction.add(layoutId, mFragment, className)
             } else {
-                fragmentTransaction.show(mFragment);
+                fragmentTransaction.show(mFragment)
             }
         }
         if (isAddToBackStack) {
-            fragmentTransaction.addToBackStack(className);
+            fragmentTransaction.addToBackStack(className)
         }
-        if (!isFinishing()) {
-            fragmentTransaction.commitAllowingStateLoss();
-            supportFragmentManager.executePendingTransactions();
+        if (!isFinishing) {
+            fragmentTransaction.commitAllowingStateLoss()
+            supportFragmentManager!!.executePendingTransactions()
         }
-        return mFragment;
+        return mFragment
     }
 
-    protected void switchDayNightMode() {
-        boolean nightMode = isNightMode();
-        setDayNightMode(!nightMode);
-        saveDayNightMode(!nightMode);
-        recreate();//重新启动当前activity
+    protected fun switchDayNightMode() {
+        val nightMode = isNightMode
+        setDayNightMode(!nightMode)
+        saveDayNightMode(!nightMode)
+        recreate() //重新启动当前activity
     }
 
-    private void saveDayNightMode(boolean nightMode) {
-        SPUtils.setBooleanByName(this, SPUtils.APP_NIGHT_MODE, nightMode);
+    private fun saveDayNightMode(nightMode: Boolean) {
+        SPUtils.setBooleanByName(this, SPUtils.APP_NIGHT_MODE, nightMode)
     }
 
-    protected void setDayNightMode(boolean nightMode) {
-        getDelegate().setLocalNightMode(nightMode ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+    protected fun setDayNightMode(nightMode: Boolean) {
+        delegate.localNightMode = if (nightMode) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
     }
 
-    public boolean isNightMode() {
-        return SPUtils.getBooleanByName(this, SPUtils.APP_NIGHT_MODE, false);
-    }
+    val isNightMode: Boolean
+        get() = SPUtils.getBooleanByName(this, SPUtils.APP_NIGHT_MODE, false)
 
-    protected void setDrawerLeftEdgeSize(Activity activity, DrawerLayout drawerLayout, float displayWidthPercentage) {
-        if (activity == null || drawerLayout == null) return;
+    protected fun setDrawerLeftEdgeSize(activity: Activity?, drawerLayout: DrawerLayout?, displayWidthPercentage: Float) {
+        if (activity == null || drawerLayout == null) return
         try {
             // 找到 ViewDragHelper 并设置 Accessible 为true
-            Field leftDraggerField = drawerLayout.getClass().getDeclaredField("mLeftDragger");//Right
-            leftDraggerField.setAccessible(true);
-            ViewDragHelper leftDragger = (ViewDragHelper) leftDraggerField.get(drawerLayout);
+            val leftDraggerField = drawerLayout.javaClass.getDeclaredField("mLeftDragger") //Right
+            leftDraggerField.isAccessible = true
+            val leftDragger = leftDraggerField[drawerLayout] as ViewDragHelper
 
             // 找到 edgeSizeField 并设置 Accessible 为true
-            Field edgeSizeField = leftDragger.getClass().getDeclaredField("mEdgeSize");
-            edgeSizeField.setAccessible(true);
-            int edgeSize = edgeSizeField.getInt(leftDragger);
+            val edgeSizeField = leftDragger.javaClass.getDeclaredField("mEdgeSize")
+            edgeSizeField.isAccessible = true
+            val edgeSize = edgeSizeField.getInt(leftDragger)
 
             // 设置新的边缘大小
-            Point displaySize = new Point();
-            activity.getWindowManager().getDefaultDisplay().getSize(displaySize);
-            edgeSizeField.setInt(leftDragger, Math.max(edgeSize, (int) (displaySize.x * displayWidthPercentage)));
-        } catch (NoSuchFieldException | IllegalArgumentException | IllegalAccessException e) {
+            val displaySize = Point()
+            activity.windowManager.defaultDisplay.getSize(displaySize)
+            edgeSizeField.setInt(leftDragger, Math.max(edgeSize, (displaySize.x * displayWidthPercentage).toInt()))
+        } catch (e: NoSuchFieldException) {
+        } catch (e: IllegalArgumentException) {
+        } catch (e: IllegalAccessException) {
         }
     }
 
+    companion object {
+        var activityStack = ArrayList<BaseActivity>()
+            protected set
+        val topActivity: BaseActivity?
+            get() = if (activityStack.size > 0) {
+                activityStack[activityStack.size - 1]
+            } else null
+    }
 }

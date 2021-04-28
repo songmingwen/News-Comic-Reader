@@ -18,7 +18,6 @@ import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.bumptech.glide.request.RequestOptions;
 import com.song.sunset.R;
 import com.song.sunset.beans.DanmakuBean;
 import com.song.sunset.beans.VideoDetailBean;

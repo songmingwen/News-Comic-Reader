@@ -1,212 +1,182 @@
-package com.song.sunset.activitys;
+package com.song.sunset.activitys
 
-import android.animation.Animator;
-import android.animation.AnimatorInflater;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.ObjectAnimator;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.os.Bundle;
-import android.os.Handler;
-import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.alibaba.android.arouter.facade.annotation.Route;
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageRequest;
-import com.davemorrissey.labs.subscaleview.ImageSource;
-import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
-import com.song.sunset.activitys.base.BaseActivity;
-import com.song.sunset.R;
-import com.song.sunset.utils.FileUtils;
-import com.song.sunset.utils.ScreenUtils;
-import com.song.sunset.utils.SdCardUtil;
-import com.song.sunset.utils.loadingmanager.ProgressLayout;
-import com.song.sunset.utils.volley.SampleVolleyFactory;
-
-import java.io.File;
+import android.animation.Animator
+import android.animation.AnimatorInflater
+import android.animation.AnimatorListenerAdapter
+import android.content.Context
+import com.song.sunset.activitys.base.BaseActivity
+import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
+import android.os.Bundle
+import com.song.sunset.R
+import com.song.sunset.utils.ScreenUtils
+import com.song.sunset.utils.SdCardUtil
+import com.davemorrissey.labs.subscaleview.ImageSource
+import android.graphics.Bitmap
+import android.view.View.OnLongClickListener
+import android.widget.Toast
+import android.content.Intent
+import android.graphics.drawable.Drawable
+import android.net.Uri
+import android.os.Handler
+import android.view.View
+import coil.imageLoader
+import coil.request.ImageRequest
+import coil.target.Target
+import com.alibaba.android.arouter.facade.annotation.Route
+import com.song.sunset.utils.BitmapUtil
+import com.song.sunset.utils.FileUtils
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.ObservableOnSubscribe
+import kotlinx.android.synthetic.main.activity_scale_pic.*
+import kotlinx.android.synthetic.main.activity_second_floor.*
+import java.io.File
 
 /**
  * Created by Song on 2016/9/2 0002.
  * Email:z53520@qq.com
  */
 @Route(path = "/song/pic/scale")
-public class ScalePicActivity extends BaseActivity {
-
-    public static final String PIC_URL = "pic_url";
-    public static final String PIC_ID = "pic_id";
-    private String picUrl;
-    private String picId;
-    private SubsamplingScaleImageView imageView;
-    private ProgressLayout progressLayout;
-    private boolean hasCache = false;
-    private File file;
-    private View.OnClickListener mOnRetryListener;
-    private TextView mSavePicTip;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scale_pic);
-        ScreenUtils.fullscreen(this, true);
-
-        progressLayout = (ProgressLayout) findViewById(R.id.progress);
-        progressLayout.showLoading();
-        mOnRetryListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progressLayout.showLoading();
-                setBitmapFromNet();
-            }
-        };
-
-        if (getIntent() != null) {
-            picUrl = getIntent().getStringExtra(PIC_URL);
-            if (picUrl != null && picUrl.contains("ori.")) {
-                picUrl = picUrl.replace("ori.", "");
-            }
-            picId = getIntent().getStringExtra(PIC_ID);
+class ScalePicActivity : BaseActivity() {
+    private var picUrl: String? = null
+    private var picId: String? = null
+    private var hasCache = false
+    private var file: File? = null
+    private var mOnRetryListener: View.OnClickListener? = null
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_scale_pic)
+        ScreenUtils.fullscreen(this, true)
+        progress!!.showLoading()
+        mOnRetryListener = View.OnClickListener {
+            progress!!.showLoading()
+            setBitmapFromNet()
         }
-
-        initView();
+        if (intent != null) {
+            picUrl = intent.getStringExtra(PIC_URL)
+            if (picUrl != null && picUrl!!.contains("ori.")) {
+                picUrl = picUrl!!.replace("ori.", "")
+            }
+            picId = intent.getStringExtra(PIC_ID)
+        }
+        initView()
         if (!setBitmapFromLocation()) {
-            setBitmapFromNet();
+            setBitmapFromNet()
         } else {
-            mSavePicTip.setVisibility(View.GONE);
+            txt_save_pic_tip!!.visibility = View.GONE
         }
     }
 
-    private void initView() {
-        imageView = findViewById(R.id.id_pic_activity_image);
-        imageView.setDoubleTapZoomDuration(200);
-        imageView.setDoubleTapZoomScale(2.5f);
-        imageView.setPanLimit(SubsamplingScaleImageView.PAN_LIMIT_INSIDE);
-        imageView.setMaxScale(5f);
-        mSavePicTip = (TextView) findViewById(R.id.txt_save_pic_tip);
+    private fun initView() {
+        id_pic_activity_image.setDoubleTapZoomDuration(200)
+        id_pic_activity_image.setDoubleTapZoomScale(2.5f)
+        id_pic_activity_image.setPanLimit(SubsamplingScaleImageView.PAN_LIMIT_INSIDE)
+        id_pic_activity_image.maxScale = 5f
     }
 
-    private void startFadeAnim() {
-        Animator animator = AnimatorInflater.loadAnimator(this, R.animator.anim_save_pic_tip_fade);
-        animator.setTarget(mSavePicTip);
-        animator.start();
-        animator.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                mSavePicTip.setVisibility(View.GONE);
+    private fun startFadeAnim() {
+        val animator = AnimatorInflater.loadAnimator(this, R.animator.anim_save_pic_tip_fade)
+        animator.setTarget(txt_save_pic_tip)
+        animator.start()
+        animator.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator) {
+                txt_save_pic_tip!!.visibility = View.GONE
             }
-        });
+        })
     }
 
-    private boolean setBitmapFromLocation() {
-        file = new File(SdCardUtil.getNormalSDCardPath() + "/Sunset/SavedCover", picId + ".jpg");
-        if (file.exists()) {
-            imageView.setImage(ImageSource.uri(Uri.fromFile(file)));
-            progressLayout.showContent();
-            setListener(null);
-            return true;
+    private fun setBitmapFromLocation(): Boolean {
+        file = File(SdCardUtil.getNormalSDCardPath() + "/Sunset/SavedCover", "$picId.jpg")
+        return if (file!!.exists()) {
+            id_pic_activity_image!!.setImage(ImageSource.uri(Uri.fromFile(file)))
+            progress!!.showContent()
+            setListener(null)
+            true
         } else {
-            return false;
+            false
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    override fun onDestroy() {
+        super.onDestroy()
     }
 
-    private void setBitmapFromNet() {
-        hasCache = false;
-        RequestQueue queue = SampleVolleyFactory.getRequestQueue(this);
-        ImageRequest imageRequest = new ImageRequest(picUrl,
-                new Response.Listener<Bitmap>() {
-                    @Override
-                    public void onResponse(Bitmap response) {
-                        hasCache = true;
-                        progressLayout.showContent();
-                        fadeAnimDelay();
-                        if (response != null) {
-                            imageView.setImage(ImageSource.bitmap(response));
-                            setListener(response);
-                        } else {
-                            progressLayout.showError(mOnRetryListener);
-                        }
+    private fun setBitmapFromNet() {
+        hasCache = false
+        val request = ImageRequest.Builder(this)
+                .data(picUrl)
+                .target(object : Target {
+                    override fun onStart(placeholder: Drawable?) {
+                        super.onStart(placeholder)
                     }
-                }, 2048, 2048, Bitmap.Config.ARGB_8888, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                if (hasCache)
-                    progressLayout.showContent();
-                else {
-                    progressLayout.showError(mOnRetryListener);
-                }
-            }
-        });
-        imageRequest.setRetryPolicy(new DefaultRetryPolicy());
-        queue.add(imageRequest);
-    }
 
-    private void fadeAnimDelay() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startFadeAnim();
-            }
-        }, 1000);
-    }
-
-    private void setListener(final Bitmap response) {
-        imageView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                if (response != null) {
-                    if (SdCardUtil.isSdCardAvailable()) {
-                        if (file != null && file.exists()) {
-                            Toast.makeText(getApplication(), "图片已保存", Toast.LENGTH_SHORT).show();
-                            return true;
-                        }
-                        savePic(response);
+                    override fun onError(error: Drawable?) {
+                        progress!!.showError(mOnRetryListener)
                     }
-                } else {
-                    Toast.makeText(getApplication(), "图片已保存", Toast.LENGTH_SHORT).show();
+
+                    override fun onSuccess(result: Drawable) {
+                        hasCache = true
+                        progress!!.showContent()
+                        fadeAnimDelay()
+                        val bitmap = BitmapUtil.drawableToBitmap(result)
+                        id_pic_activity_image!!.setImage(ImageSource.bitmap(bitmap))
+                        setListener(bitmap)
+                    }
                 }
-                return false;
-            }
-        });
+                )
+                .build()
+
+
+        val disp = this.imageLoader.enqueue(request)
     }
 
-    private void savePic(final Bitmap response) {
-        new Thread() {
-            @Override
-            public void run() {
-                if (FileUtils.saveFile(response, "/Sunset/SavedCover", picId + ".jpg")) {
-                    showResult("图片保存成功");
-                } else {
-                    showResult("图片保存失败");
+    private fun fadeAnimDelay() {
+        Handler().postDelayed({ startFadeAnim() }, 1000)
+    }
+
+    private fun setListener(response: Bitmap?) {
+        id_pic_activity_image!!.setOnLongClickListener(OnLongClickListener {
+            if (response != null) {
+                if (SdCardUtil.isSdCardAvailable()) {
+                    if (file != null && file!!.exists()) {
+                        Toast.makeText(application, "图片已保存", Toast.LENGTH_SHORT).show()
+                        return@OnLongClickListener true
+                    }
+                    savePic(response)
                 }
-                super.run();
+            } else {
+                Toast.makeText(application, "图片已保存", Toast.LENGTH_SHORT).show()
             }
-        }.start();
+            false
+        })
     }
 
-    private void showResult(final String s) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(getBaseContext(), s, Toast.LENGTH_SHORT).show();
+    private fun savePic(response: Bitmap) {
+        object : Thread() {
+            override fun run() {
+                if (FileUtils.saveFile(response, "/Sunset/SavedCover", "$picId.jpg")) {
+                    showResult("图片保存成功")
+                } else {
+                    showResult("图片保存失败")
+                }
+                super.run()
             }
-        });
+        }.start()
     }
 
-    public static void start(Context context, String ori, String comicId) {
-        Intent intent = new Intent(context, ScalePicActivity.class);
-        intent.putExtra(PIC_URL, ori);
-        intent.putExtra(PIC_ID, comicId);
-        context.startActivity(intent);
+    private fun showResult(s: String) {
+        runOnUiThread { Toast.makeText(baseContext, s, Toast.LENGTH_SHORT).show() }
+    }
+
+    companion object {
+        const val PIC_URL = "pic_url"
+        const val PIC_ID = "pic_id"
+
+        @JvmStatic
+        fun start(context: Context, ori: String?, comicId: String?) {
+            val intent = Intent(context, ScalePicActivity::class.java)
+            intent.putExtra(PIC_URL, ori)
+            intent.putExtra(PIC_ID, comicId)
+            context.startActivity(intent)
+        }
     }
 }

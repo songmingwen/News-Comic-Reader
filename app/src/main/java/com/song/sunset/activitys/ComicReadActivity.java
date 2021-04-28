@@ -140,36 +140,4 @@ public class ComicReadActivity extends BaseActivity implements RetrofitCallback<
             }
         });
     }
-
-//    public void getDataFromNet() {
-//        mLoadingAndRetryManager.showLoading();
-//        hasCache = false;
-//        RequestQueue queue = SampleVolleyFactory.getRequestQueue(this);
-//        GsonRequest gsonRequest = new GsonRequest<>(AppServices.getComicReadUrl(comicId), ComicReadRD.class,
-//                new Response.Listener<ComicReadRD>() {
-//                    @Override
-//                    public void onResponse(ComicReadRD response) {
-//                        hasCache = true;
-//                        mLoadingAndRetryManager.showContent();
-//                        List<ComicReadRD.DataBean.ReturnDataBean> returnData = response.getData().getReturnData();
-//
-//                        ArrayList<ComicReadRD.DataBean.ReturnDataBean.ImageListBean.ImagesBean> dataList = getDataList(returnData);
-//                        adapter.setData(dataList);
-//
-//                        int realPosition = getRealPosition(returnData);
-//                        recyclerView.scrollToPosition(realPosition);
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        if (hasCache)
-//                            mLoadingAndRetryManager.showContent();
-//                        else
-//                            mLoadingAndRetryManager.showRetry();
-//                    }
-//                });
-//        gsonRequest.setRetryPolicy(new DefaultRetryPolicy());
-//        queue.add(gsonRequest);
-//    }
 }

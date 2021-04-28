@@ -86,14 +86,31 @@ public abstract class BasePageLoadingFragment<T extends PageEntity> extends Base
         return root;
     }
 
+    /**
+     * 返回 recyclerview 的 Id
+     *
+     * @return recyclerview 的 Id
+     */
     protected int getRecyclerViewId() {
         return R.id.recycler;
     }
 
+    /**
+     * SmartRefreshLayout 的 Id
+     *
+     * @return 返回 SmartRefreshLayout 的 Id
+     */
     protected int getRefreshId() {
         return R.id.refresh;
     }
 
+    /**
+     * 如果需要自定义刷新头部（二楼或刷新头部样式）需要实现此方法
+     * 同时需要实现{@link #getRecyclerViewId()} 返回 recyclerview 的 Id（id 相同可使用默认实现）
+     * 同时需要实现{@link #getRefreshId()} 返回 SmartRefreshLayout 的 Id（id 相同可使用默认实现）
+     *
+     * @return 刷新头部布局
+     */
     protected int getRefreshLayoutId() {
         return R.layout.layout_refresh_default;
     }

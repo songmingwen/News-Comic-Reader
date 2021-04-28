@@ -25,3 +25,8 @@ android {
 
 //dependencies 配置在此文件添加
 apply from: file('../dependencies_base.gradle')
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "com.airbnb.android:lottie:3.4.2"
+}

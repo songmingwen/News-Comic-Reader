@@ -46,7 +46,6 @@
 -dontwarn com.squareup.okhttp.**
 -dontwarn okhttp3.**
 -dontwarn javax.annotation.**
--dontwarn com.android.volley.toolbox.**
 -dontwarn com.facebook.infer.**
 #----------------------------fresco----------------------------
 

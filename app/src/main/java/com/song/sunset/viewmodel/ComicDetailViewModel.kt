@@ -1,8 +1,8 @@
 package com.song.sunset.viewmodel
 
+import android.app.Application
 import android.util.Base64
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.song.sunset.beans.CollectionOnlineListBean
 import com.song.sunset.beans.ComicDetailBean
 import com.song.sunset.beans.ComicLocalCollection
@@ -13,9 +13,8 @@ import com.song.sunset.utils.retrofit.Net
 import com.song.sunset.utils.retrofit.RetrofitCallback
 import com.song.sunset.utils.rxjava.RxUtil
 import com.sunset.greendao.gen.ComicLocalCollectionDao
-import io.reactivex.disposables.CompositeDisposable
 
-open class ComicDetailViewModel : ViewModel() {
+open class ComicDetailViewModel(application: Application) : BaseViewModel(application) {
 
     var comicDetailBean = MutableLiveData<ComicDetailBean>()
     var dataStatus = MutableLiveData<Boolean>()
@@ -23,8 +22,6 @@ open class ComicDetailViewModel : ViewModel() {
     var showTips = MutableLiveData<String>()
 
     private var comicLocalCollectionDao: ComicLocalCollectionDao? = GreenDaoUtil.getDaoSession().comicLocalCollectionDao
-
-    private var dispose = CompositeDisposable()
 
     fun getComicDetailData(comicId: Int) {
         val dis = RxUtil.comic(
@@ -40,7 +37,7 @@ open class ComicDetailViewModel : ViewModel() {
                     }
 
                 })
-        dispose.add(dis)
+        compositeDisposable.add(dis)
     }
 
     fun getCollectionStatus(comicId: Int): Boolean {
@@ -65,7 +62,7 @@ open class ComicDetailViewModel : ViewModel() {
                         showTips.value = if (collected) "取消收藏失败" else "收藏失败"
                     }
                 })
-        dispose.add(dis)
+        compositeDisposable.add(dis)
     }
 
     /**
@@ -134,7 +131,4 @@ open class ComicDetailViewModel : ViewModel() {
         return postData
     }
 
-    override fun onCleared() {
-        dispose.clear()
-    }
 }
