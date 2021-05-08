@@ -1,13 +1,13 @@
 package com.song.sunset.design
 
-import com.song.sunset.design.factory.shape.Shape
-import com.song.sunset.design.factory.ShapeFactory
-import com.song.sunset.design.factory.ShapeFactory.*
-import com.song.sunset.design.factory.abs.ColorFactory.*
-import com.song.sunset.design.factory.abs.FactoryProducer
-import com.song.sunset.design.factory.abs.FactoryProducer.COLOR
-import com.song.sunset.design.factory.abs.FactoryProducer.SHAPE
-import com.song.sunset.design.factory.color.Color
+import com.song.sunset.design.creational.factory.shape.Shape
+import com.song.sunset.design.creational.factory.ShapeFactory
+import com.song.sunset.design.creational.factory.ShapeFactory.*
+import com.song.sunset.design.creational.factory.abs.ColorFactory.*
+import com.song.sunset.design.creational.factory.abs.FactoryProducer
+import com.song.sunset.design.creational.factory.abs.FactoryProducer.COLOR
+import com.song.sunset.design.creational.factory.abs.FactoryProducer.SHAPE
+import com.song.sunset.design.creational.factory.color.Color
 import org.junit.Test
 
 

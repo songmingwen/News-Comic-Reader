@@ -1,6 +1,6 @@
 package com.song.sunset.design
 
-import com.song.sunset.design.builder.ComputerClient
+import com.song.sunset.design.creational.builder.ComputerClient
 import org.junit.Test
 
 /**
