@@ -12,7 +12,6 @@ import com.song.sunset.R
 import kotlinx.android.synthetic.main.layout_refresh_second_floor.*
 
 /**
- * Copyright(C),2006-2021,快乐阳光互动娱乐传媒有限公司
  * Desc:
  * Author:  songmingwen
  * Email:   mingwen@mgtv.com

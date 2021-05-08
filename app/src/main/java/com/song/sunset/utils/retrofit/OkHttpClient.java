@@ -25,7 +25,7 @@ public class OkHttpClient {
         return sInstance;
     }
 
-    private okhttp3.OkHttpClient okHttpClientBuilder;
+    private okhttp3.OkHttpClient okHttpClient;
 
     private OkHttpClient() {
         initClient();
@@ -36,7 +36,7 @@ public class OkHttpClient {
         logInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         Interceptor cacheInterceptor = new OfflineCacheControlInterceptor();
-        okHttpClientBuilder = new okhttp3.OkHttpClient.Builder()
+        okHttpClient = new okhttp3.OkHttpClient.Builder()
                 //打印日志
                 .addInterceptor(logInterceptor)
                 //添加固定公共请求参数
@@ -67,10 +67,10 @@ public class OkHttpClient {
 
     public okhttp3.OkHttpClient createClient(Map<String, String> map) {
         if (map == null) {
-            if (okHttpClientBuilder == null) {
+            if (okHttpClient == null) {
                 initClient();
             }
-            return okHttpClientBuilder;
+            return okHttpClient;
         }
         HttpLoggingInterceptor logInterceptor = new HttpLoggingInterceptor();
         logInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);

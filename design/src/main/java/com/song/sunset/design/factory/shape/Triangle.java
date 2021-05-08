@@ -1,0 +1,15 @@
+package com.song.sunset.design.factory.shape;
+
+
+/**
+ * Desc:
+ * Author:  songmingwen
+ * Email:   mingwen@mgtv.com
+ * Time:    2021/5/7 14:52
+ */
+public class Triangle implements Shape {
+    @Override
+    public void draw() {
+        System.out.println("draw: triangle");
+    }
+}

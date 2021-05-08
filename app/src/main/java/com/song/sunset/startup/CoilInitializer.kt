@@ -6,7 +6,6 @@ import com.song.sunset.base.startup.base.BaseInitializer
 import com.song.sunset.startup.task.CoilStartUp
 
 /**
- * Copyright(C),2006-2021,快乐阳光互动娱乐传媒有限公司
  * Desc: 初始化 Coil 库任务
  * Author:  songmingwen
  * Email:   mingwen@mgtv.com
