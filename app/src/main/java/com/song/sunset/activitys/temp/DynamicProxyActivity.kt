@@ -29,23 +29,8 @@ class DynamicProxyActivity : AppCompatActivity() {
     }
 
     fun origin(view: View) {
-
         val golf = Golf()
         golf.wheel()
-
-        val iCar = Proxy.newProxyInstance(
-                golf.javaClass.classLoader,
-                golf.javaClass.interfaces,
-                object : InvocationHandler {
-                    override fun invoke(proxy: Any?, method: Method?, args: Array<out Any>?): Any? {
-                        Log.e(this.javaClass.toString(), "before")
-                        return method?.invoke(golf, *args.orEmpty())
-                    }
-                }) as ICar
-
-        iCar.wheel()
-        iCar.timeToMarket(this)
-
     }
 
     fun dynamicProxy(view: View) {

@@ -19,8 +19,7 @@ class ProxyKotlinDynamicHandler : InvocationHandler {
         return Proxy.newProxyInstance(target.javaClass.classLoader, target.javaClass.interfaces, this)
     }
 
-    //Java 代码正常运行，Kotlin 代码运行 crash。未解决
-    //改为 *args.orEmpty 解决问题
+    //Java 代码正常运行，Kotlin 代码运行 crash。改为 *args.orEmpty 解决问题
     @Throws(Throwable::class)
     override fun invoke(proxy: Any?, method: Method?, args: Array<out Any>?): Any? {
         Log.e(this.javaClass.toString(), "before")
