@@ -12,6 +12,7 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.song.core.FrescoInitializer
 import com.song.sunset.activitys.temp.GlobalFlowActivity.Companion.hideView
 import com.song.sunset.activitys.temp.GlobalFlowActivity.Companion.showGlobalFlowView
+import com.song.sunset.base.startup.AInitializer
 import com.song.sunset.base.startup.FiveInitializer
 import com.song.sunset.base.startup.FourInitializer
 import com.song.sunset.services.managers.BinderPool
@@ -86,6 +87,7 @@ class SunsetApplication : MultiDexApplication() {
                     AppInitializer.getInstance(applicationContext).initializeComponent(FiveInitializer::class.java)
                     AppInitializer.getInstance(applicationContext).initializeComponent(FourInitializer::class.java)
                     AppInitializer.getInstance(applicationContext).initializeComponent(CoilInitializer::class.java)
+//                    AppInitializer.getInstance(applicationContext).initializeComponent(AInitializer::class.java)
                 }
                 .subscribeOn(Schedulers.io())
                 .subscribe { o: Any? -> }
