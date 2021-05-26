@@ -18,8 +18,8 @@ apply from: file('../gradle/tools/so_scan.gradle')
 boolean hasDefaultPreinstallHandler = isRunningTask("Dev") || isRunningTask("Alpha")
 
 android {
-    compileSdkVersion ANDROID_COMPILE_SDK_VERSION
-    buildToolsVersion ANDROID_BUILD_TOOLS_VERSION
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
 
     sourceSets {
         androidTest.setRoot('tests')
@@ -38,8 +38,8 @@ android {
 
     defaultConfig {
         applicationId "com.song.sunset"
-        minSdkVersion ANDROID_BUILD_MIN_SDK_VERSION
-        targetSdkVersion ANDROID_TARGET_SDK_VERSION
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode 1
         versionName "1.0"
 //        jackOptions {
@@ -158,4 +158,5 @@ dependencies {
     implementation project(':widget')
     implementation project(':base')
 //    implementation project(':flutter_plugin_battery')
+    implementation 'com.google.auto.service:auto-service:1.0'
 }

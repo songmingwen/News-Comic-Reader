@@ -60,7 +60,6 @@ class FunctionListActivity : BaseActivity() {
         addButton("Camera") { CameraActivity.start(this@FunctionListActivity) }
         addButton("ServiceProvider") { ServiceProviderActivity.start(this@FunctionListActivity) }
         addButton("CenteredImageSpan") { CenteredImageSpanActivity.start(this@FunctionListActivity) }
-        addButton("RecyclerViewDragActivity") { RecyclerViewDragActivity.start(this@FunctionListActivity) }
         addButton("RelayTest") { RelayTest.testRelay() }
         addButton("MMKVTest") { RelayTest.testMMKV() }
     }

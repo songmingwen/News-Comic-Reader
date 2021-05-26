@@ -1,0 +1,125 @@
+ext {
+    android = [
+            minSdkVersion    : 21,   // 最低版本号
+            targetSdkVersion : 30,   // 目标版本号
+            compileSdkVersion: 30,   // 编译版本号
+            buildToolsVersion: '29.0.3',   // gradle工具版本号
+    ]
+
+    kotlin = [
+            version           : '1.3.72',
+            coroutines_version: '1.2.1',
+            anko_version      : '0.10.4'
+    ]
+
+    google = [
+            junit                  : 'junit:junit:4.13',
+            material               : 'com.google.android.material:material:1.2.1',
+            legacy                 : 'androidx.legacy:legacy-support-v4:1.0.0',
+            cardview               : 'androidx.cardview:cardview:1.0.0',
+            palette                : 'androidx.palette:palette:1.0.0',
+            appcompat              : 'androidx.appcompat:appcompat:1.2.0',
+            constraintlayout       : 'androidx.constraintlayout:constraintlayout:2.0.4',
+            flexbox                : 'com.google.android:flexbox:1.1.0',
+            multidex               : 'com.android.support:multidex:1.0.3',
+            kotlin_stdlib          : 'org.jetbrains.kotlin:kotlin-stdlib:${kotlin.version}',
+            kotlinx_coroutines_core: 'org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlin.coroutines_version}',
+            core_ktx               : 'androidx.core:core-ktx:1.2.0',
+            lifecycle_extensions   : 'androidx.lifecycle:lifecycle-extensions:2.0.0',
+            lifecycle_common_java8 : 'androidx.lifecycle:lifecycle-common-java8:2.3.1',
+            startup_runtime        : 'androidx.startup:startup-runtime:1.0.0',
+            auto_service           : 'com.google.auto.service:auto-service:1.0'
+    ]
+
+    third = [
+            work                         : 'android.arch.work:work-runtime:1.0.1',
+
+            streamsupport                : 'net.sourceforge.streamsupport:streamsupport:1.7.2',
+
+            BaseRecyclerViewAdapterHelper: 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.8.6',
+
+            lottie                       : 'com.airbnb.android:lottie:3.4.2',
+
+            glide_4_0_transformations    : 'com.github.songmingwen:glide-4.0-transformations:1.1',
+            gpuimage                     : 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1',
+            glide                        : 'com.github.bumptech.glide:glide:4.0.0',
+
+            fresco                       : 'com.facebook.fresco:fresco:2.1.0',
+            fresco_processors            : 'jp.wasabeef:fresco-processors:2.1.0',
+            fresco_imagepipeline_okhttp3 : 'com.facebook.fresco:imagepipeline-okhttp3:2.1.0',
+            // 在 API < 14 上的机器支持 WebP 时，需要添加
+            fresco_animated_base_support : 'com.facebook.fresco:animated-base-support:0.12.0',
+            // 支持 GIF 动图，需要添加
+            fresco_animated_gif          : 'com.facebook.fresco:animated-gif:2.1.0',
+            // 支持 WebP （静态图+动图），需要添加
+            fresco_animated_webp         : 'com.facebook.fresco:animated-webp:2.1.0',
+            fresco_webpsupport           : 'com.facebook.fresco:webpsupport:2.1.0',
+
+            swipebacklayout              : 'me.imid.swipebacklayout.lib:library:1.0.0',
+
+            scale_image                  : 'com.davemorrissey.labs:subsampling-scale-image-view-androidx:3.10.0',
+
+            ijkplayer_java               : 'tv.danmaku.ijk.media:ijkplayer-java:0.8.4',
+            ijkplayer_armv7a             : 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.8.4',
+            ijkplayer_arm64              : 'tv.danmaku.ijk.media:ijkplayer-arm64:0.8.4',
+
+            DanmakuFlameMaster           : 'com.github.ctiao:DanmakuFlameMaster:0.9.25',
+            ndkbitmap_armv7a             : 'com.github.ctiao:ndkbitmap-armv7a:0.9.21',
+            ndkbitmap_x86                : 'com.github.ctiao:ndkbitmap-x86:0.9.21',
+
+            okhttp                       : 'com.squareup.okhttp3:okhttp:3.14.9',
+            okhttp_logging_interceptor   : 'com.squareup.okhttp3:logging-interceptor:3.4.0',
+            retrofit2                    : 'com.squareup.retrofit2:retrofit:2.9.0',
+            retrofit2_converter_gson     : 'com.squareup.retrofit2:converter-gson:2.4.0',
+            retrofit2_adapter_rxjava2    : 'com.squareup.retrofit2:adapter-rxjava2:2.4.0',
+
+            rxjava3_android              : 'io.reactivex.rxjava3:rxandroid:3.0.0',
+            rxjava3_java                 : 'io.reactivex.rxjava3:rxjava:3.0.12',
+
+            rxlifecycle                  : 'com.trello.rxlifecycle3:rxlifecycle-components:3.1.0',
+            rxpermissions                : 'com.github.tbruyelle:rxpermissions:0.10.2',
+
+            FlycoTabLayout_Lib           : 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar',
+
+            nineoldandroids              : 'com.nineoldandroids:library:2.4.0',
+
+            greendao_generator           : 'org.greenrobot:greendao-generator:3.3.0',
+            greendao                     : 'org.greenrobot:greendao:3.3.0',
+
+            ultra_ptr                    : 'in.srain.cube:ultra-ptr:1.0.11',
+
+            switchbutton                 : 'com.kyleduo.switchbutton:library:1.4.5',
+
+            robust                       : 'com.meituan.robust:robust:0.3.3',
+            walle                        : 'com.meituan.android.walle:library:1.1.6',
+
+            qrcodereaderview             : 'com.dlazaro66.qrcodereaderview:qrcodereaderview:2.0.3',
+
+            //mmap 的高性能通用 key-value 组件（替代 sp splite 等，使用简单可以多进程使用）
+            mmkv                         : 'com.tencent:mmkv:1.0.22',
+
+            arouter                      : 'com.alibaba:arouter-api:1.5.1',
+            arouter_compiler             : 'com.alibaba:arouter-compiler:1.5.1',
+
+            sugaradapter                 : 'com.zhihu.android:sugaradapter:1.8.16',
+            sugaradapter_processor       : 'com.zhihu.android:sugaradapter-processor:1.8.16',
+
+            leakcanary_debug             : 'com.squareup.leakcanary:leakcanary-android:1.6.2',
+            leakcanary_release           : 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.2',
+
+            coil                         : 'io.coil-kt:coil:1.1.1',
+            coil_video                   : 'io.coil-kt:coil-video:1.1.1',
+            coil_svg                     : 'io.coil-kt:coil-svg:1.1.1',
+            coil_gif                     : 'io.coil-kt:coil-gif:1.1.1',
+
+            //下拉刷新相关
+            refresh_kernel               : 'com.scwang.smart:refresh-layout-kernel:2.0.3',   //核心必须依赖
+            refresh_header_classics      : 'com.scwang.smart:refresh-header-classics:2.0.3',  //经典刷新头
+            refresh_header_two_level     : 'com.scwang.smart:refresh-header-two-level:2.0.3',  //二级刷新头
+            refresh_footer_ball          : 'com.scwang.smart:refresh-footer-ball:2.0.3',   //球脉冲加载
+            refresh_footer_classics      : 'com.scwang.smart:refresh-footer-classics:2.0.3',    //经典加载
+
+            javapoet                     : 'com.squareup:javapoet:1.11.1'
+    ]
+
+}

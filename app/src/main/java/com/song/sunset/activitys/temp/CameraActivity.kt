@@ -99,7 +99,7 @@ class CameraActivity : BaseActivity(), TextureView.SurfaceTextureListener {
         }
     }
 
-    override fun onSurfaceTextureAvailable(surface: SurfaceTexture?, width: Int, height: Int) {
+    override fun onSurfaceTextureAvailable(surface: SurfaceTexture, width: Int, height: Int) {
         val openId = getBackCameraId()
         mCamera = Camera.open(openId)
         try {
@@ -111,15 +111,15 @@ class CameraActivity : BaseActivity(), TextureView.SurfaceTextureListener {
         }
     }
 
-    override fun onSurfaceTextureSizeChanged(surface: SurfaceTexture?, width: Int, height: Int) {
+    override fun onSurfaceTextureSizeChanged(surface: SurfaceTexture, width: Int, height: Int) {
 
     }
 
-    override fun onSurfaceTextureUpdated(surface: SurfaceTexture?) {
+    override fun onSurfaceTextureUpdated(surface: SurfaceTexture) {
 
     }
 
-    override fun onSurfaceTextureDestroyed(surface: SurfaceTexture?): Boolean {
+    override fun onSurfaceTextureDestroyed(surface: SurfaceTexture): Boolean {
         mCamera?.stopPreview()
         mCamera?.release()
         return true

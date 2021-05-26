@@ -3,11 +3,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion ANDROID_COMPILE_SDK_VERSION
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion ANDROID_BUILD_MIN_SDK_VERSION
-        targetSdkVersion ANDROID_TARGET_SDK_VERSION
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
@@ -23,10 +24,8 @@ android {
     }
 }
 
-//dependencies 配置在此文件添加
-apply from: file('../dependencies_base.gradle')
-
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "com.airbnb.android:lottie:3.4.2"
+    implementation rootProject.ext.third.lottie
+    implementation rootProject.ext.google.core_ktx
 }

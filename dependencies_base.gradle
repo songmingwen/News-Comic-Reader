@@ -1,20 +1,19 @@
+apply plugin: 'kotlin-kapt'
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    testImplementation 'junit:junit:4.13'
-    implementation 'com.google.android.material:material:1.2.1'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.palette:palette:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-
-    implementation 'com.google.android:flexbox:1.1.0'
-    implementation 'com.android.support:multidex:1.0.3'
-
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinx_coroutines_version"
-    implementation 'androidx.core:core-ktx:1.2.0'
-
-    implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
-    implementation "androidx.lifecycle:lifecycle-common-java8:2.3.1"
+    testImplementation rootProject.ext.google.junit
+    implementation rootProject.ext.google.material
+    implementation rootProject.ext.google.legacy
+    implementation rootProject.ext.google.cardview
+    implementation rootProject.ext.google.palette
+    implementation rootProject.ext.google.appcompat
+    implementation rootProject.ext.google.constraintlayout
+    implementation rootProject.ext.google.flexbox
+    implementation rootProject.ext.google.multidex
+    implementation rootProject.ext.google.kotlin_stdlib
+    implementation rootProject.ext.google.kotlinx_coroutines_core
+    implementation rootProject.ext.google.core_ktx
+    implementation rootProject.ext.google.lifecycle_extensions
+    implementation rootProject.ext.google.lifecycle_common_java8
+    implementation rootProject.ext.google.startup_runtime
 }

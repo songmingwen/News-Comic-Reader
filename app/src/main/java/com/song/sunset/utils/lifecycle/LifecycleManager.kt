@@ -54,7 +54,7 @@ class LifecycleManager(application: Application) {
     fun init() {
         val lifeCycles = getList()
         app.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
-            override fun onActivityCreated(activity: Activity?, savedInstanceState: Bundle?) {
+            override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
                 if (activity == null) {
                     return
                 }
@@ -68,7 +68,7 @@ class LifecycleManager(application: Application) {
                 lifeCycles.forEach { doSync(activity, savedInstanceState, it.javaClass, "onActivityCreated") { it.onActivityCreated(activity, savedInstanceState) } }
             }
 
-            override fun onActivityStarted(activity: Activity?) {
+            override fun onActivityStarted(activity: Activity) {
                 if (activity == null) {
                     return
                 }
@@ -82,7 +82,7 @@ class LifecycleManager(application: Application) {
                 lifeCycles.forEach { doSync(activity, it.javaClass, "onActivityStarted") { it.onActivityStarted(activity) } }
             }
 
-            override fun onActivityResumed(activity: Activity?) {
+            override fun onActivityResumed(activity: Activity) {
                 if (startCount == 1) {
                     lifeCycles.forEach { doAsync { it.onGlobalResume(activity) } }
                     lifeCycles.forEach { doSync(activity, it.javaClass, "onGlobalResumeSync") { it.onGlobalResumeSync(activity) } }
@@ -91,11 +91,11 @@ class LifecycleManager(application: Application) {
                 lifeCycles.forEach { doSync(activity, it.javaClass, "onActivityResumed") { it.onActivityResumed(activity) } }
             }
 
-            override fun onActivityPaused(activity: Activity?) {
+            override fun onActivityPaused(activity: Activity) {
                 lifeCycles.forEach { doSync(activity, it.javaClass, "onActivityPaused") { it.onActivityPaused(activity) } }
             }
 
-            override fun onActivityStopped(activity: Activity?) {
+            override fun onActivityStopped(activity: Activity) {
                 startCount -= 1
                 if (startCount == 0) {
                     lifeCycles.forEach { doAsync { it.onGlobalPause(activity) } }
@@ -112,7 +112,7 @@ class LifecycleManager(application: Application) {
                 }
             }
 
-            override fun onActivityDestroyed(activity: Activity?) {
+            override fun onActivityDestroyed(activity: Activity) {
                 createCount -= 1
                 if (createCount == 0) {
                     lifeCycles.forEach { doAsync { it.onLastDestroy(activity) } }
@@ -121,7 +121,7 @@ class LifecycleManager(application: Application) {
                 lifeCycles.forEach { doSync(activity, it.javaClass, "onActivityDestroyed") { it.onActivityDestroyed(activity) } }
             }
 
-            override fun onActivitySaveInstanceState(activity: Activity?, outState: Bundle?) {
+            override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
                 lifeCycles.forEach { it.onActivitySaveInstanceState(activity, outState) }
             }
 

@@ -26,7 +26,7 @@ open class ComicBaseListFragment : BasePageLoadingFragment<ComicListBean>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
-            argName = requireArguments().getString(ComicListActivity.ARG_NAME)
+            argName = requireArguments().getString(ComicListActivity.ARG_NAME) ?: ""
             argValue = requireArguments().getInt(ComicListActivity.ARG_VALUE)
         }
         if (TextUtils.isEmpty(argName)) {

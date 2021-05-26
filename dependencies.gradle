@@ -2,97 +2,61 @@
 //dependencies 配置在此文件添加
 apply from: file('../dependencies_base.gradle')
 dependencies {
-    implementation "androidx.startup:startup-runtime:1.0.0"
-
-    implementation "android.arch.work:work-runtime:1.0.1"
-
-    implementation 'com.google.auto.service:auto-service:1.0-rc6'
-
-    implementation 'net.sourceforge.streamsupport:streamsupport:1.7.2'
-
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.8.6'
-
-    implementation "com.airbnb.android:lottie:3.4.2"
-
-    implementation 'com.github.songmingwen:glide-4.0-transformations:1.1'
-    implementation 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
-    implementation "com.github.bumptech.glide:glide:4.0.0"
-
-    implementation 'com.facebook.fresco:fresco:2.1.0'
-    implementation 'jp.wasabeef:fresco-processors:2.1.0'
-    implementation 'com.facebook.fresco:imagepipeline-okhttp3:2.1.0'
-    // 在 API < 14 上的机器支持 WebP 时，需要添加
-    implementation 'com.facebook.fresco:animated-base-support:0.12.0'
-    // 支持 GIF 动图，需要添加
-    implementation 'com.facebook.fresco:animated-gif:2.1.0'
-    // 支持 WebP （静态图+动图），需要添加
-    implementation 'com.facebook.fresco:animated-webp:2.1.0'
-    implementation 'com.facebook.fresco:webpsupport:2.1.0'
-
-    implementation 'me.imid.swipebacklayout.lib:library:1.0.0'
-
-    implementation 'com.davemorrissey.labs:subsampling-scale-image-view-androidx:3.10.0'
-
-    implementation 'tv.danmaku.ijk.media:ijkplayer-java:0.8.4'
-    implementation 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.8.4'
-    implementation 'tv.danmaku.ijk.media:ijkplayer-arm64:0.8.4'
-
-    implementation 'com.github.ctiao:DanmakuFlameMaster:0.9.25'
-    implementation 'com.github.ctiao:ndkbitmap-armv7a:0.9.21'
-    implementation 'com.github.ctiao:ndkbitmap-armv5:0.9.21'
-    implementation 'com.github.ctiao:ndkbitmap-x86:0.9.21'
-
-    implementation 'com.squareup.okhttp3:okhttp:3.14.2'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.4.0'
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
-
-    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
-    implementation 'io.reactivex.rxjava3:rxjava:3.0.12'
-
-    implementation 'com.trello.rxlifecycle3:rxlifecycle-components:3.1.0'
-
-    implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
-
-    implementation 'com.nineoldandroids:library:2.4.0'
-
-    implementation 'org.greenrobot:greendao-generator:3.3.0'
-    implementation 'org.greenrobot:greendao:3.3.0'
-
-    implementation 'in.srain.cube:ultra-ptr:1.0.11'
-
-    implementation 'com.kyleduo.switchbutton:library:1.4.5'
-
-    implementation 'com.meituan.robust:robust:0.3.3'
-    implementation 'com.meituan.android.walle:library:1.1.6'
-
-    implementation "com.dlazaro66.qrcodereaderview:qrcodereaderview:2.0.3"
-    implementation "com.github.tbruyelle:rxpermissions:0.10.2"
-
-    //mmap 的高性能通用 key-value 组件（替代 sp splite 等，使用简单可以多进程使用）
-    implementation 'com.tencent:mmkv:1.0.22'
-
-    implementation "com.airbnb.android:lottie:3.4.2"
-
-    implementation 'com.alibaba:arouter-api:1.5.1'
-    kapt 'com.alibaba:arouter-compiler:1.5.1'
-
-    api 'com.zhihu.android:sugaradapter:1.8.16'
-    kapt 'com.zhihu.android:sugaradapter-processor:1.8.16'
-
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.2'
-    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.2'
-
-    api 'io.coil-kt:coil:1.1.1'
-    implementation 'io.coil-kt:coil-video:1.1.1'
-    implementation 'io.coil-kt:coil-svg:1.1.1'
-    implementation 'io.coil-kt:coil-gif:1.1.1'
-
-    //下拉刷新相关
-    implementation  'com.scwang.smart:refresh-layout-kernel:2.0.3'      //核心必须依赖
-    implementation  'com.scwang.smart:refresh-header-classics:2.0.3'    //经典刷新头
-    implementation  'com.scwang.smart:refresh-header-two-level:2.0.3'   //二级刷新头
-    implementation  'com.scwang.smart:refresh-footer-ball:2.0.3'        //球脉冲加载
-    implementation  'com.scwang.smart:refresh-footer-classics:2.0.3'    //经典加载
+    implementation rootProject.ext.third.work
+    implementation rootProject.ext.third.streamsupport
+    implementation rootProject.ext.third.BaseRecyclerViewAdapterHelper
+    implementation rootProject.ext.third.lottie
+    implementation rootProject.ext.third.glide_4_0_transformations
+    implementation rootProject.ext.third.gpuimage
+    implementation rootProject.ext.third.glide
+    implementation rootProject.ext.third.fresco
+    implementation rootProject.ext.third.fresco_processors
+    implementation rootProject.ext.third.fresco_imagepipeline_okhttp3
+    implementation rootProject.ext.third.fresco_animated_base_support
+    implementation rootProject.ext.third.fresco_animated_gif
+    implementation rootProject.ext.third.fresco_animated_webp
+    implementation rootProject.ext.third.fresco_webpsupport
+    implementation rootProject.ext.third.swipebacklayout
+    implementation rootProject.ext.third.scale_image
+    implementation rootProject.ext.third.ijkplayer_java
+    implementation rootProject.ext.third.ijkplayer_armv7a
+    implementation rootProject.ext.third.ijkplayer_arm64
+    implementation rootProject.ext.third.DanmakuFlameMaster
+    implementation rootProject.ext.third.ndkbitmap_armv7a
+    implementation rootProject.ext.third.ndkbitmap_x86
+    implementation rootProject.ext.third.okhttp
+    implementation rootProject.ext.third.okhttp_logging_interceptor
+    implementation rootProject.ext.third.retrofit2
+    implementation rootProject.ext.third.retrofit2_converter_gson
+    implementation rootProject.ext.third.retrofit2_adapter_rxjava2
+    implementation rootProject.ext.third.rxjava3_android
+    implementation rootProject.ext.third.rxjava3_java
+    implementation rootProject.ext.third.rxlifecycle
+    implementation rootProject.ext.third.rxpermissions
+    implementation rootProject.ext.third.FlycoTabLayout_Lib
+    implementation rootProject.ext.third.nineoldandroids
+    implementation rootProject.ext.third.greendao_generator
+    implementation rootProject.ext.third.greendao
+    implementation rootProject.ext.third.ultra_ptr
+    implementation rootProject.ext.third.switchbutton
+    implementation rootProject.ext.third.robust
+    implementation rootProject.ext.third.walle
+    implementation rootProject.ext.third.qrcodereaderview
+    implementation rootProject.ext.third.mmkv
+    implementation rootProject.ext.third.arouter
+    kapt rootProject.ext.third.arouter_compiler
+    implementation rootProject.ext.third.sugaradapter
+    kapt rootProject.ext.third.sugaradapter_processor
+    debugImplementation rootProject.ext.third.leakcanary_debug
+    releaseImplementation rootProject.ext.third.leakcanary_release
+    implementation rootProject.ext.third.coil
+    implementation rootProject.ext.third.coil_video
+    implementation rootProject.ext.third.coil_svg
+    implementation rootProject.ext.third.coil_gif
+    implementation rootProject.ext.third.refresh_kernel
+    implementation rootProject.ext.third.refresh_header_classics
+    implementation rootProject.ext.third.refresh_header_two_level
+    implementation rootProject.ext.third.refresh_footer_ball
+    implementation rootProject.ext.third.refresh_footer_classics
+    implementation rootProject.ext.third.javapoet
 }

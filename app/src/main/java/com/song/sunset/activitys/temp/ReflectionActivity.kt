@@ -55,7 +55,7 @@ class ReflectionActivity : AppCompatActivity() {
         val method = getClazz()?.getDeclaredMethod("getPriFiled", String::class.java)
         method?.isAccessible = true
         val result = method?.invoke(getInstance(), "extra")
-        Log.e(TAG, result as String?)
+        Log.e(TAG, result as String)
     }
 
     fun loadFiled(view: View) {
