@@ -2,6 +2,7 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -16,6 +17,15 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [
+                        moduleName         : project.getName()
+                ]
+
+            }
+        }
     }
 
     buildTypes {
@@ -32,9 +42,24 @@ android {
         jvmTarget = '1.8'
     }
 }
+//不同module的一级路径必须不同，否则会导致一个moudle中的一级路径失效！！！
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
 
 dependencies {
-    implementation rootProject.ext.google.startup_runtime
+    implementation rootProject.ext.google.kotlin_stdlib
+    implementation rootProject.ext.google.core_ktx
+    implementation rootProject.ext.google.kotlinx_coroutines_core
     implementation rootProject.ext.google.appcompat
-    implementation rootProject.ext.google.gson
+    implementation rootProject.ext.google.junit
+    implementation rootProject.ext.google.material
+    implementation rootProject.ext.google.constraintlayout
+    implementation rootProject.ext.third.mmkv
+    implementation rootProject.ext.third.arouter
+    kapt rootProject.ext.third.arouter_compiler
+    implementation project(':base')
+
 }

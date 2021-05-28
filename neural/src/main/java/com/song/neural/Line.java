@@ -1,4 +1,4 @@
-package com.song.sunset.widget.neural;
+package com.song.neural;
 
 /**
  * @author songmingwen

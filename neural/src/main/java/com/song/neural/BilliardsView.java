@@ -1,4 +1,4 @@
-package com.song.sunset.widget.neural;
+package com.song.neural;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -7,8 +7,6 @@ import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-
-import com.song.sunset.R;
 
 import androidx.annotation.Nullable;
 

@@ -1,6 +1,5 @@
 package com.song.sunset.activitys;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.alibaba.android.arouter.facade.annotation.Route;

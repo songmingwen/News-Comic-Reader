@@ -1,4 +1,4 @@
-package com.song.sunset.widget.neural;
+package com.song.neural;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -118,7 +118,7 @@ public class NeuralParams implements Parcelable {
         this.mLineColor = in.readInt();
     }
 
-    public static final Parcelable.Creator<NeuralParams> CREATOR = new Parcelable.Creator<NeuralParams>() {
+    public static final Creator<NeuralParams> CREATOR = new Creator<NeuralParams>() {
         @Override
         public NeuralParams createFromParcel(Parcel source) {
             return new NeuralParams(source);

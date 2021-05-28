@@ -11,8 +11,10 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
+import com.alibaba.android.arouter.launcher.ARouter
 import com.bubblepicker.BubbleActivity
 import com.song.sunset.R
+import com.song.sunset.activitys.ComicDetailMVPActivity
 import com.song.sunset.activitys.PhoenixVideoActivity
 import com.song.sunset.activitys.base.BaseActivity
 import com.song.sunset.activitys.opengl.OpenGLListActivity
@@ -49,7 +51,7 @@ class FunctionListActivity : BaseActivity() {
         addButton("SecondFloor") { SecondFloorActivity.start(this@FunctionListActivity) }
         addButton("binderPool") { useBinderPool() }
         addButton("openGL") { OpenGLListActivity.start(this@FunctionListActivity) }
-        addButton("neural") { NeuralNetWorksActivity.start(this@FunctionListActivity) }
+        addButton("neural") { ARouter.getInstance().build("/neural/neural").navigation() }
         addButton("billiards") { BilliardsActivity.start(this@FunctionListActivity) }
         addButton("QR code") { QRCodeActivity.start(this@FunctionListActivity) }
         addButton("MotionLayout") { MotionLayoutActivity.start(this@FunctionListActivity) }

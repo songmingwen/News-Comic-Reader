@@ -1,13 +1,10 @@
-package com.song.sunset.widget.neural
+package com.song.neural
 
 import android.content.Context
-import android.content.res.TypedArray
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
-
-import com.song.sunset.R
 
 /**
  * @author songmingwen

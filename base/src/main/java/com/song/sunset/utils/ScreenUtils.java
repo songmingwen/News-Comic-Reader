@@ -3,13 +3,13 @@ package com.song.sunset.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.ContextThemeWrapper;
-
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ContextThemeWrapper;
 
 /**
  * ScreenUtils

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".activitys.temp.BilliardsActivity">
 
-    <com.song.sunset.widget.neural.BilliardsView
+    <com.song.neural.BilliardsView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black" />

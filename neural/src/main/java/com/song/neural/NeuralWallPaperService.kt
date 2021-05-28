@@ -1,4 +1,4 @@
-package com.song.sunset.widget.neural
+package com.song.neural
 
 import android.graphics.Canvas
 import android.graphics.Color
@@ -7,12 +7,11 @@ import android.os.Handler
 import android.service.wallpaper.WallpaperService
 import android.text.TextUtils
 import android.view.SurfaceHolder
+import com.song.neural.NeuralNetWorksActivity.Companion.SP_NEURAL_NET_WORKS
+import com.song.neural.NeuralNetWorksActivity.Companion.SP_NEURAL_NET_WORKS_PREVIEW
 
-import com.song.sunset.R
 import com.song.sunset.utils.JsonUtil
-import com.song.sunset.utils.SPUtils
-import com.song.sunset.utils.SPUtils.SP_NEURAL_NET_WORKS
-import com.song.sunset.utils.SPUtils.SP_NEURAL_NET_WORKS_PREVIEW
+import com.tencent.mmkv.MMKV
 
 import java.util.ArrayList
 
@@ -22,6 +21,8 @@ import java.util.ArrayList
  * @since 2019/4/4
  */
 class NeuralWallPaperService : WallpaperService() {
+
+    private val mmkv: MMKV by lazy { MMKV.defaultMMKV() }
 
     private var mParams: NeuralParams? = null
 
@@ -89,9 +90,14 @@ class NeuralWallPaperService : WallpaperService() {
         }
 
         private fun initData() {
-            var string = SPUtils.getStringByName(this@NeuralWallPaperService, SP_NEURAL_NET_WORKS_PREVIEW, "")
+//            var string = SPUtils.getStringByName(this@NeuralWallPaperService, SP_NEURAL_NET_WORKS_PREVIEW, "")
+//            if (TextUtils.isEmpty(string)) {
+//                string = SPUtils.getStringByName(this@NeuralWallPaperService, SP_NEURAL_NET_WORKS, "")
+//            }
+
+            var string = mmkv.getString(SP_NEURAL_NET_WORKS_PREVIEW, "")
             if (TextUtils.isEmpty(string)) {
-                string = SPUtils.getStringByName(this@NeuralWallPaperService, SP_NEURAL_NET_WORKS, "")
+                string = mmkv.getString(SP_NEURAL_NET_WORKS, "")
             }
 
             mParams = JsonUtil.gsonToBean(

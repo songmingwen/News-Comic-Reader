@@ -1,4 +1,4 @@
-package com.song.sunset.widget.neural;
+package com.song.neural;
 
 import android.app.ActivityManager;
 import android.content.Context;
@@ -6,9 +6,6 @@ import android.content.pm.ConfigurationInfo;
 import android.opengl.GLSurfaceView;
 import android.service.wallpaper.WallpaperService;
 import android.view.SurfaceHolder;
-
-import com.song.sunset.widget.opengl.render.GLRenderFirst;
-import com.song.sunset.widget.opengl.render.GLRenderNeuralNet;
 
 /**
  * @author songmingwen

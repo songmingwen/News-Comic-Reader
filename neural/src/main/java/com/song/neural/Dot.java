@@ -1,6 +1,4 @@
-package com.song.sunset.widget.neural;
-
-import android.util.Log;
+package com.song.neural;
 
 import java.util.ArrayList;
 

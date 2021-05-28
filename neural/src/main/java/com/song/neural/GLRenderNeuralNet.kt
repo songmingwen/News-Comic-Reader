@@ -1,4 +1,4 @@
-package com.song.sunset.widget.opengl.render
+package com.song.neural
 
 import android.content.Context
 import android.opengl.GLSurfaceView

@@ -51,22 +51,6 @@
         <item name="android:textSize">24sp</item>
     </style>
 
-    <declare-styleable name="NeuralNetWorksView">
-        <!--圆点个数-->
-        <attr name="neural_element_amount" format="integer" />
-        <!--连线阀值-->
-        <attr name="neural_connection_threshold" format="integer" />
-        <!--基础速度-->
-        <attr name="neural_speed" format="integer" />
-        <!--圆点半径-->
-        <attr name="neural_dot_radius" format="float" />
-        <!--圆点颜色-->
-        <attr name="neural_dot_color" format="color" />
-        <!--线的颜色-->
-        <attr name="neural_line_color" format="color" />
-
-    </declare-styleable>
-
     <declare-styleable name="CircleProgress">
         <!--圆环的颜色-->
         <attr name="circle_color" format="color" />

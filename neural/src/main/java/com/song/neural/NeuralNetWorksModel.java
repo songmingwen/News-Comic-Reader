@@ -1,6 +1,4 @@
-package com.song.sunset.widget.neural;
-
-import android.util.Log;
+package com.song.neural;
 
 import java.util.ArrayList;
 
@@ -38,6 +36,10 @@ class NeuralNetWorksModel {
         mDots.add(new Dot().obtain(width, height, x, y, dX, dY, radius));
     }
 
+    /**
+     * 刷新下一个点及线的位置
+     * @param connection_threshold 连线阈值
+     */
     void next(float connection_threshold) {
 
         for (Dot dot : mDots) {

@@ -14,14 +14,17 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" /> -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <!-- <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" /> -->
     <!-- <uses-permission android:name="android.permission.WRITE_SETTINGS" /> -->
     <!-- <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" /> -->
     <!-- <uses-permission android:name="android.permission.READ_LOGS" /> -->
     <!-- 二维码扫码所需权限 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- GL相关配置 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- GL相关配置 -->
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
 
     <uses-permission android:name="android.permission.CAMERA" />
@@ -45,7 +48,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".activitys.temp.ServiceProviderActivity"></activity>
+        <activity android:name=".activitys.temp.ServiceProviderActivity"/>
         <activity
             android:name=".activitys.FlutterComicActivity"
             android:screenOrientation="portrait" >
@@ -63,10 +66,6 @@
         <activity android:name=".activitys.opengl.render.Render3DActivity" />
         <activity android:name=".activitys.opengl.OpenGLListActivity" />
         <activity android:name=".activitys.temp.BilliardsActivity" />
-
-        <activity
-            android:name=".activitys.temp.NeuralNetWorksActivity"
-            android:theme="@android:style/Theme.Wallpaper.NoTitleBar" />
 
         <activity android:name=".activitys.temp.DynamicProxyActivity" />
         <activity android:name=".activitys.temp.ReflectionActivity" />
@@ -144,15 +143,6 @@
         <activity
             android:name=".activitys.ComicListActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="com.subscaleview.sample.SubScaleViewActivity" />
-        <activity android:name="com.subscaleview.sample.animation.AnimationActivity" />
-        <activity android:name="com.subscaleview.sample.basicfeatures.BasicFeaturesActivity" />
-        <activity android:name="com.subscaleview.sample.configuration.ConfigurationActivity" />
-        <activity android:name="com.subscaleview.sample.eventhandling.EventHandlingActivity" />
-        <activity android:name="com.subscaleview.sample.eventhandlingadvanced.AdvancedEventHandlingActivity" />
-        <activity android:name="com.subscaleview.sample.extension.ExtensionActivity" />
-        <activity android:name="com.subscaleview.sample.viewpager.ViewPagerActivity" />
-        <activity android:name="com.subscaleview.sample.imagedisplay.ImageDisplayActivity" />
         <activity android:name=".activitys.MediaPlayerActivity" />
         <activity android:name=".activitys.VideoViewActivity" />
         <activity android:name=".activitys.temp.TouchEventTestActivity" />
@@ -242,19 +232,6 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/sunset_widget_info" />
         </receiver>
-        <service
-            android:name=".widget.neural.NeuralWallPaperService"
-            android:enabled="true"
-            android:label="@string/app_name"
-            android:permission="android.permission.BIND_WALLPAPER">
-            <intent-filter>
-                <action android:name="android.service.wallpaper.WallpaperService" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.service.wallpaper"
-                android:resource="@xml/my_wallpaper" />
-        </service>
         <service android:name="com.amap.api.location.APSService" />
         <service
             android:name=".services.PushService"
