@@ -50,6 +50,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation rootProject.ext.google.constraintlayout
     implementation rootProject.ext.third.sugaradapter
     kapt rootProject.ext.third.sugaradapter_processor
 }

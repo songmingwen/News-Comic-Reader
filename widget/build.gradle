@@ -27,5 +27,6 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation rootProject.ext.third.lottie
+    implementation rootProject.ext.google.constraintlayout
     implementation rootProject.ext.google.core_ktx
 }
