@@ -1,3 +1,5 @@
+include ':scankit'
+include ':mqtt'
 include ':neural'
 include ':design'
 include ':base'

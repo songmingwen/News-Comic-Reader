@@ -33,8 +33,13 @@ android {
     }
 }
 
+apply from: file('../dependencies_base.gradle')
+
 dependencies {
-    implementation rootProject.ext.google.startup_runtime
-    implementation rootProject.ext.google.appcompat
-    implementation rootProject.ext.google.gson
+    implementation rootProject.ext.third.rxjava3_android
+    implementation rootProject.ext.third.rxjava3_java
+    implementation rootProject.ext.third.rxlifecycle
+    implementation rootProject.ext.third.retrofit2
+    implementation rootProject.ext.third.retrofit2_converter_gson
+    implementation rootProject.ext.third.retrofit2_adapter_rxjava2
 }

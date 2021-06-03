@@ -41,8 +41,8 @@ class NeuralNetWorksActivity : Activity(), SeekBar.OnSeekBarChangeListener {
     }
 
     fun addWallPaper(view: View) {
-        val str = JsonUtil.gsonToString(NeuralParams(sb_connection_threshold.progress, sb_dot_amount.progress, sb_dot_speed.progress, sb_dot_radius.progress.toFloat()))
-//        SPUtils.setStringByName(this, SP_NEURAL_NET_WORKS_PREVIEW, str)
+        val str = JsonUtil.gsonToString(NeuralParams(sb_connection_threshold.progress,
+                sb_dot_amount.progress, sb_dot_speed.progress, sb_dot_radius.progress.toFloat()))
 
         mmkv.encode(SP_NEURAL_NET_WORKS_PREVIEW, str)
 
@@ -115,9 +115,8 @@ class NeuralNetWorksActivity : Activity(), SeekBar.OnSeekBarChangeListener {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 53520 && resultCode == RESULT_OK) {
-            val str = JsonUtil.gsonToString(NeuralParams(sb_connection_threshold.progress, sb_dot_amount.progress, sb_dot_speed.progress, sb_dot_radius.progress.toFloat()))
-//            SPUtils.setStringByName(this, SP_NEURAL_NET_WORKS_PREVIEW, "")
-//            SPUtils.setStringByName(this, SP_NEURAL_NET_WORKS, str)
+            val str = JsonUtil.gsonToString(NeuralParams(sb_connection_threshold.progress,
+                    sb_dot_amount.progress, sb_dot_speed.progress, sb_dot_radius.progress.toFloat()))
             mmkv.encode(SP_NEURAL_NET_WORKS_PREVIEW, "")
             mmkv.encode(SP_NEURAL_NET_WORKS, str)
         }

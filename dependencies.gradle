@@ -59,4 +59,7 @@ dependencies {
     implementation rootProject.ext.third.refresh_footer_ball
     implementation rootProject.ext.third.refresh_footer_classics
     implementation rootProject.ext.third.javapoet
+    implementation rootProject.ext.third.mqttv3
+    implementation rootProject.ext.third.mqtt_service
+    implementation rootProject.ext.third.scanplus
 }

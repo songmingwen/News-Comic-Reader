@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.customview.widget.ViewDragHelper
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.song.sunset.utils.SPUtils
 import com.song.sunset.utils.net.NetworkLifecycleTransformer
 import com.song.sunset.utils.net.SchedulerTransformer

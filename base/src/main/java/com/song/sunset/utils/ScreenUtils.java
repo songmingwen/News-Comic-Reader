@@ -10,6 +10,7 @@ import android.view.WindowManager;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 /**
  * ScreenUtils
@@ -24,6 +25,16 @@ import androidx.appcompat.view.ContextThemeWrapper;
 public class ScreenUtils {
 
     public ScreenUtils() {
+    }
+
+    public static int getScreenWidth(Context context) {
+        WindowManager window = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        return window.getDefaultDisplay().getWidth();
+    }
+
+    public static int getScreenHeight(Context context) {
+        WindowManager window = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        return window.getDefaultDisplay().getWidth();
     }
 
     public static float dp2Px(Context context, float dp) {

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.song.scankit">
+
+    <application>
+        <activity android:name=".CustomScanActivity"></activity>
+        <activity android:name=".ScanActivity" />
+        <activity android:name=".QRCodeActivity" />
+    </application>
+
+</manifest>

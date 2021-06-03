@@ -1,5 +1,7 @@
 package com.song.neural;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 /**
@@ -8,6 +10,8 @@ import java.util.ArrayList;
  * @since 2019/4/3
  */
 class NeuralNetWorksModel {
+
+    private static final String TAG = NeuralNetWorksModel.class.getSimpleName();
 
     private ArrayList<Dot> mDots = new ArrayList<>();
 
@@ -64,6 +68,7 @@ class NeuralNetWorksModel {
                 }
             }
         }
+        Log.i(TAG, "mLines count = " + mLines.size());
     }
 
     void clear() {

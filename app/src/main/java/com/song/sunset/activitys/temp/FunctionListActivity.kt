@@ -13,6 +13,7 @@ import android.widget.Button
 import android.widget.LinearLayout
 import com.alibaba.android.arouter.launcher.ARouter
 import com.bubblepicker.BubbleActivity
+import com.song.scankit.QRCodeActivity
 import com.song.sunset.R
 import com.song.sunset.activitys.ComicDetailMVPActivity
 import com.song.sunset.activitys.PhoenixVideoActivity
@@ -64,6 +65,8 @@ class FunctionListActivity : BaseActivity() {
         addButton("CenteredImageSpan") { CenteredImageSpanActivity.start(this@FunctionListActivity) }
         addButton("RelayTest") { RelayTest.testRelay() }
         addButton("MMKVTest") { RelayTest.testMMKV() }
+        addButton("ScanKit") { ARouter.getInstance().build("/scan/list").navigation() }
+
     }
 
     private var mFireworksView: FireworksView? = null

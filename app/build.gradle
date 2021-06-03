@@ -160,6 +160,7 @@ dependencies {
     implementation project(':widget')
     implementation project(':base')
     implementation project(':neural')
+    implementation project(':scankit')
 //    implementation project(':flutter_plugin_battery')
     implementation 'com.google.auto.service:auto-service:1.0'
 }

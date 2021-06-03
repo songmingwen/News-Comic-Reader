@@ -17,7 +17,6 @@ import com.song.sunset.utils.BitmapUtil
 import com.song.sunset.utils.SnackBarUtils
 import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.android.synthetic.main.activity_camera.*
-import kotlinx.android.synthetic.main.activity_qrcode.*
 import java.lang.Exception
 
 /**
@@ -73,10 +72,10 @@ class CameraActivity : BaseActivity(), TextureView.SurfaceTextureListener {
                         startCamera()
                     } else {
                         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
-                            SnackBarUtils.show(qr_code, "请授权相机使用权限后使用该功能",
+                            SnackBarUtils.show(frame_layout, "请授权相机使用权限后使用该功能",
                                     Snackbar.LENGTH_INDEFINITE, "授权") { startCamera() }
                         } else {
-                            SnackBarUtils.show(qr_code, "您永久禁止了该权限，如需授权请到应用设置中主动打开相机权限",
+                            SnackBarUtils.show(frame_layout, "您永久禁止了该权限，如需授权请到应用设置中主动打开相机权限",
                                     Snackbar.LENGTH_INDEFINITE, "知道了") { finish() }
                         }
                     }

@@ -11,10 +11,6 @@ class Dot {
 
     private static final float MIN_DD = 0.1f;
 
-    private static final float SCALE_RATE = 0.5f;
-
-    private boolean hasGravitational = false;
-
     /**
      * 点的 x 坐标
      */
@@ -63,7 +59,7 @@ class Dot {
     float getRadius() {
         float tempRadius = radius;
         if (lineAmount > 0) {
-            tempRadius = (float) (tempRadius * Math.sqrt(1 + (lineAmount * SCALE_RATE)));
+            tempRadius = (float) (tempRadius * Math.sqrt(1 + Math.sqrt(lineAmount)));
         }
         return tempRadius;
     }

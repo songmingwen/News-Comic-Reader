@@ -1,4 +1,4 @@
-package com.song.sunset.activitys.temp
+package com.song.scankit
 
 import android.Manifest
 import android.content.Context
@@ -7,15 +7,12 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.google.android.material.snackbar.Snackbar
-import com.song.sunset.R
-import com.song.sunset.activitys.base.BaseActivity
-import com.song.sunset.utils.AppConfig
+import com.song.sunset.base.activity.BaseActivity
 import com.song.sunset.utils.SnackBarUtils
 import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.android.synthetic.main.activity_qrcode.*
@@ -36,7 +33,7 @@ class QRCodeActivity : BaseActivity() {
         setContentView(R.layout.activity_qrcode)
 
         qr_code.setOnQRCodeReadListener { text, _ ->
-            Toast.makeText(AppConfig.getApp(), text, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
             qr_code.stopCamera()
         }
 

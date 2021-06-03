@@ -58,7 +58,6 @@
         </activity>
         <activity android:name=".activitys.temp.GlobalFlowActivity" />
         <activity android:name=".activitys.temp.MotionLayoutActivity" />
-        <activity android:name=".activitys.temp.QRCodeActivity" />
         <activity android:name=".activitys.ComicDetailActivity" />
         <activity android:name=".activitys.opengl.render.RenderAirHockeyActivity" />
         <activity android:name=".activitys.opengl.render.RenderTextureActivity" />

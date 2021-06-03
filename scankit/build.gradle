@@ -1,0 +1,71 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [
+                        moduleName         : project.getName()
+                ]
+
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+//不同module的一级路径必须不同，否则会导致一个moudle中的一级路径失效！！！
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
+apply from: file('../dependencies_base.gradle')
+
+dependencies {
+    implementation rootProject.ext.third.rxjava3_android
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation rootProject.ext.third.rxjava3_java
+    implementation rootProject.ext.third.rxlifecycle
+    implementation rootProject.ext.third.retrofit2
+    implementation rootProject.ext.third.retrofit2_converter_gson
+    implementation rootProject.ext.third.retrofit2_adapter_rxjava2
+    implementation rootProject.ext.third.arouter
+    kapt rootProject.ext.third.arouter_compiler
+    implementation rootProject.ext.third.rxpermissions
+    implementation rootProject.ext.third.scanplus
+    implementation rootProject.ext.third.qrcodereaderview
+    implementation project(':base')
+}

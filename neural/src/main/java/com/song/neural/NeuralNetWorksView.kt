@@ -11,11 +11,13 @@ import android.view.View
  * @description
  * @since 2019/4/3
  */
-class NeuralNetWorksView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0, defStyleRes: Int = 0) : View(context, attrs, defStyleAttr, defStyleRes) {
+class NeuralNetWorksView @JvmOverloads constructor(
+        context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0, defStyleRes: Int = 0)
+    : View(context, attrs, defStyleAttr, defStyleRes) {
 
-    private val DEFAULT_DOT_COLOR = getContext().resources.getColor(R.color.Grey_500)
+    private val DEFAULT_DOT_COLOR = context.resources.getColor(R.color.Grey_500)
 
-    private val DEFAULT_LINE_COLOR = getContext().resources.getColor(R.color.Grey_500)
+    private val DEFAULT_LINE_COLOR = context.resources.getColor(R.color.Grey_500)
 
     private var mDotPaint: Paint? = null
 
@@ -167,12 +169,12 @@ class NeuralNetWorksView @JvmOverloads constructor(context: Context, attrs: Attr
 
     companion object {
 
-        private val DEFAULT_ELEMENT_AMOUNT = 64
+        private const val DEFAULT_ELEMENT_AMOUNT = 64
 
-        private val DEFAULT_CONNECTION_THRESHOLD = 512
+        private const val DEFAULT_CONNECTION_THRESHOLD = 512
 
-        private val DEFAULT_SPEED = 4
+        private const val DEFAULT_SPEED = 4
 
-        private val DEFAULT_DOT_RADIUS = 4
+        private const val DEFAULT_DOT_RADIUS = 4
     }
 }

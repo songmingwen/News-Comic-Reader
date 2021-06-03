@@ -90,10 +90,6 @@ class NeuralWallPaperService : WallpaperService() {
         }
 
         private fun initData() {
-//            var string = SPUtils.getStringByName(this@NeuralWallPaperService, SP_NEURAL_NET_WORKS_PREVIEW, "")
-//            if (TextUtils.isEmpty(string)) {
-//                string = SPUtils.getStringByName(this@NeuralWallPaperService, SP_NEURAL_NET_WORKS, "")
-//            }
 
             var string = mmkv.getString(SP_NEURAL_NET_WORKS_PREVIEW, "")
             if (TextUtils.isEmpty(string)) {
