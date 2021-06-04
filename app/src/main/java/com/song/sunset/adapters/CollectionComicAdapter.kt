@@ -21,7 +21,7 @@ import java.util.*
  */
 class CollectionComicAdapter(private val context: Context) : RecyclerView.Adapter<ComicListViewHolder>() {
 
-    companion object{
+    companion object {
         const val NO_MORE = "无更新"
     }
 
@@ -81,7 +81,8 @@ class CollectionComicAdapter(private val context: Context) : RecyclerView.Adapte
             if (mLocalData.size > 0) {
                 mLocalData.clear()
             }
-            mLocalData.addAll(data)
+            val newData = data.sortedBy { it.name }
+            mLocalData.addAll(newData)
             fillShowData()
         }
     }
@@ -90,8 +91,10 @@ class CollectionComicAdapter(private val context: Context) : RecyclerView.Adapte
         if (collectionList == null || collectionList.isEmpty()) {
             return
         }
+        //按照漫画 id 排序一下，以免出现加载 local 再加载 online 后出现闪动的问题。
+        val newCollectionList = collectionList.sortedBy { it.name }
         mOnlineData.clear()
-        mOnlineData.addAll(collectionList)
+        mOnlineData.addAll(newCollectionList)
         fillShowData()
     }
 
