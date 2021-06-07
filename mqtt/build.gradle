@@ -37,7 +37,7 @@ dependencies {
     implementation rootProject.ext.google.kotlin_stdlib
     implementation rootProject.ext.google.core_ktx
     implementation rootProject.ext.google.appcompat
-    implementation rootProject.ext.google.junit
+    testImplementation rootProject.ext.google.junit
     implementation rootProject.ext.third.mqttv3
     implementation rootProject.ext.third.mqtt_service
 }

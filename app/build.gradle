@@ -60,13 +60,14 @@ android {
         ndk {
             abiFilters "armeabi-v7a"
         }
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
         release {
-            keyAlias 'comic'
-            keyPassword '53520song'
-            storeFile file('/Users/songmingwen/Documents/News-Comic-Reader/app/comic.jks')
-            storePassword '53520song'
+            keyAlias rootProject.KEY_ALIAS
+            keyPassword rootProject.KEY_PASSWORD
+            storeFile file(rootProject.STORE_FILE)
+            storePassword rootProject.KEYSTORE_PASSWORD
         }
     }
     buildTypes {
@@ -76,7 +77,7 @@ android {
 //            signingConfig signingConfigs.release
             renderscriptDebuggable true
             minifyEnabled false
-            proguardFile '/Users/songmingwen/Documents/News-Comic-Reader/app/proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
             debuggable false
@@ -84,7 +85,7 @@ android {
             signingConfig signingConfigs.release
             renderscriptDebuggable false
             minifyEnabled true
-            proguardFile '/Users/songmingwen/Documents/News-Comic-Reader/app/proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             zipAlignEnabled true
         }
     }
@@ -96,7 +97,6 @@ android {
     flavorDimensions "default"
     productFlavors {
         market {
-            signingConfig signingConfigs.release
             versionNameSuffix '-release'
         }
         dev {
@@ -118,6 +118,9 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
     }
 }
 walle {

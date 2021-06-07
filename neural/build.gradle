@@ -54,7 +54,7 @@ dependencies {
     implementation rootProject.ext.google.core_ktx
     implementation rootProject.ext.google.kotlinx_coroutines_core
     implementation rootProject.ext.google.appcompat
-    implementation rootProject.ext.google.junit
+    testImplementation rootProject.ext.google.junit
     implementation rootProject.ext.google.material
     implementation rootProject.ext.google.constraintlayout
     implementation rootProject.ext.third.mmkv
