@@ -7,7 +7,7 @@ import com.song.core.autoservice.InterfaceA
 import com.song.core.autoservice.InterfaceB
 import com.song.core.autoservice.ServiceProvider
 import com.song.sunset.R
-import com.song.sunset.activitys.base.BaseActivity
+import com.song.sunset.base.activity.BaseActivity
 import kotlinx.android.synthetic.main.activity_service_provider.*
 import java.lang.StringBuilder
 

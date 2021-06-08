@@ -22,7 +22,7 @@ import android.widget.LinearLayout;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.song.sunset.R;
-import com.song.sunset.activitys.base.BaseActivity;
+import com.song.sunset.base.activity.BaseActivity;
 
 /**
  * Created by z5352_000 on 2016/10/20 0020.

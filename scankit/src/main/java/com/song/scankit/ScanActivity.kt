@@ -1,9 +1,9 @@
 package com.song.scankit
 
 import android.Manifest
-import android.app.Activity
 import android.content.Intent
-import android.graphics.Rect
+import android.content.Intent.ACTION_VIEW
+import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
@@ -12,14 +12,13 @@ import androidx.core.app.ActivityCompat
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.google.android.material.snackbar.Snackbar
-import com.huawei.hms.hmsscankit.RemoteView
 import com.huawei.hms.hmsscankit.ScanUtil
 import com.huawei.hms.ml.scan.HmsScan
 import com.huawei.hms.ml.scan.HmsScanAnalyzerOptions
 import com.song.sunset.base.activity.BaseActivity
+import com.song.sunset.utils.BuildConfig
 import com.song.sunset.utils.SnackBarUtils
 import com.tbruyelle.rxpermissions2.RxPermissions
-import kotlinx.android.synthetic.main.activity_scan.*
 
 @Route(path = "/scan/list")
 class ScanActivity : BaseActivity() {
@@ -38,7 +37,7 @@ class ScanActivity : BaseActivity() {
      * onClick
      */
     fun startDefaultMode(view: View) {
-        requestPermissions(view){
+        requestPermissions(view) {
             val options = HmsScanAnalyzerOptions.Creator().setHmsScanTypes(HmsScan.ALL_SCAN_TYPE).create()
             ScanUtil.startScan(this, REQUEST_CODE_SCAN_DEFAULT_MODE, options)
         }
@@ -80,7 +79,21 @@ class ScanActivity : BaseActivity() {
         if (requestCode == REQUEST_CODE_SCAN_DEFAULT_MODE) {
             val hmsScan: HmsScan? = data.getParcelableExtra(ScanUtil.RESULT)
             if (!TextUtils.isEmpty(hmsScan?.getOriginalValue())) {
-                Toast.makeText(this, hmsScan?.getOriginalValue(), Toast.LENGTH_LONG).show()
+
+                val value = hmsScan?.getOriginalValue()
+
+                Toast.makeText(this, value, Toast.LENGTH_LONG).show()
+
+                val uri = Uri.parse(value)
+
+                val scheme = uri.scheme
+
+                if (!TextUtils.isEmpty(scheme)) {
+                    val intent = Intent(ACTION_VIEW, uri)
+                    intent.`package` = BuildConfig.APPLICATION_ID
+                    startActivity(intent)
+                    return
+                }
             }
         }
     }

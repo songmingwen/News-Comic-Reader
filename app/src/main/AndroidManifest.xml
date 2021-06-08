@@ -73,9 +73,7 @@
             <!-- Schame -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
-
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data
                     android:host="*"
@@ -85,7 +83,6 @@
             <!-- App Links -->
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
@@ -126,9 +123,6 @@
             android:name=".activitys.MainKotlinActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activitys.base.BaseActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activitys.ComicReadActivity"

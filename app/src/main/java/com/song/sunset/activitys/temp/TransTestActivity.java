@@ -28,7 +28,7 @@ import com.song.glide_40_transformations.gpu.SwirlFilterTransformation;
 import com.song.glide_40_transformations.gpu.ToonFilterTransformation;
 import com.song.glide_40_transformations.gpu.VignetteFilterTransformation;
 import com.song.sunset.R;
-import com.song.sunset.activitys.base.BaseActivity;
+import com.song.sunset.base.activity.BaseActivity;
 import com.song.sunset.adapters.TransAdapter;
 
 import org.jetbrains.annotations.NotNull;

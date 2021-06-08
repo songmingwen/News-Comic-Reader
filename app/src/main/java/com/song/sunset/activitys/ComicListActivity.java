@@ -8,7 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.song.core.statusbar.StatusBarUtil;
 import com.song.sunset.R;
-import com.song.sunset.activitys.base.BaseActivity;
+import com.song.sunset.base.activity.BaseActivity;
 import com.song.sunset.fragments.ComicGenericListFragment;
 
 /**

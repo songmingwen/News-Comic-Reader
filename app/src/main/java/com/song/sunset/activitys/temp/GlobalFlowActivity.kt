@@ -10,7 +10,7 @@ import android.util.Log
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.song.sunset.R
-import com.song.sunset.activitys.base.BaseActivity
+import com.song.sunset.base.activity.BaseActivity
 import com.song.sunset.widget.GlobalFlowView
 import com.tencent.mmkv.MMKV
 import kotlinx.android.synthetic.main.activity_global_flow.*

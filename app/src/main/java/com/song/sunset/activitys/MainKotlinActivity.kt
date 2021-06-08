@@ -27,7 +27,7 @@ import androidx.core.app.NotificationCompat
 import com.meituan.android.walle.WalleChannelReader
 import com.song.core.statusbar.StatusBarUtil
 import com.song.sunset.R
-import com.song.sunset.activitys.base.BaseActivity
+import com.song.sunset.base.activity.BaseActivity
 import com.song.sunset.activitys.temp.FunctionListActivity
 import com.song.sunset.beans.CollectionOnlineListBean
 import com.song.sunset.beans.MusicInfo
@@ -65,7 +65,6 @@ class MainKotlinActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
 
     override fun onCreate(savedInstanceState: Bundle?) {
         //夜间模式一定要包含日间模式的配置文件：如color，style......
-        setDayNightMode(isNightMode)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         verifyStoragePermissions()

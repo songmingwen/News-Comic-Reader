@@ -8,7 +8,7 @@ import android.widget.MediaController;
 import android.widget.VideoView;
 
 import com.song.sunset.R;
-import com.song.sunset.activitys.base.BaseActivity;
+import com.song.sunset.base.activity.BaseActivity;
 
 /**
  * Created by z5352_000 on 2016/10/21 0021.

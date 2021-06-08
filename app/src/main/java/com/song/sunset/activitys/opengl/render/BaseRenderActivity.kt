@@ -3,7 +3,7 @@ package com.song.sunset.activitys.opengl.render
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import com.song.sunset.activitys.base.BaseActivity
+import com.song.sunset.base.activity.BaseActivity
 import com.song.sunset.widget.opengl.surfaceview.BaseGLSurfaceView
 
 abstract class BaseRenderActivity : BaseActivity() {

@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.song.sunset.R
-import com.song.sunset.activitys.base.BaseActivity
+import com.song.sunset.base.activity.BaseActivity
 import kotlinx.android.synthetic.main.activity_lottie.*
 
 class LottieActivity : BaseActivity() {

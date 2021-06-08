@@ -8,7 +8,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.song.sunset.R;
-import com.song.sunset.activitys.base.BaseActivity;
+import com.song.sunset.base.activity.BaseActivity;
 import com.song.sunset.beans.Comment;
 import com.song.sunset.beans.User;
 

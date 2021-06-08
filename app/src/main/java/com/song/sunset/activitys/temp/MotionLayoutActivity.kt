@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import com.song.sunset.R
-import com.song.sunset.activitys.base.BaseActivity
+import com.song.sunset.base.activity.BaseActivity
 import kotlinx.android.synthetic.main.activity_motion_layout.*
 
 class MotionLayoutActivity : BaseActivity() {

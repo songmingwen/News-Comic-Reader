@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.LinearLayout
 import com.song.sunset.R
-import com.song.sunset.activitys.base.BaseActivity
+import com.song.sunset.base.activity.BaseActivity
 import com.song.sunset.activitys.opengl.render.BaseRenderActivity
 import com.song.sunset.activitys.temp.addButton
 import kotlinx.android.synthetic.main.activity_function_list.*

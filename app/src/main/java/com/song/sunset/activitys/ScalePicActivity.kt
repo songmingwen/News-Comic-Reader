@@ -4,7 +4,7 @@ import android.animation.Animator
 import android.animation.AnimatorInflater
 import android.animation.AnimatorListenerAdapter
 import android.content.Context
-import com.song.sunset.activitys.base.BaseActivity
+import com.song.sunset.base.activity.BaseActivity
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
 import android.os.Bundle
 import com.song.sunset.R

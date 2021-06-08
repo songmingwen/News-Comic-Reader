@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import com.song.sunset.R
-import com.song.sunset.activitys.base.BaseActivity
+import com.song.sunset.base.activity.BaseActivity
 import com.song.sunset.widget.CenteredImageSpan
 import kotlinx.android.synthetic.main.activity_centered_imagespan.*
 

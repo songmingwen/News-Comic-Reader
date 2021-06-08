@@ -12,7 +12,7 @@ import android.view.TextureView
 import androidx.core.app.ActivityCompat
 import com.google.android.material.snackbar.Snackbar
 import com.song.sunset.R
-import com.song.sunset.activitys.base.BaseActivity
+import com.song.sunset.base.activity.BaseActivity
 import com.song.sunset.utils.BitmapUtil
 import com.song.sunset.utils.SnackBarUtils
 import com.tbruyelle.rxpermissions2.RxPermissions

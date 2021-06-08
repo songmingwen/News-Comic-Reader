@@ -48,6 +48,9 @@ class SunsetApplication : MultiDexApplication() {
 
     private fun initInMainProcess() {
         AppConfig.setApp(this)
+
+        setBuildConfig()
+
         if (BuildConfig.DEBUG) {           // 这两行必须写在init之前，否则这些配置在init过程中将无效
             ARouter.openLog() // 打印日志
             ARouter.openDebug() // 开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
@@ -92,6 +95,15 @@ class SunsetApplication : MultiDexApplication() {
                 .subscribeOn(Schedulers.io())
                 .subscribe { o: Any? -> }
 
+    }
+
+    private fun setBuildConfig() {
+        com.song.sunset.utils.BuildConfig.APPLICATION_ID = BuildConfig.APPLICATION_ID
+        com.song.sunset.utils.BuildConfig.DEBUG = BuildConfig.DEBUG
+        com.song.sunset.utils.BuildConfig.BUILD_TYPE = BuildConfig.BUILD_TYPE
+        com.song.sunset.utils.BuildConfig.FLAVOR = BuildConfig.FLAVOR
+        com.song.sunset.utils.BuildConfig.VERSION_CODE = BuildConfig.VERSION_CODE
+        com.song.sunset.utils.BuildConfig.VERSION_NAME = BuildConfig.VERSION_NAME
     }
 
     private fun addLifecycleListener() {

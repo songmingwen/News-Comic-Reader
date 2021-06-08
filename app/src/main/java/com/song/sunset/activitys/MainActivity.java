@@ -36,7 +36,7 @@ import com.song.core.statusbar.StatusBarUtil;
 import com.song.sunset.BindView;
 import com.song.sunset.BuildConfig;
 import com.song.sunset.R;
-import com.song.sunset.activitys.base.BaseActivity;
+import com.song.sunset.base.activity.BaseActivity;
 import com.song.sunset.activitys.temp.FunctionListActivity;
 import com.song.sunset.beans.CollectionOnlineListBean;
 import com.song.sunset.beans.ComicCollectionBean;
@@ -87,7 +87,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //夜间模式一定要包含日间模式的配置文件：如color，style......
-        setDayNightMode(isNightMode());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         verifyStoragePermissions();

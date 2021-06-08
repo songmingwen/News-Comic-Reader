@@ -17,7 +17,7 @@ import com.song.scankit.QRCodeActivity
 import com.song.sunset.R
 import com.song.sunset.activitys.ComicDetailMVPActivity
 import com.song.sunset.activitys.PhoenixVideoActivity
-import com.song.sunset.activitys.base.BaseActivity
+import com.song.sunset.base.activity.BaseActivity
 import com.song.sunset.activitys.opengl.OpenGLListActivity
 import com.song.sunset.beans.MusicInfo
 import com.song.sunset.beans.VideoDetailBean
@@ -45,6 +45,8 @@ class FunctionListActivity : BaseActivity() {
         addButton("Fresco XML params display") { FrescoXMLActivity.start(this@FunctionListActivity) }
         addButton("Fresco post processor display") { FrescoProcessorActivity.start(this@FunctionListActivity) }
         addButton("Glide post processor display") { TransTestActivity.start(this@FunctionListActivity) }
+        addButton("ScanKit") { ARouter.getInstance().build("/scan/list").navigation() }
+        addButton("QR code") { QRCodeActivity.start(this@FunctionListActivity) }
         addButton("RxJava") { RxjavaActivity.start(this@FunctionListActivity) }
         addButton("Reflection") { ReflectionActivity.start(this@FunctionListActivity) }
         addButton("DynamicProxy") { DynamicProxyActivity.start(this@FunctionListActivity) }
@@ -54,7 +56,6 @@ class FunctionListActivity : BaseActivity() {
         addButton("openGL") { OpenGLListActivity.start(this@FunctionListActivity) }
         addButton("neural") { ARouter.getInstance().build("/neural/neural").navigation() }
         addButton("billiards") { BilliardsActivity.start(this@FunctionListActivity) }
-        addButton("QR code") { QRCodeActivity.start(this@FunctionListActivity) }
         addButton("MotionLayout") { MotionLayoutActivity.start(this@FunctionListActivity) }
         addButton("Bubble") { BubbleActivity.start(this@FunctionListActivity) }
         addButton("Lottie") { LottieActivity.start(this@FunctionListActivity) }
@@ -65,7 +66,6 @@ class FunctionListActivity : BaseActivity() {
         addButton("CenteredImageSpan") { CenteredImageSpanActivity.start(this@FunctionListActivity) }
         addButton("RelayTest") { RelayTest.testRelay() }
         addButton("MMKVTest") { RelayTest.testMMKV() }
-        addButton("ScanKit") { ARouter.getInstance().build("/scan/list").navigation() }
 
     }
 

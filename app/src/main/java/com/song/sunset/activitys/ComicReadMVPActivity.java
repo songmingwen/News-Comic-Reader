@@ -10,7 +10,7 @@ import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.song.sunset.R;
-import com.song.sunset.activitys.base.BaseActivity;
+import com.song.sunset.base.activity.BaseActivity;
 import com.song.sunset.adapters.ComicReadMVPAdapter;
 import com.song.sunset.beans.ChapterListBean;
 import com.song.sunset.beans.ComicReadImageListBean;

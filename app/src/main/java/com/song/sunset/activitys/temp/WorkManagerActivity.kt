@@ -8,7 +8,7 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.Observer
 import androidx.work.*
-import com.song.sunset.activitys.base.BaseActivity
+import com.song.sunset.base.activity.BaseActivity
 import com.song.sunset.work.SimpleWorker
 import kotlinx.android.synthetic.main.activity_workmanager.*
 import java.util.concurrent.TimeUnit

@@ -32,7 +32,7 @@ import android.widget.Toast;
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.TimePickerView;
 import com.song.sunset.R;
-import com.song.sunset.activitys.base.BaseActivity;
+import com.song.sunset.base.activity.BaseActivity;
 import com.song.sunset.enums.Weeks;
 import com.song.sunset.utils.BitmapUtil;
 import com.song.sunset.utils.DateTimeUtils;

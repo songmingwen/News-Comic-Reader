@@ -8,7 +8,7 @@ import android.os.PersistableBundle;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.song.sunset.R;
-import com.song.sunset.activitys.base.BaseActivity;
+import com.song.sunset.base.activity.BaseActivity;
 import com.song.sunset.adapters.VP2PagerAdapter;
 import com.song.sunset.beans.ComicRankListBean;
 import com.song.sunset.beans.PageItem;

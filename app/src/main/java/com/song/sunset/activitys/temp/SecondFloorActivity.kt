@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.song.sunset.R
 import com.song.sunset.activitys.ComicListActivity
-import com.song.sunset.activitys.base.BaseActivity
+import com.song.sunset.base.activity.BaseActivity
 import com.song.sunset.fragments.SecondFloorFragment
 import com.song.sunset.utils.ScreenUtils
 
