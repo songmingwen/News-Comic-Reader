@@ -119,7 +119,7 @@ ext {
             mqttv3                       : 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.1.0',
             mqtt_service                 : 'org.eclipse.paho:org.eclipse.paho.android.service:1.1.1',
 
-            scanplus                 : 'com.huawei.hms:scanplus:1.3.2.300'
+            scanplus                     : 'com.huawei.hms:scanplus:1.3.2.300',
     ]
 
 }

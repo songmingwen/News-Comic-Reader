@@ -68,7 +68,6 @@ class NeuralNetWorksModel {
                 }
             }
         }
-        Log.i(TAG, "mLines count = " + mLines.size());
     }
 
     void clear() {

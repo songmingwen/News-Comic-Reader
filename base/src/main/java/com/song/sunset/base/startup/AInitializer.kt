@@ -13,7 +13,7 @@ import com.song.sunset.base.startup.task.OneStartUp
  */
 class AInitializer : BaseInitializer<OneStartUp>() {
     override fun createStartUp(context: Context): OneStartUp {
-        return OneStartUp.instance.init(context)
+        return OneStartUp.init(context)
     }
 
     override fun dependencies(): List<Class<out Initializer<*>>> {

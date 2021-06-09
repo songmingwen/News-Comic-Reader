@@ -3,7 +3,8 @@ package com.song.sunset.base.startup.task
 import android.content.Context
 import android.util.Log
 
-class FourStartUp private constructor() {
+object FourStartUp {
+
     fun init(context: Context): FourStartUp {
         try {
             Thread.sleep(400)
@@ -11,12 +12,7 @@ class FourStartUp private constructor() {
             e.printStackTrace()
         }
         Log.i("start_up_task", "4")
-        return instance
+        return FourStartUp
     }
 
-    companion object {
-        val instance: FourStartUp by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
-            FourStartUp()
-        }
-    }
 }

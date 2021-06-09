@@ -14,7 +14,7 @@ import com.song.sunset.base.startup.task.TwoStartUp
 class TwoInitializer : BaseInitializer<TwoStartUp>() {
 
     override fun createStartUp(context: Context): TwoStartUp {
-        return TwoStartUp.instance.init(context)
+        return TwoStartUp.init(context)
     }
 
     override fun dependencies(): List<Class<out Initializer<*>>> {

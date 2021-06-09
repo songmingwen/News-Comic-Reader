@@ -1,47 +1,40 @@
 package com.song.sunset.activitys;
 
+import android.Manifest;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import androidx.core.app.ActivityCompat;
-
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.View;
-
 import com.google.android.material.navigation.NavigationView;
-
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.widget.Toolbar;
-
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.FrameLayout;
-
 import com.meituan.android.walle.ChannelInfo;
 import com.meituan.android.walle.WalleChannelReader;
 import com.song.core.statusbar.StatusBarUtil;
 import com.song.sunset.BindView;
-import com.song.sunset.BuildConfig;
 import com.song.sunset.R;
-import com.song.sunset.base.activity.BaseActivity;
 import com.song.sunset.activitys.temp.FunctionListActivity;
+import com.song.sunset.base.activity.BaseActivity;
 import com.song.sunset.beans.CollectionOnlineListBean;
 import com.song.sunset.beans.ComicCollectionBean;
 import com.song.sunset.beans.ComicLocalCollection;
-import com.song.sunset.fragments.ComicBaseListFragment;
 import com.song.sunset.fragments.PhoenixListFragment;
 import com.song.sunset.mvp.models.ComicCollectionModel;
 import com.song.sunset.mvp.presenters.ComicCollectionPresenter;
@@ -51,17 +44,16 @@ import com.song.sunset.services.managers.PushManager;
 import com.song.sunset.utils.AppConfig;
 import com.song.sunset.utils.BindViewTools;
 import com.song.sunset.utils.GreenDaoUtil;
-import com.song.sunset.utils.preinstall.*;
+import com.song.sunset.utils.preinstall.DefaultPreinstallHandler;
 import com.song.video.VideoManager;
 import com.sunset.greendao.gen.ComicLocalCollectionDao;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import androidx.core.app.NotificationCompat;
-import androidx.fragment.app.Fragment;
-import io.flutter.embedding.android.FlutterActivity;
+import io.reactivex.disposables.Disposable;
 
 /**
  * Created by Song on 2016/12/2.
@@ -73,20 +65,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public static final String TAG = MainActivity.class.getName();
 
     private Toolbar toolbar;
-    private long lastBackPressedTime;
     private FloatingActionButton fab;
     private NavigationView navigationView;
-    private static final int MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS = 1001;
     private ComicCollectionPresenter mPresenter;
-    private static final int REQUEST_EXTERNAL_STORAGE = 1;
-    private static String[] PERMISSIONS_STORAGE = {
-            "android.permission.READ_EXTERNAL_STORAGE",
-            "android.permission.WRITE_EXTERNAL_STORAGE"};
-    private FrameLayout mContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //夜间模式一定要包含日间模式的配置文件：如color，style......
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         verifyStoragePermissions();
@@ -94,19 +78,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         initDrawer();
         setUpListener();
 
-//        switchFragmentDelay(PhoenixListFragment.class.getName(), getResources().getString(R.string.phoenix_news), 0);
         swithFragmentByRouter("/song/phoenix/list", getResources().getString(R.string.phoenix_news));
         mPresenter = new ComicCollectionPresenter();
         mPresenter.attachVM(this, new ComicCollectionModel());
         mPresenter.getNewestCollectedComic();
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            if (!hasPermission()) {
-//                startActivityForResult(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS),
-//                        MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS);
-//            }
-//        }
-        //获取渠道
-//        String channel = WalleChannelReader.getChannel(this.getApplicationContext());
         ChannelInfo channelInfo = WalleChannelReader.getChannelInfo(this.getApplicationContext());
         if (channelInfo != null) {
             String channel = channelInfo.getChannel();
@@ -117,60 +92,36 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             Log.d(TAG, "onCreate: " + "null------");
         }
 
-        Log.d(TAG, "flavors:APPLICATION_ID  " + BuildConfig.APPLICATION_ID);
-        Log.d(TAG, "flavors:BUILD_TYPE  " + BuildConfig.BUILD_TYPE);
-        Log.d(TAG, "flavors:FLAVOR  " + BuildConfig.FLAVOR);
-        Log.d(TAG, "flavors:VERSION_NAME  " + BuildConfig.VERSION_NAME);
-        Log.d(TAG, "flavors:DEBUG  " + BuildConfig.DEBUG);
-        Log.d(TAG, "flavors:VERSION_CODE  " + BuildConfig.VERSION_CODE);
         Log.d(TAG, "flavors:preinstall  " + new DefaultPreinstallHandler().getPreinstallInfo());
     }
 
 
     public void verifyStoragePermissions() {
-        try {
-            //检测是否有写的权限
-            int permission = ActivityCompat.checkSelfPermission(this,
-                    "android.permission.WRITE_EXTERNAL_STORAGE");
-            if (permission != PackageManager.PERMISSION_GRANTED) {
-                // 没有写的权限，去申请写的权限，会弹出对话框
-                ActivityCompat.requestPermissions(this, PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Disposable disposable = new RxPermissions(this)
+                .request(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.RECORD_AUDIO)
+                .subscribe(granted -> {
+                    Log.i(TAG, "granted=" + granted);
+                });
+
     }
-
-    //检测用户是否对本app开启了“Apps with usage access”权限
-//    private boolean hasPermission() {
-//        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) return false;
-//        AppOpsManager appOps = (AppOpsManager) getSystemService(Context.APP_OPS_SERVICE);
-//        int mode = appOps.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS,
-//                android.os.Process.myUid(), getPackageName());
-//        return mode == AppOpsManager.MODE_ALLOWED;
-//    }
-
-    @BindView(R.id.toolbar)
-    Toolbar mToolbar;
 
     private void initView() {
         BindViewTools.bind(this);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         toolbar.setLogo(R.mipmap.logo_black);
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        mContent = findViewById(R.id.activity_framelayout_main);
+        fab = findViewById(R.id.fab);
     }
 
     private void initDrawer() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         StatusBarUtil.setColorForDrawerLayout(this, drawer, getResources().getColor(R.color.transparent));
-        navigationView = (NavigationView) findViewById(R.id.navView);
+        navigationView = findViewById(R.id.navView);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setCheckedItem(R.id.nav_news);
         navigationView.setItemIconTintList(null);
-//        setDrawerLeftEdgeSize(this, drawer, 0.35f);
     }
 
     private void setUpListener() {
@@ -203,7 +154,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -216,7 +166,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 swithFragmentByRouter("/song/comic/classify", getResources().getString(R.string.classify_comic));
                 break;
             case R.id.nav_video:
-                swithFragmentByRouter("/song/video/tv","TV");
+                swithFragmentByRouter("/song/video/tv", "TV");
                 break;
             case R.id.nav_rank_comic:
                 swithFragmentByRouter("/song/comic/rank", getResources().getString(R.string.rank_comic));

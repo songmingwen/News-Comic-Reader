@@ -7,7 +7,6 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
-import com.facebook.common.logging.FLog
 import com.song.core.statusbar.StatusBarUtil
 import com.song.sunset.R
 import com.song.sunset.utils.ViewUtil
