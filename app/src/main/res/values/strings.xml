@@ -39,9 +39,6 @@
     <string name="phoenix_news">凤凰新闻</string>
     <string name="phoenix_video">视频</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
-    <string name="without_content">没有内容</string>
-    <string name="loading_failure">加载失败</string>
-    <string name="click_to_loading">点击重试</string>
 
     <string name="list_footer_end">已经到底了</string>
     <string name="list_footer_network_error">点击重新加载</string>

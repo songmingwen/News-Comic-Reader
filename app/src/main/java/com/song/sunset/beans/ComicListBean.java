@@ -3,7 +3,7 @@ package com.song.sunset.beans;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.song.sunset.beans.basebeans.PageEntity;
+import com.song.sunset.base.bean.PageEntity;
 
 import java.util.List;
 

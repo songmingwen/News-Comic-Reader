@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.util.Log
 import androidx.annotation.NonNull
 import com.song.sunset.utils.net.SchedulerTransformer
-import com.song.sunset.utils.retrofit.OkHttpClient
+import com.song.sunset.base.net.OkHttpClient
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.MethodCall
@@ -13,7 +13,6 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import io.reactivex.Single
 import io.reactivex.SingleEmitter
-import io.reactivex.SingleOnSubscribe
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import okhttp3.Call

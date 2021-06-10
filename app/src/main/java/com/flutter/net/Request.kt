@@ -1,6 +1,6 @@
 package com.flutter.net
 
-import com.song.sunset.utils.api.WholeApi
+import com.song.sunset.base.api.WholeApi
 import io.flutter.plugin.common.MethodCall
 import okhttp3.FormBody
 import okhttp3.HttpUrl

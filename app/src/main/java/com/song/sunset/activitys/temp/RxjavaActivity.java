@@ -15,7 +15,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.song.sunset.R;
-import com.song.sunset.utils.rxjava.RxUtil;
+import com.song.sunset.base.rxjava.RxUtil;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -34,7 +34,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
-import io.reactivex.functions.Function3;
 import io.reactivex.subjects.PublishSubject;
 
 @Route(path = "/song/rxjava")

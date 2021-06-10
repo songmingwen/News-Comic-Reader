@@ -11,7 +11,7 @@ import android.os.RemoteException;
 import androidx.annotation.Nullable;
 import android.widget.Toast;
 
-import com.song.sunset.utils.AppConfig;
+import com.song.sunset.base.AppConfig;
 
 /**
  * Created by Song on 2017/10/16 0016.

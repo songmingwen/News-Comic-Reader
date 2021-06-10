@@ -26,7 +26,7 @@ import com.song.sunset.adapters.ComicDetailAdapter.COMIC_LIST_TYPE
 import com.song.sunset.beans.ComicDetailBean
 import com.song.sunset.utils.BitmapUtil
 import com.song.sunset.utils.ViewUtil
-import com.song.sunset.utils.fresco.FrescoUtil
+import com.song.sunset.utils.FrescoUtil
 import com.song.sunset.viewmodel.ComicDetailViewModel
 import kotlinx.android.synthetic.main.activity_comic_detail_mvvm.*
 

@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.song.sunset.fragments.base.BaseFragment
+import com.song.sunset.base.fragment.BaseFragment
 
 /**
  * @author songmingwen

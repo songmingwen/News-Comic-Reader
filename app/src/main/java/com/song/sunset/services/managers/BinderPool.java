@@ -11,7 +11,7 @@ import android.util.Log;
 
 import com.song.sunset.IBinderPool;
 import com.song.sunset.services.BinderPoolService;
-import com.song.sunset.utils.AppConfig;
+import com.song.sunset.base.AppConfig;
 
 /**
  * Binder连接池

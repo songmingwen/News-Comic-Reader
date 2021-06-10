@@ -14,13 +14,13 @@ import com.song.sunset.R;
 import com.song.sunset.activitys.ComicListActivity;
 import com.song.sunset.adapters.ComicListAdapter;
 import com.song.sunset.beans.ComicListBean;
-import com.song.sunset.beans.basebeans.BaseBean;
+import com.song.sunset.base.bean.BaseBean;
 import com.song.sunset.fragments.base.RVLoadableFragment;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.api.U17ComicApi;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
-import com.song.sunset.utils.retrofit.Net;
-import com.song.sunset.utils.rxjava.RxUtil;
+import com.song.sunset.base.net.Net;
+import com.song.sunset.base.rxjava.RxUtil;
 
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import io.reactivex.Observable;

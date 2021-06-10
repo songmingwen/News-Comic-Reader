@@ -5,12 +5,11 @@ import android.os.Bundle
 import android.text.TextUtils
 import com.song.sunset.activitys.ComicListActivity
 import com.song.sunset.beans.ComicListBean
-import com.song.sunset.beans.basebeans.PageEntity
-import com.song.sunset.fragments.base.BasePageLoadingFragment
+import com.song.sunset.base.bean.PageEntity
+import com.song.sunset.base.fragment.BasePageLoadingFragment
 import com.song.sunset.holders.ComicItemViewHolder
-import com.song.sunset.fragments.base.BasePagingFragment
 import com.song.sunset.utils.api.U17ComicApi
-import com.song.sunset.utils.retrofit.Net
+import com.song.sunset.base.net.Net
 import com.zhihu.android.sugaradapter.SugarAdapter.Builder
 
 /**

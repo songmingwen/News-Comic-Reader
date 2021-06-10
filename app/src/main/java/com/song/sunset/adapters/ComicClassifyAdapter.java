@@ -11,7 +11,7 @@ import com.song.sunset.activitys.ComicListActivity;
 import com.song.sunset.beans.ComicClassifyBean;
 import com.song.sunset.holders.ComicClassifyViewHolder;
 import com.song.sunset.utils.ViewUtil;
-import com.song.sunset.utils.fresco.FrescoUtil;
+import com.song.sunset.utils.FrescoUtil;
 
 /**
  * Created by Song on 2016/9/2 0002.

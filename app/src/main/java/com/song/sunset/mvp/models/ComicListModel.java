@@ -1,11 +1,11 @@
 package com.song.sunset.mvp.models;
 
 import com.song.sunset.beans.ComicListBean;
-import com.song.sunset.beans.basebeans.BaseBean;
+import com.song.sunset.base.bean.BaseBean;
 import com.song.sunset.interfaces.ComicListView;
-import com.song.sunset.utils.retrofit.RetrofitCall;
-import com.song.sunset.utils.retrofit.RetrofitCallback;
-import com.song.sunset.utils.retrofit.Net;
+import com.song.sunset.base.net.RetrofitCall;
+import com.song.sunset.base.net.RetrofitCallback;
+import com.song.sunset.base.net.Net;
 import com.song.sunset.utils.api.U17ComicApi;
 
 import retrofit2.Call;

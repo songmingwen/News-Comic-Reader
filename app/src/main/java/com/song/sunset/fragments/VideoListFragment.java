@@ -11,18 +11,18 @@ import android.widget.RelativeLayout;
 
 import com.song.sunset.R;
 import com.song.sunset.adapters.VideoListAdapter;
-import com.song.sunset.beans.VideoDetailBean;
-import com.song.sunset.beans.VideoListsBean;
-import com.song.sunset.fragments.base.BaseFragment;
+import com.song.sunset.phoenix.bean.VideoDetailBean;
+import com.song.sunset.phoenix.bean.VideoListsBean;
+import com.song.sunset.base.fragment.BaseFragment;
 import com.song.sunset.interfaces.LoadingMoreListener;
-import com.song.sunset.utils.AppConfig;
+import com.song.sunset.base.AppConfig;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
-import com.song.sunset.utils.rxjava.RxUtil;
-import com.song.sunset.utils.retrofit.RetrofitCallback;
-import com.song.sunset.utils.retrofit.Net;
-import com.song.sunset.utils.api.PhoenixNewsApi;
-import com.song.sunset.utils.api.WholeApi;
+import com.song.sunset.base.rxjava.RxUtil;
+import com.song.sunset.base.net.RetrofitCallback;
+import com.song.sunset.base.net.Net;
+import com.song.sunset.phoenix.api.PhoenixNewsApi;
+import com.song.sunset.base.api.WholeApi;
 import com.song.sunset.widget.LoadMoreRecyclerView;
 
 import java.util.List;

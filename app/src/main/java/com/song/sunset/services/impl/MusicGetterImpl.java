@@ -1,7 +1,6 @@
 package com.song.sunset.services.impl;
 
 import android.content.Context;
-import android.os.Looper;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 import android.util.Log;
@@ -10,15 +9,13 @@ import com.song.sunset.IMusicCallBackListener;
 import com.song.sunset.IMusicGetter;
 import com.song.sunset.beans.MusicInfo;
 import com.song.sunset.utils.MusicLoader;
-import com.song.sunset.utils.rxjava.RxUtil;
+import com.song.sunset.base.rxjava.RxUtil;
 
 
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 
 /**

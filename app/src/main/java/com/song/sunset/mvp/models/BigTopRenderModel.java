@@ -2,7 +2,7 @@ package com.song.sunset.mvp.models;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.song.sunset.beans.PhoenixChannelBean;
+import com.song.sunset.phoenix.bean.PhoenixChannelBean;
 import com.song.sunset.holders.BigTopViewHolder;
 import com.song.sunset.mvp.models.base.PhoenixBaseRenderModel;
 

@@ -1,7 +1,7 @@
 package com.song.sunset.mvp.presenters;
 
 import com.song.sunset.mvp.views.ListCallView;
-import com.song.sunset.beans.basebeans.PageEntity;
+import com.song.sunset.base.bean.PageEntity;
 import com.song.sunset.mvp.models.ListModel;
 
 /**

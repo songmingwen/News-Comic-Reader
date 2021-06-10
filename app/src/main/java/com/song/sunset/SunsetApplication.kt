@@ -12,7 +12,6 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.song.core.FrescoInitializer
 import com.song.sunset.activitys.temp.GlobalFlowActivity.Companion.hideView
 import com.song.sunset.activitys.temp.GlobalFlowActivity.Companion.showGlobalFlowView
-import com.song.sunset.base.startup.AInitializer
 import com.song.sunset.base.startup.FiveInitializer
 import com.song.sunset.base.startup.FourInitializer
 import com.song.sunset.services.managers.BinderPool
@@ -20,9 +19,9 @@ import com.song.sunset.services.managers.MessengerManager
 import com.song.sunset.services.managers.MusicGetterManager
 import com.song.sunset.services.managers.PushManager
 import com.song.sunset.startup.CoilInitializer
-import com.song.sunset.utils.AppConfig
+import com.song.sunset.base.AppConfig
 import com.song.sunset.utils.GreenDaoUtil
-import com.song.sunset.utils.SPUtils
+import com.song.sunset.base.utils.SPUtils
 import com.song.sunset.utils.lifecycle.BaseActivityLifecycle
 import com.song.sunset.utils.lifecycle.LifecycleManager
 import com.tencent.mmkv.MMKV
@@ -30,7 +29,6 @@ import io.flutter.view.FlutterMain
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import io.reactivex.schedulers.Schedulers
-import okhttp3.OkHttpClient
 
 /**
  * Created by Song on 2016/8/29 0029.

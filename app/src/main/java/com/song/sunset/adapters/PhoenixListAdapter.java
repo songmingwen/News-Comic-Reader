@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.ViewGroup;
 
 import com.song.sunset.adapters.base.BaseRVAdapterWithoutVH;
-import com.song.sunset.beans.PhoenixChannelBean;
+import com.song.sunset.phoenix.bean.PhoenixChannelBean;
 import com.song.sunset.mvp.models.base.RecyclerViewAdapterModel;
 import com.song.sunset.mvp.models.PhoenixDefaultAdapterModel;
 

@@ -12,7 +12,7 @@ import com.song.sunset.R;
 import com.song.sunset.beans.ComicsBean;
 import com.song.sunset.holders.ComicListViewHolder;
 import com.song.sunset.utils.ViewUtil;
-import com.song.sunset.utils.fresco.FrescoUtil;
+import com.song.sunset.utils.FrescoUtil;
 
 import static com.song.sunset.activitys.ComicDetailActivity.COMIC_ID;
 

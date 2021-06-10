@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.song.sunset.base.AppConfig;
+import com.song.sunset.base.utils.SPUtils;
 import com.tencent.mmkv.MMKV;
 
 import io.reactivex.Observable;
@@ -12,7 +14,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-import static com.song.sunset.utils.SPUtils.NO_SP_MODE;
+import static com.song.sunset.base.utils.SPUtils.NO_SP_MODE;
 
 /**
  * Desc:

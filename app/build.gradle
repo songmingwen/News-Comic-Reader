@@ -52,7 +52,7 @@ android {
                 arguments = [AROUTER_MODULE_NAME     : project.getName(),
                              AROUTER_GENERATE_DOC    : "enable",
                              moduleName              : "app",
-                             subModulesOfSugarAdapter: "comic",
+                             subModulesOfSugarAdapter: 'comic, base ,phoenix'
                 ]
             }
         }
@@ -164,6 +164,7 @@ dependencies {
     implementation project(':base')
     implementation project(':neural')
     implementation project(':scankit')
+    implementation project(':phoenix')
 //    implementation project(':flutter_plugin_battery')
     implementation 'com.google.auto.service:auto-service:1.0'
 }

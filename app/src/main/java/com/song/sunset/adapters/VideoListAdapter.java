@@ -8,10 +8,10 @@ import android.view.ViewGroup;
 
 import com.song.sunset.R;
 import com.song.sunset.adapters.base.BaseRecyclerViewAdapter;
-import com.song.sunset.beans.VideoDetailBean;
+import com.song.sunset.phoenix.bean.VideoDetailBean;
 import com.song.sunset.holders.VideoListViewHolder;
 import com.song.sunset.utils.ViewUtil;
-import com.song.sunset.utils.fresco.FrescoUtil;
+import com.song.sunset.utils.FrescoUtil;
 import com.song.video.NormalVideoPlayer;
 
 import io.reactivex.Completable;

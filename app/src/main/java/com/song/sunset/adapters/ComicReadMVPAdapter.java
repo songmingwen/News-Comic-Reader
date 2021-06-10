@@ -10,7 +10,7 @@ import com.song.sunset.adapters.base.BaseRecyclerViewAdapter;
 import com.song.sunset.beans.ComicReadImageListBean;
 import com.song.sunset.holders.ComicReadViewHolder;
 import com.song.sunset.utils.ViewUtil;
-import com.song.sunset.utils.fresco.FrescoUtil;
+import com.song.sunset.utils.FrescoUtil;
 
 import java.util.List;
 

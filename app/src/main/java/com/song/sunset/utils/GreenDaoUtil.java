@@ -2,6 +2,7 @@ package com.song.sunset.utils;
 
 import android.database.sqlite.SQLiteDatabase;
 
+import com.song.sunset.base.AppConfig;
 import com.sunset.greendao.gen.DaoMaster;
 import com.sunset.greendao.gen.DaoSession;
 import com.sunset.greendao.gen.MySQLiteOpenHelper;

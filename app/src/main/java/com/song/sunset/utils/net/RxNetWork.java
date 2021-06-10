@@ -9,9 +9,9 @@ import android.net.NetworkInfo;
 import android.util.AndroidException;
 import android.view.View;
 
-import com.song.sunset.SunsetApplication;
-import com.song.sunset.utils.AppConfig;
-import com.song.sunset.utils.rxjava.RxBus;
+import com.song.sunset.base.net.NetWorkUtils;
+import com.song.sunset.base.AppConfig;
+import com.song.sunset.base.rxjava.RxBus;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

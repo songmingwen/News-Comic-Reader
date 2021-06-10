@@ -8,7 +8,7 @@ package com.song.sunset.mvp.models.base;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.song.sunset.beans.PhoenixChannelBean;
+import com.song.sunset.phoenix.bean.PhoenixChannelBean;
 
 public abstract class PhoenixBaseRenderModel implements BaseRenderModel<PhoenixChannelBean>{
 

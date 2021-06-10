@@ -9,16 +9,16 @@ import android.view.View;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.song.sunset.beans.PhoenixChannelBean;
-import com.song.sunset.beans.PhoenixLiveExt;
-import com.song.sunset.beans.PhoenixSportLiveExt;
+import com.song.sunset.phoenix.bean.PhoenixChannelBean;
+import com.song.sunset.phoenix.bean.PhoenixLiveExt;
+import com.song.sunset.phoenix.bean.PhoenixSportLiveExt;
 import com.song.sunset.holders.PhoenixBaseBottomViewHolder;
 import com.song.sunset.holders.MatchScoreViewHolder;
-import com.song.sunset.utils.fresco.FrescoUtil;
+import com.song.sunset.utils.FrescoUtil;
 
 import java.util.ArrayList;
 
-import static com.song.sunset.utils.fresco.FrescoUtil.NO_CIRCLE;
+import static com.song.sunset.utils.FrescoUtil.NO_CIRCLE;
 
 /**
  * Created by Song on 2017/3/31 0031.

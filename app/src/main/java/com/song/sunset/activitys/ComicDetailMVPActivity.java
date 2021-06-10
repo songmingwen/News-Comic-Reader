@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 
-import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -34,11 +33,10 @@ import com.song.sunset.mvp.models.ComicDetailModel;
 import com.song.sunset.mvp.presenters.ComicDetailPresenter;
 import com.song.sunset.utils.BitmapUtil;
 import com.song.sunset.utils.ViewUtil;
-import com.song.sunset.utils.fresco.FrescoUtil;
+import com.song.sunset.utils.FrescoUtil;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
 import com.song.sunset.mvp.views.ComicDetailView;
 
-import static com.song.sunset.activitys.ComicDetailActivity.COMIC_ID;
 import static com.song.sunset.adapters.ComicDetailAdapter.COMIC_LIST_TYPE;
 
 /**

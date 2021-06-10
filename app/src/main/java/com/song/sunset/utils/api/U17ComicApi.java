@@ -4,7 +4,7 @@ import com.song.sunset.beans.CollectionOnlineListBean;
 import com.song.sunset.beans.ComicRankListBean;
 import com.song.sunset.beans.ComicReadChapterBean;
 import com.song.sunset.beans.ComicSearchResultBean;
-import com.song.sunset.beans.basebeans.BaseBean;
+import com.song.sunset.base.bean.BaseBean;
 import com.song.sunset.beans.ComicClassifyBean;
 import com.song.sunset.beans.ComicDetailBean;
 import com.song.sunset.beans.ComicListBean;

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="phoenix_title">15sp</dimen>
+    <dimen name="phoenix_des">12sp</dimen>
+
+</resources>

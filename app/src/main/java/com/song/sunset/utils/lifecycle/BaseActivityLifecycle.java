@@ -5,7 +5,7 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 
-import com.song.sunset.utils.AppConfig;
+import com.song.sunset.base.AppConfig;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

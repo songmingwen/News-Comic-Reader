@@ -17,13 +17,13 @@ import com.flyco.tablayout.SlidingTabLayout;
 import com.song.sunset.R;
 import com.song.sunset.adapters.RankingPagerAdapter;
 import com.song.sunset.beans.ComicRankListBean;
-import com.song.sunset.beans.basebeans.BaseBean;
-import com.song.sunset.fragments.base.BaseFragment;
+import com.song.sunset.base.bean.BaseBean;
+import com.song.sunset.base.fragment.BaseFragment;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.loadingmanager.ProgressLayout;
-import com.song.sunset.utils.rxjava.RxUtil;
-import com.song.sunset.utils.retrofit.RetrofitCallback;
-import com.song.sunset.utils.retrofit.Net;
+import com.song.sunset.base.rxjava.RxUtil;
+import com.song.sunset.base.net.RetrofitCallback;
+import com.song.sunset.base.net.Net;
 import com.song.sunset.utils.api.U17ComicApi;
 import com.song.sunset.widget.RankViewPager;
 

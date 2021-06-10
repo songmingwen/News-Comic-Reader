@@ -41,9 +41,8 @@ import com.song.sunset.services.impl.MusicGetterImpl
 import com.song.sunset.services.managers.BinderPool
 import com.song.sunset.services.managers.MessengerManager
 import com.song.sunset.services.managers.PushManager
-import com.song.sunset.utils.AppConfig
+import com.song.sunset.base.AppConfig
 import com.song.sunset.utils.GreenDaoUtil
-import com.song.sunset.utils.SPUtils
 import com.song.sunset.utils.process.AndroidProcesses
 import java.util.ArrayList
 

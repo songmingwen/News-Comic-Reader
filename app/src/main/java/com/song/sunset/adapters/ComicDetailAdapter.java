@@ -17,7 +17,7 @@ import com.song.sunset.beans.ComicDetailBean;
 import com.song.sunset.holders.ComicDetailBottomViewHolder;
 import com.song.sunset.holders.ComicDetailHeaderViewHolder;
 import com.song.sunset.holders.ComicDetailListItemViewHolder;
-import com.song.sunset.utils.fresco.FrescoUtil;
+import com.song.sunset.utils.FrescoUtil;
 
 import java.util.ArrayList;
 import java.util.List;

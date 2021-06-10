@@ -4,7 +4,7 @@ import android.content.Context;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.ViewGroup;
 
-import com.song.sunset.beans.PhoenixChannelBean;
+import com.song.sunset.phoenix.bean.PhoenixChannelBean;
 
 /**
  * Created by Song on 2017/4/7 0007.

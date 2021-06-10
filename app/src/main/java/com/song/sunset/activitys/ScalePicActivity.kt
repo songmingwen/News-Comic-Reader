@@ -9,7 +9,7 @@ import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
 import android.os.Bundle
 import com.song.sunset.R
 import com.song.sunset.utils.ScreenUtils
-import com.song.sunset.utils.SdCardUtil
+import com.song.sunset.base.utils.SdCardUtil
 import com.davemorrissey.labs.subscaleview.ImageSource
 import android.graphics.Bitmap
 import android.view.View.OnLongClickListener
@@ -24,9 +24,7 @@ import coil.request.ImageRequest
 import coil.target.Target
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.song.sunset.utils.BitmapUtil
-import com.song.sunset.utils.FileUtils
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.ObservableOnSubscribe
+import com.song.sunset.base.utils.FileUtils
 import kotlinx.android.synthetic.main.activity_scale_pic.*
 import kotlinx.android.synthetic.main.activity_second_floor.*
 import java.io.File

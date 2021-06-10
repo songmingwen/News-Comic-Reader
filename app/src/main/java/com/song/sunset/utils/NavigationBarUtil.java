@@ -2,6 +2,8 @@ package com.song.sunset.utils;
 
 import android.content.res.Resources;
 
+import com.song.sunset.base.AppConfig;
+
 /**
  * @author songmingwen
  * @description

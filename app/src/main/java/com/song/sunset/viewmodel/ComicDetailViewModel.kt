@@ -9,9 +9,9 @@ import com.song.sunset.beans.ComicLocalCollection
 import com.song.sunset.mvp.models.ComicCollectionModel
 import com.song.sunset.utils.GreenDaoUtil
 import com.song.sunset.utils.api.U17ComicApi
-import com.song.sunset.utils.retrofit.Net
-import com.song.sunset.utils.retrofit.RetrofitCallback
-import com.song.sunset.utils.rxjava.RxUtil
+import com.song.sunset.base.net.Net
+import com.song.sunset.base.net.RetrofitCallback
+import com.song.sunset.base.rxjava.RxUtil
 import com.sunset.greendao.gen.ComicLocalCollectionDao
 
 open class ComicDetailViewModel(application: Application) : BaseViewModel(application) {

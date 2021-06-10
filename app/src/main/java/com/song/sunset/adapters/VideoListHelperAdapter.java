@@ -6,11 +6,10 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.song.sunset.R;
 import com.song.sunset.activitys.PhoenixVideoActivity;
-import com.song.sunset.beans.VideoDetailBean;
-import com.song.sunset.beans.VideoListsBean;
+import com.song.sunset.phoenix.bean.VideoDetailBean;
 import com.song.sunset.holders.VideoListHelperHolder;
 import com.song.sunset.utils.ViewUtil;
-import com.song.sunset.utils.fresco.FrescoUtil;
+import com.song.sunset.utils.FrescoUtil;
 
 /**
  * Created by Song on 2017/3/13.

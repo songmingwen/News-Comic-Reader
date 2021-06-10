@@ -8,9 +8,10 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.song.sunset.R;
-import com.song.sunset.beans.basebeans.PageEntity;
-import com.song.sunset.holders.DefaultLoadMoreProgressHolder;
-import com.song.sunset.holders.DefaultRefreshEmptyHolder;
+import com.song.sunset.base.bean.PageEntity;
+import com.song.sunset.base.fragment.BaseFragment;
+import com.song.sunset.base.holder.DefaultLoadMoreProgressHolder;
+import com.song.sunset.base.holder.DefaultRefreshEmptyHolder;
 import com.song.widget.PullRefreshLayout;
 import com.zhihu.android.sugaradapter.SugarAdapter;
 

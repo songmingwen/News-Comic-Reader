@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import com.song.sunset.R;
 import com.song.sunset.utils.DateTimeUtils;
-import com.song.sunset.utils.rxjava.RxBus;
+import com.song.sunset.base.rxjava.RxBus;
 import com.song.video.base.BaseVideoController;
 import com.song.video.base.INormalVideoPlayer;
 import com.song.video.model.SeekEvent;

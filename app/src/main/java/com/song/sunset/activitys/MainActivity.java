@@ -28,7 +28,6 @@ import com.google.android.material.navigation.NavigationView;
 import com.meituan.android.walle.ChannelInfo;
 import com.meituan.android.walle.WalleChannelReader;
 import com.song.core.statusbar.StatusBarUtil;
-import com.song.sunset.BindView;
 import com.song.sunset.R;
 import com.song.sunset.activitys.temp.FunctionListActivity;
 import com.song.sunset.base.activity.BaseActivity;
@@ -41,7 +40,7 @@ import com.song.sunset.mvp.presenters.ComicCollectionPresenter;
 import com.song.sunset.mvp.views.ComicCollectionView;
 import com.song.sunset.services.managers.MessengerManager;
 import com.song.sunset.services.managers.PushManager;
-import com.song.sunset.utils.AppConfig;
+import com.song.sunset.base.AppConfig;
 import com.song.sunset.utils.BindViewTools;
 import com.song.sunset.utils.GreenDaoUtil;
 import com.song.sunset.utils.preinstall.DefaultPreinstallHandler;
@@ -78,7 +77,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         initDrawer();
         setUpListener();
 
-        swithFragmentByRouter("/song/phoenix/list", getResources().getString(R.string.phoenix_news));
+        swithFragmentByRouter("/phoenix/list", getResources().getString(R.string.phoenix_news));
         mPresenter = new ComicCollectionPresenter();
         mPresenter.attachVM(this, new ComicCollectionModel());
         mPresenter.getNewestCollectedComic();
@@ -172,7 +171,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 swithFragmentByRouter("/song/comic/rank", getResources().getString(R.string.rank_comic));
                 break;
             case R.id.nav_news:
-                swithFragmentByRouter("/song/phoenix/list", getResources().getString(R.string.phoenix_news));
+                swithFragmentByRouter("/phoenix/list", getResources().getString(R.string.phoenix_news));
                 break;
             case R.id.nav_collection:
                 swithFragmentByRouter("/song/comic/collection", getResources().getString(R.string.collection_comic));
@@ -223,7 +222,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     private void swithFragmentByRouter(String routerUrl, String title) {
-        fab.setVisibility(TextUtils.equals(routerUrl, "/song/phoenix/list") ? View.VISIBLE : View.GONE);
+        fab.setVisibility(TextUtils.equals(routerUrl, "/phoenix/list") ? View.VISIBLE : View.GONE);
 
         getmHandler().postDelayed(() -> {
             toolbar.setTitle(title);

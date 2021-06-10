@@ -7,6 +7,8 @@ import android.text.format.DateUtils;
 import android.util.Log;
 
 import com.song.sunset.R;
+import com.song.sunset.base.AppConfig;
+import com.song.sunset.base.utils.SPUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

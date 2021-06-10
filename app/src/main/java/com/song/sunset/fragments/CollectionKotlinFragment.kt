@@ -13,7 +13,7 @@ import com.song.sunset.viewmodel.CollectionViewModel
 import com.song.sunset.R
 import com.song.sunset.adapters.CollectionComicAdapter
 import com.song.sunset.beans.ComicCollectionBean
-import com.song.sunset.fragments.base.BaseFragment
+import com.song.sunset.base.fragment.BaseFragment
 import com.song.sunset.utils.ViewUtil
 import kotlinx.android.synthetic.main.fragment_comic_collection.*
 

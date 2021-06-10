@@ -14,9 +14,9 @@ import android.view.TextureView;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import com.song.sunset.utils.SPUtils;
+import com.song.sunset.base.utils.SPUtils;
 import com.song.sunset.utils.ScreenUtils;
-import com.song.sunset.utils.StringUtils;
+import com.song.sunset.base.utils.StringUtils;
 import com.song.sunset.utils.ViewUtil;
 import com.song.video.base.BaseVideoController;
 import com.song.video.base.INormalVideoPlayer;

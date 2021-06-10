@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.song.sunset.R;
 import com.song.sunset.activitys.PhoenixNewsActivity;
-import com.song.sunset.beans.PhoenixChannelBean;
+import com.song.sunset.phoenix.bean.PhoenixChannelBean;
 import com.song.sunset.holders.BigImage2ViewHolder;
 import com.song.sunset.holders.BigImageViewHolder;
 import com.song.sunset.holders.BigTopViewHolder;

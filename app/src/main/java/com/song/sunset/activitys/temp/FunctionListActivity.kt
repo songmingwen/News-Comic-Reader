@@ -15,12 +15,11 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.bubblepicker.BubbleActivity
 import com.song.scankit.QRCodeActivity
 import com.song.sunset.R
-import com.song.sunset.activitys.ComicDetailMVPActivity
 import com.song.sunset.activitys.PhoenixVideoActivity
 import com.song.sunset.base.activity.BaseActivity
 import com.song.sunset.activitys.opengl.OpenGLListActivity
 import com.song.sunset.beans.MusicInfo
-import com.song.sunset.beans.VideoDetailBean
+import com.song.sunset.phoenix.bean.VideoDetailBean
 import com.song.sunset.services.impl.BinderPoolImpl
 import com.song.sunset.services.impl.MusicCallBackListenerImpl
 import com.song.sunset.services.impl.MusicGetterImpl

@@ -29,7 +29,7 @@ import com.facebook.imagepipeline.backends.okhttp3.OkHttpImagePipelineConfigFact
 import com.facebook.imagepipeline.cache.MemoryCacheParams;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.imagepipeline.core.ImagePipelineFactory;
-import com.song.sunset.utils.retrofit.HttpsUtil;
+import com.song.sunset.base.net.HttpsUtil;
 
 import okhttp3.OkHttpClient;
 

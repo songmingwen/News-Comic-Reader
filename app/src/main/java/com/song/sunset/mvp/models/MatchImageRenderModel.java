@@ -2,10 +2,10 @@ package com.song.sunset.mvp.models;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.song.sunset.beans.PhoenixChannelBean;
+import com.song.sunset.phoenix.bean.PhoenixChannelBean;
 import com.song.sunset.holders.MatchImageViewHolder;
 import com.song.sunset.mvp.models.base.PhoenixBaseRenderModel;
-import com.song.sunset.utils.fresco.FrescoUtil;
+import com.song.sunset.utils.FrescoUtil;
 
 
 /**

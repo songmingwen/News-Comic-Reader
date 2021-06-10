@@ -3,7 +3,7 @@ package com.song.sunset.mvp.models;
 
 import com.song.sunset.mvp.views.ListCallView;
 import com.song.sunset.widget.LoadingFooter;
-import com.song.sunset.beans.basebeans.PageEntity;
+import com.song.sunset.base.bean.PageEntity;
 
 /**
  * Created by Song on 2017/11/14 0014.

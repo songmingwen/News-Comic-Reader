@@ -6,13 +6,12 @@ import android.graphics.Point
 import android.os.Bundle
 import android.os.Handler
 import android.text.TextUtils
-import android.view.WindowManager
 import androidx.customview.widget.ViewDragHelper
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import com.song.sunset.base.NetworkLifecycleTransformer
-import com.song.sunset.base.SchedulerTransformer
-import com.song.sunset.base.SimplifyRequestTransformer
+import com.song.sunset.base.net.NetworkLifecycleTransformer
+import com.song.sunset.base.net.SchedulerTransformer
+import com.song.sunset.base.net.SimplifyRequestTransformer
 import com.trello.rxlifecycle3.android.ActivityEvent
 import com.trello.rxlifecycle3.components.support.RxAppCompatActivity
 import io.reactivex.ObservableTransformer
