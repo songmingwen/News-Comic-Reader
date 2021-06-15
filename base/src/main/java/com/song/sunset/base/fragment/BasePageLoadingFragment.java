@@ -137,6 +137,7 @@ public abstract class BasePageLoadingFragment<T extends PageEntity> extends Base
         });
 
         mSwipeRefreshLayout.setEnableLoadMore(false);
+        mSwipeRefreshLayout.setDragRate(1);
         mSwipeRefreshLayout.setOnRefreshListener(refreshlayout -> refresh(true));
         mSwipeRefreshLayout.postDelayed(() -> mSwipeRefreshLayout.autoRefresh(), 100);
     }

@@ -36,6 +36,7 @@ buildscript {
 
         classpath "com.jakewharton:butterknife-gradle-plugin:10.2.1"
 
+        classpath 'com.google.gms:google-services:4.3.3'
 //        classpath "com.tencent.bugly:tinker-support:latest.release"//微信热修复
     }
 }

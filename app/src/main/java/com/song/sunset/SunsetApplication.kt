@@ -9,19 +9,22 @@ import android.util.Log
 import androidx.multidex.MultiDexApplication
 import androidx.startup.AppInitializer
 import com.alibaba.android.arouter.launcher.ARouter
+import com.google.firebase.FirebaseApp
+import com.google.firebase.appcheck.FirebaseAppCheck
+import com.google.firebase.appcheck.debug.DebugAppCheckProviderFactory
 import com.song.core.FrescoInitializer
 import com.song.sunset.activitys.temp.GlobalFlowActivity.Companion.hideView
 import com.song.sunset.activitys.temp.GlobalFlowActivity.Companion.showGlobalFlowView
+import com.song.sunset.base.AppConfig
 import com.song.sunset.base.startup.FiveInitializer
 import com.song.sunset.base.startup.FourInitializer
+import com.song.sunset.base.utils.SPUtils
 import com.song.sunset.services.managers.BinderPool
 import com.song.sunset.services.managers.MessengerManager
 import com.song.sunset.services.managers.MusicGetterManager
 import com.song.sunset.services.managers.PushManager
 import com.song.sunset.startup.CoilInitializer
-import com.song.sunset.base.AppConfig
 import com.song.sunset.utils.GreenDaoUtil
-import com.song.sunset.base.utils.SPUtils
 import com.song.sunset.utils.lifecycle.BaseActivityLifecycle
 import com.song.sunset.utils.lifecycle.LifecycleManager
 import com.tencent.mmkv.MMKV
@@ -29,6 +32,7 @@ import io.flutter.view.FlutterMain
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import io.reactivex.schedulers.Schedulers
+
 
 /**
  * Created by Song on 2016/8/29 0029.
@@ -93,6 +97,7 @@ class SunsetApplication : MultiDexApplication() {
                 .subscribeOn(Schedulers.io())
                 .subscribe { o: Any? -> }
 
+        FirebaseApp.initializeApp(this)
     }
 
     private fun setBuildConfig() {

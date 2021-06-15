@@ -13,11 +13,13 @@ import android.widget.Button
 import android.widget.LinearLayout
 import com.alibaba.android.arouter.launcher.ARouter
 import com.bubblepicker.BubbleActivity
+import com.google.firebase.appcheck.FirebaseAppCheck
+import com.google.firebase.appcheck.debug.DebugAppCheckProviderFactory
 import com.song.scankit.QRCodeActivity
 import com.song.sunset.R
 import com.song.sunset.activitys.PhoenixVideoActivity
-import com.song.sunset.base.activity.BaseActivity
 import com.song.sunset.activitys.opengl.OpenGLListActivity
+import com.song.sunset.base.activity.BaseActivity
 import com.song.sunset.beans.MusicInfo
 import com.song.sunset.phoenix.bean.VideoDetailBean
 import com.song.sunset.services.impl.BinderPoolImpl
@@ -99,7 +101,7 @@ class FunctionListActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_function_list)
 
-        mFireworksView = findViewById(R.id.fireworks_layout) as FireworksView
+        mFireworksView = findViewById(R.id.fireworks_layout)
 
         ll_function_container.apply {
             addButtonList()
@@ -107,6 +109,9 @@ class FunctionListActivity : BaseActivity() {
 
         Log.i("屏幕旋转生命周期", "onCreate")
         Log.i("A -> B", "A : onCreate")
+
+        val firebaseAppCheck = FirebaseAppCheck.getInstance()
+        firebaseAppCheck.installAppCheckProviderFactory(DebugAppCheckProviderFactory.getInstance())
     }
 
     override fun onStart() {

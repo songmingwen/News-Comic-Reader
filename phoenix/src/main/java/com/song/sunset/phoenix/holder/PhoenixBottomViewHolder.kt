@@ -17,7 +17,9 @@ import com.zhihu.android.sugaradapter.SugarHolder
  */
 open class PhoenixBottomViewHolder(view: View) : SugarHolder<PhoenixChannelBean>(view) {
 
-    private val PHOENIX_NEWS_URL = "phoenix_news_url"
+    companion object {
+        const val PHOENIX_NEWS_URL = "phoenix_news_url"
+    }
 
     private val txSource: TextView = view.findViewById(R.id.tx_source)
     private val commentCount: TextView = view.findViewById(R.id.comment_count)

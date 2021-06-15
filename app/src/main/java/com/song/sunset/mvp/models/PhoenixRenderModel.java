@@ -1,19 +1,17 @@
 package com.song.sunset.mvp.models;
 
-import androidx.annotation.NonNull;
-
 import android.net.Uri;
 import android.text.TextUtils;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.song.sunset.holders.PhoenixBaseBottomViewHolder;
 import com.song.sunset.phoenix.bean.PhoenixChannelBean;
 import com.song.sunset.phoenix.bean.PhoenixLiveExt;
-import com.song.sunset.phoenix.bean.PhoenixSportLiveExt;
-import com.song.sunset.holders.PhoenixBaseBottomViewHolder;
-import com.song.sunset.holders.MatchScoreViewHolder;
 import com.song.sunset.utils.FrescoUtil;
 
 import java.util.ArrayList;
@@ -86,19 +84,6 @@ public class PhoenixRenderModel {
         if (!TextUtils.isEmpty(phoenixChannelBean.getUpdateTime()) && phoenixChannelBean.getUpdateTime().length() > 12) {
             viewHolder.updateTime.setText(phoenixChannelBean.getUpdateTime().substring(11));
         }
-    }
-
-    static void setBaseLiveWithScore(PhoenixChannelBean phoenixChannelBean, MatchScoreViewHolder viewHolder) {
-        PhoenixSportLiveExt bean = phoenixChannelBean.getSportsLiveExt();
-        if (bean == null) {
-            return;
-        }
-        viewHolder.leftLogo.setImageURI(bean.getLeftLogo());
-        viewHolder.rightLogo.setImageURI(bean.getRightLogo());
-        viewHolder.leftTeam.setText(bean.getLeftName());
-        viewHolder.rightTeam.setText(bean.getRightName());
-        viewHolder.score.setText(bean.getLeftScore() + " - " + bean.getRightScore());
-        viewHolder.beginTime.setText(phoenixChannelBean.getStartTimeStr());
     }
 
     @NonNull

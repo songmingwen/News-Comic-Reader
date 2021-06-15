@@ -16,4 +16,6 @@ dependencies {
     implementation rootProject.ext.google.lifecycle_extensions
     implementation rootProject.ext.google.lifecycle_common_java8
     implementation rootProject.ext.google.startup_runtime
+    implementation rootProject.ext.google.firebase_core
+    implementation rootProject.ext.google.firebase_check
 }

@@ -25,6 +25,8 @@ import com.facebook.drawee.generic.RoundingParams;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.cache.DefaultCacheKeyFactory;
+import com.facebook.imagepipeline.common.ImageDecodeOptions;
+import com.facebook.imagepipeline.common.ImageDecodeOptionsBuilder;
 import com.facebook.imagepipeline.common.ResizeOptions;
 import com.facebook.imagepipeline.core.ImagePipeline;
 import com.facebook.imagepipeline.core.ImagePipelineFactory;
@@ -85,6 +87,7 @@ public class FrescoUtil {
         return builder
                 .setPlaceholderImage(android.R.color.white)
                 .setProgressBarImage(getProgressBarImage(position))
+                .setPlaceholderImage(R.drawable.icon_placeholder)
                 .setRetryImage(R.drawable.icon_new_style_retry)
                 .setRetryImageScaleType(ScalingUtils.ScaleType.CENTER_INSIDE)
                 .setFailureImage(R.drawable.icon_new_style_failure)

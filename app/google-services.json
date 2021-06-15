@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "484729264074",
+    "project_id": "song-sunset-75c0f",
+    "storage_bucket": "song-sunset-75c0f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:484729264074:android:f58b11aa9b4b5c2a5f2133",
+        "android_client_info": {
+          "package_name": "com.song.sunset"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "484729264074-gagqa6o258m1942s54pgc0ccouaeuvod.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.song.sunset",
+            "certificate_hash": "d263902055deebe9f88af67f1016bb76bdafe3e7"
+          }
+        },
+        {
+          "client_id": "484729264074-ing4jo0hfrkr0e8srkdogugldsm0m92t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOMfjF-pdwzF14m8_aAgVBx-RXG8_Xe1k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "484729264074-ing4jo0hfrkr0e8srkdogugldsm0m92t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

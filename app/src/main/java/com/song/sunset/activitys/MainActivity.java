@@ -25,6 +25,8 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.appcheck.FirebaseAppCheck;
+import com.google.firebase.appcheck.debug.DebugAppCheckProviderFactory;
 import com.meituan.android.walle.ChannelInfo;
 import com.meituan.android.walle.WalleChannelReader;
 import com.song.core.statusbar.StatusBarUtil;
@@ -38,6 +40,7 @@ import com.song.sunset.fragments.PhoenixListFragment;
 import com.song.sunset.mvp.models.ComicCollectionModel;
 import com.song.sunset.mvp.presenters.ComicCollectionPresenter;
 import com.song.sunset.mvp.views.ComicCollectionView;
+import com.song.sunset.phoenix.holder.PhoenixHolderDispatcher;
 import com.song.sunset.services.managers.MessengerManager;
 import com.song.sunset.services.managers.PushManager;
 import com.song.sunset.base.AppConfig;
@@ -126,7 +129,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private void setUpListener() {
         navigationView.setNavigationItemSelectedListener(this);
 
-        fab.setOnClickListener(v -> FunctionListActivity.Companion.start(MainActivity.this));
+        fab.setOnClickListener(v -> {
+            Log.i(TAG, "phoenix type =" + PhoenixHolderDispatcher.INSTANCE.getS().toString());
+            FunctionListActivity.Companion.start(MainActivity.this);
+        });
     }
 
     @Override

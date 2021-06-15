@@ -66,7 +66,6 @@ dependencies {
     implementation rootProject.ext.third.fresco
     implementation rootProject.ext.third.fresco_processors
     implementation rootProject.ext.third.fresco_imagepipeline_okhttp3
-    implementation rootProject.ext.third.fresco_animated_base_support
     implementation rootProject.ext.third.fresco_animated_gif
     implementation rootProject.ext.third.fresco_animated_webp
     implementation rootProject.ext.third.fresco_webpsupport
