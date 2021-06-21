@@ -1,12 +1,14 @@
 package com.song.sunset.beans;
 
+import androidx.annotation.Keep;
+
 import java.util.List;
 
 /**
  * Created by Song on 2017/8/2 0002.
  * E-mail: z53520@qq.com
  */
-
+@Keep
 public class ComicReadChapterBean {
 
     private String chapter_id;

@@ -18,6 +18,8 @@ import android.graphics.Bitmap;
 import android.os.Environment;
 import android.text.TextUtils;
 
+import com.song.sunset.base.AppConfig;
+
 /**
  * File Utils
  * <ul>
@@ -67,7 +69,7 @@ public class FileUtils {
             ByteArrayOutputStream bo = new ByteArrayOutputStream();
             bm.compress(Bitmap.CompressFormat.JPEG, 100, bo);
 
-            File path = Environment.getExternalStorageDirectory();
+            File path = AppConfig.getApp().getExternalCacheDir();
             StringBuffer sb = new StringBuffer();
             sb.append(folder);
             sb.append(File.separator);

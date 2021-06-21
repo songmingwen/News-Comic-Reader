@@ -10,8 +10,6 @@ import androidx.multidex.MultiDexApplication
 import androidx.startup.AppInitializer
 import com.alibaba.android.arouter.launcher.ARouter
 import com.google.firebase.FirebaseApp
-import com.google.firebase.appcheck.FirebaseAppCheck
-import com.google.firebase.appcheck.debug.DebugAppCheckProviderFactory
 import com.song.core.FrescoInitializer
 import com.song.sunset.activitys.temp.GlobalFlowActivity.Companion.hideView
 import com.song.sunset.activitys.temp.GlobalFlowActivity.Companion.showGlobalFlowView
@@ -88,7 +86,7 @@ class SunsetApplication : MultiDexApplication() {
         addLifecycleListener()
         FlutterMain.startInitialization(this)
         val disposable = Observable
-                .create { emitter: ObservableEmitter<Any?>? ->
+                .create { _: ObservableEmitter<Any?>? ->
                     AppInitializer.getInstance(applicationContext).initializeComponent(FiveInitializer::class.java)
                     AppInitializer.getInstance(applicationContext).initializeComponent(FourInitializer::class.java)
                     AppInitializer.getInstance(applicationContext).initializeComponent(CoilInitializer::class.java)

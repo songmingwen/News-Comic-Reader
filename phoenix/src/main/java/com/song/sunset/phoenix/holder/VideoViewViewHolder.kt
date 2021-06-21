@@ -28,7 +28,7 @@ class VideoViewViewHolder(view: View) : PhoenixBottomViewHolder(view) {
         super.onBindData(data)
         title.text = data.title
         val controller: DraweeController = Fresco.newDraweeControllerBuilder()
-                .setUri(Uri.parse(data.thumbnail))
+                .setUri(Uri.parse(data.thumbnail?: ""))
                 .setAutoPlayAnimations(true)
                 .setOldController(image.controller)
                 .build()

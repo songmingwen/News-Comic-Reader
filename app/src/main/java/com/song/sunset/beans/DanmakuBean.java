@@ -3,11 +3,13 @@ package com.song.sunset.beans;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.Keep;
+
 /**
  * Created by Song on 2017/4/18 0018.
  * E-mail: z53520@qq.com
  */
-
+@Keep
 public class DanmakuBean implements Parcelable {
     private long time;                      // 0:时间(弹幕出现时间)
     private float textSize;                // 2:字号

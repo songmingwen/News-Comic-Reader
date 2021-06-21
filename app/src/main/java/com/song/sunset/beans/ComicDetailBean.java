@@ -1,11 +1,14 @@
 package com.song.sunset.beans;
 
+import androidx.annotation.Keep;
+
 import java.util.List;
 
 /**
  * Created by Song on 2016/9/20 0020.
  * Email:z53520@qq.com
  */
+@Keep
 public class ComicDetailBean {
 
     private ComicBean comic;
@@ -38,6 +41,7 @@ public class ComicDetailBean {
         this.otherWorks = otherWorks;
     }
 
+    @Keep
     public static class ComicBean {
         private String name;
         private String comic_id;
@@ -190,9 +194,10 @@ public class ComicDetailBean {
         }
 
         public void setTheme_ids(List<String> theme_ids) {
+
             this.theme_ids = theme_ids;
         }
-
+        @Keep
         public static class AuthorBean {
             private String avatar;
             private String name;
@@ -224,6 +229,7 @@ public class ComicDetailBean {
         }
     }
 
+    @Keep
     public static class OtherWorksBean {
         private String comicId;
         private String coverUrl;

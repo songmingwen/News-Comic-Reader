@@ -80,7 +80,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
-            debuggable false
+            debuggable true
             jniDebuggable false
             signingConfig signingConfigs.release
             renderscriptDebuggable false

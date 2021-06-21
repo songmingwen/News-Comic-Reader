@@ -3,13 +3,15 @@ package com.song.sunset.beans;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.Keep;
+
 import java.util.List;
 
 /**
  * Created by Song on 2017/4/12 0012.
  * Email:z53520@qq.com
  */
-
+@Keep
 public class ComicsBean implements Parcelable {
     private String conTag;
     private String cover;

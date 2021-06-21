@@ -6,6 +6,8 @@ import android.os.Environment;
 import android.os.StatFs;
 import android.util.Log;
 
+import com.song.sunset.base.AppConfig;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
@@ -43,7 +45,7 @@ public class SdCardUtil {
      * Get phone data path.
      */
     public static String getDataPath() {
-        return Environment.getDataDirectory().getPath();
+        return AppConfig.getApp().getExternalCacheDir().getPath();
 
     }
 
@@ -51,7 +53,7 @@ public class SdCardUtil {
      * Get SD card path.
      */
     public static String getNormalSDCardPath() {
-        return Environment.getExternalStorageDirectory().getPath();
+        return AppConfig.getApp().getCacheDir().getPath();
     }
 
     public static String getAppNormalSDCardPath() {

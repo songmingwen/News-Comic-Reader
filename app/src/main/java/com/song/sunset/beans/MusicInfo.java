@@ -3,11 +3,13 @@ package com.song.sunset.beans;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.Keep;
+
 /**
  * Created by Song on 2017/6/7 0007.
  * E-mail: z53520@qq.com
  */
-
+@Keep
 public class MusicInfo implements Parcelable {
 
     private long id;

@@ -1,14 +1,11 @@
 package com.song.sunset.adapters
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import coil.imageLoader
 import coil.load
-import coil.request.ImageRequest
 import com.alibaba.android.arouter.launcher.ARouter
 import com.song.sunset.R
 import com.song.sunset.activitys.ComicDetailActivity

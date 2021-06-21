@@ -3,13 +3,15 @@ package com.song.sunset.phoenix.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.Keep;
+
 import java.util.ArrayList;
 
 /**
  * Created by Song on 2017/3/30 0030.
  * E-mail: z53520@qq.com
  */
-
+@Keep
 public class PhoenixStyleBean implements Parcelable {
 
     //展示类型	recommend/bigimg/slides/normal

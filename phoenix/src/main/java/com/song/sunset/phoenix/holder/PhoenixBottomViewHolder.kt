@@ -49,11 +49,11 @@ open class PhoenixBottomViewHolder(view: View) : SugarHolder<PhoenixChannelBean>
             updateTime.text = data.updateTime.substring(11)
         }
 
-        itemView.setOnClickListener(View.OnClickListener {
+        itemView.setOnClickListener {
             ARouter.getInstance().build("/song/phoenix/news")
-                    .withString(PHOENIX_NEWS_URL, data.link.weburl)
+                    .withString(PHOENIX_NEWS_URL, data.link?.weburl)
                     .navigation()
-        })
+        }
     }
 
 }

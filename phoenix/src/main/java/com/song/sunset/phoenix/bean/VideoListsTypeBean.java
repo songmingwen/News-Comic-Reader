@@ -3,11 +3,13 @@ package com.song.sunset.phoenix.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.Keep;
+
 /**
  * Created by Song on 2018/2/7 0007.
  * E-mail: z53520@qq.com
  */
-
+@Keep
 public class VideoListsTypeBean implements Parcelable {
     private String id;
     private String name;

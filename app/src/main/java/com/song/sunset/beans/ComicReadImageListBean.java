@@ -3,13 +3,15 @@ package com.song.sunset.beans;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.Keep;
+
 import java.util.List;
 
 /**
  * Created by Song on 2017/8/2 0002.
  * E-mail: z53520@qq.com
  */
-
+@Keep
 public class ComicReadImageListBean implements Parcelable {
 
     private String location;

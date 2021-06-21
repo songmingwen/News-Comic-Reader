@@ -32,7 +32,7 @@ class BigImageViewHolder(view: View) : PhoenixBottomViewHolder(view) {
         title.text = data.title
         videoImage.visibility = if (TextUtils.equals(data.type, "phvideo")) View.VISIBLE else View.GONE
         val controller: DraweeController = Fresco.newDraweeControllerBuilder()
-                .setUri(Uri.parse(data.thumbnail))
+                .setUri(Uri.parse(data.thumbnail?: ""))
                 .setAutoPlayAnimations(true)
                 .setOldController(image.controller)
                 .build()

@@ -22,7 +22,7 @@ public class CacheUtil {
     private static File getCacheDir() {
         //设置缓存路径
 //        final File baseDir = AppConfig.getApp().getCacheDir();
-//        final File baseDir = Environment.getExternalStorageDirectory();
+//        final File baseDir = AppConfig.getApp().getCacheDir();
         final File baseDir = FileUtils.getFile(SdCardUtil.getAppNormalSDCardPath());
         final File cacheDir = new File(baseDir, "SunsetHttpCache");
         return cacheDir;

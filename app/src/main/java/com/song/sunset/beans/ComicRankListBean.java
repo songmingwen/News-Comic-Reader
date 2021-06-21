@@ -1,12 +1,14 @@
 package com.song.sunset.beans;
 
+import androidx.annotation.Keep;
+
 import java.util.List;
 
 /**
  * Created by Song on 2016/9/28 0028.
  * Email:z53520@qq.com
  */
-
+@Keep
 public class ComicRankListBean {
 
     private List<RankinglistBean> rankinglist;

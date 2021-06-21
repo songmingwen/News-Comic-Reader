@@ -30,7 +30,7 @@ class NineLatticeItemViewHolder(view: View) : SugarHolder<String>(view) {
 
     override fun onBindData(data: String) {
         val controller: DraweeController = Fresco.newDraweeControllerBuilder()
-                .setUri(Uri.parse(data))
+                .setUri(Uri.parse(data?: ""))
                 .setAutoPlayAnimations(true)
                 .setOldController(image.controller)
                 .build()

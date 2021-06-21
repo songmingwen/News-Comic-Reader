@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.song.sunset.R;
+import com.song.sunset.base.AppConfig;
 import com.song.sunset.base.activity.BaseActivity;
 
 /**
@@ -59,7 +60,7 @@ public class MediaPlayerActivity extends BaseActivity implements OnCompletionLis
         player.setAudioStreamType(AudioManager.STREAM_MUSIC);
         Log.v("Begin:::", "surfaceDestroyed called");
         //然后指定需要播放文件的路径，初始化MediaPlayer
-        String dataPath = Environment.getExternalStorageDirectory().getPath() + "/DCIM/Camera/Dog.mp4";
+        String dataPath = AppConfig.getApp().getCacheDir().getPath() + "/DCIM/Camera/Dog.mp4";
         try {
 //            player.setDataSource(dataPath);
             player.setDataSource("http://2449.vod.myqcloud.com/2449_22ca37a6ea9011e5acaaf51d105342e3.f20.mp4");

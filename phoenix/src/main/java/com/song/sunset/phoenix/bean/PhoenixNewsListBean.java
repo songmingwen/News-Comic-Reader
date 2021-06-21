@@ -4,6 +4,8 @@ package com.song.sunset.phoenix.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.Keep;
+
 import com.song.sunset.base.bean.PageEntity;
 
 import java.util.List;
@@ -12,7 +14,7 @@ import java.util.List;
  * Created by Song on 2017/3/30 0030.
  * E-mail: z53520@qq.com
  */
-
+@Keep
 public class PhoenixNewsListBean implements Parcelable, PageEntity<PhoenixChannelBean> {
 
     private String listId;

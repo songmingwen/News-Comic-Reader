@@ -3,11 +3,14 @@ package com.song.sunset.beans;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.Keep;
+
 import java.util.ArrayList;
 
 /**
  * Created by Song on 2016/12/5.
  */
+@Keep
 public class User implements Parcelable, Cloneable {
 
     private String userName;

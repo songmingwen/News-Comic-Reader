@@ -1,5 +1,7 @@
 package com.song.sunset.beans;
 
+import androidx.annotation.Keep;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
@@ -7,6 +9,7 @@ import org.greenrobot.greendao.annotation.Generated;
 /**
  * Created by z5352_000 on 2016/10/29 0029.
  */
+@Keep
 @Entity
 public class ComicLocalCollection {
 

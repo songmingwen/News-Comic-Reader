@@ -3,10 +3,13 @@ package com.song.sunset.phoenix.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.Keep;
+
 /**
  * Created by Song on 2017/4/11 0011.
  * E-mail: z53520@qq.com
  */
+@Keep
 public class PhoenixLiveExt implements Parcelable {
 
     private String hasVideo;

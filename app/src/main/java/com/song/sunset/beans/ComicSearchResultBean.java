@@ -1,10 +1,12 @@
 package com.song.sunset.beans;
 
+import androidx.annotation.Keep;
+
 /**
  * Created by Song on 2017/12/12 0012.
  * E-mail: z53520@qq.com
  */
-
+@Keep
 public class ComicSearchResultBean {
     /**
      * comic_id : 3166

@@ -6,6 +6,7 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import com.song.sunset.R
+import com.song.sunset.base.AppConfig
 import com.song.sunset.utils.BitmapUtil
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
@@ -31,7 +32,7 @@ class RxJavaKotlinActivity : AppCompatActivity() {
     }
 
     fun start() {
-        val file = File(Environment.getExternalStorageDirectory().path + File.separator + "sunset")
+        val file = File(AppConfig.getApp().cacheDir.path + File.separator + "sunset")
         val folders = file.listFiles()
         object : Thread() {
             override fun run() {
@@ -41,7 +42,7 @@ class RxJavaKotlinActivity : AppCompatActivity() {
                     files!!.forEach { file ->
                         if (file.name.endsWith(".png") || file.name.endsWith(".jpg")) {
                             val bitmap = BitmapUtil.getSmallBitmap(file.path, 200, 200)
-                            this@RxJavaKotlinActivity.runOnUiThread({ Log.i(TAG, "run: width = " + bitmap.width + ";height=" + bitmap.height) })
+                            this@RxJavaKotlinActivity.runOnUiThread { Log.i(TAG, "run: width = " + bitmap.width + ";height=" + bitmap.height) }
                         }
                     }
                 }

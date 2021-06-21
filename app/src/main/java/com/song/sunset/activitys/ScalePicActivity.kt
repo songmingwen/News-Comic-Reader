@@ -23,8 +23,10 @@ import coil.imageLoader
 import coil.request.ImageRequest
 import coil.target.Target
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.song.sunset.base.AppConfig
 import com.song.sunset.utils.BitmapUtil
 import com.song.sunset.base.utils.FileUtils
+import com.song.sunset.utils.PictureUtil
 import kotlinx.android.synthetic.main.activity_scale_pic.*
 import kotlinx.android.synthetic.main.activity_second_floor.*
 import java.io.File
@@ -83,7 +85,7 @@ class ScalePicActivity : BaseActivity() {
     }
 
     private fun setBitmapFromLocation(): Boolean {
-        file = File(SdCardUtil.getNormalSDCardPath() + "/Sunset/SavedCover", "$picId.jpg")
+        file = File(SdCardUtil.getDataPath() + "/Sunset/SavedCover", "$picId.jpg")
         return if (file!!.exists()) {
             id_pic_activity_image!!.setImage(ImageSource.uri(Uri.fromFile(file)))
             progress!!.showContent()
@@ -152,6 +154,9 @@ class ScalePicActivity : BaseActivity() {
         object : Thread() {
             override fun run() {
                 if (FileUtils.saveFile(response, "/Sunset/SavedCover", "$picId.jpg")) {
+                    val fileName = "$picId.jpg"
+                    val filePath = AppConfig.getApp().externalCacheDir?.absolutePath + "/Sunset/SavedCover/" + fileName
+                    PictureUtil.saveImageToGallery(this@ScalePicActivity, filePath, fileName)
                     showResult("图片保存成功")
                 } else {
                     showResult("图片保存失败")

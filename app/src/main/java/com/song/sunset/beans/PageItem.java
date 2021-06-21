@@ -10,6 +10,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
+import androidx.annotation.Keep;
 import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -19,6 +20,7 @@ import androidx.fragment.app.Fragment;
  * @description
  * @since 2020/12/16
  */
+@Keep
 public class PageItem {
 
     private Class<? extends Fragment> fragmentClass;

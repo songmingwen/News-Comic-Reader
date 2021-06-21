@@ -1,6 +1,8 @@
 package com.song.sunset.beans.zhihu;
 
 
+import androidx.annotation.Keep;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -10,6 +12,7 @@ import java.util.List;
  * @description
  * @since 2019/6/24
  */
+@Keep
 public class TagsList {
 
     public String name;

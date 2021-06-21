@@ -1,11 +1,14 @@
 package com.song.sunset.beans;
 
+import androidx.annotation.Keep;
+
 import java.util.List;
 
 /**
  * Created by Song on 2016/9/21 0021.
  * Email:z53520@qq.com
  */
+@Keep
 public class ComicClassifyBean {
     private String recommendSearch;
 

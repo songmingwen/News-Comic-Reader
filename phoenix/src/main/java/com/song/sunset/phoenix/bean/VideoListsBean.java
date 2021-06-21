@@ -3,12 +3,14 @@ package com.song.sunset.phoenix.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.Keep;
+
 import java.util.List;
 
 /**
  * Created by Song on 2016/12/21.
  */
-
+@Keep
 public class VideoListsBean implements Parcelable {
 
     private int totalPage;

@@ -38,7 +38,7 @@ class SlideImageViewHolder(view: View) : PhoenixBottomViewHolder(view)  {
                     if (i <= count) {
                         val simpleDraweeView = imageList[i]
                         val controller: DraweeController = Fresco.newDraweeControllerBuilder()
-                                .setUri(Uri.parse(phoenixChannelBean.style.images[i % count]))
+                                .setUri(Uri.parse(phoenixChannelBean.style.images[i % count]?: ""))
                                 .setAutoPlayAnimations(true)
                                 .setOldController(simpleDraweeView.controller)
                                 .build()
@@ -47,7 +47,7 @@ class SlideImageViewHolder(view: View) : PhoenixBottomViewHolder(view)  {
                     } else {
                         val simpleDraweeView = imageList[i]
                         val controller: DraweeController = Fresco.newDraweeControllerBuilder()
-                                .setUri(Uri.parse(phoenixChannelBean.thumbnail))
+                                .setUri(Uri.parse(phoenixChannelBean.thumbnail?: ""))
                                 .setAutoPlayAnimations(true)
                                 .setOldController(simpleDraweeView.controller)
                                 .build()

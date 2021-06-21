@@ -32,6 +32,7 @@ import android.widget.Toast;
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.TimePickerView;
 import com.song.sunset.R;
+import com.song.sunset.base.AppConfig;
 import com.song.sunset.base.activity.BaseActivity;
 import com.song.sunset.utils.BitmapUtil;
 import com.song.sunset.utils.DateTimeUtils;
@@ -381,7 +382,7 @@ public class TempTestActivity extends BaseActivity {
     }
 
     private void RxJavaContrast() {
-        final File file = new File(Environment.getExternalStorageDirectory().getPath() + File.separator + "sunset");
+        final File file = new File(AppConfig.getApp().getCacheDir().getPath() + File.separator + "sunset");
         final File[] folders = file.listFiles();
 
         Log.i(TAG, "song----以下是rxjava_2版本");

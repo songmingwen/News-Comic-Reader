@@ -3,6 +3,8 @@ package com.song.sunset.beans;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.Keep;
+
 import com.song.sunset.base.bean.PageEntity;
 
 import java.util.List;
@@ -11,6 +13,7 @@ import java.util.List;
  * Created by Song on 2016/9/22 0022.
  * Email:z53520@qq.com
  */
+@Keep
 public class ComicListBean implements PageEntity<ComicsBean>, Parcelable {
 
     private boolean hasMore;

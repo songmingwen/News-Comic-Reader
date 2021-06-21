@@ -4,6 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 
+import androidx.annotation.Keep;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -11,6 +13,7 @@ import com.google.gson.annotations.SerializedName;
  * @description
  * @since 2018/10/16
  */
+@Keep
 public class InterestTag implements Parcelable {
 
     public static final String TYPE_OF_HOT = "0";
