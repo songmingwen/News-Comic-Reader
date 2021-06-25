@@ -21,7 +21,10 @@ evaluate(new File(
 /**------------------------------ 以下为本地联合打包配置 ------------------------------ */
 // 加载配置文件
 Properties properties = new Properties()
-properties.load(new FileInputStream("source.properties"))
+String fileName = "source.properties"
+if (file(fileName).exists()) {
+    properties.load(new FileInputStream(fileName))
+}
 
 class Source {
     String name

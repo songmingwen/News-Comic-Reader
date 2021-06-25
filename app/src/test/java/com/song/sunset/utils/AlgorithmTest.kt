@@ -1,9 +1,6 @@
 package com.song.sunset.utils
 
-import com.song.sunset.utils.algorithm.Algorithm
-import com.song.sunset.utils.algorithm.AlgorithmKt
-import com.song.sunset.utils.algorithm.ListNode
-import com.song.sunset.utils.algorithm.TreeNode
+import com.song.sunset.utils.algorithm.*
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
@@ -192,6 +189,17 @@ class AlgorithmTest {
         val str2 = "eca"
         val length = Algorithm.longestCommonSubsequence(str1, str2)
         println(length)
+    }
+
+    @Test
+    fun dpTest() {
+
+        val intArray = intArrayOf(2, 5, 7)
+        val count = DynamicProgramming.getMixCoin(intArray, 27)
+        println("最终硬币数：$count")
+
+        val extraPay = DynamicProgramming.getPayMin(intArrayOf(8, 5), 14)
+        println("extraPay = $extraPay")
     }
 
 }
