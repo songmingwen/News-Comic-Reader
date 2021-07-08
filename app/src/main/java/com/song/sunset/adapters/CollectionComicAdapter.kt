@@ -64,11 +64,8 @@ class CollectionComicAdapter(private val context: Context) : RecyclerView.Adapte
 
     override fun getItemCount(): Int {
         return when {
-            mOnlineData.isNotEmpty() -> {
-                mOnlineData.size
-            }
-            mLocalData.isNotEmpty() -> {
-                mLocalData.size
+            mShowData.isNotEmpty() -> {
+                mShowData.size
             }
             else -> {
                 0
@@ -76,17 +73,35 @@ class CollectionComicAdapter(private val context: Context) : RecyclerView.Adapte
         }
     }
 
+    /**
+     * 设置本地数据库数据
+     */
     fun setLocalData(data: List<ComicLocalCollection>?) {
-        if (data != null && data.isNotEmpty()) {
-            if (mLocalData.size > 0) {
-                mLocalData.clear()
-            }
-            val newData = data.sortedBy { it.name }
-            mLocalData.addAll(newData)
-            fillShowData()
+        if (data == null || data.isEmpty()) {
+            return
         }
+        //按照漫画 id 排序一下，以免出现加载 local 再加载 online 后出现闪动的问题。
+        val newData = data.sortedBy { it.name }
+        mLocalData.clear()
+        mLocalData.addAll(newData)
+
+        mShowData.clear()
+        mLocalData.forEach {
+            val bean: ComicCollectionBean = ComicCollectionBean()
+            bean.comic_id = it.comicId.toString()
+            bean.name = it.name
+            bean.cover = it.cover
+            bean.author_name = it.author
+            bean.pass_chapter_num = it.chapterNum.toInt()
+            bean.updateInfo = NO_MORE
+            mShowData.add(bean)
+        }
+        notifyDataSetChanged()
     }
 
+    /**
+     * 设置网络接口数据
+     */
     fun setOnlineList(collectionList: List<ComicCollectionBean>?) {
         if (collectionList == null || collectionList.isEmpty()) {
             return
@@ -95,62 +110,36 @@ class CollectionComicAdapter(private val context: Context) : RecyclerView.Adapte
         val newCollectionList = collectionList.sortedBy { it.name }
         mOnlineData.clear()
         mOnlineData.addAll(newCollectionList)
-        fillShowData()
-    }
 
-    private fun fillShowData() {
-        if (mOnlineData.isNotEmpty()) {
-            if (mShowData.isNotEmpty()) {
-                mShowData.clear()
-            }
-            mShowData.addAll(mOnlineData)
-            //处理 update 数据
-            if (mLocalData.isNotEmpty()) {
-                // 本地有记录的对比阅读章节数
-                mLocalData.forEach { bean -> setUpdateInfo(bean) }
-                // 本地没有记录的线上数据统一按照一篇没读算
-                for (data in mShowData) {
-                    if (!TextUtils.equals(data.updateInfo, NO_MORE)) {
-                        data.updateInfo = String.format(context.getString(R.string.have_update),
-                                data.pass_chapter_num)
-                    }
-                }
-            } else {
-                mShowData.forEach { bean ->
-                    bean.updateInfo = String.format(context.getString(R.string.have_update), bean.pass_chapter_num)
-                }
-            }
-        }
-        //如果 showData 为空，说明 online 数据没回来，或者 online 数据为空
-        if (mShowData.isEmpty() && mLocalData.isNotEmpty()) {
-            mLocalData.forEach {
-                val bean: ComicCollectionBean = ComicCollectionBean()
-                bean.comic_id = it.comicId.toString()
-                bean.name = it.name
-                bean.cover = it.cover
-                bean.author_name = it.author
-                bean.pass_chapter_num = it.chapterNum.toInt()
-                bean.updateInfo = NO_MORE
-                mShowData.add(bean)
-            }
-        }
+        mShowData.clear()
+        mShowData.addAll(mOnlineData)
+
+        mShowData.forEach { bean -> setUpdateInfo(bean) }
 
         notifyDataSetChanged()
     }
 
-    private fun setUpdateInfo(bean: ComicLocalCollection) {
-        if (mShowData.isEmpty()) {
-            return
-        }
-        for (data in mShowData) {
-            if (TextUtils.equals(data.comic_id, bean.comicId.toString())) {
-                if ((data.pass_chapter_num - bean.chapterNum.toInt()) > 0) {
-                    data.updateInfo = String.format(context.getString(R.string.have_update),
-                            data.pass_chapter_num - bean.chapterNum.toInt())
-                } else {
-                    data.updateInfo = NO_MORE
+    private fun setUpdateInfo(showBean: ComicCollectionBean) {
+        var match = false
+        mLocalData.forEach { localBean ->
+            run {
+                if (TextUtils.equals(localBean.comicId.toString(), showBean.comic_id)) {
+                    match = true
+                    //如果本地已经有对应漫画
+
+                    if (showBean.pass_chapter_num - localBean.chapterNum.toInt() > 0) {
+                        showBean.updateInfo = String.format(context.getString(R.string.have_update),
+                                showBean.pass_chapter_num - localBean.chapterNum.toInt())
+                    } else {
+                        showBean.updateInfo = NO_MORE
+                    }
                 }
             }
+        }
+
+        //如果本地没有对应的漫画信息
+        if (!match) {
+            showBean.updateInfo = String.format(context.getString(R.string.have_update), showBean.pass_chapter_num)
         }
     }
 

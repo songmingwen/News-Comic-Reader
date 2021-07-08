@@ -33,6 +33,7 @@ class CollectionKotlinFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
         collectionViewModel = ViewModelProviders.of(this).get(CollectionViewModel::class.java)
         collectionViewModel!!.mLocalData.observe(this, Observer {
+            //本地数据回来后，再请求网络数据
             collectionViewModel!!.getNewestCollectedComic()
             if (it != null && it.isNotEmpty()) {
                 progress.showContent()

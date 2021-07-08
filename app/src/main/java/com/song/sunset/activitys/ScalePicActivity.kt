@@ -53,9 +53,6 @@ class ScalePicActivity : BaseActivity() {
         }
         if (intent != null) {
             picUrl = intent.getStringExtra(PIC_URL)
-            if (picUrl != null && picUrl!!.contains("ori.")) {
-                picUrl = picUrl!!.replace("ori.", "")
-            }
             picId = intent.getStringExtra(PIC_ID)
         }
         initView()
