@@ -4,12 +4,11 @@ apply from: file('version.gradle')
 buildscript {
 
     repositories {
-        maven {url 'https://maven.aliyun.com/repository/public'}
         google()
-        jcenter()
         mavenCentral()
-        maven {url "https://repo.eclipse.org/content/repositories/paho-snapshots/"}
-        maven {url 'https://developer.huawei.com/repo/'}
+        maven { url 'https://jitpack.io' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://developer.huawei.com/repo/' }
     }
 
     dependencies {
@@ -40,10 +39,11 @@ buildscript {
 
 allprojects {
     repositories {
-        jcenter()
-        maven {url "https://jitpack.io"}
-        maven {url 'https://developer.huawei.com/repo/'}
         google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://developer.huawei.com/repo/' }
     }
 }
 
