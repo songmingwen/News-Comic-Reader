@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.song.sunset.base.R;
 import com.song.sunset.base.bean.PageEntity;
+import com.song.sunset.base.holder.DefaultLoadMoreEndHolder;
 import com.song.sunset.base.holder.DefaultLoadMoreProgressHolder;
 import com.song.sunset.base.holder.DefaultRefreshEmptyHolder;
 import com.zhihu.android.sugaradapter.SugarAdapter;
@@ -62,7 +63,7 @@ public abstract class BasePageLoadingFragment<T extends PageEntity> extends Base
         mDataList = new ArrayList<>();
         mAdapter = addHolders(SugarAdapter.Builder.with(mDataList))
                 .add(DefaultRefreshEmptyHolder.class)
-//                .add(DefaultLoadMoreEndHolder.class)
+                .add(DefaultLoadMoreEndHolder.class)
                 .add(DefaultLoadMoreProgressHolder.class)
 //                .add(DefaultLoadMoreErrorHolder.class)
                 .build();
@@ -413,7 +414,7 @@ public abstract class BasePageLoadingFragment<T extends PageEntity> extends Base
 
     @Nullable
     protected Object buildLoadMoreEndItem() {
-        return new DefaultLoadMoreProgressHolder.Data();
+        return new DefaultLoadMoreEndHolder.EmptyInfo();
     }
 
     @Nullable

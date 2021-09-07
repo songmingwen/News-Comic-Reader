@@ -1,109 +1,108 @@
-package com.song.sunset.activitys.temp;
+package com.song.sunset.activitys.temp
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.PersistableBundle;
+import android.app.Activity
+import android.content.Intent
+import android.os.Bundle
+import android.os.PersistableBundle
+import android.view.View
+import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
+import com.song.sunset.R
+import com.song.sunset.R2
+import com.song.sunset.activitys.ComicListActivity
+import com.song.sunset.adapters.VP2PagerAdapter
+import com.song.sunset.base.activity.BaseActivity
+import com.song.sunset.base.net.Net
+import com.song.sunset.base.net.RetrofitCallback
+import com.song.sunset.base.rxjava.RxUtil
+import com.song.sunset.beans.ComicRankListBean
+import com.song.sunset.beans.PageItem
+import com.song.sunset.beans.User
+import com.song.sunset.fragments.ComicBaseListFragment
+import com.song.sunset.holders.HeaderHolder
+import com.song.sunset.utils.api.U17ComicApi
+import com.zhihu.android.sugaradapter.Layout
+import com.zhihu.android.sugaradapter.SugarAdapter
+import com.zhihu.android.sugaradapter.SugarHolder
+import kotlinx.android.synthetic.main.activity_scrolling.*
 
-import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
-import com.song.sunset.R;
-import com.song.sunset.base.activity.BaseActivity;
-import com.song.sunset.adapters.VP2PagerAdapter;
-import com.song.sunset.beans.ComicRankListBean;
-import com.song.sunset.beans.PageItem;
-import com.song.sunset.base.bean.BaseBean;
-import com.song.sunset.fragments.ComicBaseListFragment;
-import com.song.sunset.utils.api.U17ComicApi;
-import com.song.sunset.base.net.Net;
-import com.song.sunset.base.net.RetrofitCallback;
-import com.song.sunset.base.rxjava.RxUtil;
+class ScrollingActivity : BaseActivity() {
 
-import java.util.ArrayList;
-import java.util.List;
-
-import androidx.appcompat.widget.Toolbar;
-import androidx.viewpager2.widget.ViewPager2;
-import io.reactivex.Observable;
-
-import static com.song.sunset.activitys.ComicListActivity.ARG_NAME;
-import static com.song.sunset.activitys.ComicListActivity.ARG_VALUE;
-
-public class ScrollingActivity extends BaseActivity {
-
-    private static final String BUNDLE_KEY_PAGE_INDEX = "page_index";
-    private VP2PagerAdapter rankingPagerAdapter;
-    private int mCurrPos = 0;
-
-    public static void start(Activity activity) {
-        activity.startActivity(new Intent(activity, ScrollingActivity.class));
+    companion object {
+        private const val BUNDLE_KEY_PAGE_INDEX = "page_index"
+        fun start(activity: Activity) {
+            activity.startActivity(Intent(activity, ScrollingActivity::class.java))
+        }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scrolling);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        loadNetData();
+    private var rankingPagerAdapter: VP2PagerAdapter? = null
+    private var mCurrPos = 0
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_scrolling)
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        initHeader()
+        loadNetData()
     }
 
-    private void initView(List<PageItem> pageItems) {
-
-        ViewPager2 rankingViewPager = findViewById(R.id.ranking_view_pager);
-        TabLayout tabLayout = findViewById(R.id.tabLayout);
-        rankingPagerAdapter = new VP2PagerAdapter(this);
-        rankingPagerAdapter.setFragmentList(pageItems);
-        rankingViewPager.setAdapter(rankingPagerAdapter);
-        rankingViewPager.setOffscreenPageLimit(1);
-        rankingViewPager.setCurrentItem(mCurrPos);
-        rankingViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                mCurrPos = position;
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-            }
-        });
-        TabLayoutMediator tabLayoutMediator =
-                new TabLayoutMediator(tabLayout, rankingViewPager, false,
-                        (tab, position) -> tab.setText(rankingPagerAdapter.getPageTitle(position)));
-        tabLayoutMediator.attach();
+    private fun initHeader() {
+        val list = ArrayList<Any>()
+        list.add(User("宋先生", "银河系-太阳系-地球-中国", "1008610010"))
+        list.add(User("沈女士", "银河系-太阳系-地球-中国", "1008610010"))
+        list.add(User("宋儿子", "银河系-太阳系-地球-中国", "1008610010"))
+        val adapter = SugarAdapter.Builder.with(list).add(HeaderHolder::class.java).build()
+        header_rv.adapter = adapter
+        header_rv.layoutManager = LinearLayoutManager(this)
     }
 
-    private void loadNetData() {
-        Observable<BaseBean<ComicRankListBean>> observable = Net.createService(U17ComicApi.class).queryComicRankListBeanByObservable();
-        RxUtil.comicSubscribe(observable, new RetrofitCallback<ComicRankListBean>() {
-            @Override
-            public void onSuccess(ComicRankListBean comicRankListBean) {
-                List<ComicRankListBean.RankinglistBean> rankingTypeItemList = comicRankListBean.getRankinglist();
+    private fun initViewPager(pageItems: MutableList<PageItem>) {
+        rankingPagerAdapter = VP2PagerAdapter(this)
+        rankingPagerAdapter!!.setFragmentList(pageItems)
+        ranking_view_pager.adapter = rankingPagerAdapter
+        ranking_view_pager.offscreenPageLimit = 1
+        ranking_view_pager.currentItem = mCurrPos
+        ranking_view_pager.registerOnPageChangeCallback(object : OnPageChangeCallback() {
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
+            override fun onPageSelected(position: Int) {
+                mCurrPos = position
+            }
 
-                List<PageItem> pageItems = new ArrayList<>();
-                for (ComicRankListBean.RankinglistBean rankingTypeItem : rankingTypeItemList) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString(ARG_NAME, rankingTypeItem.getArgName());
-                    bundle.putInt(ARG_VALUE, Integer.parseInt(rankingTypeItem.getArgValue()));
-                    pageItems.add(new PageItem(ComicBaseListFragment.class, rankingTypeItem.getTitle(), bundle));
+            override fun onPageScrollStateChanged(state: Int) {}
+        })
+        val tabLayoutMediator = TabLayoutMediator(tabLayout, ranking_view_pager, false
+        ) { tab: TabLayout.Tab, position: Int -> tab.text = rankingPagerAdapter!!.getPageTitle(position) }
+        tabLayoutMediator.attach()
+    }
+
+    private fun loadNetData() {
+        val observable = Net.createService(U17ComicApi::class.java).queryComicRankListBeanByObservable()
+        RxUtil.comicSubscribe(observable, object : RetrofitCallback<ComicRankListBean?> {
+            override fun onSuccess(comicRankListBean: ComicRankListBean?) {
+                val rankingTypeItemList = comicRankListBean?.rankinglist
+                val pageItems: MutableList<PageItem> = ArrayList()
+                if (rankingTypeItemList != null) {
+                    for (rankingTypeItem in rankingTypeItemList) {
+                        val bundle = Bundle()
+                        bundle.putString(ComicListActivity.ARG_NAME, rankingTypeItem.argName)
+                        bundle.putInt(ComicListActivity.ARG_VALUE, rankingTypeItem.argValue.toInt())
+                        pageItems.add(PageItem(ComicBaseListFragment::class.java, rankingTypeItem.title, bundle))
+                    }
                 }
-
-                initView(pageItems);
+                initViewPager(pageItems)
             }
 
-            @Override
-            public void onFailure(int errorCode, String errorMsg) {
-            }
-        });
+            override fun onFailure(errorCode: Int, errorMsg: String) {}
+        })
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
-        outState.putInt(BUNDLE_KEY_PAGE_INDEX, mCurrPos);
+    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+        super.onSaveInstanceState(outState, outPersistentState)
+        outState.putInt(BUNDLE_KEY_PAGE_INDEX, mCurrPos)
     }
+
 }
