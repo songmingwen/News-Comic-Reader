@@ -69,4 +69,5 @@ dependencies {
     implementation rootProject.ext.third.fresco_animated_gif
     implementation rootProject.ext.third.fresco_animated_webp
     implementation rootProject.ext.third.fresco_webpsupport
+    implementation rootProject.ext.third.lottie
 }

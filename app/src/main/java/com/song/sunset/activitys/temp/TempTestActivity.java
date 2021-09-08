@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Process;
 
 import androidx.annotation.IntDef;
@@ -34,7 +33,7 @@ import com.bigkoo.pickerview.TimePickerView;
 import com.song.sunset.R;
 import com.song.sunset.base.AppConfig;
 import com.song.sunset.base.activity.BaseActivity;
-import com.song.sunset.utils.BitmapUtil;
+import com.song.sunset.comic.utils.BitmapUtil;
 import com.song.sunset.utils.DateTimeUtils;
 import com.song.sunset.base.rxjava.RxUtil;
 import com.song.sunset.widget.CircleProgress;

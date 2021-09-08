@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.song.sunset.widget.ScaleRecyclerView
+    <com.song.sunset.comic.widget.ScaleRecyclerView
         android:id="@+id/id_comic_read_recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

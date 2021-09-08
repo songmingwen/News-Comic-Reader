@@ -15,7 +15,7 @@ import com.song.sunset.comic.holders.ComicListViewHolder;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.FrescoUtil;
 
-import static com.song.sunset.activitys.ComicDetailActivity.COMIC_ID;
+import static com.song.sunset.comic.ComicDetailActivity.COMIC_ID;
 
 /**
  * Created by Song on 2017/3/3.
@@ -61,6 +61,6 @@ public class DefaultLoadableAdapter extends BaseRecyclerViewAdapter<ComicsBean, 
 
     @Override
     protected void onItemClick(View view, int position) {
-        ARouter.getInstance().build("/song/comic/detail").withInt(COMIC_ID, getData().get(position).getComicId()).navigation();
+        ARouter.getInstance().build("/comic/detail").withInt(COMIC_ID, getData().get(position).getComicId()).navigation();
     }
 }

@@ -10,7 +10,7 @@ import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.song.sunset.R
-import com.song.sunset.activitys.ComicListActivity
+import com.song.sunset.comic.ComicListActivity
 import com.song.sunset.adapters.VP2PagerAdapter
 import com.song.sunset.base.activity.BaseActivity
 import com.song.sunset.base.net.Net
@@ -19,7 +19,7 @@ import com.song.sunset.base.rxjava.RxUtil
 import com.song.sunset.comic.bean.ComicRankListBean
 import com.song.sunset.beans.PageItem
 import com.song.sunset.beans.User
-import com.song.sunset.fragments.ComicBaseListFragment
+import com.song.sunset.comic.fragment.ComicBaseListFragment
 import com.song.sunset.holders.HeaderHolder
 import com.song.sunset.comic.api.U17ComicApi
 import com.zhihu.android.sugaradapter.SugarAdapter

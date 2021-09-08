@@ -22,7 +22,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.song.core.statusbar.StatusBarUtil;
+import com.song.sunset.comic.utils.StatusBarUtil;
 import com.song.sunset.R;
 import com.song.sunset.base.activity.BaseActivity;
 import com.song.sunset.utils.ScreenUtils;

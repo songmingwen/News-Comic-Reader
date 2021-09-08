@@ -1,0 +1,43 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/appwidget_newest_comic"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_weight="1"
+        android:visibility="gone"
+        android:src="@drawable/icon_comic"/>
+
+    <ImageView
+        android:id="@+id/appwidget_collected_comic"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_weight="1"
+        android:src="@drawable/icon_comic"/>
+
+    <ImageView
+        android:id="@+id/appwidget_news"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_weight="1"
+        android:src="@drawable/news"/>
+
+    <ImageView
+        android:id="@+id/appwidget_news_video"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_weight="1"
+        android:src="@drawable/icon_video"/>
+
+</LinearLayout>

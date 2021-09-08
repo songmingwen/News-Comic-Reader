@@ -27,16 +27,17 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.meituan.android.walle.ChannelInfo;
 import com.meituan.android.walle.WalleChannelReader;
-import com.song.core.statusbar.StatusBarUtil;
+import com.song.sunset.comic.ComicCollectionActivity;
+import com.song.sunset.comic.utils.StatusBarUtil;
 import com.song.sunset.R;
 import com.song.sunset.activitys.temp.FunctionListActivity;
 import com.song.sunset.base.activity.BaseActivity;
 import com.song.sunset.comic.bean.CollectionOnlineListBean;
 import com.song.sunset.comic.bean.ComicCollectionBean;
 import com.song.sunset.comic.bean.ComicLocalCollection;
-import com.song.sunset.mvp.models.ComicCollectionModel;
-import com.song.sunset.mvp.presenters.ComicCollectionPresenter;
-import com.song.sunset.mvp.views.ComicCollectionView;
+import com.song.sunset.comic.mvp.models.ComicCollectionModel;
+import com.song.sunset.comic.mvp.presenters.ComicCollectionPresenter;
+import com.song.sunset.comic.mvp.views.ComicCollectionView;
 import com.song.sunset.phoenix.fragment.PhoenixListFragment;
 import com.song.sunset.phoenix.holder.PhoenixHolderDispatcher;
 import com.song.sunset.services.managers.MessengerManager;
@@ -163,16 +164,16 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         switch (id) {
             case R.id.nav_gallery:
-                swithFragmentByRouter("/song/comic/newest", getResources().getString(R.string.newest_comic));
+                swithFragmentByRouter("/comic/newest", getResources().getString(R.string.newest_comic));
                 break;
             case R.id.nav_classify_comic:
-                swithFragmentByRouter("/song/comic/classify", getResources().getString(R.string.classify_comic));
+                swithFragmentByRouter("/comic/classify", getResources().getString(R.string.classify_comic));
                 break;
             case R.id.nav_video:
                 swithFragmentByRouter("/song/video/tv", "TV");
                 break;
             case R.id.nav_rank_comic:
-                swithFragmentByRouter("/song/comic/rank", getResources().getString(R.string.rank_comic));
+                swithFragmentByRouter("/comic/rank", getResources().getString(R.string.rank_comic));
                 break;
             case R.id.nav_news:
                 swithFragmentByRouter("/phoenix/list", getResources().getString(R.string.phoenix_news));

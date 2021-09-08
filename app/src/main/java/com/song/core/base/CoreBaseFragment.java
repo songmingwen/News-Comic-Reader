@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.song.sunset.comic.mvp.CoreBaseView;
+import com.song.sunset.comic.mvp.models.CoreBaseModel;
+import com.song.sunset.comic.mvp.presenters.CoreBasePresenter;
 import com.trello.rxlifecycle3.components.RxFragment;
 
 /**

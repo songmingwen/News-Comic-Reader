@@ -9,7 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.song.sunset.R;
-import com.song.sunset.utils.BitmapUtil;
+import com.song.sunset.comic.utils.BitmapUtil;
 import com.song.sunset.utils.ViewUtil;
 
 /**

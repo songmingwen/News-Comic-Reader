@@ -7,6 +7,7 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.constant.RefreshState
 import com.scwang.smart.refresh.layout.simple.SimpleMultiListener
 import com.song.sunset.R
+import com.song.sunset.comic.fragment.ComicBaseListFragment
 import kotlinx.android.synthetic.main.layout_refresh_second_floor.*
 
 /**

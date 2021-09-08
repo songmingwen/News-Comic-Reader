@@ -8,7 +8,10 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 
-import com.song.core.statusbar.StatusBarUtil;
+import com.song.sunset.comic.utils.StatusBarUtil;
+import com.song.sunset.comic.mvp.CoreBaseView;
+import com.song.sunset.comic.mvp.models.CoreBaseModel;
+import com.song.sunset.comic.mvp.presenters.CoreBasePresenter;
 import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
 
 /**

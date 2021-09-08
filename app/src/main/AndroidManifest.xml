@@ -60,7 +60,7 @@
         </activity>
         <activity android:name=".activitys.temp.GlobalFlowActivity" />
         <activity android:name=".activitys.temp.MotionLayoutActivity" />
-        <activity android:name=".activitys.ComicDetailActivity" />
+        <activity android:name=".comic.ComicDetailActivity" />
         <activity android:name=".activitys.opengl.render.RenderAirHockeyActivity" />
         <activity android:name=".activitys.opengl.render.RenderTextureActivity" />
         <activity android:name=".activitys.opengl.render.RenderFirstActivity" />
@@ -122,30 +122,21 @@
         <!-- </intent-filter> -->
         <!-- </activity> -->
         <activity
-            android:name=".activitys.MainKotlinActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activitys.ComicReadActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".activitys.VideoListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
-            android:name=".activitys.ScalePicActivity"
+            android:name=".comic.ScalePicActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activitys.ComicListActivity"
+            android:name=".comic.ComicListActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".activitys.MediaPlayerActivity" />
         <activity android:name=".activitys.VideoViewActivity" />
         <activity android:name=".activitys.temp.TouchEventTestActivity" />
         <activity android:name=".activitys.temp.TempTestActivity" />
-        <activity android:name=".activitys.ComicDetailMVPActivity" />
         <activity android:name=".activitys.temp.TransTestActivity" />
         <activity
-            android:name=".activitys.ComicCollectionActivity"
+            android:name=".comic.ComicCollectionActivity"
             android:launchMode="singleInstance" />
         <activity
             android:name=".activitys.PhoenixNewsActivity"
@@ -158,7 +149,7 @@
         <activity android:name=".activitys.BasicMapActivity" />
 
         <activity
-            android:name=".activitys.ComicReadMVPActivity"
+            android:name=".comic.ComicReadMVPActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activitys.temp.ScrollingActivity"
@@ -217,7 +208,7 @@
             android:authorities="com.song.sunset.providers.bookprovider"
             android:enabled="true"
             android:exported="true" />
-        <receiver android:name=".receivers.SunsetWidget">
+        <receiver android:name=".comic.widget.SunsetWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="com.song.sunset.intent.action.APP_WIDGET_CLICK" />

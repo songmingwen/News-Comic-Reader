@@ -238,6 +238,6 @@ class ComicStateList extends State<ComicList> {
   }
 
   _onClick(NewestComicListDataReturnDataComic comic) {
-    SRouter.navigation("/song/comic/detail", {"comic_id": comic.comicId});
+    SRouter.navigation("/comic/detail", {"comic_id": comic.comicId});
   }
 }

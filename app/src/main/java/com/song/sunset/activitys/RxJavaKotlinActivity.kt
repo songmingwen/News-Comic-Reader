@@ -1,13 +1,12 @@
 package com.song.sunset.activitys
 
 import android.os.Bundle
-import android.os.Environment
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import com.song.sunset.R
 import com.song.sunset.base.AppConfig
-import com.song.sunset.utils.BitmapUtil
+import com.song.sunset.comic.utils.BitmapUtil
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 

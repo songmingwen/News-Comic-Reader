@@ -49,7 +49,7 @@ class ComicListAdapter(private val context: Context) : BaseRecyclerViewAdapter<C
     }
 
     override fun onItemClick(view: View, position: Int) {
-        ARouter.getInstance().build("/song/comic/detail").withInt("comic_id", data[position]!!.comicId).navigation()
+        ARouter.getInstance().build("/comic/detail").withInt("comic_id", data[position]!!.comicId).navigation()
     }
 
 }

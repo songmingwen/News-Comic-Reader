@@ -160,7 +160,6 @@ dependencies {
 
     implementation project(':flutter')
     implementation project(':comic')
-    implementation project(':widget')
     implementation project(':base')
     implementation project(':neural')
     implementation project(':scankit')

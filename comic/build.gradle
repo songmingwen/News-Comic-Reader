@@ -89,6 +89,9 @@ dependencies {
     implementation rootProject.ext.third.coil_video
     implementation rootProject.ext.third.coil_svg
     implementation rootProject.ext.third.coil_gif
+    implementation rootProject.ext.third.ultra_ptr
+    implementation rootProject.ext.third.scale_image
+    implementation rootProject.ext.third.FlycoTabLayout_Lib
 
     implementation project(':base')
 }

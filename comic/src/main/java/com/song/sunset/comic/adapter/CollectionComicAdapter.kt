@@ -56,7 +56,7 @@ class CollectionComicAdapter(private val context: Context) : RecyclerView.Adapte
 
             holder.itemView.setOnClickListener {
                 mOnItemClickListener?.invoke(data.comic_id)
-                ARouter.getInstance().build("/song/comic/detail").withInt("comic_id", data.comic_id.toInt()).navigation()
+                ARouter.getInstance().build("/comic/detail").withInt("comic_id", data.comic_id.toInt()).navigation()
             }
         }
     }
