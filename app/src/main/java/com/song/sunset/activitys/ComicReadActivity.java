@@ -11,15 +11,15 @@ import android.view.View;
 import com.song.sunset.base.activity.BaseActivity;
 import com.song.sunset.utils.ScreenUtils;
 import com.song.sunset.base.bean.BaseBean;
-import com.song.sunset.beans.ComicReadBean;
+import com.song.sunset.comic.bean.ComicReadBean;
 import com.song.sunset.R;
 import com.song.sunset.adapters.ComicReadAdapter;
-import com.song.sunset.utils.loadingmanager.ProgressLayout;
+import com.song.sunset.widget.ProgressLayout;
 import com.song.sunset.base.rxjava.RxUtil;
 import com.song.sunset.base.net.RetrofitCallback;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.base.net.Net;
-import com.song.sunset.utils.api.U17ComicApi;
+import com.song.sunset.comic.api.U17ComicApi;
 import com.song.sunset.widget.ScaleRecyclerView;
 
 import java.util.ArrayList;

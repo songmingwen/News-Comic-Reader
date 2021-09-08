@@ -22,7 +22,7 @@ import com.song.sunset.services.managers.MessengerManager
 import com.song.sunset.services.managers.MusicGetterManager
 import com.song.sunset.services.managers.PushManager
 import com.song.sunset.startup.CoilInitializer
-import com.song.sunset.utils.GreenDaoUtil
+import com.song.sunset.comic.utils.GreenDaoUtil
 import com.song.sunset.utils.lifecycle.BaseActivityLifecycle
 import com.song.sunset.utils.lifecycle.LifecycleManager
 import com.tencent.mmkv.MMKV

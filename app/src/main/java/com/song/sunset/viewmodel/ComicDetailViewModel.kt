@@ -3,15 +3,16 @@ package com.song.sunset.viewmodel
 import android.app.Application
 import android.util.Base64
 import androidx.lifecycle.MutableLiveData
-import com.song.sunset.beans.CollectionOnlineListBean
-import com.song.sunset.beans.ComicDetailBean
-import com.song.sunset.beans.ComicLocalCollection
+import com.song.sunset.comic.bean.CollectionOnlineListBean
+import com.song.sunset.comic.bean.ComicDetailBean
+import com.song.sunset.comic.bean.ComicLocalCollection
 import com.song.sunset.mvp.models.ComicCollectionModel
-import com.song.sunset.utils.GreenDaoUtil
-import com.song.sunset.utils.api.U17ComicApi
+import com.song.sunset.comic.utils.GreenDaoUtil
+import com.song.sunset.comic.api.U17ComicApi
 import com.song.sunset.base.net.Net
 import com.song.sunset.base.net.RetrofitCallback
 import com.song.sunset.base.rxjava.RxUtil
+import com.song.sunset.base.viewmodel.BaseViewModel
 import com.sunset.greendao.gen.ComicLocalCollectionDao
 
 open class ComicDetailViewModel(application: Application) : BaseViewModel(application) {

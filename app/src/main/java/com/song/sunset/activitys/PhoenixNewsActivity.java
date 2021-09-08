@@ -26,7 +26,7 @@ import com.song.core.statusbar.StatusBarUtil;
 import com.song.sunset.R;
 import com.song.sunset.base.activity.BaseActivity;
 import com.song.sunset.utils.ScreenUtils;
-import com.song.sunset.utils.loadingmanager.ProgressLayout;
+import com.song.sunset.widget.ProgressLayout;
 
 /**
  * Created by Song on 2017/4/6 0006.

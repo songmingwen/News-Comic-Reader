@@ -18,7 +18,7 @@ import com.song.sunset.phoenix.bean.VideoDetailBean;
 import com.song.sunset.phoenix.bean.VideoListsBean;
 import com.song.sunset.base.fragment.BaseFragment;
 import com.song.sunset.interfaces.LoadingMoreListener;
-import com.song.sunset.utils.loadingmanager.ProgressLayout;
+import com.song.sunset.widget.ProgressLayout;
 import com.song.sunset.base.net.RetrofitCallback;
 import com.song.sunset.base.net.Net;
 import com.song.sunset.base.rxjava.RxUtil;

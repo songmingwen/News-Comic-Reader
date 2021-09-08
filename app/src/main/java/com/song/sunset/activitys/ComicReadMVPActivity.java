@@ -12,13 +12,13 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.song.sunset.R;
 import com.song.sunset.base.activity.BaseActivity;
 import com.song.sunset.adapters.ComicReadMVPAdapter;
-import com.song.sunset.beans.ChapterListBean;
-import com.song.sunset.beans.ComicReadImageListBean;
+import com.song.sunset.comic.bean.ChapterListBean;
+import com.song.sunset.comic.bean.ComicReadImageListBean;
 import com.song.sunset.interfaces.ComicReadView;
 import com.song.sunset.mvp.presenters.ComicReadPresenter;
 import com.song.sunset.utils.ScreenUtils;
 import com.song.sunset.utils.ViewUtil;
-import com.song.sunset.utils.loadingmanager.ProgressLayout;
+import com.song.sunset.widget.ProgressLayout;
 import com.song.sunset.widget.ComicReadMVPRecyclerView;
 import com.song.sunset.widget.ScaleRecyclerView;
 

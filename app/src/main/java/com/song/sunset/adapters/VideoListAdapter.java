@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.song.sunset.R;
-import com.song.sunset.adapters.base.BaseRecyclerViewAdapter;
+import com.song.sunset.base.adapter.BaseRecyclerViewAdapter;
 import com.song.sunset.phoenix.bean.VideoDetailBean;
 import com.song.sunset.holders.VideoListViewHolder;
 import com.song.sunset.utils.ViewUtil;

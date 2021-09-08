@@ -1,6 +1,6 @@
 package com.song.sunset.mvp.presenters;
 
-import com.song.sunset.beans.ChapterListBean;
+import com.song.sunset.comic.bean.ChapterListBean;
 import com.song.sunset.interfaces.ComicReadView;
 import com.song.sunset.mvp.models.ComicReadModel;
 

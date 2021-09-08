@@ -3,12 +3,13 @@ package com.song.sunset.viewmodel;
 import android.app.Application;
 import android.text.TextUtils;
 
-import com.song.sunset.beans.CollectionOnlineListBean;
-import com.song.sunset.beans.ComicCollectionBean;
-import com.song.sunset.beans.ComicLocalCollection;
+import com.song.sunset.base.viewmodel.BaseViewModel;
+import com.song.sunset.comic.bean.CollectionOnlineListBean;
+import com.song.sunset.comic.bean.ComicCollectionBean;
+import com.song.sunset.comic.bean.ComicLocalCollection;
 import com.song.sunset.base.bean.BaseBean;
-import com.song.sunset.utils.GreenDaoUtil;
-import com.song.sunset.utils.api.U17ComicApi;
+import com.song.sunset.comic.utils.GreenDaoUtil;
+import com.song.sunset.comic.api.U17ComicApi;
 import com.song.sunset.base.net.RetrofitCallback;
 import com.song.sunset.base.net.Net;
 import com.song.sunset.base.rxjava.RxUtil;

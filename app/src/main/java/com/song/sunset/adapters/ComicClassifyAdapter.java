@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.song.sunset.R;
 import com.song.sunset.activitys.ComicListActivity;
-import com.song.sunset.beans.ComicClassifyBean;
+import com.song.sunset.comic.bean.ComicClassifyBean;
 import com.song.sunset.holders.ComicClassifyViewHolder;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.FrescoUtil;

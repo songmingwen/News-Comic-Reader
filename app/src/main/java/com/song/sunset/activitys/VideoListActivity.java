@@ -19,7 +19,7 @@ import com.song.sunset.fragments.VideoListHelperFragment;
 import com.song.sunset.fragments.VideoListPlayFragment;
 import com.song.sunset.receivers.SunsetWidget;
 import com.song.sunset.utils.ViewUtil;
-import com.song.sunset.utils.loadingmanager.ProgressLayout;
+import com.song.sunset.widget.ProgressLayout;
 import com.song.sunset.base.rxjava.RxUtil;
 import com.song.sunset.base.net.RetrofitCallback;
 import com.song.sunset.base.net.Net;

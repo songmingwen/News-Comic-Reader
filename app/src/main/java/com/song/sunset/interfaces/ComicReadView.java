@@ -1,6 +1,6 @@
 package com.song.sunset.interfaces;
 
-import com.song.sunset.beans.ComicReadImageListBean;
+import com.song.sunset.comic.bean.ComicReadImageListBean;
 
 import java.util.List;
 

@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.song.sunset.R;
-import com.song.sunset.adapters.base.BaseRecyclerViewAdapter;
+import com.song.sunset.base.adapter.BaseRecyclerViewAdapter;
 import com.song.sunset.holders.FrescoProcessorHolder;
 
 /**

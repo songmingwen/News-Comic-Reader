@@ -2,10 +2,10 @@ package com.song.sunset.mvp.models;
 
 import androidx.annotation.NonNull;
 
-import com.song.sunset.beans.CollectionOnlineListBean;
+import com.song.sunset.comic.bean.CollectionOnlineListBean;
 import com.song.sunset.base.bean.BaseBean;
 import com.song.sunset.mvp.views.ComicCollectionView;
-import com.song.sunset.utils.api.U17ComicApi;
+import com.song.sunset.comic.api.U17ComicApi;
 import com.song.sunset.base.net.RetrofitCallback;
 import com.song.sunset.base.net.Net;
 import com.song.sunset.base.rxjava.RxUtil;

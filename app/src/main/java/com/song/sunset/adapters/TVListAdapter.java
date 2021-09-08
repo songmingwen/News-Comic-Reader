@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
 
 import com.song.sunset.R;
-import com.song.sunset.adapters.base.BaseRecyclerViewAdapter;
+import com.song.sunset.base.adapter.BaseRecyclerViewAdapter;
 import com.song.sunset.beans.TV;
 import com.song.sunset.holders.TVListViewHolder;
 import com.song.sunset.utils.ViewUtil;

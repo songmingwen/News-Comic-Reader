@@ -9,8 +9,9 @@ import android.view.ViewGroup;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.song.sunset.R;
-import com.song.sunset.beans.ComicsBean;
-import com.song.sunset.holders.ComicListViewHolder;
+import com.song.sunset.base.adapter.BaseRecyclerViewAdapter;
+import com.song.sunset.comic.bean.ComicsBean;
+import com.song.sunset.comic.holders.ComicListViewHolder;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.FrescoUtil;
 
@@ -20,7 +21,7 @@ import static com.song.sunset.activitys.ComicDetailActivity.COMIC_ID;
  * Created by Song on 2017/3/3.
  * E-mail:z53520@qq.com
  */
-public class DefaultLoadableAdapter extends  BaseRecyclerViewAdapter<ComicsBean, ComicListViewHolder> {
+public class DefaultLoadableAdapter extends BaseRecyclerViewAdapter<ComicsBean, ComicListViewHolder> {
 
     private Context context;
 

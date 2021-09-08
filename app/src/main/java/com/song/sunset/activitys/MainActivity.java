@@ -31,19 +31,19 @@ import com.song.core.statusbar.StatusBarUtil;
 import com.song.sunset.R;
 import com.song.sunset.activitys.temp.FunctionListActivity;
 import com.song.sunset.base.activity.BaseActivity;
-import com.song.sunset.beans.CollectionOnlineListBean;
-import com.song.sunset.beans.ComicCollectionBean;
-import com.song.sunset.beans.ComicLocalCollection;
-import com.song.sunset.fragments.PhoenixListFragment;
+import com.song.sunset.comic.bean.CollectionOnlineListBean;
+import com.song.sunset.comic.bean.ComicCollectionBean;
+import com.song.sunset.comic.bean.ComicLocalCollection;
 import com.song.sunset.mvp.models.ComicCollectionModel;
 import com.song.sunset.mvp.presenters.ComicCollectionPresenter;
 import com.song.sunset.mvp.views.ComicCollectionView;
+import com.song.sunset.phoenix.fragment.PhoenixListFragment;
 import com.song.sunset.phoenix.holder.PhoenixHolderDispatcher;
 import com.song.sunset.services.managers.MessengerManager;
 import com.song.sunset.services.managers.PushManager;
 import com.song.sunset.base.AppConfig;
 import com.song.sunset.utils.BindViewTools;
-import com.song.sunset.utils.GreenDaoUtil;
+import com.song.sunset.comic.utils.GreenDaoUtil;
 import com.song.sunset.utils.preinstall.DefaultPreinstallHandler;
 import com.song.video.VideoManager;
 import com.sunset.greendao.gen.ComicLocalCollectionDao;
@@ -178,7 +178,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 swithFragmentByRouter("/phoenix/list", getResources().getString(R.string.phoenix_news));
                 break;
             case R.id.nav_collection:
-                swithFragmentByRouter("/song/comic/collection", getResources().getString(R.string.collection_comic));
+                swithFragmentByRouter("/comic/collection", getResources().getString(R.string.collection_comic));
                 break;
             case R.id.nav_flutter:
                 startActivity(new Intent(this, FlutterComicActivity.class));

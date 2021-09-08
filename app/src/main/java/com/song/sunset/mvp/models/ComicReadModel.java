@@ -1,10 +1,10 @@
 package com.song.sunset.mvp.models;
 
-import com.song.sunset.beans.ChapterListBean;
-import com.song.sunset.beans.ComicReadChapterBean;
+import com.song.sunset.comic.bean.ChapterListBean;
+import com.song.sunset.comic.bean.ComicReadChapterBean;
 import com.song.sunset.base.bean.BaseBean;
 import com.song.sunset.interfaces.ComicReadView;
-import com.song.sunset.utils.api.U17ComicApi;
+import com.song.sunset.comic.api.U17ComicApi;
 import com.song.sunset.base.net.RetrofitCallback;
 import com.song.sunset.base.net.Net;
 import com.song.sunset.base.rxjava.RxUtil;

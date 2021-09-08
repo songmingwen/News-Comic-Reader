@@ -28,13 +28,13 @@ import com.song.core.base.CoreBaseActivity;
 import com.song.sunset.BindView;
 import com.song.sunset.R;
 import com.song.sunset.adapters.ComicDetailAdapter;
-import com.song.sunset.beans.ComicDetailBean;
+import com.song.sunset.comic.bean.ComicDetailBean;
 import com.song.sunset.mvp.models.ComicDetailModel;
 import com.song.sunset.mvp.presenters.ComicDetailPresenter;
 import com.song.sunset.utils.BitmapUtil;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.FrescoUtil;
-import com.song.sunset.utils.loadingmanager.ProgressLayout;
+import com.song.sunset.widget.ProgressLayout;
 import com.song.sunset.mvp.views.ComicDetailView;
 
 import static com.song.sunset.adapters.ComicDetailAdapter.COMIC_LIST_TYPE;

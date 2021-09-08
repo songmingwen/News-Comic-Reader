@@ -17,17 +17,17 @@ import android.widget.ImageView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.song.sunset.adapters.ComicSearchListAdapter;
-import com.song.sunset.beans.ComicSearchResultBean;
+import com.song.sunset.comic.bean.ComicSearchResultBean;
 import com.song.sunset.base.bean.BaseBean;
-import com.song.sunset.beans.ComicClassifyBean;
+import com.song.sunset.comic.bean.ComicClassifyBean;
 import com.song.sunset.R;
 import com.song.sunset.adapters.ComicClassifyAdapter;
 import com.song.sunset.utils.ViewUtil;
-import com.song.sunset.utils.loadingmanager.ProgressLayout;
+import com.song.sunset.widget.ProgressLayout;
 import com.song.sunset.base.rxjava.RxUtil;
 import com.song.sunset.base.net.RetrofitCallback;
 import com.song.sunset.base.net.Net;
-import com.song.sunset.utils.api.U17ComicApi;
+import com.song.sunset.comic.api.U17ComicApi;
 import com.song.sunset.widget.RecyclerViewDivider;
 
 import java.util.List;

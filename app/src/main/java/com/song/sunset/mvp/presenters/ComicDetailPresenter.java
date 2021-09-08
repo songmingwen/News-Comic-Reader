@@ -1,7 +1,7 @@
 package com.song.sunset.mvp.presenters;
 
 import com.song.core.base.CoreBasePresenter;
-import com.song.sunset.beans.ComicDetailBean;
+import com.song.sunset.comic.bean.ComicDetailBean;
 import com.song.sunset.mvp.models.ComicDetailModel;
 import com.song.sunset.base.rxjava.RxUtil;
 import com.song.sunset.base.net.RetrofitCallback;

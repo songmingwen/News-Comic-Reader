@@ -6,8 +6,8 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.song.sunset.R;
-import com.song.sunset.adapters.base.BaseRecyclerViewAdapter;
-import com.song.sunset.beans.ComicReadBean.ImageListBean.ImagesBean;
+import com.song.sunset.base.adapter.BaseRecyclerViewAdapter;
+import com.song.sunset.comic.bean.ComicReadBean.ImageListBean.ImagesBean;
 import com.song.sunset.holders.ComicReadViewHolder;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.utils.FrescoUtil;

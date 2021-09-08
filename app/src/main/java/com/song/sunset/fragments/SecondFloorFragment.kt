@@ -2,8 +2,6 @@ package com.song.sunset.fragments
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.widget.Toolbar
-import com.scwang.smart.refresh.header.TwoLevelHeader
 import com.scwang.smart.refresh.layout.api.RefreshHeader
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.constant.RefreshState

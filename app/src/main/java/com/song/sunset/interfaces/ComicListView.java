@@ -1,6 +1,6 @@
 package com.song.sunset.interfaces;
 
-import com.song.sunset.beans.ComicsBean;
+import com.song.sunset.comic.bean.ComicsBean;
 
 import java.util.List;
 

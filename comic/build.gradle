@@ -48,9 +48,47 @@ android {
     }
 }
 
+//--------------------------greenDao配置--------------------------
+apply plugin: 'org.greenrobot.greendao'
+greendao {
+    schemaVersion 2
+    daoPackage 'com.sunset.greendao.gen'
+    targetGenDir 'src/main/java'
+}
+//--------------------------greenDao配置--------------------------
+
+apply from: file('../dependencies_base.gradle')
+
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation rootProject.ext.google.constraintlayout
+    implementation rootProject.ext.third.rxjava3_android
+    implementation rootProject.ext.third.rxjava3_java
+    implementation rootProject.ext.third.rxlifecycle
+    implementation rootProject.ext.third.retrofit2
+    implementation rootProject.ext.third.retrofit2_converter_gson
+    implementation rootProject.ext.third.retrofit2_adapter_rxjava2
+    implementation rootProject.ext.third.refresh_kernel
+    implementation rootProject.ext.third.refresh_header_classics
+    implementation rootProject.ext.third.refresh_header_two_level
+    implementation rootProject.ext.third.refresh_footer_ball
+    implementation rootProject.ext.third.refresh_footer_classics
+    implementation rootProject.ext.third.fresco
+    implementation rootProject.ext.third.fresco_processors
+    implementation rootProject.ext.third.fresco_imagepipeline_okhttp3
+    implementation rootProject.ext.third.fresco_animated_gif
+    implementation rootProject.ext.third.fresco_animated_webp
+    implementation rootProject.ext.third.fresco_webpsupport
     implementation rootProject.ext.third.sugaradapter
     kapt rootProject.ext.third.sugaradapter_processor
+    implementation rootProject.ext.third.arouter
+    kapt rootProject.ext.third.arouter_compiler
+    implementation rootProject.ext.third.greendao_generator
+    implementation rootProject.ext.third.greendao
+    implementation rootProject.ext.third.streamsupport
+    implementation rootProject.ext.third.coil
+    implementation rootProject.ext.third.coil_video
+    implementation rootProject.ext.third.coil_svg
+    implementation rootProject.ext.third.coil_gif
+
+    implementation project(':base')
 }

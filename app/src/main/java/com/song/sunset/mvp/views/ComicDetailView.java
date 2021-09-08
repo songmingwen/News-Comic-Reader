@@ -1,7 +1,7 @@
 package com.song.sunset.mvp.views;
 
 import com.song.core.base.CoreBaseView;
-import com.song.sunset.beans.ComicDetailBean;
+import com.song.sunset.comic.bean.ComicDetailBean;
 
 /**
  * Created by Song on 2016/12/8.

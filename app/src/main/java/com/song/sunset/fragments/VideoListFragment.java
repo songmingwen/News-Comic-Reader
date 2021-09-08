@@ -17,7 +17,7 @@ import com.song.sunset.base.fragment.BaseFragment;
 import com.song.sunset.interfaces.LoadingMoreListener;
 import com.song.sunset.base.AppConfig;
 import com.song.sunset.utils.ViewUtil;
-import com.song.sunset.utils.loadingmanager.ProgressLayout;
+import com.song.sunset.widget.ProgressLayout;
 import com.song.sunset.base.rxjava.RxUtil;
 import com.song.sunset.base.net.RetrofitCallback;
 import com.song.sunset.base.net.Net;

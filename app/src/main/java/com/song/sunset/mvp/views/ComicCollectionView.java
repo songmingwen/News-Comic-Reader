@@ -1,6 +1,6 @@
 package com.song.sunset.mvp.views;
 
-import com.song.sunset.beans.CollectionOnlineListBean;
+import com.song.sunset.comic.bean.CollectionOnlineListBean;
 
 /**
  * Created by Song on 2017/12/22 0022.

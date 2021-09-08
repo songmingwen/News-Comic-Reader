@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 
 import com.song.sunset.R;
 import com.song.sunset.activitys.ComicReadMVPActivity;
-import com.song.sunset.adapters.base.BaseRecyclerViewAdapter;
-import com.song.sunset.beans.ChapterListBean;
+import com.song.sunset.base.adapter.BaseRecyclerViewAdapter;
+import com.song.sunset.comic.bean.ChapterListBean;
 import com.song.sunset.holders.ComicDetailListItemViewHolder;
 
 import java.util.ArrayList;

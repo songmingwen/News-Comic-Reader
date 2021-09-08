@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.request.RequestOptions;
 import com.song.sunset.R;
-import com.song.sunset.adapters.base.BaseRecyclerViewAdapter;
+import com.song.sunset.base.adapter.BaseRecyclerViewAdapter;
 import com.song.sunset.holders.TransViewHolder;
 
 /**

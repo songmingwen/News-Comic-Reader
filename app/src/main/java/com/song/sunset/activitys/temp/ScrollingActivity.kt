@@ -4,30 +4,25 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
-import android.view.View
-import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.song.sunset.R
-import com.song.sunset.R2
 import com.song.sunset.activitys.ComicListActivity
 import com.song.sunset.adapters.VP2PagerAdapter
 import com.song.sunset.base.activity.BaseActivity
 import com.song.sunset.base.net.Net
 import com.song.sunset.base.net.RetrofitCallback
 import com.song.sunset.base.rxjava.RxUtil
-import com.song.sunset.beans.ComicRankListBean
+import com.song.sunset.comic.bean.ComicRankListBean
 import com.song.sunset.beans.PageItem
 import com.song.sunset.beans.User
 import com.song.sunset.fragments.ComicBaseListFragment
 import com.song.sunset.holders.HeaderHolder
-import com.song.sunset.utils.api.U17ComicApi
-import com.zhihu.android.sugaradapter.Layout
+import com.song.sunset.comic.api.U17ComicApi
 import com.zhihu.android.sugaradapter.SugarAdapter
-import com.zhihu.android.sugaradapter.SugarHolder
 import kotlinx.android.synthetic.main.activity_scrolling.*
 
 class ScrollingActivity : BaseActivity() {

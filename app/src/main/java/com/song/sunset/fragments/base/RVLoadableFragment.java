@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.song.sunset.adapters.base.BaseRVAdapterWithoutVH;
+import com.song.sunset.base.adapter.BaseRVAdapterWithoutVH;
 import com.song.sunset.base.fragment.BaseFragment;
 import com.song.sunset.interfaces.EndlessRecyclerOnScrollListener;
 import com.song.sunset.mvp.views.ListCallView;
@@ -18,7 +18,7 @@ import com.song.sunset.widget.LoadingFooter;
 import com.song.sunset.base.bean.PageEntity;
 import com.song.sunset.R;
 import com.song.sunset.mvp.presenters.ListPresenter;
-import com.song.sunset.utils.loadingmanager.ProgressLayout;
+import com.song.sunset.widget.ProgressLayout;
 import com.song.sunset.base.net.RetrofitCallback;
 import com.song.sunset.widget.RecyclerViewWithHF;
 

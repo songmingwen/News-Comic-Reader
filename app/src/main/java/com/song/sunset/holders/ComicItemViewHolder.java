@@ -9,7 +9,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.song.sunset.R;
 import com.song.sunset.R2;
 import com.song.sunset.activitys.ComicDetailActivity;
-import com.song.sunset.beans.ComicsBean;
+import com.song.sunset.comic.bean.ComicsBean;
 import com.zhihu.android.sugaradapter.Layout;
 import com.zhihu.android.sugaradapter.SugarHolder;
 

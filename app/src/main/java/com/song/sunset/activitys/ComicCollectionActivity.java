@@ -5,7 +5,7 @@ import android.os.Bundle;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.song.sunset.R;
 import com.song.sunset.base.activity.BaseActivity;
-import com.song.sunset.fragments.CollectionKotlinFragment;
+import com.song.sunset.comic.fragment.CollectionKotlinFragment;
 import com.song.sunset.receivers.SunsetWidget;
 
 /**
