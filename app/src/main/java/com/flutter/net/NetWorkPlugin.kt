@@ -34,7 +34,7 @@ class NetworkPlugin : FlutterPlugin, MethodCallHandler {
     private val disposable: CompositeDisposable by lazy {
         CompositeDisposable()
     }
-    private val client = OkHttpClient.getInstance().createClient(null)
+    private val client = OkHttpClient.instance.createClient()
 
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         registerWith(flutterPluginBinding.binaryMessenger)
@@ -66,7 +66,7 @@ class NetworkPlugin : FlutterPlugin, MethodCallHandler {
     private fun createEmitter(data: Request, it: SingleEmitter<Response>) {
         try {
             val request = buildRequest(data)
-            client.newCall(request).enqueue(object : Callback {
+            client?.newCall(request)?.enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
                     it.onError(e)
                 }

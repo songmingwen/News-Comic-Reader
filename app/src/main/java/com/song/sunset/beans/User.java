@@ -93,4 +93,14 @@ public class User implements Parcelable, Cloneable {
             return new User[size];
         }
     };
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userName='" + userName + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", isSelected=" + isSelected +
+                '}';
+    }
 }

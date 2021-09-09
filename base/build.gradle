@@ -70,4 +70,6 @@ dependencies {
     implementation rootProject.ext.third.fresco_animated_webp
     implementation rootProject.ext.third.fresco_webpsupport
     implementation rootProject.ext.third.lottie
+    implementation rootProject.ext.third.streamsupport
+    implementation rootProject.ext.google.auto_service
 }

@@ -87,8 +87,8 @@ class PhoenixListFragment : BasePageLoadingFragment<PhoenixNewsListBean>() {
     private fun getDataFromRetrofit2(action: String, retrofitCallback: RetrofitCallback<PhoenixNewsListBean>) {
         val start = System.currentTimeMillis()
         val observable: Observable<List<PhoenixNewsListBean>> = Net
-                .createService(PhoenixNewsApi::class.java, WholeApi.PHOENIX_NEWS_BASE_URL, "time", System.currentTimeMillis().toString() + "")
-                .queryPhoenixListObservable(action)
+                .createService(PhoenixNewsApi::class.java, WholeApi.PHOENIX_NEWS_BASE_URL)
+                .queryPhoenixListObservable(action, System.currentTimeMillis().toString())
         val end = System.currentTimeMillis()
         Log.i("time = ", (end - start).toString() + "millis")
         RxUtil.phoenixNewsSubscribe(observable, retrofitCallback)

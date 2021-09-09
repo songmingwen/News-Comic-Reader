@@ -33,10 +33,11 @@ public interface PhoenixNewsApi {
 
     /**
      * 凤凰新闻头条接口
+     *
      * @param action up 上拉 down 下拉
      * @return
      */
     @GET("ClientNews")
     Observable<List<PhoenixNewsListBean>> queryPhoenixListObservable(
-            @Query("action") String action);
+            @Query("action") String action, @Query("time") String time);
 }

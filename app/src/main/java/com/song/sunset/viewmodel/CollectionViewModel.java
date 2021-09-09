@@ -50,7 +50,7 @@ public class CollectionViewModel extends BaseViewModel {
     }
 
     public void getNewestCollectedComic() {
-        Observable<BaseBean<CollectionOnlineListBean>> observable = Net.createService(U17ComicApi.class, getCollectionMap()).queryComicCollectionListRDByObservable("");
+        Observable<BaseBean<CollectionOnlineListBean>> observable = Net.createService(U17ComicApi.class).queryComicCollectionListRDByObservable("");
         RxUtil.comicSubscribe(observable, new RetrofitCallback<CollectionOnlineListBean>() {
             @Override
             public void onSuccess(CollectionOnlineListBean collectionOnlineListBean) {
@@ -104,15 +104,6 @@ public class CollectionViewModel extends BaseViewModel {
         if (comicLocalCollectionDao == null) {
             comicLocalCollectionDao = GreenDaoUtil.getDaoSession().getComicLocalCollectionDao();
         }
-    }
-
-    @NonNull
-    private Map<String, String> getCollectionMap() {
-        Map<String, String> map = new HashMap<>();
-        map.put("v", "3360100");
-        map.put("key", "387df5b33fc7fe893a7ca573591a9d82ee5695909ca89b94bc237d734e13762664c4437ea3069d86847388c198390f44b7c0947136188de4aca46c4adfd7eaf9c0844103fd9f7b9f554531ff99da3430222d17ed61d61cfede2d27cb667b3173%3A%3A%3Au17");
-        map.put("t", System.currentTimeMillis() + "");
-        return map;
     }
 
 }

@@ -42,7 +42,7 @@ public class ComicDetailModel implements CoreBaseModel {
      * 从网络添加、删除漫画
      */
     public void changeCollectedStateFromNet(final ComicDetailBean bean, final ChangeCollectionListener changeCollectionListener) {
-        Observable<BaseBean<CollectionOnlineListBean>> observable = Net.createService(U17ComicApi.class, ComicCollectionModel.getCollectionMap()).queryComicCollectionListRDByObservable(getPostData(bean));
+        Observable<BaseBean<CollectionOnlineListBean>> observable = Net.createService(U17ComicApi.class).queryComicCollectionListRDByObservable(getPostData(bean));
         RxUtil.comicSubscribe(observable, new RetrofitCallback<CollectionOnlineListBean>() {
             @Override
             public void onSuccess(CollectionOnlineListBean collectionOnlineListBean) {

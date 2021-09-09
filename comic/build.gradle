@@ -92,6 +92,7 @@ dependencies {
     implementation rootProject.ext.third.ultra_ptr
     implementation rootProject.ext.third.scale_image
     implementation rootProject.ext.third.FlycoTabLayout_Lib
+    implementation rootProject.ext.google.auto_service
 
     implementation project(':base')
 }

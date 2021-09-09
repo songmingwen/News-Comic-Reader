@@ -11,6 +11,7 @@ import com.song.sunset.comic.bean.ComicListBean;
 import com.song.sunset.comic.bean.ComicReadBean;
 
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observable;
 import retrofit2.Call;
@@ -21,6 +22,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 
 /**
  * Created by Song on 2016/9/18 0018.
@@ -95,6 +97,5 @@ public interface U17ComicApi {
 
     @FormUrlEncoded
     @POST("fav/index")
-    Observable<BaseBean<CollectionOnlineListBean>> queryComicCollectionListRDByObservable(
-            @Field("data") String data);
+    Observable<BaseBean<CollectionOnlineListBean>> queryComicCollectionListRDByObservable(@Field("data") String data);
 }

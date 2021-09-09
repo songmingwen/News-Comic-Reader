@@ -1,4 +1,4 @@
-package com.song.core.autoservice;
+package com.song.sunset.base.autoservice;
 
 import android.util.Log;
 

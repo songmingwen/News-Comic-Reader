@@ -242,7 +242,7 @@ public class HttpsUtil {
 
         @Override
         public boolean verify(String hostname, SSLSession session) {
-            return false;
+            return true;
         }
     }
 }

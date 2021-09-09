@@ -48,7 +48,7 @@ open class ComicDetailViewModel(application: Application) : BaseViewModel(applic
     }
 
     fun changeCollectedStatus(bean: ComicDetailBean) {
-        val dis = RxUtil.comic(Net.createService(U17ComicApi::class.java, ComicCollectionModel.getCollectionMap()).queryComicCollectionListRDByObservable(getPostData(bean)),
+        val dis = RxUtil.comic(Net.createService(U17ComicApi::class.java).queryComicCollectionListRDByObservable(getPostData(bean)),
                 object : RetrofitCallback<CollectionOnlineListBean> {
                     override fun onSuccess(t: CollectionOnlineListBean?) {
                         val collected = !getCollectionStatus(Integer.parseInt(bean.comic.comic_id))

@@ -17,29 +17,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Net {
 
     public static <T> T createService(Class<T> clazz) {
-        return createService(clazz, WholeApi.COMIC_NEW_BASE_URL, null);
-    }
-
-    public static <T> T createService(Class<T> clazz, Map<String, String> map) {
-        return createService(clazz, WholeApi.COMIC_NEW_BASE_URL, map);
+        return createService(clazz, WholeApi.COMIC_NEW_BASE_URL);
     }
 
     public static <T> T createService(Class<T> clazz, String baseUrl) {
-        return createService(clazz, baseUrl, null);
-    }
-
-    public static <T> T createService(Class<T> clazz, String baseUrl, String key, String value) {
-        Map<String, String> map = new HashMap<>();
-        map.put(key, value);
-        return createService(clazz, baseUrl, map);
-    }
-
-    public static <T> T createService(Class<T> clazz, String baseUrl, Map<String, String> map) {
         Retrofit retrofit = new Retrofit.Builder()
                 //设置baseUrl
                 .baseUrl(baseUrl)
                 //设置OKHttpClient
-                .client(OkHttpClient.getInstance().createClient(map))
+                .client(OkHttpClient.Companion.getInstance().createClient())
                 //Rx转换器
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 //gson转化器
