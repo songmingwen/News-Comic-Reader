@@ -89,7 +89,7 @@ public class ComicGenericListFragment extends RVLoadableFragment<ComicListAdapte
     }
 
     private void loadData(int page, String argName, int argValue) {
-        Observable<BaseBean<ComicListBean>> observable = Net.createService(U17ComicApi.class).queryComicListRDByObservable(page, argName, argValue);
+        Observable<BaseBean<ComicListBean>> observable = Net.INSTANCE.createService(U17ComicApi.class).queryComicListRDByObservable(page, argName, argValue);
         RxUtil.comicSubscribe(observable, ComicGenericListFragment.this);
     }
 

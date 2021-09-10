@@ -89,7 +89,7 @@ public class VideoListActivity extends AppCompatActivity {
     }
 
     private void loadNetData() {
-        Observable<List<VideoListsBean>> observable = Net.createService(PhoenixNewsApi.class, WholeApi.PHOENIX_NEWS_BASE_URL).queryFirstVideoObservable(1);
+        Observable<List<VideoListsBean>> observable = Net.INSTANCE.createService(PhoenixNewsApi.class, WholeApi.PHOENIX_NEWS_BASE_URL).queryFirstVideoObservable(1);
         RxUtil.phoenixNewsSubscribe(observable, new RetrofitCallback<VideoListsBean>() {
             @Override
             public void onSuccess(VideoListsBean videoBean) {

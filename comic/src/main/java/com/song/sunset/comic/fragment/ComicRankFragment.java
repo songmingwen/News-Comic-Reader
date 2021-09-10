@@ -101,7 +101,7 @@ public class ComicRankFragment extends BaseFragment {
     }
 
     private void loadNetData() {
-        Observable<BaseBean<ComicRankListBean>> observable = Net.createService(U17ComicApi.class).queryComicRankListBeanByObservable();
+        Observable<BaseBean<ComicRankListBean>> observable = Net.INSTANCE.createService(U17ComicApi.class).queryComicRankListBeanByObservable();
         RxUtil.comicSubscribe(observable, new RetrofitCallback<ComicRankListBean>() {
             @Override
             public void onSuccess(ComicRankListBean comicRankListBean) {

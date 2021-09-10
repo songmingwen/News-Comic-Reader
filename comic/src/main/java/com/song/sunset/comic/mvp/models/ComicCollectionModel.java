@@ -19,7 +19,7 @@ import io.reactivex.Observable;
 public class ComicCollectionModel {
 
     public void getNewestCollectedComic(final ComicCollectionView view) {
-        Observable<BaseBean<CollectionOnlineListBean>> observable = Net.createService(U17ComicApi.class).queryComicCollectionListRDByObservable("");
+        Observable<BaseBean<CollectionOnlineListBean>> observable = Net.INSTANCE.createService(U17ComicApi.class).queryComicCollectionListRDByObservable("");
         RxUtil.comicSubscribe(observable, new RetrofitCallback<CollectionOnlineListBean>() {
             @Override
             public void onSuccess(CollectionOnlineListBean collectionOnlineListBean) {

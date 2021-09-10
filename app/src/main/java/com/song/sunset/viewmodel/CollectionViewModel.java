@@ -50,7 +50,7 @@ public class CollectionViewModel extends BaseViewModel {
     }
 
     public void getNewestCollectedComic() {
-        Observable<BaseBean<CollectionOnlineListBean>> observable = Net.createService(U17ComicApi.class).queryComicCollectionListRDByObservable("");
+        Observable<BaseBean<CollectionOnlineListBean>> observable = Net.INSTANCE.createService(U17ComicApi.class).queryComicCollectionListRDByObservable("");
         RxUtil.comicSubscribe(observable, new RetrofitCallback<CollectionOnlineListBean>() {
             @Override
             public void onSuccess(CollectionOnlineListBean collectionOnlineListBean) {

@@ -28,7 +28,7 @@ public class ComicDetailModel implements CoreBaseModel {
     private ComicLocalCollectionDao comicLocalCollectionDao;
 
     public Observable<BaseBean<ComicDetailBean>> getData(int comicId) {
-        return Net.createService(U17ComicApi.class).queryComicDetailRDByObservable(comicId);
+        return Net.INSTANCE.createService(U17ComicApi.class).queryComicDetailRDByObservable(comicId);
     }
 
     public boolean isCollected(int comicId) {
@@ -42,7 +42,7 @@ public class ComicDetailModel implements CoreBaseModel {
      * 从网络添加、删除漫画
      */
     public void changeCollectedStateFromNet(final ComicDetailBean bean, final ChangeCollectionListener changeCollectionListener) {
-        Observable<BaseBean<CollectionOnlineListBean>> observable = Net.createService(U17ComicApi.class).queryComicCollectionListRDByObservable(getPostData(bean));
+        Observable<BaseBean<CollectionOnlineListBean>> observable = Net.INSTANCE.createService(U17ComicApi.class).queryComicCollectionListRDByObservable(getPostData(bean));
         RxUtil.comicSubscribe(observable, new RetrofitCallback<CollectionOnlineListBean>() {
             @Override
             public void onSuccess(CollectionOnlineListBean collectionOnlineListBean) {

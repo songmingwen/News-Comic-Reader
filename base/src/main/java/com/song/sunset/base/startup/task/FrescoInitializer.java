@@ -1,22 +1,7 @@
-/*
- * Copyright (c) 2016 Zhihu Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
- */
-
-package com.song.core;
+package com.song.sunset.base.startup.task;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.os.Environment;
 
 import com.facebook.cache.disk.DiskCacheConfig;
 import com.facebook.common.disk.NoOpDiskTrimmableRegistry;
@@ -37,7 +22,7 @@ import okhttp3.OkHttpClient;
  * Fresco 的 Image Pipeline 负责图片的获取和管理。图片可以来自远程服务器，本地文件，
  * 或者Content Provider，本地资源。压缩后的文件缓存在本地存储中，Bitmap数据缓存在内存中。
  */
-public class FrescoInitializer implements ApplicationInitializer {
+public class FrescoInitializer {
 
     //分配的可用内存
     private static final int MAX_HEAP_SIZE = (int) Runtime.getRuntime().maxMemory();
@@ -75,7 +60,6 @@ public class FrescoInitializer implements ApplicationInitializer {
         static final FrescoInitializer INSTANCE = new FrescoInitializer();
     }
 
-    @Override
     public void initialize(final Context context) {
         //内存配置
         final MemoryCacheParams bitmapCacheParams = new MemoryCacheParams(

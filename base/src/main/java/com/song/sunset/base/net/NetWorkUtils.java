@@ -43,7 +43,7 @@ public class NetWorkUtils {
     }
 
     public static <T> T createService(@NonNull Class<T> service) {
-        return Net.createService(service);
+        return Net.INSTANCE.createService(service);
     }
 
     /**

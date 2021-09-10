@@ -8,9 +8,18 @@ import java.util.concurrent.TimeUnit
  * Created by Song on 2016/9/18 0018.
  * Email:z53520@qq.com
  */
-class OkHttpClient private constructor() {
-    private var okHttpClient: okhttp3.OkHttpClient? = null
-    private fun initClient() {
+object OkHttpClient {
+
+    private const val TIMEOUT_READ = 15
+    private const val TIMEOUT_CONNECTION = 15
+
+    private var okHttpClient: okhttp3.OkHttpClient
+
+    init {
+        okHttpClient = initClient()
+    }
+
+    private fun initClient(): okhttp3.OkHttpClient {
         val builder = okhttp3.OkHttpClient.Builder()
 
         //通过 auto service 收集拦截器并添加到网络库
@@ -22,7 +31,7 @@ class OkHttpClient private constructor() {
             builder.addNetworkInterceptor(it.createInterceptor())
         }
 
-        okHttpClient = builder
+        return builder
                 .cache(CacheUtil.getCache())//设置Cache目录
                 //.cookieJar()//添加cookie
                 .retryOnConnectionFailure(true)//失败重连
@@ -32,22 +41,7 @@ class OkHttpClient private constructor() {
                 .build()
     }
 
-    fun createClient(): okhttp3.OkHttpClient? {
-        if (okHttpClient == null) {
-            initClient()
-        }
+    fun obtainClient(): okhttp3.OkHttpClient {
         return okHttpClient
-    }
-
-    companion object {
-        private const val TIMEOUT_READ = 15
-        private const val TIMEOUT_CONNECTION = 15
-
-        @get:Synchronized
-        val instance = OkHttpClient()
-    }
-
-    init {
-        initClient()
     }
 }

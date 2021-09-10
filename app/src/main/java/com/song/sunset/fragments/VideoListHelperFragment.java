@@ -103,7 +103,7 @@ public class VideoListHelperFragment extends BaseFragment implements BaseQuickAd
     }
 
     public void getDataFromRetrofit2(int page) {
-        Observable<List<VideoListsBean>> observable = Net.createService(PhoenixNewsApi.class, WholeApi.PHOENIX_NEWS_BASE_URL).queryVideoObservable(page, "list", typeId);
+        Observable<List<VideoListsBean>> observable = Net.INSTANCE.createService(PhoenixNewsApi.class, WholeApi.PHOENIX_NEWS_BASE_URL).queryVideoObservable(page, "list", typeId);
         RxUtil.phoenixNewsSubscribe(observable, new RetrofitCallback<VideoListsBean>() {
             @Override
             public void onSuccess(VideoListsBean videoBean) {

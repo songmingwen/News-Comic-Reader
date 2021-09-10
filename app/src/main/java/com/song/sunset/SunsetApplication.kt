@@ -10,12 +10,12 @@ import androidx.multidex.MultiDexApplication
 import androidx.startup.AppInitializer
 import com.alibaba.android.arouter.launcher.ARouter
 import com.google.firebase.FirebaseApp
-import com.song.core.FrescoInitializer
+import com.song.sunset.base.startup.task.FrescoInitializer
 import com.song.sunset.activitys.temp.GlobalFlowActivity.Companion.hideView
 import com.song.sunset.activitys.temp.GlobalFlowActivity.Companion.showGlobalFlowView
 import com.song.sunset.base.AppConfig
-import com.song.sunset.base.startup.FiveInitializer
-import com.song.sunset.base.startup.FourInitializer
+import com.song.sunset.base.startup.ImageLibInitializer
+import com.song.sunset.base.startup.NetInitializer
 import com.song.sunset.base.utils.SPUtils
 import com.song.sunset.services.managers.BinderPool
 import com.song.sunset.services.managers.MessengerManager
@@ -27,17 +27,15 @@ import com.song.sunset.utils.lifecycle.BaseActivityLifecycle
 import com.song.sunset.utils.lifecycle.LifecycleManager
 import com.tencent.mmkv.MMKV
 import io.flutter.view.FlutterMain
-import io.reactivex.Observable
-import io.reactivex.ObservableEmitter
-import io.reactivex.schedulers.Schedulers
-
 
 /**
  * Created by Song on 2016/8/29 0029.
  * Email:z53520@qq.com
  */
 class SunsetApplication : MultiDexApplication() {
+
     private var isMainProcess = false
+
     override fun onCreate() {
         super.onCreate()
         initProcess()
@@ -60,14 +58,8 @@ class SunsetApplication : MultiDexApplication() {
             SPUtils.setBooleanByName(this, SPUtils.APP_FIRST_INSTALL, true)
         }
         GreenDaoUtil.initGreenDao()
-        FrescoInitializer.getDefaultInstance().initialize(this)
-        val dir = MMKV.initialize(this)
-        Log.i("initInMainProcess: ", dir)
-        val mmkv = MMKV.defaultMMKV()
-        mmkv.encode("boolean", true)
-        mmkv.encode("string", "string")
-        mmkv.encode("int", 7777777)
-        Log.i("initInMainProcess: ", mmkv.decodeString("string") + "," + mmkv.decodeBool("boolean") + "," + mmkv.decodeInt("int"))
+
+        MMKV.initialize(this)
 
 //        CrashHandler.getInstance().init();
         PushManager.getInstance().init(this)
@@ -75,25 +67,18 @@ class SunsetApplication : MultiDexApplication() {
         MessengerManager.getInstance().init(this)
         MusicGetterManager.getInstance().init(this)
 
-//        if (LeakCanary.isInAnalyzerProcess(this)) {
-//            // This process is dedicated to LeakCanary for heap analysis.
-//            // You should not init your app in this process.
+//        if (!LeakCanary.isInAnalyzerProcess(this)) {
 //            return;
+//            LeakCanary.install(this);
 //        }
-//        LeakCanary.install(this);
 
         //生命周期监听
         addLifecycleListener()
         FlutterMain.startInitialization(this)
-        val disposable = Observable
-                .create { _: ObservableEmitter<Any?>? ->
-                    AppInitializer.getInstance(applicationContext).initializeComponent(FiveInitializer::class.java)
-                    AppInitializer.getInstance(applicationContext).initializeComponent(FourInitializer::class.java)
-                    AppInitializer.getInstance(applicationContext).initializeComponent(CoilInitializer::class.java)
-//                    AppInitializer.getInstance(applicationContext).initializeComponent(AInitializer::class.java)
-                }
-                .subscribeOn(Schedulers.io())
-                .subscribe { o: Any? -> }
+
+        AppInitializer.getInstance(applicationContext).initializeComponent(CoilInitializer::class.java)
+        AppInitializer.getInstance(applicationContext).initializeComponent(NetInitializer::class.java)
+        AppInitializer.getInstance(applicationContext).initializeComponent(ImageLibInitializer::class.java)
 
         FirebaseApp.initializeApp(this)
     }

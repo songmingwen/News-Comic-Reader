@@ -34,7 +34,7 @@ class NetworkPlugin : FlutterPlugin, MethodCallHandler {
     private val disposable: CompositeDisposable by lazy {
         CompositeDisposable()
     }
-    private val client = OkHttpClient.instance.createClient()
+    private val client = OkHttpClient.obtainClient()
 
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         registerWith(flutterPluginBinding.binaryMessenger)
