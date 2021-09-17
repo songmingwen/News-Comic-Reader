@@ -1,28 +1,28 @@
 {
   "talentList": [
     {
-      "talentName": "斩情神道",
-      "talentLevel": 2
+      "name": "斩情神道",
+      "level": 2
     },
     {
-      "talentName": "厚积薄发",
-      "talentLevel": 3
+      "name": "厚积薄发",
+      "level": 3
     },
     {
-      "talentName": "天煞孤星",
-      "talentLevel": 1
+      "name": "天煞孤星",
+      "level": 1
     },
     {
-      "talentName": "时来运转",
-      "talentLevel": 4
+      "name": "时来运转",
+      "level": 4
     },
     {
-      "talentName": "洪福齐天",
-      "talentLevel": 6
+      "name": "洪福齐天",
+      "level": 6
     },
     {
-      "talentName": "多情浪子",
-      "talentLevel": 5
+      "name": "多情浪子",
+      "level": 5
     }
   ]
 }
