@@ -1,0 +1,24 @@
+{
+  "wuxueList": [
+    {
+      "name": "降龙十八掌",
+      "desc": "降龙十八掌被扫地僧称为天下第一。动作简单无奇，但招招威力无穷，招式简明而劲力精深，精要之处全在运劲发力，凭强猛取胜，每出一掌均有排山倒海之力。降龙十八掌专克花里胡哨，不管敌人招数真假虚实，花样百出，千变万化，只给敌人一掌降龙十八掌，敌人见降龙十八掌厉害，非回守招架不可，那敌人的招数自然也就破了。",
+      "level": 6,
+      "physicalAttack": 1000,
+      "spellsAttack": 0,
+      "physicalCriticalRate": 0.3,
+      "spellsCriticalRate": 0,
+      "hitRate": 0.3
+    },
+    {
+      "name": "土匪刀法",
+      "desc": "土匪打劫用的一套刀法",
+      "level": 1,
+      "physicalAttack": 50,
+      "spellsAttack": 0,
+      "physicalCriticalRate": 0.05,
+      "spellsCriticalRate": 0,
+      "hitRate": 0.3
+    }
+  ]
+}

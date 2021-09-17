@@ -40,6 +40,8 @@ import kotlinx.android.synthetic.main.activity_function_list.*
 class FunctionListActivity : BaseActivity() {
 
     private fun LinearLayout.addButtonList() {
+        addButton("Soaring") {}.apply { setOnClickListener { ARouter.getInstance().build("/song/soaring/home").navigation() } }
+        addButton("battle") {}.apply { setOnClickListener { ARouter.getInstance().build("/song/soaring/battle").navigation() } }
         addButton("🎆") {}.apply { setOnClickListener { showFireworks(this) } }
         addButton("test") { TempTestActivity.start(this@FunctionListActivity) }
         addDanmu()

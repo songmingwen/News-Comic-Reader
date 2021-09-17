@@ -1,0 +1,219 @@
+{
+  "characterList": [
+    {
+      "name": "乔峰",
+      "desc": "一生有情有义，为情坚贞，为国忠诚，人生坎坷悲壮，胸襟气吞山河，提倡人道和平，为拯救世人而自我毁灭，是一个心系苍生、悲天悯人、思想境界超越国界和民族的悲剧英雄。",
+      "ability": {
+        "health": 10000,
+        "spells": 0,
+        "physicalAttack": 300,
+        "spellsAttack": 0,
+        "agility": 300,
+        "physicalDefensed": 100,
+        "spellsDefensed": 0,
+        "physicalCriticalRate": 0.2,
+        "spellsCriticalRate": 0,
+        "healthRecoverRate": 0.1,
+        "spellsRecoverRate": 0,
+        "hitRate": 0.95,
+        "dodgeRate": 0.05,
+        "fortune": 0.05
+      },
+      "talent": {
+        "name": "武学奇才",
+        "desc": "天生异禀，实是学武的奇才。任何一招平平无奇的招数到了手中，自然而然发出巨大无比的威力。这等武学天赋实是与生俱来，非靠传授与苦学所能获致。",
+        "level": 6,
+        "healthIncrease": 0.5,
+        "spellsIncrease": 0,
+        "physicalAttackIncrease": 0.5,
+        "spellsAttackIncrease": 0,
+        "agilityIncrease": 0,
+        "physicalDefensedIncrease": 0,
+        "spellsDefensedIncrease": 0,
+        "physicalCriticalRateIncrease": 0.2,
+        "spellsCriticalRateIncrease": 0,
+        "healthRecoverRateIncrease": 0.2,
+        "spellsRecoverRateIncrease": 0,
+        "hitRateIncrease": 0.2,
+        "dodgeRateIncrease": 0,
+        "fortuneIncrease": 0
+      },
+      "equipment": {
+        "head": {
+          "name": "神丐头巾",
+          "desc": "丐帮帮主的头巾",
+          "level": 5,
+          "physicalDefensed": 245,
+          "spellsDefensed": 0,
+          "spellsRecoverRate":0
+        },
+        "accessories": {
+          "name": "神丐扳指",
+          "desc": "丐帮帮主的扳指",
+          "level": 5,
+          "fortune": 0.1,
+          "spellsRecoverRate": 0,
+          "spellsCriticalRate": 0
+        },
+        "coat": {
+          "name": "神丐衣",
+          "desc": "丐帮帮主的上衣",
+          "level": 5,
+          "physicalDefensed": 245,
+          "spellsDefensed": 0,
+          "healthRecoverRate": 0.1
+        },
+        "gloves": {
+          "name": "神丐护腕",
+          "desc": "丐帮帮主的护腕",
+          "level": 5,
+          "physicalDefensed": 245,
+          "spellsDefensed": 0,
+          "physicalCriticalRate": 0.1
+        },
+        "pants": {
+          "name": "神丐裤",
+          "desc": "丐帮帮主的裤子",
+          "level": 5,
+          "physicalDefensed": 245,
+          "spellsDefensed": 0,
+          "healthRecoverRate": 0.1
+        },
+        "shoe": {
+          "name": "神丐草鞋",
+          "desc": "丐帮帮主的鞋子",
+          "level": 5,
+          "physicalDefensed": 245,
+          "spellsDefensed": 0,
+          "agility": 245
+        },
+        "weapon": {
+          "name": "打狗棒",
+          "desc": "丐帮帮主的武器",
+          "level": 6,
+          "physicalAttack": 666,
+          "spellsAttack": 0,
+          "physicalCriticalRate": 0.2,
+          "spellsCriticalRate": 0,
+          "hitRate": 0.2
+        }
+      },
+      "condition": [
+        {
+          "name": "金刚不坏",
+          "desc": "处于防御加强状态，双防加强 50%",
+          "physicalAttackIncrease": 0,
+          "spellsAttackIncrease": 0,
+          "agilityIncrease": 0,
+          "physicalDefensedIncrease": 0.5,
+          "spellsDefensedIncrease": 0,
+          "physicalCriticalRateIncrease": 0,
+          "spellsCriticalRateIncrease": 0,
+          "healthRecoverRateIncrease": 0,
+          "spellsRecoverRateIncrease": 0,
+          "hitRateIncrease": 0,
+          "dodgeRateIncrease": 0
+        }
+      ]
+    },
+    {
+      "name": "土匪头领",
+      "desc": "拦路抢劫，无恶不作",
+      "ability": {
+        "health": 10000,
+        "spells": 0,
+        "physicalAttack": 100,
+        "spellsAttack": 0,
+        "agility": 100,
+        "physicalDefensed": 50,
+        "spellsDefensed": 0,
+        "physicalCriticalRate": 0,
+        "spellsCriticalRate": 0,
+        "healthRecoverRate": 0.05,
+        "spellsRecoverRate": 0,
+        "hitRate": 0.90,
+        "dodgeRate": 0,
+        "fortune": 0
+      },
+      "talent": {
+        "name": "身强体壮",
+        "desc": "身体力量强于常人",
+        "level": 2,
+        "healthIncrease": 0.05,
+        "spellsIncrease": 0,
+        "physicalAttackIncrease": 0.05,
+        "spellsAttackIncrease": 0,
+        "agilityIncrease": 0,
+        "physicalDefensedIncrease": 0,
+        "spellsDefensedIncrease": 0,
+        "physicalCriticalRateIncrease": 0,
+        "spellsCriticalRateIncrease": 0,
+        "healthRecoverRateIncrease": 0,
+        "spellsRecoverRateIncrease": 0,
+        "hitRateIncrease": 0,
+        "dodgeRateIncrease": 0,
+        "fortuneIncrease": 0
+      },
+      "equipment": {
+        "head": {
+          "name": "土匪头领头巾",
+          "desc": "土匪头领的头巾",
+          "level": 2,
+          "physicalDefensed": 100,
+          "spellsDefensed": 0,
+          "spellsRecoverRate": 0
+        },
+        "accessories": {
+          "name": "土匪头领项链",
+          "desc": "土匪头领的项链",
+          "level": 2,
+          "fortune": 0,
+          "spellsRecoverRate": 0,
+          "spellsCriticalRate": 0
+        },
+        "coat": {
+          "name": "土匪头领上衣",
+          "desc": "土匪头领的上衣",
+          "level": 2,
+          "physicalDefensed": 100,
+          "spellsDefensed": 0,
+          "healthRecoverRate": 0
+        },
+        "gloves": {
+          "name": "土匪头领护腕",
+          "desc": "土匪头领的护腕",
+          "level": 2,
+          "physicalDefensed": 100,
+          "spellsDefensed": 0,
+          "physicalCriticalRate": 0.05
+        },
+        "pants": {
+          "name": "土匪头领裤",
+          "desc": "土匪头领的裤子",
+          "level": 2,
+          "physicalDefensed": 100,
+          "spellsDefensed": 0,
+          "healthRecoverRate": 0
+        },
+        "shoe": {
+          "name": "土匪头领鞋",
+          "desc": "土匪头领的鞋子",
+          "level": 2,
+          "physicalDefensed": 100,
+          "spellsDefensed": 0,
+          "agility": 245
+        },
+        "weapon": {
+          "name": "土匪狼牙棒",
+          "desc": "土匪头领的武器",
+          "level": 2,
+          "physicalAttack": 100,
+          "spellsAttack": 0,
+          "physicalCriticalRate": 0.05,
+          "spellsCriticalRate": 0,
+          "hitRate": 0.05
+        }
+      }
+    }
+  ]
+}

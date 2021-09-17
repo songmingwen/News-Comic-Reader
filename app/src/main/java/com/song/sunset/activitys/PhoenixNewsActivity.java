@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Picture;
+import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
@@ -36,6 +37,9 @@ import com.song.sunset.widget.ProgressLayout;
 public class PhoenixNewsActivity extends BaseActivity {
 
     public static final String PHOENIX_NEWS_URL = "phoenix_news_url";
+    public static final String PHOENIX_NEWS_SCHEME = "comifengnewsclient";
+    public static final String PHOENIX_NEWS_HTTP_PARAM_KEY = "ref";
+
     private String url;
     private ProgressBar progressBar;
     private WebView mWebView;
@@ -219,13 +223,32 @@ public class PhoenixNewsActivity extends BaseActivity {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            return super.shouldOverrideUrlLoading(view, url);
+            if (url != null && url.contains("https://statistics.appstore.ifeng.com/index.php/api/godownload")) {
+                return true;
+            }
+
+            if (!TextUtils.isEmpty(getOverrideUrl(url))) {
+                start(PhoenixNewsActivity.this, getOverrideUrl(url));
+                return true;
+            }
+            return super.shouldOverrideUrlLoading(view, getOverrideUrl(url));
         }
 
         @Override
         public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
             handler.proceed();//解决https网址webView无法展示的问题
         }
+    }
+
+    private String getOverrideUrl(String url) {
+        if (TextUtils.isEmpty(url)) {
+            return "";
+        }
+        Uri uri = Uri.parse(url);
+        if (uri != null && TextUtils.equals(uri.getScheme(), PHOENIX_NEWS_SCHEME)) {
+            return uri.getQueryParameter(PHOENIX_NEWS_HTTP_PARAM_KEY);
+        }
+        return url;
     }
 
     private Bitmap createLongImg() {
