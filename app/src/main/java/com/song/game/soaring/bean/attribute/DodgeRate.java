@@ -15,7 +15,7 @@ public class DodgeRate implements Attribute {
 
     @Override
     public float getAttribute(Character character) {
-        int rate = 0;
+        float rate = 0;
         rate += character.ability.dodgeRate;
         if (character.talent != null) {
             rate += character.talent.dodgeRateIncrease;

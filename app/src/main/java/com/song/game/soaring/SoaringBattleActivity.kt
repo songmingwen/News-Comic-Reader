@@ -47,7 +47,7 @@ class SoaringBattleActivity : BaseActivity() {
         characterList.characterList.forEach {
             if (TextUtils.equals(it.name, "乔峰")) {
                 self = it
-            } else if (TextUtils.equals(it.name, "土匪头领")) {
+            } else if (TextUtils.equals(it.name, "虚竹")) {
                 enemy = it
             }
         }
@@ -55,7 +55,7 @@ class SoaringBattleActivity : BaseActivity() {
         wuxueList.wuxueList.forEach {
             if (TextUtils.equals(it.name, "降龙十八掌")) {
                 selfWuxue = it
-            } else if (TextUtils.equals(it.name, "土匪刀法")) {
+            } else if (TextUtils.equals(it.name, "天山六阳掌")) {
                 enemyWuxue = it
             }
         }

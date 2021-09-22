@@ -15,7 +15,7 @@ public class HitRate implements Attribute {
 
     @Override
     public float getAttribute(Character character) {
-        int rate = 0;
+        float rate = 0;
         rate += character.ability.hitRate;
         if (character.equipment.weapon != null) {
             rate += character.equipment.weapon.hitRate;

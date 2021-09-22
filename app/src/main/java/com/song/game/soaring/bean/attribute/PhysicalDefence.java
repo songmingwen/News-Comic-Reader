@@ -21,7 +21,7 @@ public class PhysicalDefence implements Attribute {
     }
 
     private float getBaseValue(Character character) {
-        int defence = 0;
+        float defence = 0;
         defence += character.ability.physicalDefensed;
         if (character.equipment != null) {
             if (character.equipment.coat != null) {

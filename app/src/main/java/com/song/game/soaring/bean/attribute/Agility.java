@@ -22,7 +22,7 @@ public class Agility implements Attribute {
 
     /*** 获取敏捷值系数 */
     private float getRate(Character character) {
-        int agilityRate = 0;
+        float agilityRate = 0;
         if (character.talent != null) {
             agilityRate += character.talent.agilityIncrease;
         }
@@ -36,7 +36,7 @@ public class Agility implements Attribute {
 
     /*** 获取敏捷值基础值 */
     private float getBaseValue(Character character) {
-        int agility = 0;
+        float agility = 0;
         agility += character.ability.agility;
         if (character.equipment.shoe != null) {
             agility += character.equipment.shoe.agility;

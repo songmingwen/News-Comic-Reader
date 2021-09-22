@@ -1,20 +1,60 @@
 {
   "wuxueList": [
     {
+      "name": "逍遥御风",
+      "desc": "",
+      "level": 6,
+      "physicalAttack": 2000,
+      "spellsAttack": 0,
+      "physicalCriticalRate": 0.5,
+      "spellsCriticalRate": 0,
+      "hitRate": 0.5
+    },
+    {
       "name": "降龙十八掌",
       "desc": "降龙十八掌被扫地僧称为天下第一。动作简单无奇，但招招威力无穷，招式简明而劲力精深，精要之处全在运劲发力，凭强猛取胜，每出一掌均有排山倒海之力。降龙十八掌专克花里胡哨，不管敌人招数真假虚实，花样百出，千变万化，只给敌人一掌降龙十八掌，敌人见降龙十八掌厉害，非回守招架不可，那敌人的招数自然也就破了。",
       "level": 6,
-      "physicalAttack": 1000,
+      "physicalAttack": 1500,
       "spellsAttack": 0,
       "physicalCriticalRate": 0.3,
       "spellsCriticalRate": 0,
       "hitRate": 0.3
     },
     {
+      "name": "天山折梅手",
+      "desc": "虽然只有三路掌法，三路擒拿法，一共六路武功，但包含了逍遥派武学的精义。",
+      "level": 6,
+      "physicalAttack": 1500,
+      "spellsAttack": 0,
+      "physicalCriticalRate": 0.25,
+      "spellsCriticalRate": 0,
+      "hitRate": 0.2
+    },
+    {
+      "name": "天山六阳掌",
+      "desc": "此掌法威力极大，是逍遥派最高深的掌法",
+      "level": 6,
+      "physicalAttack": 1500,
+      "spellsAttack": 0,
+      "physicalCriticalRate": 0.25,
+      "spellsCriticalRate": 0,
+      "hitRate": 0.2
+    },
+    {
+      "name": "六脉神剑",
+      "desc": "六脉神剑，名为剑法，实质并非剑法，却与剑法类似，是指含于指尖的内力隔空激发出去的，使其以极高速在空中运动的一门剑气技术。是大理段氏的最高武学，由大理开国皇帝段思平所创。",
+      "level": 6,
+      "physicalAttack": 1500,
+      "spellsAttack": 0,
+      "physicalCriticalRate": 0.35,
+      "spellsCriticalRate": 0,
+      "hitRate": 0
+    },
+    {
       "name": "土匪刀法",
       "desc": "土匪打劫用的一套刀法",
       "level": 1,
-      "physicalAttack": 50,
+      "physicalAttack": 100,
       "spellsAttack": 0,
       "physicalCriticalRate": 0.05,
       "spellsCriticalRate": 0,

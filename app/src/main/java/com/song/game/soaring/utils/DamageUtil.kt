@@ -45,8 +45,8 @@ object DamageUtil {
     fun isHit(attack: Character, defence: Character, wuxue: Wuxue?): Boolean {
         val attackAgility = attack.agility
         val defenceAgility = defence.agility
-        val hitRate = attackAgility / defenceAgility
-        var realHitRate = hitRate + attack.hitRate - defence.dodgeRate
+        val agilityRate = attackAgility / defenceAgility
+        var realHitRate = agilityRate * attack.hitRate - defence.dodgeRate
         realHitRate += wuxue?.hitRate ?: 0f
         Log.i("soaring_attr", "最终命中率：$realHitRate")
         return (realHitRate - Random.nextFloat()) > 0

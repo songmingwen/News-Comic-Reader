@@ -21,7 +21,7 @@ public class PhysicalAttack implements Attribute {
     }
 
     private float getRate(Character character) {
-        int rate = 0;
+        float rate = 0;
         rate += character.talent.physicalAttackIncrease;
         if (character.condition != null && !character.condition.isEmpty()) {
             for (Condition condition : character.condition) {

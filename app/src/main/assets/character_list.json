@@ -91,7 +91,7 @@
           "name": "打狗棒",
           "desc": "丐帮帮主的武器",
           "level": 6,
-          "physicalAttack": 666,
+          "physicalAttack": 1000,
           "spellsAttack": 0,
           "physicalCriticalRate": 0.2,
           "spellsCriticalRate": 0,
@@ -108,6 +108,122 @@
           "physicalDefensedIncrease": 0.5,
           "spellsDefensedIncrease": 0,
           "physicalCriticalRateIncrease": 0,
+          "spellsCriticalRateIncrease": 0,
+          "healthRecoverRateIncrease": 0,
+          "spellsRecoverRateIncrease": 0,
+          "hitRateIncrease": 0,
+          "dodgeRateIncrease": 0
+        }
+      ]
+    },
+    {
+      "name": "虚竹",
+      "desc": "待补充",
+      "ability": {
+        "health": 9500,
+        "spells": 0,
+        "physicalAttack": 285,
+        "spellsAttack": 0,
+        "agility": 315,
+        "physicalDefensed": 95,
+        "spellsDefensed": 0,
+        "physicalCriticalRate": 0.25,
+        "spellsCriticalRate": 0,
+        "healthRecoverRate": 0.1,
+        "spellsRecoverRate": 0,
+        "hitRate": 1,
+        "dodgeRate": 0.06,
+        "fortune": 0.05
+      },
+      "talent": {
+        "name": "武学奇才",
+        "desc": "天生异禀，实是学武的奇才。任何一招平平无奇的招数到了手中，自然而然发出巨大无比的威力。这等武学天赋实是与生俱来，非靠传授与苦学所能获致。",
+        "level": 6,
+        "healthIncrease": 0.5,
+        "spellsIncrease": 0,
+        "physicalAttackIncrease": 0.5,
+        "spellsAttackIncrease": 0,
+        "agilityIncrease": 0,
+        "physicalDefensedIncrease": 0,
+        "spellsDefensedIncrease": 0,
+        "physicalCriticalRateIncrease": 0.2,
+        "spellsCriticalRateIncrease": 0,
+        "healthRecoverRateIncrease": 0.2,
+        "spellsRecoverRateIncrease": 0,
+        "hitRateIncrease": 0.2,
+        "dodgeRateIncrease": 0,
+        "fortuneIncrease": 0
+      },
+      "equipment": {
+        "head": {
+          "name": "逍遥头巾",
+          "desc": "逍遥掌门的头巾",
+          "level": 5,
+          "physicalDefensed": 250,
+          "spellsDefensed": 0,
+          "spellsRecoverRate":0
+        },
+        "accessories": {
+          "name": "七宝指环",
+          "desc": "逍遥掌门的扳指",
+          "level": 5,
+          "fortune": 0.1,
+          "spellsRecoverRate": 0,
+          "spellsCriticalRate": 0
+        },
+        "coat": {
+          "name": "逍遥衣",
+          "desc": "逍遥掌门的上衣",
+          "level": 5,
+          "physicalDefensed": 250,
+          "spellsDefensed": 0,
+          "healthRecoverRate": 0.1
+        },
+        "gloves": {
+          "name": "逍遥护腕",
+          "desc": "逍遥掌门的护腕",
+          "level": 5,
+          "physicalDefensed": 250,
+          "spellsDefensed": 0,
+          "physicalCriticalRate": 0.1
+        },
+        "pants": {
+          "name": "逍遥裤",
+          "desc": "逍遥掌门的裤子",
+          "level": 5,
+          "physicalDefensed": 250,
+          "spellsDefensed": 0,
+          "healthRecoverRate": 0.1
+        },
+        "shoe": {
+          "name": "逍遥布靴",
+          "desc": "逍遥掌门的鞋子",
+          "level": 5,
+          "physicalDefensed": 250,
+          "spellsDefensed": 0,
+          "agility": 250
+        },
+        "weapon": {
+          "name": "逍遥扇",
+          "desc": "逍遥掌门的武器",
+          "level": 6,
+          "physicalAttack": 950,
+          "spellsAttack": 0,
+          "physicalCriticalRate": 0.2,
+          "spellsCriticalRate": 0,
+          "hitRate": 0.2
+        }
+      },
+      "condition": [
+        {
+          "name": "轻灵飘逸",
+          "desc": "处于敏捷、暴击加强状态，敏捷加强 50%",
+          "physicalAttackIncrease": 0,
+          "spellsAttackIncrease": 0,
+          "agilityIncrease": 0.5,
+          "physicalDefensedIncrease": 0,
+          "spellsDefensedIncrease": 0,
+          "physicalCriticalRateIncrease": 0.5,
           "spellsCriticalRateIncrease": 0,
           "healthRecoverRateIncrease": 0,
           "spellsRecoverRateIncrease": 0,

@@ -20,7 +20,7 @@ public class SpellsDefence implements Attribute{
     }
 
     private float getBaseValue(Character character) {
-        int defence = 0;
+        float defence = 0;
         defence += character.ability.spellsDefensed;
         if (character.equipment != null) {
             if (character.equipment.coat != null) {
