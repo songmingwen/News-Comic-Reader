@@ -15,6 +15,8 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.bubblepicker.BubbleActivity
 import com.google.firebase.appcheck.FirebaseAppCheck
 import com.google.firebase.appcheck.debug.DebugAppCheckProviderFactory
+import com.song.game.soaring.SoaringBattleActivity.Companion.BATTLE_EXTRA
+import com.song.game.soaring.SoaringBattleActivity.Companion.obtainBundle
 import com.song.scankit.QRCodeActivity
 import com.song.sunset.R
 import com.song.sunset.activitys.PhoenixVideoActivity
@@ -41,7 +43,7 @@ class FunctionListActivity : BaseActivity() {
 
     private fun LinearLayout.addButtonList() {
         addButton("Soaring") {}.apply { setOnClickListener { ARouter.getInstance().build("/song/soaring/home").navigation() } }
-        addButton("battle") {}.apply { setOnClickListener { ARouter.getInstance().build("/song/soaring/battle").navigation() } }
+        addButton("battle") {}.apply { setOnClickListener { toBattle() } }
         addButton("🎆") {}.apply { setOnClickListener { showFireworks(this) } }
         addButton("test") { TempTestActivity.start(this@FunctionListActivity) }
         addDanmu()
@@ -70,6 +72,13 @@ class FunctionListActivity : BaseActivity() {
         addButton("RelayTest") { RelayTest.testRelay() }
         addButton("MMKVTest") { RelayTest.testMMKV() }
 
+    }
+
+    private fun toBattle() {
+        ARouter.getInstance().build("/song/soaring/battle")
+                .withBundle(BATTLE_EXTRA, obtainBundle("乔峰", "虚竹",
+                        "降龙十八掌", "龙爪手"))
+                .navigation()
     }
 
     private var mFireworksView: FireworksView? = null

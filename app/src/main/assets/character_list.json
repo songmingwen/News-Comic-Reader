@@ -45,7 +45,7 @@
           "level": 5,
           "physicalDefensed": 245,
           "spellsDefensed": 0,
-          "spellsRecoverRate":0
+          "spellsRecoverRate": 0
         },
         "accessories": {
           "name": "神丐扳指",
@@ -161,7 +161,7 @@
           "level": 5,
           "physicalDefensed": 250,
           "spellsDefensed": 0,
-          "spellsRecoverRate":0
+          "spellsRecoverRate": 0
         },
         "accessories": {
           "name": "七宝指环",
