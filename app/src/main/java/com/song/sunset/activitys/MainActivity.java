@@ -216,7 +216,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     private void switchFragmentDelay(final String className, final String title, long delayTime) {
-        fab.setVisibility(TextUtils.equals(className, PhoenixListFragment.class.getName()) ? View.VISIBLE : View.GONE);
+//        fab.setVisibility(TextUtils.equals(className, PhoenixListFragment.class.getName()) ? View.VISIBLE : View.GONE);
         getmHandler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -227,7 +227,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     private void swithFragmentByRouter(String routerUrl, String title) {
-        fab.setVisibility(TextUtils.equals(routerUrl, "/phoenix/list") ? View.VISIBLE : View.GONE);
+//        fab.setVisibility(TextUtils.equals(routerUrl, "/phoenix/list") ? View.VISIBLE : View.GONE);
 
         getmHandler().postDelayed(() -> {
             toolbar.setTitle(title);

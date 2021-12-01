@@ -3,18 +3,18 @@ package com.song.sunset.comic;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.song.sunset.base.activity.BaseActivity;
 import com.song.sunset.comic.adapter.ComicReadMVPAdapter;
 import com.song.sunset.comic.bean.ChapterListBean;
 import com.song.sunset.comic.bean.ComicReadImageListBean;
-import com.song.sunset.comic.mvp.views.ComicReadView;
 import com.song.sunset.comic.mvp.presenters.ComicReadPresenter;
+import com.song.sunset.comic.mvp.views.ComicReadView;
 import com.song.sunset.comic.widget.ComicReadMVPRecyclerView;
 import com.song.sunset.comic.widget.ScaleRecyclerView;
 import com.song.sunset.utils.ScreenUtils;
@@ -54,7 +54,7 @@ public class ComicReadMVPActivity extends BaseActivity implements ComicReadMVPRe
         setContentView(R.layout.activity_comic_read_mvp);
         switchScreenStatus();
 
-        progressLayout = (ProgressLayout)findViewById(R.id.progress);
+        progressLayout = findViewById(R.id.progress);
         progressLayout.showLoading();
 
         if (getIntent() != null) {
@@ -73,7 +73,7 @@ public class ComicReadMVPActivity extends BaseActivity implements ComicReadMVPRe
     }
 
     private void initView() {
-        recyclerView = (ComicReadMVPRecyclerView) findViewById(R.id.id_comic_read_recycler);
+        recyclerView = findViewById(R.id.id_comic_read_recycler);
         adapter = new ComicReadMVPAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(getLinearLayoutManager());
@@ -118,12 +118,9 @@ public class ComicReadMVPActivity extends BaseActivity implements ComicReadMVPRe
             adapter.setData(list);
             progressLayout.showContent();
         } else {
-            progressLayout.showError(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    progressLayout.showLoading();
-                    mPresenter.firstLoad(openPosition);
-                }
+            progressLayout.showError(v -> {
+                progressLayout.showLoading();
+                mPresenter.firstLoad(openPosition);
             });
         }
     }

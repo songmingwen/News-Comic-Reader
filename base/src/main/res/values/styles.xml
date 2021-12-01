@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="DragLayout">
+        <!-- 阻尼系数 -->
+        <attr name="dampRatio" format="float" />
+        <!-- true：图片在容器内部，false：图片尺寸大于容器 -->
+        <attr name="isInner" format="boolean" />
+    </declare-styleable>
+
+</resources>

@@ -7,10 +7,12 @@ import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
+
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -132,9 +134,13 @@ public class ScaleRecyclerView extends RecyclerView implements View.OnTouchListe
                 return super.onDoubleTap(e);
             } else {
                 if (getScaleX() == ORIGINAL_RATE) {
-                    zoom(ORIGINAL_RATE, MAX_SCALE_RATE, 0, (HALF_SCREEN_WIDTH - e.getX()) * (MAX_SCALE_RATE - 1), 0, (HALF_SCREEN_HEIGHT - e.getY()) * (MAX_SCALE_RATE - 1));
+                    zoom(ORIGINAL_RATE, MAX_SCALE_RATE,
+                            0, (HALF_SCREEN_WIDTH - e.getX()) * (MAX_SCALE_RATE - 1),
+                            0, (HALF_SCREEN_HEIGHT - e.getY()) * (MAX_SCALE_RATE - 1));
                 } else {
-                    zoom(currentScale, ORIGINAL_RATE, getX(), 0, getY(), 0);
+                    zoom(currentScale, ORIGINAL_RATE,
+                            getX(), 0,
+                            getY(), 0);
                 }
                 return true;
             }
@@ -338,28 +344,16 @@ public class ScaleRecyclerView extends RecyclerView implements View.OnTouchListe
         isZooming = true;
         AnimatorSet animatorSet = new AnimatorSet();
         final ValueAnimator translationXAnimator = ValueAnimator.ofFloat(fromX, toX);
-        translationXAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                setX((Float) animation.getAnimatedValue());
-            }
-        });
+        translationXAnimator.addUpdateListener(
+                animation -> setX((Float) animation.getAnimatedValue()));
 
         ValueAnimator translationYAnimator = ValueAnimator.ofFloat(fromY, toY);
-        translationYAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                setY((Float) animation.getAnimatedValue());
-            }
-        });
+        translationYAnimator.addUpdateListener(
+                animation -> setY((Float) animation.getAnimatedValue()));
 
         ValueAnimator scaleAnimator = ValueAnimator.ofFloat(fromRate, toRate);
-        scaleAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                setScaleRate((float) animation.getAnimatedValue());
-            }
-        });
+        scaleAnimator.addUpdateListener(
+                animation -> setScaleRate((float) animation.getAnimatedValue()));
         animatorSet.playTogether(translationXAnimator, translationYAnimator, scaleAnimator);
         animatorSet.setDuration(ANIMATOR_DURATION_TIME);
         animatorSet.setInterpolator(new DecelerateInterpolator());

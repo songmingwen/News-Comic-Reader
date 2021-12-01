@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.song.sunset.widget.DragLayout
+        android:id="@+id/in"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="20dp"
+        android:background="@color/Grey_200"
+        app:dampRatio="1"
+        app:layout_constraintBottom_toTopOf="@+id/out"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight="1">
+
+        <ImageView
+            android:id="@+id/text_in"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:src="@drawable/windows_pic"
+            android:text="Fling" />
+    </com.song.sunset.widget.DragLayout>
+
+    <com.song.sunset.widget.DragLayout
+        android:id="@+id/out"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="20dp"
+        android:background="@color/Grey_400"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        app:dampRatio="1"
+        app:isInner="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/in"
+        app:layout_constraintVertical_weight="1">
+
+        <ImageView
+            android:id="@+id/text_out"
+            android:layout_width="800dp"
+            android:layout_height="800dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:src="@drawable/windows_pic"
+            android:text="可 Fling View" />
+    </com.song.sunset.widget.DragLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

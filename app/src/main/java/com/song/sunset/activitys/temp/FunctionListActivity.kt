@@ -46,6 +46,7 @@ class FunctionListActivity : BaseActivity() {
         addButton("battle") {}.apply { setOnClickListener { toBattle() } }
         addButton("🎆") {}.apply { setOnClickListener { showFireworks(this) } }
         addButton("test") { TempTestActivity.start(this@FunctionListActivity) }
+        addButton("ViewDragHelper") { ViewDragHelperActivity.start(this@FunctionListActivity) }
         addDanmu()
         addButton("Fresco XML params display") { FrescoXMLActivity.start(this@FunctionListActivity) }
         addButton("Fresco post processor display") { FrescoProcessorActivity.start(this@FunctionListActivity) }
