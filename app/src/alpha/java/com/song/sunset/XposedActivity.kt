@@ -1,4 +1,4 @@
-package com.song.sunset.activitys.temp
+package com.song.sunset
 
 import android.Manifest
 import android.content.pm.VersionedPackage
@@ -9,12 +9,14 @@ import android.telephony.TelephonyManager
 import android.util.Log
 import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.song.sunset.R
 import com.song.sunset.base.activity.BaseActivity
 import com.tbruyelle.rxpermissions2.RxPermissions
 import de.robv.android.xposed.XC_MethodHook
 import de.robv.android.xposed.XposedHelpers
 
+/**
+ * xposed targetSdkVersion=30 时在多款机型会出现 crash，解决方案：可以将 targetSdkVersion 设置为 27
+ */
 @Route(path = "/song/xposed")
 class XposedActivity : BaseActivity() {
 
@@ -65,16 +67,7 @@ class XposedActivity : BaseActivity() {
                 Log.i("ssoo", getThreadStacktrace(Thread.currentThread()))
             }
         })
-        XposedHelpers.findAndHookMethod(packageManager, "getPackageInfo", String::class.java, Int::class.java, object : XC_MethodHook() {
-            @Throws(Throwable::class)
-            override fun beforeHookedMethod(param: MethodHookParam) {
-
-                Log.i("ssoonng", "getPackageInfo" + param.method.name)
-
-                Log.i("ssoo", getThreadStacktrace(Thread.currentThread()))
-            }
-        })
-        XposedHelpers.findAndHookMethod(packageManager, "getPackageInfo", VersionedPackage::class.java, Int::class.java, object : XC_MethodHook() {
+        XposedHelpers.findAndHookMethod(packageManager, "getInstalledApplications", Int::class.java, object : XC_MethodHook() {
             @Throws(Throwable::class)
             override fun beforeHookedMethod(param: MethodHookParam) {
 

@@ -48,7 +48,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".activitys.temp.XposedActivity"></activity>
+        <activity android:name=".XposedActivity"/>
         <activity android:name="com.song.game.soaring.SoaringBattleActivity" />
         <activity android:name="com.song.game.soaring.SoaringCharacteristicActivity" />
         <activity android:name="com.song.game.soaring.SoaringLifeActivity" />

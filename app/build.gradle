@@ -12,9 +12,6 @@ apply plugin: 'walle'
 //apply plugin: 'robust'//生成apk时打开
 /**Robust  美团热修复技术*/
 apply plugin: 'com.google.gms.google-services'
-//dependencies 配置在此文件添加
-apply from: file('../dependencies.gradle')
-apply from: file('../gradle/tools/so_scan.gradle')
 
 boolean hasDefaultPreinstallHandler = isRunningTask("Dev") || isRunningTask("Alpha")
 
@@ -152,6 +149,9 @@ kapt {
     }
 }
 
+//dependencies 配置在此文件添加
+apply from: file('../dependencies.gradle')
+apply from: file('../gradle/tools/so_scan.gradle')
 dependencies {
     implementation files('libs/jbox2d-library-2.1.2.2.jar')
     implementation files('libs/slf4j-api-1.7.22.jar')
