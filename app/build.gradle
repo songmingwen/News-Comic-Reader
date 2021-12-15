@@ -1,4 +1,5 @@
 apply from: file("../functions.gradle")
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
@@ -10,7 +11,7 @@ apply plugin: 'walle'
 //apply plugin: 'auto-patch-plugin'//生成patch时打开
 //apply plugin: 'robust'//生成apk时打开
 /**Robust  美团热修复技术*/
-
+apply plugin: 'com.google.gms.google-services'
 //dependencies 配置在此文件添加
 apply from: file('../dependencies.gradle')
 apply from: file('../gradle/tools/so_scan.gradle')
@@ -168,4 +169,67 @@ dependencies {
     implementation 'com.google.auto.service:auto-service:1.0'
 }
 
-apply plugin: 'com.google.gms.google-services'
+subprojects{
+    project.configurations.all {
+        resolutionStrategy {
+            force rootProject.ext.third.work
+            force rootProject.ext.third.streamsupport
+            force rootProject.ext.third.BaseRecyclerViewAdapterHelpe
+            force rootProject.ext.third.lottie
+            force rootProject.ext.third.glide_4_0_transformations
+            force rootProject.ext.third.gpuimage
+            force rootProject.ext.third.glide
+            force rootProject.ext.third.fresco
+            force rootProject.ext.third.fresco_processors
+            force rootProject.ext.third.fresco_imagepipeline_okhttp3
+            force rootProject.ext.third.fresco_animated_gif
+            force rootProject.ext.third.fresco_animated_webp
+            force rootProject.ext.third.fresco_webpsupport
+            force rootProject.ext.third.swipebacklayout
+            force rootProject.ext.third.scale_image
+            force rootProject.ext.third.ijkplayer_java
+            force rootProject.ext.third.ijkplayer_armv7a
+            force rootProject.ext.third.ijkplayer_arm64
+            force rootProject.ext.third.DanmakuFlameMaster
+            force rootProject.ext.third.ndkbitmap_armv7a
+            force rootProject.ext.third.ndkbitmap_x86
+            force rootProject.ext.third.okhttp
+            force rootProject.ext.third.okhttp_logging_interceptor
+            force rootProject.ext.third.retrofit2
+            force rootProject.ext.third.retrofit2_converter_gson
+            force rootProject.ext.third.retrofit2_adapter_rxjava2
+            force rootProject.ext.third.rxjava3_android
+            force rootProject.ext.third.rxjava3_java
+            force rootProject.ext.third.rxlifecycle
+            force rootProject.ext.third.rxpermissions
+            force rootProject.ext.third.FlycoTabLayout_Lib
+            force rootProject.ext.third.nineoldandroids
+            force rootProject.ext.third.greendao_generator
+            force rootProject.ext.third.greendao
+            force rootProject.ext.third.ultra_ptr
+            force rootProject.ext.third.switchbutton
+            force rootProject.ext.third.robust
+            force rootProject.ext.third.walle
+            force rootProject.ext.third.qrcodereaderview
+            force rootProject.ext.third.mmkv
+            force rootProject.ext.third.arouter
+            force rootProject.ext.third.sugaradapter
+            force rootProject.ext.third.coil
+            force rootProject.ext.third.coil_video
+            force rootProject.ext.third.coil_svg
+            force rootProject.ext.third.coil_gif
+            force rootProject.ext.third.refresh_kernel
+            force rootProject.ext.third.refresh_header_classics
+            force rootProject.ext.third.refresh_header_two_level
+            force rootProject.ext.third.refresh_footer_ball
+            force rootProject.ext.third.refresh_footer_classics
+            force rootProject.ext.third.javapoet
+            force rootProject.ext.third.mqttv3
+            force rootProject.ext.third.mqtt_service
+            force rootProject.ext.third.scanplus
+            force rootProject.ext.third.hooklib
+            force rootProject.ext.third.nativehook
+            force rootProject.ext.third.xposedcompat
+        }
+    }
+}

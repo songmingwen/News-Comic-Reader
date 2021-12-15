@@ -42,9 +42,9 @@ import kotlinx.android.synthetic.main.activity_function_list.*
 class FunctionListActivity : BaseActivity() {
 
     private fun LinearLayout.addButtonList() {
-        addButton("Soaring") {}.apply { setOnClickListener { ARouter.getInstance().build("/song/soaring/home").navigation() } }
-        addButton("battle") {}.apply { setOnClickListener { toBattle() } }
-        addButton("🎆") {}.apply { setOnClickListener { showFireworks(this) } }
+        addButton("Soaring") { ARouter.getInstance().build("/song/soaring/home").navigation() }
+        addButton("battle") { toBattle() }
+        addButton("🎆") { showFireworks(this) }
         addButton("test") { TempTestActivity.start(this@FunctionListActivity) }
         addButton("ViewDragHelper") { ViewDragHelperActivity.start(this@FunctionListActivity) }
         addDanmu()
@@ -72,6 +72,7 @@ class FunctionListActivity : BaseActivity() {
         addButton("CenteredImageSpan") { CenteredImageSpanActivity.start(this@FunctionListActivity) }
         addButton("RelayTest") { RelayTest.testRelay() }
         addButton("MMKVTest") { RelayTest.testMMKV() }
+        addButton("Xposed") { ARouter.getInstance().build("/song/xposed").navigation() }
 
     }
 

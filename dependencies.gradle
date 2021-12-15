@@ -61,4 +61,8 @@ dependencies {
     implementation rootProject.ext.third.mqttv3
     implementation rootProject.ext.third.mqtt_service
     implementation rootProject.ext.third.scanplus
+    implementation rootProject.ext.third.hooklib
+    implementation rootProject.ext.third.nativehook
+    implementation rootProject.ext.third.xposedcompat
+    compileOnly rootProject.ext.third.hookannotation
 }
