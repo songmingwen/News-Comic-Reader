@@ -16,6 +16,7 @@ import com.song.sunset.base.startup.ImageLibInitializer
 import com.song.sunset.base.startup.NetInitializer
 import com.song.sunset.base.utils.SPUtils
 import com.song.sunset.comic.utils.GreenDaoUtil
+import com.song.sunset.hook.HookFaceApi
 import com.song.sunset.services.managers.BinderPool
 import com.song.sunset.services.managers.MessengerManager
 import com.song.sunset.services.managers.MusicGetterManager
@@ -46,6 +47,8 @@ class SunsetApplication : MultiDexApplication() {
         AppConfig.setApp(this)
 
         setBuildConfig()
+
+        HookFaceApi.initHook(this)
 
         if (BuildConfig.DEBUG) {           // 这两行必须写在init之前，否则这些配置在init过程中将无效
             ARouter.openLog() // 打印日志

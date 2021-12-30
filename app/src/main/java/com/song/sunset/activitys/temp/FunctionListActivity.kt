@@ -29,6 +29,7 @@ import com.song.sunset.services.impl.MusicCallBackListenerImpl
 import com.song.sunset.services.impl.MusicGetterImpl
 import com.song.sunset.services.managers.BinderPool
 import com.song.sunset.utils.RelayTest
+import com.song.sunset.utils.ScreenUtils
 import com.song.sunset.utils.ViewUtil
 import com.song.sunset.utils.preinstall.DefaultPreinstallHandler
 import com.song.sunset.utils.preinstall.HuaweiPreinstallHandler
@@ -44,7 +45,7 @@ class FunctionListActivity : BaseActivity() {
     private fun LinearLayout.addButtonList() {
         addButton("Soaring") { ARouter.getInstance().build("/song/soaring/home").navigation() }
         addButton("battle") { toBattle() }
-        addButton("🎆") { showFireworks(this) }
+        addButton("🎆") { button -> showFireworks(button) }
         addButton("test") { TempTestActivity.start(this@FunctionListActivity) }
         addButton("ViewDragHelper") { ViewDragHelperActivity.start(this@FunctionListActivity) }
         addDanmu()
@@ -72,8 +73,12 @@ class FunctionListActivity : BaseActivity() {
         addButton("CenteredImageSpan") { CenteredImageSpanActivity.start(this@FunctionListActivity) }
         addButton("RelayTest") { RelayTest.testRelay() }
         addButton("MMKVTest") { RelayTest.testMMKV() }
-        addButton("Xposed") { ARouter.getInstance().build("/song/xposed").navigation() }
+        addButton("Xposed") { showResult() }
 
+    }
+
+    private fun showResult() {
+        //xposed 会 hook 此方法
     }
 
     private fun toBattle() {
@@ -183,8 +188,8 @@ class FunctionListActivity : BaseActivity() {
         val itemPosition = IntArray(2)
         view.getLocationOnScreen(itemPosition)
         val x = itemPosition[0] + view.width / 2
-        val y = itemPosition[1]
-        mFireworksView!!.launch(x, y)
+        val y = itemPosition[1] - ScreenUtils.dp2Px(this, 24f)
+        mFireworksView!!.launch(x, y.toInt())
     }
 
     /**
@@ -252,7 +257,7 @@ class FunctionListActivity : BaseActivity() {
                 Log.i("song", "Running app number in last 600 seconds : " + stats.size)
 
                 //取得最近运行的一个app，即当前运行的app
-                if (!stats.isEmpty()) {
+                if (stats.isNotEmpty()) {
                     for (i in stats.indices) {
                         Log.i("song", "top running app is : " + stats[i].packageName)
                     }
@@ -273,13 +278,13 @@ class FunctionListActivity : BaseActivity() {
     }
 }
 
-fun LinearLayout.addButton(title: String, onClick: () -> Unit): Button {
+fun LinearLayout.addButton(title: String, onClick: (View) -> Unit): Button {
     val button = Button(context).apply {
         text = title
         textSize = 15f
         setTextColor(resources.getColor(R.color.white))
         setBackgroundResource(R.drawable.shape_interest_selection_blue_bg)
-        setOnClickListener { onClick() }
+        setOnClickListener { onClick(this) }
     }
     val params = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)

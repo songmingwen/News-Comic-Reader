@@ -1,0 +1,8 @@
+{
+  "data": [
+    {
+      "apiName": "getApplicationInfo",
+      "gapTime": 10000
+    }
+  ]
+}

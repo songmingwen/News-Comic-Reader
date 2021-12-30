@@ -1,0 +1,9 @@
+<resources>
+    <string name="string_danger_api">在隐私页面有%d个敏感 Api 请求</string>
+    <string name="string_net_call">在隐私页面有%d个网络请求</string>
+    <string name="string_danger_gap_api">目前为止出现%d个敏感 Api 多次请求问题</string>
+
+    <string name="string_no_danger_issue">隐私页面未出现敏感 Api 调用问题</string>
+    <string name="string_no_net_issue">隐私页面未出现网络请求问题</string>
+    <string name="string_no_gap_danger_issue">未出现敏感 Api 间隔时间多次请求问题</string>
+</resources>

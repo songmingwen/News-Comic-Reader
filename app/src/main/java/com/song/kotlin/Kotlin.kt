@@ -118,3 +118,30 @@ fun Context.dp2px(dp: Int): Int {
  */
 val <E> List<E>.lastIndex: Int
     get() = size - 1
+
+/**
+ * Kotlin 使用类似 () -> Unit 的函数类型来处理函数的声明
+ * (() -> Unit) 可以看作一个整体。
+ * 其中 () 中可以携带参数 如 (View) -> Unit,(View,String) -> Unit
+ *
+ */
+typealias IntTransformer = (String) -> Int
+
+class StringToInt : IntTransformer {
+    override fun invoke(x: String): Int = x.toIntOrNull() ?: -1
+}
+
+val intFunction: IntTransformer = StringToInt()
+
+val sum: (Int, Int) -> Int = { x: Int, y: Int -> x + y }
+
+/**
+ * 匿名函数
+ */
+val sum1 = fun(x: Int, y: Int): Int = x + y
+/**
+ * 匿名函数，带有接收者的函数字面值
+ * 在这样的函数字面值内部，传给调用的接收者对象成为隐式的this，
+ * 以便访问接收者对象的成员而无需任何额外的限定符，亦可使用 this 表达式 访问接收者对象。
+ */
+val sum2 = fun Int.(other: Int): Int = this + other
