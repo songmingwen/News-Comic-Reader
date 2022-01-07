@@ -7,6 +7,7 @@ import com.song.sunset.hook.bean.RecordData;
 import com.song.sunset.hook.filter.DefaultFilter;
 import com.song.sunset.hook.filter.Filter;
 import com.song.sunset.hook.record.RecordInterface;
+import com.song.sunset.hook.utils.StacktraceUtil;
 
 import java.util.ArrayList;
 
@@ -57,7 +58,7 @@ public abstract class BaseHook implements HookInterface {
      * 当发生危险 api 调用时，调用此类记录到内存
      */
     protected void append(RecordData danger) {
-        Log.i("song-hook", danger.toString());
+        Log.i("sunset-hook", danger.toString());
         if (!isActive) {
             return;
         }
@@ -94,29 +95,7 @@ public abstract class BaseHook implements HookInterface {
     }
 
 
-    protected String getThreadStacktrace() {
-        return getThreadStacktrace(Thread.currentThread());
+    protected String getThreadStacktrace(Context context) {
+        return StacktraceUtil.getThreadStacktrace(context);
     }
-
-    private String getThreadStacktrace(Thread thread) {
-        if (thread == null) {
-            return "";
-        }
-        StringBuilder sb = new StringBuilder();
-        try {
-            StackTraceElement[] stacktrace = thread.getStackTrace();
-            sb.append("\n\nThread StackTrace:\n")
-                    .append(", tid: ").append(thread.getId()).append(", name: ").append(thread.getName())
-                    .append("\n")
-                    .append("java stacktrace:\n");
-            for (StackTraceElement element : stacktrace) {
-                sb.append("    at ").append(element.toString()).append("\n");
-            }
-            sb.append("\n");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return sb.toString();
-    }
-
 }

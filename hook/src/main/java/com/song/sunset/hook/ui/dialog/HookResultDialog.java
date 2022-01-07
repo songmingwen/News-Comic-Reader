@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.song.sunset.base.utils.DateUtil;
 import com.song.sunset.hook.R;
 import com.song.sunset.hook.bean.RecordData;
+import com.song.sunset.hook.utils.DateUtil;
 
 import java.util.List;
 
@@ -34,10 +33,8 @@ public class HookResultDialog extends Dialog {
 
     public static void showHookResultDialog(Activity activity, List<RecordData> list) {
         try {
-            Log.i("song-HookResultDialog", "start");
             HookResultDialog dialog = new HookResultDialog(activity, list);
             dialog.show();
-            Log.i("song-HookResultDialog", "end");
         } catch (Exception e) {
             e.printStackTrace();
         }

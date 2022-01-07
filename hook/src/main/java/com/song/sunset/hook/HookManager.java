@@ -16,7 +16,7 @@ import com.song.sunset.hook.hooknet.HookNetClient;
  */
 public class HookManager {
 
-    private static final String TAG = "song-HookStarter";
+    private static final String TAG = "sunset-HookStarter";
 
     public static void init(Application context) {
         Log.i(TAG, "init hook");

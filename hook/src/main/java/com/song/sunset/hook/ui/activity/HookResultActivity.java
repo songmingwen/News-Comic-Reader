@@ -3,12 +3,12 @@ package com.song.sunset.hook.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.song.sunset.base.activity.BaseActivity;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.song.sunset.hook.R;
 import com.song.sunset.hook.hookdangerapi.HookDangerApiClient;
 import com.song.sunset.hook.hookdangerapi.HookGapDangerApiClient;
@@ -21,22 +21,16 @@ import com.song.sunset.hook.ui.dialog.HookResultDialog;
  * Email:   mingwen@mgtv.com
  * Time:    2021/12/27 15:25
  */
-public class HookResultActivity extends BaseActivity {
+public class HookResultActivity extends AppCompatActivity {
 
-    private static final String TAG = "song-HookResultActivity";
+    private static final String TAG = "sunset-HookResultActivity";
 
     private Button dangerApi, netCall, dangerGapApi;
 
     public static void startActivity(Context context) {
-        Log.i(TAG, "startActivity");
-        try {
-            Intent intent = new Intent(context, HookResultActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        Intent intent = new Intent(context, HookResultActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
     }
 
     @Override

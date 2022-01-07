@@ -1,12 +1,14 @@
 package com.song.sunset.hook.bean;
 
+import java.io.Serializable;
+
 /**
  * Desc:    危险 Api 信息类
  * Author:  songmingwen
  * Email:   mingwen@mgtv.com
  * Time:    2021/12/14 14:55
  */
-public class RecordData {
+public class RecordData implements Serializable {
 
     /*** 危险或敏感 api 名称 */
     public String apiName;
@@ -44,11 +46,11 @@ public class RecordData {
     @Override
     public String toString() {
         return "DangerApiInfo{" +
-                "apiName='" + apiName + '\'' +
-                ", stacktrace='" + stacktrace + '\'' +
+                "apiName='" + apiName + '\n' +
                 ", timestamp=" + timestamp +
                 ", recordGapTime=" + recordGapTime +
-                ", gapTime='" + gapTime + '\'' +
+                ", gapTime='" + gapTime + '\n' +
+                ", stacktrace='" + stacktrace + '\'' +
                 '}';
     }
 }

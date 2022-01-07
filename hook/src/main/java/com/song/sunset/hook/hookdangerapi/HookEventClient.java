@@ -17,7 +17,7 @@ import de.robv.android.xposed.XposedHelpers;
  */
 public class HookEventClient {
 
-    private static final String TAG = "song-HookEventClient";
+    private static final String TAG = "sunset-HookEventClient";
 
     public static void startObserve(Context context) {
         Log.i(TAG, "startObserve");
@@ -36,19 +36,23 @@ public class HookEventClient {
             e.printStackTrace();
         }
         if (clazz != null) {
-            XposedHelpers.findAndHookMethod(clazz, "showResult",
-                    new XC_MethodHook() {
-                        @Override
-                        protected void beforeHookedMethod(MethodHookParam param) {
-                            Log.i(TAG, "showResult 点击");
+            try {
+                XposedHelpers.findAndHookMethod(clazz, "showResult",
+                        new XC_MethodHook() {
+                            @Override
+                            protected void beforeHookedMethod(MethodHookParam param) {
+                                Log.i(TAG, "showResult 点击");
 
-                            HookDangerApiClient.getInstance().stopObserve();
-                            HookNetClient.getInstance().stopObserve();
-                            HookGapDangerApiClient.getInstance().stopObserve();
+                                HookDangerApiClient.getInstance().stopObserve();
+                                HookNetClient.getInstance().stopObserve();
+                                HookGapDangerApiClient.getInstance().stopObserve();
 
-                            HookResultActivity.startActivity(context);
-                        }
-                    });
+                                HookResultActivity.startActivity(context);
+                            }
+                        });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }

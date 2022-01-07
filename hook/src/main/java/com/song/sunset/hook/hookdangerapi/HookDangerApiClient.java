@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class HookDangerApiClient {
 
-    private static final String TAG = "song-HookDangerApiClient";
+    private static final String TAG = "sunset-HookDangerApiClient";
 
     private static HookDangerApiClient INSTANCE;
 
@@ -47,8 +47,6 @@ public class HookDangerApiClient {
         Log.i(TAG, "startObserve");
         showResult = false;
         hook.clear();
-        //重置数据
-        DefaultRecord.writeRecord(DefaultRecord.FIELD_NAME, "");
         record = new DefaultRecord();
         hook.add(new HookPackageManager(record));
         hook.add(new HookTelephonyManager(record));

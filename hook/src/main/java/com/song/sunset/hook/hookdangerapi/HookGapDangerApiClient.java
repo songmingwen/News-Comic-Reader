@@ -8,7 +8,6 @@ import com.song.sunset.hook.bean.RecordData;
 import com.song.sunset.hook.hookdangerapi.record.GapRecord;
 import com.song.sunset.hook.hookdangerapi.type.gap.HookGapPackageManager;
 import com.song.sunset.hook.hookdangerapi.type.gap.HookGapTelephonyManager;
-import com.song.sunset.hook.record.DefaultRecord;
 import com.song.sunset.hook.record.RecordInterface;
 
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ import java.util.List;
  */
 public class HookGapDangerApiClient {
 
-    private static final String TAG = "song-HookGapDangerApiClient";
+    private static final String TAG = "sunset-HookGapDangerApiClient";
 
     private static HookGapDangerApiClient INSTANCE;
 
@@ -50,8 +49,6 @@ public class HookGapDangerApiClient {
         Log.i(TAG, "startObserve");
         hook.clear();
 
-        //重置数据
-        DefaultRecord.writeRecord(GapRecord.FIELD_NAME, "");
         record = new GapRecord();
         hook.add(new HookGapPackageManager(record));
         hook.add(new HookGapTelephonyManager(record));

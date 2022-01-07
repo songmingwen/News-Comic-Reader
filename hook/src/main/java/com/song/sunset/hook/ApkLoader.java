@@ -24,8 +24,8 @@ import dalvik.system.DexClassLoader;
  * Time:    2021/12/28 14:28
  */
 public class ApkLoader {
-    private static final String TAG = "song-HookLoader";
-    private static final String APKHOOK_PACKAGE_NAME = "com.mgtv.helper";
+    private static final String TAG = "sunset-HookLoader";
+    private static final String APKHOOK_PACKAGE_NAME = "com.song.sunset.helper";
     private static Application mApplication;
 
     public static void init(Application application) {
@@ -64,7 +64,7 @@ public class ApkLoader {
             }
             MyLog.log("librarySearchPath: " + librarySearchPath);
             DexClassLoader dexClassLoader = new DexClassLoader(applicationInfo.sourceDir, mSystemContext.getApplicationInfo().dataDir, librarySearchPath, mSystemContext.getClassLoader());
-            Class hookBridgeClass = dexClassLoader.loadClass("com.mgtv.helper.hook.XposedHander");
+            Class hookBridgeClass = dexClassLoader.loadClass("com.song.sunset.helper.hook.XposedHander");
             if (hookBridgeClass != null) {
                 if (mApplication != null) {
                     hookBridgeClass.getDeclaredMethod("init", Context.class).invoke(null, mApplication);

@@ -8,7 +8,6 @@ import android.content.Context;
  * Email:   mingwen@mgtv.com
  * Time:    2021/12/14 15:39
  */
-
 public interface HookInterface {
     /*** 开始监控 */
     void startObserve(Context context);

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 
 import com.song.sunset.hook.bean.RecordData;
-import com.song.sunset.hook.record.DefaultRecord;
 import com.song.sunset.hook.record.RecordInterface;
 
 import java.util.List;
@@ -17,7 +16,7 @@ import java.util.List;
  */
 public class HookNetClient {
 
-    private static final String TAG = "song-HookNetClient";
+    private static final String TAG = "sunset-HookNetClient";
 
     private static HookNetClient INSTANCE;
 
@@ -40,8 +39,6 @@ public class HookNetClient {
     public void startObserve(Context context) {
         Log.i(TAG, "startObserve");
         showResult = false;
-        //重置数据
-        DefaultRecord.writeRecord(NetRecord.FIELD_NAME, "");
         record = new NetRecord();
         hookNet = new HookNet(record);
         hookNet.startObserve(context);

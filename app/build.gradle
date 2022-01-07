@@ -168,14 +168,10 @@ dependencies {
 //    implementation project(':flutter_plugin_battery')
     implementation rootProject.ext.google.auto_service
 
-    if (project.properties.'enableHook' == 'true') {
-        implementation project(':hook')
-    } else {
-        implementation project(':hook_no_op')
-    }
+//    implementation project(':hook')
 }
 
-subprojects{
+subprojects {
     project.configurations.all {
         resolutionStrategy {
             force rootProject.ext.third.work

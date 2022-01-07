@@ -9,7 +9,7 @@ include ':annotation'
 include ':processor'
 include ':app'
 include ':flutter_comic'
-include ':hook'
+//include ':hook'
 
 setBinding(new Binding([gradle: this]))
 //flutter module 对应的 include_flutter.groovy 实际目录地址

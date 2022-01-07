@@ -3,10 +3,10 @@ package com.song.sunset.hook.hookdangerapi.type.gap;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.song.sunset.utils.JsonUtil;
 import com.song.sunset.hook.bean.GapConfig;
 import com.song.sunset.hook.bean.GapConfigList;
 import com.song.sunset.hook.utils.AssetsUtil;
+import com.song.sunset.hook.utils.JsonUtil;
 
 import java.util.ArrayList;
 import java.util.List;
