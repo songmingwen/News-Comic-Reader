@@ -54,31 +54,33 @@ class NineLatticeViewHolder(view: View) : PhoenixBottomViewHolder(view) {
             }
         }
 
+        val screenWidth = ScreenUtils.getScreenWidth(context)
+
         val recyclerViewHeight: Float = when (temp.size) {
             2 -> {
-                (ScreenUtils.getScreenWidth(context) - ScreenUtils.dp2Px(context, 21f)) / 2
+                (screenWidth - ScreenUtils.dp2Px(context, 21f)) / 2
             }
             3 -> {
-                (ScreenUtils.getScreenWidth(context) - ScreenUtils.dp2Px(context, 28f)) / 3
+                (screenWidth - ScreenUtils.dp2Px(context, 28f)) / 3
             }
             5, 6 -> {
-                ((ScreenUtils.getScreenWidth(context) - ScreenUtils.dp2Px(context, 28f)) / 3) * 2 + ScreenUtils.dp2Px(context, 7f)
+                ((screenWidth - ScreenUtils.dp2Px(context, 28f)) / 3) * 2 + ScreenUtils.dp2Px(context, 7f)
             }
             else -> {//1,4,7,8,9
-                ScreenUtils.getScreenWidth(context) - ScreenUtils.dp2Px(context, 14f)
+                screenWidth - ScreenUtils.dp2Px(context, 14f)
             }
 
         }
 
         val itemWidth: Float = when (temp.size) {
             2, 4 -> {
-                (ScreenUtils.getScreenWidth(context) - ScreenUtils.dp2Px(context, 21f + 6)) / 2
+                (screenWidth - ScreenUtils.dp2Px(context, 21f + 6)) / 2
             }
             3, 5, 6, 7, 8, 9 -> {
-                (ScreenUtils.getScreenWidth(context) - ScreenUtils.dp2Px(context, 28f + 6)) / 3
+                (screenWidth - ScreenUtils.dp2Px(context, 28f + 6)) / 3
             }
             else -> {
-                ScreenUtils.getScreenWidth(context) - ScreenUtils.dp2Px(context, 14f + 6)
+                screenWidth - ScreenUtils.dp2Px(context, 14f + 6)
             }
         }
 
