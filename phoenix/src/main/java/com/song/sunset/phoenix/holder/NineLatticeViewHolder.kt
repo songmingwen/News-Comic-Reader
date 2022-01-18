@@ -11,6 +11,7 @@ import com.song.sunset.utils.ScreenUtils
 import com.song.sunset.widget.SpacesItemDecoration
 import com.zhihu.android.sugaradapter.Layout
 import com.zhihu.android.sugaradapter.SugarAdapter
+import java.util.ArrayList
 
 /**
  * Desc:
@@ -32,7 +33,16 @@ class NineLatticeViewHolder(view: View) : PhoenixBottomViewHolder(view) {
             return
         }
 
-        val gridSize: Int = when (data.style.images.size) {
+        val temp = ArrayList<String>()
+        if (data.style.images.size > 9) {
+            for (index in 0..9) {
+                temp.add(data.style.images[index])
+            }
+        } else {
+            temp.addAll(data.style.images)
+        }
+
+        val gridSize: Int = when (temp.size) {
             1 -> {
                 1
             }
@@ -44,26 +54,23 @@ class NineLatticeViewHolder(view: View) : PhoenixBottomViewHolder(view) {
             }
         }
 
-        val recyclerViewHeight: Float = when (data.style.images.size) {
+        val recyclerViewHeight: Float = when (temp.size) {
             2 -> {
                 (ScreenUtils.getScreenWidth(context) - ScreenUtils.dp2Px(context, 21f)) / 2
             }
             3 -> {
                 (ScreenUtils.getScreenWidth(context) - ScreenUtils.dp2Px(context, 28f)) / 3
             }
-            4, 7, 8, 9 -> {
-                ScreenUtils.getScreenWidth(context) - ScreenUtils.dp2Px(context, 14f)
-            }
             5, 6 -> {
                 ((ScreenUtils.getScreenWidth(context) - ScreenUtils.dp2Px(context, 28f)) / 3) * 2 + ScreenUtils.dp2Px(context, 7f)
             }
-            else -> {
+            else -> {//1,4,7,8,9
                 ScreenUtils.getScreenWidth(context) - ScreenUtils.dp2Px(context, 14f)
             }
 
         }
 
-        val itemWidth: Float = when (data.style.images.size) {
+        val itemWidth: Float = when (temp.size) {
             2, 4 -> {
                 (ScreenUtils.getScreenWidth(context) - ScreenUtils.dp2Px(context, 21f + 6)) / 2
             }
@@ -79,7 +86,7 @@ class NineLatticeViewHolder(view: View) : PhoenixBottomViewHolder(view) {
 
         val layoutManager = GridLayoutManager(context, gridSize)
         recyclerView.layoutManager = layoutManager
-        val adapter = SugarAdapter.Builder.with(data.style.images)
+        val adapter = SugarAdapter.Builder.with(temp)
                 .add(NineLatticeItemViewHolder::class.java) { holder -> holder.setWidth(itemWidth, data.link.weburl) }
                 .build()
         recyclerView.adapter = adapter
