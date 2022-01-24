@@ -15,8 +15,8 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.bubblepicker.BubbleActivity
 import com.google.firebase.appcheck.FirebaseAppCheck
 import com.google.firebase.appcheck.debug.DebugAppCheckProviderFactory
-import com.song.game.soaring.SoaringBattleActivity.Companion.BATTLE_EXTRA
-import com.song.game.soaring.SoaringBattleActivity.Companion.obtainBundle
+import com.song.game.wuxia.WuXiaBattleActivity.Companion.BATTLE_EXTRA
+import com.song.game.wuxia.WuXiaBattleActivity.Companion.obtainBundle
 import com.song.scankit.QRCodeActivity
 import com.song.sunset.R
 import com.song.sunset.activitys.PhoenixVideoActivity
@@ -43,7 +43,7 @@ import kotlinx.android.synthetic.main.activity_function_list.*
 class FunctionListActivity : BaseActivity() {
 
     private fun LinearLayout.addButtonList() {
-        addButton("Soaring") { ARouter.getInstance().build("/song/soaring/home").navigation() }
+        addButton("wuxia") { ARouter.getInstance().build("/song/wuxia/home").navigation() }
         addButton("battle") { toBattle() }
         addButton("🎆") { button -> showFireworks(button) }
         addButton("test") { TempTestActivity.start(this@FunctionListActivity) }
@@ -82,7 +82,7 @@ class FunctionListActivity : BaseActivity() {
     }
 
     private fun toBattle() {
-        ARouter.getInstance().build("/song/soaring/battle")
+        ARouter.getInstance().build("/song/wuxia/battle")
                 .withBundle(BATTLE_EXTRA, obtainBundle("乔峰", "虚竹",
                         "降龙十八掌", "龙爪手"))
                 .navigation()

@@ -48,11 +48,11 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:appComponentFactory">
-        <activity android:name="com.song.game.soaring.SoaringBattleActivity" />
-        <activity android:name="com.song.game.soaring.SoaringCharacteristicActivity" />
-        <activity android:name="com.song.game.soaring.SoaringLifeActivity" />
-        <activity android:name="com.song.game.soaring.SoaringTalentActivity" />
-        <activity android:name="com.song.game.soaring.SoaringHomeActivity" />
+        <activity android:name="com.song.game.wuxia.WuXiaBattleActivity" />
+        <activity android:name="com.song.game.wuxia.WuXiaCharacteristicActivity" />
+        <activity android:name="com.song.game.wuxia.WuXiaLifeActivity" />
+        <activity android:name="com.song.game.wuxia.WuXiaTalentActivity" />
+        <activity android:name="com.song.game.wuxia.WuXiaHomeActivity" />
         <activity android:name=".activitys.temp.ServiceProviderActivity" />
         <activity
             android:name=".activitys.FlutterComicActivity"

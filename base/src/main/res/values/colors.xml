@@ -52,13 +52,13 @@
     <color name="greenStart">#a7f56e</color>
     <color name="greenEnd">#11c612</color>
 
-    <color name="soaring_color_white">#EEEEEE</color>
-    <color name="soaring_color_green">#77FF77</color>
-    <color name="soaring_color_blue">#3377FF</color>
-    <color name="soaring_color_purple">#9933FF</color>
-    <color name="soaring_color_red">#FF3300</color>
-    <color name="soaring_color_gold">#FFD700</color>
-    <color name="soaring_color_dark">#1D222C</color>
-    <color name="soaring_color_title">@color/soaring_color_white</color>
-    <color name="soaring_color_talent_btn">@color/bgColor_overlay</color>
+    <color name="wuxia_color_white">#EEEEEE</color>
+    <color name="wuxia_color_green">#77FF77</color>
+    <color name="wuxia_color_blue">#3377FF</color>
+    <color name="wuxia_color_purple">#9933FF</color>
+    <color name="wuxia_color_red">#FF3300</color>
+    <color name="wuxia_color_gold">#FFD700</color>
+    <color name="wuxia_color_dark">#1D222C</color>
+    <color name="wuxia_color_title">@color/wuxia_color_white</color>
+    <color name="wuxia_color_talent_btn">@color/bgColor_overlay</color>
 </resources>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    tools:context="com.song.game.wuxia.WuXiaBattleActivity">
+
+    <ImageView
+        android:id="@+id/enemy_avatar"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/character_qiaofeng"
+        app:layout_constraintBottom_toTopOf="@+id/self_avatar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="invisible" />
+
+    <ProgressBar
+        android:id="@+id/enemy_health"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="0dp"
+        android:layout_height="4dp"
+        android:background="@null"
+        android:max="256"
+        android:progress="100"
+        android:progressDrawable="@drawable/progress_bar_health"
+        android:thumb="@null"
+        app:layout_constraintBottom_toBottomOf="@id/enemy_avatar"
+        app:layout_constraintEnd_toStartOf="@+id/enemy_avatar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/enemy_avatar" />
+
+    <ImageView
+        android:id="@+id/self_avatar"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/character_qiaofeng"
+        app:layout_constraintBottom_toTopOf="@id/message_scroll"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/enemy_avatar"
+        tools:visibility="invisible" />
+
+    <ProgressBar
+        android:id="@+id/self_health"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="0dp"
+        android:layout_height="4dp"
+        android:background="@null"
+        android:max="256"
+        android:progress="100"
+        android:progressDrawable="@drawable/progress_bar_health"
+        android:thumb="@null"
+        app:layout_constraintBottom_toBottomOf="@id/self_avatar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/self_avatar"
+        app:layout_constraintTop_toTopOf="@+id/self_avatar" />
+
+    <ScrollView
+        android:id="@+id/message_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/attack">
+
+        <LinearLayout
+            android:id="@+id/message_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+
+    <Button
+        android:id="@+id/attack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/blackhole"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.song.sunset.widget.WaveView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/message_scroll" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/wuxia_color_dark"
-    tools:context="com.song.game.wuxia.WuXiaHomeActivity">
+    tools:context="com.song.game.wuxia.WuXiaCharacteristicActivity">
 
     <TextView
-        android:id="@+id/talent_title"
+        android:id="@+id/characteristic_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="选择天赋"
+        android:text="分配初始属性"
         android:textColor="@color/wuxia_color_title"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,25 +20,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/talent_tips"
+        android:id="@+id/characteristic_tips"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="最多 3 项"
+        android:text="可用属性点"
         android:textColor="@color/wuxia_color_title"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/talent_title" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/talent_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/talent_tips" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
