@@ -14,10 +14,11 @@ class ChainTest {
 
     @Test
     fun chain() {
-        LogChan.getLogChain().log(Logger.ERROR,"这里发生 crash")
+        val logger = LogChan.getLogChain()
+        logger.log(Logger.ERROR,"这里发生 crash")
         println("---------------------")
-        LogChan.getLogChain().log(Logger.DEBUG,"debug 显示的信息")
+        logger.log(Logger.DEBUG,"debug 显示的信息")
         println("---------------------")
-        LogChan.getLogChain().log(Logger.INFO,"一些辅助信息")
+        logger.log(Logger.INFO,"一些辅助信息")
     }
 }

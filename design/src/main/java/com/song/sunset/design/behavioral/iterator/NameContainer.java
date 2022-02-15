@@ -21,11 +21,7 @@ public class NameContainer implements Container {
 
         @Override
         public boolean hasNext() {
-            if (index >= name.length) {
-                return false;
-            } else {
-                return true;
-            }
+            return index < name.length;
         }
 
         @Override
