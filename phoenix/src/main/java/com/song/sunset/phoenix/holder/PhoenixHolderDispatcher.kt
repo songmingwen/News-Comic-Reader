@@ -37,7 +37,8 @@ object PhoenixHolderDispatcher {
             return TitleImageViewHolder::class.java
         }
         val viewType: String = phoenixChannelBean.style.view
-        Log.i("phoenix type=", viewType + " ,title=" + phoenixChannelBean.title)
+        val title = phoenixChannelBean.title
+        Log.i("phoenix", "type=$viewType ,title=$title")
         s.add(viewType)
         return when (viewType) {
             TITLE_IMAGE -> {
