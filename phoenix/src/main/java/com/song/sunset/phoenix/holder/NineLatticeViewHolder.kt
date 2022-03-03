@@ -35,7 +35,7 @@ class NineLatticeViewHolder(view: View) : PhoenixBottomViewHolder(view) {
 
         val temp = ArrayList<String>()
         if (data.style.images.size > 9) {
-            for (index in 0..9) {
+            for (index in 0..8) {
                 temp.add(data.style.images[index])
             }
         } else {
