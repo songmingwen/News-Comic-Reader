@@ -21,7 +21,7 @@ public class ComicCollectionActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getIntent() != null) {
-            fromWidget = getIntent().getBooleanExtra(SunsetWidget.FROM, false);
+            fromWidget = getIntent().getBooleanExtra(SunsetWidget.FROM_WIDGET, false);
         }
         setContentView(R.layout.activity_comic_collection);
         switchFragment(CollectionKotlinFragment.class.getName(), R.id.id_comic_collection_content);

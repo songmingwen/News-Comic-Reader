@@ -53,7 +53,7 @@ public class VideoListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getIntent() != null) {
-            fromWidget = getIntent().getBooleanExtra(SunsetWidget.FROM, false);
+            fromWidget = getIntent().getBooleanExtra(SunsetWidget.FROM_WIDGET, false);
         }
         setContentView(R.layout.activity_video);
 

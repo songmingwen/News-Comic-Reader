@@ -18,7 +18,7 @@ import java.util.Arrays;
  */
 public class SunsetWidget extends AppWidgetProvider {
 
-    public static final String FROM = "com.song.sunset.from";
+    public static final String FROM_WIDGET = "com.song.sunset.from_widget";
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
@@ -34,7 +34,7 @@ public class SunsetWidget extends AppWidgetProvider {
         views.setOnClickPendingIntent(R.id.appwidget_newest_comic, newestComic);
 
         Intent collectedComicIntent = new Intent(context, ComicCollectionActivity.class);
-        collectedComicIntent.putExtra(FROM, true);
+        collectedComicIntent.putExtra(FROM_WIDGET, true);
         PendingIntent collectedComic = PendingIntent.getActivity(context, (int) (Math.random() * 100000),
                 collectedComicIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         views.setOnClickPendingIntent(R.id.appwidget_collected_comic, collectedComic);
@@ -45,7 +45,7 @@ public class SunsetWidget extends AppWidgetProvider {
 
         Intent newIntent = new Intent();
         newIntent.setClassName(context, "com.song.sunset.activitys.VideoListActivity");
-        newIntent.putExtra(FROM, true);
+        newIntent.putExtra(FROM_WIDGET, true);
         PendingIntent newsVideo = PendingIntent.getActivity(context, (int) (Math.random() * 100000),
                 newIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         views.setOnClickPendingIntent(R.id.appwidget_news_video, newsVideo);
