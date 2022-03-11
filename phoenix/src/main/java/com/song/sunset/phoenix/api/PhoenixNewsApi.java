@@ -5,6 +5,7 @@ import com.song.sunset.phoenix.bean.VideoListsBean;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import io.reactivex.Observable;
@@ -40,4 +41,7 @@ public interface PhoenixNewsApi {
     @GET("ClientNews")
     Observable<List<PhoenixNewsListBean>> queryPhoenixListObservable(
             @Query("action") String action, @Query("time") String time);
+
+
+    Observable<ResponseBody> getImage();
 }

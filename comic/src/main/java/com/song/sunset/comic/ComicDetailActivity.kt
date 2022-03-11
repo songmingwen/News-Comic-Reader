@@ -22,7 +22,7 @@ import com.facebook.imagepipeline.image.CloseableImage
 import com.song.sunset.comic.adapter.ComicDetailAdapter
 import com.song.sunset.comic.adapter.ComicDetailAdapter.COMIC_LIST_TYPE
 import com.song.sunset.comic.bean.ComicDetailBean
-import com.song.sunset.comic.utils.BitmapUtil
+import com.song.sunset.utils.BitmapUtil
 import com.song.sunset.comic.utils.StatusBarUtil
 import com.song.sunset.comic.viewmodel.ComicDetailViewModel
 import com.song.sunset.utils.ViewUtil

@@ -23,7 +23,7 @@ import coil.request.ImageRequest
 import coil.target.Target
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.song.sunset.base.AppConfig
-import com.song.sunset.comic.utils.BitmapUtil
+import com.song.sunset.utils.BitmapUtil
 import com.song.sunset.base.utils.FileUtils
 import com.song.sunset.comic.utils.PictureUtil
 import kotlinx.android.synthetic.main.activity_scale_pic.*

@@ -17,7 +17,7 @@ import com.song.sunset.phoenix.bean.VideoListsBean;
 import com.song.sunset.phoenix.bean.VideoListsTypeBean;
 import com.song.sunset.fragments.VideoListHelperFragment;
 import com.song.sunset.fragments.VideoListPlayFragment;
-import com.song.sunset.comic.widget.SunsetWidget;
+import com.song.sunset.comic.widget.appwidget.SunsetWidget;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.widget.ProgressLayout;
 import com.song.sunset.base.rxjava.RxUtil;

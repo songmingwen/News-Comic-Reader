@@ -1,4 +1,4 @@
-package com.song.sunset.comic.utils;
+package com.song.sunset.utils;
 
 import android.content.Intent;
 import android.content.res.Resources;

@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.song.sunset.comic.R;
-import com.song.sunset.comic.utils.BitmapUtil;
+import com.song.sunset.utils.BitmapUtil;
 
 /**
  * Created by Song on 2017/12/7 0007.

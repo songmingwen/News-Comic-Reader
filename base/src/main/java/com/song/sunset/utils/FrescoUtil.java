@@ -200,7 +200,7 @@ public class FrescoUtil {
         }
     }
 
-    public static void PrefetchImg(ImageRequest imageRequest, Context context) {
+    public static void prefetchImg(ImageRequest imageRequest, Context context) {
         ImagePipeline imagePipeline = Fresco.getImagePipeline();
         imagePipeline.prefetchToDiskCache(imageRequest, context);
     }

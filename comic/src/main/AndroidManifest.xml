@@ -1,4 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.song.sunset.comic">
+
+    <application>
+        <receiver android:name=".widget.appwidget.SunsetWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.song.sunset.intent.action.APP_WIDGET_CLICK" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/sunset_widget_info" />
+        </receiver>
+    </application>
 
 </manifest>

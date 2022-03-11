@@ -72,6 +72,10 @@ dependencies {
     kapt rootProject.ext.third.sugaradapter_processor
     implementation rootProject.ext.third.arouter
     kapt rootProject.ext.third.arouter_compiler
+    implementation rootProject.ext.third.coil
+    implementation rootProject.ext.third.coil_video
+    implementation rootProject.ext.third.coil_svg
+    implementation rootProject.ext.third.coil_gif
 
     implementation project(':base')
 }

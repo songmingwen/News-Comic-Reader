@@ -208,17 +208,6 @@
             android:enabled="true"
             android:exported="true" />
 
-        <receiver android:name=".comic.widget.SunsetWidget">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="com.song.sunset.intent.action.APP_WIDGET_CLICK" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/sunset_widget_info" />
-        </receiver>
-
         <service android:name="com.amap.api.location.APSService" />
         <service
             android:name=".services.PushService"

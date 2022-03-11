@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import com.song.sunset.R
 import com.song.sunset.base.AppConfig
-import com.song.sunset.comic.utils.BitmapUtil
+import com.song.sunset.utils.BitmapUtil
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 
