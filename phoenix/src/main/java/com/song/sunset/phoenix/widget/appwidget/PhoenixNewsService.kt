@@ -3,12 +3,10 @@ package com.song.sunset.phoenix.widget.appwidget
 import android.appwidget.AppWidgetManager
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Base64
+import android.text.TextUtils
 import android.util.Log
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
@@ -26,7 +24,6 @@ import com.song.sunset.phoenix.bean.PhoenixNewsListBean
 import com.song.sunset.phoenix.bean.WidgetItem
 import com.song.sunset.utils.BitmapUtil
 import io.reactivex.Observable
-import java.io.ByteArrayOutputStream
 import java.util.*
 
 /**
@@ -119,15 +116,17 @@ class PhoenixNewsService : RemoteViewsService() {
 
                     Log.i(PhoenixNewsWidget.TAG, "fetchData onSuccess")
 
-                    data?.item?.forEach {
-                        val item = WidgetItem()
-                        item.title = it.title
-                        item.image = it.thumbnail
-                        item.jumpUrl = it.link.weburl
-                        item.className = "com.song.sunset.activitys.PhoenixNewsActivity"
-                        mList.add(item)
-                        getBitmapFromNet(mContext, item.image)
-                    }
+                    data?.item
+                            ?.filter { !TextUtils.isEmpty(it.thumbnail) }
+                            ?.forEach {
+                                val item = WidgetItem()
+                                item.title = it.title
+                                item.image = it.thumbnail
+                                item.jumpUrl = it.link.weburl
+                                item.className = "com.song.sunset.activitys.PhoenixNewsActivity"
+                                mList.add(item)
+                                getBitmapFromNet(mContext, item.image)
+                            }
                 }
 
                 override fun onFailure(errorCode: Int, errorMsg: String?) {
