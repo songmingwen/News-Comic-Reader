@@ -15,9 +15,9 @@ import com.song.sunset.comic.bean.ChapterListBean;
 import com.song.sunset.comic.bean.ComicReadImageListBean;
 import com.song.sunset.comic.mvp.presenters.ComicReadPresenter;
 import com.song.sunset.comic.mvp.views.ComicReadView;
+import com.song.sunset.comic.utils.StatusBarUtil;
 import com.song.sunset.comic.widget.ComicReadMVPRecyclerView;
 import com.song.sunset.comic.widget.ScaleRecyclerView;
-import com.song.sunset.utils.ScreenUtils;
 import com.song.sunset.utils.ViewUtil;
 import com.song.sunset.widget.ProgressLayout;
 
@@ -51,9 +51,10 @@ public class ComicReadMVPActivity extends BaseActivity implements ComicReadMVPRe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_comic_read_mvp);
-        switchScreenStatus();
+        //设置状态栏透明
+        StatusBarUtil.setTransparent(this);
 
+        setContentView(R.layout.activity_comic_read_mvp);
         progressLayout = findViewById(R.id.progress);
         progressLayout.showLoading();
 
@@ -65,11 +66,6 @@ public class ComicReadMVPActivity extends BaseActivity implements ComicReadMVPRe
         initView();
         mPresenter = new ComicReadPresenter(this);
         mPresenter.setChapterList(mChapterList, openPosition);
-    }
-
-    private void switchScreenStatus() {
-        fullScreen = !fullScreen;
-        ScreenUtils.fullscreen(this, fullScreen);
     }
 
     private void initView() {
@@ -143,6 +139,6 @@ public class ComicReadMVPActivity extends BaseActivity implements ComicReadMVPRe
 
     @Override
     public void onSingleTap() {
-        switchScreenStatus();
+
     }
 }

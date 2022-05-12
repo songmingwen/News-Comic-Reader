@@ -145,7 +145,8 @@
             android:launchMode="singleInstance" />
         <activity
             android:name=".activitys.PhoenixNewsActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize|locale|uiMode|smallestScreenSize|screenLayout" />
         <activity
             android:name=".activitys.PhoenixVideoActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />

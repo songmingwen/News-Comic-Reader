@@ -23,7 +23,6 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.song.sunset.comic.utils.StatusBarUtil;
 import com.song.sunset.R;
 import com.song.sunset.base.activity.BaseActivity;
 import com.song.sunset.utils.ScreenUtils;
@@ -58,8 +57,6 @@ public class PhoenixNewsActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ScreenUtils.fullscreen(this, true);
-        StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimary));
         WebView.enableSlowWholeDocumentDraw();
         setContentView(R.layout.activity_phoenix_news_layout);
         video_fullView = (FrameLayout) findViewById(R.id.video_fullView);
@@ -165,7 +162,8 @@ public class PhoenixNewsActivity extends BaseActivity {
 
         @Override
         public void onShowCustomView(View view, CustomViewCallback callback) {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+            ScreenUtils.hideSystemUI(PhoenixNewsActivity.this);
             mWebView.setVisibility(View.INVISIBLE);
             // 如果一个视图已经存在，那么立刻终止并新建一个
             if (xCustomView != null) {
@@ -185,6 +183,7 @@ public class PhoenixNewsActivity extends BaseActivity {
                 return;
 
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            ScreenUtils.showSystemUI(PhoenixNewsActivity.this);
             xCustomView.setVisibility(View.GONE);
             video_fullView.removeView(xCustomView);
             xCustomView = null;
