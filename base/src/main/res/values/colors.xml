@@ -4,8 +4,8 @@
     <color name="colorPrimaryDark">@color/color_primary_dark</color>
     <color name="colorAccent">@color/color_accent</color>
 
-    <color name="color_primary_light_dark">#2bbad8</color>
-    <color name="color_primary_dark">#0096B6</color>
+    <color name="color_primary_light_dark">#FF4500</color>
+    <color name="color_primary_dark">#FF7700</color>
     <color name="color_accent">#ffa200</color>
 
     <color name="color_smooth_red">#ff4545</color>

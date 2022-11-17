@@ -3,9 +3,11 @@ package com.song.sunset.activitys;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.text.TextUtils;
 import android.view.View;
 
@@ -15,7 +17,6 @@ import com.song.sunset.R;
 import com.song.sunset.comic.adapter.RankingPagerAdapter;
 import com.song.sunset.phoenix.bean.VideoListsBean;
 import com.song.sunset.phoenix.bean.VideoListsTypeBean;
-import com.song.sunset.fragments.VideoListHelperFragment;
 import com.song.sunset.fragments.VideoListPlayFragment;
 import com.song.sunset.comic.widget.appwidget.SunsetWidget;
 import com.song.sunset.utils.ViewUtil;
@@ -57,7 +58,7 @@ public class VideoListActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_video);
 
-        progressLayout = (ProgressLayout)findViewById(R.id.progress);
+        progressLayout = (ProgressLayout) findViewById(R.id.progress);
         progressLayout.showLoading();
 
         viewPager = (ViewPager) findViewById(R.id.ranking_view_pager);
@@ -111,15 +112,10 @@ public class VideoListActivity extends AppCompatActivity {
                     if (TextUtils.equals(item.getName(), "凤凰卫视") || TextUtils.equals(item.getName(), "音频") || TextUtils.equals(item.getName(), "直播")) {
                         continue;
                     }
-                    if (TextUtils.equals(item.getName(), "美食")) {
-                        VideoListPlayFragment fragment = (VideoListPlayFragment) Fragment.instantiate(VideoListActivity.this, VideoListPlayFragment.class.getName(), bundle);
-                        fragmentList.add(0, fragment);
-                        titleList.add(0, item.getName());
-                    } else {
-                        VideoListHelperFragment fragment = (VideoListHelperFragment) Fragment.instantiate(VideoListActivity.this, VideoListHelperFragment.class.getName(), bundle);
-                        fragmentList.add(fragment);
-                        titleList.add(item.getName());
-                    }
+                    VideoListPlayFragment fragment = (VideoListPlayFragment) Fragment.instantiate(VideoListActivity.this, VideoListPlayFragment.class.getName(), bundle);
+                    fragmentList.add(0, fragment);
+                    titleList.add(0, item.getName());
+
                 }
 
                 if (fragmentList.size() <= 6) {

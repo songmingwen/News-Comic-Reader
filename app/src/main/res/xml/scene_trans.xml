@@ -11,44 +11,45 @@
         <OnSwipe
             motion:dragDirection="dragDown"
             motion:touchAnchorSide="top" />
+
+        <KeyFrameSet>
+
+            <KeyAttribute
+                android:alpha="0"
+                motion:framePosition="0"
+                motion:motionTarget="@id/id_7" />
+
+            <KeyAttribute
+                android:alpha="0"
+                motion:framePosition="0"
+                motion:motionTarget="@id/id_8" />
+
+            <KeyAttribute
+                android:alpha="0"
+                motion:framePosition="0"
+                motion:motionTarget="@id/id_9" />
+
+            <KeyPosition
+                motion:keyPositionType="pathRelative"
+                motion:percentX="0.25"
+                motion:framePosition="10"
+                motion:motionTarget="@+id/id_7"/>
+
+            <KeyPosition
+                motion:keyPositionType="pathRelative"
+                motion:percentX="0.25"
+                motion:framePosition="20"
+                motion:motionTarget="@+id/id_8"/>
+
+            <KeyPosition
+                motion:keyPositionType="pathRelative"
+                motion:percentX="0.25"
+                motion:framePosition="30"
+                motion:motionTarget="@+id/id_9"/>
+
+        </KeyFrameSet>
+
     </Transition>
-
-    <KeyFrameSet>
-
-        <KeyAttribute
-            android:alpha="0"
-            motion:framePosition="0"
-            motion:motionTarget="@id/id_7" />
-
-        <KeyAttribute
-            android:alpha="0"
-            motion:framePosition="0"
-            motion:motionTarget="@id/id_8" />
-
-        <KeyAttribute
-            android:alpha="0"
-            motion:framePosition="0"
-            motion:motionTarget="@id/id_9" />
-
-        <KeyPosition
-            motion:keyPositionType="pathRelative"
-            motion:percentX="0.25"
-            motion:framePosition="10"
-            motion:motionTarget="@+id/id_7"/>
-
-        <KeyPosition
-            motion:keyPositionType="pathRelative"
-            motion:percentX="0.25"
-            motion:framePosition="20"
-            motion:motionTarget="@+id/id_8"/>
-
-        <KeyPosition
-            motion:keyPositionType="pathRelative"
-            motion:percentX="0.25"
-            motion:framePosition="30"
-            motion:motionTarget="@+id/id_9"/>
-
-    </KeyFrameSet>
 
     <!--起始状态布局-->
     <ConstraintSet android:id="@+id/start">

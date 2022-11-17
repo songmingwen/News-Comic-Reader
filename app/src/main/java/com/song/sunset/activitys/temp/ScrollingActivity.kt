@@ -48,8 +48,8 @@ class ScrollingActivity : BaseActivity() {
     private fun initHeader() {
         val list = ArrayList<Any>()
         list.add(User("宋先生", "银河系-太阳系-地球-中国", "1008610010"))
-//        list.add(User("沈女士", "银河系-太阳系-地球-中国", "1008610010"))
-//        list.add(User("宋儿子", "银河系-太阳系-地球-中国", "1008610010"))
+        list.add(User("沈女士", "银河系-太阳系-地球-中国", "1008610010"))
+        list.add(User("宋儿子", "银河系-太阳系-地球-中国", "1008610010"))
         val adapter = SugarAdapter.Builder.with(list).add(HeaderHolder::class.java).build()
         header_rv.adapter = adapter
         header_rv.layoutManager = LinearLayoutManager(this)

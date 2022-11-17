@@ -35,7 +35,7 @@ object OkHttpClient {
                 .cache(CacheUtil.getCache())//设置Cache目录
                 //.cookieJar()//添加cookie
                 .retryOnConnectionFailure(true)//失败重连
-                .sslSocketFactory(HttpsUtil.createDefaultSSLSocketFactory())
+                .sslSocketFactory(HttpsUtil.createDefaultSSLSocketFactory(), HttpsUtil.UnSafeTrustManager())
                 .readTimeout(TIMEOUT_READ.toLong(), TimeUnit.SECONDS)
                 .connectTimeout(TIMEOUT_CONNECTION.toLong(), TimeUnit.SECONDS)
                 .build()

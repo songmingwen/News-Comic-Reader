@@ -4,7 +4,6 @@ apply from: file('../dependencies_base.gradle')
 dependencies {
     implementation rootProject.ext.third.work
     implementation rootProject.ext.third.streamsupport
-    implementation rootProject.ext.third.BaseRecyclerViewAdapterHelper
     implementation rootProject.ext.third.lottie
     implementation rootProject.ext.third.glide_4_0_transformations
     implementation rootProject.ext.third.gpuimage

@@ -154,6 +154,9 @@ apply from: file('../dependencies.gradle')
 apply from: file('../gradle/tools/so_scan.gradle')
 dependencies {
     implementation files('libs/jbox2d-library-2.1.2.2.jar')
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation files('libs/slf4j-api-1.7.22.jar')
 
     implementation project(':annotation')

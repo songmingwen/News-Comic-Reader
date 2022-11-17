@@ -43,6 +43,7 @@ import kotlinx.android.synthetic.main.activity_function_list.*
 class FunctionListActivity : BaseActivity() {
 
     private fun LinearLayout.addButtonList() {
+        addButton("发送芒果私信消息") { ARouter.getInstance().build("/song/sendmsg").navigation() }
         addButton("wuxia") { ARouter.getInstance().build("/song/wuxia/home").navigation() }
         addButton("battle") { toBattle() }
         addButton("🎆") { button -> showFireworks(button) }
@@ -58,6 +59,7 @@ class FunctionListActivity : BaseActivity() {
         addButton("Reflection") { ReflectionActivity.start(this@FunctionListActivity) }
         addButton("DynamicProxy") { DynamicProxyActivity.start(this@FunctionListActivity) }
         addButton("CoordinatorLayout") { ScrollingActivity.start(this@FunctionListActivity) }
+        addButton("CoordinatorLayout2") { ScrollingActivity2.start(this@FunctionListActivity) }
         addButton("SecondFloor") { SecondFloorActivity.start(this@FunctionListActivity) }
         addButton("binderPool") { useBinderPool() }
         addButton("openGL") { OpenGLListActivity.start(this@FunctionListActivity) }

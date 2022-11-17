@@ -33,8 +33,6 @@ ext {
 
             streamsupport                : 'net.sourceforge.streamsupport:streamsupport:1.7.2',
 
-            BaseRecyclerViewAdapterHelper: 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.8.6',
-
             lottie                       : 'com.airbnb.android:lottie:3.4.2',
 
             glide_4_0_transformations    : 'com.github.songmingwen:glide-4.0-transformations:1.1',
