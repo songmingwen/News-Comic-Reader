@@ -11,10 +11,12 @@ import com.song.sunset.base.fragment.BasePageLoadingFragment
 import com.song.sunset.base.net.Net
 import com.song.sunset.base.net.RetrofitCallback
 import com.song.sunset.base.rxjava.RxUtil
+import com.song.sunset.base.utils.AssetsUtils
 import com.song.sunset.phoenix.holder.PhoenixHolderDispatcher
 import com.song.sunset.phoenix.api.PhoenixNewsApi
 import com.song.sunset.phoenix.bean.PhoenixChannelBean
 import com.song.sunset.phoenix.bean.PhoenixNewsListBean
+import com.song.sunset.utils.JsonUtil
 import com.song.sunset.utils.ViewUtil
 import com.zhihu.android.sugaradapter.SugarAdapter
 import com.zhihu.android.sugaradapter.SugarHolder
@@ -55,7 +57,10 @@ class PhoenixListFragment : BasePageLoadingFragment<PhoenixNewsListBean>() {
             }
 
             override fun onFailure(errorCode: Int, errorMsg: String?) {
-                postRefreshFailed(Throwable(errorMsg))
+//                postRefreshFailed(Throwable(errorMsg))
+                val json = AssetsUtils.getJson("default.json", activity)
+                val bean = JsonUtil.gsonToBean(json, PhoenixNewsListBean::class.java)
+                postRefreshSucceed(bean)
             }
 
         })
@@ -74,7 +79,11 @@ class PhoenixListFragment : BasePageLoadingFragment<PhoenixNewsListBean>() {
             }
 
             override fun onFailure(errorCode: Int, errorMsg: String?) {
-                postRefreshFailed(Throwable(errorMsg))
+//                postRefreshFailed(Throwable(errorMsg))
+                val json = AssetsUtils.getJson("default.json", activity)
+                val bean = JsonUtil.gsonToBean(json, PhoenixNewsListBean::class.java)
+                postLoadMoreSucceed(bean)
+                redirectPosition(mRecyclerView.height - ViewUtil.dip2px(7f) - ViewUtil.dip2px(60f))
             }
 
         })

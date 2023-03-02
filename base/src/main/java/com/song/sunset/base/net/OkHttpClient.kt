@@ -2,6 +2,8 @@ package com.song.sunset.base.net
 
 import com.song.sunset.base.autoservice.ServiceProvider
 import com.song.sunset.base.autoservice.interceptor.NetworkInterceptor
+import java.security.KeyManagementException
+import java.security.NoSuchAlgorithmException
 import java.util.concurrent.TimeUnit
 
 /**
@@ -31,11 +33,19 @@ object OkHttpClient {
             builder.addNetworkInterceptor(it.createInterceptor())
         }
 
+        try {
+            VerifierManager.setTrustAllManager(builder)
+        } catch (e: NoSuchAlgorithmException) {
+            e.printStackTrace()
+        } catch (e: KeyManagementException) {
+            e.printStackTrace()
+        }
+
         return builder
                 .cache(CacheUtil.getCache())//设置Cache目录
                 //.cookieJar()//添加cookie
                 .retryOnConnectionFailure(true)//失败重连
-                .sslSocketFactory(HttpsUtil.createDefaultSSLSocketFactory(), HttpsUtil.UnSafeTrustManager())
+//                .sslSocketFactory(HttpsUtil.createDefaultSSLSocketFactory(), HttpsUtil.UnSafeTrustManager())
                 .readTimeout(TIMEOUT_READ.toLong(), TimeUnit.SECONDS)
                 .connectTimeout(TIMEOUT_CONNECTION.toLong(), TimeUnit.SECONDS)
                 .build()

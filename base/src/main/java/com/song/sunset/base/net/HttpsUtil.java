@@ -64,7 +64,7 @@ public class HttpsUtil {
             KeyManager[] keyManagers = prepareKeyManager(bksFile, password);
 
             //TLS是最新的IETF制定了标准的安全协议，相当于SSL 3.0后的版本。
-            SSLContext sslContext = SSLContext.getInstance("SSL");
+            SSLContext sslContext = SSLContext.getInstance("TLS");
             X509TrustManager trustManager;
 
             if (trustManagers != null) {
@@ -216,20 +216,20 @@ public class HttpsUtil {
         public void checkServerTrusted(X509Certificate[] chain, String authType)
                 throws CertificateException {
 
-//            if (chain == null || chain.length == 0 || TextUtils.isEmpty(authType)) {
-//                throw new IllegalArgumentException("illegal argument.");
-//            } else {
-//                try {
-//                    for (X509Certificate certificate : chain) {
-//                        certificate.checkValidity();
-//                        //CertificateExpiredException, CertificateNotYetValidException
-//                    }
-//                } catch (java.security.cert.CertificateException e) {
-//                    throw new java.security.cert.CertificateException("Certificate not valid or trusted.");
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
+            if (chain == null || chain.length == 0 || TextUtils.isEmpty(authType)) {
+                throw new IllegalArgumentException("illegal argument.");
+            } else {
+                try {
+                    for (X509Certificate certificate : chain) {
+                        certificate.checkValidity();
+                        //CertificateExpiredException, CertificateNotYetValidException
+                    }
+                } catch (java.security.cert.CertificateException e) {
+                    throw new java.security.cert.CertificateException("Certificate not valid or trusted.");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
         @Override

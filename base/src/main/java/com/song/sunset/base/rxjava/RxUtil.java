@@ -47,7 +47,7 @@ public class RxUtil {
 
                     @Override
                     public void onError(Throwable e) {
-                        retrofitCallback.onFailure(-1, "服务器错误");
+                        retrofitCallback.onFailure(-1, e.getMessage());
                     }
 
                     @Override
@@ -83,7 +83,7 @@ public class RxUtil {
                     if (ts == null) retrofitCallback.onFailure(-1, "无数据");
                     else retrofitCallback.onSuccess(ts.get(0));
                 }, throwable -> {
-//                        retrofitCallback.onFailure(-1, "服务器错误");
+                        retrofitCallback.onFailure(-1, throwable.getMessage());
                 });
     }
 

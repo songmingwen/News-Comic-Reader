@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import com.facebook.cache.disk.DiskCacheConfig;
 import com.facebook.common.disk.NoOpDiskTrimmableRegistry;
 import com.facebook.common.internal.Supplier;
+import com.facebook.common.logging.FLog;
 import com.facebook.common.memory.MemoryTrimType;
 import com.facebook.common.memory.NoOpMemoryTrimmableRegistry;
 import com.facebook.common.util.ByteConstants;
@@ -14,7 +15,12 @@ import com.facebook.imagepipeline.backends.okhttp3.OkHttpImagePipelineConfigFact
 import com.facebook.imagepipeline.cache.MemoryCacheParams;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.imagepipeline.core.ImagePipelineFactory;
+import com.song.sunset.base.AppConfig;
 import com.song.sunset.base.net.HttpsUtil;
+import com.song.sunset.base.net.VerifierManager;
+
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 
 import okhttp3.OkHttpClient;
 
@@ -82,7 +88,7 @@ public class FrescoInitializer {
                 .build();
 
         //默认图片的磁盘配置
-        DiskCacheConfig diskCacheConfig = DiskCacheConfig.newBuilder(context).setBaseDirectoryPath(context.getApplicationContext().getExternalCacheDir())//缓存图片基路径
+        DiskCacheConfig diskCacheConfig = DiskCacheConfig.newBuilder(context).setBaseDirectoryPath(context.getApplicationContext().getCacheDir())//缓存图片基路径
                 .setBaseDirectoryName(IMAGE_PIPELINE_CACHE_DIR)//文件夹名
                 .setMaxCacheSize(MAX_DISK_CACHE_SIZE)//默认缓存的最大大小。
                 .setMaxCacheSizeOnLowDiskSpace(MAX_DISK_CACHE_LOW_SIZE)//缓存的最大大小,使用设备时低磁盘空间。
@@ -92,15 +98,23 @@ public class FrescoInitializer {
 
         //缓存图片配置
         //自定义网络加载
-        OkHttpClient okHttpClient = new OkHttpClient.Builder().sslSocketFactory(HttpsUtil.createDefaultSSLSocketFactory()).build();
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        try {
+            VerifierManager.setTrustAllManager(builder);
+        } catch (NoSuchAlgorithmException | KeyManagementException e) {
+            e.printStackTrace();
+        }
 
-        ImagePipelineConfig.Builder configBuilder = OkHttpImagePipelineConfigFactory.newBuilder(context, okHttpClient)
+        OkHttpClient okHttpClient = builder.build();
+
+        ImagePipelineConfig config = OkHttpImagePipelineConfigFactory.newBuilder(context, okHttpClient)
                 .setBitmapsConfig(Bitmap.Config.RGB_565)
                 .setBitmapMemoryCacheParamsSupplier(mSupplierMemoryCacheParams)
                 .setSmallImageDiskCacheConfig(diskSmallCacheConfig)
                 .setMainDiskCacheConfig(diskCacheConfig)
                 .setMemoryTrimmableRegistry(NoOpMemoryTrimmableRegistry.getInstance())
-                .setResizeAndRotateEnabledForNetwork(true);
+                .setResizeAndRotateEnabledForNetwork(true)
+                .build();
 
         // 就是这段代码，用于清理缓存
         NoOpMemoryTrimmableRegistry.getInstance().registerMemoryTrimmable(trimType -> {
@@ -114,6 +128,7 @@ public class FrescoInitializer {
             }
         });
 
-        Fresco.initialize(context.getApplicationContext(), configBuilder.build());
+        Fresco.initialize(context.getApplicationContext());
+        FLog.setMinimumLoggingLevel(FLog.VERBOSE);
     }
 }
