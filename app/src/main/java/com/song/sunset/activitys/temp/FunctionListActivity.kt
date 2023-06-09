@@ -15,6 +15,7 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.bubblepicker.BubbleActivity
 import com.google.firebase.appcheck.FirebaseAppCheck
 import com.google.firebase.appcheck.debug.DebugAppCheckProviderFactory
+import com.imgo.arcard.Presentation
 import com.song.game.wuxia.WuXiaBattleActivity.Companion.BATTLE_EXTRA
 import com.song.game.wuxia.WuXiaBattleActivity.Companion.obtainBundle
 import com.song.scankit.QRCodeActivity
@@ -43,6 +44,7 @@ import kotlinx.android.synthetic.main.activity_function_list.*
 class FunctionListActivity : BaseActivity() {
 
     private fun LinearLayout.addButtonList() {
+        addButton("灵境卡片") { Presentation.start(this@FunctionListActivity) }
         addButton("发送芒果私信消息") { ARouter.getInstance().build("/song/sendmsg").navigation() }
         addButton("wuxia") { ARouter.getInstance().build("/song/wuxia/home").navigation() }
         addButton("battle") { toBattle() }

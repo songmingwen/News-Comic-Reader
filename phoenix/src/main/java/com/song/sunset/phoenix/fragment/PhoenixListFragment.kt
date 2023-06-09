@@ -71,7 +71,7 @@ class PhoenixListFragment : BasePageLoadingFragment<PhoenixNewsListBean>() {
             override fun onSuccess(data: PhoenixNewsListBean?) {
                 if (data != null && data.data != null) {
                     postLoadMoreSucceed(data)
-                    redirectPosition(mRecyclerView.height - ViewUtil.dip2px(7f) - ViewUtil.dip2px(60f))
+                    redirectPosition(mRecyclerView.height - ViewUtil.dip2px(80f))
 
                 } else {
                     postLoadMoreFailed(Throwable("data is fail"))
@@ -79,11 +79,11 @@ class PhoenixListFragment : BasePageLoadingFragment<PhoenixNewsListBean>() {
             }
 
             override fun onFailure(errorCode: Int, errorMsg: String?) {
-//                postRefreshFailed(Throwable(errorMsg))
+                postRefreshFailed(Throwable(errorMsg))
                 val json = AssetsUtils.getJson("default.json", activity)
                 val bean = JsonUtil.gsonToBean(json, PhoenixNewsListBean::class.java)
                 postLoadMoreSucceed(bean)
-                redirectPosition(mRecyclerView.height - ViewUtil.dip2px(7f) - ViewUtil.dip2px(60f))
+                redirectPosition(mRecyclerView.height - ViewUtil.dip2px(80f))
             }
 
         })

@@ -1,3 +1,4 @@
+include ':arcard'
 include ':phoenix'
 include ':scankit'
 include ':mqtt'

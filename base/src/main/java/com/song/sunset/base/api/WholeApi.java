@@ -10,7 +10,7 @@ public interface WholeApi {
 
     String COMIC_NEW_BASE_URL = "https://app.u17.com/v3/appV3_3/android/phone/";
 
-    String PHOENIX_NEWS_BASE_URL = "https://api.iclient.ifeng.com/";
+    String PHOENIX_NEWS_BASE_URL = "https://nine.ifeng.com/";
 
     String ZHI_API = "https://api.zhihu.com/";
 

@@ -1,0 +1,20 @@
+{
+  "canvasList": [
+    {
+      "canvasName": "son",
+      "localFeaturePath": "/storage/emulated/0/Android/data/com.song.sunset/files/son/son",
+      "modelName": "son",
+      "pathToTextures": [
+        "/storage/emulated/0/Android/data/com.song.sunset/files/son/video.mp4"
+      ]
+    },
+    {
+      "canvasName": "tea",
+      "localFeaturePath": "/storage/emulated/0/Android/data/com.song.sunset/files/tea/tea",
+      "modelName": "tea",
+      "pathToTextures": [
+        "/storage/emulated/0/Android/data/com.song.sunset/files/tea/tea.mp4"
+      ]
+    }
+  ]
+}
