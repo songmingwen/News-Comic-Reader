@@ -4,7 +4,7 @@
 
     <application>
         <activity
-            android:name=".Presentation"
+            android:name=".ARDataActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ARFragmentActivity"
