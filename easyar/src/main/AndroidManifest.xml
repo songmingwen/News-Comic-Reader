@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.imgo.easyar">
+
+    <application>
+
+        <activity
+            android:name="com.easyar.samples.helloarvideo.ARActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
+            android:exported="false"
+            android:screenOrientation="unspecified" />
+
+    </application>
+
+</manifest>

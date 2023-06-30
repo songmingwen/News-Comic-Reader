@@ -169,6 +169,7 @@ dependencies {
     implementation project(':scankit')
     implementation project(':phoenix')
     implementation project(':arcard')
+    implementation project(':easyar')
 //    implementation project(':flutter_plugin_battery')
     implementation rootProject.ext.google.auto_service
 

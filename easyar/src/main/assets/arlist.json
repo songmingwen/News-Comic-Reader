@@ -1,0 +1,25 @@
+{
+  "list": [
+    {
+      "imgName": "tea",
+      "imgPath": "tea.jpg",
+      "imgStorageType": 1,
+      "videoPath": "tea.mp4",
+      "videoType": 0
+    },
+    {
+      "imgName": "son",
+      "imgPath": "son.jpg",
+      "imgStorageType": 1,
+      "videoPath": "transparentvideo.mp4",
+      "videoType": 1
+    },
+    {
+      "imgName": "sky",
+      "imgPath": "sky.jpg",
+      "imgStorageType": 1,
+      "videoPath": "https://sightpvideo-cdn.sightp.com/sdkvideo/EasyARSDKShow201520.mp4",
+      "videoType": 2
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+include ':easyar'
 include ':arcard'
 include ':phoenix'
 include ':scankit'
