@@ -2,9 +2,9 @@
   "list": [
     {
       "imgName": "tea",
-      "imgPath": "tea.jpg",
+      "imgPath": "tea/tea.jpg",
       "imgStorageType": 1,
-      "videoPath": "tea.mp4",
+      "videoPath": "tea/tea.mp4",
       "videoType": 0
     },
     {
