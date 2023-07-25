@@ -6,9 +6,10 @@
 //
 //================================================================================================================================
 
-package com.easyar.samples.helloarvideo;
+package com.easyar.samples.arvideo;
 
 import android.opengl.GLES30;
+import android.opengl.Matrix;
 
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
@@ -21,17 +22,18 @@ import cn.easyar.Matrix44F;
 import cn.easyar.Vec2F;
 
 public class VideoRenderer {
-    private int program_box;
-    private int pos_coord_box;
-    private int pos_tex_box;
-    private int pos_trans_box;
-    private int pos_proj_box;
-    private int vbo_coord_box;
-    private int vbo_tex_box;
-    private int vbo_faces_box;
-    private int texture_id;
 
-    private EGLContext current_context = null;
+    private int proGramBox;
+    private int posCoordBox;
+    private int posTexBox;
+    private int posTransBox;
+    private int posProjBox;
+    private int vboCoordBox;
+    private int vboTexBox;
+    private int vboFacesBox;
+    private int textureId;
+
+    private EGLContext currentContext = null;
 
     private String box_vert = "uniform mat4 trans;\n"
             + "uniform mat4 proj;\n"
@@ -136,51 +138,63 @@ public class VideoRenderer {
 
     private static float[] getGLMatrix(Matrix44F m) {
         float[] d = m.data;
-        return new float[]{d[0], d[4], d[8], d[12], d[1], d[5], d[9], d[13], d[2], d[6], d[10], d[14], d[3], d[7], d[11], d[15]};
+        return new float[]{
+                d[0], d[4], d[8], d[12],
+                d[1], d[5], d[9], d[13],
+                d[2], d[6], d[10], d[14],
+                d[3], d[7], d[11], d[15]};
     }
 
     public VideoRenderer() {
-        current_context = ((EGL10) EGLContext.getEGL()).eglGetCurrentContext();
+        currentContext = ((EGL10) EGLContext.getEGL()).eglGetCurrentContext();
 
-        program_box = GLES30.glCreateProgram();
+        proGramBox = GLES30.glCreateProgram();
         int vertShader = GLES30.glCreateShader(GLES30.GL_VERTEX_SHADER);
         GLES30.glShaderSource(vertShader, box_vert);
         GLES30.glCompileShader(vertShader);
         int fragShader = GLES30.glCreateShader(GLES30.GL_FRAGMENT_SHADER);
         GLES30.glShaderSource(fragShader, box_frag);
         GLES30.glCompileShader(fragShader);
-        GLES30.glAttachShader(program_box, vertShader);
-        GLES30.glAttachShader(program_box, fragShader);
-        GLES30.glLinkProgram(program_box);
-        GLES30.glUseProgram(program_box);
+        GLES30.glAttachShader(proGramBox, vertShader);
+        GLES30.glAttachShader(proGramBox, fragShader);
+        GLES30.glLinkProgram(proGramBox);
+        GLES30.glUseProgram(proGramBox);
         GLES30.glDeleteShader(vertShader);
         GLES30.glDeleteShader(fragShader);
-        pos_coord_box = GLES30.glGetAttribLocation(program_box, "coord");
-        pos_tex_box = GLES30.glGetAttribLocation(program_box, "texcoord");
-        pos_trans_box = GLES30.glGetUniformLocation(program_box, "trans");
-        pos_proj_box = GLES30.glGetUniformLocation(program_box, "proj");
+        posCoordBox = GLES30.glGetAttribLocation(proGramBox, "coord");
+        posTexBox = GLES30.glGetAttribLocation(proGramBox, "texcoord");
+        posTransBox = GLES30.glGetUniformLocation(proGramBox, "trans");
+        posProjBox = GLES30.glGetUniformLocation(proGramBox, "proj");
 
-        vbo_coord_box = generateOneBuffer();
-        GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER, vbo_coord_box);
-        float cube_vertices[][] = {{1.0f / 2, 1.0f / 2, 0.f}, {1.0f / 2, -1.0f / 2, 0.f}, {-1.0f / 2, -1.0f / 2, 0.f}, {-1.0f / 2, 1.0f / 2, 0.f}};
-        FloatBuffer cube_vertices_buffer = FloatBuffer.wrap(flatten(cube_vertices));
-        GLES30.glBufferData(GLES30.GL_ARRAY_BUFFER, cube_vertices_buffer.limit() * 4, cube_vertices_buffer, GLES30.GL_DYNAMIC_DRAW);
+        vboCoordBox = generateOneBuffer();
+        GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER, vboCoordBox);
+        float[][] cube_vertices = {
+                {1.0f / 2, 1.0f / 2, 0.f},
+                {1.0f / 2, -1.0f / 2, 0.f},
+                {-1.0f / 2, -1.0f / 2, 0.f},
+                {-1.0f / 2, 1.0f / 2, 0.f}};
+        FloatBuffer cubeVerticesBuffer = FloatBuffer.wrap(flatten(cube_vertices));
+        GLES30.glBufferData(GLES30.GL_ARRAY_BUFFER, cubeVerticesBuffer.limit() * 4, cubeVerticesBuffer, GLES30.GL_DYNAMIC_DRAW);
 
-        vbo_tex_box = generateOneBuffer();
-        GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER, vbo_tex_box);
-        int cube_vertex_texs[][] = {{1, 0}, {1, 1}, {0, 1}, {0, 0}};
-        ByteBuffer cube_vertex_texs_buffer = ByteBuffer.wrap(byteArrayFromIntArray(flatten(cube_vertex_texs)));
+        vboTexBox = generateOneBuffer();
+        GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER, vboTexBox);
+        int[][] cubeVertexTexs = {
+                {1, 0},
+                {1, 1},
+                {0, 1},
+                {0, 0}};
+        ByteBuffer cube_vertex_texs_buffer = ByteBuffer.wrap(byteArrayFromIntArray(flatten(cubeVertexTexs)));
         GLES30.glBufferData(GLES30.GL_ARRAY_BUFFER, cube_vertex_texs_buffer.limit(), cube_vertex_texs_buffer, GLES30.GL_STATIC_DRAW);
 
-        vbo_faces_box = generateOneBuffer();
-        GLES30.glBindBuffer(GLES30.GL_ELEMENT_ARRAY_BUFFER, vbo_faces_box);
-        short cube_faces[] = {3, 2, 1, 0};
+        vboFacesBox = generateOneBuffer();
+        GLES30.glBindBuffer(GLES30.GL_ELEMENT_ARRAY_BUFFER, vboFacesBox);
+        short[] cube_faces = {3, 2, 1, 0};
         ShortBuffer cube_faces_buffer = ShortBuffer.wrap(cube_faces);
         GLES30.glBufferData(GLES30.GL_ELEMENT_ARRAY_BUFFER, cube_faces_buffer.limit() * 2, cube_faces_buffer, GLES30.GL_STATIC_DRAW);
 
-        GLES30.glUniform1i(GLES30.glGetUniformLocation(program_box, "texture"), 0);
-        texture_id = generateOneTexture();
-        GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, texture_id);
+        GLES30.glUniform1i(GLES30.glGetUniformLocation(proGramBox, "texture"), 0);
+        textureId = generateOneTexture();
+        GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, textureId);
         GLES30.glTexParameteri(GLES30.GL_TEXTURE_2D, GLES30.GL_TEXTURE_MIN_FILTER, GLES30.GL_LINEAR);
         GLES30.glTexParameteri(GLES30.GL_TEXTURE_2D, GLES30.GL_TEXTURE_MAG_FILTER, GLES30.GL_LINEAR);
         GLES30.glTexParameteri(GLES30.GL_TEXTURE_2D, GLES30.GL_TEXTURE_WRAP_S, GLES30.GL_CLAMP_TO_EDGE);
@@ -188,13 +202,13 @@ public class VideoRenderer {
     }
 
     public void dispose() {
-        if (((EGL10) EGLContext.getEGL()).eglGetCurrentContext().equals(current_context)) { //destroy resources unless the context has lost
-            GLES30.glDeleteProgram(program_box);
+        if (((EGL10) EGLContext.getEGL()).eglGetCurrentContext().equals(currentContext)) { //destroy resources unless the context has lost
+            GLES30.glDeleteProgram(proGramBox);
 
-            GLES30.glDeleteBuffers(1, new int[]{vbo_coord_box}, 0);
-            GLES30.glDeleteBuffers(1, new int[]{vbo_tex_box}, 0);
-            GLES30.glDeleteBuffers(1, new int[]{vbo_faces_box}, 0);
-            GLES30.glDeleteTextures(1, new int[]{texture_id}, 0);
+            GLES30.glDeleteBuffers(1, new int[]{vboCoordBox}, 0);
+            GLES30.glDeleteBuffers(1, new int[]{vboTexBox}, 0);
+            GLES30.glDeleteBuffers(1, new int[]{vboFacesBox}, 0);
+            GLES30.glDeleteTextures(1, new int[]{textureId}, 0);
         }
     }
 
@@ -202,32 +216,38 @@ public class VideoRenderer {
         float size0 = size.data[0];
         float size1 = size.data[1];
 
-        GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER, vbo_coord_box);
+        GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER, vboCoordBox);
         float height = size0 / 1000;
-        float cube_vertices[][] = {{size0 / 2, size1 / 2, 0}, {size0 / 2, -size1 / 2, 0}, {-size0 / 2, -size1 / 2, 0}, {-size0 / 2, size1 / 2, 0}};
-        FloatBuffer cube_vertices_buffer = FloatBuffer.wrap(flatten(cube_vertices));
-        GLES30.glBufferData(GLES30.GL_ARRAY_BUFFER, cube_vertices_buffer.limit() * 4, cube_vertices_buffer, GLES30.GL_DYNAMIC_DRAW);
+        float[][] cube_vertices = {
+                {size0 / 2, size1 / 2, 0},
+                {size0 / 2, -size1 / 2, 0},
+                {-size0 / 2, -size1 / 2, 0},
+                {-size0 / 2, size1 / 2, 0}};
+        FloatBuffer cubeVerticesBuffer = FloatBuffer.wrap(flatten(cube_vertices));
+        GLES30.glBufferData(GLES30.GL_ARRAY_BUFFER, cubeVerticesBuffer.limit() * 4, cubeVerticesBuffer, GLES30.GL_DYNAMIC_DRAW);
 
         GLES30.glEnable(GLES30.GL_BLEND);
         GLES30.glBlendFunc(GLES30.GL_SRC_ALPHA, GLES30.GL_ONE_MINUS_SRC_ALPHA);
         GLES30.glEnable(GLES30.GL_DEPTH_TEST);
-        GLES30.glUseProgram(program_box);
-        GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER, vbo_coord_box);
-        GLES30.glEnableVertexAttribArray(pos_coord_box);
-        GLES30.glVertexAttribPointer(pos_coord_box, 3, GLES30.GL_FLOAT, false, 0, 0);
-        GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER, vbo_tex_box);
-        GLES30.glEnableVertexAttribArray(pos_tex_box);
-        GLES30.glVertexAttribPointer(pos_tex_box, 2, GLES30.GL_UNSIGNED_BYTE, false, 0, 0);
-        GLES30.glUniformMatrix4fv(pos_trans_box, 1, false, getGLMatrix(cameraview), 0);
-        GLES30.glUniformMatrix4fv(pos_proj_box, 1, false, getGLMatrix(projectionMatrix), 0);
-        GLES30.glBindBuffer(GLES30.GL_ELEMENT_ARRAY_BUFFER, vbo_faces_box);
+        GLES30.glUseProgram(proGramBox);
+        GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER, vboCoordBox);
+        GLES30.glEnableVertexAttribArray(posCoordBox);
+        GLES30.glVertexAttribPointer(posCoordBox, 3, GLES30.GL_FLOAT, false, 0, 0);
+        GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER, vboTexBox);
+        GLES30.glEnableVertexAttribArray(posTexBox);
+        GLES30.glVertexAttribPointer(posTexBox, 2, GLES30.GL_UNSIGNED_BYTE, false, 0, 0);
+        GLES30.glUniformMatrix4fv(posTransBox, 1, false, getGLMatrix(cameraview), 0);
+        float[] matrix = getGLMatrix(projectionMatrix);
+        Matrix.translateM(matrix, 0, 0, -0.005f, 0);//视频左边未对齐，进行平移处理
+        GLES30.glUniformMatrix4fv(posProjBox, 1, false, matrix, 0);
+        GLES30.glBindBuffer(GLES30.GL_ELEMENT_ARRAY_BUFFER, vboFacesBox);
         GLES30.glActiveTexture(GLES30.GL_TEXTURE0);
-        GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, texture_id);
+        GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, textureId);
         GLES30.glDrawElements(GLES30.GL_TRIANGLE_FAN, 4, GLES30.GL_UNSIGNED_SHORT, 0);
         GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, 0);
     }
 
     public int texId() {
-        return texture_id;
+        return textureId;
     }
 }

@@ -99,7 +99,7 @@ public class PhoenixVideoActivity extends AppCompatActivity {
                 .into(controller.imageView());
         player.setUp(mVideoDetailBean.getVideo_url(), null);
         //        controller.setResolutions(getResolutions(), 0);
-        player.start();
+//        player.start();
 
         Disposable disposable = RxBus.getInstance().toObservable(SeekEvent.class, this).subscribe(seekEvent -> {
             if (mDanmakuView != null) {

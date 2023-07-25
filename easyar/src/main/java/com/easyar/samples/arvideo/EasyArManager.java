@@ -6,12 +6,12 @@
 //
 //================================================================================================================================
 
-package com.easyar.samples.helloarvideo;
+package com.easyar.samples.arvideo;
 
 import android.opengl.GLES30;
 import android.util.Log;
 
-import com.easyar.samples.helloarvideo.bean.ArData;
+import com.easyar.samples.arvideo.bean.ArData;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -47,15 +47,15 @@ import cn.easyar.TargetStatus;
 import cn.easyar.Vec2F;
 import cn.easyar.Vec2I;
 
-public class HelloAR {
+public class EasyArManager {
     private DelayedCallbackScheduler scheduler;
     private CameraDevice camera;
     private ArrayList<ImageTracker> trackers;
     private BGRenderer bgRenderer;
-    private ArrayList<VideoRenderer> video_renderers;
-    private VideoRenderer current_video_renderer;
-    private int tracked_target = 0;
-    private int active_target = 0;
+    private ArrayList<VideoRenderer> videoRenderers;
+    private VideoRenderer currentVideoRenderer;
+    private int trackedTarget = 0;
+    private int activeTarget = 0;
     private ARVideo video = null;
 
     private InputFrameThrottler throttler;
@@ -69,7 +69,7 @@ public class HelloAR {
     private int previousInputFrameIndex = -1;
     private byte[] imageBytes = null;
 
-    public HelloAR() {
+    public EasyArManager() {
         scheduler = new DelayedCallbackScheduler();
         trackers = new ArrayList<ImageTracker>();
     }
@@ -95,38 +95,38 @@ public class HelloAR {
         target.dispose();
     }
 
-    public void recreate_context() {
-        if (active_target != 0) {
+    public void recreateContext() {
+        if (activeTarget != 0) {
             video.onLost();
             video.dispose();
             video = null;
-            tracked_target = 0;
-            active_target = 0;
+            trackedTarget = 0;
+            activeTarget = 0;
         }
         if (bgRenderer != null) {
             bgRenderer.dispose();
             bgRenderer = null;
         }
-        if (video_renderers != null) {
-            for (VideoRenderer video_renderer : video_renderers) {
+        if (videoRenderers != null) {
+            for (VideoRenderer video_renderer : videoRenderers) {
                 video_renderer.dispose();
             }
-            video_renderers = null;
+            videoRenderers = null;
         }
-        current_video_renderer = null;
+        currentVideoRenderer = null;
         previousInputFrameIndex = -1;
         bgRenderer = new BGRenderer();
-        video_renderers = new ArrayList<VideoRenderer>();
+        videoRenderers = new ArrayList<VideoRenderer>();
         //创建视频渲染列表
         int count = ArDataManager.getInstance().getArListSize();
         for (int k = 0; k < count; k++) {
             VideoRenderer video_renderer = new VideoRenderer();
-            video_renderers.add(video_renderer);
+            videoRenderers.add(video_renderer);
         }
     }
 
     public void initialize() {
-        recreate_context();
+        recreateContext();
 
         camera = CameraDeviceSelector.createCameraDevice(CameraDevicePreference.PreferObjectSensing);
         throttler = InputFrameThrottler.create();
@@ -186,20 +186,20 @@ public class HelloAR {
             video.dispose();
             video = null;
         }
-        tracked_target = 0;
-        active_target = 0;
+        trackedTarget = 0;
+        activeTarget = 0;
 
         for (ImageTracker tracker : trackers) {
             tracker.dispose();
         }
         trackers.clear();
-        if (video_renderers != null) {
-            for (VideoRenderer video_renderer : video_renderers) {
+        if (videoRenderers != null) {
+            for (VideoRenderer video_renderer : videoRenderers) {
                 video_renderer.dispose();
             }
-            video_renderers = null;
+            videoRenderers = null;
         }
-        current_video_renderer = null;
+        currentVideoRenderer = null;
         if (bgRenderer != null) {
             bgRenderer = null;
         }
@@ -287,15 +287,15 @@ public class HelloAR {
                         if (targetInstance.status() == TargetStatus.Tracking) {
                             Target target = targetInstance.target();
                             int id = target.runtimeID();
-                            if (active_target != 0 && active_target != id) {
+                            if (activeTarget != 0 && activeTarget != id) {
                                 video.onLost();
                                 video.dispose();
                                 video = null;
-                                tracked_target = 0;
-                                active_target = 0;
+                                trackedTarget = 0;
+                                activeTarget = 0;
                             }
-                            if (tracked_target == 0) {
-                                if (video == null && video_renderers.size() > 0) {
+                            if (trackedTarget == 0) {
+                                if (video == null && videoRenderers.size() > 0) {
                                     String target_name = target.name();
 
                                     ArData arData = ArDataManager.getInstance().getArDataFromName(target_name);
@@ -303,32 +303,32 @@ public class HelloAR {
                                     video = new ARVideo();
                                     switch (arData.getVideoType()) {
                                         case ArData.VIDEO_TYPE.DEFAULT:
-                                            video.openVideoFile(arData.getVideoPath(), video_renderers.get(index).texId(), scheduler);
+                                            video.openVideoFile(arData.getVideoPath(), videoRenderers.get(index).texId(), scheduler);
                                             break;
                                         case ArData.VIDEO_TYPE.TRANS:
-                                            video.openTransparentVideoFile(arData.getVideoPath(), video_renderers.get(index).texId(), scheduler);
+                                            video.openTransparentVideoFile(arData.getVideoPath(), videoRenderers.get(index).texId(), scheduler);
                                             break;
                                         case ArData.VIDEO_TYPE.NET:
-                                            video.openStreamingVideo(arData.getVideoPath(), video_renderers.get(index).texId(), scheduler);
+                                            video.openStreamingVideo(arData.getVideoPath(), videoRenderers.get(index).texId(), scheduler);
                                             break;
                                         default:
                                             break;
                                     }
-                                    current_video_renderer = video_renderers.get(index);
+                                    currentVideoRenderer = videoRenderers.get(index);
                                 }
                                 if (video != null) {
                                     video.onFound();
-                                    tracked_target = id;
-                                    active_target = id;
+                                    trackedTarget = id;
+                                    activeTarget = id;
                                 }
                             }
                             ImageTarget imagetarget = target instanceof ImageTarget ? (ImageTarget) (target) : null;
                             if (imagetarget != null) {
                                 Vec2F scale = new Vec2F(imagetarget.scale(), imagetarget.scale() / imagetarget.aspectRatio());
-                                if (current_video_renderer != null) {
+                                if (currentVideoRenderer != null) {
                                     video.update();
                                     if (video.isRenderTextureAvailable()) {
-                                        current_video_renderer.render(projectionMatrix, targetInstance.pose(), scale);
+                                        currentVideoRenderer.render(projectionMatrix, targetInstance.pose(), scale);
                                     }
                                 }
                             }
@@ -337,9 +337,9 @@ public class HelloAR {
                         targetInstance.dispose();
                     }
                     if (targetInstances.size() == 0) {
-                        if (tracked_target != 0) {
+                        if (trackedTarget != 0) {
                             video.onLost();
-                            tracked_target = 0;
+                            trackedTarget = 0;
                         }
                     }
                 }

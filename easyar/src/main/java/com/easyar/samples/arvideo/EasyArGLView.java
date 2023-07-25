@@ -6,7 +6,7 @@
 //
 //================================================================================================================================
 
-package com.easyar.samples.helloarvideo;
+package com.easyar.samples.arvideo;
 
 import android.app.Activity;
 import android.content.Context;
@@ -25,7 +25,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 import cn.easyar.Engine;
 
-public class GLView extends GLSurfaceView {
+public class EasyArGLView extends GLSurfaceView {
     private Object lock = new Object();
     private boolean finishing = false;
 
@@ -33,9 +33,9 @@ public class GLView extends GLSurfaceView {
     private int width = 1;
     private int height = 1;
 
-    private HelloAR helloAR;
+    private EasyArManager easyArManager;
 
-    public GLView(Context context) {
+    public EasyArGLView(Context context) {
         super(context);
         //setPreserveEGLContextOnPause(true); //uncomment if EGL context need to be preserved on pause
         setEGLContextFactory(new ContextFactory());
@@ -47,12 +47,12 @@ public class GLView extends GLSurfaceView {
             public void onSurfaceCreated(GL10 gl, EGLConfig config) {
                 if (!initialized) {
                     initialized = true;
-                    helloAR = new HelloAR();
-                    helloAR.initialize();
+                    easyArManager = new EasyArManager();
+                    easyArManager.initialize();
                 } else {
-                    helloAR.recreate_context();
+                    easyArManager.recreateContext();
                 }
-                helloAR.start();
+                easyArManager.start();
             }
 
             @Override
@@ -66,7 +66,7 @@ public class GLView extends GLSurfaceView {
                 if (!initialized) {
                     return;
                 }
-                helloAR.render(width, height, GetScreenRotation());
+                easyArManager.render(width, height, GetScreenRotation());
             }
         });
         this.setZOrderMediaOverlay(true);
@@ -90,9 +90,9 @@ public class GLView extends GLSurfaceView {
         }
         if (initialized && b) {
             initialized = false;
-            helloAR.stop();
-            helloAR.dispose();
-            helloAR = null;
+            easyArManager.stop();
+            easyArManager.dispose();
+            easyArManager = null;
         }
     }
 

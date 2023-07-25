@@ -15,10 +15,10 @@
       "videoType": 1
     },
     {
-      "imgName": "sky",
-      "imgPath": "sky.jpg",
+      "imgName": "card",
+      "imgPath": "card/card.jpg",
       "imgStorageType": 1,
-      "videoPath": "https://sightpvideo-cdn.sightp.com/sdkvideo/EasyARSDKShow201520.mp4",
+      "videoPath": "https://vipcdn.mgtv.com/act/assets/bi/v0200f8d0000bg3qe6fm1hf45i1li0pg.MP4",
       "videoType": 2
     }
   ]

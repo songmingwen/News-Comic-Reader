@@ -5,7 +5,7 @@
     <application>
 
         <activity
-            android:name="com.easyar.samples.helloarvideo.ARActivity"
+            android:name="com.easyar.samples.arvideo.EasyArActivity"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
             android:exported="false"
             android:screenOrientation="unspecified" />

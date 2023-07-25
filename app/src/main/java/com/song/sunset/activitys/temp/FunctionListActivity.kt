@@ -13,7 +13,7 @@ import android.widget.Button
 import android.widget.LinearLayout
 import com.alibaba.android.arouter.launcher.ARouter
 import com.bubblepicker.BubbleActivity
-import com.easyar.samples.helloarvideo.ARActivity
+import com.easyar.samples.arvideo.EasyArActivity
 import com.google.firebase.appcheck.FirebaseAppCheck
 import com.google.firebase.appcheck.debug.DebugAppCheckProviderFactory
 import com.imgo.arcard.ARDataActivity
@@ -46,7 +46,7 @@ class FunctionListActivity : BaseActivity() {
 
     private fun LinearLayout.addButtonList() {
         addButton("灵境卡片") { ARDataActivity.start(this@FunctionListActivity) }
-        addButton("灵境卡片 easyAr") { ARActivity.start(this@FunctionListActivity) }
+        addButton("灵境卡片 easyAr") { EasyArActivity.start(this@FunctionListActivity) }
         addButton("发送芒果私信消息") { ARouter.getInstance().build("/song/sendmsg").navigation() }
         addButton("wuxia") { ARouter.getInstance().build("/song/wuxia/home").navigation() }
         addButton("battle") { toBattle() }

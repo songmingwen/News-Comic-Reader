@@ -6,7 +6,7 @@
 //
 //================================================================================================================================
 
-package com.easyar.samples.helloarvideo;
+package com.easyar.samples.arvideo;
 
 import android.opengl.GLES30;
 import android.util.Log;
@@ -127,25 +127,23 @@ public class BGRenderer {
         YUV,
     }
 
-    ;
+    private FrameShader backgroundShader = FrameShader.RGB;
 
-    private FrameShader background_shader_ = FrameShader.RGB;
+    private boolean initialized = false;
+    private EGLContext currentContext = null;
+    private int backgroundProgram = 0;
+    private IntBuffer backgroundTextureId = IntBuffer.allocate(1);
+    private IntBuffer backgroundTextureUvId = IntBuffer.allocate(1);
+    private IntBuffer backgroundTextureUId = IntBuffer.allocate(1);
+    private IntBuffer backgroundTextureVId = IntBuffer.allocate(1);
+    private int backgroundCoordLocation = -1;
+    private int backgroundTextureLocation = -1;
+    private IntBuffer backgroundCoordVbo = IntBuffer.allocate(1);
+    private IntBuffer backgroundTextureVbo = IntBuffer.allocate(1);
+    private IntBuffer backgroundTextureFbo = IntBuffer.allocate(1);
 
-    private boolean initialized_ = false;
-    private EGLContext current_context_ = null;
-    private int background_program_ = 0;
-    private IntBuffer background_texture_id_ = IntBuffer.allocate(1);
-    private IntBuffer background_texture_uv_id_ = IntBuffer.allocate(1);
-    private IntBuffer background_texture_u_id_ = IntBuffer.allocate(1);
-    private IntBuffer background_texture_v_id_ = IntBuffer.allocate(1);
-    private int background_coord_location_ = -1;
-    private int background_texture_location_ = -1;
-    private IntBuffer background_coord_vbo_ = IntBuffer.allocate(1);
-    private IntBuffer background_texture_vbo_ = IntBuffer.allocate(1);
-    private IntBuffer background_texture_fbo_ = IntBuffer.allocate(1);
-
-    private int current_format_ = PixelFormat.Unknown;
-    private Vec2I current_image_size_;
+    private int currentFormat = PixelFormat.Unknown;
+    private Vec2I currentImageSize;
 
     private Vec4F mul(Matrix44F mat, Vec4F vec) {
         Vec4F val = new Vec4F(0, 0, 0, 0);
@@ -158,7 +156,7 @@ public class BGRenderer {
     }
 
     public void dispose() {
-        finalize(current_format_);
+        finalize(currentFormat);
     }
 
     public void upload(int format, int width, int height, int pixelWidth, int pixelHeight, ByteBuffer buffer) {
@@ -178,35 +176,35 @@ public class BGRenderer {
         GLES30.glGetIntegerv(GLES30.GL_TEXTURE_BINDING_2D, bak_tex_2);
 
         try {
-            if (current_format_ != format) {
-                finalize(current_format_);
+            if (currentFormat != format) {
+                finalize(currentFormat);
                 if (!initialize(format)) {
                     return;
                 }
-                current_format_ = format;
+                currentFormat = format;
             }
-            current_image_size_ = new Vec2I(width, height);
+            currentImageSize = new Vec2I(width, height);
 
-            switch (background_shader_) {
+            switch (backgroundShader) {
                 case RGB:
                     GLES30.glActiveTexture(GLES30.GL_TEXTURE0);
-                    GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, background_texture_id_.get(0));
+                    GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, backgroundTextureId.get(0));
                     retrieveFrame(format, width, height, pixelWidth, pixelHeight, buffer, 0);
                 case YUV:
                     GLES30.glActiveTexture(GLES30.GL_TEXTURE0);
-                    GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, background_texture_id_.get(0));
+                    GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, backgroundTextureId.get(0));
                     retrieveFrame(format, width, height, pixelWidth, pixelHeight, buffer, 0);
                     if (format == PixelFormat.YUV_NV21 || format == PixelFormat.YUV_NV12) {
                         GLES30.glActiveTexture(GLES30.GL_TEXTURE1);
-                        GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, background_texture_uv_id_.get(0));
+                        GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, backgroundTextureUvId.get(0));
                         retrieveFrame(format, width, height, pixelWidth, pixelHeight, buffer, 1);
                     } else {
                         GLES30.glActiveTexture(GLES30.GL_TEXTURE1);
-                        GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, background_texture_u_id_.get(0));
+                        GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, backgroundTextureUId.get(0));
                         retrieveFrame(format, width, height, pixelWidth, pixelHeight, buffer, 1);
 
                         GLES30.glActiveTexture(GLES30.GL_TEXTURE2);
-                        GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, background_texture_v_id_.get(0));
+                        GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, backgroundTextureVId.get(0));
                         retrieveFrame(format, width, height, pixelWidth, pixelHeight, buffer, 2);
                     }
             }
@@ -254,13 +252,13 @@ public class BGRenderer {
         GLES30.glGetIntegerv(GLES30.GL_TEXTURE_BINDING_2D, bak_tex_2);
 
         int[] va = {-1, -1};
-        IntBuffer bak_va_binding[] = {IntBuffer.allocate(1), IntBuffer.allocate(1)};
+        IntBuffer[] bak_va_binding = {IntBuffer.allocate(1), IntBuffer.allocate(1)};
 
-        IntBuffer bak_va_enable[] = {IntBuffer.allocate(1), IntBuffer.allocate(1)},
-                bak_va_size[] = {IntBuffer.allocate(1), IntBuffer.allocate(1)},
-                bak_va_stride[] = {IntBuffer.allocate(1), IntBuffer.allocate(1)},
-                bak_va_type[] = {IntBuffer.allocate(1), IntBuffer.allocate(1)},
-                bak_va_norm[] = {IntBuffer.allocate(1), IntBuffer.allocate(1)};
+        IntBuffer[] bak_va_enable = {IntBuffer.allocate(1), IntBuffer.allocate(1)};
+        IntBuffer[] bak_va_size = {IntBuffer.allocate(1), IntBuffer.allocate(1)};
+        IntBuffer[] bak_va_stride = {IntBuffer.allocate(1), IntBuffer.allocate(1)};
+        IntBuffer[] bak_va_type = {IntBuffer.allocate(1), IntBuffer.allocate(1)};
+        IntBuffer[] bak_va_norm = {IntBuffer.allocate(1), IntBuffer.allocate(1)};
         IntBuffer[] bak_va_pointer = {IntBuffer.allocate(1), IntBuffer.allocate(1)};
 
         GLES30.glDisable(GLES30.GL_DEPTH_TEST);
@@ -269,8 +267,8 @@ public class BGRenderer {
         GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER, 0);
         GLES30.glBindBuffer(GLES30.GL_ELEMENT_ARRAY_BUFFER, 0);
 
-        va[0] = background_coord_location_;
-        va[1] = background_texture_location_;
+        va[0] = backgroundCoordLocation;
+        va[1] = backgroundTextureLocation;
         for (int i = 0; i < 2; ++i) {
             if (va[i] == -1)
                 continue;
@@ -284,13 +282,13 @@ public class BGRenderer {
         }
 
         try {
-            GLES30.glUseProgram(background_program_);
-            GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER, background_coord_vbo_.get(0));
+            GLES30.glUseProgram(backgroundProgram);
+            GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER, backgroundCoordVbo.get(0));
 
-            GLES30.glEnableVertexAttribArray(background_coord_location_);
-            GLES30.glVertexAttribPointer(background_coord_location_, 3, GLES30.GL_FLOAT, false, 0, 0);
+            GLES30.glEnableVertexAttribArray(backgroundCoordLocation);
+            GLES30.glVertexAttribPointer(backgroundCoordLocation, 3, GLES30.GL_FLOAT, false, 0, 0);
 
-            float vertices[] = {
+            float[] vertices = {
                     -1.0f, -1.0f, 0.f,
                     1.0f, -1.0f, 0.f,
                     1.0f, 1.0f, 0.f,
@@ -306,7 +304,7 @@ public class BGRenderer {
             v2_v4f = mul(imageProjection, v2_v4f);
             v3_v4f = mul(imageProjection, v3_v4f);
 
-            Vec4F v4f_array[] = {v0_v4f, v1_v4f, v2_v4f, v3_v4f};
+            Vec4F[] v4f_array = {v0_v4f, v1_v4f, v2_v4f, v3_v4f};
 
             for (int i = 0; i < 4; i += 1) {
                 for (int k = 0; k < 3; k += 1) {
@@ -315,26 +313,26 @@ public class BGRenderer {
             }
             GLES30.glBufferData(GLES30.GL_ARRAY_BUFFER, 4 * 12, FloatBuffer.wrap(vertices), GLES30.GL_DYNAMIC_DRAW);
 
-            GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER, background_texture_vbo_.get(0));
-            GLES30.glEnableVertexAttribArray(background_texture_location_);
-            GLES30.glVertexAttribPointer(background_texture_location_, 2, GLES30.GL_FLOAT, false, 0, 0);
+            GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER, backgroundTextureVbo.get(0));
+            GLES30.glEnableVertexAttribArray(backgroundTextureLocation);
+            GLES30.glVertexAttribPointer(backgroundTextureLocation, 2, GLES30.GL_FLOAT, false, 0, 0);
 
-            switch (background_shader_) {
+            switch (backgroundShader) {
                 case RGB:
                     GLES30.glActiveTexture(GLES30.GL_TEXTURE0);
-                    GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, background_texture_id_.get(0));
+                    GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, backgroundTextureId.get(0));
                 case YUV:
                     GLES30.glActiveTexture(GLES30.GL_TEXTURE0);
-                    GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, background_texture_id_.get(0));
-                    if (current_format_ == PixelFormat.YUV_NV21 || current_format_ == PixelFormat.YUV_NV12) {
+                    GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, backgroundTextureId.get(0));
+                    if (currentFormat == PixelFormat.YUV_NV21 || currentFormat == PixelFormat.YUV_NV12) {
                         GLES30.glActiveTexture(GLES30.GL_TEXTURE1);
-                        GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, background_texture_uv_id_.get(0));
+                        GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, backgroundTextureUvId.get(0));
                     } else {
                         GLES30.glActiveTexture(GLES30.GL_TEXTURE1);
-                        GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, background_texture_u_id_.get(0));
+                        GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, backgroundTextureUId.get(0));
 
                         GLES30.glActiveTexture(GLES30.GL_TEXTURE2);
-                        GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, background_texture_v_id_.get(0));
+                        GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, backgroundTextureVId.get(0));
                     }
             }
 
@@ -376,7 +374,7 @@ public class BGRenderer {
     private void retrieveFrame(int format, int width, int height, int pixelWidth, int pixelHeight, ByteBuffer buffer, int retrieve_count) {
         if (retrieve_count == 0) {
             GLES30.glPixelStorei(GLES30.GL_UNPACK_ROW_LENGTH, pixelWidth);
-            switch (background_shader_) {
+            switch (backgroundShader) {
                 case RGB:
                     switch (format) {
                         case PixelFormat.Unknown:
@@ -415,7 +413,7 @@ public class BGRenderer {
             }
             GLES30.glPixelStorei(GLES30.GL_UNPACK_ROW_LENGTH, 0);
         } else if (retrieve_count == 1 || retrieve_count == 2) {
-            if (background_shader_ != FrameShader.YUV) {
+            if (backgroundShader != FrameShader.YUV) {
                 return;
             }
             GLES30.glPixelStorei(GLES30.GL_UNPACK_ROW_LENGTH, pixelWidth / 2);
@@ -466,8 +464,8 @@ public class BGRenderer {
         if (format == PixelFormat.Unknown) {
             return false;
         }
-        current_context_ = ((EGL10) EGLContext.getEGL()).eglGetCurrentContext();
-        background_program_ = GLES30.glCreateProgram();
+        currentContext = ((EGL10) EGLContext.getEGL()).eglGetCurrentContext();
+        backgroundProgram = GLES30.glCreateProgram();
         int vertShader = GLES30.glCreateShader(GLES30.GL_VERTEX_SHADER);
         GLES30.glShaderSource(vertShader, videobackground_vert);
         GLES30.glCompileShader(vertShader);
@@ -476,33 +474,33 @@ public class BGRenderer {
             case PixelFormat.Gray:
             case PixelFormat.RGB888:
             case PixelFormat.RGBA8888:
-                background_shader_ = FrameShader.RGB;
+                backgroundShader = FrameShader.RGB;
                 GLES30.glShaderSource(fragShader, videobackground_rgb_frag);
                 break;
             case PixelFormat.BGR888:
             case PixelFormat.BGRA8888:
-                background_shader_ = FrameShader.RGB;
+                backgroundShader = FrameShader.RGB;
                 GLES30.glShaderSource(fragShader, videobackground_bgr_frag);
                 break;
             case PixelFormat.YUV_NV21:
-                background_shader_ = FrameShader.YUV;
+                backgroundShader = FrameShader.YUV;
                 GLES30.glShaderSource(fragShader, videobackground_yuv_nv21_frag);
                 break;
             case PixelFormat.YUV_NV12:
-                background_shader_ = FrameShader.YUV;
+                backgroundShader = FrameShader.YUV;
                 GLES30.glShaderSource(fragShader, videobackground_yuv_nv12_frag);
                 break;
             case PixelFormat.YUV_I420:
             case PixelFormat.YUV_YV12:
-                background_shader_ = FrameShader.YUV;
+                backgroundShader = FrameShader.YUV;
                 GLES30.glShaderSource(fragShader, videobackground_yuv_i420_yv12_frag);
                 break;
             default:
                 break;
         }
         GLES30.glCompileShader(fragShader);
-        GLES30.glAttachShader(background_program_, vertShader);
-        GLES30.glAttachShader(background_program_, fragShader);
+        GLES30.glAttachShader(backgroundProgram, vertShader);
+        GLES30.glAttachShader(backgroundProgram, fragShader);
 
         IntBuffer compileSuccess_0 = IntBuffer.allocate(1);
 
@@ -517,59 +515,59 @@ public class BGRenderer {
             String messages = GLES30.glGetShaderInfoLog(fragShader);
             Log.v("[easyar]", "vertshader error " + messages);
         }
-        GLES30.glLinkProgram(background_program_);
+        GLES30.glLinkProgram(backgroundProgram);
         GLES30.glDeleteShader(vertShader);
         GLES30.glDeleteShader(fragShader);
 
         IntBuffer linkstatus = IntBuffer.allocate(1);
-        GLES30.glGetProgramiv(background_program_, GLES30.GL_LINK_STATUS, linkstatus);
-        GLES30.glUseProgram(background_program_);
-        background_coord_location_ = GLES30.glGetAttribLocation(background_program_, "coord");
-        background_texture_location_ = GLES30.glGetAttribLocation(background_program_, "texCoord");
+        GLES30.glGetProgramiv(backgroundProgram, GLES30.GL_LINK_STATUS, linkstatus);
+        GLES30.glUseProgram(backgroundProgram);
+        backgroundCoordLocation = GLES30.glGetAttribLocation(backgroundProgram, "coord");
+        backgroundTextureLocation = GLES30.glGetAttribLocation(backgroundProgram, "texCoord");
 
         GLES30.glDeleteShader(vertShader);
         GLES30.glDeleteShader(fragShader);
-        GLES30.glGenBuffers(1, background_coord_vbo_);
-        GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER, background_coord_vbo_.get(0));
-        float coord[] = {-1.0f, -1.0f, 0.f, 1.0f, -1.0f, 0.f, 1.0f, 1.0f, 0.f, -1.0f, 1.0f, 0.f};
+        GLES30.glGenBuffers(1, backgroundCoordVbo);
+        GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER, backgroundCoordVbo.get(0));
+        float[] coord = {-1.0f, -1.0f, 0.f, 1.0f, -1.0f, 0.f, 1.0f, 1.0f, 0.f, -1.0f, 1.0f, 0.f};
         GLES30.glBufferData(GLES30.GL_ARRAY_BUFFER, 12 * 4, FloatBuffer.wrap(coord), GLES30.GL_DYNAMIC_DRAW);
-        GLES30.glGenBuffers(1, background_texture_vbo_);
-        GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER, background_texture_vbo_.get(0));
-        float texcoord[] = {0.f, 1.f, 1.f, 1.f, 1.f, 0.f, 0.f, 0.f}; //input texture data is Y-inverted
+        GLES30.glGenBuffers(1, backgroundTextureVbo);
+        GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER, backgroundTextureVbo.get(0));
+        float[] texcoord = {0.f, 1.f, 1.f, 1.f, 1.f, 0.f, 0.f, 0.f}; //input texture data is Y-inverted
         GLES30.glBufferData(GLES30.GL_ARRAY_BUFFER, 8 * 4, FloatBuffer.wrap(texcoord), GLES30.GL_STATIC_DRAW);
 
-        GLES30.glUniform1i(GLES30.glGetUniformLocation(background_program_, "texture"), 0);
-        GLES30.glGenTextures(1, background_texture_id_);
-        GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, background_texture_id_.get(0));
+        GLES30.glUniform1i(GLES30.glGetUniformLocation(backgroundProgram, "texture"), 0);
+        GLES30.glGenTextures(1, backgroundTextureId);
+        GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, backgroundTextureId.get(0));
         GLES30.glTexParameteri(GLES30.GL_TEXTURE_2D, GLES30.GL_TEXTURE_MIN_FILTER, GLES30.GL_LINEAR);
         GLES30.glTexParameteri(GLES30.GL_TEXTURE_2D, GLES30.GL_TEXTURE_MAG_FILTER, GLES30.GL_LINEAR);
         GLES30.glTexParameteri(GLES30.GL_TEXTURE_2D, GLES30.GL_TEXTURE_WRAP_S, GLES30.GL_CLAMP_TO_EDGE);
         GLES30.glTexParameteri(GLES30.GL_TEXTURE_2D, GLES30.GL_TEXTURE_WRAP_T, GLES30.GL_CLAMP_TO_EDGE);
 
-        switch (background_shader_) {
+        switch (backgroundShader) {
             case RGB:
                 break;
             case YUV:
                 if (format == PixelFormat.YUV_NV21 || format == PixelFormat.YUV_NV12) {
-                    GLES30.glUniform1i(GLES30.glGetUniformLocation(background_program_, "uv_texture"), 1);
-                    GLES30.glGenTextures(1, background_texture_uv_id_);
-                    GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, background_texture_uv_id_.get(0));
+                    GLES30.glUniform1i(GLES30.glGetUniformLocation(backgroundProgram, "uv_texture"), 1);
+                    GLES30.glGenTextures(1, backgroundTextureUvId);
+                    GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, backgroundTextureUvId.get(0));
                     GLES30.glTexParameteri(GLES30.GL_TEXTURE_2D, GLES30.GL_TEXTURE_MIN_FILTER, GLES30.GL_LINEAR);
                     GLES30.glTexParameteri(GLES30.GL_TEXTURE_2D, GLES30.GL_TEXTURE_MAG_FILTER, GLES30.GL_LINEAR);
                     GLES30.glTexParameteri(GLES30.GL_TEXTURE_2D, GLES30.GL_TEXTURE_WRAP_S, GLES30.GL_CLAMP_TO_EDGE);
                     GLES30.glTexParameteri(GLES30.GL_TEXTURE_2D, GLES30.GL_TEXTURE_WRAP_T, GLES30.GL_CLAMP_TO_EDGE);
                 } else {
-                    GLES30.glUniform1i(GLES30.glGetUniformLocation(background_program_, "u_texture"), 1);
-                    GLES30.glGenTextures(1, background_texture_u_id_);
-                    GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, background_texture_u_id_.get(0));
+                    GLES30.glUniform1i(GLES30.glGetUniformLocation(backgroundProgram, "u_texture"), 1);
+                    GLES30.glGenTextures(1, backgroundTextureUId);
+                    GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, backgroundTextureUId.get(0));
                     GLES30.glTexParameteri(GLES30.GL_TEXTURE_2D, GLES30.GL_TEXTURE_MIN_FILTER, GLES30.GL_LINEAR);
                     GLES30.glTexParameteri(GLES30.GL_TEXTURE_2D, GLES30.GL_TEXTURE_MAG_FILTER, GLES30.GL_LINEAR);
                     GLES30.glTexParameteri(GLES30.GL_TEXTURE_2D, GLES30.GL_TEXTURE_WRAP_S, GLES30.GL_CLAMP_TO_EDGE);
                     GLES30.glTexParameteri(GLES30.GL_TEXTURE_2D, GLES30.GL_TEXTURE_WRAP_T, GLES30.GL_CLAMP_TO_EDGE);
 
-                    GLES30.glUniform1i(GLES30.glGetUniformLocation(background_program_, "v_texture"), 2);
-                    GLES30.glGenTextures(1, background_texture_v_id_);
-                    GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, background_texture_v_id_.get(0));
+                    GLES30.glUniform1i(GLES30.glGetUniformLocation(backgroundProgram, "v_texture"), 2);
+                    GLES30.glGenTextures(1, backgroundTextureVId);
+                    GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, backgroundTextureVId.get(0));
                     GLES30.glTexParameteri(GLES30.GL_TEXTURE_2D, GLES30.GL_TEXTURE_MIN_FILTER, GLES30.GL_LINEAR);
                     GLES30.glTexParameteri(GLES30.GL_TEXTURE_2D, GLES30.GL_TEXTURE_MAG_FILTER, GLES30.GL_LINEAR);
                     GLES30.glTexParameteri(GLES30.GL_TEXTURE_2D, GLES30.GL_TEXTURE_WRAP_S, GLES30.GL_CLAMP_TO_EDGE);
@@ -580,37 +578,37 @@ public class BGRenderer {
                 break;
 
         }
-        GLES30.glGenFramebuffers(1, background_texture_fbo_);
-        initialized_ = true;
+        GLES30.glGenFramebuffers(1, backgroundTextureFbo);
+        initialized = true;
         return true;
     }
 
     private void finalize(int format) {
-        if (!initialized_) {
+        if (!initialized) {
             return;
         }
 
-        if (((EGL10) EGLContext.getEGL()).eglGetCurrentContext().equals(current_context_)) { //destroy resources unless the context has lost
-            GLES30.glDeleteProgram(background_program_);
-            GLES30.glDeleteBuffers(1, background_coord_vbo_);
-            GLES30.glDeleteBuffers(1, background_texture_vbo_);
-            GLES30.glDeleteFramebuffers(1, background_texture_fbo_);
-            GLES30.glDeleteTextures(1, background_texture_id_);
-            switch (background_shader_) {
+        if (((EGL10) EGLContext.getEGL()).eglGetCurrentContext().equals(currentContext)) { //destroy resources unless the context has lost
+            GLES30.glDeleteProgram(backgroundProgram);
+            GLES30.glDeleteBuffers(1, backgroundCoordVbo);
+            GLES30.glDeleteBuffers(1, backgroundTextureVbo);
+            GLES30.glDeleteFramebuffers(1, backgroundTextureFbo);
+            GLES30.glDeleteTextures(1, backgroundTextureId);
+            switch (backgroundShader) {
                 case RGB:
                     break;
                 case YUV:
                     if (format == PixelFormat.YUV_NV21 || format == PixelFormat.YUV_NV12) {
-                        GLES30.glDeleteTextures(1, background_texture_uv_id_);
+                        GLES30.glDeleteTextures(1, backgroundTextureUvId);
                     } else {
-                        GLES30.glDeleteTextures(1, background_texture_u_id_);
-                        GLES30.glDeleteTextures(1, background_texture_v_id_);
+                        GLES30.glDeleteTextures(1, backgroundTextureUId);
+                        GLES30.glDeleteTextures(1, backgroundTextureVId);
                     }
                     break;
                 default:
                     break;
             }
         }
-        initialized_ = false;
+        initialized = false;
     }
 }

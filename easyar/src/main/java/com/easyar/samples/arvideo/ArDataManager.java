@@ -1,8 +1,8 @@
-package com.easyar.samples.helloarvideo;
+package com.easyar.samples.arvideo;
 
 import android.text.TextUtils;
 
-import com.easyar.samples.helloarvideo.bean.ArData;
+import com.easyar.samples.arvideo.bean.ArData;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class ArDataManager {
 
-    private static ArDataManager Instance = new ArDataManager();
+    private static final ArDataManager Instance = new ArDataManager();
 
     private List<ArData> list;
 

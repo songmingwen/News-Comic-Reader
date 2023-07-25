@@ -1,4 +1,4 @@
-package com.easyar.samples.helloarvideo.bean;
+package com.easyar.samples.arvideo.bean;
 
 import java.util.List;
 

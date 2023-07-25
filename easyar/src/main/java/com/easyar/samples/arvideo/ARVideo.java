@@ -6,7 +6,7 @@
 //
 //================================================================================================================================
 
-package com.easyar.samples.helloarvideo;
+package com.easyar.samples.arvideo;
 
 import android.util.Log;
 
