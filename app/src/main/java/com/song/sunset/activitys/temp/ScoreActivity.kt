@@ -44,6 +44,13 @@ class ScoreActivity : AppCompatActivity() {
         }")
 
         start.setOnClickListener { calculate() }
+        clear.setOnClickListener {
+            value1.setText("")
+            score1.setText("")
+            value2.setText("")
+            score2.setText("")
+            real_value.setText("")
+        }
     }
 
     private fun calculate() {
@@ -64,6 +71,13 @@ class ScoreActivity : AppCompatActivity() {
             val score2Float = score2.toFloat()
             val realValueFloat = realValue.toFloat()
 
+            if (realValueFloat < value1Float.coerceAtMost(value2Float)
+                    || realValueFloat > value1Float.coerceAtLeast(value2Float)) {
+                Toast.makeText(this, "实际值应介于端点数值间", Toast.LENGTH_SHORT).show()
+                real_value.setText("")
+                return
+            }
+
             if (((value1Float > value2Float) && (score1Float > score2Float)) ||
                     ((value1Float < value2Float) && (score1Float < score2Float))) {
                 score.text = getMoreToMoreScore(
@@ -77,7 +91,7 @@ class ScoreActivity : AppCompatActivity() {
                         score1Float.coerceAtMost(score2Float), score1Float.coerceAtLeast(score2Float)).toString()
             }
         } catch (e: Exception) {
-            Toast.makeText(this, "请检查数值", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "请输入数字值", Toast.LENGTH_SHORT).show()
         }
     }
 
