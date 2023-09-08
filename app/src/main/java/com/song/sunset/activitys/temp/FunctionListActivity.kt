@@ -23,6 +23,7 @@ import com.song.scankit.QRCodeActivity
 import com.song.sunset.R
 import com.song.sunset.activitys.PhoenixVideoActivity
 import com.song.sunset.activitys.opengl.OpenGLListActivity
+import com.song.sunset.addButton
 import com.song.sunset.base.activity.BaseActivity
 import com.song.sunset.beans.MusicInfo
 import com.song.sunset.phoenix.bean.VideoDetailBean
@@ -40,11 +41,14 @@ import com.song.sunset.utils.preinstall.XiaomiPreinstallHandler
 import com.song.sunset.utils.process.AndroidProcesses
 import com.song.sunset.widget.fireworks.BitmapProvider
 import com.song.sunset.widget.fireworks.FireworksView
+import com.sunset.room.RoomActivity
 import kotlinx.android.synthetic.main.activity_function_list.*
 
 class FunctionListActivity : BaseActivity() {
 
     private fun LinearLayout.addButtonList() {
+        addButton("打分计算") { ScoreActivity.start(this@FunctionListActivity) }
+        addButton("ROOM 数据库") { RoomActivity.start(this@FunctionListActivity) }
         addButton("灵境卡片") { ARDataActivity.start(this@FunctionListActivity) }
         addButton("灵境卡片 easyAr") { EasyArActivity.start(this@FunctionListActivity) }
         addButton("发送芒果私信消息") { ARouter.getInstance().build("/song/sendmsg").navigation() }
@@ -282,22 +286,6 @@ class FunctionListActivity : BaseActivity() {
             context.startActivity(starter)
         }
     }
-}
-
-fun LinearLayout.addButton(title: String, onClick: (View) -> Unit): Button {
-    val button = Button(context).apply {
-        text = title
-        textSize = 15f
-        setTextColor(resources.getColor(R.color.white))
-        setBackgroundResource(R.drawable.shape_interest_selection_blue_bg)
-        setOnClickListener { onClick(this) }
-    }
-    val params = LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-    params.topMargin = ViewUtil.dip2px(5f)
-    params.bottomMargin = ViewUtil.dip2px(5f)
-    addView(button, params)
-    return button
 }
 
 //        startActivity(new Intent(MainActivity.this, SubScaleViewActivity.class));

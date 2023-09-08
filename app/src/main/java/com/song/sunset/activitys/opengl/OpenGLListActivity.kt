@@ -8,7 +8,7 @@ import com.song.sunset.R
 import com.song.sunset.base.activity.BaseActivity
 import com.song.sunset.activitys.opengl.render.*
 import com.song.sunset.activitys.opengl.teach.OpenGLTeachListActivity
-import com.song.sunset.activitys.temp.addButton
+import com.song.sunset.addButton
 import kotlinx.android.synthetic.main.activity_function_list.*
 
 class OpenGLListActivity : BaseActivity() {

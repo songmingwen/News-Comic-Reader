@@ -14,9 +14,9 @@ class CalculateScore {
     fun printLowToMoreScore() {
         print("最终得分 = ${
             getLowToMoreScore(
-                    1.02f,
-                    0.5f, 1.1f,
-                    8.5f, 9.5f)
+                    0.037f,
+                    0.03f, 0.2f,
+                    7.5f, 8.5f)
         }")
     }
 

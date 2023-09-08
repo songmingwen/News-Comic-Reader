@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.song.sunset.R
+import com.song.sunset.addButton
 import com.song.sunset.base.activity.BaseActivity
 import com.song.sunset.widget.GlobalFlowView
 import com.tencent.mmkv.MMKV
