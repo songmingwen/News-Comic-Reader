@@ -125,6 +125,7 @@ ext {
             nativehook                   : 'com.swift.sandhook:nativehook:4.2.0',
             xposedcompat                 : 'com.swift.sandhook:xposedcompat:4.2.0',
             hookannotation               : 'com.swift.sandhook:hookannotation:4.2.0',
+            svga_player                  : 'com.github.yyued:SVGAPlayer-Android:2.5.15',
     ]
 
 }

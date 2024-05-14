@@ -69,6 +69,7 @@ class SendMgtvMsgActivity : BaseActivity() {
         for (i in 20000..20029) {
             send(i.toString() + "", i.toString() + "", getReceiveUid(), i.toString() + "")
         }
+        mmkv.encode(RECEIVE_UID, getReceiveUid())
         Toast.makeText(this, "发送成功", Toast.LENGTH_SHORT).show()
     }
 

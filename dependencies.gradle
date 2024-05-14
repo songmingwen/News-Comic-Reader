@@ -60,4 +60,5 @@ dependencies {
     implementation rootProject.ext.third.mqttv3
     implementation rootProject.ext.third.mqtt_service
     implementation rootProject.ext.third.scanplus
+    implementation rootProject.ext.third.svga_player
 }

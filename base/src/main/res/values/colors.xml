@@ -61,4 +61,7 @@
     <color name="wuxia_color_dark">#1D222C</color>
     <color name="wuxia_color_title">@color/wuxia_color_white</color>
     <color name="wuxia_color_talent_btn">@color/bgColor_overlay</color>
+
+    <color name="color_3500D6">#3500D6</color>
+    <color name="color_6b0aff_80">#cc6b0aff</color>
 </resources>

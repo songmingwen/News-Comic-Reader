@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.song.sunset.widget.GleeButtonRippleView
+        android:id="@+id/ripple"
+        android:layout_width="390dp"
+        android:layout_height="68dp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/glee_container"
+        app:layout_constraintEnd_toEndOf="@+id/glee_container"
+        app:layout_constraintStart_toStartOf="@+id/glee_container"
+        app:layout_constraintTop_toTopOf="@+id/glee_container"/>
+
+    <LinearLayout
+        android:id="@+id/glee_container"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="15.5dp"
+        android:layout_marginEnd="18dp"
+        android:background="@drawable/shape_rect_gradient_glee_barrage"
+        android:orientation="vertical"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@+id/glee_motion_layout"
+        app:layout_constraintTop_toTopOf="@+id/glee_motion_layout"
+        tools:layout_height="40dp"
+        tools:layout_width="149dp"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:id="@+id/top_container"
+            android:layout_width="362dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="52dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="4dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:src="@drawable/icon_comic" />
+
+            <ImageView
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:src="@drawable/icon_comic" />
+
+            <ImageView
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:src="@drawable/icon_comic" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1245.7w" />
+
+            <ImageView
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:src="@drawable/icon_comic" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="正在合唱《五月天-干杯》" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bottom_container"
+            android:layout_width="match_parent"
+            android:layout_height="119dp"
+            android:orientation="vertical"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/glee_motion_layout"
+        android:layout_width="157dp"
+        android:layout_height="55.5dp"
+        android:visibility="gone"
+        app:layoutDescription="@xml/glee_logo_scene"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:showPaths="true"
+        tools:visibility="visible">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="92dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="65dp"
+            android:layout_marginBottom="6dp"
+            android:src="@drawable/icon_logo"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/mike"
+            app:layout_constraintEnd_toEndOf="@+id/mike"
+            tools:visibility="visible" />
+
+        <com.opensource.svgaplayer.SVGAImageView
+            android:id="@+id/mike"
+            android:layout_width="65dp"
+            android:layout_height="53dp"
+            android:layout_marginTop="2.5dp"
+            android:src="@drawable/icon_foot"
+            app:source="svg_glee_mike_fly.svga"
+            app:autoPlay="true"
+            app:loopCount="0"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.os.RemoteException
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.LinearLayout
 import com.alibaba.android.arouter.launcher.ARouter
 import com.bubblepicker.BubbleActivity
@@ -33,7 +32,6 @@ import com.song.sunset.services.impl.MusicGetterImpl
 import com.song.sunset.services.managers.BinderPool
 import com.song.sunset.utils.RelayTest
 import com.song.sunset.utils.ScreenUtils
-import com.song.sunset.utils.ViewUtil
 import com.song.sunset.utils.preinstall.DefaultPreinstallHandler
 import com.song.sunset.utils.preinstall.HuaweiPreinstallHandler
 import com.song.sunset.utils.preinstall.VivoPreinstallHandler
@@ -47,6 +45,7 @@ import kotlinx.android.synthetic.main.activity_function_list.*
 class FunctionListActivity : BaseActivity() {
 
     private fun LinearLayout.addButtonList() {
+        addButton("GleeMotionLayout") { MotionLayoutTestActivity.start(this@FunctionListActivity) }
         addButton("打分计算") { ScoreActivity.start(this@FunctionListActivity) }
         addButton("ROOM 数据库") { RoomActivity.start(this@FunctionListActivity) }
         addButton("灵境卡片") { ARDataActivity.start(this@FunctionListActivity) }

@@ -66,6 +66,8 @@
         </activity>
         <activity android:name=".activitys.temp.GlobalFlowActivity" />
         <activity android:name=".activitys.temp.MotionLayoutActivity" />
+        <activity android:name=".activitys.temp.MotionLayoutTestActivity"
+            android:screenOrientation="landscape"/>
         <activity android:name=".comic.ComicDetailActivity" />
         <activity android:name=".activitys.opengl.render.RenderAirHockeyActivity" />
         <activity android:name=".activitys.opengl.render.RenderTextureActivity" />
@@ -108,7 +110,7 @@
             android:name=".activitys.FirstKotlinActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppLaunch">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
