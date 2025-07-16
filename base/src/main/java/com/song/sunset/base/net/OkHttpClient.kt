@@ -1,6 +1,7 @@
 package com.song.sunset.base.net
 
 import com.song.sunset.base.autoservice.ServiceProvider
+import com.song.sunset.base.autoservice.interceptor.Interceptor
 import com.song.sunset.base.autoservice.interceptor.NetworkInterceptor
 import java.security.KeyManagementException
 import java.security.NoSuchAlgorithmException
@@ -25,7 +26,7 @@ object OkHttpClient {
         val builder = okhttp3.OkHttpClient.Builder()
 
         //通过 auto service 收集拦截器并添加到网络库
-        ServiceProvider.loadService(com.song.sunset.base.autoservice.interceptor.Interceptor::class.java).filterNotNull().forEach {
+        ServiceProvider.loadService(Interceptor::class.java).filterNotNull().forEach {
             builder.addInterceptor(it.createInterceptor())
         }
         //通过 auto service 收集拦截器并添加到网络库

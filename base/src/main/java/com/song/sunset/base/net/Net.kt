@@ -17,12 +17,12 @@ object Net {
 
     @JvmStatic
     fun <T> createService(clazz: Class<T>?, baseUrl: String?): T {
-        val retrofit = Retrofit.Builder() //设置baseUrl
-                .baseUrl(baseUrl) //设置OKHttpClient
-                .client(obtainClient()) //Rx转换器
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create()) //gson转化器
-                .addConverterFactory(GsonConverterFactory.create()) //String转换器
-                .addConverterFactory(StringConverterFactory.create())
+        val retrofit = Retrofit.Builder()
+                .baseUrl(baseUrl)                                           //设置baseUrl
+                .client(obtainClient())                                     //设置OKHttpClient
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())  //Rx转换器
+                .addConverterFactory(GsonConverterFactory.create())         //gson转化器
+                .addConverterFactory(StringConverterFactory.create())       //String转换器
                 .build()
         return retrofit.create(clazz)
     }

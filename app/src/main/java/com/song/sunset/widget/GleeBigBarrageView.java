@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -65,6 +66,8 @@ public class GleeBigBarrageView extends FrameLayout {
         bottomContainer = findViewById(R.id.bottom_container);
         logo = findViewById(R.id.logo);
         mike = findViewById(R.id.mike);
+        TextView txtTitle = findViewById(R.id.txtTitle);
+        txtTitle.setSelected(true);
     }
 
     public void initData() {

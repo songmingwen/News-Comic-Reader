@@ -68,7 +68,7 @@ public class GleeButtonRippleView extends FrameLayout {
         }
         animatorOne = ValueAnimator.ofInt(0, 50, 100, 100);
         animatorOne.setRepeatCount(INFINITE);
-        animatorOne.setDuration(1000);
+        animatorOne.setDuration(1800);
         animatorOne.setInterpolator(new DecelerateInterpolator());
         animatorOne.addUpdateListener(animation -> {
             int value = (int) animation.getAnimatedValue();
@@ -78,14 +78,14 @@ public class GleeButtonRippleView extends FrameLayout {
 
         animatorTwo = ValueAnimator.ofInt(0, 50, 100, 100);
         animatorTwo.setRepeatCount(INFINITE);
-        animatorTwo.setDuration(1000);
+        animatorTwo.setDuration(1800);
         animatorTwo.setInterpolator(new DecelerateInterpolator());
         animatorTwo.addUpdateListener(animation -> {
             int value = (int) animation.getAnimatedValue();
             float progress = value / 100f;
             renderViewByProgress(two, progress);
         });
-        animatorTwo.setStartDelay(150);
+        animatorTwo.setStartDelay(300);
 
         animatorOne.start();
         animatorTwo.start();

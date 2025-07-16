@@ -131,6 +131,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         fab.setOnClickListener(v -> {
             Log.i(TAG, "phoenix type =" + PhoenixHolderDispatcher.INSTANCE.getS().toString());
             FunctionListActivity.Companion.start(MainActivity.this);
+
+//            Intent intent = new Intent();
+//            intent.setClassName("com.hunantv.imgo.activity", "com.mgtv.ui.browser.ImgoOpenActivity");
+//            intent.putExtra("schema_url","imgotv://webview?url=https://www.mgtv.com&third_channel=知乎&aaa=aaa&bbb=bbb&ccc=ccc");
+//            MainActivity.this.startActivity(intent);
         });
     }
 
