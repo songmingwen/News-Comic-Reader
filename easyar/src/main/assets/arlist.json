@@ -8,10 +8,17 @@
       "videoType": 0
     },
     {
-      "imgName": "son",
-      "imgPath": "son.jpg",
+      "imgName": "sky",
+      "imgPath": "sky/sky.jpg",
       "imgStorageType": 1,
-      "videoPath": "transparentvideo.mp4",
+      "videoPath": "sky/drum.mp4",
+      "videoType": 0
+    },
+    {
+      "imgName": "son",
+      "imgPath": "son/son.jpg",
+      "imgStorageType": 1,
+      "videoPath": "son/transparentvideo.mp4",
       "videoType": 1
     },
     {

@@ -25,7 +25,7 @@ import java.io.File;
 
 /**
  * 想快速测试
- * 请将 mockData 中的文件，按照【如何配置测试数据.png】图片的描述，复制到 device file explorer 中。
+ * 请将 mockData 中的文件，按照【mock方法.png】图片的描述，复制到 device file explorer 中。
  */
 public class ARDataActivity extends BaseActivity {
 

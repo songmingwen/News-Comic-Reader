@@ -40,7 +40,7 @@ android {
     }
 }
 
-artifacts.add("default", file('EasyAR.aar'))
+artifacts.add("default", file('EasyAR_4.7.0.aar'))
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar", "*.aar"])

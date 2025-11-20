@@ -16,12 +16,12 @@ public class GoldDecorator extends ColorDecorator{
 
     @Override
     public String getDesc() {
-        return "金色" + shape.desc;
+        return "金色";
     }
 
     @Override
     public void draw() {
         shape.draw();
-        System.out.println("涂上金色");
+        System.out.println("涂上" + getDesc());
     }
 }
