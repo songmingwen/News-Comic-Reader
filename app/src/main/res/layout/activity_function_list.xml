@@ -8,19 +8,10 @@
     android:clipToPadding="false"
     android:paddingTop="24dp">
 
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:id="@+id/ll_function_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="10dp">
-
-        </LinearLayout>
-    </ScrollView>
+        android:layout_height="match_parent"/>
 
     <com.song.sunset.widget.fireworks.FireworksView
         android:id="@+id/fireworks_layout"

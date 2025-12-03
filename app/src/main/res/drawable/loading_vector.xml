@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="35dp"
+        android:height="35dp"
+        android:viewportHeight="70"
+        android:viewportWidth="70"
+    >
+    <path
+        android:name="loading_vector"
+        android:pathData="
+        M22,48
+        L22,23
+        L44,44
+        L61,24
+        a30,30 -15 1,1 -11,-14"
+        android:strokeColor="@color/Grey_700"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:strokeWidth="6"
+        />
+
+</vector>

@@ -3,12 +3,15 @@ package com.song.sunset.activitys.temp
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.ScaleDrawable
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import com.song.sunset.R
 import com.song.sunset.base.activity.BaseActivity
 import kotlinx.android.synthetic.main.activity_motion_glee.glee_big_barrage_view
+import kotlinx.android.synthetic.main.activity_motion_glee.mg_loding
 import kotlinx.android.synthetic.main.activity_motion_glee.one
 import kotlinx.android.synthetic.main.activity_motion_glee.progress_bar
 import kotlinx.android.synthetic.main.activity_motion_glee.rippleHide
@@ -43,6 +46,18 @@ class MotionLayoutTestActivity : BaseActivity() {
                 progressDrawable.setTint(Color.BLUE)
             }
         }
+
+        var vectorDrawable: AnimatedVectorDrawable? = null
+        try {
+            vectorDrawable = ContextCompat.getDrawable(this, R.drawable.change_color) as AnimatedVectorDrawable?
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        if (vectorDrawable == null) {
+            return
+        }
+        mg_loding.setImageDrawable(vectorDrawable)
+        vectorDrawable.start()
 
         progress_bar.progress = 75
 

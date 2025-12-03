@@ -4,10 +4,14 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.LinearLayout
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.song.sunset.R
 import com.song.sunset.base.activity.BaseActivity
 import com.song.sunset.activitys.opengl.render.BaseRenderActivity
 import com.song.sunset.addButton
+import com.song.sunset.beans.FuncItem
+import com.song.sunset.holders.FunctionItemHolder
+import com.zhihu.android.sugaradapter.SugarAdapter
 import kotlinx.android.synthetic.main.activity_function_list.*
 
 class OpenGLTeachListActivity : BaseActivity() {
@@ -22,14 +26,17 @@ class OpenGLTeachListActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_function_list)
 
-        ll_function_container.apply {
-            addButtonList()
-        }
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = SugarAdapter.Builder
+            .with(getFunctionList())
+            .add(FunctionItemHolder::class.java)
+            .build()
     }
 
-    private fun LinearLayout.addButtonList() {
-        addButton("One"){ BaseRenderActivity.start(this@OpenGLTeachListActivity, TeachOneActivity::class.java) }
-        addButton("Two"){ BaseRenderActivity.start(this@OpenGLTeachListActivity, TeachTwoActivity::class.java) }
+    private fun getFunctionList(): List<FuncItem> {
+        val list = ArrayList<FuncItem>()
+        list.add(FuncItem("One") { BaseRenderActivity.start(this, TeachOneActivity::class.java) })
+        list.add(FuncItem("Two") { BaseRenderActivity.start(this, TeachTwoActivity::class.java) })
+        return list
     }
-
 }
