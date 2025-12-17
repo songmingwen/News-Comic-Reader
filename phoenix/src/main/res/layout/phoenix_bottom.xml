@@ -42,7 +42,7 @@
         android:drawableRight="@drawable/phoenix_hot_list_new_comment"
         android:textSize="@dimen/phoenix_des"
         android:text="0"
-        android:visibility="visible" />
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/pic_count"

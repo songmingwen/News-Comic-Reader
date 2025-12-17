@@ -40,9 +40,11 @@ open class PhoenixBottomViewHolder(view: View) : SugarHolder<PhoenixChannelBean>
             }
         }
 
-        if (!TextUtils.equals(data.commentsall, "0")) {
+        if (!TextUtils.equals(data.commentsall, "0") && !TextUtils.isEmpty(data.commentsall)) {
             commentCount.visibility = View.VISIBLE
             commentCount.text = data.commentsall
+        } else {
+            commentCount.visibility = View.GONE
         }
 
         if (!TextUtils.isEmpty(data.updateTime) && data.updateTime.length > 12) {

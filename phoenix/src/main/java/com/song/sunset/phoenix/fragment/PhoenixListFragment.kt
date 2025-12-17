@@ -79,14 +79,23 @@ class PhoenixListFragment : BasePageLoadingFragment<PhoenixNewsListBean>() {
             }
 
             override fun onFailure(errorCode: Int, errorMsg: String?) {
-                postRefreshFailed(Throwable(errorMsg))
+//                postRefreshFailed(Throwable(errorMsg))
                 val json = AssetsUtils.getJson("default.json", activity)
                 val bean = JsonUtil.gsonToBean(json, PhoenixNewsListBean::class.java)
+                var size = dataList.size - 1
+                for (item in bean.item) {
+                    size += 1
+                    item.title = "$size"
+                }
                 postLoadMoreSucceed(bean)
                 redirectPosition(mRecyclerView.height - ViewUtil.dip2px(80f))
             }
 
         })
+    }
+
+    override fun isScrollingTriggerLoadingMore(): Boolean {
+        return false
     }
 
     override fun getScrollLoadMoreThreshold(): Int {
