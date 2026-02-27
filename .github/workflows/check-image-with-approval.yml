@@ -1,0 +1,79 @@
+name: Check Image Size with Approval
+
+on:
+  pull_request:
+    branches: [ main, master ]  # 根据你的目标分支调整
+
+jobs:
+  # 作业1：检查图片大小
+  check-size:
+    runs-on: ubuntu-latest
+    outputs:
+      need_approval: ${{ steps.check.outputs.need_approval }}
+      violating_files: ${{ steps.check.outputs.violating_files }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # 获取 PR 中变更的图片文件
+      - name: Get changed image files
+        id: changed-files
+        uses: tj-actions/changed-files@v44
+        with:
+          files: |
+            **/*.png
+            **/*.jpg
+            **/*.jpeg
+            **/*.gif
+            **/*.bmp
+            **/*.webp
+            **/*.svg
+            **/*.ico
+            **/*.tiff
+
+      # 检查每个图片文件的大小
+      - name: Check image sizes
+        id: check
+        env:
+          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
+        run: |
+          SIZE_LIMIT=20480   # 20KB
+          VIOLATING_FILES=()
+          for file in ${ALL_CHANGED_FILES}; do
+            size=$(stat -c%s "$file" 2>/dev/null || echo 0)
+            if [ "$size" -gt "$SIZE_LIMIT" ]; then
+              VIOLATING_FILES+=("$file ($size bytes)")
+            fi
+          done
+
+          if [ ${#VIOLATING_FILES[@]} -ne 0 ]; then
+            echo "❌ 发现以下图片文件超过 20KB："
+            printf '%s\n' "${VIOLATING_FILES[@]}"
+            # 输出需要审批的标志
+            echo "need_approval=true" >> $GITHUB_OUTPUT
+            # 将违规文件列表转为 JSON 数组，方便后续作业读取
+            VIOLATING_JSON=$(printf '%s\n' "${VIOLATING_FILES[@]}" | jq -R . | jq -s .)
+            echo "violating_files=$VIOLATING_JSON" >> $GITHUB_OUTPUT
+          else
+            echo "✅ 所有图片文件大小符合规范（<= 20KB）。"
+            echo "need_approval=false" >> $GITHUB_OUTPUT
+            echo "violating_files=[]" >> $GITHUB_OUTPUT
+          fi
+
+  # 作业2：人工审批（仅在需要审批时运行）
+  approval:
+    needs: check-size
+    if: needs.check-size.outputs.need_approval == 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: image-approval
+      url: ${{ github.event.pull_request.html_url }}  # 方便审核者跳转到 PR
+    steps:
+      - name: Display violating files
+        run: |
+          echo "以下图片文件超过20KB，需要管理员审批："
+          echo '${{ needs.check-size.outputs.violating_files }}' | jq -r '.[]'
+      - name: Approval placeholder
+        run: echo "管理员已批准，工作流继续。"
