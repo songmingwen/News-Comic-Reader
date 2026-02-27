@@ -2,7 +2,7 @@ name: Check Image Size
 
 on:
   pull_request:
-    # 当 PR 的目标分支为以下分支时触发
+    # 当 PR 的目标分支为以下分支时触发，嗯
     branches:
       - main
       - master
