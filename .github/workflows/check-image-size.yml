@@ -7,6 +7,12 @@ on:
       - main
       - master
       - develop
+  push: 
+    # 当 PR 的目标分支为以下分支时触发
+    branches:
+      - main
+      - master
+      - develop
 
 jobs:
   check-image-size:
