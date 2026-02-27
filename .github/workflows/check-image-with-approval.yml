@@ -2,7 +2,7 @@ name: Check Image Size with Approval
 
 on:
   pull_request:
-    branches: [ main, master ]   # 可根据需要调整目标分支
+    branches: [ main, master ]   # 按需修改目标分支
 
 jobs:
   # 作业1：检查图片大小
@@ -51,17 +51,19 @@ jobs:
           if [ ${#VIOLATING_FILES[@]} -ne 0 ]; then
             echo "❌ 发现以下图片文件超过 20KB："
             printf '%s\n' "${VIOLATING_FILES[@]}"
-            # 输出需要审批的标志
+            # 设置 need_approval 为 true（等号后无空格）
             echo "need_approval=true" >> $GITHUB_OUTPUT
-            # 将违规文件列表转为 JSON 数组（处理空格和特殊字符）
-            VIOLATING_JSON=$(printf '%s\n' "${VIOLATING_FILES[@]}" | jq -R . | jq -s .)
+            # 生成紧凑的 JSON 数组（单行），确保等号后无空格
+            VIOLATING_JSON=$(printf '%s\n' "${VIOLATING_FILES[@]}" | jq -R . | jq -s -c .)
             echo "violating_files=$VIOLATING_JSON" >> $GITHUB_OUTPUT
+            # 可选：调试输出，查看实际内容
+            echo "DEBUG: violating_files=$VIOLATING_JSON"
           else
             echo "✅ 所有图片文件大小符合规范（<= 20KB）。"
             echo "need_approval=false" >> $GITHUB_OUTPUT
             echo "violating_files=[]" >> $GITHUB_OUTPUT
           fi
-          # 无论是否发现违规，都以成功状态退出，保证作业成功
+          # 关键：始终以成功状态退出，保证作业成功
           exit 0
 
   # 作业2：人工审批（仅在需要审批时运行）
@@ -71,11 +73,11 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: image-approval           # 必须与你在 Settings > Environments 中创建的环境名称一致
-      url: ${{ github.event.pull_request.html_url }}   # 方便审核者直接跳转到 PR
+      url: ${{ github.event.pull_request.html_url }}
     steps:
       - name: Display violating files
         run: |
           echo "以下图片文件超过20KB，需要管理员审批："
           echo '${{ needs.check-size.outputs.violating_files }}' | jq -r '.[]'
       - name: Wait for approval
-        run: echo "等待管理员审批..."   # 实际审批由环境阻塞，无需额外代码
+        run: echo "等待管理员审批..."   # 实际审批由环境阻塞
